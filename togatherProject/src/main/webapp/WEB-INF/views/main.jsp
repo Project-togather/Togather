@@ -18,7 +18,7 @@
 	
 	원데이
 	
-	
+	ada
 	
 	<jsp:include page="common/footer.jsp"/>
 </body>
