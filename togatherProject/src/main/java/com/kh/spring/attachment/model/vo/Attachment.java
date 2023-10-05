@@ -16,7 +16,7 @@ public class Attachment {
 	private String attNo;
 	private String refFno;
 	private String originName;
-	private String updateName;
+	private String changeName;
 	private String filePath;
 	private Date enrollDate;
 }
