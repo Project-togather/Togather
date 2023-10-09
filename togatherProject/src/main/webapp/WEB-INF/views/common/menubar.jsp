@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,23 @@
 			<div><a herf="#">챌린지</a></div>
 			<div><a herf="#">라운지</a></div>
 			<div><a herf="#">원데이</a></div>
-			<div id="login">로그인 / 회원가입</div>
+			<!--  로그인 전 -->
+			<c:choose>
+             	<c:when test="${ empty loginMember }">
+	               <form action="login.me" method="post">
+						<div id="login">로그인 / 회원가입</div> <br>
+						ID : <input type="text" name="memId" required> <br>
+						PWD : <input type="password" name="memPwd" required> <br>
+						<button type="submit">로그인</button>
+					</form>
+             	</c:when>
+				<c:otherwise>
+                    <!-- 로그인 후-->
+                    <div>${ loginMember.nickname }님 환영합니다</div>
+                    <a href="">마이페이지</a>
+                    <a href="logout.me">로그아웃</a>
+				</c:otherwise>	                      
+            </c:choose>
 		</div>
 	</div>
 	
