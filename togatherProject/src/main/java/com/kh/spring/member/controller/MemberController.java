@@ -39,4 +39,10 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	//마이페이지이동
+	@RequestMapping(value = "mypage.me")
+	public String myPage() {
+		return "member/myPage";
+	}
+	
 }

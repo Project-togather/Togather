@@ -78,7 +78,7 @@
 								<li><a href="#services"><span class="menu-item-span">라운지</span></a></li>
 								<li><a href="#news"><span class="menu-item-span">내모임</span></a></li>
 								
-								<li><a href="#news"><span class="menu-item-span">마이페이지</span></a></li>
+								<li><a href="mypage.me"><span class="menu-item-span">마이페이지</span></a></li>
 								
 								<li><a href="#news"><span class="menu-item-span">관리자페이지</span></a></li>
 							</ul>
