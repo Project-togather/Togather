@@ -4313,3 +4313,17 @@ body.off-canvas-sidebar-open:after {
 .parallax:not(.bg-light) .form-control {
     background: transparent;
 }
+
+/*개인적으로 추가한 css*/
+#socialing:hover{
+    background-color: orange;
+    cursor:pointer;
+}
+#club:hover{
+    background-color: green;
+    cursor:pointer;
+}
+#challenge:hover{
+    background-color: rgb(49, 66, 221); 
+    cursor:pointer;
+}

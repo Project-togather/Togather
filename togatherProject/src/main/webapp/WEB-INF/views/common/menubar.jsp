@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 <!-- Favicons-->
 <link rel="shortcut icon" href="assets/images/favicon.png">
@@ -77,6 +78,8 @@
 								<li><a href="#gallery"><span class="menu-item-span">원데이클래스</span></a></li>
 								<li><a href="#services"><span class="menu-item-span">라운지</span></a></li>
 								<li><a href="#news"><span class="menu-item-span">내모임</span></a></li>
+								
+								<li><a href="enrollForm.cl"><span class="menu-item-span">모임 등록</span></a></li>
 								
 								<li><a href="mypage.me"><span class="menu-item-span">마이페이지</span></a></li>
 								

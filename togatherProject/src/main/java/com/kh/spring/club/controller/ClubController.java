@@ -246,4 +246,13 @@ public class ClubController {
 	public void selectMyList() {
 		ArrayList<Club> list = cService.selectMyList();
 	}
+	
+	/**
+	 * 모임등록 폼 이동 
+	 */
+	@RequestMapping("enrollForm.cl")
+	public String classEnrollForm() {
+		return "class/ClassEnrollForm";
+	}
+	
 }
