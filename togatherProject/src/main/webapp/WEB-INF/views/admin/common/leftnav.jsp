@@ -36,7 +36,7 @@
 
             <!-- 회원 관리 대시보드 시작 -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>회원 관리</span>
@@ -44,7 +44,7 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">회원관리</h6>
-                        <a class="collapse-item" href="buttons.html">회원 통합 관리</a>
+                        <a class="collapse-item" href="memberListView.jsp">회원 통합 관리</a>
                         <a class="collapse-item" href="cards.html">블랙리스트 관리</a>
                     </div>
                 </div>
