@@ -21,15 +21,52 @@
 <link href="assets/css/plugins.min.css" rel="stylesheet">
 <!-- Template core CSS-->
 <link href="assets/css/template.css" rel="stylesheet">
+
 <style>
+
 .menu-item-span{
 	font-size: 17px;
 	font-weight: bold;
 }
 
 .top-bar{
-	height: 70px;
+	height: 100%;
 }
+
+
+
+.search-box {
+
+}
+
+.search-btn{
+
+}
+
+.search-txt{
+	display: flex;
+	padding: 0;
+	width: 500px;
+	border:none;
+	background: none;
+	outline: none;
+	float: left;
+}
+
+.top-bar-tools {
+	position: relative;
+}
+
+.open-offcanvas {
+	position: absolute;
+	left: auto;
+}
+
+.ti-user fa-2x {
+	position:absolute;
+	left: 100px;
+}
+
 </style>
 </head>
 <body>
@@ -43,24 +80,21 @@
 		<header class="header header-transparent">
 			<!-- Top bar-->
 			<div class="top-bar" style="background-color: orange;">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-6">
-							<ul class="list-left-align">
-								<li>Mon - Fri: 07:00 am - 05:00 pm</li>
-								<li><abbr title="Phone">P:</abbr> +39 02 87 21 43 19</li>
-								<li><a href="start.html" data-color="#e1be64">Demos</a></li>
-							</ul>
+				<ul class="top-bar-tools">
+
+						<li><a class="open-offcanvas" href="#"><i class="ti-menu fa-2x"></i></a></li>
+						
+						<li><a href="sign-in.html"><i class="ti-user fa-2x"></i></a></li>
+
+						<li>
+							<div class="search-box">
+							<input type="text" class="search-txt" name=""placeholder="지금 생각나는 취미를 검색하세요.">
+							<a class="search-btn" href="#">
+								<i class="fa fa-search" aria-hidden="true" type="submit"></i>
+							</a>
 						</div>
-						<div class="col-md-6">
-							<ul class="top-bar-tools">
-								<li><a class="open-offcanvas" href="#"><i class="ti-menu fa-2x"></i></a></li>
-								<li><a href="sign-in.html"><i class="ti-search fa-2x"></i></a></li>
-								<li><a href="sign-in.html"><i class="ti-user fa-2x"></i></a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
+					</li>
+				</ul>
 			</div>
 
 			<div class="navigation navigation-center">
