@@ -84,7 +84,7 @@
 
                   <li><a class="open-offcanvas" href="#"><i class="ti-menu fa-2x"></i></a></li>
                   
-                  <li><a href="sign-in.html"><i class="ti-user fa-2x"></i></a></li>
+                  <li><a href="enrollForm.me"><i class="ti-user fa-2x"></i></a></li>
 
                   <li>
                      <div class="search-box">
