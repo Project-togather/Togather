@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -21,6 +24,7 @@
 		<link href="assets/css/template.css" rel="stylesheet">
 	</head>
 	<body>
+	<jsp:include page="../common/menubar.jsp"></jsp:include>
 
 		<!-- Preloader-->
 		<div class="page-loader">
@@ -32,7 +36,7 @@
 		<div class="wrapper">
 
 			<!-- Hero-->
-			<section class="module-cover fullscreen parallax" data-background="assets/images/module-21.jpg" data-overlay="0.7">
+			<section class="module-cover fullscreen parallax" data-background="assets/images/clients/logo-1.png" data-overlay="0.7">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4 m-auto">
@@ -41,21 +45,24 @@
 									<h5>Create a new account</h5>
 								</div>
 								<div class="up-form">
-									<form method="post">
+									<form action="insertMember.me" method="post">
 										<div class="form-group">
-											<input class="form-control" type="text" placeholder="Name">
+											<input class="form-control" id="idInput" name="memName" type="text" placeholder="Name" style="color: white;">
+										</div>
+										<div id="checkResult">
+											
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="email" placeholder="Email">
+											<input class="form-control" name="email" type="email" placeholder="Email" style="color: white;">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="password" placeholder="Pasword">
+											<input class="form-control" name="memPwd" type="password" placeholder="Pasword" style="color: white;">
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="password" placeholder="Confirm password">
+											<input class="form-control" type="password" placeholder="Confirm password" style="color: white;">
 										</div>
 										<div class="form-group">
-											<button class="btn btn-block btn-round btn-brand" type="submit">Sign Up</button>
+											<button  class="btn btn-block btn-round btn-brand" type="submit">Sign Up</button>
 										</div>
 									</form>
 								</div>
@@ -67,6 +74,53 @@
 					</div>
 				</div>
 			</section>
+			
+			    <script>
+    $(function(){
+    	//아이디를 입력하는 input 요소 객체 변수에 담아두기
+    	const $idInput = $("#idInput"); //
+    	$idInput.keyup(function(){
+    		//console.log($idInput.val());
+    		//5글자 이상에서만
+    		if($idInput.val().length >= 5){
+    			$.ajax({
+    				url: "idCheck.me",
+    			   data: {checkId : $idInput.val()},
+    			   success : function(result){
+    				   if(result == "NNNNN"){//사용이 불가능한 상태
+    					   // -> 빨간색 메세지 (사용불가능) 출력
+    					   // -> 버튼 비활성화
+    					   $("#checkResult").show();
+    					   $("#checkResult").css("color", "red").text("중복된 아이디입니다");
+    					   $("#enrollForm :submit").attr("disalbled", true);
+    				   }else{//사용이 가능한 상황
+    					   $("#checkResult").show();
+    					   $("#checkResult").css("color", "green").text("사용가능한 아이디입니다");
+    					   $("#enrollForm :submit").attr("disabled", false);
+    				   }
+
+    			   },
+    			   error :function(){
+    				   console.log("ajax 통신 실패요");
+    			   }
+    			})
+    		}else{//5글자 미만인경우 버튼 비활성화
+    			$("#checkResult").hide();
+    			$("#enrollForm :submit").attr("disalbled", true);
+    		}
+    		
+    		
+    	})
+    })
+    </script>
+			
+			
+			
+			
+			
+			
+			
+			
 			<!-- Hero end-->
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
@@ -135,7 +189,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-md-6">
-								<div class="copyright">© 2017 <a href="http://2the.me/">2theme</a>, All Rights Reserved.</div>
+								<div class="copyright">Â© 2017 <a href="http://2the.me/">2theme</a>, All Rights Reserved.</div>
 							</div>
 							<div class="col-md-6">
 								<ul class="social-links">

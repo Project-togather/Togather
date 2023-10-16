@@ -54,8 +54,8 @@
 						<div class="col-md-6">
 							<ul class="top-bar-tools">
 								<li><a class="open-offcanvas" href="#"><i class="ti-menu fa-2x"></i></a></li>
-								<li><a href="sign-in.html"><i class="ti-search fa-2x"></i></a></li>
-								<li><a href="sign-in.html"><i class="ti-user fa-2x"></i></a></li>
+								<li><a href="#"><i class="ti-search fa-2x"></i></a></li>
+								<li><a href="enrollForm.me"><i class="ti-user fa-2x"></i></a></li>
 							</ul>
 						</div>
 					</div>

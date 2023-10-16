@@ -5,7 +5,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.spring.member.model.service.MemberServiceImpl;
 import com.kh.spring.member.model.vo.Member;
@@ -44,5 +46,27 @@ public class MemberController {
 	public String myPage() {
 		return "member/myPage";
 	}
+	
+	//회원가입폼 이동
+	@RequestMapping("enrollForm.me")
+	public String enrollForm() {
+		return "member/memberEnrollForm";
+	}
+	
+	//회원가입
+	@RequestMapping("insertMember.me")
+	public String insertMember(Member m) {
+		System.out.println(m.getMemName());
+		return null ;
+	}
+	//회원가입중 아이디체크 Ajax
+	@ResponseBody
+	@RequestMapping("idCheck.me")
+	public String idCheck(String checkId) {
+			System.out.println(checkId);
+			return "NNNNY";
+	}
+	
+	
 	
 }
