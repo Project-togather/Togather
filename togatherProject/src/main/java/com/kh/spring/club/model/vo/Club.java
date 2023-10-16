@@ -21,13 +21,16 @@ public class Club {
 	private String cContent;
 	private String cLocation;
 	private Date cDate;
-	private String cPrice;
+	private String cTime;
+	private int cPrice;
 	private String cApproval;
-	private String ageLimit;
-	private String peopleLimit;
-	private String guide;
-	private String hobbyCategory;
-	private String cCa;
-	private String memNo;
+	private int minAge;
+	private int maxAge;
+	private int peopleLimit;
+	private String clCategory;
+	private String clType;
+	private String myStatus;
+	private String curriculum;
+	private String status;
 	
 }
