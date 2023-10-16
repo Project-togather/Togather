@@ -36,6 +36,7 @@ public class MemberController {
       } else {
          session.setAttribute("loginMember", loginMember);
          return "redirect:/";
+         
       }
       
    }
