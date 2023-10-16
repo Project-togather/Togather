@@ -63,8 +63,11 @@ public class MemberController {
    @ResponseBody
    @RequestMapping("idCheck.me")
       public String idCheck(String checkId) {
-         
+        
          int result = mService.idCheck(checkId);
+         checkId.toLowerCase();
+         System.out.println(checkId);
+         System.out.println(result);
          if(result > 0) {
             return "NNNNN";
          }else {
