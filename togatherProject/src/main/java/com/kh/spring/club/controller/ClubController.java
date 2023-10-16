@@ -70,6 +70,36 @@ public class ClubController {
 		}
 	}
 	
+	// 소셜링 페이지 이동
+	@RequestMapping(value = "sosial.pa")
+	public String myClassPage() {
+		return "class/sosialPage";
+	}
+	
+	// 클럽 페이지 이동
+	@RequestMapping(value = "club.pa")
+	public String clubPage() {
+		return "class/clubPage";
+	}
+	
+	// 챌린지 페이지 이동
+	@RequestMapping(value = "challenge.pa")
+	public String challengePage() {
+		return "class/challengePage";
+	}
+	
+	// 원데이클래스 페이지 이동
+	@RequestMapping(value = "oneday.pa")
+	public String onedayPage() {
+		return "class/onedayPage";
+	}
+	
+	// 라운지 페이지 이동
+	@RequestMapping(value = "rounge.pa")
+	public String roungePage() {
+		return "class/roungePage";
+	}
+	
 	/**
 	 * 소셜링 전체 조회
 	 */
