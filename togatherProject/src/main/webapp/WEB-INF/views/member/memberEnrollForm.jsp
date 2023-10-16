@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -8,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>myPage</title>
+		<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
 		<!-- Favicons-->
 		<link rel="shortcut icon" href="assets/images/favicon.png">
 		<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -22,18 +19,8 @@
 		<link href="assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
 		<link href="assets/css/template.css" rel="stylesheet">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-		<style>
-			.gallery-item:hover{
-				cursor:pointer
-			}
-
-		</style>
 	</head>
 	<body>
-	
-	<jsp:include page="../common/menubar.jsp"></jsp:include>
 
 		<!-- Preloader-->
 		<div class="page-loader">
@@ -41,153 +28,46 @@
 		</div>
 		<!-- Preloader end-->
 
-
 		<!-- Wrapper-->
 		<div class="wrapper">
-		
-		
-		
-		
+
 			<!-- Hero-->
-			<section class="module-cover parallax" data-background="assets/images/module-8.jpg" data-overlay="1" data-gradient="1">
+			<section class="module-cover fullscreen parallax" data-background="assets/images/module-21.jpg" data-overlay="0.7">
 				<div class="container">
-				
-				
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-4 m-auto">
 							<div class="text-center">
-								<h2 class="display-1">MyPage</h2>
-								<p>마이페이지 입니다 <br/> trends to see any changes in performance over time.</p>
+								<div class="up-as">
+									<h5>Create a new account</h5>
+								</div>
+								<div class="up-form">
+									<form method="post">
+										<div class="form-group">
+											<input class="form-control" type="text" placeholder="Name">
+										</div>
+										<div class="form-group">
+											<input class="form-control" type="email" placeholder="Email">
+										</div>
+										<div class="form-group">
+											<input class="form-control" type="password" placeholder="Pasword">
+										</div>
+										<div class="form-group">
+											<input class="form-control" type="password" placeholder="Confirm password">
+										</div>
+										<div class="form-group">
+											<button class="btn btn-block btn-round btn-brand" type="submit">Sign Up</button>
+										</div>
+									</form>
+								</div>
+								<div class="up-help">
+									<p>By clicking "Sign Up", you agree to our <br> <a href="#">software services agreement</a>.</p>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 			<!-- Hero end-->
-			
-			<div class="module">
-				<div class="container">
-					<div class="gallery-item">
-						<div class="gallery-image" data-background="assets/images/avatar/1.jpg"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
-						
-						<br><br><br><br>
-					</div>
-				<table border="0" style="width: 800px; margin-top: 100px;" align="center">
-					<thead>
-					<tr>
-						<td>조준하님</td>
-						<td colspan="2"><a href="">프로필수정</a></td>	
-					</tr>		
-					</thead>
-						<tr>
-							<th style="width: 100px;">게시물수</th>
-							<td>6</td>
-							
-						</tr>
-						<tr>
-							<th>팔로잉</th>
-							<td>5</td>
-							
-						</tr>
-						<tr>
-							<th>팔로워</th>
-							<td>50</td>
-							
-						</tr>
-						<tr>
-							<td colspan="3">
-								안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다
-								안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다
-								안녕하세요 반갑습니다
-							</td>
-						</tr>	
-						<tr>
-							<td>관심사</td>
-							<td>영화 , 밥 , 문화 예술</td>
-						</tr>
-					<tbody>
-
-					</tbody>
-				</table>
-						
-				</div>
-			</div>
-			
-			
-				<div class="container">
-					<div class="row" style="margin-left: 100px;">
-						<img src="assets/images/new.png" onclick="test();">
-					</div>
-				</div>
-				<script>
-					function test(){
-						alert("클릭시 신규게시글이동");
-					}
-
-				</script>
-			
-			<!-- Menu-->
-			<section class="module" >
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="gallery gallery-4-columns">
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg "style="width: 400px; height: 270px;" >
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-							</div>
-						</div>
-					</div>
-					<script>
-						$(function(){
-							$(".gallery-item>img").click(function(){
-							alert("클릭시 상세정보이동");
-						})
-						})
-						
-					</script>
-
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="50px"></div>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="100px"></div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!-- Menu end-->
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
@@ -407,7 +287,7 @@
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 
 		<!-- Scripts-->
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
