@@ -34,29 +34,28 @@ public class ClubController {
 		int ranNum = (int)(Math.random() * 90000 + 10000); 
 		String ext = originName.substring(originName.lastIndexOf("."));
 		
-		String changeName = currentTime + ranNum + ext; 
+		String updateName = currentTime + ranNum + ext; 
 		
 		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
 		
 			try {
-				upfile.transferTo(new File(savePath + changeName));
+				upfile.transferTo(new File(savePath + updateName));
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
 			
-		return changeName;
+		return updateName;
 	}
 	
 	/**
-	 * 전체 리스트 조회 (소셜링, 클럽, 챌린지, 원데이, 피드?) (대문자)
+	 * 전체 리스트 조회 (소셜링, 클럽, 챌린지, 원데이, 피드?)
 	 */
-	public String selectClubList(Club c, Attachment at, MultipartFile upfile, HttpSession session, Model model) {
-		
+	public String selectClassList(Club c, Attachment at, MultipartFile upfile, HttpSession session, Model model) {
 		
 		if(!upfile.getOriginalFilename().equals("")) {
-			String changeName = saveFile(upfile, session);
+			String updateName = saveFile(upfile, session);
 			at.setOriginName(upfile.getOriginalFilename());
-			at.setChangeName("resources/uploadFiles/" + changeName);
+			at.setUpdateName("resources/uploadFiles/" + updateName);
 		}
 		
 		ArrayList<Club> list = cService.selectClubList();
@@ -68,12 +67,6 @@ public class ClubController {
 			model.addAttribute("errorMsg", "실패!?");
 			return "/";
 		}
-	}
-	
-	// 소셜링 페이지 이동
-	@RequestMapping(value = "sosial.pa")
-	public String myClassPage() {
-		return "class/sosialPage";
 	}
 	
 	// 클럽 페이지 이동
@@ -95,24 +88,39 @@ public class ClubController {
 	}
 	
 	// 라운지 페이지 이동
-	@RequestMapping(value = "rounge.pa")
-	public String roungePage() {
-		return "class/roungePage";
+	@RequestMapping(value = "lounge.pa")
+	public String loungePage() {
+		return "class/loungePage";
 	}
+	
+	   // 내모임 리스트 조회
+	   @RequestMapping(value = "myclass.me")
+	   public String selectMyClass() {
+	      
+	      return "";
+	   }
 	
 	/**
 	 * 소셜링 전체 조회
 	 */
-	public String selectSocialList() {
+	@RequestMapping("social.pa")
+	public String selectSocialList(Club c, Attachment at, MultipartFile upfile, HttpSession session, Model model) {
+		
 		ArrayList<Club> list = cService.selectSocialList();
 		
-		return "main";
+		if(list != null) {
+			session.setAttribute("list", list);
+			return "class/socialPage";
+		}else {
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
+		}
 	}
 	
 	/**
 	 * 소셜링 상세 조회
 	 */
-	public String selectSocialList(int cNo) {
+	public String selectSocial(int cNo) {
 		int result = cService.increaseCount(cNo);
 		
 		if(result > 0) {
@@ -145,10 +153,10 @@ public class ClubController {
 	}
 	
 	/**
-	 * 클럽 전체 조회 (소문자)
+	 * 클럽 전체 조회
 	 */
-	public void selectclubList() {
-		ArrayList<Club> list = cService.selectclubList();
+	public void selectClubList() {
+		ArrayList<Club> list = cService.selectClubList();
 	}
 
 	/**
@@ -189,8 +197,8 @@ public class ClubController {
 	/**
 	 * 챌린지 전체 조회
 	 */
-	public void selectchallengeList() {
-		ArrayList<Club> list = cService.selectchallengeList();
+	public void selectChallengeList() {
+		ArrayList<Club> list = cService.selectChallengeList();
 	}
 	
 	/**
@@ -274,7 +282,7 @@ public class ClubController {
 	 * 내 즐겨찾기 조회
 	 */
 	public void selectMyList() {
-		ArrayList<Club> list = cService.selectMyList();
+		ArrayList<Club> list = cService.selectMyClassList();
 	}
 	
 	/**

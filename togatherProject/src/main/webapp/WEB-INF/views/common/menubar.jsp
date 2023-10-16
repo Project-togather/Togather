@@ -7,7 +7,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<style>
 <!-- Favicons-->
 <link rel="shortcut icon" href="assets/images/favicon.png">
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -21,9 +20,7 @@
 <link href="assets/css/plugins.min.css" rel="stylesheet">
 <!-- Template core CSS-->
 <link href="assets/css/template.css" rel="stylesheet">
-
 <style>
-
 .menu-item-span{
    font-size: 17px;
    font-weight: bold;
@@ -32,8 +29,6 @@
 .top-bar{
    height: 100%;
 }
-
-
 
 .search-box {
 
@@ -67,6 +62,9 @@
    left: 100px;
 }
 
+.col-md-6 .lead{
+	font-size: 30px;
+}
 </style>
 </head>
 <body>
@@ -106,11 +104,11 @@
                   <div class="inner-nav onepage-nav">
                      <ul>
 						<li><a href="#"><span class="menu-item-span">Home</span></a></li>
-						<li><a href="sosial.pa"><span class="menu-item-span">소셜링</span></a></li>
+						<li><a href="social.pa"><span class="menu-item-span">소셜링</span></a></li>
 						<li><a href="club.pa"><span class="menu-item-span">클럽</span></a></li>
 						<li><a href="challenge.pa"><span class="menu-item-span">챌린지</span></a></li>
 						<li><a href="oneday.pa"><span class="menu-item-span">원데이클래스</span></a></li>
-						<li><a href="rounge.pa"><span class="menu-item-span">라운지</span></a></li>
+						<li><a href="lounge.pa"><span class="menu-item-span">라운지</span></a></li>
 						<li><a href="myclass.pa"><span class="menu-item-span">내모임</span></a></li>
 						
 						<li><a href="enrollForm.cl"><span class="menu-item-span">모임 등록</span></a></li>
