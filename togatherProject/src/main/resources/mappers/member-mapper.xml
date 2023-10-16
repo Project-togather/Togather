@@ -6,7 +6,7 @@
 		<result column="mem_id" property="memId"/>
 		<result column="mem_pwd" property="memPwd"/>
 		<result column="mem_name" property="memName"/>
-		<result column="nickname" property="nickname"/>
+		<result column="nickname" property="nickName"/>
 		<result column="email" property="email"/>
 		<result column="gender" property="gender"/>
 		<result column="age" property="age"/>
@@ -14,7 +14,7 @@
 		<result column="enroll_date" property="enrollDate"/>
 		<result column="m_status" property="mStatus"/>
 		<result column="manner" property="manner"/>
-		<result column="interest" property="interest"/>
+
 	</resultMap>
 	
 	<select id="loginMember" resultMap="MemberResult">
@@ -31,7 +31,6 @@
 		     , enroll_date
 		     , m_status
 		     , manner
-		     , interest
 		  from member
 		 where mem_id = #{memId}
 		   and mem_pwd = #{memPwd}	

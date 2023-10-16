@@ -25,20 +25,28 @@ public class MemberController {
    @Autowired 
    private MemberServiceImpl mService;
    
+   //로그인폼 이동
+   @RequestMapping("loginForm.me")
+   public String loginForm() {
+	   return "member/loginForm";
+   }
+   
+   
    // 로그인
    @RequestMapping("login.me")
    public String loginMember(Member m, Model model, HttpSession session) {
-      
-      Member loginMember = mService.loginMember(m);
-            
+	  System.out.println("여긴오니1");
+	  System.out.println(m);
+      Member loginMember = mService.loginMember(m);      
+      System.out.println(loginMember);
       if(loginMember == null) {
          model.addAttribute("errorMsg", "로그인 실패");
          return "common/errorPage";
       } else {
          session.setAttribute("loginMember", loginMember);
-         return "redirect:/";
-         
-         
+         session.setAttribute("alertMsg", "어서오십시오");
+         return "main";
+
       }
       
    }

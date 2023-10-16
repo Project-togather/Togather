@@ -91,7 +91,14 @@
             <ul class="top-bar-tools">
 
                   <li><a class="open-offcanvas" href="#"><i class="ti-menu fa-2x"></i></a></li>
-                  
+                 <c:choose>
+                 	<c:when test="${empty loginMember}">
+                  		<li><a href="loginForm.me">로그인</a></li>
+                  	</c:when>
+                  	<c:otherwise>
+                  		누구누구님 환영합니다
+                  	</c:otherwise>
+                  </c:choose>
                   <li><a href="enrollForm.me"><i class="ti-user fa-2x"></i></a></li>
 
 						<li>
