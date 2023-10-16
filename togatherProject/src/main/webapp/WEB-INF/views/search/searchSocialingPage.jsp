@@ -22,10 +22,70 @@
 		<link href="assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
 		<link href="assets/css/template.css" rel="stylesheet">
+
+<style>
+.top-bar {
+	position: relative;
+
+	height: 130px;
+	border-bottom: 1px solid lightgray;
+}
+
+.search-box {
+
+	position: absolute;
+	top: 30%;
+	left: 35%;
+	
+	height: 60px;
+
+	background-color: #f5f5f5;
+	border-radius: 30px;
+}
+
+.search-txt{
+	display: flex;
+	padding: 0;
+	width: 600px;
+	border:none;
+	background: none;
+	outline: none;
+	float: left;
+
+	font-size: 1rem;
+	line-height: 50px;
+	margin-top: 1%;
+	margin-left: 2%;
+
+	position: relative;
+}
+
+.search-btn{
+	/*
+	box-sizing: border-box;
+	border: 1px solid black;
+	*/
+
+	margin-left: 90%;
+	margin-bottom: 50px;
+
+	position: absolute;
+	bottom: 75%;
+}
+
+
+
+
+.open-offcanvas {
+
+}
+
+.ti-user fa-2x {
+
+}
+</style>
 	</head>
 	<body>
-	
-	<jsp:include page="../common/menubar.jsp"></jsp:include>
 
 		<!-- Preloader-->
 		<div class="page-loader">
@@ -36,200 +96,112 @@
 		<!-- Wrapper-->
 		<div class="wrapper">
 
-			<!-- Hero-->
-			<section class="module-cover parallax" data-background="assets/images/module-4.jpg" data-overlay="1" data-gradient="1">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="text-center">
-								<h2 class="display-1">Special Recipes</h2>
-								<p>See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-							</div>
-						</div>
-					</div>
+		<!-- Hero-->
+
+		<div class="top-bar" style="background-color: white;">
+			<div class="search-box">
+				<input type="text" class="search-txt" name="" placeholder="지금 생각나는 취미를 검색하세요.">
+				<a class="search-btn" href="search.so">
+				<i class="fa fa-search fa-3x" aria-hidden="true" type="submit" style="color: orange;"></i>
+				</a>
+			</div>
+		</div>
+
+		<!-- Hero end-->
+
+		<section class="module">
+			<div class="container">
+			
+				<div class="row blog-masonry">
+
+
+						<div class="col-md-4 post-item">
+							<!-- Post-->
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title display-1"><a href="blog-single-1.html">${ s.cTitle }</a></h2>
+									</div>
+									<div class="post-content">
+										<p>${ s.cLocation }</p>
+									</div>
+									<div class="post-more"><a href="#">${ s.cDate }</a></div>
+								</div>
+							</article>
+							<!-- Post end-->
+						</div>		
+
+						<div class="col-md-4 post-item">
+							<!-- Post-->
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title display-1"><a href="blog-single-1.html">${ s.cTitle }</a></h2>
+									</div>
+									<div class="post-content">
+										<p>${ s.cLocation }</p>
+									</div>
+									<div class="post-more"><a href="#">${ s.cDate }</a></div>
+								</div>
+							</article>
+							<!-- Post end-->
+						</div>	
+
+						<div class="col-md-4 post-item">
+							<!-- Post-->
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title display-1"><a href="blog-single-1.html">${ s.cTitle }</a></h2>
+									</div>
+									<div class="post-content">
+										<p>${ s.cLocation }</p>
+									</div>
+									<div class="post-more"><a href="#">${ s.cDate }</a></div>
+								</div>
+							</article>
+							<!-- Post end-->
+						</div>	
+						
 				</div>
-			</section>
-			<!-- Hero end-->
 
-			<section class="module">
-				<div class="container">
-					<div class="row blog-masonry">
-						<div class="col-md-4 post-item">
-
-							<!-- Post-->
-							<article class="post">
-								<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-								<div class="post-wrapper">
-									<div class="post-header">
-										<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-									</div>
-									<div class="post-content">
-										<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-									</div>
-									<div class="post-more"><a href="#">read more...</a></div>
-								</div>
-							</article>
-							<!-- Post end-->
-						</div>
-						<div class="col-md-4 post-item">
-
-							<!-- Post-->
-							<article class="post">
-								<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-								<div class="post-wrapper">
-									<div class="post-header">
-										<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-									</div>
-									<div class="post-content">
-										<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-									</div>
-									<div class="post-more"><a href="#">read more...</a></div>
-								</div>
-							</article>
-							<!-- Post end-->
-						</div>
-						<div class="col-md-4 post-item">
-
-								<!-- Post-->
-								<article class="post">
-									<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-									<div class="post-wrapper">
-										<div class="post-header">
-											<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-										</div>
-										<div class="post-content">
-											<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-										</div>
-										<div class="post-more"><a href="#">read more...</a></div>
-									</div>
-								</article>
-								<!-- Post end-->
-							</div>
-							<div class="col-md-4 post-item">
-
-								<!-- Post-->
-								<article class="post">
-									<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-									<div class="post-wrapper">
-										<div class="post-header">
-											<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-										</div>
-										<div class="post-content">
-											<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-										</div>
-										<div class="post-more"><a href="#">read more...</a></div>
-									</div>
-								</article>
-								<!-- Post end-->
-							</div>
-							<div class="col-md-4 post-item">
-
-								<!-- Post-->
-								<article class="post">
-									<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-									<div class="post-wrapper">
-										<div class="post-header">
-											<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-										</div>
-										<div class="post-content">
-											<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-										</div>
-										<div class="post-more"><a href="#">read more...</a></div>
-									</div>
-								</article>
-								<!-- Post end-->
-							</div>
-							<div class="col-md-4 post-item">
-
-									<!-- Post-->
-									<article class="post">
-										<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-										<div class="post-wrapper">
-											<div class="post-header">
-												<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-											</div>
-											<div class="post-content">
-												<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-											</div>
-											<div class="post-more"><a href="#">read more...</a></div>
-										</div>
-									</article>
-									<!-- Post end-->
-								</div>
-								<div class="col-md-4 post-item">
-
-									<!-- Post-->
-							<article class="post">
-								<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-								<div class="post-wrapper">
-									<div class="post-header">
-										<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-									</div>
-									<div class="post-content">
-										<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-									</div>
-									<div class="post-more"><a href="#">read more...</a></div>
-								</div>
-							</article>
-							<!-- Post end-->
-						</div>
-						<div class="col-md-4 post-item">
-
-							<!-- Post-->
-							<article class="post">
-								<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-								<div class="post-wrapper">
-									<div class="post-header">
-										<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-									</div>
-									<div class="post-content">
-										<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-									</div>
-									<div class="post-more"><a href="#">read more...</a></div>
-								</div>
-							</article>
-							<!-- Post end-->
-						</div>
-						<div class="col-md-4 post-item">
-
-								<!-- Post-->
-								<article class="post">
-									<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-									<div class="post-wrapper">
-										<div class="post-header">
-											<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-										</div>
-										<div class="post-content">
-											<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-										</div>
-										<div class="post-more"><a href="#">read more...</a></div>
-									</div>
-								</article>
-								<!-- Post end-->
-							</div>
-							<div class="col-md-4 post-item">
+				<div id="pagingArea">
+					<ul class="pagination">
+						
+							<c:choose>
+								<c:when test="${ pi.currentPage eq 1 }">
+									<li class="page-item disabled"><a class="page-link" href="">&laquo;</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="search.so?cpage=${ pi.currentPage - 1 }">&laquo;</a></li>
+								</c:otherwise>
+							</c:choose>
 							
-
-
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="50px"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="text-center"><a class="btn btn-black" href="#">Load More</a></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="100px"></div>
-						</div>
-					</div>
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<li class="page-item"><a class="page-link" href="search.so?cpage=${ p }">${ p }</a></li>
+							 </c:forEach>
+							 
+							 <c:choose>
+								 <c:when test="${ pi.currentPage eq pi.maxPage }">
+									 <li class="page-item disabled"><a class="page-link" href="">&raquo;</a></li>
+								 </c:when>
+								 <c:otherwise>
+									 <li class="page-item"><a class="page-link" href="search.so?cpage=${ pi.currentPage + 1 }">&raquo;</a></li>
+								 </c:otherwise>
+							 </c:choose>
+							 
+							 
+					</ul>
 				</div>
-			</section>
+			</div>
+		</section>
+					
+
+
+
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
