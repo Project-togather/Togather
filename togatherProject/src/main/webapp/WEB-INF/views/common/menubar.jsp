@@ -111,27 +111,30 @@
 					</li>
 				</ul>
 			</div>
-
+			
          <div class="navigation navigation-center">
             <div class="container-fluid">
                <!-- Brand-->
-               <div class="inner-header"><a class="inner-brand" href="index.html"><img class="brand-dark" src="assets/images/logo.png" width="74px" alt=""><img class="brand-light" src="assets/images/logo-light.png" width="74px" alt=""></a></div>
+               <div class="inner-header"><a class="inner-brand" href="main.pa"><img class="brand-dark" src="assets/images/logo.png" width="74px" alt=""><img class="brand-light" src="assets/images/logo-light.png" width="74px" alt=""></a></div>
                <!-- Navigation-->
                <div class="inner-navigation collapse">
                   <div class="inner-nav onepage-nav">
                      <ul>
-						<li><a href="#"><span class="menu-item-span">Home</span></a></li>
+						<li><a href="main.pa"><span class="menu-item-span">Home</span></a></li>
 						<li><a href="social.pa"><span class="menu-item-span">소셜링</span></a></li>
 						<li><a href="club.pa"><span class="menu-item-span">클럽</span></a></li>
 						<li><a href="challenge.pa"><span class="menu-item-span">챌린지</span></a></li>
 						<li><a href="oneday.pa"><span class="menu-item-span">원데이클래스</span></a></li>
 						<li><a href="lounge.pa"><span class="menu-item-span">라운지</span></a></li>
+						
+					<!-- <c:if test="${ not empty loginMember }"> -->
+					<!-- </c:if> -->
 						<li><a href="myclass.pa"><span class="menu-item-span">내모임</span></a></li>
-						
 						<li><a href="enrollForm.cl"><span class="menu-item-span">모임 등록</span></a></li>
-						
 						<li><a href="mypage.me"><span class="menu-item-span">마이페이지</span></a></li>
-						
+					
+					<!-- <c:if test="${ loginMember.memId == 'ADMIN' }"> -->
+					<!-- </c:if> -->
 						<li><a href="#"><span class="menu-item-span">관리자페이지</span></a></li>
                      </ul>
                   </div>

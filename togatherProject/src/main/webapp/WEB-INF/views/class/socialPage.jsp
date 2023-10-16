@@ -29,7 +29,7 @@
 						<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
-								<div class="menu-classic-item-price">1/${ c.peopleLimit }
+								<div class="menu-classic-item-price">${ c.currentPeople }/${ c.peopleLimit }
 								</div>
 							</div>
 							<div class="menu-classic-item-inner">
@@ -42,8 +42,8 @@
 				        	   </c:otherwise> 
 				          </c:choose>
      					  <c:choose>
-					           <c:when test="${fn:length(c.classContent) > 60}">
-					            	<p><c:out value="${fn:substring(c.classContent, 0,59)}"/>...</p>
+					           <c:when test="${fn:length(c.classContent) > 63}">
+					            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
 					           </c:when>
 					           <c:otherwise>
 					            	<c:out value="${c.classContent}"/>

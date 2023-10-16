@@ -10,8 +10,13 @@ import com.kh.spring.club.model.vo.Club;
 @Repository
 public class ClubDao {
 	
+	public ArrayList<Club> selectClassList(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClassList"); 
+	}
+	
 	public ArrayList<Club> selectSocialList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("clubMapper.selectSocialList");
 	}
+	
 	
 }

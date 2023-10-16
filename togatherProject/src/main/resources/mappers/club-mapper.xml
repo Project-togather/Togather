@@ -8,15 +8,16 @@
 		<result column="c_content" property="classContent"/>
 		<result column="c_location" property="classLocation"/>
 		<result column="c_date" property="classDate"/>
+		<result column="c_time" property="classTime"/>
 		<result column="c_price" property="classPrice"/>
 		<result column="c_approval" property="classApproval"/>
-		<result column="age_limit" property="ageLimit"/>
+		<result column="minage" property="minAge"/>
+		<result column="maxage" property="maxAge"/>
 		<result column="people_limit" property="peopleLimit"/>
-		<result column="cl_ca_no" property="clCaNo"/>
 		<result column="cl_type" property="clType"/>
-		<result column="in_no" property="inNo"/>
+		<result column="cl_category" property="clCategory"/>
 		<result column="curriculum" property="curriculum"/>
-		
+	
 		<collection property="attachment" resultMap="attachment"/>
 	</resultMap>
 	
@@ -26,20 +27,22 @@
 		<result column="file_path" property="filePath"/>
 	</resultMap>
 	
-	<select id="selectSocialList" resultMap="resultclub">
-		select 
+	<select id="selectClassList" resultMap="resultclub">
+        select 
 		       c_no
 		     , c_title
 		     , c_content
 		     , c_location
 		     , c_date
+             , c_time
 		     , c_price
 		     , c_approval
-		     , age_limit
+		     , minage
+             , maxage
 		     , people_limit
-		     , cl_ca_no
-		     , cl_type
-		     , in_no
+             , current_people
+             , cl_type
+		     , cl_category
 		     , curriculum
 		     , origin_name
 		     , update_name
@@ -47,6 +50,30 @@
 		  from class
 		  join attachment on (c_no = ref_fno)
 		 where status = 'Y'
-		   and cl_ca_no = 1
+	</select>
+	
+	<select id="selectSocialList" resultMap="resultclub">
+        select 
+		       c_no
+		     , c_title
+		     , c_content
+		     , c_location
+		     , c_date
+             , c_time
+		     , c_price
+		     , c_approval
+		     , minage
+             , maxage
+		     , people_limit
+             , cl_type
+		     , cl_category
+		     , curriculum
+		     , origin_name
+		     , update_name
+		     , file_path
+		  from class
+		  join attachment on (c_no = ref_fno)
+		 where status = 'Y'
+		   and cl_type = 1
 	</select>
 </mapper>
