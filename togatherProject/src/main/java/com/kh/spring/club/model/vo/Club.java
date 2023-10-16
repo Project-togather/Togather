@@ -2,6 +2,8 @@ package com.kh.spring.club.model.vo;
 
 import java.sql.Date;
 
+import com.kh.spring.attachment.model.vo.Attachment;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,6 @@ import lombok.ToString;
 
 public class Club {
 	
-<<<<<<< HEAD
 	private String cNo;
 	private String cTitle;
 	private String cContent;
@@ -33,23 +34,7 @@ public class Club {
 	private String myStatus;
 	private String curriculum;
 	private String status;
-=======
-	private String classNo;
-	private String classTitle;
-	private String classContent;
-	private String classLocation;
-	private String classDate;
-	private int classPrice;
-	private String classApproval;
-	private String ageLimit;
-	private int peopleLimit;
-	private int clCaNo;
-	private int clType;
-	private int inNo;
-	private String curriculum;
-	private String status;
 	
 	private Attachment attachment;
->>>>>>> 001de490d4020ae5d77c8548e2c4187d2a0fd8c1
 	
 }
