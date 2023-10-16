@@ -75,4 +75,6 @@ public interface ClubService {
 	
 	// 내 즐겨찾기 조회
 	ArrayList<Club> selectMyClassList();
+	
+	Club selectClassDetail(int classNo);
 }

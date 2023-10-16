@@ -10,9 +10,9 @@
 		<result column="c_date" property="classDate"/>
 		<result column="c_price" property="classPrice"/>
 		<result column="c_approval" property="classApproval"/>
-		<result column="age_limit" property="ageLimit"/>
+		<result column="minage" property="minAge"/>
+		<result column="maxage" property="maxAge"/>
 		<result column="people_limit" property="peopleLimit"/>
-		<result column="cl_ca_no" property="clCaNo"/>
 		<result column="cl_type" property="clType"/>
 		<result column="in_no" property="inNo"/>
 		<result column="curriculum" property="curriculum"/>
@@ -48,5 +48,29 @@
 		  join attachment on (c_no = ref_fno)
 		 where status = 'Y'
 		   and cl_ca_no = 1
+	</select>
+	
+	<select id="selectClassDetail" resultMap="resultclub">
+		select
+		       c_no
+		     , c_title
+		     , c_content
+		     , c_location
+		     , c_date
+		     , c_time
+		     , c_price
+		     , c_approval
+		     , minage
+		     , maxage
+		     , people_limit
+		     , cl_type
+		     , in_no
+		     , curriculum
+		     , status
+		     , nickname
+		  from class
+		  join member using (mem_no)
+		 where c_no = 'C'||#{classNo}
+		   and status = 'Y'
 	</select>
 </mapper>

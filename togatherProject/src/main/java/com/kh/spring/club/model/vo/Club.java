@@ -23,9 +23,9 @@ public class Club {
 	private String classDate;
 	private int classPrice;
 	private String classApproval;
-	private String ageLimit;
+	private int minAge;
+	private int maxAge;
 	private int peopleLimit;
-	private int clCaNo;
 	private int clType;
 	private int inNo;
 	private String curriculum;
