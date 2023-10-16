@@ -29,5 +29,11 @@ public class MemberServiceImpl implements MemberService {
 		int result = mDao.idCheck(sqlSession, checkId);
 		return result;
 	}
+
+	@Override
+	public int inserMember(Member m) {
+		
+		return 0;
+	}
 	
 }

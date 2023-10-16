@@ -1,5 +1,10 @@
 package com.kh.spring.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.member.model.service.MemberServiceImpl;
 import com.kh.spring.member.model.vo.Member;
@@ -30,6 +36,8 @@ public class MemberController {
       } else {
          session.setAttribute("loginMember", loginMember);
          return "redirect:/";
+         
+         
       }
       
    }
@@ -55,16 +63,57 @@ public class MemberController {
    
    //회원가입
    @RequestMapping("insertMember.me")
-   public String insertMember(Member m) {
-      System.out.println(m.getMemName());
+   public String insertMember(Member m ,MultipartFile upfile , HttpSession session , Model model , MultipartFile[] upfile2) {
+	  System.out.println(upfile);
+      System.out.println(m);
+      if(!upfile.getOriginalFilename().equals("")) {
+
+    	  	String changeName = saveFile(upfile , session);
+			System.out.println(changeName);
+
+		}
+
       return null ;
    }
+   
+   
+	public String saveFile(MultipartFile upfile, HttpSession session) { //리팩토링 작업이라고 한다.
+		String originName = upfile.getOriginalFilename();
+		//"20231004154607"
+		String currentTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		int ranNum = (int)(Math.random() * 90000 + 10000);//5자리 랜덤값
+		String ext =originName.substring(originName.lastIndexOf("."));
+		
+		String changeName = currentTime+ ranNum + ext ; //새로운 이름
+		//업로드 시키고자 하는 폴더의 물리적 경로를 알아내보자
+		String savePath = session.getServletContext().getRealPath("resources/uploadFiles/");
+		//슬래쉬는 webapp
+		//외우거라 넹
+		try {
+			upfile.transferTo(new File(savePath + changeName)); //io 라서 예외처리 실제 저장하는중
+		} catch (IllegalStateException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		return changeName;
+	}
+	
+   
+   
+   
+   
+   
    //회원가입중 아이디체크 Ajax
    @ResponseBody
    @RequestMapping("idCheck.me")
       public String idCheck(String checkId) {
-         
+        
          int result = mService.idCheck(checkId);
+         checkId.toLowerCase();
+ 
          if(result > 0) {
             return "NNNNN";
          }else {

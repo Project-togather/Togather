@@ -293,4 +293,9 @@ public class ClubController {
 		return "class/ClassEnrollForm";
 	}
 	
+	@RequestMapping("enroll.cl")
+	public void classEnroll(Club c) {
+		System.out.println(c);
+	}
+	
 }

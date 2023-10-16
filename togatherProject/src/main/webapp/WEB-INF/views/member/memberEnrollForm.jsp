@@ -45,12 +45,15 @@
 									<h5>Create a new account</h5>
 								</div>
 								<div class="up-form">
-									<form action="insertMember.me" method="post">
+									<form action="insertMember.me" method="post" enctype="multipart/form-data">
 										<div class="form-group">
-											<input class="form-control" id="idInput" name="memName" type="text" placeholder="Name" style="color: white;">
+											<input class="form-control" id="idInput" name="memId" type="text" placeholder="Id" style="color: white;">
 										</div>
 										<div id="checkResult">
 											
+										</div>
+										<div class="form-group">
+											<input class="form-control" name="memName" type="text" placeholder="Name" style="color: white;">
 										</div>
 										<div class="form-group">
 											<input class="form-control" name="email" type="email" placeholder="Email" style="color: white;">
@@ -62,7 +65,39 @@
 											<input class="form-control" type="password" placeholder="Confirm password" style="color: white;">
 										</div>
 										<div class="form-group">
-											<button  class="btn btn-block btn-round btn-brand" type="submit">Sign Up</button>
+											<input class="form-control" name="nickName" type="text" placeholder="nickName" style="color: white;">
+										</div>
+										<div class="form-group">
+											<input class="form-control" name="phone" type="text" placeholder="phone" style="color: white;">
+										</div>
+										<div class="form-group">
+											<input type='radio'
+											       name='gender' 
+											       value='F' 
+											       />Female
+											<input type='radio' 
+											       name='gender' 
+											       value='M' 
+											       />Male
+											<br>
+											AGE
+											<select name = "age">
+												<c:forEach begin="10" end="60" step="1" var ="i">
+												  <option value='${i}'>${i}</option>
+											    </c:forEach>	  
+											</select>
+											 <th>프로필이미지</th>
+							                    <td colspan="3" align="center">
+							                        <img id = "titleImg" width="250" height="170" onclick="chooseFile(1);">
+							                    </td>
+							                      <div id="file-area" style = "display:none">
+									                <input type="file" name="upfile" id = "file1" onchange ="loadImg(this,1)" required>
+									             </div>
+											
+										</div>
+										
+										<div class="form-group">
+											<button id="submitBtn" class="btn btn-block btn-round btn-brand" type="submit" disabled>Sign Up</button>
 										</div>
 									</form>
 								</div>
@@ -92,11 +127,11 @@
     					   // -> 버튼 비활성화
     					   $("#checkResult").show();
     					   $("#checkResult").css("color", "red").text("중복된 아이디입니다");
-    					   $("#enrollForm :submit").attr("disalbled", true);
+    					   $("#submitBtn").attr("disalbled", true);
     				   }else{//사용이 가능한 상황
     					   $("#checkResult").show();
     					   $("#checkResult").css("color", "green").text("사용가능한 아이디입니다");
-    					   $("#enrollForm :submit").attr("disabled", false);
+    					   $("#submitBtn").attr("disabled", false);
     				   }
 
     			   },
@@ -112,6 +147,35 @@
     		
     	})
     })
+    
+   			  function chooseFile(num){
+            		$("#file"+num).click();
+            	}
+            	function loadImg(inputFile , num){
+            		if (inputFile.files.length == 1){//파일이 선택된경우 => 파일읽어들여서 미리보기
+            			
+            			const reader = new FileReader();
+            			reader.readAsDataURL(inputFile.files[0]);
+            			//해당파일을 읽어들이는 순간 해당 파일만이 가지고 있는 url 을 부여해줌
+            			//파일 읽어들이기가 완료가 되었다면 실행할 함수는?
+            			reader.onload = function(e){
+            			//e.target.result -> 읽어들인 파일의 고유한 url 이 들어가 있다	
+            				switch (num){
+                                case 1: $("#titleImg").attr("src",e.target.result);
+                                break; 
+                            }
+            			}
+            		}else{//파일이 빠졌을경우
+                        switch (num){
+                                case 1: $("#titleImg").attr("src",null);
+                                break;
+                            }
+            		}
+            		
+            		
+            		
+            	}
+    
     </script>
 			
 			
@@ -120,226 +184,6 @@
 			
 			
 			
-			
-			<!-- Hero end-->
-
-			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
-				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
-			</svg>
-			<!-- Footer-->
-			<footer class="footer">
-				<div class="container">
-					<div class="row">
-						<div class="col-md-3">
-							<!-- Text widget-->
-							<aside class="widget widget_text">
-								<div class="textwidget">
-									<p><img src="assets/images/logo-light.png" width="74px" alt=""></p>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-									<ul class="icon-list">
-										<li><i class="ti-email"></i> info@themebusiness.com</li>
-										<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-										<li><i class="ti-location-pin"></i> Raymond Boulevard 224, New York</li>
-									</ul>
-								</div>
-							</aside>
-						</div>
-						<div class="col-md-3">
-							<!-- Recent entries widget-->
-							<aside class="widget widget_recent_entries">
-								<div class="widget-title">
-									<h5>Recent Posts</h5>
-								</div>
-								<ul>
-									<li><a href="#">Matcha Portuguese Egg Tarts</a> <span class="post-date">May 8, 2016</span></li>
-									<li><a href="#">Camp Cooking: One Pan Yaki Udon</a> <span class="post-date">April 7, 2016</span></li>
-									<li><a href="#">Chicken & Spring Vegetable Lasagna</a> <span class="post-date">April 7, 2016</span></li>
-									<li><a href="#">Mini California Sushi Cones</a> <span class="post-date">April 7, 2016</span></li>
-								</ul>
-							</aside>
-						</div>
-						<div class="col-md-3">
-							<!-- Twitter-->
-							<aside class="widget twitter-feed-widget">
-								<div class="widget-title">
-									<h5>Twitter Feed</h5>
-								</div>
-								<div class="twitter-feed" data-twitter="345170787868762112" data-number="2"></div>
-							</aside>
-						</div>
-						<div class="col-md-3">
-							<!-- Recent portfolio widget-->
-							<aside class="widget widget_recent_works">
-								<div class="widget-title">
-									<h5>Instagram</h5>
-								</div>
-								<ul>
-									<li><a href="#"><img src="assets/images/widgets/1.jpg" alt=""></a></li>
-									<li><a href="#"><img src="assets/images/widgets/2.jpg" alt=""></a></li>
-									<li><a href="#"><img src="assets/images/widgets/3.jpg" alt=""></a></li>
-									<li><a href="#"><img src="assets/images/widgets/4.jpg" alt=""></a></li>
-									<li><a href="#"><img src="assets/images/widgets/5.jpg" alt=""></a></li>
-									<li><a href="#"><img src="assets/images/widgets/6.jpg" alt=""></a></li>
-								</ul>
-							</aside>
-						</div>
-					</div>
-				</div>
-				<div class="small-footer">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="copyright">Â© 2017 <a href="http://2the.me/">2theme</a>, All Rights Reserved.</div>
-							</div>
-							<div class="col-md-6">
-								<ul class="social-links">
-									<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-vimeo"></i></a></li>
-									<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-									<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</footer>
-			<!-- Footer end-->
-		</div>
-		<!-- Wrapper end-->
-
-		<!-- Off canvas-->
-		<div class="off-canvas-sidebar" data-background="assets/images/sidebar.jpg">
-			<div class="off-canvas-sidebar-wrapper">
-				<div class="off-canvas-header"><a class="close-offcanvas" href="#"><span class="arrows arrows-arrows-remove"></span></a></div>
-				<div class="off-canvas-content">
-					<!-- Text widget-->
-					<aside class="widget widget_text">
-						<div class="textwidget">
-							<p><img src="assets/images/logo-light.png" width="74px" alt=""></p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.</p>
-							<ul class="icon-list">
-								<li><i class="ti-email"></i> info@themebusiness.com</li>
-								<li><i class="ti-headphone-alt"></i> 1-444-123-4559</li>
-								<li><i class="ti-location-pin"></i> Raymond Boulevard 224, New York</li>
-							</ul>
-						</div>
-					</aside>
-					<!-- Recent portfolio widget-->
-					<aside class="widget widget_recent_works">
-						<div class="widget-title">
-							<h5>Instagram</h5>
-						</div>
-						<ul>
-							<li><a href="#"><img src="assets/images/widgets/1.jpg" alt=""></a></li>
-							<li><a href="#"><img src="assets/images/widgets/2.jpg" alt=""></a></li>
-							<li><a href="#"><img src="assets/images/widgets/3.jpg" alt=""></a></li>
-							<li><a href="#"><img src="assets/images/widgets/4.jpg" alt=""></a></li>
-							<li><a href="#"><img src="assets/images/widgets/5.jpg" alt=""></a></li>
-							<li><a href="#"><img src="assets/images/widgets/6.jpg" alt=""></a></li>
-						</ul>
-					</aside>
-					<!-- Text widget-->
-					<!--aside.widget.widget_text
-					.textwidget
-						.up-logo
-							p.text-center.m-b-50: img(src="assets/images/logo-light.png" width="100" alt="")
-						.up-form
-							form(method="post")
-								.form-group
-									input.form-control.form-control-lg(type="email" placeholder="Email")
-								.form-group
-									input.form-control.form-control-lg(type="password" placeholder="Pasword")
-								.form-group
-									button(type="submit" class="btn btn-block btn-lg btn-round btn-brand") Log in
-						.up-help
-							p: a(href="#") Forgot your password?
-							p Don't have an account yet? <a href="#">Sign in</a>
-					
-					-->
-
-					<!-- Twitter widget-->
-					<aside class="widget twitter-feed-widget">
-						<div class="widget-title">
-							<h5>Twitter Feed</h5>
-						</div>
-						<div class="twitter-feed" data-twitter="345170787868762112" data-number="2"></div>
-					</aside>
-					<ul class="social-icons">
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-						<li><a href="#"><i class="fa fa-vk"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<!-- Off canvas end-->
-
-		<!-- Reserve Popup-->
-		<div class="white-popup-block mfp-hide" id="test-form">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 p-0">
-						<div class="qwert" data-background="assets/images/module-2.jpg"></div>
-					</div>
-					<div class="col-md-8">
-						<div class="ddd"><a class="popup-modal-dismiss" href="#"><i class="ti-close"></i></a>
-							<h1 class="display-1">Book a Table</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-							<div class="divider-border-left"></div>
-							<div class="space" data-mY="60px"></div>
-							<form method="post" novalidate>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="name" placeholder="Name" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="name" placeholder="Phone" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="email" name="email" placeholder="E-mail" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="subject" placeholder="Persons" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="email" name="email" placeholder="Date" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="subject" placeholder="Time" required="">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="form-control" name="message" placeholder="Special Requests" rows="6" required=""></textarea>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<input class="btn btn-black" type="submit" value="Reserve">
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Reserve Popup end-->
-
-		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
-
 		<!-- Scripts-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
