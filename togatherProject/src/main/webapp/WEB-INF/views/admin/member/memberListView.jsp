@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +21,7 @@
 						    	회원 목록 다운로드
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						    <li><a class="dropdown-item" href="#">회원목록 다운로드</a></li>
+						    <li><a class="dropdown-item" href="list.dl">회원목록 다운로드</a></li>
 						    <li><a class="dropdown-item" href="#">회원정보 수정</a></li>
 						  </ul>
 						</div>
@@ -32,35 +33,21 @@
 						      <th scope="col">이름</th>
 						      <th scope="col">아이디</th>
 						      <th scope="col">닉네임</th>
-						      <th scope="col">가입일</th>
 						      <th scope="col">나이</th>
+						      <th scope="col">가입일</th>
 						    </tr>
 						  </thead>
 						  <tbody>
-						    <tr>
-						      <th scope="row">1</th>
-						      <td>Mark</td>
-						      <td>Otto</td>
-						      <td>@mdo</td>
-						      <td>@mdo</td>
-						      <td>@mdo</td>
-						    </tr>
-						   <tr>
-						      <th scope="row">1</th>
-						      <td>Mark</td>
-						      <td>Otto</td>
-						      <td>@mdo</td>
-						      <td>@mdo</td>
-						      <td>@mdo</td>
-						    </tr>
-						    <tr>
-						      <th scope="row">1</th>
-						      <td>Mark</td>
-						      <td>Otto</td>
-						      <td>@mdo</td>
-						      <td>@mdo</td>
-						      <td>@mdo</td>
-						    </tr>
+						 	 <c:forEach var="m" items="${list}">
+							    <tr>
+							      <th scope="row">${m.memNo}</th>
+							      <td>${m.memName }</td>
+							      <td>${m.memId }</td>
+							      <td>${m.nickname }</td>
+							      <td>${m.age }</td>
+							      <td>${m.enrollDate }</td>
+							    </tr>
+						 	 </c:forEach>
 						  </tbody>
 						</table>
 					</div>

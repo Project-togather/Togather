@@ -17,5 +17,6 @@
 	 	<mapper resource="/mappers/club-mapper.xml"/>
 	 	<mapper resource="/mappers/feed-mapper.xml"/>
 	 	<mapper resource="/mappers/attachment-mapper.xml"/>
+	 	<mapper resource="/mappers/admin-mapper.xml"/>
 	 </mappers>
 </configuration>
