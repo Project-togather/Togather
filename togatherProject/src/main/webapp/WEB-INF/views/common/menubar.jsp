@@ -86,16 +86,16 @@
                   
                   <li><a href="enrollForm.me"><i class="ti-user fa-2x"></i></a></li>
 
-                  <li>
-                     <div class="search-box">
-                     <input type="text" class="search-txt" name=""placeholder="지금 생각나는 취미를 검색하세요.">
-                     <a class="search-btn" href="#">
-                        <i class="fa fa-search" aria-hidden="true" type="submit"></i>
-                     </a>
-                  </div>
-               </li>
-            </ul>
-         </div>
+						<li>
+							<div class="search-box">
+							<input type="text" class="search-txt" name="" placeholder="지금 생각나는 취미를 검색하세요.">
+							<a class="search-btn" href="search.so">
+								<i class="fa fa-search" aria-hidden="true" type="submit"></i>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
 
          <div class="navigation navigation-center">
             <div class="container-fluid">
