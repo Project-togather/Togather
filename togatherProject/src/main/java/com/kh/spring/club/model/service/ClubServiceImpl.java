@@ -13,19 +13,19 @@ import com.kh.spring.club.model.vo.Club;
 public class ClubServiceImpl implements ClubService {
 	
 	@Autowired
-	private ClubDao bDao;
+	private ClubDao cDao;
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public ArrayList<Club> selectClubList() {
+	public ArrayList<Club> selectClassList() {
 		return null;
 	}
 
 	@Override
 	public ArrayList<Club> selectSocialList() {
-		return null;
+		return cDao.selectSocialList(sqlSession);
 	}
 
 	@Override
@@ -54,7 +54,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public ArrayList<Club> selectclubList() {
+	public ArrayList<Club> selectClubList() {
 		return null;
 	}
 
@@ -79,7 +79,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public ArrayList<Club> selectchallengeList() {
+	public ArrayList<Club> selectChallengeList() {
 		return null;
 	}
 
@@ -129,7 +129,7 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public ArrayList<Club> selectMyList() {
+	public ArrayList<Club> selectMyClassList() {
 		return null;
 	}
 

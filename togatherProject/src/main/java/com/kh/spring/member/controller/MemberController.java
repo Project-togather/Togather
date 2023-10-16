@@ -127,11 +127,6 @@ public class MemberController {
       return "member/myClassPage";
    }
    
-   // 내모임 리스트 조회
-   @RequestMapping(value = "myclass.me")
-   public String selectMyClass() {
-      
-      return "";
-   }
+
    
 }

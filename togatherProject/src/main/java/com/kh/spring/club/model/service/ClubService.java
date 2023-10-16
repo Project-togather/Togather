@@ -7,7 +7,7 @@ import com.kh.spring.club.model.vo.Club;
 public interface ClubService {
 	
 	// 전체 리스트 조회 (소셜링, 클럽, 챌린지, 원데이, 피드?) (대문자)
-	ArrayList<Club> selectClubList();
+	ArrayList<Club> selectClassList();
 	
 	// 소셜링 전체 조회
 	ArrayList<Club> selectSocialList();
@@ -25,8 +25,8 @@ public interface ClubService {
 	// 소셜링 삭제
 	int deleteSocial(int cNo);
 	
-	// 클럽 전체 조회 (소문자)
-	ArrayList<Club> selectclubList();
+	// 클럽 전체 조회
+	ArrayList<Club> selectClubList();
 	
 	// 클럽 상세 조회
 	// 카운트 증가 where 절 바꾸기
@@ -42,7 +42,7 @@ public interface ClubService {
 	int deleteclub(int cNo);
 	
 	// 챌린지 전체 조회
-	ArrayList<Club> selectchallengeList();
+	ArrayList<Club> selectChallengeList();
 	
 	// 챌린지 상세 조회
 	// 카운트 증가 where 절 바꾸기
@@ -74,5 +74,5 @@ public interface ClubService {
 	int deleteOneDay(int cNo);
 	
 	// 내 즐겨찾기 조회
-	ArrayList<Club> selectMyList();
+	ArrayList<Club> selectMyClassList();
 }

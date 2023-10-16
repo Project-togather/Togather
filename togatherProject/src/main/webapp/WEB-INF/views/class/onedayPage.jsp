@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +11,13 @@
 <body>
 		<jsp:include page="../common/menubar.jsp"/>
 
-		<br>
+		<br><br><br><br><br>
 		
-		<div class="text-center">
-			<h2 class="display-1">소셜링</h2>
-		</div>
+		<div class="col-md-6 m-auto text-center">
+				<h1 class="display-1">원데이 클래스</h1>
+				<p class="lead">배우고 싶은 걸 <br/> 하루만에 배워보아요</p>
+			<div class="divider-border"></div>
+		</div>/div>
 		
 	
 		<!-- Menu-->
@@ -177,7 +180,9 @@
 
 
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
-
+	
+		<jsp:include page="../common/footer.jsp"/>
+		
 		<!-- Scripts-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
@@ -185,6 +190,5 @@
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
 		<script src="assets/js/plugins.min.js"></script>
 		<script src="assets/js/custom.min.js"></script>
-	</body>
 </body>
 </html>
