@@ -20,7 +20,7 @@ public class Member {
 	private String memId;
 	private String memPwd;
 	private String memName;
-	private String nickname;
+	private String nickName;
 	private String email;
 	private String gender;
 	private String age;

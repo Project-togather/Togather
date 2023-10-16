@@ -9,5 +9,8 @@ public interface MemberService {
 		
 	//아이디 중복검사(select)
 		int idCheck(String checkId);
+		
+	//회원가입 (insert)
+		int inserMember(Member m);
 	
 }
