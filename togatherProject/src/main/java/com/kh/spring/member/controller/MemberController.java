@@ -63,8 +63,13 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping("idCheck.me")
 	public String idCheck(String checkId) {
-			System.out.println(checkId);
+		
+		int result = mService.idCheck(checkId);
+		if(result > 0) {
+			return "NNNNN";
+		}else {
 			return "NNNNY";
+		}		
 	}
 	
 	

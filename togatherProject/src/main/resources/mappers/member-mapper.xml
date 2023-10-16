@@ -36,4 +36,9 @@
 		 where mem_id = #{memId}
 		   and mem_pwd = #{memPwd}	
 	</select>
+	
+	<select id = "idCheck" resultType= "_int" >
+		select count(*) from member
+		where mem_id = #{checkId}
+	</select>
 </mapper>

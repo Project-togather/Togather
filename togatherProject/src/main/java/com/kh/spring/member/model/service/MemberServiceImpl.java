@@ -23,5 +23,11 @@ public class MemberServiceImpl implements MemberService {
 		
 		return loginMember;
 	}
+
+	@Override
+	public int idCheck(String checkId) {
+		int result = mDao.idCheck(sqlSession, checkId);
+		return result;
+	}
 	
 }

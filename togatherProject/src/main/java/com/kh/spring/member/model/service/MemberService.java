@@ -6,4 +6,8 @@ public interface MemberService {
 
 	//로그인 (select)
 		Member loginMember(Member m);
+		
+	//아이디 중복검사(select)
+		int idCheck(String checkId);
+	
 }
