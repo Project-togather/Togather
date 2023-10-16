@@ -62,11 +62,27 @@ public class MemberController {
 	//회원가입중 아이디체크 Ajax
 	@ResponseBody
 	@RequestMapping("idCheck.me")
-	public String idCheck(String checkId) {
-			System.out.println(checkId);
-			return "NNNNY";
+	   public String idCheck(String checkId) {
+	      
+	      int result = mService.idCheck(checkId);
+	      if(result > 0) {
+	         return "NNNNN";
+	      }else {
+	         return "NNNNY";
+	      }      
+	   }
+	
+	// 내모임 페이지 이동
+	@RequestMapping(value = "myclass.pa")
+	public String myClassPage() {
+		return "member/myClassPage";
 	}
 	
-	
+	// 내모임 리스트 조회
+	@RequestMapping(value = "myclass.me")
+	public String selectMyClass() {
+		
+		return "";
+	}
 	
 }
