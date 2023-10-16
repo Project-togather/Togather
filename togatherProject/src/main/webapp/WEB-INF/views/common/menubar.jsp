@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- Favicons-->
 <link rel="shortcut icon" href="assets/images/favicon.png">
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -20,6 +21,7 @@
 <link href="assets/css/plugins.min.css" rel="stylesheet">
 <!-- Template core CSS-->
 <link href="assets/css/template.css" rel="stylesheet">
+
 <style>
 .menu-item-span{
    font-size: 17px;
@@ -68,6 +70,14 @@
 </style>
 </head>
 <body>
+	<c:if test="${not empty alertMsg}">
+		<script >
+			//swal("${alertMsg}");
+			swal("${alertMsg}");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
+
    <!-- Preloader-->
       <div class="page-loader">
          <div class="loader"></div>

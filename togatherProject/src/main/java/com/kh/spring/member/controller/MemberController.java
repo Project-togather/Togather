@@ -90,7 +90,7 @@ public class MemberController {
       //파일을 attach에 insert하면 됨
       Attachment at = new Attachment();
       at.setRefFno(memNo);
-      at.setChangeName(changeName);
+      at.setUpdateName(changeName);
       at.setOriginName(originName);
       at.setFilePath(filePath);
       //System.out.println(at);
@@ -99,7 +99,7 @@ public class MemberController {
       
       if(result1 * result2 != 0 ) {
     	  session.setAttribute("alertMsg","작성성공");
-    	  return "redirect:main";
+    	  return "main";
       }else {
     	  System.out.println("실패");
       }
