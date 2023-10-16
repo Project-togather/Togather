@@ -304,4 +304,15 @@ public class ClubController {
 		System.out.println(c);
 	}
 	
+	@RequestMapping("detail.cl")
+	public String selectClassDetail(int cNo, Model model) {
+		
+		Club c = cService.selectClassDetail(cNo);
+		model.addAttribute("c", c);
+		
+		System.out.println(c);
+		return "class/classDetailView";
+		
+	}
+	
 }

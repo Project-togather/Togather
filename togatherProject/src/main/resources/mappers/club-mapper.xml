@@ -76,4 +76,28 @@
 		 where status = 'Y'
 		   and cl_type = 1
 	</select>
+	
+	<select id="selectClassDetail" resultMap="resultclub">
+		select
+		       c_no
+		     , c_title
+		     , c_content
+		     , c_location
+		     , c_date
+		     , c_time
+		     , c_price
+		     , c_approval
+		     , minage
+		     , maxage
+		     , people_limit
+		     , cl_type
+		     , in_no
+		     , curriculum
+		     , status
+		     , nickname
+		  from class
+		  join member using (mem_no)
+		 where c_no = 'C'||#{classNo}
+		   and status = 'Y'
+	</select>
 </mapper>

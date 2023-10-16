@@ -133,4 +133,9 @@ public class ClubServiceImpl implements ClubService {
 		return null;
 	}
 
+	@Override
+	public Club selectClassDetail(int classNo) {
+		return cDao.selectClassDetail(classNo, sqlSession);
+	}
+
 }

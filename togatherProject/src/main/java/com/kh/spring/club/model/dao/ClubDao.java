@@ -18,5 +18,9 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.selectSocialList");
 	}
 	
+	public Club selectClassDetail(int classNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("clubMapper.selectClassDetail", classNo);
+	}
+	
 	
 }
