@@ -41,4 +41,76 @@
 		select count(*) from member
 		where mem_id = #{checkId}
 	</select>
+	
+	
+	<insert id ="insertMember" parameterType="Member">
+
+	insert 
+    into 
+    member
+    (
+        mem_no
+       ,mem_id
+       ,mem_pwd
+       ,mem_name
+       ,nickname
+       ,email
+       ,gender
+       ,age
+       ,phone
+       ,enroll_date
+       ,m_status
+       ,manner
+       ,reg_type
+       ,rp_count
+    )
+    values
+    (
+        'M'||seq_mno.nextval
+       ,#{memId}
+       ,#{memPwd}
+       ,#{memName}
+       ,#{nickName}
+       ,#{email}
+       ,#{gender}
+       ,#{age}
+       ,#{phone}
+       ,sysdate
+       ,default
+       ,36.5
+       ,null
+       ,default
+    )
+	</insert>
+	
+	<select id ="bringMemNo" resultType = "string" parameterType="Member">
+		select mem_no
+		from member
+		where mem_id = #{memId}
+	</select>
+	
+	
+	<insert id="insertProfileImage"  parameterType="Attachment" >
+		insert into attachment
+		(
+		    att_no
+		   ,ref_fno
+		   ,origin_name
+		   ,update_name
+		   ,file_path
+		   ,enroll_date
+		   ,category
+		)
+		values
+		(
+		    'AT'||seq_ano.nextval
+		   ,#{refFno}
+		   ,#{originName}
+		   ,#{changeName}
+		   ,#{filePath}
+		   ,sysdate
+		   ,'profileImage'
+		)
+	</insert>
+	
 </mapper>
