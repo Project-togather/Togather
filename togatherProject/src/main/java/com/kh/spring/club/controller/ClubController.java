@@ -58,7 +58,7 @@ public class ClubController {
 			at.setUpdateName("resources/uploadFiles/" + updateName);
 		}
 		
-		ArrayList<Club> list = cService.selectClubList();
+		ArrayList<Club> list = cService.selectClassList();
 		
 		if(list != null) {
 			session.setAttribute("list", list);
@@ -67,6 +67,12 @@ public class ClubController {
 			model.addAttribute("errorMsg", "실패!?");
 			return "/";
 		}
+	}
+	
+	// 메인 페이지 이동
+	@RequestMapping(value = "main.pa")
+	public String mainPage() {
+		return "main";
 	}
 	
 	// 클럽 페이지 이동

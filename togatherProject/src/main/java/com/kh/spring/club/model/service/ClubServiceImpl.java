@@ -20,7 +20,7 @@ public class ClubServiceImpl implements ClubService {
 	
 	@Override
 	public ArrayList<Club> selectClassList() {
-		return null;
+		return cDao.selectClassList(sqlSession);
 	}
 
 	@Override
