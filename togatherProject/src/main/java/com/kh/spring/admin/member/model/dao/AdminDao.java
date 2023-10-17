@@ -32,4 +32,7 @@ public class AdminDao {
 	public int idCheck(SqlSession sqlsession,String checkId) {
 		return sqlsession.selectOne("adminMapper.idCheck",checkId);
 	}
+	public int insertblackList(SqlSession sqlsession,String userId) {
+		return sqlsession.insert("adminMapper.insertblackList",userId);
+	}
 }

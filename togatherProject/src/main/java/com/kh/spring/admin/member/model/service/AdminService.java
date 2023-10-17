@@ -20,4 +20,7 @@ public interface AdminService  {
 	
 	//블랙리스트 아이디 체크
 	int idCheck(String checkId);
+	
+	//블랙리스트 추가
+	int insertblackList(String userId);
 }

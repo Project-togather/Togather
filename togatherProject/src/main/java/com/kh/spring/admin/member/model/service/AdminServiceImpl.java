@@ -11,15 +11,12 @@ import com.kh.spring.admin.member.model.dao.AdminDao;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.member.model.vo.Member;
 
-
-
-
 @Service
-public class AdminServiceImpl implements AdminService{
-	
+public class AdminServiceImpl implements AdminService {
+
 	@Autowired
 	private AdminDao ADao;
-	
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -40,7 +37,12 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public int idCheck(String checkId) {
-		return ADao.idCheck(sqlSession,checkId);
+		return ADao.idCheck(sqlSession, checkId);
+	}
+
+	@Override
+	public int insertblackList(String userId) {
+		return ADao.insertblackList(sqlSession,userId);
 	}
 	
 

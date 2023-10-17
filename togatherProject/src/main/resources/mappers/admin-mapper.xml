@@ -37,4 +37,32 @@
 		   where  mem_Id = #{checkId}
 	</select>
 
+	<insert id="insertblackList">
+		insert
+			into blacklist
+			(
+				BLACK_NO
+				,BLACK_ID
+				,BLACK_NAME
+				,NICKNAME
+				,BLACKRP_COUNT
+				,GENDER
+				,PHONE
+				,BLACK_ENROLL_DATE
+				,BLACK_STATUS
+			)
+			select
+			     SEQ_BLNO.NEXTVAL
+				, m.MEM_ID
+				, m.MEM_NAME
+				, m.NICKNAME
+				, m.RP_COUNT
+				, m.GENDER
+				, m.PHONE
+				, SYSDATE
+				, 'Y'
+			
+			FROM Member m
+			WHERE m.MEM_ID = #{userID}
+	</insert>
 </mapper>

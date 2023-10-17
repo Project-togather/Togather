@@ -33,7 +33,8 @@
 								</div>
 								<div class="modal-body">
 									<div class="mb-3">
-										<form class="row g-3" id="enrollForm" action="insert.bo" method="post">
+										<form class="row g-3" id="enrollForm" action="insert.bl"
+											>
 											<div class="col-md-12">
 												<label for="validationServer01" class="form-label">회원아이디:</label>
 												<input type="text" class="form-control " id="idInput"
@@ -47,10 +48,10 @@
 										data-bs-dismiss="modal">취소하기</button>
 									<button type="submit" class="btn btn-warning">등록하기</button>
 								</div>
+								</form>
 							</div>
 						</div>
 					</div>
-					</form>
 
 
 					<br> <br>
@@ -124,10 +125,10 @@
 					console.log($idInput.val());
 
 					//최소 3글자 이상으로 입력되어 있을때만 ajax 요청해서 중복체크 하도록
-					if ($idInput.val().length >= 3) {
+					if ($idInput.val().length >= 1) {
 
 						$.ajax({
-							type: "POST",
+							type : "POST",
 							url : "idCheck.me",
 							data : {
 								checkId : $idInput.val()

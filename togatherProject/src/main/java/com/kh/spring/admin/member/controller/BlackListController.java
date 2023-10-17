@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.spring.admin.member.model.service.AdminServiceImpl;
+import com.kh.spring.member.model.vo.Member;
 
 @Controller
 public class BlackListController {
@@ -23,7 +24,6 @@ public class BlackListController {
 			@ResponseBody
 			@RequestMapping ("idCheck.me")
 			public String idCheck(String checkId){
-				
 				int count = Aservice.idCheck(checkId);
 				
 				  if(count > 0) {
@@ -34,10 +34,11 @@ public class BlackListController {
 			}
 				  
 			//블랙리스트 추가하기
-			@RequestMapping("insert.bo")
-			public String insertblacklist(String memId) {
-				System.out.println(memId);
+			@RequestMapping("insert.bl")
+			public String insertblacklist(String userId) {
+				int result = Aservice.insertblackList(userId);
 				
+				System.out.println(result);
 				return "";
 			}
 
