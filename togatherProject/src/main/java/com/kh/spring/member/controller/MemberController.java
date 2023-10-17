@@ -35,18 +35,22 @@ public class MemberController {
    // 로그인
    @RequestMapping("login.me")
    public String loginMember(Member m, Model model, HttpSession session) {
-	  System.out.println("여긴오니1");
-	  System.out.println(m);
-      Member loginMember = mService.loginMember(m);      
-      System.out.println(loginMember);
-      if(loginMember == null) {
-         model.addAttribute("errorMsg", "로그인 실패");
-         return "common/errorPage";
-      } else {
-         session.setAttribute("loginMember", loginMember);
-         session.setAttribute("alertMsg", "어서오십시오");
-         return "main";
+	  System.out.println("여기오냐?");
+      Member loginMember = mService.loginMember(m);
 
+      if(loginMember != null) {
+    	 System.out.println(loginMember);
+    	 Attachment pImg = mService.getProfileImg(loginMember.getMemNo());
+    	 //System.out.println("컨트롤러에서 받아오자 " + pImg);
+         //System.out.println("세션에 저장");
+         session.setAttribute("loginMember", loginMember);
+         session.setAttribute("pImg", pImg);
+         session.setAttribute("alertMsg", "어서오십시오");
+         return "redirect:/";
+      } else {
+    	
+    	  model.addAttribute("errorMsg", "로그인 실패");
+          return "common/errorPage";
       }
       
    }
@@ -86,8 +90,9 @@ public class MemberController {
     	  	 //파일저장하고 경로좀 받아오자
     	  	 changeName = arr[0];
     	  	 savePath = arr[1];
-    	  	 filePath = savePath+changeName;
+    	  	 filePath = "resources/uploadFiles/"+changeName;
 			//System.out.println(changeName);
+    	  	 //System.out.println(filePath);
 		}
       //먼저 member를 insert하고
       int result1 = mService.insertMember(m);
@@ -107,14 +112,13 @@ public class MemberController {
       
       if(result1 * result2 != 0 ) {
     	  session.setAttribute("alertMsg","작성성공");
-    	  return "main";
+    	  return "redirect:/";
       }else {
     	  System.out.println("실패");
+    	  return "common/errorPage";
       }
-      
-      //그다음 파일과 맴버가 잘 들어갔는지 확인해서 오류페이지 or 리턴
 
-      return null ;
+   
    }
    
    
@@ -129,6 +133,7 @@ public class MemberController {
 		//업로드 시키고자 하는 폴더의 물리적 경로를 알아내보자
 		String savePath = session.getServletContext().getRealPath("resources/uploadFiles/");
 		
+		//System.out.println("savePath 제작중" + savePath);
 		//슬래쉬는 webapp
 		//외우거라 넹
 		try {

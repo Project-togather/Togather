@@ -33,4 +33,12 @@ public class MemberDao {
 	public int insertProfileImage(SqlSessionTemplate sqlSession , Attachment at) {
 		return sqlSession.insert("memberMapper.insertProfileImage", at);
 	}
+	
+	public Attachment getProfileImg(SqlSessionTemplate sqlSession , String memNo) {
+		
+		Attachment pImg = sqlSession.selectOne("memberMapper.getProfileImg" , memNo);
+		//System.out.println("DB로 들어갈 memNo" + memNo);
+		//System.out.println("DAO 에서 꺼내온 사진" +  pImg);
+		return pImg;
+	}
 }

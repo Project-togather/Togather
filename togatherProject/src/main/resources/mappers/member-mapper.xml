@@ -17,6 +17,17 @@
 
 	</resultMap>
 	
+	<resultMap type="Attachment" id="AttachResult">
+		<result column="ATT_NO" property="attNo"/>
+		<result column="REF_FNO" property="refFno"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="UPDATE_NAME" property="updateName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="ENROLL_DATE" property="enrollDate"/>
+	</resultMap>
+	
+	
+	
 	<select id="loginMember" resultMap="MemberResult">
 		select
 		       mem_no
@@ -111,5 +122,19 @@
 		   ,'profileImage'
 		)
 	</insert>
+	
+	<select id="getProfileImg" resultMap="AttachResult" >
+		select 
+		    att_no
+		   ,ref_fno
+		   ,origin_name
+		   ,update_name
+		   ,file_path
+		   ,enroll_date
+		from attachment
+		where ref_fno = #{memNo}
+	</select>
+	
+	
 	
 </mapper>

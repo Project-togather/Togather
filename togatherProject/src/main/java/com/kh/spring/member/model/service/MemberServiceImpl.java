@@ -21,7 +21,6 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginMember(Member m) {
 		
 		Member loginMember = mDao.loginMember(m, sqlSession);
-		
 		return loginMember;
 	}
 
@@ -54,6 +53,12 @@ public class MemberServiceImpl implements MemberService {
 	public int insertProfileImage(Attachment at) {
 		int result = mDao.insertProfileImage(sqlSession , at);
 		return result;
+	}
+	//프사가져오기
+	@Override
+	public Attachment getProfileImg(String memNo) {
+		Attachment pImg = mDao.getProfileImg(sqlSession,memNo);
+		return pImg;
 	}
 	
 }

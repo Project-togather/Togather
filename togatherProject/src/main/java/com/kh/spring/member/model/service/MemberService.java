@@ -10,5 +10,7 @@ public interface MemberService {
 	String bringMemNo(Member m);
 	//프사 첨부
 	int insertProfileImage(Attachment at);
+	//프사 가져오기
+	Attachment getProfileImg(String memNo);
 	
 }
