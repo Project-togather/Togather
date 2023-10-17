@@ -2,6 +2,10 @@ package com.kh.spring.member.model.service;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.meminterest.model.vo.MemInterest;
+
+
+
 
 public interface MemberService {
 	Member loginMember(Member m);
@@ -16,7 +20,7 @@ public interface MemberService {
 	
 	//DB에 취향밑 한마디 넣기
 	int insertMsg(Member m);
-	int insertInterest(int inNo);
+	int insertInterest(MemInterest mi);
 	//다음꺼
 	
 }

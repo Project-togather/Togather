@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.attachment.model.vo.Attachment;
+import com.kh.spring.interest.model.vo.Interest;
 import com.kh.spring.member.model.service.MemberServiceImpl;
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.meminterest.model.vo.MemInterest;
 
 @Controller
 public class MemberController {
@@ -187,13 +189,13 @@ public class MemberController {
    
    
    @RequestMapping(value="profile.me")
-   public String insertProfile(HttpServletRequest request , String memNo , String profileMessage) {
-	   System.out.println(memNo);
-	   System.out.println(profileMessage);
+   public String insertProfile(HttpServletRequest request , String memNo , String profileMessage , HttpSession session) {
+	   //System.out.println(memNo);
+	   //System.out.println(profileMessage);
 	   String arr [] = request.getParameterValues("interest"); 
 	   int interArr[] = new int [arr.length];
 	   for(int i = 0 ; i < arr.length ; i ++) {
-		   System.out.println(arr[i]);
+		   //System.out.println(arr[i]);
 	   }
 	   for(int i = 0 ; i < arr.length ; i ++) {
 		   interArr[i] = Integer.parseInt(arr[i]);
@@ -205,14 +207,26 @@ public class MemberController {
 	   m.setMemNo(memNo);
 	   m.setMsg(profileMessage);
 	   //프로필 한마디를 넣어보아요
+	   
+	   //System.out.println("DB로 갈 m " + m);
 	   int result1 = mService.insertMsg(m);
 
 	   //DB 에 취향을 넣어봅시다. 프로필 한마디도 넣어야함
 	   int result2 = 0 ; 
 	   for(int i = 0 ; i < interArr.length ; i ++) {
-		
+		  MemInterest mi = new MemInterest();
+		  mi.setMemNo(memNo);
+		  mi.setInNo(interArr[i]);
+		  //System.out.println("DB로갈 mi" + mi);
+		  result2 = mService.insertInterest(mi);
+		  
 	   }
-	   return null; 
+	   if(result1 * result2 != 0) {
+		   session.setAttribute("alertMsg", "가입을 축하드립니다!");
+		   return "redirect:/";
+	   }else {
+		   return "common/errorPage";
+	   }
    }
    
 

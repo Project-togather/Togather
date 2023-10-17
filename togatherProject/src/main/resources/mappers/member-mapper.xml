@@ -146,8 +146,22 @@
 		update 
 		    member
 		    set msg = #{msg}
-		where mem_no = #{mem_no}
+		where mem_no = #{memNo}
 	</update>
+	
+	<insert id="insertInterest">
+		insert into
+			mem_interest
+			(
+			    mem_no
+			   ,in_no 
+			)
+			values
+			(
+			    #{memNo}
+			   ,#{inNo}
+			)
+	</insert>
 	
 	
 	
