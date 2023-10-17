@@ -41,4 +41,9 @@ public class MemberDao {
 		//System.out.println("DAO 에서 꺼내온 사진" +  pImg);
 		return pImg;
 	}
+	
+	public int insertMsg(SqlSessionTemplate sqlSession , Member m) {
+		return sqlSession.update("memberMapper.insertMsg",m);
+	}
+	
 }

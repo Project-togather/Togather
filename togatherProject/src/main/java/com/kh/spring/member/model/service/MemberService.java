@@ -14,4 +14,9 @@ public interface MemberService {
 	//프사 가져오기
 	Attachment getProfileImg(String memNo);
 	
+	//DB에 취향밑 한마디 넣기
+	int insertMsg(Member m);
+	int insertInterest(int inNo);
+	//다음꺼
+	
 }

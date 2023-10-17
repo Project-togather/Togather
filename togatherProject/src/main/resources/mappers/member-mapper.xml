@@ -15,6 +15,7 @@
 		<result column="m_status" property="mStatus"/>
 		<result column="manner" property="manner"/>
 		<result column="img" property="img"/>
+		<result column="msg" property="msg"/>
 		
 
 	</resultMap>
@@ -45,6 +46,7 @@
 		     , m_status
 		     , manner
 		     , img
+		     , msg
 		  from member
 		 where mem_id = #{memId}
 		   and mem_pwd = #{memPwd}	
@@ -139,6 +141,13 @@
 		from attachment
 		where ref_fno = #{memNo}
 	</select>
+	
+	<update id="insertMsg">
+		update 
+		    member
+		    set msg = #{msg}
+		where mem_no = #{mem_no}
+	</update>
 	
 	
 	

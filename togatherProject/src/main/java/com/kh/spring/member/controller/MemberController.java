@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +37,11 @@ public class MemberController {
    // 로그인
    @RequestMapping("login.me")
    public String loginMember(Member m, Model model, HttpSession session) {
-	  System.out.println("여기오냐?");
+	  //System.out.println("여기오냐?");
       Member loginMember = mService.loginMember(m);
 
       if(loginMember != null) {
-    	 System.out.println(loginMember);
+    	 //System.out.println(loginMember);
     	 Attachment pImg = mService.getProfileImg(loginMember.getMemNo());
     	 //System.out.println("컨트롤러에서 받아오자 " + pImg);
          //System.out.println("세션에 저장");
@@ -76,7 +78,7 @@ public class MemberController {
    
    //회원가입
    @RequestMapping("insertMember.me")
-   public String insertMember(Member m ,MultipartFile upfile , HttpSession session , Model model , MultipartFile[] upfile2) {
+   public String insertMember(Member m ,MultipartFile upfile , HttpSession session , Model model , MultipartFile[] upfile2 , HttpServletRequest request) {
 	  //System.out.println(upfile);
       //System.out.println(m);
 	   
@@ -117,8 +119,9 @@ public class MemberController {
       int result2 = mService.insertProfileImage(at);
       
       if(result1 * result2 != 0 ) {
-    	  session.setAttribute("alertMsg","작성성공");
-    	  return "redirect:/";
+    	  request.setAttribute("memNo", memNo);
+    	  session.setAttribute("alertMsg","이제 취향을 알아볼까요?");
+    	  return "member/chooseInterest";
       }else {
     	  System.out.println("실패");
     	  return "common/errorPage";
@@ -179,6 +182,37 @@ public class MemberController {
    @RequestMapping(value = "myclass.pa")
    public String myClassPage() {
       return "member/myClassPage";
+   }
+   
+   
+   
+   @RequestMapping(value="profile.me")
+   public String insertProfile(HttpServletRequest request , String memNo , String profileMessage) {
+	   System.out.println(memNo);
+	   System.out.println(profileMessage);
+	   String arr [] = request.getParameterValues("interest"); 
+	   int interArr[] = new int [arr.length];
+	   for(int i = 0 ; i < arr.length ; i ++) {
+		   System.out.println(arr[i]);
+	   }
+	   for(int i = 0 ; i < arr.length ; i ++) {
+		   interArr[i] = Integer.parseInt(arr[i]);
+	   }
+	   
+	   
+	   
+	   Member m = new Member();
+	   m.setMemNo(memNo);
+	   m.setMsg(profileMessage);
+	   //프로필 한마디를 넣어보아요
+	   int result1 = mService.insertMsg(m);
+
+	   //DB 에 취향을 넣어봅시다. 프로필 한마디도 넣어야함
+	   int result2 = 0 ; 
+	   for(int i = 0 ; i < interArr.length ; i ++) {
+		
+	   }
+	   return null; 
    }
    
 

@@ -60,5 +60,17 @@ public class MemberServiceImpl implements MemberService {
 		Attachment pImg = mDao.getProfileImg(sqlSession,memNo);
 		return pImg;
 	}
+	//프로필메세지 넣기 업데이트
+	@Override
+	public int insertMsg(Member m) {
+		int result = mDao.insertMsg(sqlSession, m);
+		return result;
+	}
+	//취향넣기
+	@Override
+	public int insertInterest(int inNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 }

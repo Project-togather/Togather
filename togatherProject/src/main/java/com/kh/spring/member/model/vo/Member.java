@@ -29,5 +29,6 @@ public class Member {
 	private String mStatus;
 	private double manner;
 	private String img ; 
+	private String msg;
 	
 }
