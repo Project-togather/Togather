@@ -180,11 +180,11 @@ public class MemberController {
          }      
       }
 
-   // 내모임 페이지 이동
-   @RequestMapping(value = "myclass.pa")
-   public String myClassPage() {
-      return "member/myClassPage";
-   }
+//   // 내모임 페이지 이동
+//   @RequestMapping(value = "myclass.pa")
+//   public String myClassPage() {
+//      return "member/myClassPage";
+//   }
    
    
    
