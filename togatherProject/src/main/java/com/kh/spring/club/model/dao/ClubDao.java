@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.reply.model.vo.Reply;
 
 @Repository
 public class ClubDao {
@@ -35,9 +36,14 @@ public class ClubDao {
 		return sqlSession.selectOne("clubMapper.selectClassDetail", classNo);
 	}
 	
+	public int insertReply(Reply r, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("clubMapper.insertReply", r);
+	}
+
 	public int insertClass(Club c, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("clubMapper.insertClass", c);
 	}
+
 	
 	public int insertImg(Attachment at, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("clubMapper.insertImg", at);

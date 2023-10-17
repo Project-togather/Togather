@@ -169,7 +169,7 @@
 		     , c_location
 		     , to_char(to_date(c_date), 'yyyy-mm-dd dy') c_date
 		     , c_time
-		     , c_price
+		     , to_char(c_price, 'FM999,999') c_price
 		     , c_approval
 		     , minage
 		     , maxage
@@ -283,5 +283,20 @@
 	    where status = 'Y'
 	    order by c_no desc
 	</select>
+
+	<insert id="insertReply">
+		insert
+		  into reply
+		  values
+		  (
+		  	'RE'||seq_reno.nextval
+		  , #{rvContent}
+		  , sysdate
+		  , 'Y'
+		  , #{refFno}	
+		  , #{memNo}
+		  )
+	</insert>
+	
 
 </mapper>

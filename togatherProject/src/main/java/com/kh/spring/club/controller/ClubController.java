@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.reply.model.vo.Reply;
 import com.kh.spring.myClass.model.vo.MyClass;
 
 @Controller
@@ -219,7 +220,16 @@ public class ClubController {
 		
 		model.addAttribute("c", c);
 		return "class/classDetailView";
+	}
+	
+	@ResponseBody
+	@RequestMapping("enroll.rv")
+	public String insertReply(Reply r) {
 		
+		System.out.println(r);
+		int result = cService.insertReply(r);
+		return result>0 ? "success" : "fail";
+
 	}
 	
 }

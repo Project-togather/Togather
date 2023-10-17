@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.reply.model.vo.Reply;
 
 public interface ClubService {
 	
@@ -25,11 +26,16 @@ public interface ClubService {
 	// 내 즐겨찾기 조회
 	ArrayList<Club> selectMyClassList();
 	
+	// 모임 상세 조회
 	Club selectClassDetail(int classNo);
 	
+	// 댓글(모임) 등록
+	int insertReply(Reply r);
+
 	int insertClass(Club c);
 	
 	int insertImg(Attachment at);
 	
 	int insertMyClass(Club c);
+
 }

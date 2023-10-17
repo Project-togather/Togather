@@ -25,7 +25,7 @@ public class Club {
 	private String classLocation; // 모임지역
 	private String classDate; // 모임날짜
 	private String classTime; // 모임시간
-	private int classPrice; // 모임비
+	private String classPrice; // 모임비
 	private String classApproval; // 승인제
 	private int minAge; // 최소나이제한
 	private int maxAge; // 최대나이제한
