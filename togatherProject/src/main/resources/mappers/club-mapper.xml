@@ -14,8 +14,11 @@
 		<result column="minage" property="minAge"/>
 		<result column="maxage" property="maxAge"/>
 		<result column="people_limit" property="peopleLimit"/>
+		<result column="vacancy" property="vacancy"/>
+		<result column="nickname" property="nickname"/>
 		<result column="cl_type" property="clType"/>
 		<result column="cl_category" property="clCategory"/>
+		<result column="cl_name" property="clName"/>
 		<result column="curriculum" property="curriculum"/>
 	
 		<collection property="attachment" resultMap="attachment"/>
@@ -80,10 +83,11 @@
 	<select id="selectClassDetail" resultMap="resultclub">
 		select
 		       c_no
+		     , mem_no
 		     , c_title
 		     , c_content
 		     , c_location
-		     , c_date
+		     , to_char(to_date(c_date), 'yyyy-mm-dd dy') c_date
 		     , c_time
 		     , c_price
 		     , c_approval
@@ -91,12 +95,17 @@
 		     , maxage
 		     , people_limit
 		     , cl_type
-		     , in_no
+		     , cl_category
+		     , cl_name
 		     , curriculum
 		     , status
 		     , nickname
+		     , people_limit - (select count(*)
+		                         from my_class
+		                        where c_no = 'C'||#{classNo}) vacancy
 		  from class
 		  join member using (mem_no)
+		  join cl_category on (cl_category = cl_categoryno)
 		 where c_no = 'C'||#{classNo}
 		   and status = 'Y'
 	</select>
