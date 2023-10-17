@@ -14,8 +14,22 @@
 		<result column="enroll_date" property="enrollDate"/>
 		<result column="m_status" property="mStatus"/>
 		<result column="manner" property="manner"/>
+		<result column="img" property="img"/>
+		<result column="msg" property="msg"/>
+		
 
 	</resultMap>
+	
+	<resultMap type="Attachment" id="AttachResult">
+		<result column="ATT_NO" property="attNo"/>
+		<result column="REF_FNO" property="refFno"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="UPDATE_NAME" property="updateName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="ENROLL_DATE" property="enrollDate"/>
+	</resultMap>
+	
+	
 	
 	<select id="loginMember" resultMap="MemberResult">
 		select
@@ -31,6 +45,8 @@
 		     , enroll_date
 		     , m_status
 		     , manner
+		     , img
+		     , msg
 		  from member
 		 where mem_id = #{memId}
 		   and mem_pwd = #{memPwd}	
@@ -62,6 +78,7 @@
        ,manner
        ,reg_type
        ,rp_count
+       ,img
     )
     values
     (
@@ -79,6 +96,7 @@
        ,36.5
        ,null
        ,default
+       ,#{img}
     )
 	</insert>
 	
@@ -111,5 +129,40 @@
 		   ,'profileImage'
 		)
 	</insert>
+	
+	<select id="getProfileImg" resultMap="AttachResult" >
+		select 
+		    att_no
+		   ,ref_fno
+		   ,origin_name
+		   ,update_name
+		   ,file_path
+		   ,enroll_date
+		from attachment
+		where ref_fno = #{memNo}
+	</select>
+	
+	<update id="insertMsg">
+		update 
+		    member
+		    set msg = #{msg}
+		where mem_no = #{memNo}
+	</update>
+	
+	<insert id="insertInterest">
+		insert into
+			mem_interest
+			(
+			    mem_no
+			   ,in_no 
+			)
+			values
+			(
+			    #{memNo}
+			   ,#{inNo}
+			)
+	</insert>
+	
+	
 	
 </mapper>

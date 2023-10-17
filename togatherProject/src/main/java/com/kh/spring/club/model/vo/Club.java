@@ -32,8 +32,11 @@ public class Club {
 	private int peopleLimit; // 인원제한
 	private int clType; //  (소셜링, 챌린지)
 	private int clCategory; // in_no 관심사 (취미,)
+	private String clName; // 카테고리 이름
 	private String curriculum; // 커리큘럼
 	private String status; // 폐쇄상태
+	private int vacancy; // 남은 자리
+	private String nickname; // 닉네임
 	
 	private Attachment attachment;
 	

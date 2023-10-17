@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.club.model.vo.Club;
 import com.kh.spring.common.model.vo.PageInfo;
+import com.kh.spring.feed.model.vo.Feed;
 
 @Repository
 public class SearchDao {
@@ -26,6 +27,12 @@ public class SearchDao {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
 		return (ArrayList)sqlSession.selectList("clubMapper.selectSocialingList", null, rowBounds);
+		
+	}
+	
+	public ArrayList<Feed> selectFeedList(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("feedMapper.selectFeedList");
 		
 	}
 

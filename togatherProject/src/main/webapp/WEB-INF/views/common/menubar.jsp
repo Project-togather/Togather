@@ -1,6 +1,15 @@
+<%@page import="com.kh.spring.attachment.model.vo.Attachment"%>
+<%@page import="com.kh.spring.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	//if(session.getAttribute("pImg") != null){
+	//	Attachment at = (Attachment)session.getAttribute("pImg");
+	//	System.out.println("헤더에서 이미지 주소 " + at.getFilePath());
+	//	String filePath = at.getFilePath();
+	//}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,14 +106,14 @@
                   <li><a href="enrollForm.me"><i class="ti-user fa-2x"></i></a></li>
 					</c:when>
 					  <c:otherwise>
-                  <li><img src="#"></li>
+                 			 <li><img src="${loginMember.img}" style="width: 40px; height: 40px ;border-radius: 30px; "></li>
 					  </c:otherwise>
                   </c:choose> 	
 
 						<li>
 							<div class="search-box">
 							<input type="text" class="search-txt" name="" placeholder="지금 생각나는 취미를 검색하세요.">
-							<a class="search-btn" href="search.so">
+							<a class="search-btn" href="list.so">
 								<i class="fa fa-search" aria-hidden="true" type="submit"></i>
 							</a>
 						</div>
