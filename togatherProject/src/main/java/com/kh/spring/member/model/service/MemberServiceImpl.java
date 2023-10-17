@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.member.model.dao.MemberDao;
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.meminterest.model.vo.MemInterest;
+
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -68,9 +70,9 @@ public class MemberServiceImpl implements MemberService {
 	}
 	//취향넣기
 	@Override
-	public int insertInterest(int inNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertInterest(MemInterest mi) {
+		int result = mDao.insertInterest(sqlSession , mi);
+		return result;
 	}
 	
 }

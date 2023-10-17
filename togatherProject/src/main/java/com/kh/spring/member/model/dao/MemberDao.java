@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.meminterest.model.vo.MemInterest;
+
 
 @Repository
 public class MemberDao {
@@ -44,6 +46,10 @@ public class MemberDao {
 	
 	public int insertMsg(SqlSessionTemplate sqlSession , Member m) {
 		return sqlSession.update("memberMapper.insertMsg",m);
+	}
+	
+	public int insertInterest(SqlSessionTemplate sqlSession , MemInterest mi) {
+		return sqlSession.insert("memberMapper.insertInterest", mi);
 	}
 	
 }
