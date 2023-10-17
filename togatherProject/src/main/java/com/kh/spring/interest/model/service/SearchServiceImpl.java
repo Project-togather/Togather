@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.club.model.vo.Club;
 import com.kh.spring.common.model.vo.PageInfo;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.interest.model.dao.SearchDao;
 
 @Service
@@ -31,6 +32,11 @@ public class SearchServiceImpl implements SearchService {
 		
 		return sDao.selectSocialingList(sqlSession, pi);
 		
+	}
+
+	@Override
+	public ArrayList<Feed> selectFeedList() {
+		return sDao.selectFeedList(sqlSession);
 	}
 	
 }

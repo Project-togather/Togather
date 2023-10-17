@@ -100,4 +100,22 @@
 		 where c_no = 'C'||#{classNo}
 		   and status = 'Y'
 	</select>
+	
+		<select id="selectSocialingListCount" resultType="_int">
+		select
+		count(*)
+	from class
+	where status = 'Y'
+	</select>
+	
+	<select id="selectSocialingList" resultMap="resultclub">
+		select
+	        c_no
+	    ,   c_title
+	    ,   c_location
+	    ,   c_date
+	    from class
+	    where status = 'Y'
+	    order by c_no desc
+	</select>
 </mapper>

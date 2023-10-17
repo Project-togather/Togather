@@ -8,7 +8,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>searchSocialingPage</title>
+		<title>searchFeedPage</title>
+		
+		<!-- jQuery 라이브러리 -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		
 		<!-- Favicons-->
 		<link rel="shortcut icon" href="assets/images/favicon.png">
 		<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -180,80 +184,61 @@ nav a:nth-child(5):hover ~ .nav-underline {
 			<a href="#"><i class="fas fa-solid fa-user">&nbsp;</i>Member</a>
 			<div class="nav-underline"></div>
 		</nav>
-		  
-		 
-		<%-- 만일 검색 키워드가 존재한다면 몇개의 글이 검색 되었는지 알려준다. --%>
-		<div class="alert text-center">
-        	<strong>${totalRow }</strong> 의 검색 결과 10
-    	</div>
-    	
-    	
-    	
-    	
-    	<div class="Filter__FilterButtonWrapper-sc-1buujtg-1 gRnEmw"><div class="FilterDate__Wrapper-tqa6fq-0 gymLjt"><div class="FilterOpenButton__Wrapper-sc-91gci-0 NVKNq"><button height="auto" color="initial" font-size="14px" font-weight="500" class="Button-bqxlp0-0 fFBpBV">날짜</button></div></div><div class="FilterOthers__Wrapper-sc-1w6ksuy-0 jJIWoq"><div class="FilterOpenButton__Wrapper-sc-91gci-0 NVKNq"><button height="auto" color="initial" font-size="14px" font-weight="500" class="Button-bqxlp0-0 fFBpBV">필터</button></div></div></div>
-		
-		
 
 		<!-- Hero end-->
-
-		<section class="module">
-			<div class="container">
+		
+		
+			<section class="module">
+				<div class="container">
 			
-				<div class="row blog">
+					<div class="row blog-masonry">
 
-						<c:forEach var="s" items="${ list }">
 						<div class="col-md-4 post-item">
 							<!-- Post-->
 							<article class="post">
-								<div class="post-preview"><a href="#"><img src="assets/images/widgets/1.jpg" alt=""></a></div>
+								<div class="post-preview"><a href="#"><img src="assets/images/portfolio/10.jpg" alt=""></a></div>
 								<div class="post-wrapper">
 									<div class="post-header">
-										<h5 class="post-title display-1"><a href="blog-single-1.html">${ s.classTitle }</a></h5>
+										<h5 class="post-title display-1"><a href="blog-single-1.html">sdasdasdasd</a></h5>
 									</div>
 									<div class="post-content">
-										<p>${ s.classLocation }</p>
+										<p>asdasdasdasd</p>
 									</div>
-									<div class="post-more"><a href="#">${ s.classDate }</a></div>
+									<div class="post-more"><a href="#">adasdasdsa</a></div>
 								</div>
 							</article>
 							<!-- Post end-->
-						</div>
-						</c:forEach>			
+						</div>			
 						
-				</div>
-
-				<div id="pagingArea">
-					<ul class="pagination">
-						
-							<c:choose>
-								<c:when test="${ pi.currentPage eq 1 }">
-									<li class="page-item disabled"><a class="page-link" href="">&laquo;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="list.so?cpage=${ pi.currentPage - 1 }">&laquo;</a></li>
-								</c:otherwise>
-							</c:choose>
-							
-							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-								<li class="page-item"><a class="page-link" href="list.so?cpage=${ p }">${ p }</a></li>
-							 </c:forEach>
-							 
-							 <c:choose>
-								 <c:when test="${ pi.currentPage eq pi.maxPage }">
-									 <li class="page-item disabled"><a class="page-link" href="">&raquo;</a></li>
-								 </c:when>
-								 <c:otherwise>
-									 <li class="page-item"><a class="page-link" href="list.so?cpage=${ pi.currentPage + 1 }">&raquo;</a></li>
-								 </c:otherwise>
-							 </c:choose>
-							 
-							 
-					</ul>
 				</div>
 			</div>
 		</section>
-					
+		
+		<script>
+			$(function() {
+				feedList();
+				
+				// var interval = setInterval( feedList, 100000);
+				
+				// clearInterval(interval);
+				
+			})
+			
+			function feedList() {
+				$.ajax({
+					url:"list.fe",
+					success:function(list) {
+						
+						console.log(list);
 
+					}, error:function() {
+						
+						console.log("ajax 통신 실패");
+					}
+				})
+			}
+			
+		</script>
 
 
 
