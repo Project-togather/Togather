@@ -17,9 +17,10 @@ import com.kh.spring.common.template.Pagination;
 import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.interest.model.service.SearchServiceImpl;
 
+
 @Controller
 public class SearchController {
-	
+	/*
 	@Autowired
 	private SearchServiceImpl sService;
 
@@ -43,12 +44,11 @@ public class SearchController {
 		
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "feed.li")
 	public String ssfsdfw() {
 		return "search/searchFeedPage";
 	}
-	
 	
 	@ResponseBody
 	@RequestMapping(value = "list.fe", produces = "application/json; charset=utf-8;")

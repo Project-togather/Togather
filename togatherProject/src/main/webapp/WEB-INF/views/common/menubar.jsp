@@ -41,14 +41,6 @@
    height: 100%;
 }
 
-.search-box {
-
-}
-
-.search-btn{
-
-}
-
 .search-txt{
    display: flex;
    padding: 0;
@@ -145,15 +137,15 @@
 						<li><a href="lounge.pa"><span class="menu-item-span">라운지</span></a></li>
 						
 					 <c:if test="${ not empty loginMember }"> 
+					 </c:if> 
 						<li><a href="myclass.pa"><span class="menu-item-span">내모임</span></a></li>
 						<li><a href="enrollForm.cl"><span class="menu-item-span">모임 등록</span></a></li>
 						<li><a href="mypage.me"><span class="menu-item-span">마이페이지</span></a></li>
-					 </c:if> 
 
 					
 					 <c:if test="${ loginMember.memId == 'ADMIN' }">
-					 	<li><a href="#"><span class="menu-item-span">관리자페이지</span></a></li>
 					 </c:if> 
+					 	<li><a href="#"><span class="menu-item-span">관리자페이지</span></a></li>
 						
                      </ul>
                   </div>

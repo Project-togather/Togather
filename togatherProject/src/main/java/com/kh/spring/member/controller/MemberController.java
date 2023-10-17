@@ -47,6 +47,7 @@ public class MemberController {
     	 Attachment pImg = mService.getProfileImg(loginMember.getMemNo());
     	 //System.out.println("컨트롤러에서 받아오자 " + pImg);
          //System.out.println("세션에 저장");
+
          session.setAttribute("loginMember", loginMember);
          session.setAttribute("pImg", pImg);
          session.setAttribute("alertMsg", "어서오십시오");
@@ -179,7 +180,7 @@ public class MemberController {
             return "NNNNY";
          }      
       }
-   
+
    // 내모임 페이지 이동
    @RequestMapping(value = "myclass.pa")
    public String myClassPage() {
@@ -228,7 +229,5 @@ public class MemberController {
 		   return "common/errorPage";
 	   }
    }
-   
-
-   
+  
 }
