@@ -1,15 +1,83 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>   
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%
+	//String str = (String)request.getAttribute("memNo");
+	//System.out.println(str);
+%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+	<style >
+		ul {
+		  list-style-type: none;
+		}
+		
+		li {
+		  display: inline-block;
+		}
+		
+		input[type="checkbox"][id^="myCheckbox"] {
+		  display: none;
+		}
+		
+		label {
+		  border: 1px solid #fff;
+		  padding: 10px;
+		  display: block;
+		  position: relative;
+		  margin: 10px;
+		  cursor: pointer;
+		}
+		
+		label:before {
+		  background-color: white;
+		  color: white;
+		  content: " ";
+		  display: block;
+		  border-radius: 50%;
+		  border: 1px solid grey;
+		  position: absolute;
+		  top: -5px;
+		  left: -5px;
+		  width: 25px;
+		  height: 25px;
+		  text-align: center;
+		  line-height: 28px;
+		  transition-duration: 0.4s;
+		  transform: scale(0);
+		}
+		
+		label img {
+		  height: 100px;
+		  width: 100px;
+		  transition-duration: 0.2s;
+		  transform-origin: 50% 50%;
+		}
+		
+		:checked + label {
+		  border-color: #ddd;
+		}
+		
+		:checked + label:before {
+		  content: "✓";
+		  background-color: grey;
+		  transform: scale(1);
+		}
+		
+		:checked + label img {
+		  transform: scale(0.9);
+		  /* box-shadow: 0 0 5px #333; */
+		  z-index: -1;
+}
+	</style>
+	
+	
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>myPage</title>
+		<title>ChooseInterest</title>
 		<!-- Favicons-->
 		<link rel="shortcut icon" href="assets/images/favicon.png">
 		<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -23,18 +91,11 @@
 		<link href="assets/css/plugins.min.css" rel="stylesheet">
 		<!-- Template core CSS-->
 		<link href="assets/css/template.css" rel="stylesheet">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-		<style>
-			.gallery-item:hover{
-				cursor:pointer
-			}
-
-		</style>
 	</head>
 	<body>
+		<jsp:include page="../common/menubar.jsp"></jsp:include>
+		
 	
-	<jsp:include page="../common/menubar.jsp"></jsp:include>
 
 		<!-- Preloader-->
 		<div class="page-loader">
@@ -42,143 +103,107 @@
 		</div>
 		<!-- Preloader end-->
 
+		
 
 		<!-- Wrapper-->
-		<div class="wrapper" >
-
+		<div class="wrapper">
+		
 			<!-- Hero-->
-			<section class="module-cover parallax" data-background="assets/images/module-8.jpg" data-overlay="1" data-gradient="1">
+			<section class="module-cover parallax" data-background="assets/images/black.jpg" data-overlay="1" data-gradient="1">
 				<div class="container">
-				
-				
 					<div class="row">
 						<div class="col-md-12">
 							<div class="text-center">
-								<h2 class="display-1">MyPage</h2>
-								<p>마이페이지 입니다 <br/> trends to see any changes in performance over time.</p>
+								<h1 class="display-1">Set my Information</h1>
+								<p>show your interest and tell me who you are <br/>if you set your profile detail, you can join club more easily  </p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 			<!-- Hero end-->
-			
-			<div class="module">
-				<div class="container">
-					<div class="gallery-item">
-						<div class="gallery-image" data-background="${loginMember.img}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
-						
-						<br><br><br><br>
-					</div>
-				<table border="0" style="width: 800px; margin-top: 100px;" align="center">
-					<thead>
-					<tr>
-						<th>${loginMember.memName} 님</th>
-						<td colspan="2"><a href="">setMyProfile</a></td>	
-					</tr>		
-					</thead>
-						<tr>
-							<th style="width: 100px;">FeedsCount</th>
-							<td>6</td>
-							
-						</tr>
-						<tr>
-							<th>Following</th>
-							<td>5</td>
-							
-						</tr>
-						<tr>
-							<th>Follower</th>
-							<td>50</td>
-							
-						</tr>
-						<tr>
-							<th>introduce</th>
-							<td colspan="2">
-								안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다
-								안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다
-								안녕하세요 반갑습니다
-							</td>
-						</tr>	
-						<tr>
-							<th>interest</th>
-							<td>영화 , 밥 , 문화 예술</td>
-						</tr>
-					<tbody>
 
-					</tbody>
-				</table>
-						
-				</div>
-			</div>
-			
-			
-				<div class="container">
-					<div class="row" style="margin-left: 100px;">
-						<img src="assets/images/new.png" onclick="test();">
-					</div>
-				</div>
-				<script>
-					function test(){
-						alert("클릭시 신규게시글이동");
-					}
-
-				</script>
-			
-			<!-- Menu-->
-			<section class="module" >
+			<!---->
+			<section class="module">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-12">
-							<div class="gallery gallery-4-columns">
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg "style="width: 400px; height: 270px;" >
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-							</div>
+						<div class="col-md-6 m-auto text-center">
+							<p class="subtitle">Set my Information</p>
+							<h1 class="display-1">MyProfile</h1>
+							<p class="lead">show your interest and tell me who you are <br/> if you set your profile detail, you can join club more easily.</p>
+							<div class="divider-border"></div>
 						</div>
 					</div>
-					<script>
-						$(function(){
-							$(".gallery-item>img").click(function(){
-							alert("클릭시 상세정보이동");
-						})
-						})
-						
-					</script>
-
 					<div class="row">
 						<div class="col-md-12">
-							<div class="space" data-mY="50px"></div>
+							<div class="space" data-mY="60px"></div>
 						</div>
 					</div>
-					
+					<div class="row">
+						<div class="col-md-12">
+							<form action="profile.me" method="post" novalidate>
+							<input type="hidden" name="memNo" value ="${memNo}"/>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											 <div class="select">
+											     <ul>
+												  <li>
+												    <input type="checkbox" id="myCheckbox1" name="interest" value="1" />
+												    <label for="myCheckbox1"><img src="assets/images/interest/music.jpg" />ART&Music</label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox2" name="interest" value="2"/>
+												    <label for="myCheckbox2"><img src="assets/images/interest/activity.jpg" />activity</label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox3" name="interest" value="3" />
+												    <label for="myCheckbox3"><img src="assets/images/interest/food.jpg" />Food</label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox4" name="interest" value="4" />
+												    <label for="myCheckbox4"><img src="assets/images/interest/hobby.jpg" />Hobby</label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox5" name="interest" value="5"/>
+												    <label for="myCheckbox5"><img src="assets/images/interest/party.jpg" />Party</label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox6" name="interest" value="6"/>
+												    <label for="myCheckbox6"><img src="assets/images/interest/meet.jpg" />Meet</label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox7" name="interest" value="7"/>
+												    <label for="myCheckbox7"><img src="assets/images/interest/invest.jpg" />Investment</label>
+												  </li>
+												  <li>
+												    <input type="checkbox" id="myCheckbox8" name="interest" value="8"/>
+												    <label for="myCheckbox8"><img src="assets/images/interest/language.jpg" />Language</label>
+												  </li>
+												</ul>
+											</div>
+										</div>
+									</div>						
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea class="form-control" name="profileMessage" placeholder="Special Requests" rows="6" required></textarea>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="text-center">
+											<input class="btn btn-black" type="submit" value="Reserve">
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="space" data-mY="100px"></div>
@@ -186,7 +211,6 @@
 					</div>
 				</div>
 			</section>
-			<!-- Menu end-->
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
@@ -406,7 +430,7 @@
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 
 		<!-- Scripts-->
-		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
