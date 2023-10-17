@@ -308,9 +308,14 @@ public class ClubController {
 	public String selectClassDetail(int cNo, Model model) {
 		
 		Club c = cService.selectClassDetail(cNo);
-		model.addAttribute("c", c);
 		
-		System.out.println(c);
+		if(c.getClassApproval().equals("Y")) {
+			c.setClassApproval("승인제");
+		} else {
+			c.setClassApproval("선착순");
+		}
+		
+		model.addAttribute("c", c);
 		return "class/classDetailView";
 		
 	}
