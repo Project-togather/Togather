@@ -47,7 +47,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	/**
-	 *프사넣기
+	 *첨부파일 테이블에 프사넣기
 	 */
 	@Override
 	public int insertProfileImage(Attachment at) {

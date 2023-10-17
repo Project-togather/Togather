@@ -8,8 +8,9 @@ public interface MemberService {
 	int idCheck(String checkId);
 	int insertMember(Member m);
 	String bringMemNo(Member m);
-	//프사 첨부
+	//프사 첨부파일에 넣기
 	int insertProfileImage(Attachment at);
+
 	//프사 가져오기
 	Attachment getProfileImg(String memNo);
 	

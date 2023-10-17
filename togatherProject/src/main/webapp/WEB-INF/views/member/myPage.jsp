@@ -66,7 +66,7 @@
 			<div class="module">
 				<div class="container">
 					<div class="gallery-item">
-						<div class="gallery-image" data-background="${pImg.filePath}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
+						<div class="gallery-image" data-background="${loginMember.img}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
 						
 						<br><br><br><br>
 					</div>

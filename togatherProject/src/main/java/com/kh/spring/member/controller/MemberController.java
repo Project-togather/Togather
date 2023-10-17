@@ -95,11 +95,17 @@ public class MemberController {
     	  	 //System.out.println(filePath);
 		}
       //먼저 member를 insert하고
+      m.setImg(filePath);
       int result1 = mService.insertMember(m);
       
       //memberNo 를 가져와서
      
       String memNo = mService.bringMemNo(m);
+
+      
+      
+      
+      
       //파일을 attach에 insert하면 됨
       Attachment at = new Attachment();
       at.setRefFno(memNo);

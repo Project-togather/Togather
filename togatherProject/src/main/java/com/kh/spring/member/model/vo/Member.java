@@ -28,6 +28,6 @@ public class Member {
 	private Date enrollDate;
 	private String mStatus;
 	private double manner;
-	private String interest;
-
+	private String img ; 
+	
 }

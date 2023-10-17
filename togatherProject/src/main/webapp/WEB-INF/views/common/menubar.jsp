@@ -114,7 +114,7 @@
                   <li><a href="enrollForm.me"><i class="ti-user fa-2x"></i></a></li>
 					</c:when>
 					  <c:otherwise>
-                 			 <li><img src="${pImg.filePath}" style="width: 40px; height: 40px ;border-radius: 30px; "></li>
+                 			 <li><img src="${loginMember.img}" style="width: 40px; height: 40px ;border-radius: 30px; "></li>
 					  </c:otherwise>
                   </c:choose> 	
 
