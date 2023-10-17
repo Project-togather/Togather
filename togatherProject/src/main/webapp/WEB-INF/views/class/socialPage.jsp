@@ -29,7 +29,7 @@
 						<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
-								<div class="menu-classic-item-price">${ c.currentPeople }/${ c.peopleLimit }
+								<div class="menu-classic-item-price">6/${ c.peopleLimit }
 								</div>
 							</div>
 							<div class="menu-classic-item-inner">

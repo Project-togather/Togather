@@ -11,11 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.spring.club.model.vo.Club;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.common.template.Pagination;
-import com.kh.spring.interest.model.service.SearchServiceImpl;
+/*import com.kh.spring.interest.model.service.SearchServiceImpl;*/
 
 @Controller
 public class SearchController {
-	
+	/*
 	@Autowired
 	private SearchServiceImpl sService;
 
@@ -39,5 +39,5 @@ public class SearchController {
 		
 		return mv;
 	}
-	
+	*/
 }

@@ -35,10 +35,10 @@ public class MemberController {
    // 로그인
    @RequestMapping("login.me")
    public String loginMember(Member m, Model model, HttpSession session) {
-	  System.out.println("여긴오니1");
-	  System.out.println(m);
+	  //System.out.println("여긴오니1");
+	  //System.out.println(m);
       Member loginMember = mService.loginMember(m);      
-      System.out.println(loginMember);
+      //System.out.println(loginMember);
       if(loginMember == null) {
          model.addAttribute("errorMsg", "로그인 실패");
          return "common/errorPage";
@@ -163,13 +163,5 @@ public class MemberController {
             return "NNNNY";
          }      
       }
-   
-   // 내모임 페이지 이동
-   @RequestMapping(value = "myclass.pa")
-   public String myClassPage() {
-      return "member/myClassPage";
-   }
-   
-
    
 }
