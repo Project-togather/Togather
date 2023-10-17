@@ -44,11 +44,8 @@
 
 
 		<!-- Wrapper-->
-		<div class="wrapper">
-		
-		
-		
-		
+		<div class="wrapper" >
+
 			<!-- Hero-->
 			<section class="module-cover parallax" data-background="assets/images/module-8.jpg" data-overlay="1" data-gradient="1">
 				<div class="container">
@@ -69,41 +66,42 @@
 			<div class="module">
 				<div class="container">
 					<div class="gallery-item">
-						<div class="gallery-image" data-background="assets/images/avatar/1.jpg"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
+						<div class="gallery-image" data-background="${pImg.filePath}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
 						
 						<br><br><br><br>
 					</div>
 				<table border="0" style="width: 800px; margin-top: 100px;" align="center">
 					<thead>
 					<tr>
-						<td>조준하님</td>
-						<td colspan="2"><a href="">프로필수정</a></td>	
+						<th>${loginMember.memName} 님</th>
+						<td colspan="2"><a href="">setMyProfile</a></td>	
 					</tr>		
 					</thead>
 						<tr>
-							<th style="width: 100px;">게시물수</th>
+							<th style="width: 100px;">FeedsCount</th>
 							<td>6</td>
 							
 						</tr>
 						<tr>
-							<th>팔로잉</th>
+							<th>Following</th>
 							<td>5</td>
 							
 						</tr>
 						<tr>
-							<th>팔로워</th>
+							<th>Follower</th>
 							<td>50</td>
 							
 						</tr>
 						<tr>
-							<td colspan="3">
+							<th>introduce</th>
+							<td colspan="2">
 								안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다
 								안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다
 								안녕하세요 반갑습니다
 							</td>
 						</tr>	
 						<tr>
-							<td>관심사</td>
+							<th>interest</th>
 							<td>영화 , 밥 , 문화 예술</td>
 						</tr>
 					<tbody>
