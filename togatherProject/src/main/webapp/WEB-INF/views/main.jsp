@@ -1,29 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- Favicons-->
-<link rel="shortcut icon" href="assets/images/favicon.png">
-<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-touch-icon-114x114.png">
-<!-- Web Fonts-->
-<link href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700" rel="stylesheet">
-<!-- Bootstrap core CSS-->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
-<!-- Plugins and Icon Fonts-->
-<link href="assets/css/plugins.min.css" rel="stylesheet">
-<!-- Template core CSS-->
-<link href="assets/css/template.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 
 </style>
 </head>
 <body>
+	<script>
+	   $window.onload(function() {
+		   location.href="index.do";
+	   });
+	</script>
+
 	<jsp:include page="common/menubar.jsp"/>
 	
 	<!-- Wrapper-->
@@ -42,7 +37,10 @@
 				</div>
 			</div>
 		</section>
-
+	
+		<script>
+		</script>
+	
 		<section class="module">
 			<div class="container">
 				<div class="row">
@@ -60,10 +58,36 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index.html"><img src="assets/images/demo/1.jpg" alt="">
-								<h6>01. Parallax</h6></a></div>
-					</div>
+					<c:forEach var="c" items="${ list }">
+						<c:if test="${ c.clType eq 1 }">
+							<div class="col-md-4">
+								<div class="menu-classic-item">
+									<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
+										<div class="menu-classic-item-price">6/${ c.peopleLimit }
+										</div>
+									</div>
+									<div class="menu-classic-item-inner">
+							       <c:choose>
+							           <c:when test="${fn:length(c.classTitle) > 18}">
+							            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+							           </c:when>
+							           <c:otherwise>
+							            	<c:out value="${c.classTitle}"/>
+						        	   </c:otherwise> 
+						          </c:choose>
+			    					  <c:choose>
+							           <c:when test="${fn:length(c.classContent) > 63}">
+							            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
+							           </c:when>
+							           <c:otherwise>
+							            	<c:out value="${c.classContent}"/>
+						        	   </c:otherwise> 
+						          </c:choose>
+									</div>
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
 					<div class="col-md-4">
 						<div class="demo-preview"><a href="index-2.html"><img src="assets/images/demo/2.jpg" alt="">
 								<h6>02. Slider</h6></a></div>
@@ -117,10 +141,36 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index.html"><img src="assets/images/demo/1.jpg" alt="">
-								<h6>01. Parallax</h6></a></div>
-					</div>
+					<c:forEach var="c" items="${ list }">
+						<c:if test="${ c.clType eq 2 }">
+							<div class="col-md-4">
+								<div class="menu-classic-item">
+									<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
+										<div class="menu-classic-item-price">6/${ c.peopleLimit }
+										</div>
+									</div>
+									<div class="menu-classic-item-inner">
+							       <c:choose>
+							           <c:when test="${fn:length(c.classTitle) > 18}">
+							            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+							           </c:when>
+							           <c:otherwise>
+							            	<c:out value="${c.classTitle}"/>
+						        	   </c:otherwise> 
+						          </c:choose>
+			    					  <c:choose>
+							           <c:when test="${fn:length(c.classContent) > 63}">
+							            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
+							           </c:when>
+							           <c:otherwise>
+							            	<c:out value="${c.classContent}"/>
+						        	   </c:otherwise> 
+						          </c:choose>
+									</div>
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
 					<div class="col-md-4">
 						<div class="demo-preview"><a href="index-2.html"><img src="assets/images/demo/2.jpg" alt="">
 								<h6>02. Slider</h6></a></div>
@@ -174,10 +224,36 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index.html"><img src="assets/images/demo/1.jpg" alt="">
-								<h6>01. Parallax</h6></a></div>
-					</div>
+					<c:forEach var="c" items="${ list }">
+						<c:if test="${ c.clType eq 3 }">
+							<div class="col-md-4">
+								<div class="menu-classic-item">
+									<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
+										<div class="menu-classic-item-price">6/${ c.peopleLimit }
+										</div>
+									</div>
+									<div class="menu-classic-item-inner">
+							       <c:choose>
+							           <c:when test="${fn:length(c.classTitle) > 18}">
+							            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+							           </c:when>
+							           <c:otherwise>
+							            	<c:out value="${c.classTitle}"/>
+						        	   </c:otherwise> 
+						          </c:choose>
+			    					  <c:choose>
+							           <c:when test="${fn:length(c.classContent) > 63}">
+							            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
+							           </c:when>
+							           <c:otherwise>
+							            	<c:out value="${c.classContent}"/>
+						        	   </c:otherwise> 
+						          </c:choose>
+									</div>
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
 					<div class="col-md-4">
 						<div class="demo-preview"><a href="index-2.html"><img src="assets/images/demo/2.jpg" alt="">
 								<h6>02. Slider</h6></a></div>
@@ -231,10 +307,36 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index.html"><img src="assets/images/demo/1.jpg" alt="">
-								<h6>01. Parallax</h6></a></div>
-					</div>
+					<c:forEach var="c" items="${ list }">
+						<c:if test="${ c.clType eq 4 }">
+							<div class="col-md-4">
+								<div class="menu-classic-item">
+									<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
+										<div class="menu-classic-item-price">6/${ c.peopleLimit }
+										</div>
+									</div>
+									<div class="menu-classic-item-inner">
+							       <c:choose>
+							           <c:when test="${fn:length(c.classTitle) > 18}">
+							            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+							           </c:when>
+							           <c:otherwise>
+							            	<c:out value="${c.classTitle}"/>
+						        	   </c:otherwise> 
+						          </c:choose>
+			    					  <c:choose>
+							           <c:when test="${fn:length(c.classContent) > 63}">
+							            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
+							           </c:when>
+							           <c:otherwise>
+							            	<c:out value="${c.classContent}"/>
+						        	   </c:otherwise> 
+						          </c:choose>
+									</div>
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
 					<div class="col-md-4">
 						<div class="demo-preview"><a href="index-2.html"><img src="assets/images/demo/2.jpg" alt="">
 								<h6>02. Slider</h6></a></div>
@@ -288,10 +390,36 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index.html"><img src="assets/images/demo/1.jpg" alt="">
-								<h6>01. Parallax</h6></a></div>
-					</div>
+					<c:forEach var="f" items="${ list }">
+						<c:if test="${ c.feStatus eq 5 }">
+							<div class="col-md-4">
+								<div class="menu-classic-item">
+									<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
+										<div class="menu-classic-item-price">6/${ c.peopleLimit }
+										</div>
+									</div>
+									<div class="menu-classic-item-inner">
+							       <c:choose>
+							           <c:when test="${fn:length(c.classTitle) > 18}">
+							            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+							           </c:when>
+							           <c:otherwise>
+							            	<c:out value="${c.classTitle}"/>
+						        	   </c:otherwise> 
+						          </c:choose>
+			    					  <c:choose>
+							           <c:when test="${fn:length(c.classContent) > 63}">
+							            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
+							           </c:when>
+							           <c:otherwise>
+							            	<c:out value="${c.classContent}"/>
+						        	   </c:otherwise> 
+						          </c:choose>
+									</div>
+								</div>
+							</div>
+						</c:if>
+					</c:forEach>
 					<div class="col-md-4">
 						<div class="demo-preview"><a href="index-2.html"><img src="assets/images/demo/2.jpg" alt="">
 								<h6>02. Slider</h6></a></div>
@@ -333,13 +461,5 @@
 		<br><br><br>
 		
 	<jsp:include page="common/footer.jsp"/>
-	
-	<!-- Scripts-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-	<script src="assets/js/plugins.min.js"></script>
-	<script src="assets/js/custom.min.js"></script>
 </body>
 </html>

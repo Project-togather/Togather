@@ -21,6 +21,6 @@ public class Feed {
 	private String feContent;
 	private Date feDate;
 	private String feWriter;
-	private String fStatus;
+	private String feStatus;
 	
 }

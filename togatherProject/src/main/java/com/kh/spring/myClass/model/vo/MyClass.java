@@ -12,6 +12,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class MyClass {
-	private String clType;
-	private String clName;
+	private String classNo; // 모임번호
+	private String memNo; // 회원번호
+	private int clType; // 모임상태번호
 }

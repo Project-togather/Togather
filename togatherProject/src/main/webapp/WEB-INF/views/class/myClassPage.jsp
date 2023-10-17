@@ -21,6 +21,35 @@
 		<section class="module">
 			<div class="container">
 				<div class="row">
+					<c:forEach var="c"  items="${ list }">
+					<div class="col-md-4">
+						<div class="menu-classic-item">
+							<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
+								<div class="menu-classic-item-price">6/${ c.peopleLimit }
+								</div>
+							</div>
+							<div class="menu-classic-item-inner">
+					       <c:choose>
+					           <c:when test="${fn:length(c.classTitle) > 18}">
+					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+					           </c:when>
+					           <c:otherwise>
+					            	<c:out value="${c.classTitle}"/>
+				        	   </c:otherwise> 
+				          </c:choose>
+     					  <c:choose>
+					           <c:when test="${fn:length(c.classContent) > 63}">
+					            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
+					           </c:when>
+					           <c:otherwise>
+					            	<c:out value="${c.classContent}"/>
+				        	   </c:otherwise> 
+				          </c:choose>
+							</div>
+						</div>
+					</div>
+					</c:forEach>
+				
 					<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/1.jpg"></a><img src="assets/images/menu/1.jpg" alt="">
