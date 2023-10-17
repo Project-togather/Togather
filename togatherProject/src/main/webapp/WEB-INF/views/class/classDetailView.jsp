@@ -70,12 +70,13 @@
 								찜하기 <img src="resources/assets/images/detail/noheart.png" id="heart">
 							</p>
 							<div class="divider-border"></div>
-							<p class="lead">${ c.classContent }</p>
+							<p class="lead" style="text-align:left;">${ c.classContent }</p>
 							<div class="divider-border"></div>
 						</div>
 
 						<script>
-							// 즐겨찾기 조회						
+							// 즐겨찾기 조회
+							/*
 							function checkFavorite(classNo){
 								$.ajax({
 									url:"checkFavorite.me",
@@ -90,7 +91,7 @@
 								})
 							}
 							
-							checkFavorite(classNo);
+							checkFavorite();
 							
 							// 즐겨찾기 추가, 해제
 							function updateFavorite(){
@@ -107,6 +108,7 @@
 									}
 								})
 							}
+							*/
 						</script>
 
 					</div>
@@ -393,9 +395,9 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6 m-auto text-center">
-							<p class="subtitle">For your comfort</p>
+							<p class="subtitle">Summary of instructions </p>
 							<h1 class="display-1">안내사항 요약</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
+							<p class="lead">자세한 정보를 알려드릴게요.</p>
 							<div class="divider-border"></div>
 						</div>
 					</div>
@@ -407,50 +409,64 @@
 					<div class="row appear-childer">
 						<div class="col-md-3">
 							<div class="icon-box text-center">
-								<div class="icon-box-icon"><span class="icon-clock"></span></div>
+								<div class="icon-box-icon"><span class="ti-user"></span></div>
 								<div class="icon-box-title">
-									<h5>Opened 24/7</h5>
+									<h5>${ c.vacancy } / ${ c.peopleLimit }명 · ${ c.classApproval }</h5>
 								</div>
 								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
+									<p>
+										현재 ${ c.peopleLimit }명 중 ${ c.vacancy }가입되어 있으며 <br>
+										<c:choose>
+											<c:when test="${ c.classApproval eq '승인제' }">
+												호스트의 승인에 의해 가입되는 승인제 입니다.
+											</c:when>
+											<c:otherwise>
+												먼저 신청한 순으로 가입되는 선착순 입니다.
+											</c:otherwise>
+										</c:choose>
+									</p>
 								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="icon-box text-center">
-								<div class="icon-box-icon"><span class="icon-streetsign"></span></div>
+								<div class="icon-box-icon"><span class="ti-money"></span></div>
 								<div class="icon-box-title">
-									<h5>Free Parking</h5>
+									<h5>${ c.classPrice }원</h5>
 								</div>
 								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
+									<p>
+										운영비 - 콘텐츠 제작, 호스트 수고비 <br>
+										모임비 - 대관료, 재료비 <br>
+										기타 - 플랫폼 수수료 등을 합산하여 호스트가 지정한 금액입니다.
+									</p>
 								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="icon-box text-center">
-								<div class="icon-box-icon"><span class="icon-compass"></span></div>
+								<div class="icon-box-icon"><span class="icon_calendar"></span></div>
 								<div class="icon-box-title">
-									<h5>Central Location</h5>
+									<h5>${ c.classDate } &nbsp; ${ c.classTime }</h5>
 								</div>
 								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
+									<p>
+										해당 시간에 잊지말고 참석해주세요!
+									</p>
 								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
 							</div>
 						</div>
 						<div class="col-md-3">
 							<div class="icon-box text-center">
-								<div class="icon-box-icon"><span class="icon-linegraph"></span></div>
+								<div class="icon-box-icon"><span class="ti-map-alt"></span></div>
 								<div class="icon-box-title">
-									<h5>High Quality</h5>
+									<h5>${ c.classLocation }</h5>
 								</div>
 								<div class="icon-box-content">
-									<p>Map where your photos were taken and discover local points of interest. Map where your photos.</p>
+									<p>
+										<a href="">상세 위치</a>를 눌러주세요!
+									</p>
 								</div>
-								<div class="icon-box-link"><a href="#"></a></div>
 							</div>
 						</div>
 					</div>
@@ -461,7 +477,10 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6 m-auto">
-							<p class="text-center">* See how your users experience your website in realtime or view trends to see any changes in performance over time.</p>
+							<p class="text-center ti-alert">
+								개인 계좌 입금 유도, 개인 정보 요구, 저희 멤버가 아닌 외부 인원 초대 등 
+								가이드를 위반하는 경우 저희에게 <a href="#신고 url">신고</a>해 주세요!								
+							</p>
 						</div>
 					</div>
 				</div>
@@ -491,11 +510,34 @@
 									<div class="menu-simple-item-img"><img src="assets/images/widgets/1.jpg" alt=""></div>
 									<div class="menu-simple-item-inner" style="padding:0px;">
 										<h6>
-											<input type="text" name="reply" class="form-control" placeholder="댓글달기" style="background-color: #f4f1ea; width:700px;">
-											<button class="btn btn-gray" id="enroll-btn">댓글 등록</button>
+											<input type="text" name="reply" id="reply" class="form-control" placeholder="댓글달기" style="background-color: #f4f1ea; width:700px;">
+											<button class="btn btn-gray" id="enroll-btn" onclick="addReply();">댓글 등록</button>
 										</h6>
 									</div>
 								</div>
+								
+								<script>
+									function addReply(){
+										if($("#reply").val().trim().length != 0){
+											$.ajax({
+												url:"enroll.rv",
+												data:{
+													rvContent:$("#reply").val(),
+													refFno:'${c.classNo}',
+													memNo:'${loginMember.memNo}',												
+													},success:result=>{
+													if(result == "success"){
+														console.log(result)
+														//selectReplyList();
+													}
+												}, error:()=>{
+													console.log("실패");
+												}
+											})
+										}
+									}										
+								</script>
+								
 								<div class="menu-simple-item">
 									<div class="menu-simple-item-img"><img src="assets/images/widgets/2.jpg" alt=""></div>
 									<div class="menu-simple-item-inner">

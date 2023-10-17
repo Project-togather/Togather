@@ -12,11 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.reply.model.vo.Reply;
 
 @Controller
 public class ClubController {
@@ -317,7 +319,16 @@ public class ClubController {
 		
 		model.addAttribute("c", c);
 		return "class/classDetailView";
+	}
+	
+	@ResponseBody
+	@RequestMapping("enroll.rv")
+	public String insertReply(Reply r) {
 		
+		System.out.println(r);
+		int result = cService.insertReply(r);
+		return result>0 ? "success" : "fail";
+
 	}
 	
 }

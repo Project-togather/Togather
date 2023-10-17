@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.club.model.dao.ClubDao;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.reply.model.vo.Reply;
 
 @Service
 public class ClubServiceImpl implements ClubService {
@@ -136,6 +137,11 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public Club selectClassDetail(int classNo) {
 		return cDao.selectClassDetail(classNo, sqlSession);
+	}
+
+	@Override
+	public int insertReply(Reply r) {
+		return cDao.insertReply(r, sqlSession);
 	}
 
 }

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.reply.model.vo.Reply;
 
 @Repository
 public class ClubDao {
@@ -20,6 +21,10 @@ public class ClubDao {
 	
 	public Club selectClassDetail(int classNo, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("clubMapper.selectClassDetail", classNo);
+	}
+	
+	public int insertReply(Reply r, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("clubMapper.insertReply", r);
 	}
 	
 	

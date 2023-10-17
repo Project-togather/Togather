@@ -171,7 +171,6 @@ public class MemberController {
       public String idCheck(String checkId) {
         
          int result = mService.idCheck(checkId);
-         checkId.toLowerCase();
  
          if(result > 0) {
             return "NNNNN";

@@ -14,10 +14,10 @@ import lombok.ToString;
 @Getter
 @ToString
 public class Reply {
-	private String rNo;
-	private String rContent;
-	private Date rDate;
-	private String rStatus;
+	private String rvNo;
+	private String rvContent;
+	private Date rvDate;
+	private String rvStatus;
 	private String refFno;
 	private String memNo;
 }
