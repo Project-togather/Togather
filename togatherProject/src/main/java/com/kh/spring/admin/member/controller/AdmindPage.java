@@ -1,4 +1,4 @@
-package com.kh.spring.admin.controller;
+package com.kh.spring.admin.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,5 +11,4 @@ public class AdmindPage {
 		public String mainPage() {
 			return "admin/common/adminMain";
 		}
-
 }

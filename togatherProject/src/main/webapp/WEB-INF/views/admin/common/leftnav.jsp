@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
  <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -33,12 +34,13 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
+            <li class="nav-item ">
                 <a class="nav-link" href="admin.pa">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>대시보드</span></a>
             </li>
-
+			
+			 
            <!-- hr 줄바꿈 -->
             <hr class="sidebar-divider my-0">
 
@@ -46,7 +48,7 @@
 
             <!-- 회원 관리 대시보드 시작 -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseTwo"
+                <a class="nav-link collapsed" href="list.mem" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>회원 관리</span>
@@ -55,7 +57,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">회원관리</h6>
                         <a class="collapse-item" href="list.mem">회원 통합 관리</a>
-                        <a class="collapse-item" href="cards.html">블랙리스트 관리</a>
+                        <a class="collapse-item" href="blacklist.bo">블랙리스트 관리</a>
                     </div>
                 </div>
             </li>
@@ -65,7 +67,7 @@
             <hr class="sidebar-divider my-0">
             
             <!-- 모임 관리 대시보드 시작 -->
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
@@ -144,6 +146,14 @@
         </ul>
  
         <!-- 사이드바 끝 -->
+        
+        <script>
+        $(function(){
+            $(".collapse-item").click(function(){
+                $(this).closest("li.nav-item").addClass("active");
+            });
+        });
+        </script>
         
         
          <!-- Bootstrap core JavaScript-->

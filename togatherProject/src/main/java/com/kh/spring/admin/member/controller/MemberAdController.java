@@ -1,4 +1,4 @@
-package com.kh.spring.admin.controller;
+package com.kh.spring.admin.member.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,10 +12,14 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.spring.admin.model.service.AdminServiceImpl;
+import com.kh.spring.admin.member.model.service.AdminServiceImpl;
+import com.kh.spring.common.model.vo.PageInfo;
+import com.kh.spring.common.template.Pagination;
 import com.kh.spring.member.model.vo.Member;
 
 @Controller
@@ -25,13 +29,17 @@ public class MemberAdController {
 	
 	//회원 관리 페이지 이동
 	@RequestMapping("list.mem")
-	public ModelAndView selectMemberList(ModelAndView mv){
-		ArrayList<Member> list = Aservice.selectMemberList();
+	public ModelAndView selectMemberListCount(@RequestParam(value="cpage",defaultValue = "1") int currentPage,ModelAndView mv){
+		int  memCount = Aservice.selectMemberListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(memCount, currentPage, 10, 10);
+		
+		ArrayList<Member> list = Aservice.selectMemberList1(pi);
 		
 		if(list.size()>0) {//성공
-			mv.addObject("list",list).setViewName("admin/member/memberListView");
+			mv.addObject("pi",pi).addObject("list",list).setViewName("admin/member/memberListView");
 		}else {//실패
-			mv.addObject("errorMsg", "로그인실패");  
+			mv.addObject("errorMsg", "회원조회실패");  
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
@@ -62,7 +70,9 @@ public class MemberAdController {
         cell = row.createCell(5);
         cell.setCellValue("나이");
         
-        ArrayList<Member> list = Aservice.selectMemberList();
+        ArrayList<Member> list = Aservice.selectMemberList2();
+        
+        
         System.out.println(list);
         // Body
         for (int i=0; i<list.size(); i++) {

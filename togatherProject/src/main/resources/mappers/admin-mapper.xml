@@ -20,6 +20,21 @@
 		    enroll_date,
 		    age
 		from member
+			where m_Status = 'Y'
+	</select>
+	
+	<select id="selectMemberCount" resultType="_int">
+		select
+				count(*)
+			from member
+		   where m_Status = 'Y'
+	</select>
+	
+	<select id="idCheck" resultType="_int">
+		select 
+			count(*)
+			from member
+		   where  mem_Id = #{checkId}
 	</select>
 
 </mapper>
