@@ -93,13 +93,21 @@
                   <li><a class="open-offcanvas" href="#"><i class="ti-menu fa-2x"></i></a></li>
                  <c:choose>
                  	<c:when test="${empty loginMember}">
-                  		<li><a href="loginForm.me">로그인</a></li>
+                  		<li><a href="loginForm.me">login</a></li>
                   	</c:when>
                   	<c:otherwise>
-                  		누구누구님 환영합니다
+                  		<li> ${loginMember.memName} 님환영합니다 </li>
                   	</c:otherwise>
                   </c:choose>
+                  
+                   <c:choose>
+                 	<c:when test="${empty loginMember}">
                   <li><a href="enrollForm.me"><i class="ti-user fa-2x"></i></a></li>
+					</c:when>
+					  <c:otherwise>
+                  <li><img src="#"></li>
+					  </c:otherwise>
+                  </c:choose> 	
 
 						<li>
 							<div class="search-box">
@@ -127,15 +135,17 @@
 						<li><a href="oneday.pa"><span class="menu-item-span">원데이클래스</span></a></li>
 						<li><a href="lounge.pa"><span class="menu-item-span">라운지</span></a></li>
 						
-					<!-- <c:if test="${ not empty loginMember }"> -->
-					<!-- </c:if> -->
+					 <c:if test="${ not empty loginMember }"> 
 						<li><a href="myclass.pa"><span class="menu-item-span">내모임</span></a></li>
 						<li><a href="enrollForm.cl"><span class="menu-item-span">모임 등록</span></a></li>
 						<li><a href="mypage.me"><span class="menu-item-span">마이페이지</span></a></li>
+					 </c:if> 
+
 					
-					<!-- <c:if test="${ loginMember.memId == 'ADMIN' }"> -->
-					<!-- </c:if> -->
-						<li><a href="#"><span class="menu-item-span">관리자페이지</span></a></li>
+					 <c:if test="${ loginMember.memId == 'ADMIN' }">
+					 	<li><a href="#"><span class="menu-item-span">관리자페이지</span></a></li>
+					 </c:if> 
+						
                      </ul>
                   </div>
                </div>

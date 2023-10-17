@@ -37,7 +37,7 @@
 		<div class="wrapper">
 
 			<!-- Hero-->
-			<section class="module-cover fullscreen parallax" data-background="assets/images/module-21.jpg" data-overlay="0.7">
+			<section class="module-cover fullscreen parallax" data-background="assets/images/portfolio/10.jpg" data-overlay="0.7">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4 m-auto">
@@ -48,10 +48,10 @@
 								<div  class="up-form">
 									<form action="login.me" method="post">
 										<div class="form-group">
-											<input class="form-control" name="memId" type="text" placeholder="Id">
+											<input class="form-control" name="memId" type="text" placeholder="Id" style="color: white;">
 										</div>
 										<div class="form-group">
-											<input class="form-control" name="memPwd" type="password" placeholder="Pasword">
+											<input class="form-control" name="memPwd" type="password" placeholder="Pasword" style="color: white;">
 										</div>
 										<div class="form-group">
 											<button class="btn btn-block btn-round btn-brand" type="submit">Login</button>
