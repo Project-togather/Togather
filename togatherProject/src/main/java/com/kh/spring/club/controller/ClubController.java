@@ -186,7 +186,7 @@ public class ClubController {
 		}
 		
 		if(result > 0) {
-			at.setCategory(c.getClType());
+			at.setCategory(c.getClType()+"");
 			
 			int result2 = cService.insertImg(at);
 			MyClass myClass = new MyClass();
@@ -233,12 +233,7 @@ public class ClubController {
 		return result>0 ? "success" : "fail";
 
 	}
-	
-<<<<<<< HEAD
-	@RequestMapping
-	public String adminPage() {
-		return "admin/common/adminMain";
-=======
+
 	@ResponseBody
 	@RequestMapping(value="rlist.cl", produces = "application/json; charset=UTF-8")
 	public String selectReplyList(String cno){
@@ -253,12 +248,6 @@ public class ClubController {
 		ArrayList<Reply> crlist = cService.selectCreplyList(cno);
 		return new Gson().toJson(crlist);
 
->>>>>>> selectReply1
 	}
-	
-	@RequestMapping
-	public String adminPage() {
-		return "admin/common/adminMain";
-	}
-	
+		
 }
