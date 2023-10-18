@@ -3,6 +3,7 @@ package com.kh.spring.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletRequest;
@@ -228,10 +229,34 @@ public class MemberController {
    //마이페이지 관련 으어어어어어어어어어
    //마이페이지이동
    @RequestMapping(value = "mypage.me")
-   public String myPage(HttpSession session) {
+   public String myPage(HttpSession session , HttpServletRequest request ) {
 	  Member loginMember = (Member)session.getAttribute("loginMember");
 	  String memNo = loginMember.getMemNo();
-	  System.out.println(memNo);
+	  //관심사 가져오기
+	  ArrayList<MemInterest> mi = mService.getMemInterest(memNo);
+	 
+	  String [] interArr = new String [mi.size()];
+	   for (int i = 0 ; i < mi.size() ; i ++) {
+		 if(mi.get(i).getInNo() == 1) { 
+			 interArr[i] = "Music & Art" + "🎨" ;
+		 }else if (mi.get(i).getInNo() == 2) {
+			 interArr[i] = "Activity 🥅";
+		 }else if (mi.get(i).getInNo() == 3) {
+			 interArr[i] = "Food & Drink 🍻";
+		 }else if (mi.get(i).getInNo() == 4) { 
+			 interArr[i] = "Hooby 📸";
+		 }else if (mi.get(i).getInNo() == 5) {
+			 interArr[i] = "Party 🎉";
+		 }else if (mi.get(i).getInNo() == 6) {
+			 interArr[i] = "Date 💄";
+		 }else if (mi.get(i).getInNo() == 7) {
+			 interArr[i] = "InvestMent 💸";
+		 }else {
+			 interArr[i] = "Foreign Language 💬 ";
+		 }
+	  }
+	  //문화예술 1 액티비티2 푸드드링크3 취미4 파티소개팅5 동네친목6 제테크7 외국어8
+	  request.setAttribute("interArr",interArr);
       return "member/myPage";
    }
    

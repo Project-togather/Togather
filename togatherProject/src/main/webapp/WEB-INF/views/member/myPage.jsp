@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>   
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -101,7 +102,11 @@
 						</tr>	
 						<tr>
 							<th>interest</th>
-							<td>영화 , 밥 , 문화 예술</td>
+							<th>
+								<c:forEach begin="0" end="${fn:length(interArr)}" step="1" var="i">
+						          	${interArr[i]} 
+						        </c:forEach>
+							</th>
 						</tr>
 					<tbody>
 

@@ -1,5 +1,7 @@
 package com.kh.spring.member.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -73,6 +75,13 @@ public class MemberServiceImpl implements MemberService {
 	public int insertInterest(MemInterest mi) {
 		int result = mDao.insertInterest(sqlSession , mi);
 		return result;
+	}
+
+	//관심사 가져오기
+	@Override
+	public ArrayList<MemInterest> getMemInterest(String memNo) {
+		ArrayList<MemInterest> mi = mDao.getMemInterest(sqlSession, memNo);
+		return mi;
 	}
 	
 }

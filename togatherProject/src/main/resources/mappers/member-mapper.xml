@@ -29,6 +29,11 @@
 		<result column="ENROLL_DATE" property="enrollDate"/>
 	</resultMap>
 	
+	<resultMap type="MemInterest" id="InterestResult" >
+		<result column="mem_no" property="memNo"/>
+		<result column="in_no" property="inNo"/>
+	</resultMap>
+	
 	
 	
 	<select id="loginMember" resultMap="MemberResult">
@@ -162,6 +167,14 @@
 			   ,#{inNo}
 			)
 	</insert>
+	
+	<select id ="getMemInterest" resultMap="InterestResult">
+	select 
+	    mem_no
+	   ,in_no
+	from mem_interest
+	where mem_no = #{memNo}
+	</select>
 	
 	
 	

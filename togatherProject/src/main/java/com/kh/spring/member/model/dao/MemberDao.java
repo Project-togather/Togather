@@ -1,5 +1,7 @@
 package com.kh.spring.member.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -51,5 +53,13 @@ public class MemberDao {
 	public int insertInterest(SqlSessionTemplate sqlSession , MemInterest mi) {
 		return sqlSession.insert("memberMapper.insertInterest", mi);
 	}
+	
+	public ArrayList<MemInterest> getMemInterest(SqlSessionTemplate sqlSession , String memNo){
+		
+		ArrayList<MemInterest> mi = (ArrayList)sqlSession.selectList("memberMapper.getMemInterest" , memNo);
+		
+		return mi;
+	}
+	
 	
 }
