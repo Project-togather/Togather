@@ -22,6 +22,7 @@ import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.common.template.Pagination;
 import com.kh.spring.member.model.vo.Member;
 
+
 @Controller
 public class MemberAdController {
 	@Autowired
@@ -74,6 +75,7 @@ public class MemberAdController {
         //엑셀다운로드용 메서드
         ArrayList<Member> list = Aservice.selectMemberList2();
         
+        System.out.println(list);
         
         
         // Body
@@ -86,7 +88,7 @@ public class MemberAdController {
             cell = row.createCell(2);
             cell.setCellValue(list.get(i).getMemId());
             cell = row.createCell(3);
-            cell.setCellValue(list.get(i).getNickname());
+            cell.setCellValue(list.get(i).getNickName());
             cell = row.createCell(4);
             cell.setCellValue(list.get(i).getEnrollDate());
             cell = row.createCell(5);

@@ -65,7 +65,7 @@ public class BlackListController {
 				int result = Aservice.insertblackList(userId);
 				
 				if(result>0) {
-					session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
+					session.setAttribute("alertMsg", "성공적으로 블랙리스트가 등록되었습니다.");
 					return "redirect:blacklist.bo";
 				}else {
 					model.addAttribute("errorMsg","블랙리스트 등록에 실패했습니다.");

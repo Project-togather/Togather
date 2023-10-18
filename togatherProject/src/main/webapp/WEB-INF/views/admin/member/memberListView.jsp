@@ -46,7 +46,7 @@
 									<th scope="row">${m.memNo}</th>
 									<td>${m.memName }</td>
 									<td>${m.memId }</td>
-									<td>${m.nickname }</td>
+									<td>${m.nickName }</td>
 									<td>${m.age }</td>
 									<td>${m.enrollDate }</td>
 								</tr>

@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="admemberMapper">
 	
-	<resultMap id="MemberResult" type="Member">
+	<resultMap id="AdMemberResult" type="Member">
 		<result column="mem_no" property="memNo"></result>
 		<result column="mem_name" property="memName"></result>
 		<result column="mem_id" property="memId"></result>
-		<result column="nickname" property="nickname"></result>
+		<result column="nickname" property="nickName"></result>
 		<result column="enroll_date" property="enrollDate"></result>
 		<result column="age" property="age"></result>
 	</resultMap>
@@ -23,12 +23,12 @@
 	
 	
 
-	<select id="selectMemberList" resultMap="MemberResult" parameterType="Member">
+	<select id="selectMemberList" resultMap="AdMemberResult" parameterType="Member">
 		select 
 		    mem_no,
 		    mem_name,
 		    mem_id,
-		    nickname,
+		    nickName,
 		    enroll_date,
 		    age
 		from member
