@@ -8,19 +8,6 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
-<!-- Favicons-->
-<link rel="shortcut icon" href="assets/images/favicon.png">
-<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-touch-icon-114x114.png">
-<!-- Web Fonts-->
-<link href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700" rel="stylesheet">
-<!-- Bootstrap core CSS-->
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
-<!-- Plugins and Icon Fonts-->
-<link href="assets/css/plugins.min.css" rel="stylesheet">
-<!-- Template core CSS-->
-<link href="assets/css/template.css" rel="stylesheet">
 
 <!-- 카카오 지도 코드 보류
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js" integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous"></script>
@@ -67,6 +54,9 @@
 #pagination {margin:10px auto;text-align: center;}
 #pagination a {display:inline-block;margin-right:10px;}
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
+.display{display: none;}
+#oneday:hover{background-color: purple;}
+
 </style>		
 </head>
 <body>
@@ -91,24 +81,88 @@
 									<div class="form-group">
 										<input type="hidden" id="hidden" name="memNo" value="${ loginMember.memNo }">
 										<h5>모임유형을 선택해주세요!</h5>
-										<select name="clType">
-											<option value="1">소셜링</option>
-											<option value="2">클럽</option>
-											<option value="3">챌린지</option>
-											<option value="4">원데이</option>
-										</select>
 									</div>
-									<!-- 
-									<div class="form-group">
-										<div class="form-control" id="socialing" style="color: white;">소셜링</div>
-									</div>
-									<div class="form-group">
-										<div class="form-control" id="club" style="color: white;">클럽</div>
-									</div>
-									<div class="form-group">
-										<div class="form-control" id="challenge" style="color: white;">챌린지</div>
-									</div>
-									 -->
+
+									<div id="removeClass">
+										<div class="form-group">
+											<div class="form-control" id="socialing" name="clType" style="color: white;">소셜링</div>
+										</div>
+										<div class="form-group">
+											<div class="form-control" id="club" name="clType" style="color: white;">클럽</div>
+										</div>
+										<div class="form-group">
+											<div class="form-control" id="challenge" name="clType" style="color: white;">챌린지</div>
+										</div>
+										<div class="form-group">
+											<div class="form-control" id="oneday" name="clType" style="color: white;">원데이</div>
+										</div>
+									</div>								
+									<script>
+										// 모임 유형 선택 (div)시 다른 div 체크해제 + 히든에 값주기
+										$("#socialing").click(function(){
+											if($("#club").css("display") != "none"){
+												$("#club").css("display", "none");
+												$("#challenge").css("display", "none");
+												$("#oneday").css("display", "none");
+												
+												$("#socialing").css("backgroundColor", "orange");
+											}else{
+												$("#club").css("display", "");
+												$("#challenge").css("display", "");
+												$("#oneday").css("display", "");
+												
+												$("#socialing").css("backgroundColor", "");
+											}
+										})
+										
+										$("#club").click(function(){
+											if($("#socialing").css("display") != "none"){
+												$("#socialing").css("display", "none");
+												$("#challenge").css("display", "none");
+												$("#oneday").css("display", "none");
+												
+												$("#club").css("backgroundColor", "green");
+											}else{
+												$("#socialing").css("display", "");
+												$("#challenge").css("display", "");
+												$("#oneday").css("display", "");
+												
+												$("#club").css("backgroundColor", "");
+											}
+										})
+										
+										$("#challenge").click(function(){
+											if($("#socialing").css("display") != "none"){
+												$("#socialing").css("display", "none");
+												$("#club").css("display", "none");
+												$("#oneday").css("display", "none");
+												
+												$("#challenge").css("backgroundColor", "blue");
+											}else{
+												$("#socialing").css("display", "");
+												$("#club").css("display", "");
+												$("#oneday").css("display", "");
+												
+												$("#challenge").css("backgroundColor", "");
+											}
+										})
+										
+										$("#oneday").click(function(){
+											if($("#socialing").css("display") != "none"){
+												$("#socialing").css("display", "none");
+												$("#club").css("display", "none");
+												$("#challenge").css("display", "none");
+												
+												$("#oneday").css("backgroundColor", "purple");
+											}else{
+												$("#socialing").css("display", "");
+												$("#club").css("display", "");
+												$("#challenge").css("display", "");
+												
+												$("#oneday").css("backgroundColor", "");
+											}
+										})
+									</script> 
 									 
 									<hr>
 									<h5>(소셜링, 클럽, 챌린지)주제를 선택해 볼까요?</h5>
@@ -128,12 +182,12 @@
 									
 									<div id="map" style="width:500px;height:400px;"></div>
 									<div>
-					                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15" name="classLocation"> 
-					                    <button type="submit" onclick="searchPlaces(); return false;">검색하기</button> 
+					                    키워드 : <input type="text" value="서울" id="keyword" size="15" name="classLocation"> 
+					                    <button class="search" type="submit" onclick="searchPlaces(); return false;">검색하기</button> 
 									</div>
 															
 									
-									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06&libraries=services"></script>
+									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9c08fb064e6bc40cfa573768b020756&libraries=services"></script>
 									
 									<script>
 									
@@ -154,10 +208,10 @@
 
 									// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
 									var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-
+									
 									// 키워드로 장소를 검색합니다
 									searchPlaces();
-
+									
 									// 키워드 검색을 요청하는 함수입니다
 									function searchPlaces() {
 
@@ -355,9 +409,6 @@
 									}
 									
 									
-									
-									
-									
 									/*
 									// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 									var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -453,12 +504,24 @@
 										<select name="classApproval">
 											<option value="Y">승인제</option>
 											<option value="N">선착순</option>
+											<option value="null">제한없음</option>
 										</select>
 									</div>
 									
+									<div id="remove">
+										나이제한이 필요하시면 버튼을 클릭해주세요 <br>
+										<button type="button" id="ageLimit">나이제한</button>
+									</div>
+									<script>
+										$("#ageLimit").click(function(){
+											$("#age1").attr("type", "number");
+											$("#age2").attr("type", "number");
+											$("#remove").remove();
+										})
+									</script>							
 									<div class="form-group">
-										최소 나이 제한 <input type="text" class="form-control" name="minAge" style="color:white"> <br>
-										최대 나이 제한 <input type="text" class="form-control" name="maxAge" style="color:white">
+										<input type="hidden" id="age1" class="form-control" name="minAge" style="color:white" placeholder="최소나이제한"> <br>
+										<input type="hidden" id="age2" class="form-control" name="maxAge" style="color:white" placeholder="최대나이제한">
 									</div>
 									
 									<div class="form-group">
@@ -515,31 +578,14 @@
 									<input type="submit" value="모임등록">
 								</form>		
 							</div>
-							
-							<div class="up-help">
-								<p>By clicking "Sign Up", you agree to our <br> <a href="#">software services agreement</a>.</p>
-							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
 		<!-- Hero end-->
-
-		<script>
-			// 모임 유형 선택 (div)시 다른 div 체크해제 + 히든에 값주기
-		</script>
-
 	</div>
 	<!-- Wrapper end-->
 	<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
-
-	<!-- Scripts-->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-	<script src="assets/js/plugins.min.js"></script>
-	<script src="assets/js/custom.min.js"></script>
 </body>
 </html>
