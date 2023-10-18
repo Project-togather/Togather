@@ -156,8 +156,8 @@
 
 
 .feed_img{
-    width: 100%;
     object-fit: contain;
+    width: 100%;
 }
 
 .feed_content{
