@@ -52,4 +52,12 @@ public class ClubDao {
 	public int insertMyClass(Club c, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("clubMapper.insertMyClass", c);
 	}
+	
+	public ArrayList<Reply> selectReplyList(String classNo, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectReplyList", classNo);
+	}
+	
+	public ArrayList<Reply> selectCreplyList(String classNo, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectCreplyList", classNo);
+	}
 }

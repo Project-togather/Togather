@@ -75,4 +75,14 @@ public class ClubServiceImpl implements ClubService {
 		return cDao.insertReply(r, sqlSession);
 	}
 
+	@Override
+	public ArrayList<Reply> selectReplyList(String classNo) {
+		return cDao.selectReplyList(classNo, sqlSession);
+	}
+
+	@Override
+	public ArrayList<Reply> selectCreplyList(String classNo) {
+		return cDao.selectCreplyList(classNo, sqlSession);
+	}
+
 }

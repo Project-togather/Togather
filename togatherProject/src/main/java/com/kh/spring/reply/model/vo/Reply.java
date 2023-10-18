@@ -15,9 +15,14 @@ import lombok.ToString;
 @ToString
 public class Reply {
 	private String rvNo;
+	private String mrNo;
+	private String crNo;
 	private String rvContent;
-	private Date rvDate;
+	private String rvDate;
 	private String rvStatus;
 	private String refFno;
 	private String memNo;
+	
+	private String nickname;
+	private String img;
 }

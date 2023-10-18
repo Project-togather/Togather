@@ -20,7 +20,7 @@ import com.kh.spring.interest.model.service.SearchServiceImpl;
 
 @Controller
 public class SearchController {
-	/*
+	
 	@Autowired
 	private SearchServiceImpl sService;
 
@@ -61,6 +61,6 @@ public class SearchController {
 		return new Gson().toJson(list);
 				
 	}
-	*/
+	
 	
 }
