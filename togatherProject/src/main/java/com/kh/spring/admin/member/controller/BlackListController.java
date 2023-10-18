@@ -48,7 +48,7 @@ public class BlackListController {
 			
 			//블랙리스트 아이디 체크
 			@ResponseBody
-			@RequestMapping ("idCheck.me")
+			@RequestMapping ("idCheck.bl")
 			public String idCheck(String checkId){
 				int count = Aservice.idCheck(checkId);
 				

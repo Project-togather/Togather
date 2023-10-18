@@ -153,7 +153,7 @@
 
 						$.ajax({
 							type : "POST",
-							url : "idCheck.me",
+							url : "idCheck.bl",
 							data : {
 								checkId : $idInput.val()
 							},
