@@ -20,14 +20,15 @@ public class Member {
 	private String memId;
 	private String memPwd;
 	private String memName;
-	private String nickname;
+	private String nickName;
 	private String email;
-	private String gneder;
+	private String gender;
 	private String age;
 	private String phone;
 	private Date enrollDate;
 	private String mStatus;
 	private double manner;
-	private String interest;
-
+	private String img ; 
+	private String msg;
+	
 }

@@ -1,5 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
+	<resultMap type="Member" id="MemberResult">
+		<result column="mem_no" property="memNo"/>
+		<result column="mem_id" property="memId"/>
+		<result column="mem_pwd" property="memPwd"/>
+		<result column="mem_name" property="memName"/>
+		<result column="nickname" property="nickName"/>
+		<result column="email" property="email"/>
+		<result column="gender" property="gender"/>
+		<result column="age" property="age"/>
+		<result column="phone" property="phone"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="m_status" property="mStatus"/>
+		<result column="manner" property="manner"/>
+		<result column="img" property="img"/>
+		<result column="msg" property="msg"/>
+		
+
+	</resultMap>
+	
+	<resultMap type="Attachment" id="AttachResult">
+		<result column="ATT_NO" property="attNo"/>
+		<result column="REF_FNO" property="refFno"/>
+		<result column="ORIGIN_NAME" property="originName"/>
+		<result column="UPDATE_NAME" property="updateName"/>
+		<result column="FILE_PATH" property="filePath"/>
+		<result column="ENROLL_DATE" property="enrollDate"/>
+	</resultMap>
+	
+	<resultMap type="MemInterest" id="InterestResult" >
+		<result column="mem_no" property="memNo"/>
+		<result column="in_no" property="inNo"/>
+	</resultMap>
+	
+	
+	
+	<select id="loginMember" resultMap="MemberResult">
+		select
+		       mem_no
+		     , mem_id
+		     , mem_pwd
+		     , mem_name
+		     , nickname
+		     , email
+		     , gender
+		     , age
+		     , phone
+		     , enroll_date
+		     , m_status
+		     , manner
+		     , img
+		     , msg
+		  from member
+		 where mem_id = #{memId}
+		   and mem_pwd = #{memPwd}	
+	</select>
+	
+	<select id = "idCheck" resultType= "_int" >
+		select count(*) from member
+		where mem_id = #{checkId}
+	</select>
+	
+	
+	<insert id ="insertMember" parameterType="Member">
+
+	insert 
+    into 
+    member
+    (
+        mem_no
+       ,mem_id
+       ,mem_pwd
+       ,mem_name
+       ,nickname
+       ,email
+       ,gender
+       ,age
+       ,phone
+       ,enroll_date
+       ,m_status
+       ,manner
+       ,reg_type
+       ,rp_count
+       ,img
+    )
+    values
+    (
+        'M'||seq_mno.nextval
+       ,#{memId}
+       ,#{memPwd}
+       ,#{memName}
+       ,#{nickName}
+       ,#{email}
+       ,#{gender}
+       ,#{age}
+       ,#{phone}
+       ,sysdate
+       ,default
+       ,36.5
+       ,null
+       ,default
+       ,#{img}
+    )
+	</insert>
+	
+	<select id ="bringMemNo" resultType = "string" parameterType="Member">
+		select mem_no
+		from member
+		where mem_id = #{memId}
+	</select>
+	
+	
+	<insert id="insertProfileImage"  parameterType="Attachment" >
+		insert into attachment
+		(
+		    att_no
+		   ,ref_fno
+		   ,origin_name
+		   ,update_name
+		   ,file_path
+		   ,enroll_date
+		   ,category
+		)
+		values
+		(
+		    'AT'||seq_ano.nextval
+		   ,#{refFno}
+		   ,#{originName}
+		   ,#{updateName}
+		   ,#{filePath}
+		   ,sysdate
+		   ,'profileImage'
+		)
+	</insert>
+	
+	<select id="getProfileImg" resultMap="AttachResult" >
+		select 
+		    att_no
+		   ,ref_fno
+		   ,origin_name
+		   ,update_name
+		   ,file_path
+		   ,enroll_date
+		from attachment
+		where ref_fno = #{memNo}
+	</select>
+	
+	<update id="insertMsg">
+		update 
+		    member
+		    set msg = #{msg}
+		where mem_no = #{memNo}
+	</update>
+	
+	<insert id="insertInterest">
+		insert into
+			mem_interest
+			(
+			    mem_no
+			   ,in_no 
+			)
+			values
+			(
+			    #{memNo}
+			   ,#{inNo}
+			)
+	</insert>
+	
+	<select id ="getMemInterest" resultMap="InterestResult">
+	select 
+	    mem_no
+	   ,in_no
+	from mem_interest
+	where mem_no = #{memNo}
+	</select>
+	
+	
 	
 </mapper>

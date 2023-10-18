@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-실패
+
+	<h1 align="center">${ errorMsg }</h1>
+
 </body>
 </html>

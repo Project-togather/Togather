@@ -1,0 +1,190 @@
+/*! -----------------------------------------------------------------
+[Colors]
+*/
+
+::-moz-selection {
+    background: rgba(231, 76, 60, .9);
+    color: #fff;
+}
+
+::-webkit-selection {
+    background: rgba(231, 76, 60, .9);
+    color: #fff;
+}
+
+::selection {
+    background: rgba(231, 76, 60, .9);
+    color: #fff;
+}
+
+a {
+    color: #e74c3c;
+}
+
+a:hover,
+a:focus {
+    color: #d62c1a;
+}
+
+h1 > a:hover,
+h1 > a:focus,
+h2 > a:hover,
+h2 > a:focus,
+h3 > a:hover,
+h3 > a:focus,
+h4 > a:hover,
+h4 > a:focus,
+h5 > a:hover,
+h5 > a:focus,
+h6 > a:hover,
+h6 > a:focus {
+    color: #e74c3c;
+}
+
+.btn.btn-brand {
+    background: #e74c3c;
+}
+
+.btn.btn-brand:hover,
+.btn.btn-brand:focus {
+    background: #ed7669;
+}
+
+.page-item.active .page-link,
+.page-link:focus,
+.page-link:hover {
+    border-color: #e74c3c;
+}
+
+.owl-dots .owl-dot.active {
+    background: rgba(231, 76, 60, .7);
+}
+
+.social-icons > li > a:hover,
+.social-icons > li > a:focus {
+    color: #e74c3c;
+}
+
+.post-content blockquote:hover {
+    border-color: #e74c3c;
+}
+
+.comment-meta-date a:hover,
+.comment-meta-date a:focus,
+.comment-meta-author a:hover,
+.comment-meta-author a:focus {
+    color: #e74c3c;
+}
+
+.comment-reply > a:hover,
+.comment-reply > a:focus {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.header .inner-nav > ul > li > a:hover,
+.header .inner-nav > ul > li > a:focus {
+    color: #e74c3c;
+}
+
+.header .inner-nav > ul > li.sub-menu-open > a {
+    color: #e74c3c;
+}
+
+.inner-nav .sub-menu li.sub-menu-open > a {
+    border-color: #e74c3c;
+    color: #e74c3c;
+}
+
+.inner-nav .sub-menu li a:hover {
+    color: #e74c3c;
+}
+
+.hero h1 > span,
+.hero-slides h1 > span {
+    color: #e74c3c;
+}
+
+.hero-meta span.hero-meta-desc > a:hover,
+.hero-meta span.hero-meta-desc > a:focus,
+.hero-meta span.hero-meta-title > a:hover,
+.hero-meta span.hero-meta-title > a:focus {
+    color: #e74c3c;
+}
+
+.filters-row a:hover,
+.filters-row a.current {
+    color: #e74c3c;
+}
+
+.search-button:hover {
+    color: #e74c3c;
+}
+
+.widget_meta ul li a:hover,
+.widget_archive ul li a:hover,
+.widget_nav_menu ul li a:hover,
+.widget_categories ul li a:hover,
+.widget_widget_recent_comments ul li a:hover {
+    color: #e74c3c;
+}
+
+.widget_recent_works:hover,
+.widget_recent_entries a:hover,
+.widget_recent_entries_custom a:hover {
+    color: #e74c3c;
+}
+
+.post-tags > a:hover,
+.widget_tag_cloud .tagcloud > a:hover {
+    background: #e74c3c;
+}
+
+.footer a:hover,
+.footer a:focus {
+    color: #ed7669;
+}
+
+.footer .widget_tag_cloud .tagcloud > a:hover {
+    background: #e74c3c;
+}
+
+.parallax a:not(.btn) {
+    color: #e74c3c;
+}
+
+.parallax a:not(.btn):hover,
+.parallax a:not(.btn):focus {
+    color: #d62c1a;
+}
+
+.parallax h1 > a:hover,
+.parallax h1 > a:focus,
+.parallax .h1 > a:hover,
+.parallax .h1 > a:focus,
+.parallax h2 > a:hover,
+.parallax h2 > a:focus,
+.parallax .h2 > a:hover,
+.parallax .h2 > a:focus,
+.parallax h3 > a:hover,
+.parallax h3 > a:focus,
+.parallax .h3 > a:hover,
+.parallax .h3 > a:focus,
+.parallax h4 > a:hover,
+.parallax h4 > a:focus,
+.parallax .h4 > a:hover,
+.parallax .h4 > a:focus,
+.parallax h5 > a:hover,
+.parallax h5 > a:focus,
+.parallax .h5 > a:hover,
+.parallax .h5 > a:focus,
+.parallax h6 > a:hover,
+.parallax h6 > a:focus,
+.parallax .h6 > a:hover,
+.parallax .h6 > a:focus {
+    color: #e74c3c;
+}
+
+.parallax .owl-dots .owl-dot.active {
+    background: rgba(231, 76, 60, .7);
+}

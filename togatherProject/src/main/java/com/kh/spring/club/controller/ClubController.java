@@ -12,11 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.reply.model.vo.Reply;
+import com.kh.spring.myClass.model.vo.MyClass;
 
 @Controller
 public class ClubController {
@@ -34,32 +37,27 @@ public class ClubController {
 		int ranNum = (int)(Math.random() * 90000 + 10000); 
 		String ext = originName.substring(originName.lastIndexOf("."));
 		
-		String changeName = currentTime + ranNum + ext; 
+		String updateName = currentTime + ranNum + ext; 
 		
 		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
 		
 			try {
-				upfile.transferTo(new File(savePath + changeName));
+				upfile.transferTo(new File(savePath + updateName));
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
 			
-		return changeName;
+		return updateName;
 	}
 	
 	/**
-	 * 전체 리스트 조회 (소셜링, 클럽, 챌린지, 원데이, 피드?) (대문자)
+	 * 전체 리스트 조회 (소셜링, 클럽, 챌린지, 원데이, 피드?)
 	 */
-	public String selectClubList(Club c, Attachment at, MultipartFile upfile, HttpSession session, Model model) {
+	@RequestMapping(value= "index.do")
+	public String selectClassList(Club c, Attachment at, MultipartFile upfile, HttpSession session, Model model) {
 		
-		
-		if(!upfile.getOriginalFilename().equals("")) {
-			String changeName = saveFile(upfile, session);
-			at.setOriginName(upfile.getOriginalFilename());
-			at.setChangeName("resources/uploadFiles/" + changeName);
-		}
-		
-		ArrayList<Club> list = cService.selectClubList();
+		ArrayList<Club> list = cService.selectClassList();
+		// 피드 리스트 조회 추가!
 		
 		if(list != null) {
 			session.setAttribute("list", list);
@@ -70,180 +68,168 @@ public class ClubController {
 		}
 	}
 	
+	// 메인 페이지 이동
+	@RequestMapping(value = "main.pa")
+	public String mainPage() {
+		return "main";
+	}
+	
+	// 라운지 페이지 이동
+	@RequestMapping(value = "lounge.pa")
+	public String loungePage() {
+		return "class/loungePage";
+	}
+	
+   // 내모임 리스트 조회
+   @RequestMapping(value = "myclass.pa")
+   public String selectMyClass() {
+      return "class/myClassPage";
+   }
+	
 	/**
 	 * 소셜링 전체 조회
 	 */
-	public String selectSocialList() {
+	@RequestMapping("social.pa")
+	public String selectSocialList(Club c, Attachment at, MultipartFile upfile, HttpSession session, Model model) {
+		
 		ArrayList<Club> list = cService.selectSocialList();
 		
-		return "main";
-	}
-	
-	/**
-	 * 소셜링 상세 조회
-	 */
-	public String selectSocialList(int cNo) {
-		int result = cService.increaseCount(cNo);
-		
-		if(result > 0) {
-			Club c = cService.selectSocial(cNo);
+		if(list != null) {
+			session.setAttribute("list", list);
+			return "class/socialPage";
 		}else {
-			
-		}
-		return "main";
-	}
-	
-	/**
-	 * 소셜링 작성
-	 */
-	public void insertSocial(Club c) {
-		int result = cService.insertSocial(c);
-	}
-	
-	/**
-	 * 소셜링 수정
-	 */
-	public void updateSocial(Club c) {
-		int result = cService.updateSocial(c);
-	}
-
-	/**
-	 * 소셜링 삭제
-	 */
-	public void deleteSocial(int cNo) {
-		int result = cService.deleteSocial(cNo);
-	}
-	
-	/**
-	 * 클럽 전체 조회 (소문자)
-	 */
-	public void selectclubList() {
-		ArrayList<Club> list = cService.selectclubList();
-	}
-
-	/**
-	 * 클럽 상세 조회 (카운트 증가 where 절 바꾸기)
-	 */
-	public void selectclub(int cNo) {
-		
-		int result = cService.increaseCount(cNo);
-		
-		if(result > 0) {
-			Club c = cService.selectSocial(cNo);
-		}else {
-			
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
 		}
 	}
-
-	/**
-	 * 클럽 작성
-	 */
-	public void insertclub(Club c) {
-		int result = cService.insertclub(c);
-	}
 	
 	/**
-	 * 클럽 수정
+	 * 클럽 전체 조회
 	 */
-	public void updateclub(Club c) {
-		int result = cService.updateclub(c);
+	@RequestMapping("club.pa")
+	public String selectClubList(Club c, Attachment at, MultipartFile upfile, HttpSession session, Model model) {
+		
+		ArrayList<Club> list = cService.selectClubList();
+		
+		if(list != null) {
+			session.setAttribute("list", list);
+			return "class/clubPage";
+		}else {
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
+		}
 	}
-
-	/**
-	 * 클럽 삭제
-	 */
-	public void deleteclub(int cNo) {
-		int result = cService.deleteclub(cNo);
-	}
-
+	
 	/**
 	 * 챌린지 전체 조회
 	 */
-	public void selectchallengeList() {
-		ArrayList<Club> list = cService.selectchallengeList();
-	}
-	
-	/**
-	 * 챌린지 상세 조회 (카운트 증가 where 절 바꾸기)
-	 */
-	public void selectchallenge(int cNo) {
+	@RequestMapping("challenge.pa")
+	public String selectChallengeList(Club c, Attachment at, MultipartFile upfile, HttpSession session, Model model) {
 		
-		int result = cService.increaseCount(cNo);
+		ArrayList<Club> list = cService.selectChallengeList();
 		
-		if(result > 0) {
-			Club c = cService.selectSocial(cNo);
+		if(list != null) {
+			session.setAttribute("list", list);
+			return "class/challengePage";
 		}else {
-			
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
 		}
 	}
 	
 	/**
-	 * 챌린지 작성
+	 * 원데이클래스 전체 조회
 	 */
-	public void insertchallenge(Club c) {
-		int result = cService.insertchallenge(c);
-	}
-	
-	/**
-	 * 챌린지 수정
-	 */
-	public void updatechallenge(Club c) {
-		int result = cService.updateOneDay(c);
-	}
-
-	/**
-	 * 챌린지 삭제
-	 */
-	public void deletechallenge(int cNo) {
-		int result = cService.deletechallenge(cNo);
-	}
-	
-	/**
-	 * 원데이 전체 조회
-	 */
-	public void selectOneDayList() {
+	@RequestMapping("oneday.pa")
+	public String selectOneDayList(Club c, Attachment at, MultipartFile upfile, HttpSession session, Model model) {
+		
 		ArrayList<Club> list = cService.selectOneDayList();
-	}
-
-	/**
-	 * 원데이 상세 조회 (카운트 증가 where 절 바꾸기)
-	 */
-	public void selectOneDay(int cNo) {
 		
-		int result = cService.increaseCount(cNo);
-		
-		if(result > 0) {
-			Club c = cService.selectSocial(cNo);
+		if(list != null) {
+			session.setAttribute("list", list);
+			return "class/onedayPage";
 		}else {
-			
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
 		}
-	}
-	
-	/**
-	 * 원데이 작성
-	 */
-	public void insertOneDay(Club c) {
-		int result = cService.insertOneDay(c);
-	}
-	
-	/**
-	 * 원데이 수정
-	 */
-	public void updateOneDay(Club c) {
-		int result = cService.updateOneDay(c);
-	}
-	
-	/**
-	 * 원데이 삭제
-	 */
-	public void deleteOneDay(int cNo) {
-		int result = cService.deleteOneDay(cNo);
 	}
 	
 	/**
 	 * 내 즐겨찾기 조회
 	 */
 	public void selectMyList() {
-		ArrayList<Club> list = cService.selectMyList();
+		ArrayList<Club> list = cService.selectMyClassList();
 	}
+	
+	/**
+	 * 모임등록 폼 이동 
+	 */
+	@RequestMapping("enrollForm.cl")
+	public String classEnrollForm() {
+		return "class/ClassEnrollForm";
+	}
+	
+	
+	@RequestMapping("enroll.cl")
+	public String insertClass(Club c, Attachment at, MultipartFile upfile , HttpSession session , Model model) {
+		
+		int result = cService.insertClass(c);
+		
+		if(!upfile.getOriginalFilename().equals("")) {
+			
+			String updateName = saveFile(upfile, session);
+			at.setOriginName(upfile.getOriginalFilename());
+			at.setUpdateName("resources/uploadFiles/" + updateName);
+			at.setFilePath(upfile.getOriginalFilename() + "resources/uploadFiles/" + updateName);
+		}
+		
+		if(result > 0) {
+			at.setCategory(c.getClType());
+			
+			int result2 = cService.insertImg(at);
+			MyClass myClass = new MyClass();
+			if(result2 > 0) {
+				myClass.setClassNo(c.getClassNo());
+				myClass.setMemNo(c.getMemNo());
+				myClass.setClType(c.getClType());
+				
+				int result3 = cService.insertMyClass(c);
+				
+				if(result3 > 0) {
+				}
+				session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
+				return "class/myClassPage";
+				}else {
+					model.addAttribute("errorMsg", "게시글 등록에 실패");
+					return "common/errorPage";
+				}
+		}
+		return null;
+	}
+	
+	@RequestMapping("detail.cl")
+	public String selectClassDetail(int cNo, Model model) {
+		
+		Club c = cService.selectClassDetail(cNo);
+		
+		if(c.getClassApproval().equals("Y")) {
+			c.setClassApproval("승인제");
+		} else {
+			c.setClassApproval("선착순");
+		}
+		
+		model.addAttribute("c", c);
+		return "class/classDetailView";
+	}
+	
+	@ResponseBody
+	@RequestMapping("enroll.rv")
+	public String insertReply(Reply r) {
+		
+		System.out.println(r);
+		int result = cService.insertReply(r);
+		return result>0 ? "success" : "fail";
+
+	}
+	
 }
