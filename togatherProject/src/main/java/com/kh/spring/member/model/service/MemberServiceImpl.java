@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.attachment.model.vo.Attachment;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.dao.MemberDao;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.meminterest.model.vo.MemInterest;
@@ -82,6 +83,20 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<MemInterest> getMemInterest(String memNo) {
 		ArrayList<MemInterest> mi = mDao.getMemInterest(sqlSession, memNo);
 		return mi;
+	}
+	
+	//피드 사진들 저장하기
+	@Override
+	public int insertFeedImg(Attachment at) {
+		int result = mDao.insertFeedImg(sqlSession, at);
+		return result;
+	}
+	
+	//피드작성
+	@Override
+	public int insertFeed(Feed f) {
+		return mDao.insertFeed(sqlSession ,f);
+		
 	}
 	
 }
