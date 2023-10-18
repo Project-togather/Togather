@@ -176,6 +176,52 @@
 	where mem_no = #{memNo}
 	</select>
 	
+	<insert id="insertFeedImg">
+		insert
+		    into attachment
+		(
+		    att_no
+		   ,ref_fno
+		   ,origin_name
+		   ,update_name
+		   ,file_path
+		   ,enroll_date
+		   ,category
+		   ,thumbnail
+		)
+		values
+		(
+		    'AT'||seq_ano.nextval
+		   ,'F'||seq_fno.currval
+		   ,#{originName}
+		   ,#{updateName}
+		   ,#{filePath}
+		   ,sysdate
+		   ,'FEED'
+		   ,#{thumbnail}
+		)
+	</insert>
 	
+	<insert id = "insertFeed">
+		insert 
+		    into feed
+		(
+		     fe_no
+		    ,ref_cno
+		    ,fe_content
+		    ,fe_date
+		    ,fe_writer
+		    ,f_status
+		)
+		values
+		(
+		    'F'||seq_fno.nextval
+		   ,#{refCno}
+		   ,#{feContent}
+		   ,sysdate
+		   ,#{feWriter}
+		   ,default
+		)
+	</insert>
 	
 </mapper>

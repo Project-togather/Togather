@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.attachment.model.vo.Attachment;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.meminterest.model.vo.MemInterest;
 
@@ -61,5 +62,11 @@ public class MemberDao {
 		return mi;
 	}
 	
+	public int insertFeedImg(SqlSessionTemplate sqlSession , Attachment at){
+		return sqlSession.insert("memberMapper.insertFeedImg" , at);
+	}
 	
+	public int insertFeed(SqlSessionTemplate sqlSession , Feed f) {
+		return sqlSession.insert("memberMapper.insertFeed", f);
+	}
 }
