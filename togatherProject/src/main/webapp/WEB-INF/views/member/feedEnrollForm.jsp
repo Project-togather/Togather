@@ -1,52 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>   
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<title>myPage</title>
-		<!-- Favicons-->
-		<link rel="shortcut icon" href="assets/images/favicon.png">
-		<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-		<link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-touch-icon-114x114.png">
-		<!-- Web Fonts-->
-		<link href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700" rel="stylesheet">
-		<!-- Bootstrap core CSS-->
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
-		<!-- Plugins and Icon Fonts-->
-		<link href="assets/css/plugins.min.css" rel="stylesheet">
-		<!-- Template core CSS-->
-		<link href="assets/css/template.css" rel="stylesheet">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-		<style>
-			.gallery-item:hover{
-				cursor:pointer
-			}
-
-		</style>
+	
 	</head>
 	<body>
+		<jsp:include page="../common/menubar.jsp"></jsp:include>
 	
-	<jsp:include page="../common/menubar.jsp"></jsp:include>
-
 		<!-- Preloader-->
 		<div class="page-loader">
 			<div class="loader"></div>
 		</div>
 		<!-- Preloader end-->
+		
 
+		
 
 		<!-- Wrapper-->
-		<div class="wrapper" >
-
 			<!-- Hero-->
 			<section class="module-cover parallax" data-background="assets/images/black.jpg" data-overlay="1" data-gradient="1">
 				<div class="container">
@@ -55,142 +28,212 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="text-center">
-								<h2 class="display-1"> ${loginMember.memName} 's Page</h2>
-								<p>personal Page<br/> show who you are</p>
+								<h2 class="display-1"> Write your Feed</h2>
+								<p>you can write anything you want<br/>show your daily Life to EveryBody!</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 			<!-- Hero end-->
-			
-			<div class="module">
-				<div class="container">
-					<div class="gallery-item">
-						<div class="gallery-image" data-background="${loginMember.img}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
-						
-						<br><br><br><br>
-					</div>
-				<table border="0" style="width: 800px; margin-top: 100px;" align="center">
-					<thead>
-					<tr>
-						<th>${loginMember.memName} 님</th>
-						<td colspan="2"><a href="">setMyProfile</a></td>	
-					</tr>		
-					</thead>
-						<tr>
-							<th style="width: 100px;">FeedsCount</th>
-							<td>6</td>
+		<div class="wrapper">
+		<section class="module">
+					<div class="container">
+						<div class="row">
 							
-						</tr>
-						<tr>
-							<th>Following</th>
-							<td>5</td>
-							
-						</tr>
-						<tr>
-							<th>Follower</th>
-							<td>50</td>
-							
-						</tr>
-						<tr>
-							<th>introduce</th>
-							<td colspan="2">
+							<div class="owl-carousel menu-carousel" data-carousel-options="{&quot;nav&quot;: false}">
+								<div class="menu-classic-item">
+									<div class="menu-classic-item-img"><a id="first" class="photo" href="assets/images/insertImage2.png"></a>
+									<img id = "titleImg"  src="assets/images/insertImage2.png" onclick="chooseFile(1);">
+										<div class="menu-classic-item-price">Image1
+										</div>
+									</div>
+									<div class="menu-classic-item-inner">
+										<h6>ThumbNail Image</h6>
+										<p>it will be your thumbnail image of this feed</p>
+									</div>
+								</div>
+								<div class="menu-classic-item">
+									<div class="menu-classic-item-img"><a id="second" class="photo" href="assets/images/insertImage2.png"></a>
+									<img id = "contentImg1"  src="assets/images/insertImage2.png" onclick="chooseFile(2);">
+										<div class="menu-classic-item-price">Image2
+										</div>
+									</div>
+									<div class="menu-classic-item-inner">
+										<h6>Second Image</h6>
+										
+									</div>
+								</div>
+								<div class="menu-classic-item">
+									<div class="menu-classic-item-img"><a id="third" class="photo" href="assets/images/insertImage2.png"></a>
+									<img id = "contentImg2"  src="assets/images/insertImage2.png" onclick="chooseFile(3);">
+										<div class="menu-classic-item-price">Image3
+										</div>
+									</div>
+									<div class="menu-classic-item-inner">
+										<h6>Third Image</h6>
+										
+									</div>
+								</div>
+								<div class="menu-classic-item">
+									<div class="menu-classic-item-img"><a id="forth" class="photo" href="assets/images/insertImage2.png"></a>
+									<img id = "contentImg3"  src="assets/images/insertImage2.png" onclick="chooseFile(4);">
+										<div class="menu-classic-item-price">Image4
+										</div>
+									</div>
+									<div class="menu-classic-item-inner">
+										<h6>Fourth image</h6>
+										
+									</div>
+								</div>
 								
-								${loginMember.msg}
-							</td>
-						</tr>	
-						<tr>
-							<th>interest</th>
-							<th>
-								<c:forEach begin="0" end="${fn:length(interArr)}" step="1" var="i">
-						          	${interArr[i]} 
-						        </c:forEach>
-							</th>
-						</tr>
-					<tbody>
-
-					</tbody>
-				</table>
-						
-				</div>
-			</div>
-			
-			
-				<div class="container">
-					<div class="row" style="margin-left: 100px;">
-						<img src="assets/images/new.png" onclick="test();">
+						</div>
+							
 					</div>
-				</div>
-				<script>
-					function test(){
-						location.href ="feedEnrollForm.me"
-					}
-
-				</script>
-			
-			<!-- Menu-->
-			<section class="module" >
-				<div class="container">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="gallery gallery-4-columns">
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg "style="width: 400px; height: 270px;" >
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
+		</section>
+		
+		
+		
+		
+			<section class="module">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<img id = "titleImg1" width="250" height="170" src="assets/images/insertImage2.png" onclick="chooseFile(1);">
+								<img id = "contentImg11" width="250" height="170" src="assets/images/insertImage2.png" onclick="chooseFile(2);">
+								<img id = "contentImg21" width="250" height="170" src="assets/images/insertImage2.png" onclick="chooseFile(3);">
+								<img id = "contentImg31" width="250" height="170" src="assets/images/insertImage2.png" onclick="chooseFile(4);">
+								
 							</div>
 						</div>
 					</div>
-					<script>
-						$(function(){
-							$(".gallery-item>img").click(function(){
-							alert("클릭시 상세정보이동");
-						})
-						})
-						
-					</script>
+			</section>
+			
 
+			<section class="module">
+				<div class="container">
 					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="50px"></div>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="100px"></div>
+						<div class="comment-respond">
+							<h5 class="comment-reply-title">Write your Feed</h5>
+							  	<p class="comment-notes">Add more than 1 picture and select yout thumbnail Image</p>
+									<form action="insertFeed.me" method="post" class="comment-form row" enctype="multipart/form-data">
+									
+										<div class="form-group col-md-4">
+											<div id="file-area" style = "display:none">
+								                <input class="form-control" type="file" name="upfile" id = "file1" onchange ="loadImg(this,1)" required>
+								                <input class="form-control" type="file" name="upfile" id = "file2" onchange ="loadImg(this,2)">
+								                <input class="form-control" type="file" name="upfile" id = "file3" onchange ="loadImg(this,3)">
+								                <input class="form-control" type="file" name="upfile" id = "file4" onchange ="loadImg(this,4)">
+								            </div>
+								         </div> 
+							            
+							            
+										<div class="form-group col-md-4">
+												  <input type="radio" id="option1" name="option" value="1" onclick="test1();">
+												  <label for="option1">Personal Feed</label></br>
+												  <input type="radio" id="option2" name="option" value="2" onclick="test2();">
+												  <label for="option2">Review</label></br>
+
+										</div>
+										<script>
+										
+											function test1(){
+												$("#checkTarget").css("display","none");
+											}
+											function test2(){
+												$("#checkTarget").css("display","block");
+											}
+										
+										</script>
+										<div id="checkTarget" class="form-group col-md-4" style = "display:none">
+											<select name="refCno" id="lang">
+											    <option value="example1">example1</option>
+											    <option value="example2">example2</option>
+											    <option value="example3">example3</option>
+											  </select>
+										</div>
+									
+
+										<div class="form-group col-md-12">
+											<textarea class="form-control" name="feContent" rows="8" placeholder="Comment"></textarea>
+										</div>
+											<div class="form-submit col-md-12">
+												<button class="btn btn-black" type="submit">Post Feed</button>
+											</div>
+									</form>
 						</div>
 					</div>
 				</div>
 			</section>
-			<!-- Menu end-->
+			
+			<script >
+            	function chooseFile(num){
+            		$("#file"+num).click();
+            	}
+            	function loadImg(inputFile , num){
+            		console.log(inputFile);
+
+            		if (inputFile.files.length == 1){
+            			console.log("이거좀봐" + inputFile.files.length);
+            			const reader = new FileReader();
+            			reader.readAsDataURL(inputFile.files[0]);
+            			reader.onload = function(e){
+            				switch (num){
+                                case 1: 
+                                $("#titleImg").attr("src",e.target.result);
+                                $("#titleImg1").attr("src",e.target.result);
+                                $("#first").attr("href",e.target.result);
+                                console.log(num);
+                                break;
+                                
+                                case 2: $("#contentImg1").attr("src",e.target.result);
+                                $("#contentImg11").attr("src",e.target.result);
+                                $("#second").attr("href",e.target.result);
+                                console.log(num);
+                                break;
+                               
+                                case 3: $("#contentImg2").attr("src",e.target.result);
+                                $("#contentImg21").attr("src",e.target.result);
+                                $("#third").attr("href",e.target.result);
+                                console.log(num);
+                                break;
+                                
+                                case 4: $("#contentImg3").attr("src",e.target.result);
+                                case 4: $("#contentImg31").attr("src",e.target.result);
+                                $("#forth").attr("href",e.target.result);
+                                console.log(num);
+                                break;
+                            }
+            			}
+            		}else{//파일이 빠졌을경우
+                        switch (num){
+                                case 1: $("#titleImg").attr("src","assets/images/insertImage2.png");
+                                break;
+                                case 2: $("#contentImg1").attr("src","assets/images/insertImage2.png");
+                                break;
+                                case 3: $("#contentImg2").attr("src","assets/images/insertImage2.png");
+                                break;
+                                case 4: $("#contentImg3").attr("src","assets/images/insertImage2.png");
+                                break;
+                            }
+            		}
+            	}
+            </script>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
@@ -409,12 +452,6 @@
 
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 
-		<!-- Scripts-->
-		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-		<script src="assets/js/plugins.min.js"></script>
-		<script src="assets/js/custom.min.js"></script>
+
 	</body>
 </html>

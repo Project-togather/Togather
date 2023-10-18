@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.attachment.model.vo.Attachment;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.interest.model.vo.Interest;
 import com.kh.spring.member.model.service.MemberServiceImpl;
 import com.kh.spring.member.model.vo.Member;
@@ -261,6 +262,16 @@ public class MemberController {
    }
    
    
-   
+   //피드 작성 이동폼
+   @RequestMapping(value = "feedEnrollForm.me")
+   public String feedEnrollForm() {
+	   return "member/feedEnrollForm";
+   }
+   //피드작성
+   @RequestMapping(value = "insertFeed.me")
+   public void insertFeed(MultipartFile[] upfile , HttpServletRequest request , Feed f ,HttpSession session) {
+	   System.out.println(f);
+	   System.out.println(upfile);
+   }
   
 }
