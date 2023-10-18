@@ -140,7 +140,7 @@
 					 </c:if> 
 						<li><a href="myclass.pa"><span class="menu-item-span">내모임</span></a></li>
 						<li><a href="enrollForm.cl"><span class="menu-item-span">모임 등록</span></a></li>
-						<li><a href="mypage.me"><span class="menu-item-span">마이페이지</span></a></li>
+						<li><a href="mypage.me"><span class="menu-item-span">myPage</span></a></li>
 
 					
 					 <c:if test="${ loginMember.memId == 'ADMIN' }">

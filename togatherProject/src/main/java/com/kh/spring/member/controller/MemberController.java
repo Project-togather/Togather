@@ -67,12 +67,6 @@ public class MemberController {
       return "redirect:/";
    }
    
-   //마이페이지이동
-   @RequestMapping(value = "mypage.me")
-   public String myPage() {
-      return "member/myPage";
-   }
-   
    //회원가입폼 이동
    @RequestMapping("enrollForm.me")
    public String enrollForm() {
@@ -134,9 +128,9 @@ public class MemberController {
    }
    
    
-	public String[] saveFile(MultipartFile upfile, HttpSession session) { //리팩토링 작업이라고 한다.
+	public String[] saveFile(MultipartFile upfile, HttpSession session) { //리팩토링1
 		String originName = upfile.getOriginalFilename();
-		//"20231004154607"
+		
 		String currentTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 		int ranNum = (int)(Math.random() * 90000 + 10000);//5자리 랜덤값
 		String ext =originName.substring(originName.lastIndexOf("."));
@@ -201,8 +195,6 @@ public class MemberController {
 		   interArr[i] = Integer.parseInt(arr[i]);
 	   }
 	   
-	   
-	   
 	   Member m = new Member();
 	   m.setMemNo(memNo);
 	   m.setMsg(profileMessage);
@@ -228,5 +220,22 @@ public class MemberController {
 		   return "common/errorPage";
 	   }
    }
+   
+   
+   
+   
+   
+   //마이페이지 관련 으어어어어어어어어어
+   //마이페이지이동
+   @RequestMapping(value = "mypage.me")
+   public String myPage(HttpSession session) {
+	  Member loginMember = (Member)session.getAttribute("loginMember");
+	  String memNo = loginMember.getMemNo();
+	  System.out.println(memNo);
+      return "member/myPage";
+   }
+   
+   
+   
   
 }

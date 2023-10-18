@@ -47,15 +47,15 @@
 		<div class="wrapper" >
 
 			<!-- Hero-->
-			<section class="module-cover parallax" data-background="assets/images/module-8.jpg" data-overlay="1" data-gradient="1">
+			<section class="module-cover parallax" data-background="assets/images/black.jpg" data-overlay="1" data-gradient="1">
 				<div class="container">
 				
 				
 					<div class="row">
 						<div class="col-md-12">
 							<div class="text-center">
-								<h2 class="display-1">MyPage</h2>
-								<p>마이페이지 입니다 <br/> trends to see any changes in performance over time.</p>
+								<h2 class="display-1"> ${loginMember.memName} 's Page</h2>
+								<p>personal Page<br/> show who you are</p>
 							</div>
 						</div>
 					</div>
@@ -95,9 +95,8 @@
 						<tr>
 							<th>introduce</th>
 							<td colspan="2">
-								안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다
-								안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다안녕하세요 반갑습니다
-								안녕하세요 반갑습니다
+								
+								${loginMember.msg}
 							</td>
 						</tr>	
 						<tr>
