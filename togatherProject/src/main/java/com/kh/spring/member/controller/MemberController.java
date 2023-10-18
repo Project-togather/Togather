@@ -269,9 +269,76 @@ public class MemberController {
    }
    //피드작성
    @RequestMapping(value = "insertFeed.me")
-   public void insertFeed(MultipartFile[] upfile , HttpServletRequest request , Feed f ,HttpSession session) {
+   public String insertFeed(MultipartFile[] upfile , HttpServletRequest request , Feed f ,HttpSession session , Model model) {
 	   System.out.println(f);
-	   System.out.println(upfile);
+	   String feWriter = ((Member)session.getAttribute("loginMember")).getMemNo();
+	   int result1 = 0 ;
+	   int result2 = 0 ;
+	   //피드 넣고 피드 번호 가져와야됨 좇같다
+	   //이제 피드를 넣자
+	   Feed feed = new Feed();
+	   feed.setRefCno(f.getRefCno());
+	   feed.setFeContent(f.getFeContent());
+	   feed.setFeWriter(feWriter);
+	   //ㅇㅋ 피드로 가셈
+	   result1 = mService.insertFeed(feed);
+	   //다녀왔어
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   //db에 4번 다녀오자
+	   for (int i = 0 ; i< upfile.length ; i ++) {
+		   //첨부파일이 null 이 아닐때 required 걸어놔서 null 일경우는 없지만
+		   if(!upfile[i].getOriginalFilename().equals("")) { 
+			   
+			   String changeName ="";
+			   String originName = upfile[i].getOriginalFilename();
+			   String savePath = "";
+			   String filePath = "";
+			   String arr[] = saveFile(upfile[i] , session);
+	    	  	 //파일저장하고 경로좀 받아오자
+	    	   changeName = arr[0];
+	    	   savePath = arr[1];
+	    	   filePath = "resources/uploadFiles/"+changeName;
+			   Attachment at = new Attachment();
+			   
+			   //at 생성하고 값 채워넣기
+			  
+			   
+			   
+	    	   at.setOriginName(originName);
+	    	   at.setUpdateName(changeName);
+	    	   at.setFilePath(filePath);
+	    	   at.setCategory("FEED");
+	    	   if(i == 0) { //썸네일 사진은 1로 세팅
+	    		   at.setThumbnail(1);
+	    	   }else { 
+	    		   at.setThumbnail(0);
+	    	   }
+			   //db로 가보자고
+	    	   result2 = mService.insertFeedImg(at);
+	    	   //if(result2 !=0) {
+	    	   //	   System.out.println("성공" + i);
+	    	   // }
+		   }
+ 
+	   }
+	   
+	   if (result1 * result2 != 0) {
+		   session.setAttribute("alertMsg", "어서오십시오");
+	        return "redirect:/";
+	   }else {
+		   model.addAttribute("errorMsg", "피드작성 실패");
+	       return "common/errorPage";
+	   }
+	   
+	   
+	   
+	   
    }
   
 }

@@ -19,5 +19,6 @@ public class Attachment {
 	private String updateName;
 	private String filePath;
 	private String enrollDate;
-	private int category;
+	private String category;
+	private int  thumbnail;
 }
