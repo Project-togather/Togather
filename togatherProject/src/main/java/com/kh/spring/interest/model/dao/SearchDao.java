@@ -30,10 +30,12 @@ public class SearchDao {
 		
 	}
 	
+	
 	public ArrayList<Feed> selectFeedList(SqlSessionTemplate sqlSession) {
 		
 		return (ArrayList)sqlSession.selectList("feedMapper.selectFeedList");
 		
 	}
+	
 
 }

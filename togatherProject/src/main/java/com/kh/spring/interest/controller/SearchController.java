@@ -44,6 +44,7 @@ public class SearchController {
 		return mv;
 	}
 	
+	
 	@RequestMapping(value = "feed.li")
 	public String ssfsdfw() {
 		return "search/searchFeedPage";
@@ -61,5 +62,6 @@ public class SearchController {
 		return new Gson().toJson(list);
 				
 	}
+	
 	
 }

@@ -13,6 +13,7 @@ public interface SearchService {
 	int selectSocialingListCount();
 	ArrayList<Club> selectSocialingList(PageInfo pi);
 	
+	
 	// 2. 피드 리스트가 보이는 서비스
 	ArrayList<Feed> selectFeedList();
 	
