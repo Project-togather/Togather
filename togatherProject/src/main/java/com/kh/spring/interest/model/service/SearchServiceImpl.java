@@ -34,9 +34,11 @@ public class SearchServiceImpl implements SearchService {
 		
 	}
 
+	
 	@Override
 	public ArrayList<Feed> selectFeedList() {
 		return sDao.selectFeedList(sqlSession);
 	}
+	
 	
 }
