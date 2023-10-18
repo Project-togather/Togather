@@ -10,8 +10,10 @@
 		<typeAlias type="com.kh.spring.club.model.vo.Club" alias="Club"/>
 		<typeAlias type="com.kh.spring.feed.model.vo.Feed" alias="Feed"/>
 		<typeAlias type="com.kh.spring.attachment.model.vo.Attachment" alias="Attachment"/>
+		<typeAlias type="com.kh.spring.admin.member.model.vo.BlackList" alias="BlackList"/>
 		<typeAlias type="com.kh.spring.myClass.model.vo.MyClass" alias="MyClass"/>
 		<typeAlias type="com.kh.spring.meminterest.model.vo.MemInterest" alias="MemInterest"/>
+
 	</typeAliases>
 	 
 	 <mappers>
@@ -19,5 +21,6 @@
 	 	<mapper resource="/mappers/club-mapper.xml"/>
 	 	<mapper resource="/mappers/feed-mapper.xml"/>
 	 	<mapper resource="/mappers/attachment-mapper.xml"/>
+	 	<mapper resource="/mappers/admember-mapper.xml"/>
 	 </mappers>
 </configuration>
