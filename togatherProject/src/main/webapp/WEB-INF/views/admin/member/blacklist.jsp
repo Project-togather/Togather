@@ -19,10 +19,10 @@
 					<div>블랙리스트</div>
 					<!-- Button trigger modal -->
 					<button type="button" class="btn btn-warning btn-sm float-right"
-						data-bs-toggle="modal" data-bs-target="#exampleModal"
+						data-bs-toggle="modal" data-bs-target="#blackinsert"
 						data-bs-whatever="@mdo">블랙리스트 추가하기</button>
 
-					<div class="modal fade" id="exampleModal" tabindex="-1"
+					<div class="modal fade" id="blackinsert" tabindex="-1"
 						aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -55,27 +55,51 @@
 
 
 					<br> <br>
-					<table class="table table-hover">
+					<table class="table table-hover" id="blacktable">
 						<thead>
 							<tr>
-								<th scope="col">회원번호</th>
-								<th scope="col">이름</th>
+								<th scope="col">블랙리스트.No</th>
 								<th scope="col">아이디</th>
+								<th scope="col">이름</th>
 								<th scope="col">닉네임</th>
-								<th scope="col">나이</th>
-								<th scope="col">가입일</th>
+								<th scope="col">누적신고횟수</th>
+								<th scope="col">블랙리스트 추가 날짜</th>
+								<th scope="col">블랙리스트 해제</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="m" items="${list}">
+							<c:forEach var="b" items="${list}">
 								<tr>
-									<th scope="row">${m.memNo}</th>
-									<td>${m.memName }</td>
-									<td>${m.memId }</td>
-									<td>${m.nickname }</td>
-									<td>${m.age }</td>
-									<td>${m.enrollDate }</td>
+									<th scope="row">${b.blackNo}</th>
+									<td>${b.blackId }</td>
+									<td id="blackname">${b.blackName }</td>
+									<td>${b.nickName }</td>
+									<td>${b.blackrpCount }</td>
+									<td>${b.blackEnrollDate }</td>
+									<td>
+										<button id="blackbtn" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#blackcancel">
+										블랙리스트 해제
+										</button>
+									</td>
 								</tr>
+									<!-- Modal -->
+										<div class="modal fade" id="blackcancel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h5 class="modal-title" id="exampleModalLabel">블랙리스트 해제하기</h5>
+										        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										      </div>
+										      <div id="modalbody"  class="modal-body">
+										        
+										      </div>
+										      <div class="modal-footer">
+										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+										        <button type="button" class="btn btn-primary">해제하기</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -91,12 +115,12 @@
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="list.mem?cpage=${pi.currentPage -1}">Previous</a></li>
+										href="blacklist.bo?cpage=${pi.currentPage -1}">Previous</a></li>
 								</c:otherwise>
 							</c:choose>
 							<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
 								<li class="page-item"><a class="page-link"
-									href="list.mem?cpage=${p }">${p }</a></li>
+									href="blacklist.bo?cpage=${p }">${p }</a></li>
 							</c:forEach>
 							<c:choose>
 								<c:when test="${pi.currentPage eq pi.maxPage }">
@@ -105,7 +129,7 @@
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="list.mem?cpage=${pi.currentPage +1}">Next</a></li>
+										href="blacklist.bo?cpage=${pi.currentPage +1}">Next</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ul>
@@ -156,6 +180,17 @@
 					} else {
 						$("#enroll-btn :submit").attr("disabled", true);
 					}
+				})
+			})
+		</script>
+		
+		
+		<script>
+			$(function(){
+				$("#blackbtn").click(function(){
+					let con = $(this).parents();
+					console.log(con);
+					
 				})
 			})
 		</script>

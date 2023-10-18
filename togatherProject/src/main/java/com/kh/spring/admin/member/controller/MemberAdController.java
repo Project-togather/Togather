@@ -34,6 +34,7 @@ public class MemberAdController {
 		
 		PageInfo pi = Pagination.getPageInfo(memCount, currentPage, 10, 10);
 		
+		//화면 리스트용 메서드
 		ArrayList<Member> list = Aservice.selectMemberList1(pi);
 		
 		if(list.size()>0) {//성공
@@ -70,10 +71,11 @@ public class MemberAdController {
         cell = row.createCell(5);
         cell.setCellValue("나이");
         
+        //엑셀다운로드용 메서드
         ArrayList<Member> list = Aservice.selectMemberList2();
         
         
-        System.out.println(list);
+        
         // Body
         for (int i=0; i<list.size(); i++) {
             row = sheet.createRow(rowNum++);

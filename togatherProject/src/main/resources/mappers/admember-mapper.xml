@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
-<mapper namespace="adminMapper">
+<mapper namespace="admemberMapper">
 	
 	<resultMap id="MemberResult" type="Member">
 		<result column="mem_no" property="memNo"></result>
@@ -10,6 +10,18 @@
 		<result column="enroll_date" property="enrollDate"></result>
 		<result column="age" property="age"></result>
 	</resultMap>
+	
+	<resultMap id="BlackListResult" type="BlackList">
+		<result column="black_no" property="blackNo"></result>
+		<result column="black_id" property="blackId"></result>
+		<result column="black_name" property="blackName"></result>
+		<result column="nickname" property="nickName"></result>
+		<result column="blackrp_count" property="blackrpCount"></result>
+		<result column="black_enroll_date" property="blackEnrollDate"></result>
+	</resultMap>
+	
+	
+	
 
 	<select id="selectMemberList" resultMap="MemberResult" parameterType="Member">
 		select 
@@ -65,4 +77,26 @@
 			FROM Member m
 			WHERE m.MEM_ID = #{userID}
 	</insert>
+	
+	<select id="selectBlackListCount" resultType="_int" >
+		select
+				count(*)
+			from blackList
+		   where black_Status = 'Y'
+	</select>
+	
+	<select id="selectBlackList" resultMap="BlackListResult" parameterType="BlackList">
+			select 
+			    black_no,
+			    black_id,
+			    black_name,
+			    nickname,
+			    blackrp_count,
+			    black_enroll_date
+			from blackList
+				where black_Status = 'Y'
+				order
+				by black_no desc 
+	</select>
+
 </mapper>

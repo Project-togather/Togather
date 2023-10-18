@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.admin.member.model.dao.AdminDao;
+import com.kh.spring.admin.member.model.vo.BlackList;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.member.model.vo.Member;
 
@@ -43,6 +44,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int insertblackList(String userId) {
 		return ADao.insertblackList(sqlSession,userId);
+	}
+
+	@Override
+	public int selectBlackListCount() {
+		return ADao.selectBlackListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<BlackList> selectBlackList(PageInfo pi) {
+		return ADao.selectBlackList(sqlSession,pi);
 	}
 	
 
