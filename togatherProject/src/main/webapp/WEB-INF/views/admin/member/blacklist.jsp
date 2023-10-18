@@ -94,8 +94,8 @@
 										        
 										      </div>
 										      <div class="modal-footer">
+										        <button type="button" class="btn btn-warning">해제하기</button>
 										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
-										        <button type="button" class="btn btn-primary">해제하기</button>
 										      </div>
 										    </div>
 										  </div>
@@ -185,14 +185,25 @@
 		</script>
 		
 		
+		
+
+		<script>
+		 $(function() {
+			    $(document).on("click", "#blackbtn", function () {
+			      let username = $(this).closest("tr").find("#blackname").text();
+			      $("#modalbody").html(username + "님을 블랙리스트에서 해제 하시겠습니까?");
+			    });
+			  });
+		</script>
+		<!--  
 		<script>
 			$(function(){
-				$("#blackbtn").click(function(){
-					let con = $(this).parents();
-					console.log(con);
-					
-				})
-			})
+			  $("#blackbtn").click(function(){
+			    let username = $(this).closest("tr").find("#blackname").text();
+			    $("#modalbody").html(username);
+			  });
+			});
 		</script>
+		-->
 </body>
 </html>
