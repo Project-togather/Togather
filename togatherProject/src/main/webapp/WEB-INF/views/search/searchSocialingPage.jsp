@@ -92,59 +92,9 @@
 
 }
 
-/* 네비바 영역 */
-nav {
-  position: relative;
-  display: flex;
-  width: 640px;
-  margin: 4em auto;
-}
-nav a {
-  display: block;
-  width: 20%;
-  padding: .75em 0;
-  color: #333;
-  text-decoration: none;
-  text-align: center;
-}
-.nav-underline {
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 20%;
-  height: 2px;
-  background: #333;
-  transition: all .3s ease-in-out;
-}
-nav a:nth-child(1).is-current ~ .nav-underline {
-  left: 0;
-}
-nav a:nth-child(2).is-current ~ .nav-underline {
-  left: 20%;
-}
-nav a:nth-child(3).is-current ~ .nav-underline {
-  left: 40%;
-}
-nav a:nth-child(4).is-current ~ .nav-underline {
-  left: 60%;
-}
-nav a:nth-child(5).is-current ~ .nav-underline {
-  left: 80%;
-}
-nav a:nth-child(1):hover ~ .nav-underline {
-  left: 0;
-}
-nav a:nth-child(2):hover ~ .nav-underline {
-  left: 20%;
-}
-nav a:nth-child(3):hover ~ .nav-underline {
-  left: 40%;
-}
-nav a:nth-child(4):hover ~ .nav-underline {
-  left: 60%;
-}
-nav a:nth-child(5):hover ~ .nav-underline {
-  left: 80%;
+
+.alert {
+	font-size: 30px;
 }
 
 </style>
@@ -161,37 +111,23 @@ nav a:nth-child(5):hover ~ .nav-underline {
 		<div class="wrapper">
 
 		<!-- Hero-->
-
-		<div class="top-bar" style="background-color: white;">
-			<div class="search-box">
-				<input type="text" class="search-txt" name="keyword" placeholder="지금 생각나는 취미를 검색하세요.">
-				<a class="search-btn" href="list.so">
-				<i class="fa fa-search fa-3x" aria-hidden="true" type="submit" style="color: orange;"></i>
-				</a>
-			</div>
-		</div>
+		
+		<!-- 네비바 영역 -->
+		<jsp:include page="../common/searchbar.jsp"/>
 
 		<!-- 네비바 영역 -->
-		<nav>
-			<a href="list.so"><i class="fas fa-duotone fa-bolt">&nbsp;</i>Socialing</a>
-			<a href="#"><i class="fas fa-regular fa-star">&nbsp;</i>Club</a>
-			<a href="#"><i class="fas fa-regular fa-fire">&nbsp;</i>challenge</a>
-			<a href="feed.li"><i class="fas fa-light fa-comment">&nbsp;</i>Feed</a>
-			<a href="#"><i class="fas fa-solid fa-user">&nbsp;</i>Member</a>
-			<div class="nav-underline"></div>
-		</nav>
+		<jsp:include page="../common/searchMenubar.jsp"/>
 		  
 		 
+		<!-- 날짜, 카테고리 모달 영역 -->
+		
+
+
 		<%-- 만일 검색 키워드가 존재한다면 몇개의 글이 검색 되었는지 알려준다. --%>
 		<div class="alert text-center">
         	<strong>${totalRow }</strong> 의 검색 결과 10
     	</div>
     	
-    	
-    	
-    	
-    	<div class="Filter__FilterButtonWrapper-sc-1buujtg-1 gRnEmw"><div class="FilterDate__Wrapper-tqa6fq-0 gymLjt"><div class="FilterOpenButton__Wrapper-sc-91gci-0 NVKNq"><button height="auto" color="initial" font-size="14px" font-weight="500" class="Button-bqxlp0-0 fFBpBV">날짜</button></div></div><div class="FilterOthers__Wrapper-sc-1w6ksuy-0 jJIWoq"><div class="FilterOpenButton__Wrapper-sc-91gci-0 NVKNq"><button height="auto" color="initial" font-size="14px" font-weight="500" class="Button-bqxlp0-0 fFBpBV">필터</button></div></div></div>
-		
 		
 
 		<!-- Hero end-->

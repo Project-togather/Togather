@@ -31,6 +31,25 @@
 		rel="stylesheet"
 		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Include Bootstrap JS and jQuery (optional) -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	  
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+			  integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+	  
+		<!-- 요기에 구글 머티리얼 아이콘 -->
+		<link
+		  href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+		  rel="stylesheet">
+
 <style>
 .top-bar {
 	position: relative;
@@ -96,60 +115,79 @@
 
 }
 
-/* 네비바 영역 */
-nav {
-  position: relative;
-  display: flex;
-  width: 640px;
-  margin: 4em auto;
+/* 피드 디자인 */
+
+.feed {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center; /* 가로 중앙 정렬 */
+  	align-items: center; /* 세로 중앙 정렬 */
+	gap: 0; /* No gap between feed items */
 }
-nav a {
-  display: block;
-  width: 20%;
-  padding: .75em 0;
-  color: #333;
-  text-decoration: none;
-  text-align: center;
+
+.row {
+	display: flex;
+	flex: 1; /* Equal distribution of available space */
 }
-.nav-underline {
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 20%;
-  height: 2px;
-  background: #333;
-  transition: all .3s ease-in-out;
+
+.feed-item {
+	width: 480px; /* 변경: 너비를 480px로 설정 */
+	background-color: white;
+	height: 480px;
+	margin: 0; /* Remove margin */
+	display: flex; /* 내부 요소 중앙 정렬을 위해 내부 요소에도 flex를 적용 */
+	justify-content: center; /* 내부 요소 가로 중앙 정렬 */
+	align-items: center; /* 내부 요소 세로 중앙 정렬 */
 }
-nav a:nth-child(1).is-current ~ .nav-underline {
-  left: 0;
+
+.feed-box {
+
+	padding: 5%;
+
 }
-nav a:nth-child(2).is-current ~ .nav-underline {
-  left: 20%;
+
+@media (max-width: 768px) { /* 미디어 쿼리 화면 폭 조건을 설정 */
+	.feed-item {
+		width: 100%; /* 화면 폭이 768px 이하일 때 feed-item 하나씩 표시 */
+	}
 }
-nav a:nth-child(3).is-current ~ .nav-underline {
-  left: 40%;
+
+
+
+
+.feed_img{
+    object-fit: contain;
+    width: 100%;
 }
-nav a:nth-child(4).is-current ~ .nav-underline {
-  left: 60%;
+
+.feed_content{
+    padding: 10px;
 }
-nav a:nth-child(5).is-current ~ .nav-underline {
-  left: 80%;
+
+
+.feed_like{
+    padding: 0px 10px;
 }
-nav a:nth-child(1):hover ~ .nav-underline {
-  left: 0;
+
+.feed_reply{
+    padding: 0px 10px;
+    display: flex;
+    flex-direction: column;
 }
-nav a:nth-child(2):hover ~ .nav-underline {
-  left: 20%;
+
+
+.feed_txt{
+    font-size: 14px;
 }
-nav a:nth-child(3):hover ~ .nav-underline {
-  left: 40%;
-}
-nav a:nth-child(4):hover ~ .nav-underline {
-  left: 60%;
-}
-nav a:nth-child(5):hover ~ .nav-underline {
-  left: 80%;
-}
+
+.feed_icon{
+    padding: 5px 5px 0px 5px;
+    display: flex;
+    justify-content: space-between;
+}span{
+     padding-right: 5px;
+ }
+</style>
 
 </style>
 	</head>
@@ -176,43 +214,150 @@ nav a:nth-child(5):hover ~ .nav-underline {
 		</div>
 
 		<!-- 네비바 영역 -->
-		<nav>
-			<a href="list.so"><i class="fas fa-duotone fa-bolt">&nbsp;</i>Socialing</a>
-			<a href="#"><i class="fas fa-regular fa-star">&nbsp;</i>Club</a>
-			<a href="#"><i class="fas fa-regular fa-fire">&nbsp;</i>challenge</a>
-			<a href="feed.li"><i class="fas fa-light fa-comment">&nbsp;</i>Feed</a>
-			<a href="#"><i class="fas fa-solid fa-user">&nbsp;</i>Member</a>
-			<div class="nav-underline"></div>
-		</nav>
+		<jsp:include page="../common/searchMenubar.jsp"/>
 
 		<!-- Hero end-->
 		
 		
-			<section class="module">
-				<div class="container">
-			
-					<div class="row blog-masonry">
-
-						<div class="col-md-4 post-item">
-							<!-- Post-->
-							<article class="post">
-								<div class="post-preview"><a href="#"><img src="assets/images/portfolio/10.jpg" alt=""></a></div>
-								<div class="post-wrapper">
-									<div class="post-header">
-										<h5 class="post-title display-1"><a href="blog-single-1.html">sdasdasdasd</a></h5>
-									</div>
-									<div class="post-content">
-										<p>asdasdasdasd</p>
-									</div>
-									<div class="post-more"><a href="#">adasdasdsa</a></div>
+		<!-- 피드 영역 -->
+		<section class="module">
+			<div class="container">
+				<div class="feed">
+					<div class="feed-item" style="border: 1px solid lightgray;">
+						<div class="feed-box">
+							<img class="feed_img " src="https://mblogthumb-phinf.pstatic.net/MjAxNzA2MTFfMjc1/MDAxNDk3MTcyMDgyNzEw.ID5RyHWKvsVEW2NS9EQGyRYX7vUaXr7znQeuTrRRmdIg.gK7MD7VhNJPkV4_dueiWer2y-oH7NAAmEklF-6bbYyQg.JPEG.jejubyeol/%EC%97%AC%EB%A6%84%EC%97%90_%EC%A0%9C%EC%A3%BC%EB%8F%84_%EC%82%AC%EC%A7%84%EC%B0%8D%EA%B8%B0_%EC%A2%8B%EC%9D%80%EA%B3%B3.jpg?type=w800">
+							<div class="feed_icon">
+								<div>
+								  <span class="material-icons-outlined">
+									favorite_border
+								  </span>
+								  <span class="material-icons-outlined">
+									mode_comment
+								  </span>
+								  <span class="material-icons-outlined">
+									send
+								  </span>
 								</div>
-							</article>
-							<!-- Post end-->
-						</div>			
-						
+								<div>
+								  <span class="material-icons-outlined">
+									turned_in_not
+								  </span>
+								</div>
+							  </div>
+							  <div class="feed_like">
+								<p class="feed_txt"> <b>좋아요 10개</b></p>
+							  </div>
+							<div class="feed_content">
+							  <p class="feed_txt">.</p>
+							</div>
+						</div>
+					</div>
+
+
+					<div class="feed-item" style="border: 1px solid lightgray;">
+						<div class="feed-box">
+							<img class="feed_img " src="https://mblogthumb-phinf.pstatic.net/MjAxNzA2MTFfMjc1/MDAxNDk3MTcyMDgyNzEw.ID5RyHWKvsVEW2NS9EQGyRYX7vUaXr7znQeuTrRRmdIg.gK7MD7VhNJPkV4_dueiWer2y-oH7NAAmEklF-6bbYyQg.JPEG.jejubyeol/%EC%97%AC%EB%A6%84%EC%97%90_%EC%A0%9C%EC%A3%BC%EB%8F%84_%EC%82%AC%EC%A7%84%EC%B0%8D%EA%B8%B0_%EC%A2%8B%EC%9D%80%EA%B3%B3.jpg?type=w800">
+							<div class="feed_icon">
+								<div>
+								  <span class="material-icons-outlined">
+									favorite_border
+								  </span>
+								  <span class="material-icons-outlined">
+									mode_comment
+								  </span>
+								  <span class="material-icons-outlined">
+									send
+								  </span>
+								</div>
+								<div>
+								  <span class="material-icons-outlined">
+									turned_in_not
+								  </span>
+								</div>
+							  </div>
+							  <div class="feed_like">
+								<p class="feed_txt"> <b>좋아요 10개</b></p>
+							  </div>
+							<div class="feed_content">
+							  <p class="feed_txt">.</p>
+							</div>
+						</div>
+					</div>
+
+
+
+					<div class="feed-item" style="border: 1px solid lightgray;">
+						<div class="feed-box">
+							<img class="feed_img " src="https://mblogthumb-phinf.pstatic.net/MjAxNzA2MTFfMjc1/MDAxNDk3MTcyMDgyNzEw.ID5RyHWKvsVEW2NS9EQGyRYX7vUaXr7znQeuTrRRmdIg.gK7MD7VhNJPkV4_dueiWer2y-oH7NAAmEklF-6bbYyQg.JPEG.jejubyeol/%EC%97%AC%EB%A6%84%EC%97%90_%EC%A0%9C%EC%A3%BC%EB%8F%84_%EC%82%AC%EC%A7%84%EC%B0%8D%EA%B8%B0_%EC%A2%8B%EC%9D%80%EA%B3%B3.jpg?type=w800">
+							<div class="feed_icon">
+								<div>
+								  <span class="material-icons-outlined">
+									favorite_border
+								  </span>
+								  <span class="material-icons-outlined">
+									mode_comment
+								  </span>
+								  <span class="material-icons-outlined">
+									send
+								  </span>
+								</div>
+								<div>
+								  <span class="material-icons-outlined">
+									turned_in_not
+								  </span>
+								</div>
+							  </div>
+							  <div class="feed_like">
+								<p class="feed_txt"> <b>좋아요 10개</b></p>
+							  </div>
+							<div class="feed_content">
+							  <p class="feed_txt">.</p>
+							</div>
+						</div>
+					</div>
+
+
+
+
+					<div class="feed-item" style="border: 1px solid lightgray;">
+						<div class="feed-box">
+							<img class="feed_img " src="https://mblogthumb-phinf.pstatic.net/MjAxNzA2MTFfMjc1/MDAxNDk3MTcyMDgyNzEw.ID5RyHWKvsVEW2NS9EQGyRYX7vUaXr7znQeuTrRRmdIg.gK7MD7VhNJPkV4_dueiWer2y-oH7NAAmEklF-6bbYyQg.JPEG.jejubyeol/%EC%97%AC%EB%A6%84%EC%97%90_%EC%A0%9C%EC%A3%BC%EB%8F%84_%EC%82%AC%EC%A7%84%EC%B0%8D%EA%B8%B0_%EC%A2%8B%EC%9D%80%EA%B3%B3.jpg?type=w800">
+							<div class="feed_icon">
+								<div>
+								  <span class="material-icons-outlined">
+									favorite_border
+								  </span>
+								  <span class="material-icons-outlined">
+									mode_comment
+								  </span>
+								  <span class="material-icons-outlined">
+									send
+								  </span>
+								</div>
+								<div>
+								  <span class="material-icons-outlined">
+									turned_in_not
+								  </span>
+								</div>
+							  </div>
+							  <div class="feed_like">
+								<p class="feed_txt"> <b>좋아요 10개</b></p>
+							  </div>
+							<div class="feed_content">
+							  <p class="feed_txt">.</p>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- Add more items as needed -->
 				</div>
 			</div>
 		</section>
+		
+		
+
+
 		
 		<script>
 			$(function() {
