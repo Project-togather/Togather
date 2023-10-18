@@ -145,7 +145,7 @@
 					
 					 <c:if test="${ loginMember.memId == 'ADMIN' }">
 					 </c:if> 
-					 	<li><a href="#"><span class="menu-item-span">관리자페이지</span></a></li>
+					 	<li><a href="admin.pa"><span class="menu-item-span">관리자페이지</span></a></li>
 						
                      </ul>
                   </div>

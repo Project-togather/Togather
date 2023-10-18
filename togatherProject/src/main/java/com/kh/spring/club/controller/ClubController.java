@@ -232,4 +232,9 @@ public class ClubController {
 
 	}
 	
+	@RequestMapping
+	public String adminPage() {
+		return "admin/common/adminMain";
+	}
+	
 }
