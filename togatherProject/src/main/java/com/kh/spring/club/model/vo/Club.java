@@ -19,22 +19,22 @@ import lombok.ToString;
 public class Club {
 	
 	private String classNo; // 모임번호
+	private String memNo; // 호스트멤버번호
 	private String classTitle; // 모임제목
 	private String classContent; // 모임내용
 	private String classLocation; // 모임지역
 	private String classDate; // 모임날짜
 	private String classTime; // 모임시간
-	private int classPrice; // 모임비
+	private String classPrice; // 모임비
 	private String classApproval; // 승인제
 	private int minAge; // 최소나이제한
 	private int maxAge; // 최대나이제한
 	private int peopleLimit; // 인원제한
-	private String clType; //  (소셜링, 챌린지)
-	private String clCategory; // in_no 관심사 (취미,)
+	private int clType; //  (소셜링, 챌린지)
+	private int clCategory; // in_no 관심사 (취미,)
 	private String clName; // 카테고리 이름
 	private String curriculum; // 커리큘럼
 	private String status; // 폐쇄상태
-	
 	private int vacancy; // 남은 자리
 	private String nickname; // 닉네임
 	

@@ -50,7 +50,7 @@
 		
 		label img {
 		  height: 100px;
-		  width: 100px;
+		  width: 220px;
 		  transition-duration: 0.2s;
 		  transform-origin: 50% 50%;
 		}
@@ -150,41 +150,41 @@
 											     <ul>
 												  <li>
 												    <input type="checkbox" id="myCheckbox1" name="interest" value="1" />
-												    <label for="myCheckbox1"><img src="assets/images/interest/music.jpg" />ART&Music</label>
+												    <label for="myCheckbox1"><img src="assets/images/interest/newMusic.png" /></label>
 												  </li>
 												  <li>
 												
 												    <input type="checkbox" id="myCheckbox2" name="interest" value="2"/>
-												    <label for="myCheckbox2"><img src="assets/images/interest/activity.jpg" />activity</label>
+												    <label for="myCheckbox2"><img src="assets/images/interest/newActivity.png" /></label>
 												  </li>
 												  <li>
 												
 												    <input type="checkbox" id="myCheckbox3" name="interest" value="3" />
-												    <label for="myCheckbox3"><img src="assets/images/interest/food.jpg" />Food</label>
+												    <label for="myCheckbox3"><img src="assets/images/interest/newFood.png" /></label>
 												  </li>
 												  <li>
 												
 												    <input type="checkbox" id="myCheckbox4" name="interest" value="4" />
-												    <label for="myCheckbox4"><img src="assets/images/interest/hobby.jpg" />Hobby</label>
+												    <label for="myCheckbox4"><img src="assets/images/interest/newHobby.png" /></label>
 												  </li>
 												  <li>
 												
 												    <input type="checkbox" id="myCheckbox5" name="interest" value="5"/>
-												    <label for="myCheckbox5"><img src="assets/images/interest/party.jpg" />Party</label>
+												    <label for="myCheckbox5"><img src="assets/images/interest/newParty.png" /></label>
 												  </li>
 												  <li>
 												
 												    <input type="checkbox" id="myCheckbox6" name="interest" value="6"/>
-												    <label for="myCheckbox6"><img src="assets/images/interest/meet.jpg" />Meet</label>
+												    <label for="myCheckbox6"><img src="assets/images/interest/newDate.png" /></label>
 												  </li>
 												  <li>
 												
 												    <input type="checkbox" id="myCheckbox7" name="interest" value="7"/>
-												    <label for="myCheckbox7"><img src="assets/images/interest/invest.jpg" />Investment</label>
+												    <label for="myCheckbox7"><img src="assets/images/interest/newInvestment.png" /></label>
 												  </li>
 												  <li>
 												    <input type="checkbox" id="myCheckbox8" name="interest" value="8"/>
-												    <label for="myCheckbox8"><img src="assets/images/interest/language.jpg" />Language</label>
+												    <label for="myCheckbox8"><img src="assets/images/interest/newLanguage.png" /></label>
 												  </li>
 												</ul>
 											</div>

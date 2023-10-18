@@ -4,6 +4,7 @@
 
 	<resultMap type="Club" id="resultclub">
 		<result column="c_no" property="classNo"/>
+		<result column="mem_no" property="memNo"/>
 		<result column="c_title" property="classTitle"/>
 		<result column="c_content" property="classContent"/>
 		<result column="c_location" property="classLocation"/>
@@ -33,6 +34,7 @@
 	<select id="selectClassList" resultMap="resultclub">
         select 
 		       c_no
+		     , mem_no
 		     , c_title
 		     , c_content
 		     , c_location
@@ -43,7 +45,6 @@
 		     , minage
              , maxage
 		     , people_limit
-             , current_people
              , cl_type
 		     , cl_category
 		     , curriculum
@@ -58,6 +59,7 @@
 	<select id="selectSocialList" resultMap="resultclub">
         select 
 		       c_no
+		     , mem_no
 		     , c_title
 		     , c_content
 		     , c_location
@@ -80,6 +82,84 @@
 		   and cl_type = 1
 	</select>
 	
+		<select id="selectClubList" resultMap="resultclub">
+        select 
+		       c_no
+		     , mem_no
+		     , c_title
+		     , c_content
+		     , c_location
+		     , c_date
+             , c_time
+		     , c_price
+		     , c_approval
+		     , minage
+             , maxage
+		     , people_limit
+             , cl_type
+		     , cl_category
+		     , curriculum
+		     , origin_name
+		     , update_name
+		     , file_path
+		  from class
+		  join attachment on (c_no = ref_fno)
+		 where status = 'Y'
+		   and cl_type = 2
+	</select>
+	
+		<select id="selectChallengeList" resultMap="resultclub">
+        select 
+		       c_no
+		     , mem_no
+		     , c_title
+		     , c_content
+		     , c_location
+		     , c_date
+             , c_time
+		     , c_price
+		     , c_approval
+		     , minage
+             , maxage
+		     , people_limit
+             , cl_type
+		     , cl_category
+		     , curriculum
+		     , origin_name
+		     , update_name
+		     , file_path
+		  from class
+		  join attachment on (c_no = ref_fno)
+		 where status = 'Y'
+		   and cl_type = 3
+	</select>
+	
+		<select id="selectOneDayList" resultMap="resultclub">
+        select 
+		       c_no
+		     , mem_no
+		     , c_title
+		     , c_content
+		     , c_location
+		     , c_date
+             , c_time
+		     , c_price
+		     , c_approval
+		     , minage
+             , maxage
+		     , people_limit
+             , cl_type
+		     , cl_category
+		     , curriculum
+		     , origin_name
+		     , update_name
+		     , file_path
+		  from class
+		  join attachment on (c_no = ref_fno)
+		 where status = 'Y'
+		   and cl_type = 4
+	</select>
+	
 	<select id="selectClassDetail" resultMap="resultclub">
 		select
 		       c_no
@@ -89,7 +169,7 @@
 		     , c_location
 		     , to_char(to_date(c_date), 'yyyy-mm-dd dy') c_date
 		     , c_time
-		     , c_price
+		     , to_char(c_price, 'FM999,999') c_price
 		     , c_approval
 		     , minage
 		     , maxage
@@ -110,6 +190,82 @@
 		   and status = 'Y'
 	</select>
 	
+
+	<insert id="insertClass">
+		insert 
+		  into Class	
+			 (
+				c_no
+			  , mem_no
+			  , c_title
+			  , c_content
+			  , c_location
+			  , c_date
+			  , c_time
+			  , c_price
+			  , c_approval
+			  , minage
+			  , maxage
+			  , people_limit
+			  , cl_type
+			  , cl_category
+			  , curriculum
+			 )
+		values
+			 (
+			    'C'||seq_cno.nextval
+			  , #{memNo}
+			  , #{classTitle}
+			  , #{classContent}
+			  , #{classLocation}
+			  , #{classDate}
+			  , #{classTime}
+			  , #{classPrice}
+			  , #{classApproval}
+			  , #{minAge}
+			  , #{maxAge}
+			  , #{peopleLimit}
+			  , #{clType}
+			  , #{clCategory}
+			  , #{curriculum}
+			 )
+	</insert>
+	
+	<insert id="insertImg">
+		insert 
+		  into attachment	
+			 (
+			    att_no
+			   ,ref_fno
+			   ,origin_name
+			   ,update_name
+			   ,file_path
+			   ,enroll_date
+			   ,category
+			 )
+		values
+			 (
+			    'A'||seq_ano.nextval
+			   ,'C'||seq_cno.currval
+			   , #{originName}
+			   , #{updateName}
+			   , #{filePath}
+			   , sysdate
+			   , #{category}
+			 )
+	</insert>
+	
+	<insert id="insertMyClass">
+		insert
+		  into my_class
+		values
+		     (
+		      'C'||seq_cno.currval
+		     , #{memNo} 
+		     , #{clType} 
+		     )
+	</insert>
+
 		<select id="selectSocialingListCount" resultType="_int">
 		select
 		count(*)
@@ -127,4 +283,20 @@
 	    where status = 'Y'
 	    order by c_no desc
 	</select>
+
+	<insert id="insertReply">
+		insert
+		  into reply
+		  values
+		  (
+		  	'RE'||seq_reno.nextval
+		  , #{rvContent}
+		  , sysdate
+		  , 'Y'
+		  , #{refFno}	
+		  , #{memNo}
+		  )
+	</insert>
+	
+
 </mapper>

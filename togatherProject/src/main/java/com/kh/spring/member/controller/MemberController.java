@@ -3,6 +3,7 @@ package com.kh.spring.member.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletRequest;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.attachment.model.vo.Attachment;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.interest.model.vo.Interest;
 import com.kh.spring.member.model.service.MemberServiceImpl;
 import com.kh.spring.member.model.vo.Member;
@@ -47,6 +49,7 @@ public class MemberController {
     	 Attachment pImg = mService.getProfileImg(loginMember.getMemNo());
     	 //System.out.println("컨트롤러에서 받아오자 " + pImg);
          //System.out.println("세션에 저장");
+
          session.setAttribute("loginMember", loginMember);
          session.setAttribute("pImg", pImg);
          session.setAttribute("alertMsg", "어서오십시오");
@@ -64,12 +67,6 @@ public class MemberController {
    public String logoutMember(HttpSession session) {
       session.invalidate();
       return "redirect:/";
-   }
-   
-   //마이페이지이동
-   @RequestMapping(value = "mypage.me")
-   public String myPage() {
-      return "member/myPage";
    }
    
    //회원가입폼 이동
@@ -133,9 +130,9 @@ public class MemberController {
    }
    
    
-	public String[] saveFile(MultipartFile upfile, HttpSession session) { //리팩토링 작업이라고 한다.
+	public String[] saveFile(MultipartFile upfile, HttpSession session) { //리팩토링1
 		String originName = upfile.getOriginalFilename();
-		//"20231004154607"
+		
 		String currentTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
 		int ranNum = (int)(Math.random() * 90000 + 10000);//5자리 랜덤값
 		String ext =originName.substring(originName.lastIndexOf("."));
@@ -171,7 +168,6 @@ public class MemberController {
       public String idCheck(String checkId) {
         
          int result = mService.idCheck(checkId);
-         checkId.toLowerCase();
  
          if(result > 0) {
             return "NNNNN";
@@ -179,12 +175,12 @@ public class MemberController {
             return "NNNNY";
          }      
       }
-   
-   // 내모임 페이지 이동
-   @RequestMapping(value = "myclass.pa")
-   public String myClassPage() {
-      return "member/myClassPage";
-   }
+
+//   // 내모임 페이지 이동
+//   @RequestMapping(value = "myclass.pa")
+//   public String myClassPage() {
+//      return "member/myClassPage";
+//   }
    
    
    
@@ -200,8 +196,6 @@ public class MemberController {
 	   for(int i = 0 ; i < arr.length ; i ++) {
 		   interArr[i] = Integer.parseInt(arr[i]);
 	   }
-	   
-	   
 	   
 	   Member m = new Member();
 	   m.setMemNo(memNo);
@@ -229,6 +223,55 @@ public class MemberController {
 	   }
    }
    
-
    
+   
+   
+   
+   //마이페이지 관련 으어어어어어어어어어
+   //마이페이지이동
+   @RequestMapping(value = "mypage.me")
+   public String myPage(HttpSession session , HttpServletRequest request ) {
+	  Member loginMember = (Member)session.getAttribute("loginMember");
+	  String memNo = loginMember.getMemNo();
+	  //관심사 가져오기
+	  ArrayList<MemInterest> mi = mService.getMemInterest(memNo);
+	 
+	  String [] interArr = new String [mi.size()];
+	   for (int i = 0 ; i < mi.size() ; i ++) {
+		 if(mi.get(i).getInNo() == 1) { 
+			 interArr[i] = "Music & Art" + "🎨" ;
+		 }else if (mi.get(i).getInNo() == 2) {
+			 interArr[i] = "Activity 🥅";
+		 }else if (mi.get(i).getInNo() == 3) {
+			 interArr[i] = "Food & Drink 🍻";
+		 }else if (mi.get(i).getInNo() == 4) { 
+			 interArr[i] = "Hooby 📸";
+		 }else if (mi.get(i).getInNo() == 5) {
+			 interArr[i] = "Party 🎉";
+		 }else if (mi.get(i).getInNo() == 6) {
+			 interArr[i] = "Date 💄";
+		 }else if (mi.get(i).getInNo() == 7) {
+			 interArr[i] = "InvestMent 💸";
+		 }else {
+			 interArr[i] = "Foreign Language 💬 ";
+		 }
+	  }
+	  //문화예술 1 액티비티2 푸드드링크3 취미4 파티소개팅5 동네친목6 제테크7 외국어8
+	  request.setAttribute("interArr",interArr);
+      return "member/myPage";
+   }
+   
+   
+   //피드 작성 이동폼
+   @RequestMapping(value = "feedEnrollForm.me")
+   public String feedEnrollForm() {
+	   return "member/feedEnrollForm";
+   }
+   //피드작성
+   @RequestMapping(value = "insertFeed.me")
+   public void insertFeed(MultipartFile[] upfile , HttpServletRequest request , Feed f ,HttpSession session) {
+	   System.out.println(f);
+	   System.out.println(upfile);
+   }
+  
 }

@@ -87,9 +87,9 @@
 								<h4>모임 등록하기</h4>
 							</div>
 							<div class="up-form">
-								<form action="enroll.cl" method="post">
+								<form action="enroll.cl" method="post" enctype="multipart/form-data">
 									<div class="form-group">
-										<input type="hidden" id="hidden">
+										<input type="hidden" id="hidden" name="memNo" value="${ loginMember.memNo }">
 										<h5>모임유형을 선택해주세요!</h5>
 										<select name="clType">
 											<option value="1">소셜링</option>
@@ -98,6 +98,7 @@
 											<option value="4">원데이</option>
 										</select>
 									</div>
+									<!-- 
 									<div class="form-group">
 										<div class="form-control" id="socialing" style="color: white;">소셜링</div>
 									</div>
@@ -107,6 +108,8 @@
 									<div class="form-group">
 										<div class="form-control" id="challenge" style="color: white;">챌린지</div>
 									</div>
+									 -->
+									 
 									<hr>
 									<h5>(소셜링, 클럽, 챌린지)주제를 선택해 볼까요?</h5>
 									<div class="form-group">
@@ -125,7 +128,7 @@
 									
 									<div id="map" style="width:500px;height:400px;"></div>
 									<div>
-					                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15"> 
+					                    키워드 : <input type="text" value="이태원 맛집" id="keyword" size="15" name="classLocation"> 
 					                    <button type="submit" onclick="searchPlaces(); return false;">검색하기</button> 
 									</div>
 															
@@ -415,7 +418,7 @@
 									<hr>
 									<h5>(소셜링, 클럽, 챌린지)정보를 입력할 차례에요!</h5>
 									<div class="form-group">
-										<input class="form-control" type="text" name="cTitle" placeholder="소셜링 제목을 작성해주세요!" style="color:white"> <!-- 글자수체크 추가 -->
+										<input class="form-control" type="text" name="classTitle" placeholder="소셜링 제목을 작성해주세요!" style="color:white"> <!-- 글자수체크 추가 -->
 									</div>
 									<table>
 										<tr>
@@ -427,27 +430,27 @@
 										</tr>
 									</table>
 									<div style="display:none">
-										<input type="file" id="file1" name="file1" onchange="loadImg(this, 1);">
-										<input type="file" id="file2" name="file2" onchange="loadImg(this, 2);">
-										<input type="file" id="file3" name="file3" onchange="loadImg(this, 3);">
-										<input type="file" id="file4" name="file4" onchange="loadImg(this, 4);">
-										<input type="file" id="file5" name="file5" onchange="loadImg(this, 5);">
+										<input type="file" id="file1" name="upfile" onchange="loadImg(this, 1);">
+										<input type="file" id="file2" name="upfile" onchange="loadImg(this, 2);">
+										<input type="file" id="file3" name="upfile" onchange="loadImg(this, 3);">
+										<input type="file" id="file4" name="upfile" onchange="loadImg(this, 4);">
+										<input type="file" id="file5" name="upfile" onchange="loadImg(this, 5);">
 									</div>
 									<br>
 									
 									<div class="form-group">
-										<textarea id="summernote" name="cContent" style="color:black"></textarea>
+										<textarea id="summernote" name="classContent" style="color:black"></textarea>
 									</div>
 
 									<h5>언제 만날까요?</h5>
 									<div class="form-group">
-										<input type="date" name="cDate">
-										<input type="time" name="cTime">
+										<input type="date" name="classDate">
+										<input type="time" name="classTime">
 									</div>
 									
 									
 									<div class="form-group">
-										<select name="cApproval">
+										<select name="classApproval">
 											<option value="Y">승인제</option>
 											<option value="N">선착순</option>
 										</select>
@@ -459,7 +462,7 @@
 									</div>
 									
 									<div class="form-group">
-										<input class="form-control" type="number" name="cPrice" placeholder="참가비가 없다면 0을 입력해주세요." style="color:white">
+										<input class="form-control" type="number" name="classPrice" placeholder="참가비가 없다면 0을 입력해주세요." style="color:white">
 									</div>
 									<div class="form-group">
 										<input class="form-control" type="number" name="peopleLimit" placeholder="참가 인원수를 선택해주세요." style="color:white">
@@ -512,6 +515,7 @@
 									<input type="submit" value="모임등록">
 								</form>		
 							</div>
+							
 							<div class="up-help">
 								<p>By clicking "Sign Up", you agree to our <br> <a href="#">software services agreement</a>.</p>
 							</div>

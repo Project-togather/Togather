@@ -6,8 +6,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.dao.ClubDao;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.reply.model.vo.Reply;
 
 @Service
 public class ClubServiceImpl implements ClubService {
@@ -29,103 +31,18 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public int increaseCount(int cNo) {
-		return 0;
-	}
-
-	@Override
-	public Club selectSocial(int cNo) {
-		return null;
-	}
-
-	@Override
-	public int insertSocial(Club c) {
-		return 0;
-	}
-
-	@Override
-	public int updateSocial(Club c) {
-		return 0;
-	}
-
-	@Override
-	public int deleteSocial(int cNo) {
-		return 0;
-	}
-
-	@Override
 	public ArrayList<Club> selectClubList() {
-		return null;
-	}
-
-	@Override
-	public Club selectclub(int cNo) {
-		return null;
-	}
-
-	@Override
-	public int insertclub(Club c) {
-		return 0;
-	}
-
-	@Override
-	public int updateclub(Club c) {
-		return 0;
-	}
-
-	@Override
-	public int deleteclub(int cNo) {
-		return 0;
+		return cDao.selectClubList(sqlSession);
 	}
 
 	@Override
 	public ArrayList<Club> selectChallengeList() {
-		return null;
+		return cDao.selectChallengeList(sqlSession);
 	}
-
-	@Override
-	public Club selectchallenge(int cNo) {
-		return null;
-	}
-
-	@Override
-	public int insertchallenge(Club c) {
-		return 0;
-	}
-
-	@Override
-	public int updatechallenge(Club c) {
-		return 0;
-	}
-
-	@Override
-	public int deletechallenge(int cNo) {
-		return 0;
-	}
-
+	
 	@Override
 	public ArrayList<Club> selectOneDayList() {
-		return null;
-	}
-
-	@Override
-	public Club selectOneDay(int cNo) {
-		return null;
-	}
-
-	@Override
-	public int insertOneDay(Club c) {
-		return 0;
-	}
-
-	@Override
-	public int updateOneDay(Club c) {
-		return 0;
-	}
-
-	@Override
-	public int deleteOneDay(int cNo) {
-		return 0;
+		return cDao.selectOneDayList(sqlSession);
 	}
 
 	@Override
@@ -136,6 +53,26 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public Club selectClassDetail(int classNo) {
 		return cDao.selectClassDetail(classNo, sqlSession);
+	}
+
+	@Override
+	public int insertClass(Club c) {
+		return cDao.insertClass(c, sqlSession);
+	}
+
+	@Override
+	public int insertImg(Attachment at) {
+		return cDao.insertImg(at, sqlSession);
+	}
+
+	@Override
+	public int insertMyClass(Club c) {
+		return cDao.insertMyClass(c, sqlSession);
+	}
+
+	@Override
+	public int insertReply(Reply r) {
+		return cDao.insertReply(r, sqlSession);
 	}
 
 }
