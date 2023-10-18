@@ -31,6 +31,17 @@
 		<result column="file_path" property="filePath"/>
 	</resultMap>
 	
+	<resultMap type="Reply" id="replyResult">
+		<result column="R_NO" property="rvNo"/>
+		<result column="MR_NO" property="mrNo"/>
+		<result column="CR_NO" property="crNo"/>
+		<result column="R_CONTENT" property="rvContent"/>
+		<result column="R_DATE" property="rvDate"/>
+		<result column="R_STATUS" property="rvStatus"/>
+		<result column="REF_FNO" property="refFno"/>
+		<result column="MEM_NO" property="memNo"/>
+	</resultMap>
+	
 	<select id="selectClassList" resultMap="resultclub">
         select 
 		       c_no
@@ -287,6 +298,14 @@
 	<insert id="insertReply">
 		insert
 		  into reply
+		  (
+		    r_no
+		  , r_content
+		  , r_date
+		  , r_status
+		  , ref_fno
+		  , mem_no
+		  )
 		  values
 		  (
 		  	'RE'||seq_reno.nextval
@@ -298,5 +317,42 @@
 		  )
 	</insert>
 	
-
+	<select id="selectReplyList" resultMap="replyResult">
+		select 
+		       r_no
+		     , mr_no
+		     , cr_no
+		     , r_content
+		     , to_char(to_date(r_date),'yy/mm/dd') r_date
+		     , ref_fno
+		     , mem_no
+		     , img
+		     , nickname
+		  from reply
+		  join member using (mem_no)
+		 where r_status = 'Y'
+		   and ref_fno = #{classNo}
+		 order
+   		    by to_number(substr(r_no,3)) desc
+	</select>
+	
+	<select id="selectCreplyList" resultMap="replyResult">
+		select 
+		       r_no
+		     , mr_no
+		     , cr_no
+		     , r_content
+		     , to_char(to_date(r_date),'yy/mm/dd') r_date
+		     , ref_fno
+		     , mem_no
+		     , img
+		     , nickname
+		  from reply
+		  join member using (mem_no)
+		 where r_status = 'Y'
+		   and ref_fno = #{classNo}
+		   and cr_no is not null
+		 order
+   		    by to_number(substr(cr_no,3))
+	</select>
 </mapper>

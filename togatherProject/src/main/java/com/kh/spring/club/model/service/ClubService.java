@@ -37,5 +37,11 @@ public interface ClubService {
 	int insertImg(Attachment at);
 	
 	int insertMyClass(Club c);
+	
+	// 댓글(모임) 조회
+	ArrayList<Reply> selectReplyList(String classNo);
+	
+	// 댓글(모임)의 답글 조회
+	ArrayList<Reply> selectCreplyList(String classNo);
 
 }

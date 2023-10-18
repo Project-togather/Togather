@@ -491,32 +491,173 @@
 			<section class="module bg-gray" id="popular">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-6 m-auto text-center">
-							<p class="subtitle">Tasty and crunchy</p>
-							<h1 class="display-1">댓글 목록</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
+						<div class="col-md-7 m-auto text-center">
+							<p class="subtitle">Reply</p>
+							<h1 class="display-1">댓글</h1>
+							<p class="lead">호스트에게 궁금한 점 또는 하고 싶은 말을 자유롭게 남겨보세요! <br/> </p>
 							<div class="divider-border"></div>
 						</div>
 					</div>
+					
 					<div class="row">
 						<div class="col-md-12">
-							<div class="space" data-mY="60px"></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
 							<div class="menu-simple">
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/1.jpg" alt=""></div>
-									<div class="menu-simple-item-inner" style="padding:0px;">
-										<h6>
-											<input type="text" name="reply" id="reply" class="form-control" placeholder="댓글달기" style="background-color: #f4f1ea; width:700px;">
-											<button class="btn btn-gray" id="enroll-btn" onclick="addReply();">댓글 등록</button>
-										</h6>
-									</div>
-								</div>
+								<c:choose>
+									<c:when test="${ not empty loginMember }">
+										<div class="menu-simple-item">
+											<div class="menu-simple-item-img"><img src="${ loginMember.img }" alt=""></div>
+											<div class="menu-simple-item-inner" style="padding:0px;">
+												<h6>
+													<input type="text" name="reply" id="reply" class="form-control" placeholder="댓글달기" style="background-color: #f4f1ea; width:700px;">
+													<button class="btn btn-gray" id="enroll-btn" onclick="addReply();">댓글 등록</button>
+												</h6>
+											</div>
+										</div>
+									</c:when>
+									<c:otherwise>
+									댓글작성을 하시려면 로그인해주세요.<br><br>
+									</c:otherwise>
+								</c:choose>
+							</div>
 								
 								<script>
+									$(()=>{
+										selectReplyList();
+										selectCreplyList();
+									})
+									
+								
+									function selectReplyList(){
+										$.ajax({
+											url:"rlist.cl",
+											data:{cno:'${c.classNo}'},
+											success:rlist=>{
+												let reply = "";
+												let creply = "";
+												
+												for(var i in rlist){
+													
+													let rvNo = rlist[i].rvNo;
+													
+													if(rlist[i].crNo == null){
+														
+														reply += '<div class="menu-simple-item">'
+														       + '<div class="menu-simple-item-img"><img src="' + rlist[i].img + '" alt=""></div>'
+														       + '<div class="menu-simple-item-inner replybox">'
+														       + '<h6><span>' + rlist[i].nickname + '</span></h6>'
+														       + '<p>' + rlist[i].rvContent + '</p>'
+														       + '<p>' + rlist[i].rvDate + '<span class="addrere" id="rreply' + rvNo + '">답글달기</span>' + '</p>'
+														       + '<div id="'+ rvNo + '" class="' + rvNo + '"></div>'
+														       + '<h6 class="rereply' + rvNo + '"style="display:none;">'
+														       + '<input type="text" name="reply" id="reply" class="form-control rereply' + rvNo + '"placeholder="댓글달기" style="background-color: #f4f1ea; width:700px;">'
+														       + '<button class="btn btn-gray" id="enroll-btn" onclick="addReReply();">댓글등록</button>'
+														       + '</h6>'
+														       + '</div>'
+														       + '</div>';
+													}    
+												}
+			
+												
+												$(".replylist").append(reply);
+												
+												
+												//$("#creplylist").html(creply);
+												
+											}, error:()=>{
+												console.log("댓글 조회 ajax 실패")
+											}
+										})
+									}
+									
+									
+									function selectCreplyList(){
+										$.ajax({
+											url:"rlist.cl",
+											data:{cno:'${c.classNo}'},
+											success:rlist=>{
+												let reply = "";
+												let creply = "";
+												
+												for(var i in rlist){
+													
+													if(rlist[i].crNo == null){
+														
+														reply += '<div class="menu-simple-item">'
+														       + '<div class="menu-simple-item-img"><img src="' + rlist[i].img + '" alt=""></div>'
+														       + '<div class="menu-simple-item-inner replybox">'
+														       + '<h6><span>' + rlist[i].nickname + '</span></h6>'
+														       + '<p>' + rlist[i].rvContent + '</p>'
+														       + '<p>' + rlist[i].rvDate + '<span id="rreply">답글달기</span>' + '</p>'
+														       + '<div id="' + rlist[i].rvNo + '" class="' + rlist[i].rvNo + '"></div>'
+														       + '</div>'
+														       + '</div>';
+													}    
+													
+													creply = "";
+													
+													for(var j in rlist){
+														
+														var rvNo = rlist[i].rvNo;
+														
+														
+														if(rlist[j].mrNo == rvNo){														
+															
+															creply += '<div class="menu-simple-item">'
+															       + '<div class="menu-simple-item-img"><img src="' + rlist[j].img + '" alt=""></div>'
+															       + '<div class="menu-simple-item-inner">'
+															       + '<h6><span>' + rlist[j].nickname + '</span></h6>'
+															       + '<p>' + rlist[j].rvContent + '</p>'
+															       + '<p>' + rlist[j].rvDate + '<span id="rreply"></span>' + '</p>'
+															       + '</div>'
+															       + '</div>';
+
+													        $('#' + rvNo).html(creply);
+
+														}
+														
+													}
+													
+												}
+												
+												//$("#creplylist").html(creply);
+												
+											}, error:()=>{
+												console.log("댓글 조회 ajax 실패")
+											}
+										})
+												
+												/*
+												console.log(rlist);
+												let value = "";
+												for(var i in rlist){
+													
+													value = '<div class="menu-simple-item">'
+													       + '<div class="menu-simple-item-img"><img src="' + rlist[i].img + '" alt=""></div>'
+													       + '<div class="menu-simple-item-inner">'
+													       + '<h6><span>' + rlist[i].nickname + '</span></h6>'
+													       + '<p>' + rlist[i].rvContent + '</p>'
+													       + '<p>' + rlist[i].rvDate + '<span id="rreply">답글달기</span>' + '</p>'
+													       + '</div>'
+													       + '</div>';
+													
+											       	
+													       
+													console.log($(".replybox").children().last().attr("id"));
+													
+													$("#RE4").html(value);
+												       
+												}
+												
+												$("#creplylist").html(value);
+											}, error:()=>{
+												console.log("댓글 조회 ajax 실패")
+											}
+										})
+										*/
+									}
+									
+								
+								
 									function addReply(){
 										if($("#reply").val().trim().length != 0){
 											$.ajax({
@@ -527,88 +668,31 @@
 													memNo:'${loginMember.memNo}',												
 													},success:result=>{
 													if(result == "success"){
-														console.log(result)
-														//selectReplyList();
+														$("#reply").val("");
+														selectReplyList();
 													}
 												}, error:()=>{
 													console.log("실패");
 												}
 											})
 										}
-									}										
+									}							
+
+										
+										
+										$(document).on("click", ".replybox>p>span", function(){
+											
+											let id = $(this).attr("id");
+											let rvNo = id.substring(6);
+											
+											$(".rereply"+rvNo).css("display","block");
+										})										
+									
 								</script>
-								
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/2.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Lemon and Garlic Green Beans</span></h6>
-										<p>Pork meat, Sauces, Potato</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/3.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>American Brunch Combo Menu</span></h6>
-										<p>Bacon, Rice, Vegetables</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/4.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Smoked Paprika Hummus</span></h6>
-										<p>Shrimp, Vegetables, Sauce</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/5.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Italian Source Mushroom</span></h6>
-										<p>Steak, Spices, Sauces</p>
-									</div>
+								<div class="menu-simple replylist">
 								</div>
 							</div>
 						</div>
-						<!-- 
-						<div class="col-md-6">
-							<div class="menu-simple">
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/6.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Lemon and Garlic Green Beans</span></h6>
-										<p>Pork meat, Sauces, Potato</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/1.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>American Brunch Combo Menu</span></h6>
-										<p>Bacon, Rice, Vegetables</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/2.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Smoked Paprika Hummus</span></h6>
-										<p>Shrimp, Vegetables, Sauce</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/3.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Italian Source Mushroom</span></h6>
-										<p>Steak, Spices, Sauces</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/4.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Wild Mushroom Bucatini with Kale</span></h6>
-										<p>Cheese, Garlic, Potato, Pork</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					 -->
 					</div>
 					<div class="row">
 						<div class="col-md-12">

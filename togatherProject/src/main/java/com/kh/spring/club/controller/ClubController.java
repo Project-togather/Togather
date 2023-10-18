@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
@@ -157,6 +158,7 @@ public class ClubController {
 	/**
 	 * 내 즐겨찾기 조회
 	 */
+	@RequestMapping
 	public void selectMyList() {
 		ArrayList<Club> list = cService.selectMyClassList();
 	}
@@ -230,6 +232,28 @@ public class ClubController {
 		int result = cService.insertReply(r);
 		return result>0 ? "success" : "fail";
 
+	}
+	
+<<<<<<< HEAD
+	@RequestMapping
+	public String adminPage() {
+		return "admin/common/adminMain";
+=======
+	@ResponseBody
+	@RequestMapping(value="rlist.cl", produces = "application/json; charset=UTF-8")
+	public String selectReplyList(String cno){
+		ArrayList<Reply> rlist = cService.selectReplyList(cno);
+		return new Gson().toJson(rlist);
+
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="crlist.cl", produces = "application/json; charset=UTF-8")
+	public String selectCreplyList(String cno){
+		ArrayList<Reply> crlist = cService.selectCreplyList(cno);
+		return new Gson().toJson(crlist);
+
+>>>>>>> selectReply1
 	}
 	
 	@RequestMapping
