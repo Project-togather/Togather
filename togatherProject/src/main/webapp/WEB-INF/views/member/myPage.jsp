@@ -64,6 +64,8 @@
 			</section>
 			<!-- Hero end-->
 			
+			
+			
 			<div class="module">
 				<div class="container">
 					<div class="gallery-item">
@@ -74,7 +76,10 @@
 				<table border="0" style="width: 800px; margin-top: 100px;" align="center">
 					<thead>
 					<tr>
-						<th>${loginMember.memName} 님</th>
+						<th>${loginMember.memName} 님
+							
+						</th>
+							
 						<td colspan="2"><a href="">setMyProfile</a></td>	
 					</tr>		
 					</thead>
