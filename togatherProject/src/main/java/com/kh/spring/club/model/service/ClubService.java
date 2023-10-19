@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
 
 public interface ClubService {
@@ -31,6 +33,9 @@ public interface ClubService {
 	
 	// 댓글(모임) 등록
 	int insertReply(Reply r);
+	
+	// 댓글의 답글(모임) 등록
+	int insertReReply(Reply r);
 
 	int insertClass(Club c);
 	
@@ -44,4 +49,12 @@ public interface ClubService {
 	// 댓글(모임)의 답글 조회
 	ArrayList<Reply> selectCreplyList(String classNo);
 
+	// 모임 가입 상태 확인
+	int checkStatus(MyClass c);
+	
+	// 모임 가입 타입 확인
+	int checkType(MyClass c); 
+	
+	// 모임 가입
+	int enterClass(MyClass c);
 }

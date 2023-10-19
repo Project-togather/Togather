@@ -31,7 +31,7 @@
 							<div class="text-center">
 								<h6 class="text-uppercase"><span class="vacancy" id="class_info">&nbsp;잔여 ${ c.vacancy } 자리&nbsp;</span><span id="class_info">&nbsp;${ c.clName }&nbsp;</span></h6>
 								<h1 class="display-1">${ c.classTitle }</h1>
-								<div class="space" data-mY="40px"></div><a class="btn btn-white" href="#">모임 참가하기</a>
+								<div class="space" data-mY="40px"></div><a class="btn btn-white enter-btn" onclick="enterClass();" style="color:black;">모임 참가하기</a>
 							</div>
 						</div>
 					</div>
@@ -133,7 +133,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12 text-center">
-							<div class="space" data-mY="20px"></div><a class="btn btn-white" href="#">모임 참가하기</a>
+							<div class="space" data-mY="20px"></div><a class="btn btn-white enter-btn" onclick="enterClass();">모임 참가하기</a>
 						</div>
 					</div>
 				</div>
@@ -402,6 +402,77 @@
 						</div>
 					</div>
 					<div class="row">
+						<div class="col-md-3">
+							<div class="pie-chart">
+								<div class="chart" data-percent="10"><span class="chart-text"><span><i class="icon-telescope"></i></span></span></div>
+								<div class="chart-title"><span>${ c.vacancy } / ${ c.peopleLimit }명 · ${ c.classApproval }</span></div>
+								<div class="chart-content">
+									<p>
+										현재 ${ c.peopleLimit }명 중 ${ c.vacancy }가입되어 있으며 <br>
+										<c:choose>
+											<c:when test="${ c.classApproval eq '승인제' }">
+												호스트의 승인에 의해 가입되는 승인제 입니다.
+											</c:when>
+											<c:otherwise>
+												먼저 신청한 순으로 가입되는 선착순 입니다.
+											</c:otherwise>
+										</c:choose>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="pie-chart">
+								<div class="chart" data-percent="100"><span class="chart-text"><span><i class="icon-circle-compass"></i></span></span></div>
+								<div class="chart-title"><span>${ c.classPrice }원</span></div>
+								<div class="chart-content">
+									<p>
+										운영비 - 콘텐츠 제작, 호스트 수고비 <br>
+										모임비 - 대관료, 재료비 <br>
+										기타 - 플랫폼 수수료 등을 합산하여 호스트가 지정한 금액입니다.
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="pie-chart">
+								<div class="chart" data-percent="70"><span class="chart-text"><span><i class="icon-strategy"></i></span></span></div>
+								<div class="chart-title"><span>${ c.classDate } &nbsp; ${ c.classTime }</span></div>
+								<div class="chart-content">
+									<p>
+										해당 시간에 잊지말고 참석해 주세요!
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="pie-chart">
+								<div class="chart" data-percent="90"><span class="chart-text"><span><i class="icon-circle-compass"></i></span></span></div>
+								<div class="chart-title"><span>${ c.classLocation }</span></div>
+								<div class="chart-content">
+									<p>
+										<a href="">상세 위치</a>를 눌러주세요!
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="space" data-mY="60px"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 m-auto">
+							<p class="text-center ti-alert">
+								개인 계좌 입금 유도, 개인 정보 요구, 저희 멤버가 아닌 외부 인원 초대 등 
+								가이드를 위반하는 경우 저희에게 <a href="#신고 url">신고</a>해 주세요!								
+							</p>
+						</div>
+					</div>
+					
+					<!--
+					<div class="row">
 						<div class="col-md-12">
 							<div class="space" data-mY="60px"></div>
 						</div>
@@ -426,6 +497,7 @@
 										</c:choose>
 									</p>
 								</div>
+								
 							</div>
 						</div>
 						<div class="col-md-3">
@@ -483,6 +555,7 @@
 							</p>
 						</div>
 					</div>
+					-->
 				</div>
 			</section>
 			<!-- Services End-->
@@ -523,17 +596,15 @@
 								<script>
 									$(()=>{
 										selectReplyList();
-										selectCreplyList();
+										
 									})
-									
-								
+										
 									function selectReplyList(){
 										$.ajax({
 											url:"rlist.cl",
 											data:{cno:'${c.classNo}'},
 											success:rlist=>{
 												let reply = "";
-												let creply = "";
 												
 												for(var i in rlist){
 													
@@ -546,11 +617,11 @@
 														       + '<div class="menu-simple-item-inner replybox">'
 														       + '<h6><span>' + rlist[i].nickname + '</span></h6>'
 														       + '<p>' + rlist[i].rvContent + '</p>'
-														       + '<p>' + rlist[i].rvDate + '<span class="addrere" id="rreply' + rvNo + '">답글달기</span>' + '</p>'
+														       + '<p>' + rlist[i].rvDate + '<span class="addrere" id="rreply' + rvNo + '">답글달기</span>' + '</p><br>'
 														       + '<div id="'+ rvNo + '" class="' + rvNo + '"></div>'
 														       + '<h6 class="rereply' + rvNo + '"style="display:none;">'
-														       + '<input type="text" name="reply" id="reply" class="form-control rereply' + rvNo + '"placeholder="댓글달기" style="background-color: #f4f1ea; width:700px;">'
-														       + '<button class="btn btn-gray" id="enroll-btn" onclick="addReReply();">댓글등록</button>'
+														       + '<input type="text" name="reply" id="rereply' + rvNo + '" class="form-control rereply' + rvNo + '"placeholder="답글달기" style="background-color: #f4f1ea; width:700px;">'
+														       + '<button class="btn btn-gray" id="enroll-btn">답글등록</button>'
 														       + '</h6>'
 														       + '</div>'
 														       + '</div>';
@@ -558,8 +629,9 @@
 												}
 			
 												
-												$(".replylist").append(reply);
+												$(".replylist").html(reply);
 												
+												selectCreplyList();
 												
 												//$("#creplylist").html(creply);
 												
@@ -572,34 +644,20 @@
 									
 									function selectCreplyList(){
 										$.ajax({
-											url:"rlist.cl",
+											url:"crlist.cl",
 											data:{cno:'${c.classNo}'},
 											success:rlist=>{
 												let reply = "";
 												let creply = "";
 												
 												for(var i in rlist){
-													
-													if(rlist[i].crNo == null){
-														
-														reply += '<div class="menu-simple-item">'
-														       + '<div class="menu-simple-item-img"><img src="' + rlist[i].img + '" alt=""></div>'
-														       + '<div class="menu-simple-item-inner replybox">'
-														       + '<h6><span>' + rlist[i].nickname + '</span></h6>'
-														       + '<p>' + rlist[i].rvContent + '</p>'
-														       + '<p>' + rlist[i].rvDate + '<span id="rreply">답글달기</span>' + '</p>'
-														       + '<div id="' + rlist[i].rvNo + '" class="' + rlist[i].rvNo + '"></div>'
-														       + '</div>'
-														       + '</div>';
-													}    
-													
+	
 													creply = "";
 													
 													for(var j in rlist){
 														
 														var rvNo = rlist[i].rvNo;
-														
-														
+
 														if(rlist[j].mrNo == rvNo){														
 															
 															creply += '<div class="menu-simple-item">'
@@ -676,18 +734,61 @@
 												}
 											})
 										}
-									}							
-
-										
-										
-										$(document).on("click", ".replybox>p>span", function(){
-											
-											let id = $(this).attr("id");
-											let rvNo = id.substring(6);
-											
-											$(".rereply"+rvNo).css("display","block");
-										})										
+									}
 									
+									$(document).on("click", ".replybox>h6>button", function(){
+										
+										let mr_no = $(this).parent().attr("class").substring(7);
+										let rvContent = $("#rereply"+mr_no).val();
+
+										if($("#rereply"+mr_no).val().trim().length != 0){
+											
+											$.ajax({
+												url:"enrollRe.rv",
+												data:{
+													rvContent:$("#rereply"+mr_no).val(),
+													refFno:'${c.classNo}',
+													memNo:'${loginMember.memNo}',
+													mrNo:mr_no,
+													},success:result=>{
+													if(result == "success"){
+														$("#rereply").val("");
+														selectReplyList();
+													}
+												}, error:()=>{
+													console.log("실패");
+												}
+											})
+										}
+										
+										
+									})
+										
+									$(document).on("click", ".replybox>p>span", function(){
+										
+										let lm = "${loginMember}";
+										
+										if(lm == ""){
+											swal("로그인해야 댓글을 등록하실 수 있습니다.");
+										} else {
+											
+											let rvNo = $(this).attr("id").substring(6);
+											let rvText = $(this).text();
+											
+											if(rvText == '답글달기'){
+												$(".rereply"+rvNo).css("display","block");
+												$(this).text("답글닫기");
+											}
+											
+											if(rvText == '답글닫기'){
+												$(".rereply"+rvNo).css("display","none");
+												$(this).text("답글달기");
+											}	
+										}
+										
+										
+									})										
+								
 								</script>
 								<div class="menu-simple replylist">
 								</div>
@@ -1016,68 +1117,77 @@
 		<!-- Off canvas end-->
 
 		<!-- Reserve Popup-->
-		<div class="white-popup-block mfp-hide" id="test-form">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 p-0">
-						<div class="qwert" data-background="assets/images/module-2.jpg"></div>
-					</div>
-					<div class="col-md-8">
-						<div class="ddd"><a class="popup-modal-dismiss" href="#"><i class="ti-close"></i></a>
-							<h1 class="display-1">Book a Table</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
-							<div class="divider-border-left"></div>
-							<div class="space" data-mY="60px"></div>
-							<form method="post" novalidate>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="name" placeholder="Name" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="name" placeholder="Phone" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="email" name="email" placeholder="E-mail" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="subject" placeholder="Persons" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="email" name="email" placeholder="Date" required="">
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" type="text" name="subject" placeholder="Time" required="">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="form-control" name="message" placeholder="Special Requests" rows="6" required=""></textarea>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<input class="btn btn-black" type="submit" value="Reserve">
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 		<!-- Reserve Popup end-->
 
-		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
+		<!-- To top button-->
+		<div class="space" data-mY="40px"></div><a class="btn btn-white enterClass enter-btn" onclick="enterClass();">모임 참가하기</a>
+		<a class="likeClass"><span class="icon_heart_alt" onclick="likeClass();"></span></a>
+		<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
+		<a class="classOption" href="#수정페이지"><span class="icon-gears"></span></a>
+		
+		<script>
+		
+			let lm = "${loginMember}";
+			
+			if(lm != ""){
+				$.ajax({
+					url:"checkStatus.cl",
+					data:{
+						memNo:'${loginMember.memNo}',
+						classNo:'${c.classNo}',
+					}, success:result=>{
+						switch (result){
+							case 0 : ""; break;
+							case 1 : $(".enter-btn").text("참가중인 모임 입니다."); break;
+							case 2 : $(".enter-btn").text("호스트 승인 대기중 입니다."); break;
+							case 3 : $(".enter-btn").text("빈자리가 나오기를 대기중입니다."); break;
+						}
+					}, error:()=>{
+						console.log("가입상태 ajax 실패");
+					}
+				})
+			}
+				
+		
+			function enterClass(){
+				
+				let lm = "${loginMember}";
+				let seat = "${c.vacancy}";
+				let cl_type = '${c.classApproval}';
+				let cl_typeNo = 0;
+				
+				console.log(seat);
+				
+				if(lm == ""){
+					swal("로그인해야 모임에 가입하실 수 있습니다.");
+				} else {
+					
+					if(cl_type == "승인제" && seat > 0){
+						cl_typeNo = 2;
+						console.log(cl_typeNo);
+					} else if(cl_type == "승인제" && seat == 0){
+						cl_typeNo = 3;
+					} else if(cl_type == "선착순" && seat > 0){
+						cl_typeNo = 1;
+					} else if(cl_type == "선착순" && seat == 0){
+						cl_typeNo = 2;
+					}
+				
+					$.ajax({
+						url:"enterClass.cl",
+						data:{
+							memNo:'${loginMember.memNo}',
+							classNo:'${c.classNo}',
+							clType:cl_typeNo,
+						}, success:result=>{
+							console.log(result);
+						}, error:()=>{
+							console.log("모임가입 ajax 실패");
+						}
+					})
+				}
+			}
+		</script>
 		
 </body>
 </html>

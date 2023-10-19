@@ -42,6 +42,12 @@
 		<result column="MEM_NO" property="memNo"/>
 	</resultMap>
 	
+	<resultMap type="MyClass" id="myClassResult">
+		<result column="c_no" property="classNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="cl_type" property="clType"/>
+	</resultMap>
+	
 	<select id="selectClassList" resultMap="resultclub">
         select 
 		       c_no
@@ -351,8 +357,65 @@
 		  join member using (mem_no)
 		 where r_status = 'Y'
 		   and ref_fno = #{classNo}
-		   and cr_no is not null
 		 order
    		    by to_number(substr(cr_no,3))
 	</select>
+	
+	<insert id="insertReReply">
+		insert
+		  into reply
+		  (
+		    r_no
+		  , mr_no
+		  , cr_no 
+		  , r_content
+		  , r_date
+		  , r_status
+		  , ref_fno
+		  , mem_no
+		  )
+		  values
+		  (
+		  	'RE'||seq_reno.nextval
+		  , #{mrNo}
+		  , 'CR'||seq_crno.nextval	
+		  , #{rvContent}
+		  , sysdate
+		  , 'Y'
+		  , #{refFno}	
+		  , #{memNo}
+		  )
+	</insert>
+	
+	<select id="checkStatus" resultType="_int">
+		select 
+		       count(*)
+		  from my_class
+		 where c_no = #{classNo}
+		   and mem_no = #{memNo}
+	</select>
+	
+	<select id="checkType" resultType="_int">
+		select 
+		       cl_type
+		  from my_class
+		 where c_no = #{classNo}
+		   and mem_no = #{memNo}
+	</select>
+	
+	<insert id="enterClass">
+		insert
+		  into my_class
+		  (
+		  	c_no
+		  ,	mem_no
+		  , cl_type
+		  )
+		  values
+		  (
+		  	#{classNo}
+		  ,	#{memNo}
+		  , #{clType}
+		  )
+	</insert>
 </mapper>

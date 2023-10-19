@@ -228,7 +228,6 @@ public class ClubController {
 	@RequestMapping("enroll.rv")
 	public String insertReply(Reply r) {
 		
-		System.out.println(r);
 		int result = cService.insertReply(r);
 		return result>0 ? "success" : "fail";
 
@@ -245,9 +244,39 @@ public class ClubController {
 	@ResponseBody
 	@RequestMapping(value="crlist.cl", produces = "application/json; charset=UTF-8")
 	public String selectCreplyList(String cno){
-		ArrayList<Reply> crlist = cService.selectCreplyList(cno);
-		return new Gson().toJson(crlist);
+		ArrayList<Reply> rlist = cService.selectCreplyList(cno);
+		return new Gson().toJson(rlist);
 
+	}
+	
+	@ResponseBody
+	@RequestMapping("enrollRe.rv")
+	public String insertReReply(Reply r) {
+		int result = cService.insertReReply(r);
+		return result>0 ? "success" : "fail";
+
+	}
+	
+	@ResponseBody
+	@RequestMapping("checkStatus.cl")
+	public int checkStatus(MyClass c) {
+		int result = cService.checkStatus(c);
+		if(result > 0) {
+			int type = cService.checkType(c);
+			return type;
+		} else {
+			return 0;
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("enterClass.cl")
+	public String enterClass(MyClass c) {
+		
+		int result = cService.enterClass(c);
+		return result>0 ? "success" : "fail";
+		
 	}
 		
 }
