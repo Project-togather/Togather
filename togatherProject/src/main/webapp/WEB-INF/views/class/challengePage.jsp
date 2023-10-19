@@ -24,7 +24,7 @@
 		<section class="module">
 			<div class="container">
 				<div class="row">
-					<c:forEach var="c"  items="${ list }">
+					<c:forEach var="c" items="${ list }">
 					<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">

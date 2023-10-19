@@ -130,17 +130,17 @@
                   <div class="inner-nav onepage-nav">
                      <ul>
 						<li><a href="main.pa"><span class="menu-item-span">Home</span></a></li>
-						<li><a href="social.pa"><span class="menu-item-span">소셜링</span></a></li>
-						<li><a href="club.pa"><span class="menu-item-span">클럽</span></a></li>
-						<li><a href="challenge.pa"><span class="menu-item-span">챌린지</span></a></li>
-						<li><a href="oneday.pa"><span class="menu-item-span">원데이클래스</span></a></li>
-						<li><a href="lounge.pa"><span class="menu-item-span">라운지</span></a></li>
+						<li><a href="social.pa"><span class="menu-item-span">SOCIAL</span></a></li>
+						<li><a href="club.pa"><span class="menu-item-span">CLUB</span></a></li>
+						<li><a href="challenge.pa"><span class="menu-item-span">CHALLENGE</span></a></li>
+						<li><a href="oneday.pa"><span class="menu-item-span">ONEDAY</span></a></li>
+						<li><a href="lounge.pa"><span class="menu-item-span">ROUNGE</span></a></li>
 						
 					 <c:if test="${ not empty loginMember }"> 
 					 </c:if> 
-						<li><a href="myclass.pa"><span class="menu-item-span">내모임</span></a></li>
-						<li><a href="enrollForm.cl"><span class="menu-item-span">모임 등록</span></a></li>
-						<li><a href="mypage.me"><span class="menu-item-span">myPage</span></a></li>
+						<li><a href="myclass.pa"><span class="menu-item-span">MYCLASS</span></a></li>
+						<li><a href="enrollForm.cl"><span class="menu-item-span">ENROLL CLASS</span></a></li>
+						<li><a href="mypage.me"><span class="menu-item-span">MYPAGE</span></a></li>
 
 					
 					 <c:if test="${ loginMember.memId == 'ADMIN' }">
