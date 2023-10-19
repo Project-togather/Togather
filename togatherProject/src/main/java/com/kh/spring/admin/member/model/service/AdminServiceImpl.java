@@ -55,6 +55,11 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<BlackList> selectBlackList(PageInfo pi) {
 		return ADao.selectBlackList(sqlSession,pi);
 	}
+
+	@Override
+	public int updateBlackList(String memId) {
+		return ADao.updateBlackList(sqlSession,memId);
+	}
 	
 
 }

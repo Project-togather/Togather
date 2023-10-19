@@ -14,6 +14,7 @@
 		<typeAlias type="com.kh.spring.myClass.model.vo.MyClass" alias="MyClass"/>
 		<typeAlias type="com.kh.spring.meminterest.model.vo.MemInterest" alias="MemInterest"/>
 		<typeAlias type="com.kh.spring.reply.model.vo.Reply" alias="Reply"/>
+		<typeAlias type="com.kh.spring.admin.customercenter.model.vo.Notice" alias="Notice"/>
 		
 	</typeAliases>
 	 
@@ -23,5 +24,8 @@
 	 	<mapper resource="/mappers/feed-mapper.xml"/>
 	 	<mapper resource="/mappers/attachment-mapper.xml"/>
 	 	<mapper resource="/mappers/admember-mapper.xml"/>
+	 	<mapper resource="/mappers/adcustomer-mapper.xml"/>
+	 	
+	 	
 	 </mappers>
 </configuration>

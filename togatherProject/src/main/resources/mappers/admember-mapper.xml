@@ -99,4 +99,10 @@
 				by black_no desc 
 	</select>
 
+	<update id="updateBlackList">
+		update 
+			blacklist
+		  set black_status ='N'
+		    where black_id = #{memId}
+	</update>
 </mapper>

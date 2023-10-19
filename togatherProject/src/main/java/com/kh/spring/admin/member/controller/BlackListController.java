@@ -73,5 +73,19 @@ public class BlackListController {
 					
 				}
 			}
+			
+			@RequestMapping("black.de")
+			public String updateBlackList(String memId,Model model,HttpSession session) {
+				
+				int result = Aservice.updateBlackList(memId);
+				
+				if(result>0) {
+					session.setAttribute("alertMsg", "성공적으로 블랙리스트 해제되었습니다.");
+					return "redirect:blacklist.bo";
+				}else {
+					model.addAttribute("errorMsg","블랙리스트 해제에 실패했습니다.");
+					return "common/errorPage";
+				}
+			}
 
 }
