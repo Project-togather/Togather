@@ -113,7 +113,7 @@
 						<li>
 							<div class="search-box">
 							<input type="text" class="search-txt" name="" placeholder="지금 생각나는 취미를 검색하세요.">
-							<a class="search-btn" href="list.so">
+							<a class="search-btn" href="search.li">
 								<i class="fa fa-search" aria-hidden="true" type="submit"></i>
 							</a>
 						</div>

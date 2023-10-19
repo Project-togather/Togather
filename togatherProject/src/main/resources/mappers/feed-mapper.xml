@@ -9,7 +9,7 @@
 	<result column="fe_content" property="feContent"/>
 	<result column="fe_date" property="feDate"/>
 	<result column="fe_writer" property="feWriter"/>
-	<result column="f_status" property="fStatus"/>
+	<result column="fe_status" property="fStatus"/>
 </resultMap>
 
 	<select id="selectFeedList" resultMap="feedResult">

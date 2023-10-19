@@ -110,40 +110,16 @@ nav a.is-current {
 
 <!-- 네비바 영역 -->
 <nav>
-    <a href="list.so" onclick="setActiveLink(this)"><i class="fas fa-duotone fa-bolt">&nbsp;</i>Socialing</a>
-    <a href="#" onclick="setActiveLink(this)"><i class="fas fa-regular fa-star">&nbsp;</i>Club</a>
-    <a href="#" onclick="setActiveLink(this)"><i class="fas fa-regular fa-fire">&nbsp;</i>challenge</a>
-    <a href="feed.li" onclick="setActiveLink(this)"><i class="fas fa-light fa-comment">&nbsp;</i>Feed</a>
-    <a href="#" onclick="setActiveLink(this)"><i class="fas fa-solid fa-user">&nbsp;</i>Member</a>
+    <a href="list.so"><i class="fas fa-duotone fa-bolt">&nbsp;</i>Socialing</a>
+    <a href="#"><i class="fas fa-regular fa-star">&nbsp;</i>Club</a>
+    <a href="#"><i class="fas fa-regular fa-fire">&nbsp;</i>challenge</a>
+    <a href="feed.li"><i class="fas fa-light fa-comment">&nbsp;</i>Feed</a>
+    <a href="#"><i class="fas fa-solid fa-user">&nbsp;</i>Member</a>
     <div class="nav-underline"></div>
 </nav>
 
 <script>
-function setActiveLink(link) {
-    // 모든 링크에서 'is-current' 클래스 제거
-    $("nav a").removeClass("is-current");
-    // 클릭한 링크에 'is-current' 클래스 추가
-    $(link).addClass("is-current");
-    // 밑줄의 위치 업데이트
-    updateUnderlinePosition(link);
-}
 
-function updateUnderlinePosition(link) {
-    // 밑줄을 클릭한 링크 아래로 이동
-    var linkIndex = $("nav a").index(link);
-    var underlinePosition = linkIndex * 20 + "%";
-    $(".nav-underline").css("left", underlinePosition);
-}
-
-// 페이지 로드시 URL을 기반으로 현재 페이지 결정
-$(document).ready(function() {
-    var currentPageURL = window.location.href;
-    if (currentPageURL.includes("list.so")) {
-        setActiveLink($("nav a[href='list.so']"));
-    } else if (currentPageURL.includes("feed.li")) {
-        setActiveLink($("nav a[href='feed.li']"));
-    }
-});
 </script>
 
 </body>
