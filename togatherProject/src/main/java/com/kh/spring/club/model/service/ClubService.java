@@ -57,4 +57,13 @@ public interface ClubService {
 	
 	// 모임 가입
 	int enterClass(MyClass c);
+	
+	// 모임 즐찾 등록
+	int likeClass(MyClass c);
+	
+	// 모임 즐찾 해제
+	int unlikeClass(MyClass c);
+	
+	// 모임 즐찾 확인
+	int checkLike(MyClass c);
 }

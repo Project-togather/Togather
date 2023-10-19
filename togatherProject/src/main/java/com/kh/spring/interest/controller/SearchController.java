@@ -31,9 +31,6 @@ public class SearchController {
 		return "search/searchPage";
 	}
 	
-
-	
-	/*
 	@ResponseBody
 	@RequestMapping(value = "getList.so", produces = "application/json; charset=utf-8;")
 	public String selectSocialingList(Club c, @RequestParam(value="cpage", defaultValue = "1", required = false) int currentPage) {

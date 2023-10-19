@@ -106,4 +106,20 @@ public class ClubServiceImpl implements ClubService {
 		return cDao.enterClass(c, sqlSession);
 	}
 
+	@Override
+	public int likeClass(MyClass c) {
+		return cDao.likeClass(c, sqlSession);
+	}
+
+	@Override
+	public int unlikeClass(MyClass c) {
+		return cDao.unlikeClass(c, sqlSession);
+	}
+
+	@Override
+	public int checkLike(MyClass c) {
+		return cDao.checkLike(c, sqlSession);
+	}
+	
+
 }

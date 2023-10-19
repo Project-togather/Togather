@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,9 +66,6 @@
 									</c:otherwise>
 								</c:choose>
 								<img src="resources/assets/images/detail/calender.png" id="detail_icon">${ c.classDate } &nbsp; ${ c.classTime }
-							</p>
-							<p>
-								찜하기 <img src="resources/assets/images/detail/noheart.png" id="heart">
 							</p>
 							<div class="divider-border"></div>
 							<p class="lead" style="text-align:left;">${ c.classContent }</p>
@@ -404,11 +402,11 @@
 					<div class="row">
 						<div class="col-md-3">
 							<div class="pie-chart">
-								<div class="chart" data-percent="10"><span class="chart-text"><span><i class="icon-telescope"></i></span></span></div>
+								<div class="chart" data-percent="${ c.vacancy / c.peopleLimit * 100 }"><span class="chart-text"><span><i class="icon-telescope"></i></span></span></div>
 								<div class="chart-title"><span>${ c.vacancy } / ${ c.peopleLimit }명 · ${ c.classApproval }</span></div>
 								<div class="chart-content">
 									<p>
-										현재 ${ c.peopleLimit }명 중 ${ c.vacancy }가입되어 있으며 <br>
+										현재 ${ c.peopleLimit }명 중 ${ c.vacancy }명 가입되어 있으며 <br>
 										<c:choose>
 											<c:when test="${ c.classApproval eq '승인제' }">
 												호스트의 승인에 의해 가입되는 승인제 입니다.
@@ -423,8 +421,8 @@
 						</div>
 						<div class="col-md-3">
 							<div class="pie-chart">
-								<div class="chart" data-percent="100"><span class="chart-text"><span><i class="icon-circle-compass"></i></span></span></div>
-								<div class="chart-title"><span>${ c.classPrice }원</span></div>
+								<div class="chart" data-percent="${ c.classPrice / c.avgPrice * 100 }"><span class="chart-text"><span><i class="icon-circle-compass"></i></span></span></div>
+								<div class="chart-title"><span><fmt:formatNumber value="${ c.classPrice }" type="currency"/> 원</span></div>
 								<div class="chart-content">
 									<p>
 										운영비 - 콘텐츠 제작, 호스트 수고비 <br>
@@ -436,7 +434,7 @@
 						</div>
 						<div class="col-md-3">
 							<div class="pie-chart">
-								<div class="chart" data-percent="70"><span class="chart-text"><span><i class="icon-strategy"></i></span></span></div>
+								<div class="chart" data-percent="${ (c.hour - 12) * 8.4 }"><span class="chart-text"><span><i class="icon-strategy"></i></span></span></div>
 								<div class="chart-title"><span>${ c.classDate } &nbsp; ${ c.classTime }</span></div>
 								<div class="chart-content">
 									<p>
@@ -451,9 +449,16 @@
 								<div class="chart-title"><span>${ c.classLocation }</span></div>
 								<div class="chart-content">
 									<p>
-										<a href="">상세 위치</a>를 눌러주세요!
+										<span class="moveMap">상세 위치</span>를 눌러주세요!
 									</p>
 								</div>
+								<script>
+									$(".moveMap").click(()=>{
+										var offset = $(".map").offset();
+										
+										$('html').animate({scrollTop : offset.top}, 400);
+									})
+								</script>
 							</div>
 						</div>
 					</div>
@@ -878,7 +883,7 @@
 			<!-- News-->
 			<section class="module" id="news">
 				<div class="container">
-					<div class="row">
+					<div class="row map">
 						<div class="col-md-6 m-auto text-center">
 							<p class="subtitle">From the blog</p>
 							<h1 class="display-1">유사한 모임 (위치 or 카테고리) + 지도api</h1>
@@ -1123,7 +1128,9 @@
 		<div class="space" data-mY="40px"></div><a class="btn btn-white enterClass enter-btn" onclick="enterClass();">모임 참가하기</a>
 		<a class="likeClass"><span class="icon_heart_alt" onclick="likeClass();"></span></a>
 		<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
-		<a class="classOption" href="#수정페이지"><span class="icon-gears"></span></a>
+		<c:if test="${loginMember.memNo eq c.memNo }">
+		</c:if>
+			<a class="classOption" href="#수정페이지"><span class="icon-gears"></span></a>		
 		
 		<script>
 		
@@ -1187,6 +1194,54 @@
 					})
 				}
 			}
+			
+			function checkLike(){
+				$.ajax({
+					url:"checkLike.cl",
+					data:{
+						memNo:'${loginMember.memNo}',
+						classNo:'${c.classNo}',
+					}, success:result=>{
+						if(result>0){
+							$(".likeClass>span").attr("class", "icon_heart");
+						}
+					}, error:()=>{
+						console.log("즐겨찾기 ajax실패");
+					}
+				})
+			}
+			
+			checkLike();
+			
+			function likeClass(){
+				
+				let lm = "${loginMember}";
+				
+				if(lm == ""){
+					swal("로그인해야 모임을 즐겨찾기 하실 수 있습니다.");
+				}else{
+					$.ajax({
+						url:"likeClass.cl",
+						data:{
+							memNo:'${loginMember.memNo}',
+							classNo:'${c.classNo}',
+						}, success:result=>{
+							if(result == "insert"){
+								$(".likeClass>span").attr("class", "icon_heart");
+								checkLike();
+								swal("찜 등록 완료했습니다!");
+							} else if(result == "delete"){
+								$(".likeClass>span").attr("class", "icon_heart_alt");
+								checkLike();
+								swal("찜 삭제 완료했습니다!");
+							}
+						}, error:()=>{
+							console.log("즐겨찾기 ajax실패");
+						}
+					})
+				}
+			}
+				
 		</script>
 		
 </body>

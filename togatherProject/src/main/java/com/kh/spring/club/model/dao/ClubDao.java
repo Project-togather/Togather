@@ -79,4 +79,16 @@ public class ClubDao {
 	public int enterClass(MyClass c, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("clubMapper.enterClass", c);
 	}
+	
+	public int likeClass(MyClass c, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("clubMapper.likeClass", c);
+	}
+	
+	public int unlikeClass(MyClass c, SqlSessionTemplate sqlSession) {
+		return sqlSession.delete("clubMapper.unlikeClass", c);
+	}
+	
+	public int checkLike(MyClass c, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("clubMapper.checkLike", c);
+	}
 }
