@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
 
 @Repository
@@ -39,12 +40,12 @@ public class ClubDao {
 	public int insertReply(Reply r, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("clubMapper.insertReply", r);
 	}
+	
 
 	public int insertClass(Club c, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("clubMapper.insertClass", c);
 	}
 
-	
 	public int insertImg(Attachment at, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("clubMapper.insertImg", at);
 	}
@@ -59,5 +60,23 @@ public class ClubDao {
 	
 	public ArrayList<Reply> selectCreplyList(String classNo, SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("clubMapper.selectCreplyList", classNo);
+	}
+	
+	public int insertReReply(Reply r, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("clubMapper.insertReReply", r);
+	}
+	
+	public int checkStatus(MyClass c, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("clubMapper.checkStatus", c);
+	}
+	
+	public int checkType(MyClass c, SqlSessionTemplate sqlSession) {
+		int a = sqlSession.selectOne("clubMapper.checkType", c);
+		System.out.println(a);
+		return a;
+	}
+	
+	public int enterClass(MyClass c, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("clubMapper.enterClass", c);
 	}
 }

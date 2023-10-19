@@ -14,6 +14,7 @@
 		<typeAlias type="com.kh.spring.myClass.model.vo.MyClass" alias="MyClass"/>
 		<typeAlias type="com.kh.spring.meminterest.model.vo.MemInterest" alias="MemInterest"/>
 		<typeAlias type="com.kh.spring.reply.model.vo.Reply" alias="Reply"/>
+		<typeAlias type="com.kh.spring.myClass.model.vo.MyClass" alias="MyClass"/>
 		
 	</typeAliases>
 	 
