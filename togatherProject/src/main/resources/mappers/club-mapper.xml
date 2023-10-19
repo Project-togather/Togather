@@ -21,6 +21,7 @@
 		<result column="cl_category" property="clCategory"/>
 		<result column="cl_name" property="clName"/>
 		<result column="curriculum" property="curriculum"/>
+		<result column="status" property="status"/>
 	
 		<collection property="attachment" resultMap="attachment"/>
 	</resultMap>
@@ -254,19 +255,8 @@
 			   , #{category}
 			 )
 	</insert>
-	
-	<insert id="insertMyClass">
-		insert
-		  into my_class
-		values
-		     (
-		      'C'||seq_cno.currval
-		     , #{memNo} 
-		     , #{clType} 
-		     )
-	</insert>
 
-		<select id="selectSocialingListCount" resultType="_int">
+	<select id="selectSocialingListCount" resultType="_int">
 		select
 		count(*)
 	from class

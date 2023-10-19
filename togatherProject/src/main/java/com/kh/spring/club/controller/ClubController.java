@@ -172,7 +172,7 @@ public class ClubController {
 	
 	@RequestMapping("enroll.cl")
 	public String insertClass(Club c, Attachment at, MultipartFile upfile , HttpSession session , Model model) {
-		
+		System.out.println(c);
 		int result = cService.insertClass(c);
 		
 		if(!upfile.getOriginalFilename().equals("")) {
@@ -187,22 +187,14 @@ public class ClubController {
 			at.setCategory(c.getClType());
 			
 			int result2 = cService.insertImg(at);
-			MyClass myClass = new MyClass();
+			
 			if(result2 > 0) {
-				myClass.setClassNo(c.getClassNo());
-				myClass.setMemNo(c.getMemNo());
-				myClass.setClType(c.getClType());
-				
-				int result3 = cService.insertMyClass(c);
-				
-				if(result3 > 0) {
-				}
 				session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
 				return "class/myClassPage";
-				}else {
-					model.addAttribute("errorMsg", "게시글 등록에 실패");
-					return "common/errorPage";
-				}
+			}else {
+				model.addAttribute("errorMsg", "게시글 등록에 실패");
+				return "common/errorPage";
+			}
 		}
 		return null;
 	}
