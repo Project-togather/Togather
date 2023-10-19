@@ -1,7 +1,9 @@
 package com.kh.spring.interest.controller;
 
 import java.util.ArrayList;
+import java.util.Map;
 
+import org.apache.commons.collections4.map.HashedMap;
 import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,48 +22,49 @@ import com.kh.spring.interest.model.service.SearchServiceImpl;
 
 @Controller
 public class SearchController {
-	/*
+	
 	@Autowired
 	private SearchServiceImpl sService;
 
-	@RequestMapping(value = "list.so")
-	public ModelAndView selectSocialingList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, ModelAndView mv) {
+	@RequestMapping(value = "search.li")
+	public String searchPageList() {
+		return "search/searchPage";
+	}
+	
+
+	
+	/*
+	@ResponseBody
+	@RequestMapping(value = "getList.so", produces = "application/json; charset=utf-8;")
+	public String selectSocialingList(Club c, @RequestParam(value="cpage", defaultValue = "1", required = false) int currentPage) {
 		
-		// System.out.println(currentPage);
 		int listCount = sService.selectSocialingListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 		
 		ArrayList<Club> list = sService.selectSocialingList(pi);
 		
-		
-		// System.out.println(pi);
-		// System.out.println(list);
-		
-		mv.addObject("pi", pi);
-		mv.addObject("list", list);
-		mv.setViewName("search/searchSocialingPage");
-		
-		return mv;
+		return new Gson().toJson(list, pi);
 	}
+	*/
+	
+	
+	
 
-	@RequestMapping(value = "feed.li")
-	public String ssfsdfw() {
-		return "search/searchFeedPage";
-	}
 	
 	@ResponseBody
-	@RequestMapping(value = "list.fe", produces = "application/json; charset=utf-8;")
+	@RequestMapping(value = "getList.fe", produces = "application/json; charset=utf-8;")
 	public String ajaxSelectFeedList() {
 		
 		ArrayList<Feed> list = sService.selectFeedList();
 		
-		System.out.println(new Gson().toJson(list));
+		// System.out.println(new Gson().toJson(list));
 		
 		return new Gson().toJson(list);
 				
 	}
-	*/
+	
+	
 	
 	
 }

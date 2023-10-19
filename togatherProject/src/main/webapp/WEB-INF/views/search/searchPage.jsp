@@ -1,61 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<title>searchFeedPage</title>
-		
-		<!-- jQuery 라이브러리 -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		
-		<!-- Favicons-->
-		<link rel="shortcut icon" href="assets/images/favicon.png">
-		<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-		<link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-touch-icon-114x114.png">
-		<!-- Web Fonts-->
-		<link href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700" rel="stylesheet">
-		<!-- Bootstrap core CSS-->
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
-		<!-- Plugins and Icon Fonts-->
-		<link href="assets/css/plugins.min.css" rel="stylesheet">
-		<!-- Template core CSS-->
-		<link href="assets/css/template.css" rel="stylesheet">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 
-		<link
-		rel="stylesheet"
-		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+<!-- jQuery 라이브러리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-		<!-- Include Bootstrap JS and jQuery (optional) -->
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<!-- Favicons-->
+<link rel="shortcut icon" href="assets/images/favicon.png">
+<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-touch-icon-114x114.png">
+<!-- Web Fonts-->
+<link href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700" rel="stylesheet">
+<!-- Bootstrap core CSS-->
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+<!-- Plugins and Icon Fonts-->
+<link href="assets/css/plugins.min.css" rel="stylesheet">
+<!-- Template core CSS-->
+<link href="assets/css/template.css" rel="stylesheet">
 
-		<!-- Required meta tags -->
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-	  
-		<!-- Bootstrap CSS -->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-			  integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-	  
-		<!-- 요기에 구글 머티리얼 아이콘 -->
-		<link
-		  href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-		  rel="stylesheet">
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Include Bootstrap JS and jQuery (optional) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+<!-- 요기에 구글 머티리얼 아이콘 -->
+<link
+    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+    rel="stylesheet">
+
+
+
+
+
 
 <style>
+
+/* 서치바 영역 */
 .top-bar {
 	position: relative;
 
 	height: 130px;
-	border-bottom: 1px solid lightgray;
+	border-bottom: 1px solid rgb(230, 230, 230);
 }
 
 .search-box {
@@ -104,16 +109,55 @@
 	font-size: 1px;
 }
 
-
-
-
+/* ? */
 .open-offcanvas {
-
 }
 
 .ti-user fa-2x {
-
 }
+
+/* 네비바 영역 */
+
+nav {
+    position: relative;
+    display: flex;
+    width: 80%;
+    margin: 1em auto;
+    font-size: 20px;
+}
+nav a {
+    display: block;
+    width: 20%;
+    padding: .75em 0;
+    color: #333;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer; /* 추가: 링크에 커서 스타일 적용 */
+}
+
+.nav-underline {
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 20%;
+    height: 2px;
+    background: #333;
+    transition: all .3s ease-in-out;
+}
+
+/* 추가: 클릭한 페이지의 링크에 대한 스타일 */
+nav a.is-current {
+    color: black; /* 클릭한 링크의 텍스트 색상 변경 */
+}
+
+
+
+
+
+
+
+
+
 
 /* 피드 디자인 */
 
@@ -138,11 +182,13 @@
 	display: flex; /* 내부 요소 중앙 정렬을 위해 내부 요소에도 flex를 적용 */
 	justify-content: center; /* 내부 요소 가로 중앙 정렬 */
 	align-items: center; /* 내부 요소 세로 중앙 정렬 */
+
+	border-top: 1px solid lightgray;
 }
 
 .feed-box {
 
-	padding: 5%;
+	padding: 10%;
 
 }
 
@@ -156,8 +202,9 @@
 
 
 .feed_img{
-    object-fit: contain;
-    width: 100%;
+	width: 400px;
+  	height: 250px;
+  	object-fit: cover;
 }
 
 .feed_content{
@@ -187,13 +234,37 @@
 }span{
      padding-right: 5px;
  }
-</style>
 
-</style>
-	</head>
-	<body>
 
-		<!-- Preloader-->
+/* 프로필, 리스트 아이콘 관련 스타일 */
+.feed_name{
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.feed_name_txt{
+    font-size: 14px;
+    padding: 0px 10px;
+    font-weight: bold;
+}
+
+.profile_box {
+    width: 40px;
+    height: 40px;
+    border-radius: 70%;
+    overflow: hidden;
+}
+.profile_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+</style>
+</head>
+<body>
+
+    		<!-- Preloader-->
 		<div class="page-loader">
 			<div class="loader"></div>
 		</div>
@@ -204,28 +275,46 @@
 
 		<!-- Hero-->
 
-		<div class="top-bar" style="background-color: white;">
-			<div class="search-box">
-				<input type="text" class="search-txt" name="keyword" placeholder="지금 생각나는 취미를 검색하세요.">
-				<a class="search-btn" href="list.so">
-				<i class="fa fa-search fa-3x" aria-hidden="true" type="submit" style="color: orange;"></i>
-				</a>
-			</div>
-		</div>
+        <!-- 서치바 영역 -->
+        <div class="top-bar" style="background-color: white;">
+            <div class="search-box">
+                <input type="text" class="search-txt" name="keyword" placeholder="지금 생각나는 취미를 검색하세요.">
+                <a class="search-btn" href="search.li">
+                <i class="fa fa-search fa-3x" aria-hidden="true" type="submit" style="color: orange;"></i>
+                </a>
+            </div>
+        </div>
 
-		<!-- 네비바 영역 -->
-		<jsp:include page="../common/searchMenubar.jsp"/>
+        <!-- 네비바 영역 -->
+        <nav>
+            <a href="#" id="socialingClick"><i class="fas fa-duotone fa-bolt" style="color: rgba(46, 102, 255, 0.918);">&nbsp;</i>Socialing</a>
+            <a href="#" id="clubClick"><i class="fas fa-regular fa-star" style="color: rgba(255, 233, 35, 0.918);">&nbsp;</i>Club</a>
+            <a href="#" id="challengeClick"><i class="fas fa-regular fa-fire" style="color: rgba(255, 98, 36, 0.918);">&nbsp;</i>challenge</a>
+            <a href="#" id="feedClick"><i class="fas fa-light fa-comment" style="color: rgba(114, 114, 114, 0.918);">&nbsp;</i>Feed</a>
+            <a href="#" id="memberClick"><i class="fas fa-solid fa-user" style="color: rgba(136, 230, 112, 0.918);">&nbsp;</i>Member</a>
+            <div class="nav-underline"></div>
+        </nav>
 
 		<!-- Hero end-->
 		
 		
-		<!-- 피드 영역 -->
+		<!-- 피드 ajax 영역 -->
 		<section class="module">
 			<div class="container">
 				<div class="feed">
+
+					<!-- 
 					<div class="feed-item" style="border: 1px solid lightgray;">
 						<div class="feed-box">
-							<img class="feed_img " src="https://mblogthumb-phinf.pstatic.net/MjAxNzA2MTFfMjc1/MDAxNDk3MTcyMDgyNzEw.ID5RyHWKvsVEW2NS9EQGyRYX7vUaXr7znQeuTrRRmdIg.gK7MD7VhNJPkV4_dueiWer2y-oH7NAAmEklF-6bbYyQg.JPEG.jejubyeol/%EC%97%AC%EB%A6%84%EC%97%90_%EC%A0%9C%EC%A3%BC%EB%8F%84_%EC%82%AC%EC%A7%84%EC%B0%8D%EA%B8%B0_%EC%A2%8B%EC%9D%80%EA%B3%B3.jpg?type=w800">
+
+							<div class="feed_name">
+								<div class="profile_box">
+								  <img class="profile_img" src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_org.jpg?61e575e8653e5920470a38d1482d7312/melon/optimize/90">
+								</div>
+								<span class="feed_name_txt"> jin.99 </span>
+							</div>
+
+							<img class="feed_img " src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/%EC%95%8C%EB%A0%88%EC%98%AC%EB%A0%88_e1e634ae5a2fb6377b1dd828a0fb8c2ce5f12723fc34df3da578ea3e8e35eb62">
 							<div class="feed_icon">
 								<div>
 								  <span class="material-icons-outlined">
@@ -233,9 +322,6 @@
 								  </span>
 								  <span class="material-icons-outlined">
 									mode_comment
-								  </span>
-								  <span class="material-icons-outlined">
-									send
 								  </span>
 								</div>
 								<div>
@@ -248,143 +334,123 @@
 								<p class="feed_txt"> <b>좋아요 10개</b></p>
 							  </div>
 							<div class="feed_content">
-							  <p class="feed_txt">.</p>
+							  <p class="feed_txt">제목</p>
 							</div>
 						</div>
 					</div>
+					 -->
 
 
-					<div class="feed-item" style="border: 1px solid lightgray;">
-						<div class="feed-box">
-							<img class="feed_img " src="https://mblogthumb-phinf.pstatic.net/MjAxNzA2MTFfMjc1/MDAxNDk3MTcyMDgyNzEw.ID5RyHWKvsVEW2NS9EQGyRYX7vUaXr7znQeuTrRRmdIg.gK7MD7VhNJPkV4_dueiWer2y-oH7NAAmEklF-6bbYyQg.JPEG.jejubyeol/%EC%97%AC%EB%A6%84%EC%97%90_%EC%A0%9C%EC%A3%BC%EB%8F%84_%EC%82%AC%EC%A7%84%EC%B0%8D%EA%B8%B0_%EC%A2%8B%EC%9D%80%EA%B3%B3.jpg?type=w800">
-							<div class="feed_icon">
-								<div>
-								  <span class="material-icons-outlined">
-									favorite_border
-								  </span>
-								  <span class="material-icons-outlined">
-									mode_comment
-								  </span>
-								  <span class="material-icons-outlined">
-									send
-								  </span>
-								</div>
-								<div>
-								  <span class="material-icons-outlined">
-									turned_in_not
-								  </span>
-								</div>
-							  </div>
-							  <div class="feed_like">
-								<p class="feed_txt"> <b>좋아요 10개</b></p>
-							  </div>
-							<div class="feed_content">
-							  <p class="feed_txt">.</p>
-							</div>
-						</div>
-					</div>
-
-
-
-					<div class="feed-item" style="border: 1px solid lightgray;">
-						<div class="feed-box">
-							<img class="feed_img " src="https://mblogthumb-phinf.pstatic.net/MjAxNzA2MTFfMjc1/MDAxNDk3MTcyMDgyNzEw.ID5RyHWKvsVEW2NS9EQGyRYX7vUaXr7znQeuTrRRmdIg.gK7MD7VhNJPkV4_dueiWer2y-oH7NAAmEklF-6bbYyQg.JPEG.jejubyeol/%EC%97%AC%EB%A6%84%EC%97%90_%EC%A0%9C%EC%A3%BC%EB%8F%84_%EC%82%AC%EC%A7%84%EC%B0%8D%EA%B8%B0_%EC%A2%8B%EC%9D%80%EA%B3%B3.jpg?type=w800">
-							<div class="feed_icon">
-								<div>
-								  <span class="material-icons-outlined">
-									favorite_border
-								  </span>
-								  <span class="material-icons-outlined">
-									mode_comment
-								  </span>
-								  <span class="material-icons-outlined">
-									send
-								  </span>
-								</div>
-								<div>
-								  <span class="material-icons-outlined">
-									turned_in_not
-								  </span>
-								</div>
-							  </div>
-							  <div class="feed_like">
-								<p class="feed_txt"> <b>좋아요 10개</b></p>
-							  </div>
-							<div class="feed_content">
-							  <p class="feed_txt">.</p>
-							</div>
-						</div>
-					</div>
-
-
-
-
-					<div class="feed-item" style="border: 1px solid lightgray;">
-						<div class="feed-box">
-							<img class="feed_img " src="https://mblogthumb-phinf.pstatic.net/MjAxNzA2MTFfMjc1/MDAxNDk3MTcyMDgyNzEw.ID5RyHWKvsVEW2NS9EQGyRYX7vUaXr7znQeuTrRRmdIg.gK7MD7VhNJPkV4_dueiWer2y-oH7NAAmEklF-6bbYyQg.JPEG.jejubyeol/%EC%97%AC%EB%A6%84%EC%97%90_%EC%A0%9C%EC%A3%BC%EB%8F%84_%EC%82%AC%EC%A7%84%EC%B0%8D%EA%B8%B0_%EC%A2%8B%EC%9D%80%EA%B3%B3.jpg?type=w800">
-							<div class="feed_icon">
-								<div>
-								  <span class="material-icons-outlined">
-									favorite_border
-								  </span>
-								  <span class="material-icons-outlined">
-									mode_comment
-								  </span>
-								  <span class="material-icons-outlined">
-									send
-								  </span>
-								</div>
-								<div>
-								  <span class="material-icons-outlined">
-									turned_in_not
-								  </span>
-								</div>
-							  </div>
-							  <div class="feed_like">
-								<p class="feed_txt"> <b>좋아요 10개</b></p>
-							  </div>
-							<div class="feed_content">
-							  <p class="feed_txt">.</p>
-							</div>
-						</div>
-					</div>
-
-
-					<!-- Add more items as needed -->
 				</div>
 			</div>
 		</section>
-		
-		
 
 
-		
+        <!-- 피트 ajax 스크립트 영역 -->
 		<script>
 			$(function() {
-				feedList();
-				
-				// var interval = setInterval( feedList, 100000);
-				
-				// clearInterval(interval);
-				
-			})
-			
-			function feedList() {
-				$.ajax({
-					url:"list.fe",
-					success:function(list) {
-						
-						console.log(list);
-
-					}, error:function() {
-						
-						console.log("ajax 통신 실패");
-					}
+				$("#feedClick").click(function() {
+					
+					$.ajax({
+						url:"getList.fe",
+						success:function(list) {
+							
+							
+							// console.log(list);
+							
+							let value = "";
+							
+							for(let i in list) {
+								
+								let item = list[i];
+								
+								value += "<div class='feed-item'>" 
+											+ "<div class='feed-box'>" 
+											
+												+ "<div class='feed_name'>" 
+													+ "<div class='profile_box'>" 
+														+ "<img class='profile_img' src='https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_org.jpg?61e575e8653e5920470a38d1482d7312/melon/optimize/90'>"
+													+ "</div>"
+													+ "<span class='feed_name_txt'>" + item.feWriter + "</span>"
+													
+												+ "</div>" 
+												
+												+ "<img class='feed_img' src='https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/%EC%95%8C%EB%A0%88%EC%98%AC%EB%A0%88_e1e634ae5a2fb6377b1dd828a0fb8c2ce5f12723fc34df3da578ea3e8e35eb62'>"
+												
+												+ "<div class='feed_icon'>" 
+													+ "<div>"
+														+ "<span class='material-icons-outlined'>" + "favorite_border" + "</span>"
+														+ "<span class='material-icons-outlined'>" + "mode_comment" + "</span>"
+													+ "</div>"
+													
+													+ "<div>"
+														+ "<span class='material-icons-outlined'>" + "turned_in_not" + "</span>"
+													+ "</div>"
+													
+												+ "</div>"
+												
+												+ "<div class='feed_like'>" 
+													+ "<p class='feed_txt'>" + "<b>" + "좋아요 10개" + "</b>" + "</p>"
+												+ "</div>"
+												
+												+ "<div class='feed_content'>" 
+													+ "<p class='feed_txt'>" + item.feContent + "</p>"
+												+ "</div>"
+												
+									+ "</div>"
+								+ "</div>"
+								
+							}
+							
+							
+							$(".feed").html(value);
+							
+							
+						}, error:function() {
+							console.log("ajax 통신 실패");
+						}
+					})
+					
 				})
-			}
+			})
+
+            
+            /* 네비바 조정 */
+
+            $(document).ready(function() {
+                // 네비게이션 링크에 대한 마우스 호버 이벤트 리스너 추가
+                $('nav a').hover(function() {
+                    const link = this;
+                    const underline = $('.nav-underline')[0];
+                    const left = link.offsetLeft;
+                    underline.style.width = link.offsetWidth + 'px';
+                    underline.style.left = left + 'px';
+                }, function() {
+                    // 마우스 호버를 벗어나면 .nav-underline를 현재 선택된 링크로 이동
+                    const currentLink = $('nav a.is-current')[0];
+                    const underline = $('.nav-underline')[0];
+                    const left = currentLink.offsetLeft;
+                    underline.style.width = currentLink.offsetWidth + 'px';
+                    underline.style.left = left + 'px';
+                });
+
+                // 네비게이션 링크에 대한 클릭 이벤트 리스너 추가
+                $('nav a').click(function(e) {
+                    e.preventDefault();
+                    const feedLink = $('#feedClick')[0];
+                    const underline = $('.nav-underline')[0];
+                    const left = feedLink.offsetLeft;
+                    underline.style.width = feedLink.offsetWidth + 'px';
+                    underline.style.left = left + 'px';
+                    $('nav a').removeClass('is-current');
+                    $(feedLink).addClass('is-current');
+                });
+            });
+
+
 			
 		</script>
-
+		
 
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
@@ -605,11 +671,12 @@
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 
 		<!-- Scripts-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></scrip>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
 		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
 		<script src="assets/js/plugins.min.js"></script>
 		<script src="assets/js/custom.min.js"></script>
-	</body>
+
+</body>
 </html>
