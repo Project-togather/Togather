@@ -258,6 +258,19 @@ public class MemberController {
 	  }
 	  //문화예술 1 액티비티2 푸드드링크3 취미4 파티소개팅5 동네친목6 제테크7 외국어8
 	  request.setAttribute("interArr",interArr);
+	  //나의 피드 불러오기
+	  ArrayList<Feed> fList = mService.selectFeedList(memNo);
+	 
+	 
+	  
+	  
+	  //다음은 feed_no 를 기준으로 썸네일을 불러오자
+	  for(int i = 0 ; i < fList.size() ; i ++) {
+		  String thumbFilePath = mService.selectThumbnail(fList.get(i).getFeNo());
+		  fList.get(i).setThumbnail(thumbFilePath);
+	  }
+	  //System.out.println(fList);
+	  request.setAttribute("fList", fList);
       return "member/myPage";
    }
    
@@ -329,7 +342,7 @@ public class MemberController {
 	   }
 	   
 	   if (result1 * result2 != 0) {
-		   session.setAttribute("alertMsg", "어서오십시오");
+		   session.setAttribute("alertMsg", "피드가 성공적으로 작성되었습니다");
 	        return "redirect:/";
 	   }else {
 		   model.addAttribute("errorMsg", "피드작성 실패");

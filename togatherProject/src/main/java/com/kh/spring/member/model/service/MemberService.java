@@ -35,11 +35,11 @@ public interface MemberService {
 	int insertFeedImg(Attachment at);
 	//피드넣기
 	int insertFeed(Feed f);
-	
-	//피드번호가져오기
-	
-	
-	
+	//피드리스트 조회
+	ArrayList<Feed> selectFeedList(String memNo);
+	//썸네일 사진 가져오기 피드 번호로
+	String selectThumbnail(String feNo);
+
 	//여기까지
 	
 	

@@ -40,6 +40,13 @@
 		<section class="module">
 					<div class="container">
 						<div class="row">
+						
+						<div class="col-md-6 m-auto text-center">
+							<h1 class="display-1">Feed Image preView</h1>
+							<p class="lead">if you insert Images below insert tab<br/> you can check your images before enroll feed</p>
+							<div class="divider-border"></div>
+						</div>
+						
 							
 							<div class="owl-carousel menu-carousel" data-carousel-options="{&quot;nav&quot;: false}">
 								<div class="menu-classic-item">
@@ -92,6 +99,11 @@
 					</div>
 		</section>
 		
+			<div class="col-md-6 m-auto text-center">
+					<h1 class="display-1">Insert Image</h1>
+					<p class="lead">Click below insertImage section<br/>more than 1 image is required to wirte your new Feed</p>
+					<div class="divider-border"></div>
+			</div>
 		
 		
 		

@@ -99,4 +99,17 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 	
+	//피드리스트 조회
+	@Override
+	public ArrayList<Feed> selectFeedList(String memNo) {
+		ArrayList<Feed> feedList = mDao.selectFeedList(sqlSession , memNo);
+		return feedList;
+	}
+	
+	//썸네일 사진 가져오기
+	@Override
+	public String selectThumbnail(String feNo) {
+		return mDao.selectThumbnail(sqlSession , feNo);
+	}
+	
 }
