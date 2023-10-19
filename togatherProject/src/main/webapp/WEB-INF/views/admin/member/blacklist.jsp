@@ -71,8 +71,8 @@
 							<c:forEach var="b" items="${list}">
 								<tr>
 									<th scope="row">${b.blackNo}</th>
-									<td>${b.blackId }</td>
-									<td id="blackname">${b.blackName }</td>
+									<td id="blackId">${b.blackId }</td>
+									<td >${b.blackName }</td>
 									<td>${b.nickName }</td>
 									<td>${b.blackrpCount }</td>
 									<td>${b.blackEnrollDate }</td>
@@ -94,7 +94,7 @@
 										        
 										      </div>
 										      <div class="modal-footer">
-										        <button type="button" class="btn btn-warning">해제하기</button>
+										        <button type="button" class="btn btn-warning" id="deletebtn">해제하기</button>
 										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
 										      </div>
 										    </div>
@@ -186,15 +186,16 @@
 		
 		
 		
-
+ 
 		<script>
 		 $(function() {
 			    $(document).on("click", "#blackbtn", function () {
-			      let username = $(this).closest("tr").find("#blackname").text();
-			      $("#modalbody").html(username + "님을 블랙리스트에서 해제 하시겠습니까?");
+			      let userId = $(this).closest("tr").find("#blackId").text();
+			      $("#modalbody").html(userId + " ID를 가진 회원을 블랙리스트에서 해제 하시겠습니까?");
 			    });
 			  });
 		</script>
+	
 		<!--  
 		<script>
 			$(function(){
@@ -205,5 +206,15 @@
 			});
 		</script>
 		-->
+		
+		<script>
+			$(function(){
+				$(document).on("click", "#deletebtn", function () {
+						
+				     let content = $("#modalbody").text().split('I',1)[0];
+					 location.href='black.de?memId='+content;
+				})
+			})
+		</script>
 </body>
 </html>

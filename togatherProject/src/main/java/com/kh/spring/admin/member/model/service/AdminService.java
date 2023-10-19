@@ -32,4 +32,6 @@ public interface AdminService  {
 	int selectBlackListCount();
 	
 	ArrayList<BlackList> selectBlackList(PageInfo pi);
+	
+	int updateBlackList(String memId);
 }
