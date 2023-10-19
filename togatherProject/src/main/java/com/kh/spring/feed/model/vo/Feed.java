@@ -22,5 +22,6 @@ public class Feed {
 	private Date feDate;
 	private String feWriter;
 	private String feStatus;
+	private String thumbnail;
 	
 }

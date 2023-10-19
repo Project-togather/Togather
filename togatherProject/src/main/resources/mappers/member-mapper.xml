@@ -34,6 +34,15 @@
 		<result column="in_no" property="inNo"/>
 	</resultMap>
 	
+	<resultMap type="Feed" id="myPageFeedResult" >
+		<result column="fe_no" property="feNo"/>
+		<result column="ref_cno" property="refCno"/>
+		<result column="fe_content" property="feContent"/>
+		<result column="fe_date" property="feDate"/>
+		<result column="fe_writer" property="feWriter"/>
+		<result column="f_status" property="feStatus"/>
+	</resultMap>
+	
 	
 	
 	<select id="loginMember" resultMap="MemberResult">
@@ -223,5 +232,27 @@
 		   ,default
 		)
 	</insert>
+	
+	
+	<select id="selectFeedList" resultMap="myPageFeedResult">
+		select
+		    fe_no
+		   ,ref_cno
+		   ,fe_content
+		   ,fe_date
+		   ,fe_writer
+		   ,f_status
+		  from feed
+		  where fe_writer = #{memNo}
+	</select>
+	
+	<select id = "selectThumbnail" resultType="string">
+		select 
+		    file_path
+		from attachment
+		where ref_fno = #{feNo}
+		and thumbnail = 1
+	</select>
+	
 	
 </mapper>

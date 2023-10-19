@@ -140,43 +140,40 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="gallery gallery-4-columns">
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg "style="width: 400px; height: 270px;" >
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
-								<div class="gallery-item">
-									<img src="assets/images/portfolio/10.jpg" style="width: 400px; height: 270px;">
-								</div>
+								
+								
+								
+								<c:choose>
+									<c:when test="${not empty fList}">
+
+										<c:forEach var="i" begin="0" end="${ (fn:length(fList))-1}"  step="1">
+											<div class="gallery-item">
+												<input type="hidden" name="feNo" value="${fList[i].feNo}">	
+												<img src="${fList[i].thumbnail}" style="width: 400px; height: 270px;">									
+											</div>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<div class="gallery-item">
+											There is no Feed 
+										</div>
+									</c:otherwise>
+									
+								</c:choose>
+								
+								
+								
+								
+								
+								
 							</div>
 						</div>
 					</div>
 					<script>
 						$(function(){
-							$(".gallery-item>img").click(function(){
-							alert("클릭시 상세정보이동");
+							$(".gallery-item").click(function(){
+								var feNo =$(this).children().eq(0).val();
+								alert(feNo);
 						})
 						})
 						

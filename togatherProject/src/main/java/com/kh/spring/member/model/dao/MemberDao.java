@@ -69,4 +69,12 @@ public class MemberDao {
 	public int insertFeed(SqlSessionTemplate sqlSession , Feed f) {
 		return sqlSession.insert("memberMapper.insertFeed", f);
 	}
+	
+	public ArrayList<Feed> selectFeedList(SqlSessionTemplate sqlSession , String memNo){
+		return (ArrayList)sqlSession.selectList("memberMapper.selectFeedList",memNo) ;
+	}
+	public String selectThumbnail(SqlSessionTemplate sqlSession , String feNo) {
+		return sqlSession.selectOne("memberMapper.selectThumbnail",feNo);
+	}
+	
 }
