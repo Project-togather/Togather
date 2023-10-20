@@ -4459,3 +4459,11 @@ body.off-canvas-sidebar-open:after {
 	cursor:pointer;
 	background-color: #ffc107;
 }
+
+.moveMap{
+	color:orange;
+}
+
+.moveMap:hover{
+	cursor:pointer;
+}

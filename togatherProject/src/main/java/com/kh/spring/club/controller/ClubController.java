@@ -205,7 +205,7 @@ public class ClubController {
 	public String selectClassDetail(int cNo, Model model) {
 		
 		Club c = cService.selectClassDetail(cNo);
-		
+
 		if(c.getClassApproval().equals("Y")) {
 			c.setClassApproval("승인제");
 		} else {
@@ -269,6 +269,36 @@ public class ClubController {
 		int result = cService.enterClass(c);
 		return result>0 ? "success" : "fail";
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping("likeClass.cl")
+	public String likeClass(MyClass c) {
+		
+		int check = cService.checkLike(c);
+		int result = 0;
+		if(check > 0) {
+			result = unlikeClass(c);
+			return "delete";
+		} else {
+			result = cService.likeClass(c);		
+			return "insert";
+		}
+
+	}
+	
+	@ResponseBody
+	@RequestMapping("unlikeClass.cl")
+	public int unlikeClass(MyClass c) {
+		int result = cService.unlikeClass(c);
+		return result;
+	}
+	
+	@ResponseBody
+	@RequestMapping("checkLike.cl")
+	public int checkLike(MyClass c) {
+		int result = cService.checkLike(c);
+		return result;
 	}
 		
 }

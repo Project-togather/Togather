@@ -26,6 +26,8 @@ public class Club {
 	private String classDate; // 모임날짜
 	private String classTime; // 모임시간
 	private String classPrice; // 모임비
+	private String avgPrice; // 모임비 평균 값
+	private int hour; // 모임시간에서 시만 자름
 	private String classApproval; // 승인제
 	private int minAge; // 최소나이제한
 	private int maxAge; // 최대나이제한

@@ -10,7 +10,9 @@
 		<result column="c_location" property="classLocation"/>
 		<result column="c_date" property="classDate"/>
 		<result column="c_time" property="classTime"/>
+		<result column="hour" property="hour"/>
 		<result column="c_price" property="classPrice"/>
+		<result column="avg_price" property="avgPrice"/>
 		<result column="c_approval" property="classApproval"/>
 		<result column="minage" property="minAge"/>
 		<result column="maxage" property="maxAge"/>
@@ -187,7 +189,11 @@
 		     , c_location
 		     , to_char(to_date(c_date), 'yyyy-mm-dd dy') c_date
 		     , c_time
-		     , to_char(c_price, 'FM999,999') c_price
+		     , substr(c_time,0,2) hour
+		     , (select sum(c_price) / count(*)
+                  from class
+                 where status = 'Y') avg_price
+             , c_price
 		     , c_approval
 		     , minage
 		     , maxage
@@ -198,13 +204,13 @@
 		     , curriculum
 		     , status
 		     , nickname
-		     , people_limit - (select count(*)
-		                         from my_class
-		                        where c_no = 'C'||#{classNo}) vacancy
+		     , (select count(*)
+                 from my_class
+                where c_no = 'C1') vacancy
 		  from class
 		  join member using (mem_no)
 		  join cl_category on (cl_category = cl_categoryno)
-		 where c_no = 'C'||#{classNo}
+		 where c_no = 'C1'
 		   and status = 'Y'
 	</select>
 	
@@ -408,4 +414,33 @@
 		  , #{clType}
 		  )
 	</insert>
+	
+	<insert id="likeClass">
+		insert
+		  into favorites
+		  (
+		  	c_no
+		  , mem_no	
+		  )
+		values
+		  (
+		  	#{classNo}
+		  , #{memNo}
+		  )		  
+	</insert>
+	
+	<delete id="unlikeClass">
+		delete
+		  from favorites
+		 where c_no = #{classNo}
+		   and mem_no = #{memNo}
+	</delete>
+	
+	<select id="checkLike" resultType="_int">
+		select
+			   count(*)
+		  from favorites
+		 where c_no = #{classNo}
+		   and mem_no = #{memNo}
+	</select>
 </mapper>

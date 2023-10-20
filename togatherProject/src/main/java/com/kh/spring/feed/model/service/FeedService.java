@@ -7,15 +7,12 @@ import com.kh.spring.reply.model.vo.Reply;
 
 public interface FeedService {
 	
-	// 피드 전체 조회
-	ArrayList<Feed> selectFeedList();
+	
 	
 	// 피드 상세 조회
-	int increaseCount(int feNo);
-	Feed selectFeed(int feNo);
+	Feed selectFeed(String feNo);
+
 	
-	// 피드 작성
-	int insertFeed(Feed f);
 	
 	// 피드 수정
 	int updateFeed(Feed f);

@@ -34,8 +34,6 @@ public class SearchController {
 	}
 	
 
-	
-	
 	@ResponseBody
 	@RequestMapping(value = "getList.so", produces = "application/json; charset=utf-8;")
 	public String ajaxSelectSocialingList(Club c,

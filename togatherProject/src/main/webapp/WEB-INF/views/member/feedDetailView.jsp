@@ -1,41 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>   
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>   
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<title>myPage</title>
-		<!-- Favicons-->
-		<link rel="shortcut icon" href="assets/images/favicon.png">
-		<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-		<link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-touch-icon-114x114.png">
-		<!-- Web Fonts-->
-		<link href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700" rel="stylesheet">
-		<!-- Bootstrap core CSS-->
-		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
-		<!-- Plugins and Icon Fonts-->
-		<link href="assets/css/plugins.min.css" rel="stylesheet">
-		<!-- Template core CSS-->
-		<link href="assets/css/template.css" rel="stylesheet">
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-		<style>
-			.gallery-item:hover{
-				cursor:pointer
-			}
-
-		</style>
+		<title>FeedDetailView</title>
 	</head>
 	<body>
-	
-	<jsp:include page="../common/menubar.jsp"></jsp:include>
+		<jsp:include page="../common/menubar.jsp"></jsp:include>
 
 		<!-- Preloader-->
 		<div class="page-loader">
@@ -43,156 +16,186 @@
 		</div>
 		<!-- Preloader end-->
 
-
 		<!-- Wrapper-->
-		<div class="wrapper" >
+		<div class="wrapper">
 
-			<!-- Hero-->
-			<section class="module-cover parallax" data-background="assets/images/black.jpg" data-overlay="1" data-gradient="1">
-				<div class="container">
-				
-				
-					<div class="row">
-						<div class="col-md-12">
-							<div class="text-center">
-								<h2 class="display-1"> ${loginMember.memName} 's Page</h2>
-								<p>personal Page<br/> show who you are</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			<!-- Hero end-->
-			
-			
-			
-			<div class="module">
-				<div class="container">
-					<div class="gallery-item">
-						<div class="gallery-image" data-background="${loginMember.img}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
-						
-						<br><br><br><br>
-					</div>
-				<table border="0" style="width: 800px; margin-top: 100px;" align="center">
-					<thead>
-					<tr>
-						<th>${loginMember.memName} 님
-							
-						</th>
-							
-						<td colspan="2"><a href="">setMyProfile</a></td>	
-					</tr>		
-					</thead>
-						<tr>
-							<th style="width: 100px;">FeedsCount</th>
-							<td>6</td>
-							
-						</tr>
-						<tr>
-							<th>Following</th>
-							<td>5</td>
-							
-						</tr>
-						<tr>
-							<th>Follower</th>
-							<td>50</td>
-							
-						</tr>
-						<tr>
-							<th>introduce</th>
-							<td colspan="2">
-								
-								${loginMember.msg}
-							</td>
-						</tr>	
-						<tr>
-							<th>interest</th>
-							<th>
-								<c:forEach begin="0" end="${fn:length(interArr)}" step="1" var="i">
-						          	${interArr[i]} 
-						        </c:forEach>
-							</th>
-						</tr>
-					<tbody>
-
-					</tbody>
-				</table>
-						
-				</div>
-			</div>
-			
-			
-				<div class="container">
-					<div class="row" style="margin-left: 100px;">
-						<img src="assets/images/new.png" onclick="test();">
-					</div>
-				</div>
-				<script>
-					function test(){
-						location.href ="feedEnrollForm.me"
-					}
-
-				</script>
-			
-			<!-- Menu-->
-			<section class="module" >
+			<section class="module">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-12">
-							<div class="gallery gallery-4-columns">
-								
-								
-								
-								<c:choose>
-									<c:when test="${not empty fList}">
-
-										<c:forEach var="i" begin="0" end="${ (fn:length(fList))-1}"  step="1">
-											<div class="gallery-item">
-												<input type="hidden" name="feNo" value="${fList[i].feNo}">	
-												<img src="${fList[i].thumbnail}" style="width: 400px; height: 270px;">									
+						<div class="col-lg-11 m-auto">
+							<div class="row">
+								<div class="col-lg-8">
+									<!-- Post-->
+									<article class="post">
+										<div class="post-preview"><img src="http://piquant.mikado-themes.com/wp-content/uploads/2015/11/b-grilled-chorizo-with-spicy-sauce.jpg" alt=""></div>
+										<div class="post-wrapper">
+											<div class="post-header">
+												<h1 class="post-title display-1">Try some healthy crackers for snacks</h1>
+												<ul class="post-meta">
+													<li>November 18, 2016</li>
+													<li>In <a href="#">Branding</a>, <a href="#">Design</a></li>
+													<li><a href="#">3 Comments</a></li>
+												</ul>
 											</div>
-										</c:forEach>
-									</c:when>
-									<c:otherwise>
-										<div class="gallery-item">
-											There is no Feed 
+											<div class="post-content">
+												<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Seitan High Life reprehenderit consectetur cupidatat kogi about me. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica.</p>
+												<p>Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed. Craft beer elit seitan exercitation, photo booth et 8-bit kale chips proident chillwave deep v laborum.</p>
+												<!--blockquotep To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.
+												-->
+												<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Seitan High Life reprehenderit consectetur cupidatat kogi about me. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica.</p>
+												<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Seitan High Life reprehenderit consectetur cupidatat kogi about me. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica.</p>
+												<!--ol
+												li Digital Strategy
+												li Software Development
+												li Interaction Design
+												-->
+												<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Seitan High Life reprehenderit consectetur cupidatat kogi about me. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica.</p>
+												<p>Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed. Craft beer elit seitan exercitation, photo booth et 8-bit kale chips proident chillwave deep v laborum. Aliquip veniam delectus, Marfa eiusmod Pinterest in do umami readymade swag.</p>
+											</div>
+											<div class="post-footer">
+												<div class="post-tags"><a href="#">Lifestyle</a><a href="#">Music</a><a href="#">News</a><a href="#">Travel</a></div>
+											</div>
 										</div>
-									</c:otherwise>
-									
-								</c:choose>
-								
-								
-								
-								
-								
-								
-							</div>
-						</div>
-					</div>
-					<script>
-						$(function(){
-							$(".gallery-item").click(function(){
-								var feNo =$(this).children().eq(0).val();
-								location.href = "feedDetail.fe?feNo="+feNo ; 
-						})
-						})
-						
-					</script>
+									</article>
+									<!-- Post end-->
+									<!-- Comments area-->
+									<div class="comments-area">
+										<h5 class="comments-title">3 Comments</h5>
+										<div class="comment-list">
+											<!-- Comment-->
+											<div class="comment">
+												<div class="comment-author"><img class="avatar" src="assets/images/avatar/1.jpg" alt=""></div>
+												<div class="comment-body">
+													<div class="comment-meta">
+														<div class="comment-meta-author"><a href="#">Jason Ford</a></div>
+														<div class="comment-meta-date"><a href="#">May 5, 2015 at 4:51 am</a></div>
+													</div>
+													<div class="comment-content">
+														<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud.</p>
+													</div>
+													<div class="comment-reply"><a href="#">Reply</a></div>
+												</div>
+												<!-- Subcomment-->
+												<div class="children">
+													<div class="comment">
+														<div class="comment-author"><img class="avatar" src="assets/images/avatar/2.jpg" alt=""></div>
+														<div class="comment-body">
+															<div class="comment-meta">
+																<div class="comment-meta-author"><a href="#">Harry Benson</a></div>
+																<div class="comment-meta-date"><a href="#">May 5, 2015 at 4:51 am</a></div>
+															</div>
+															<div class="comment-content">
+																<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud.</p>
+															</div>
+															<div class="comment-reply"><a href="#">Reply</a></div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- Comment-->
+											<div class="comment">
+												<div class="comment-author"><img class="avatar" src="assets/images/avatar/3.jpg" alt=""></div>
+												<div class="comment-body">
+													<div class="comment-meta">
+														<div class="comment-meta-author"><a href="#">Henry Cain</a></div>
+														<div class="comment-meta-date"><a href="#">May 5, 2015 at 4:51 am</a></div>
+													</div>
+													<div class="comment-content">
+														<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud.</p>
+													</div>
+													<div class="comment-reply"><a href="#">Reply</a></div>
+												</div>
+											</div>
+										</div>
+										<div class="comment-respond">
+											<h5 class="comment-reply-title">Leave a Reply</h5>
+											<p class="comment-notes">Your email address will not be published. Required fields are marked</p>
+											<form class="comment-form row">
+												<div class="form-group col-md-4">
+													<input class="form-control" type="text" placeholder="Name">
+												</div>
+												<div class="form-group col-md-4">
+													<input class="form-control" type="text" placeholder="Email">
+												</div>
+												<div class="form-group col-md-4">
+													<input class="form-control" type="url" placeholder="Website">
+												</div>
+												<div class="form-group col-md-12">
+													<textarea class="form-control" rows="8" placeholder="Comment"></textarea>
+												</div>
+												<div class="form-submit col-md-12">
+													<button class="btn btn-black" type="submit">Post Comment</button>
+												</div>
+											</form>
+										</div>
+									</div>
+									<!-- Comments area end-->
+								</div>
 
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="50px"></div>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-md-12">
-							<div class="space" data-mY="100px"></div>
+								<div class="col-lg-4">
+									<div class="sidebar">
+										<!-- Search widget-->
+										<aside class="widget widget_search">
+											<form>
+												<input class="form-control" type="search" placeholder="Type search here">
+												<button class="search-button" type="submit"><span class="fa fa-search"></span></button>
+											</form>
+										</aside>
+
+										<!-- Text widget-->
+										<aside class="widget widget_text">
+											<div class="widget-title">
+												<h6>About Us</h6>
+											</div>
+											<div class="textwidget">
+												<p><img src="assets/images/module-1.jpg" alt=""></p>
+												<p>See how your users experience your website in realtime or view trends to see any changes in performance over time.</p>
+											</div>
+										</aside>
+
+										<!-- Recent entries widget-->
+										<aside class="widget widget_recent_entries_custom">
+											<div class="widget-title">
+												<h6>Recent Posts</h6>
+											</div>
+											<ul>
+												<li class="clearfix">
+													<div class="wi"><a href="#"><img src="assets/images/widgets/1.jpg" alt=""></a></div>
+													<div class="wb"><a href="#">Brazilian Burger With Egg</a><span class="post-date">May 8, 2016</span></div>
+												</li>
+												<li class="clearfix">
+													<div class="wi"><a href="#"><img src="assets/images/widgets/2.jpg" alt=""></a></div>
+													<div class="wb"><a href="#">Mini California Sushi Cones</a><span class="post-date">May 8, 2016</span></div>
+												</li>
+												<li class="clearfix">
+													<div class="wi"><a href="#"><img src="assets/images/widgets/3.jpg" alt=""></a></div>
+													<div class="wb"><a href="#">Matcha Portuguese Egg Tarts</a><span class="post-date">May 8, 2016</span></div>
+												</li>
+											</ul>
+										</aside>
+
+										<!-- Twitter widget-->
+										<aside class="widget twitter-feed-widget">
+											<div class="widget-title">
+												<h6>Twitter Feed</h6>
+											</div>
+											<div class="twitter-feed" data-twitter="345170787868762112" data-number="2"></div>
+										</aside>
+
+										<!-- Tags widget-->
+										<aside class="widget widget_tag_cloud">
+											<div class="widget-title">
+												<h6>Tags</h6>
+											</div>
+											<div class="tagcloud"><a href="#">e-commerce</a><a href="#">portfolio</a><a href="#">responsive</a><a href="#">bootstrap</a><a href="#">business</a><a href="#">corporate</a></div>
+										</aside>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</section>
-			<!-- Menu end-->
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
@@ -411,12 +414,6 @@
 
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 
-		<!-- Scripts-->
-		
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-		<script src="assets/js/plugins.min.js"></script>
-		<script src="assets/js/custom.min.js"></script>
+
 	</body>
 </html>
