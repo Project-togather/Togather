@@ -74,7 +74,9 @@
 											</div>
 											<!-- 이건지울꺼임 -->
 											<div id="replySection2" class="comment"> 
+												
 											</div>
+											
 											
 										
 										</div>
@@ -88,31 +90,47 @@
 												<div class="form-submit col-md-12">
 													<button type="button" class="btn btn-black" onClick="insertFeedReply();">Post Comment</button>
 												</div>
-											
+												
 										</div>
+										
 									</div>
 									<script>
 									$(function (){
 										showFeedReply() ;
-										let hello ="RE16"
-										let value2 = "";
-										value2 +=
-											"<div class='children'>"
-											+	"<div class='comment'>"
-											+		"<div class='comment-author'><img class='avatar' src='assets/images/avatar/2.jpg' ></div>"
-											+		"<div class='comment-body'>"
-											+			"<div class='comment-meta'>"
-											+				"<div class='comment-meta-author'><a href='#'>샘플답글 이름</a></div>"
-											+				"<div class='comment-meta-date'><a href='#'>샘플답글 시간</a></div>"
-											+			"</div>"
-											+			"<div class='comment-content'>"
-											+				"<p>샘플답글 내용.</p>"
-											+			"</div>"
-											+		"</div>"
-											+	"</div>"
-											+"</div>"
-											$("#replySection").css("color","red");
+										
+										
+									
+											
+											
+											
 									})
+									
+									
+									function test1(){
+										alert("할루");
+										let hello ="RE16"
+											let value2 = "";
+											value2 +=
+												"<div class='children'>"
+												+	"<div class='comment'>"
+												+		"<div class='comment-author'><img class='avatar' src='assets/images/avatar/2.jpg' ></div>"
+												+		"<div class='comment-body'>"
+												+			"<div class='comment-meta'>"
+												+				"<div class='comment-meta-author'><a href='#'>샘플답글 이름</a></div>"
+												+				"<div class='comment-meta-date'><a href='#'>샘플답글 시간</a></div>"
+												+			"</div>"
+												+			"<div class='comment-content'>"
+												+				"<p>샘플답글 내용.</p>"
+												+			"</div>"
+												+		"</div>"
+												+	"</div>"
+												+"</div>"
+												console.log(value2);
+												
+												$("#replySection").find("#RE2").after(value2);
+
+									}
+									
 									
 									
 									//댓글 보여주기 함수
@@ -129,20 +147,21 @@
 													console.log(rvNo);
 													value += 
 													"<div id ="+ rvNo +">"	
-													+"<div class='comment-author'><img class='avatar' src=" + rList[i].img  +"></div>" 
-													+"<div class='comment-body'>"
-													+"	<div class='comment-meta'>"
-													+"		<div class='comment-meta-author'><a href='#'>"+ rList[i].nickname+ "</a></div>"
-													+"		<div class='comment-meta-date'><a href='#'>"+rList[i].rvDate+"</a></div>"
-													+"	</div> "
-													+"	<div class='comment-content'>"
-													+"		<p>"+rList[i].rvContent+"</p>"
-													+"	</div>"
-													+"	<div class='comment-reply'><a href='#'>Reply</a></div>"
-													+"</div>"
+														+"<div class='comment-author'><img class='avatar' src=" + rList[i].img  +"></div>" 
+														+"<div class='comment-body'>"
+														+"	<div class='comment-meta'>"
+														+"		<div class='comment-meta-author'><a href='#'>"+ rList[i].nickname+ "</a></div>"
+														+"		<div class='comment-meta-date'><a href='#'>"+rList[i].rvDate+"</a></div>"
+														+"	</div> "
+														+"	<div class='comment-content'>"
+														+"		<p>"+rList[i].rvContent+"</p>"
+														+"	</div>"
+														+"	<div class='comment-reply'><a href='#'>Reply</a></div>"
+														+"</div>"
 													+"</div>";
 												}
 												$("#replySection").html(value);
+												test1();
 												
 											},
 											error : function(){
