@@ -585,9 +585,9 @@
 										<div class="menu-simple-item">
 											<div class="menu-simple-item-img"><img src="${ loginMember.img }" alt=""></div>
 											<div class="menu-simple-item-inner" style="padding:0px;">
-												<h6>
-													<input type="text" name="reply" id="reply" class="form-control" placeholder="댓글달기" style="background-color: #f4f1ea; width:700px;">
-													<button class="btn btn-gray" id="enroll-btn" onclick="addReply();">댓글 등록</button>
+												<h6 style="text-align:center; width:100%;">
+													<input type="text" name="reply" id="reply" class="form-control" placeholder="댓글달기" style="background-color: #f4f1ea; width:700px; display :inline-block;">
+													<button class="btn btn-gray" id="enroll-btn1" onclick="addReply();" style="display :inline-block;">댓글 등록</button>
 												</h6>
 											</div>
 										</div>
@@ -616,7 +616,27 @@
 													let rvNo = rlist[i].rvNo;
 													
 													if(rlist[i].crNo == null){
+														       	
+														 reply += '<div class="comment">'
+																+	'<div class="comment-author"><img class="avatar" src="' + rlist[i].img + '"></div>'
+																+	'<div class="comment-body replybox">'
+																+		'<div class="comment-meta">'
+																+			'<div class="comment-meta-author"><a href="#">' + rlist[i].nickname + '</a></div>'
+																+			'<div class="comment-meta-date"><a href="#">' + rlist[i].rvDate + '</a></div>'
+																+		'</div>'
+																+		'<div class="comment-content">'
+																+			'<p>' + rlist[i].rvContent + '</p>'
+																+		'</div>'
+																+		'<div class="comment-reply"><a><span id="rreply' + rvNo + '">답글달기</span></a></div>'
+																+ 		'<div id="'+ rvNo + '" class="' + rvNo + '"></div>'
+													       		+ 		'<h6 class="rereply' + rvNo + '"style="display:none;">'
+													        	+ 			'<input type="text" name="reply" id="rereply' + rvNo + '" class="form-control rereply' + rvNo + '"placeholder="답글달기" style="background-color: #f4f1ea; width:700px; display:inline-block;">'
+													       	 	+ 			'<button class="btn btn-gray" id="enroll-btn" style="display :inline-block;">답글등록</button>'
+														        + 		'</h6>'
+																+	'</div>'
+																+	'</div>';
 														
+														/*
 														reply += '<div class="menu-simple-item">'
 														       + '<div class="menu-simple-item-img"><img src="' + rlist[i].img + '" alt=""></div>'
 														       + '<div class="menu-simple-item-inner replybox">'
@@ -630,9 +650,12 @@
 														       + '</h6>'
 														       + '</div>'
 														       + '</div>';
+														*/
+														
 													}    
 												}
 			
+												$(".comments-title").text("댓글수 : " + rlist.length);
 												
 												$(".replylist").html(reply);
 												
@@ -769,7 +792,7 @@
 										
 									})
 										
-									$(document).on("click", ".replybox>p>span", function(){
+									$(document).on("click", ".replybox>div>a>span", function(){
 										
 										let lm = "${loginMember}";
 										
@@ -795,7 +818,10 @@
 									})										
 								
 								</script>
-								<div class="menu-simple replylist">
+								<div class="comments-area">
+									<h5 class="comments-title"></h5>
+										<div class="comment-list replylist">
+										</div>
 								</div>
 							</div>
 						</div>
