@@ -30,6 +30,9 @@
 			.gallery-item:hover{
 				cursor:pointer
 			}
+			#newFeed :hover{
+				cursor:pointer
+			}
 
 		</style>
 	</head>
@@ -123,7 +126,7 @@
 			
 			
 				<div class="container">
-					<div class="row" style="margin-left: 100px;">
+					<div id="newFeed" class="row" style="margin-left: 100px;">
 						<img src="assets/images/new.png" onclick="test();">
 					</div>
 				</div>
@@ -173,7 +176,7 @@
 						$(function(){
 							$(".gallery-item").click(function(){
 								var feNo =$(this).children().eq(0).val();
-								alert(feNo);
+								location.href = "feedDetail.fe?feNo="+feNo ; 
 						})
 						})
 						

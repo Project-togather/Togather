@@ -1,6 +1,7 @@
 package com.kh.spring.interest.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.collections4.map.HashedMap;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.common.model.vo.ListResponse;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.common.template.Pagination;
 import com.kh.spring.feed.model.vo.Feed;
@@ -31,20 +33,31 @@ public class SearchController {
 		return "search/searchPage";
 	}
 	
+
 	@ResponseBody
 	@RequestMapping(value = "getList.so", produces = "application/json; charset=utf-8;")
-	public String selectSocialingList(Club c, @RequestParam(value="cpage", defaultValue = "1", required = false) int currentPage) {
-		
-		int listCount = sService.selectSocialingListCount();
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
-		
-		ArrayList<Club> list = sService.selectSocialingList(pi);
-		
-		return new Gson().toJson(list, pi);
+	public String ajaxSelectSocialingList(Club c,
+	    @RequestParam(value = "cpage", defaultValue = "1", required = false) int currentPage,
+	    @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+	    
+	    int listCount = sService.selectSocialingListCount();
+	    
+	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageSize, 9);
+	    
+	    ArrayList<Club> list = sService.selectSocialingList(pi);
+	    
+	    Map<String, Object> response = new HashMap<>();
+	    response.put("list", list); // 페이징된 목록
+	    response.put("pageInfo", pi); // 페이지 정보
+	    
+	    // Gson을 사용하여 Map을 JSON 문자열로 변환하여 반환
+	    Gson gson = new Gson();
+	    String jsonResponse = gson.toJson(response);
+	    
+	    return jsonResponse;
 	}
-	
-	
+
+
 	
 	
 
