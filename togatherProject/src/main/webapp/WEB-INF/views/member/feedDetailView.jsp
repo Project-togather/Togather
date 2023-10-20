@@ -156,7 +156,7 @@
 														+"	<div class='comment-content'>"
 														+"		<p>"+rList[i].rvContent+"</p>"
 														+"	</div>"
-														+"	<div class='comment-reply'><a href='#'>Reply</a></div>"
+														+"	<div class='comment-reply' onClick='test2(this);'>Reply<input class='ref' type='hidden' value="+rvNo +"></div>"
 														+"</div>"
 													+"</div>";
 												}
@@ -169,6 +169,10 @@
 											}
 										})
 									}
+									
+										function test2(e){
+											 alert($(e).find(".ref").val());
+										}
 									
 									
 									
