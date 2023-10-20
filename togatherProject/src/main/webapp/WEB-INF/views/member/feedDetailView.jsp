@@ -27,33 +27,36 @@
 								<div class="col-lg-8">
 									<!-- Post-->
 									<article class="post">
-										<div class="post-preview"><img src="http://piquant.mikado-themes.com/wp-content/uploads/2015/11/b-grilled-chorizo-with-spicy-sauce.jpg" alt=""></div>
+										<div class="post-preview">
+										
+											<div class="col-md-12">
+												<div class="image-slider owl-carousel">
+													<c:forEach var="i" begin="0" end="${ (fn:length(atList))-1}"  step="1">
+														<img src="${atList[i].filePath}" alt="">
+													</c:forEach>
+												</div>
+											</div>
+										
+										</div>
 										<div class="post-wrapper">
 											<div class="post-header">
-												<h1 class="post-title display-1">Try some healthy crackers for snacks</h1>
+												<h1 class="post-title display-1">Feed Content..</h1>
 												<ul class="post-meta">
-													<li>November 18, 2016</li>
-													<li>In <a href="#">Branding</a>, <a href="#">Design</a></li>
-													<li><a href="#">3 Comments</a></li>
+													<li>${f.feDate}</li>
+													<li><a href="#">Like : ${f.likeCount}</a>,</li>
+													<li>3 Comments</li>
 												</ul>
 											</div>
 											<div class="post-content">
-												<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Seitan High Life reprehenderit consectetur cupidatat kogi about me. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica.</p>
-												<p>Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed. Craft beer elit seitan exercitation, photo booth et 8-bit kale chips proident chillwave deep v laborum.</p>
-												<!--blockquotep To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.
-												-->
-												<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Seitan High Life reprehenderit consectetur cupidatat kogi about me. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica.</p>
-												<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Seitan High Life reprehenderit consectetur cupidatat kogi about me. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica.</p>
-												<!--ol
-												li Digital Strategy
-												li Software Development
-												li Interaction Design
-												-->
-												<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud. Seitan High Life reprehenderit consectetur cupidatat kogi about me. Photo booth anim 8-bit hella, PBR 3 wolf moon beard Helvetica.</p>
-												<p>Exercitation photo booth stumptown tote bag Banksy, elit small batch freegan sed. Craft beer elit seitan exercitation, photo booth et 8-bit kale chips proident chillwave deep v laborum. Aliquip veniam delectus, Marfa eiusmod Pinterest in do umami readymade swag.</p>
+												<p>${f.feContent}</p>
+												
 											</div>
 											<div class="post-footer">
-												<div class="post-tags"><a href="#">Lifestyle</a><a href="#">Music</a><a href="#">News</a><a href="#">Travel</a></div>
+												<div class="post-tags">
+												 	<c:forEach var="i" begin="0" end="${ (fn:length(interArr))-1}"  step="1">
+												 		${interArr[i]} 
+												 	</c:forEach>
+												</div>
 											</div>
 										</div>
 									</article>
@@ -61,74 +64,122 @@
 									<!-- Comments area-->
 									<div class="comments-area">
 										<h5 class="comments-title">3 Comments</h5>
-										<div class="comment-list">
-											<!-- Comment-->
-											<div class="comment">
-												<div class="comment-author"><img class="avatar" src="assets/images/avatar/1.jpg" alt=""></div>
-												<div class="comment-body">
-													<div class="comment-meta">
-														<div class="comment-meta-author"><a href="#">Jason Ford</a></div>
-														<div class="comment-meta-date"><a href="#">May 5, 2015 at 4:51 am</a></div>
-													</div>
-													<div class="comment-content">
-														<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud.</p>
-													</div>
-													<div class="comment-reply"><a href="#">Reply</a></div>
-												</div>
+										<div  class="comment-list">
+											<div id="replySection" class="comment">
+												
 												<!-- Subcomment-->
-												<div class="children">
-													<div class="comment">
-														<div class="comment-author"><img class="avatar" src="assets/images/avatar/2.jpg" alt=""></div>
-														<div class="comment-body">
-															<div class="comment-meta">
-																<div class="comment-meta-author"><a href="#">Harry Benson</a></div>
-																<div class="comment-meta-date"><a href="#">May 5, 2015 at 4:51 am</a></div>
-															</div>
-															<div class="comment-content">
-																<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud.</p>
-															</div>
-															<div class="comment-reply"><a href="#">Reply</a></div>
-														</div>
-													</div>
-												</div>
+												
+												
+												
 											</div>
-											<!-- Comment-->
-											<div class="comment">
-												<div class="comment-author"><img class="avatar" src="assets/images/avatar/3.jpg" alt=""></div>
-												<div class="comment-body">
-													<div class="comment-meta">
-														<div class="comment-meta-author"><a href="#">Henry Cain</a></div>
-														<div class="comment-meta-date"><a href="#">May 5, 2015 at 4:51 am</a></div>
-													</div>
-													<div class="comment-content">
-														<p>Meh synth Schlitz, tempor duis single-origin coffee ea next level ethnic fingerstache fanny pack nostrud.</p>
-													</div>
-													<div class="comment-reply"><a href="#">Reply</a></div>
-												</div>
+											<!-- 이건지울꺼임 -->
+											<div id="replySection2" class="comment"> 
 											</div>
+											
+										
 										</div>
 										<div class="comment-respond">
 											<h5 class="comment-reply-title">Leave a Reply</h5>
-											<p class="comment-notes">Your email address will not be published. Required fields are marked</p>
-											<form class="comment-form row">
-												<div class="form-group col-md-4">
-													<input class="form-control" type="text" placeholder="Name">
-												</div>
-												<div class="form-group col-md-4">
-													<input class="form-control" type="text" placeholder="Email">
-												</div>
-												<div class="form-group col-md-4">
-													<input class="form-control" type="url" placeholder="Website">
-												</div>
+											<p class="comment-notes">Required fields are marked</p>
+											
 												<div class="form-group col-md-12">
-													<textarea class="form-control" rows="8" placeholder="Comment"></textarea>
+													<textarea id ="rvContent" class="form-control" rows="8" placeholder="Comment"></textarea>
 												</div>
 												<div class="form-submit col-md-12">
-													<button class="btn btn-black" type="submit">Post Comment</button>
+													<button type="button" class="btn btn-black" onClick="insertFeedReply();">Post Comment</button>
 												</div>
-											</form>
+											
 										</div>
 									</div>
+									<script>
+									$(function (){
+										showFeedReply() ;
+										let hello ="RE16"
+										let value2 = "";
+										value2 +=
+											"<div class='children'>"
+											+	"<div class='comment'>"
+											+		"<div class='comment-author'><img class='avatar' src='assets/images/avatar/2.jpg' ></div>"
+											+		"<div class='comment-body'>"
+											+			"<div class='comment-meta'>"
+											+				"<div class='comment-meta-author'><a href='#'>샘플답글 이름</a></div>"
+											+				"<div class='comment-meta-date'><a href='#'>샘플답글 시간</a></div>"
+											+			"</div>"
+											+			"<div class='comment-content'>"
+											+				"<p>샘플답글 내용.</p>"
+											+			"</div>"
+											+		"</div>"
+											+	"</div>"
+											+"</div>"
+											$("#replySection").css("color","red");
+									})
+									
+									
+									//댓글 보여주기 함수
+									function showFeedReply(){
+										$.ajax({
+											url : "showFeedReply.re",
+											data : {feNo : '${f.feNo}'},												
+											success: function(rList){
+												//console.log(rList);
+												
+												let value = "";
+												for (let i = 0 ; i < rList.length ; i++){
+													let rvNo = rList[i].rvNo;
+													console.log(rvNo);
+													value += 
+													"<div id ="+ rvNo +">"	
+													+"<div class='comment-author'><img class='avatar' src=" + rList[i].img  +"></div>" 
+													+"<div class='comment-body'>"
+													+"	<div class='comment-meta'>"
+													+"		<div class='comment-meta-author'><a href='#'>"+ rList[i].nickname+ "</a></div>"
+													+"		<div class='comment-meta-date'><a href='#'>"+rList[i].rvDate+"</a></div>"
+													+"	</div> "
+													+"	<div class='comment-content'>"
+													+"		<p>"+rList[i].rvContent+"</p>"
+													+"	</div>"
+													+"	<div class='comment-reply'><a href='#'>Reply</a></div>"
+													+"</div>"
+													+"</div>";
+												}
+												$("#replySection").html(value);
+												
+											},
+											error : function(){
+												console.log("댓글불러오기 ajax실패");
+											}
+										})
+									}
+									
+									
+									
+										function insertFeedReply(){
+											$.ajax({
+												url : "insertFeedReply.re",
+												data : {rvContent : $("#rvContent").val(),
+														refFno : '${f.feNo}',
+														memNo : '${loginMember.memNo}'
+														},
+												success : function (result){
+													if(result == "YYYYY"){
+														showFeedReply();
+													}
+													else{
+														alert("댓글작성실패");
+													}
+													
+												},
+												error : function(){
+													console.log("에이작 통신실패");
+												}
+											})
+										}
+									
+										
+										
+									</script>
+									
+									
 									<!-- Comments area end-->
 								</div>
 
@@ -145,50 +196,23 @@
 										<!-- Text widget-->
 										<aside class="widget widget_text">
 											<div class="widget-title">
-												<h6>About Us</h6>
+												<c:choose>
+													<c:when test="${f.refCno eq 'example1'}">
+														<h6>Personal Feed</h6>
+													</c:when>
+													<c:otherwise>
+														<h6>${f.refCno}Club</h6>
+														<div class="textwidget">
+															<p><img src="assets/images/module-1.jpg" alt=""></p>
+															<p>thisFeed is review of this Club</p>
+														</div>
+													</c:otherwise>
+												</c:choose>
 											</div>
-											<div class="textwidget">
-												<p><img src="assets/images/module-1.jpg" alt=""></p>
-												<p>See how your users experience your website in realtime or view trends to see any changes in performance over time.</p>
-											</div>
+											
 										</aside>
 
-										<!-- Recent entries widget-->
-										<aside class="widget widget_recent_entries_custom">
-											<div class="widget-title">
-												<h6>Recent Posts</h6>
-											</div>
-											<ul>
-												<li class="clearfix">
-													<div class="wi"><a href="#"><img src="assets/images/widgets/1.jpg" alt=""></a></div>
-													<div class="wb"><a href="#">Brazilian Burger With Egg</a><span class="post-date">May 8, 2016</span></div>
-												</li>
-												<li class="clearfix">
-													<div class="wi"><a href="#"><img src="assets/images/widgets/2.jpg" alt=""></a></div>
-													<div class="wb"><a href="#">Mini California Sushi Cones</a><span class="post-date">May 8, 2016</span></div>
-												</li>
-												<li class="clearfix">
-													<div class="wi"><a href="#"><img src="assets/images/widgets/3.jpg" alt=""></a></div>
-													<div class="wb"><a href="#">Matcha Portuguese Egg Tarts</a><span class="post-date">May 8, 2016</span></div>
-												</li>
-											</ul>
-										</aside>
-
-										<!-- Twitter widget-->
-										<aside class="widget twitter-feed-widget">
-											<div class="widget-title">
-												<h6>Twitter Feed</h6>
-											</div>
-											<div class="twitter-feed" data-twitter="345170787868762112" data-number="2"></div>
-										</aside>
-
-										<!-- Tags widget-->
-										<aside class="widget widget_tag_cloud">
-											<div class="widget-title">
-												<h6>Tags</h6>
-											</div>
-											<div class="tagcloud"><a href="#">e-commerce</a><a href="#">portfolio</a><a href="#">responsive</a><a href="#">bootstrap</a><a href="#">business</a><a href="#">corporate</a></div>
-										</aside>
+									
 									</div>
 								</div>
 							</div>

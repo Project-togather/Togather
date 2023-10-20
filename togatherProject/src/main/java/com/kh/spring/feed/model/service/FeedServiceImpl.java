@@ -6,78 +6,53 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.feed.model.dao.FeedDao;
 import com.kh.spring.feed.model.vo.Feed;
+import com.kh.spring.member.model.dao.MemberDao;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.reply.model.vo.Reply;
 
 @Service
 public class FeedServiceImpl implements FeedService {
-
+	
+	@Autowired
+	private FeedDao fDao;
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	//피드 상세정보
 	@Override
-	public Feed selectFeed(String feNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public Feed selectFeedDetail(String feNo) {
+		return fDao.selectFeedDetail(sqlSession , feNo);
 	}
 
+	//피드에 가져올 사진 리스트 조회
 	@Override
-	public int updateFeed(Feed f) {
-		// TODO Auto-generated method stub
-		return 0;
+	public ArrayList<Attachment> selectFeedDetailImgList(String feNo) {
+		
+		return fDao.selectFeedDetailImgList(sqlSession,feNo);
 	}
 
+	//피드에 댓글작성
 	@Override
-	public int deleteFeed(int feNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertFeedReply(Reply r) {
+		return fDao.insertFeedReply(sqlSession, r);
+	}
+	//피드 댓글리스트 가져오기
+	@Override
+	public ArrayList<Reply> showFeedReply(String feNo) {
+		return fDao.showFeedReply(sqlSession ,feNo);
+	}
+	//댓글의 맴버 정보 가져오기
+	@Override
+	public Member selectReplyMember(String memNo) {
+		return fDao.selectReplyMember(sqlSession,memNo);
 	}
 
-	@Override
-	public ArrayList<Feed> selectReviewList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Feed selectRevicw(int feNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public int insertReview(Feed f) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateReview(Feed f) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ArrayList<Reply> selectReplyList(int cNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int insertReply(int rNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateReply(int rNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deleteReply(int rNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 	
 }

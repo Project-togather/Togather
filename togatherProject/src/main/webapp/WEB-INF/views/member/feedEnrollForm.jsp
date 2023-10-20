@@ -5,7 +5,11 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-	
+		<style>
+			.col-md-12 :hover{
+				cursor: pointer;
+			}
+		</style>
 	</head>
 	<body>
 		<jsp:include page="../common/menubar.jsp"></jsp:include>

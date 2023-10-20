@@ -81,7 +81,9 @@ public class MemberServiceImpl implements MemberService {
 	//관심사 가져오기
 	@Override
 	public ArrayList<MemInterest> getMemInterest(String memNo) {
+		
 		ArrayList<MemInterest> mi = mDao.getMemInterest(sqlSession, memNo);
+
 		return mi;
 	}
 	
