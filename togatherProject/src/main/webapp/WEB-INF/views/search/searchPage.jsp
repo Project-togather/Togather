@@ -297,6 +297,79 @@ nav a.is-current {
 
 		<!-- Hero end-->
 		
+		<!-- 소셜링 ajax 영역 -->
+		<section class="module">
+			<div class="container">
+			
+				<div class="socialing">
+
+						<!-- 
+						<c:forEach var="s" items="${ list }">
+						<div class="col-md-4 post-item">
+							// Post
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="assets/images/widgets/1.jpg" alt=""></a></div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h5 class="post-title display-1"><a href="blog-single-1.html">${ s.classTitle }</a></h5>
+									</div>
+									<div class="post-content">
+										<p>${ s.classLocation }</p>
+									</div>
+									<div class="post-more"><a href="#">${ s.classDate }</a></div>
+								</div>
+							</article>
+							// Post end
+						</div>
+						</c:forEach>
+						 -->			
+						
+				</div>
+
+				<!-- 
+				<div id="pagingArea">
+					<ul class="pagination">
+							
+							<c:choose>
+								<c:when test="${ pi.currentPage eq 1 }">
+									<li class="page-item disabled"><a class="page-link" href="">&laquo;</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="list.so?cpage=${ pi.currentPage - 1 }">&laquo;</a></li>
+								</c:otherwise>
+							</c:choose>
+							
+							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+								<li class="page-item"><a class="page-link" href="list.so?cpage=${ p }">${ p }</a></li>
+							 </c:forEach>
+							 
+							 <c:choose>
+								 <c:when test="${ pi.currentPage eq pi.maxPage }">
+									 <li class="page-item disabled"><a class="page-link" href="">&raquo;</a></li>
+								 </c:when>
+								 <c:otherwise>
+									 <li class="page-item"><a class="page-link" href="list.so?cpage=${ pi.currentPage + 1 }">&raquo;</a></li>
+								 </c:otherwise>
+							 </c:choose>
+							 
+					</ul>
+				</div>
+				-->
+				
+				
+			</div>
+		</section>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		<!-- 피드 ajax 영역 -->
 		<section class="module">
@@ -344,10 +417,87 @@ nav a.is-current {
 				</div>
 			</div>
 		</section>
+		
 
 
-        <!-- 피트 ajax 스크립트 영역 -->
 		<script>
+			<!-- 소셜링 ajax 스크립트 영역 -->
+			$(function() {
+			    $("#socialingClick").click(function() {
+			        loadSocialingData(1); // 초기 페이지 번호 (1)로 데이터 로드
+			    });
+			    
+			    /*
+			    // 페이징 버튼 클릭 시 해당 페이지 데이터 로드
+			    $(document).on("click", ".pagination a", function(e) {
+			        e.preventDefault();
+			        let page = $(this).data("page");
+			        loadSocialingData(page);
+			    });
+			    */
+
+			    function loadSocialingData(page) {
+			    	
+			        $.ajax({
+			            url: "getList.so",
+			            data: { cpage: page },
+			            success: function(response) {
+			            	
+			                console.log(response);
+			                
+			                let list = response.list;
+			                
+			                
+			                $(".socialing").empty();
+
+			                
+			                $.each(list, function(index, item) {
+			                	
+			                	let row = $("<div class='col-md-4 post-item'>");
+			                	row.append($("<article class='post'>"));
+			                	
+			                    
+			                    
+			                    $(".socialing").append(row);
+			                    
+			                    $(".feed").hide();
+			                    $(".socialing").show();
+			                });
+			                
+							/*
+			                // 페이징 버튼 업데이트
+			                updatePagination(response.pageInfo);
+							*/
+			            },
+			            error: function() {
+			                console.log("ajax 통신 실패");
+			            }
+			        });
+			    }
+			    
+			    
+			    /*
+			    function updatePagination(pageInfo) {
+			        let pagination = $(".pagination");
+			        pagination.empty();
+			        
+			        for (let i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+			            let pageLink = $("<a>").text(i).data("page", i);
+			            if (i === pageInfo.currentPage) {
+			                pageLink.addClass("current-page");
+			            }
+			            pagination.append(pageLink);
+			        }
+			    }
+			    */
+			});
+
+		
+		
+		
+		
+		
+        	<!-- 피트 ajax 스크립트 영역 -->
 			$(function() {
 				$("#feedClick").click(function() {
 					
@@ -355,6 +505,7 @@ nav a.is-current {
 						url:"getList.fe",
 						success:function(list) {
 							
+							$(".socialing").hide();
 							
 							// console.log(list);
 							
@@ -405,6 +556,8 @@ nav a.is-current {
 							
 							$(".feed").html(value);
 							
+							$(".socialing").hide();
+							$(".feed").show();
 							
 						}, error:function() {
 							console.log("ajax 통신 실패");
@@ -417,35 +570,21 @@ nav a.is-current {
             
             /* 네비바 조정 */
 
-            $(document).ready(function() {
-                // 네비게이션 링크에 대한 마우스 호버 이벤트 리스너 추가
-                $('nav a').hover(function() {
-                    const link = this;
-                    const underline = $('.nav-underline')[0];
-                    const left = link.offsetLeft;
-                    underline.style.width = link.offsetWidth + 'px';
-                    underline.style.left = left + 'px';
-                }, function() {
-                    // 마우스 호버를 벗어나면 .nav-underline를 현재 선택된 링크로 이동
-                    const currentLink = $('nav a.is-current')[0];
-                    const underline = $('.nav-underline')[0];
-                    const left = currentLink.offsetLeft;
-                    underline.style.width = currentLink.offsetWidth + 'px';
-                    underline.style.left = left + 'px';
-                });
+            $('nav a').click(function(e) {
+				e.preventDefault();
 
-                // 네비게이션 링크에 대한 클릭 이벤트 리스너 추가
-                $('nav a').click(function(e) {
-                    e.preventDefault();
-                    const feedLink = $('#feedClick')[0];
-                    const underline = $('.nav-underline')[0];
-                    const left = feedLink.offsetLeft;
-                    underline.style.width = feedLink.offsetWidth + 'px';
-                    underline.style.left = left + 'px';
-                    $('nav a').removeClass('is-current');
-                    $(feedLink).addClass('is-current');
-                });
-            });
+				// Remove the 'is-current' class from all navigation links
+				$('nav a').removeClass('is-current');
+
+				// Add the 'is-current' class to the clicked link
+				$(this).addClass('is-current');
+
+				const link = this;
+				const underline = $('.nav-underline')[0];
+				const left = link.offsetLeft;
+				underline.style.width = link.offsetWidth + 'px';
+				underline.style.left = left + 'px';
+			});
 
 
 			
