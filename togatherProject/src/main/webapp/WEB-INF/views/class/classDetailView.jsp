@@ -54,7 +54,7 @@
 						<div class="col-md-16 m-auto text-center">
 							<a href="# 마이페이지">
 								<span id="profile"><img src="resources/assets/images/detail/approval.png"></span> <br>
-								<span class="subtitle" id="profile_nickname">${ c.nickname }</span> <br><br>
+								<span class="subtitle" id="profile_nickname">${ c.nickName }</span> <br><br>
 							</a>
 							<p>
 								<c:choose>
@@ -164,7 +164,7 @@
 										</div>
 									</div>
 									<div class="menu-classic-item-inner">
-										<p>${ c.nickname }</p>
+										<p>${ c.nickName }</p>
 									</div>
 								</div>
 								<div class="menu-classic-item">
@@ -621,7 +621,7 @@
 																+	'<div class="comment-author"><img class="avatar" src="' + rlist[i].img + '"></div>'
 																+	'<div class="comment-body replybox">'
 																+		'<div class="comment-meta">'
-																+			'<div class="comment-meta-author"><a href="#">' + rlist[i].nickname + '</a></div>'
+																+			'<div class="comment-meta-author"><a href="#">' + rlist[i].nickName + '</a></div>'
 																+			'<div class="comment-meta-date"><a href="#">' + rlist[i].rvDate + '</a></div>'
 																+		'</div>'
 																+		'<div class="comment-content">'
@@ -691,7 +691,7 @@
 															creply += '<div class="menu-simple-item">'
 															       + '<div class="menu-simple-item-img"><img src="' + rlist[j].img + '" alt=""></div>'
 															       + '<div class="menu-simple-item-inner">'
-															       + '<h6><span>' + rlist[j].nickname + '</span></h6>'
+															       + '<h6><span>' + rlist[j].nickName + '</span></h6>'
 															       + '<p>' + rlist[j].rvContent + '</p>'
 															       + '<p>' + rlist[j].rvDate + '<span id="rreply"></span>' + '</p>'
 															       + '</div>'
@@ -992,6 +992,7 @@
 					</div>
 				</div>
 			</section>
+			
 			<!-- News end-->
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
@@ -1156,7 +1157,7 @@
 		<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 		<c:if test="${loginMember.memNo eq c.memNo }">
 		</c:if>
-			<a class="classOption" href="#수정페이지"><span class="icon-gears"></span></a>		
+			<a class="classOption" href="classUpdateForm.cl?cNo=${ c.classNo }"><span class="icon-gears"></span></a>		
 		
 		<script>
 		

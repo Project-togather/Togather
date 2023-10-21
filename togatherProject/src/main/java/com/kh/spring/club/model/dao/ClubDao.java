@@ -33,7 +33,7 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.selectOneDayList");
 	}
 	
-	public Club selectClassDetail(int classNo, SqlSessionTemplate sqlSession) {
+	public Club selectClassDetail(String classNo, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("clubMapper.selectClassDetail", classNo);
 	}
 	
@@ -91,4 +91,12 @@ public class ClubDao {
 	public int checkLike(MyClass c, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("clubMapper.checkLike", c);
 	}
+	
+	public int deleteClass(String classNo, SqlSessionTemplate sqlSession) {
+		int result = sqlSession.update("clubMapper.deleteClass", classNo);
+		System.out.println("다오 : " + result);
+		return result;
+	}
+	
+	
 }

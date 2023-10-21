@@ -74,7 +74,7 @@
 	<c:if test="${not empty alertMsg}">
 		<script >
 			//swal("${alertMsg}");
-			swal("${alertMsg}");
+			swal("${alertMsg}","", "success");
 		</script>
 		<c:remove var="alertMsg" scope="session"/>
 	</c:if>

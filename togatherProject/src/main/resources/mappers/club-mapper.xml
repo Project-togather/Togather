@@ -18,7 +18,7 @@
 		<result column="maxage" property="maxAge"/>
 		<result column="people_limit" property="peopleLimit"/>
 		<result column="vacancy" property="vacancy"/>
-		<result column="nickname" property="nickname"/>
+		<result column="nickname" property="nickName"/>
 		<result column="cl_type" property="clType"/>
 		<result column="cl_category" property="clCategory"/>
 		<result column="cl_name" property="clName"/>
@@ -443,4 +443,10 @@
 		 where c_no = #{classNo}
 		   and mem_no = #{memNo}
 	</select>
+	
+	<update id="deleteClass">
+		update class
+		   set status ='N'
+		 where c_no = #{classNo}
+	</update>
 </mapper>

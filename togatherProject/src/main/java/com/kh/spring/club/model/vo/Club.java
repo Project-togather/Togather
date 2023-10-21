@@ -38,7 +38,7 @@ public class Club {
 	private String curriculum; // 커리큘럼
 	private String status; // 폐쇄상태
 	private int vacancy; // 남은 자리
-	private String nickname; // 닉네임
+	private String nickName; // 닉네임
 	
 	private Attachment attachment;
 	

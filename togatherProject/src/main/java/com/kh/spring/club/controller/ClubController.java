@@ -202,7 +202,7 @@ public class ClubController {
 	}
 	
 	@RequestMapping("detail.cl")
-	public String selectClassDetail(int cNo, Model model) {
+	public String selectClassDetail(String cNo, Model model) {
 		
 		Club c = cService.selectClassDetail(cNo);
 
@@ -299,6 +299,45 @@ public class ClubController {
 	public int checkLike(MyClass c) {
 		int result = cService.checkLike(c);
 		return result;
+	}
+	
+	@RequestMapping("classUpdateForm.cl")
+	public String classUpdateForm(String cNo, Model model) {
+
+		Club c = cService.selectClassDetail(cNo);
+		model.addAttribute("c", c);
+		
+		return "class/classUpdateForm";
+	}
+	
+	/*
+	@ResponseBody
+	@RequestMapping("deleteClass.cl")
+	public String deleteClass(String cNo, Model model) {
+		
+		System.out.println(cNo);
+		
+		int result = cService.deleteClass(cNo);
+		
+		System.out.println("결과 : " + result);
+		if(result> 0) {
+			System.out.println("성공했니");
+			return "result";
+		}else {
+			System.out.println("실패했니");
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
+		}
+	}
+	*/
+	
+	@RequestMapping("deleteClass.cl")
+	public String deleteClass(String cNo) {
+		
+		System.out.println("컨 : " + cNo);
+		int result = cService.deleteClass(cNo);
+		System.out.println("컨 결과 : " + result);
+		return "redirect:/";
 	}
 		
 }
