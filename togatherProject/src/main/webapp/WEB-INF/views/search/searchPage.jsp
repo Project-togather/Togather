@@ -151,11 +151,19 @@ nav a.is-current {
 }
 
 
+/* 페이징 디자인 */
+.wrapper {
+	
+	position: relative;
+}
 
 
+#pagingArea {
 
+	position: absolute;
 
-
+	left: 42%;
+}
 
 
 
@@ -264,7 +272,7 @@ nav a.is-current {
 </head>
 <body>
 
-    		<!-- Preloader-->
+    	<!-- Preloader-->
 		<div class="page-loader">
 			<div class="loader"></div>
 		</div>
@@ -299,64 +307,59 @@ nav a.is-current {
 		
 		<!-- 소셜링 ajax 영역 -->
 		<section class="module">
-			<div class="container">
-			
-				<div class="socialing">
-
-						<!-- 
-						<c:forEach var="s" items="${ list }">
-						<div class="col-md-4 post-item">
-							// Post
-							<article class="post">
-								<div class="post-preview"><a href="#"><img src="assets/images/widgets/1.jpg" alt=""></a></div>
-								<div class="post-wrapper">
-									<div class="post-header">
-										<h5 class="post-title display-1"><a href="blog-single-1.html">${ s.classTitle }</a></h5>
+				<div class="container">
+					<div class="socialing">
+						<div class="row">
+					
+							<!--  
+							<div class="col-md-4 post-item">
+								<article class="post">
+									<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
+									<div class="post-wrapper">
+										<div class="post-header">
+											<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
+										</div>
+										<div class="post-content">
+											<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
+										</div>
+										<div class="post-more"><a href="#">read more...</a></div>
 									</div>
-									<div class="post-content">
-										<p>${ s.classLocation }</p>
-									</div>
-									<div class="post-more"><a href="#">${ s.classDate }</a></div>
-								</div>
-							</article>
-							// Post end
+								</article>
+							</div>
+							-->
+							
 						</div>
-						</c:forEach>
-						 -->			
-						
-				</div>
+					</div>
+					
 
-				<!-- 
+
 				<div id="pagingArea">
-					<ul class="pagination">
-							
-							<c:choose>
-								<c:when test="${ pi.currentPage eq 1 }">
-									<li class="page-item disabled"><a class="page-link" href="">&laquo;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="list.so?cpage=${ pi.currentPage - 1 }">&laquo;</a></li>
-								</c:otherwise>
-							</c:choose>
-							
-							<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-								<li class="page-item"><a class="page-link" href="list.so?cpage=${ p }">${ p }</a></li>
-							 </c:forEach>
-							 
-							 <c:choose>
-								 <c:when test="${ pi.currentPage eq pi.maxPage }">
-									 <li class="page-item disabled"><a class="page-link" href="">&raquo;</a></li>
-								 </c:when>
-								 <c:otherwise>
-									 <li class="page-item"><a class="page-link" href="list.so?cpage=${ pi.currentPage + 1 }">&raquo;</a></li>
-								 </c:otherwise>
-							 </c:choose>
-							 
-					</ul>
+					<nav aria-label="Page navigation example">
+					
+					  <ul class="pagination">
+					  
+					  	<!--
+					    <li class="page-item">
+					      <a class="page-link" href="#" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+					    <li class="page-item"><a class="page-link" href="#">1</a></li>
+					    <li class="page-item"><a class="page-link" href="#">2</a></li>
+					    <li class="page-item"><a class="page-link" href="#">3</a></li>
+					    <li class="page-item">
+					      <a class="page-link" href="#" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+					    -->
+					    
+					  </ul>
+					  
+					</nav>
 				</div>
-				-->
 				
-				
+				</div>
 			</div>
 		</section>
 		
@@ -364,7 +367,64 @@ nav a.is-current {
 		
 		
 		
-		
+		<!-- 클럽 ajax 영역 -->
+		<section class="module">
+				<div class="container">
+					<div class="club">
+						<div class="row">
+					
+							<!--  
+							<div class="col-md-4 post-item">
+								<article class="post">
+									<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
+									<div class="post-wrapper">
+										<div class="post-header">
+											<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
+										</div>
+										<div class="post-content">
+											<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
+										</div>
+										<div class="post-more"><a href="#">read more...</a></div>
+									</div>
+								</article>
+							</div>
+							-->
+							
+						</div>
+					</div>
+					
+
+				<!-- 
+				<div id="pagingArea">
+					<nav aria-label="Page navigation example">
+					
+					  <ul class="pagination">
+					  
+					  	
+					    <li class="page-item">
+					      <a class="page-link" href="#" aria-label="Previous">
+					        <span aria-hidden="true">&laquo;</span>
+					      </a>
+					    </li>
+					    <li class="page-item"><a class="page-link" href="#">1</a></li>
+					    <li class="page-item"><a class="page-link" href="#">2</a></li>
+					    <li class="page-item"><a class="page-link" href="#">3</a></li>
+					    <li class="page-item">
+					      <a class="page-link" href="#" aria-label="Next">
+					        <span aria-hidden="true">&raquo;</span>
+					      </a>
+					    </li>
+					    
+					    
+					  </ul>
+					  
+					</nav>
+				</div>
+				 -->
+				
+				</div>
+			</div>
+		</section>
 		
 		
 		
@@ -422,12 +482,13 @@ nav a.is-current {
 
 		<script>
 			<!-- 소셜링 ajax 스크립트 영역 -->
-			$(function() {
+			 $(function() {
 			    $("#socialingClick").click(function() {
 			        loadSocialingData(1); // 초기 페이지 번호 (1)로 데이터 로드
 			    });
 			    
 			    /*
+			    
 			    // 페이징 버튼 클릭 시 해당 페이지 데이터 로드
 			    $(document).on("click", ".pagination a", function(e) {
 			        e.preventDefault();
@@ -448,26 +509,84 @@ nav a.is-current {
 			                let list = response.list;
 			                
 			                
-			                $(".socialing").empty();
+			                $(".socialing .row").empty();
 
 			                
 			                $.each(list, function(index, item) {
 			                	
 			                	let row = $("<div class='col-md-4 post-item'>");
-			                	row.append($("<article class='post'>"));
-			                	
+			                    let article = $("<article class='post'>");
+
+			                    let postPreview = $("<div class='post-preview'></div");
+			                    let postWrapper = $("<div class='post-wrapper'></div");
+			                    let postContent = $("<div class='post-content'></div");
+			                    let postMore = $("<div class='post-more'></div");
+
+			                    // <a href='#'>를 추가
+			                    let link = $("<a href='#'></a>");
+
+			                    // <img src="assets/images/widgets/3.jpg" alt="">를 추가 (이미지 경로 수정)
+			                    let image = $("<img src='assets/images/widgets/3.jpg' alt='' />");
+
+			                    // 링크 안에 이미지를 넣음
+			                    link.append(image);
+
+			                    // postPreview 안에 링크를 넣음
+			                    postPreview.append(link);
+
+			                    // postWrapper 안에 post-header 추가
+			                    postWrapper.append("<div class='post-header'></div>");
+
+			                    let postHeader = postWrapper.find(".post-header");
+			                    let postTitle = $("<h2 class='socialing-title'></h2>");
+			                    let postLink = $("<a href='blog-single-1.html'></a>");
+			                    
+			                    // postLink를 postTitle에 추가
+			                    postTitle.append(postLink);
+
+			                    // postTitle를 postHeader에 추가
+			                    postHeader.append(postTitle);
+
+
+			                    // postMore 안에 <a href='#'></a>를 추가
+			                    let moreLink = $("<a href='#'></a>");
+			                    postMore.append(moreLink);
+
+			                    article.append(postPreview);
+			                    article.append(postWrapper);
+			                    article.append(postContent);
+			                    article.append(postMore);
+
+			                    row.append(article);
+
+			                 	// item 넣기
+			                 	
+			                 	// 모임 명
+			                    postLink.text(item.classTitle);
+			                 	postTitle.append(postLink);
+			                 	
+			                 	// 모임 타입
+			                 	let paragraph = $("<p>" + item.clType + "</p>");
+								postContent.append(paragraph);
+			                 	
+			                 	// 모임 날짜
+			                 	moreLink.text(item.classDate);
+								postMore.append(moreLink);
+			                 	
 			                    
 			                    
-			                    $(".socialing").append(row);
+			                    $(".socialing .row").append(row);
 			                    
 			                    $(".feed").hide();
-			                    $(".socialing").show();
+			                    
+			                    $(".socialing .row").show();
+			                    $(".pagination").show();
 			                });
 			                
-							/*
+							
 			                // 페이징 버튼 업데이트
 			                updatePagination(response.pageInfo);
-							*/
+							
 			            },
 			            error: function() {
 			                console.log("ajax 통신 실패");
@@ -476,20 +595,54 @@ nav a.is-current {
 			    }
 			    
 			    
-			    /*
+			    
+			    
+			    <!-- 소셜링 페이징바 영역 -->
 			    function updatePagination(pageInfo) {
 			        let pagination = $(".pagination");
 			        pagination.empty();
-			        
+
+			        // << 버튼
+			        if (pageInfo.currentPage > 1) {
+			            let prevPageLink = $("<a class='page-link' href='#' aria-label='Previous'>&laquo;</a>");
+			            prevPageLink.data("page", pageInfo.currentPage - 1);
+			            pagination.append($("<li class='page-item'></li>").append(prevPageLink));
+			            prevPageLink.click(function() {
+			                loadSocialingData(pageInfo.currentPage - 1);
+			            });
+			        } else {
+			            pagination.append($("<li class='page-item disabled'></li").append($("<a class='page-link' href='#' aria-label='Previous'>&laquo;</a>")));
+			        }
+
+			        // 숫자 버튼
 			        for (let i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
-			            let pageLink = $("<a>").text(i).data("page", i);
+			            let pageLink = $("<a class='page-link' href='#'></a>").text(i);
+			            pageLink.data("page", i);
 			            if (i === pageInfo.currentPage) {
-			                pageLink.addClass("current-page");
+			                pageLink.parent().addClass("active");
 			            }
-			            pagination.append(pageLink);
+			            let pageItem = $("<li class='page-item'></li").append(pageLink);
+			            pagination.append(pageItem);
+
+			            // Clicking a page number loads the corresponding page
+			            pageLink.click(function() {
+			                loadSocialingData(i);
+			            });
+			        }
+
+			        // >> 버튼
+			        if (pageInfo.currentPage < pageInfo.maxPage) {
+			            let nextPageLink = $("<a class='page-link' href='#' aria-label='Next'>&raquo;</a>");
+			            nextPageLink.data("page", pageInfo.currentPage + 1);
+			            pagination.append($("<li class='page-item'></li").append(nextPageLink));
+			            nextPageLink.click(function() {
+			                loadSocialingData(pageInfo.currentPage + 1);
+			            });
+			        } else {
+			            pagination.append($("<li class='page-item disabled'></li").append($("<a class='page-link' href='#' aria-label='Next'>&raquo;</a>")));
 			        }
 			    }
-			    */
+			    
 			});
 
 		
@@ -497,7 +650,7 @@ nav a.is-current {
 		
 		
 		
-        	<!-- 피트 ajax 스크립트 영역 -->
+        	<!-- 피드 ajax 스크립트 영역 -->
 			$(function() {
 				$("#feedClick").click(function() {
 					
@@ -505,7 +658,7 @@ nav a.is-current {
 						url:"getList.fe",
 						success:function(list) {
 							
-							$(".socialing").hide();
+							$(".socialing .row").hide();
 							
 							// console.log(list);
 							
@@ -556,7 +709,9 @@ nav a.is-current {
 							
 							$(".feed").html(value);
 							
-							$(".socialing").hide();
+							$(".socialing .row").hide();
+							$(".pagination").hide();
+							
 							$(".feed").show();
 							
 						}, error:function() {

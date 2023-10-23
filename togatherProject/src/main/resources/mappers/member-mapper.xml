@@ -292,4 +292,12 @@
 	 	   and mem_pwd = #{memPwd}
 	</select>
 	
+	<select id="selectMemberList" resultMap="MemberResult">
+		select
+            mem_no
+        ,   mem_name
+    from member
+    where m_status = 'Y'
+	</select>
+	
 </mapper>
