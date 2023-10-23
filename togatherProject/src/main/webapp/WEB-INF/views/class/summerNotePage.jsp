@@ -14,13 +14,27 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 <style>
-.summernote{width:800px; margin: auto;}
+.summernote{width:800px;}
+.btnarea{float: right; margin-right: 20px;}
+.btnarea>button{
+	width: 80px;
+	height: 40px;
+	margin-right: 10px;
+}
+button:hover {
+	cursor: pointer;
+	background-color: orange;
+}
 </style>
 </head>
 <body>
 	<div class="summernote">
-		<form action="insertClass.cl">
+		<form action="insertContent.cl" method="post">
 			<textarea id="summernote" name="classContent"></textarea>
+			<div class="btnarea">
+				<button type="submit" id="submitbtn">작성</button>
+				<button type="button" id="cancel">취소</button>
+			</div>
 		</form>
 	</div>
 	
@@ -48,6 +62,10 @@
   					  ],
 					fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
 					fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+		})
+		
+		$("#cancel").click(function(){
+			window.close();
 		})
 	</script>
 </body>

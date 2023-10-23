@@ -1,7 +1,12 @@
 package com.kh.spring.club.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -305,5 +310,11 @@ public class ClubController {
 	public String summerNotePage() {
 		return "class/summerNotePage";
 	}
-		
+	
+	@RequestMapping(value="insertContent.cl")
+	public String insertContent(String classContent) {
+		return "redirect:enrollForm.cl";
+	}
+	
+	
 }

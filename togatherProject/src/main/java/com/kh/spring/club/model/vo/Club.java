@@ -24,7 +24,7 @@ public class Club {
 	private String classContent; // 모임내용
 	private String classLocation; // 모임지역
 	private String classDate; // 모임날짜
-	private String classTime; // 모임시간
+	private String classTime; // 모임시간(분)
 	private String classPrice; // 모임비
 	private String avgPrice; // 모임비 평균 값
 	private int hour; // 모임시간에서 시만 자름
@@ -39,6 +39,10 @@ public class Club {
 	private String status; // 폐쇄상태
 	private int vacancy; // 남은 자리
 	private String nickname; // 닉네임
+	
+	// 카카오맵 api 추가
+	private String latitude; // 위도
+	private String longitude; // 경도
 	
 	private Attachment attachment;
 	

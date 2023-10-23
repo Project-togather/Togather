@@ -8,15 +8,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
-
-<!-- 카카오 지도 코드 보류
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js" integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous"></script>
-<script>
-	Kakao.init('JAVASCRIPT_KEY');
-	console.log(Kakao.isInitialized());
-</script>
--->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+    
 <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
@@ -77,7 +71,12 @@
 .hiddenMap{
 	display: none;
 }
+.hiddenBusiness{
+	display: none;
+}
 .addorange{background-color: orange;}
+#summernoteLoad:hover{color: orange;}
+#summernoteView{width:800px;}
 </style>		
 </head>
 <body>
@@ -100,7 +99,7 @@
 							<div class="up-form">
 								<form action="enroll.cl" method="post" enctype="multipart/form-data">
 									<div class="form-group">
-										<input type="hidden" id="hidden" name="memNo" value="${ loginMember.memNo }">
+										<input type="hidden" name="memNo" value="${ loginMember.memNo }">
 										<h5>모임유형을 선택해주세요!</h5>
 									</div>
 									
@@ -116,6 +115,39 @@
 									<div class="form-group">
 										<div class="form-control" id="oneday" style="color: white;">원데이</div>
 									</div>
+									
+									<!-- 사업자 등록증 -->
+									<div class="hiddenBusiness" id="hiddenBusiness">
+										<div class="form-group">
+											<input class="form-control" type="text" id="business" style="color: white;" placeholder="사업자번호를 입력해주세요">
+											<div id="verification"></div>
+										</div>
+									</div>
+									
+									<script>
+										$(function(){
+											$("#business").keyup(function(){
+												var businessNum = $("#business").val()
+												var data = {
+													    b_no: [businessNum]
+													   }; 
+												$.ajax({
+													  url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=6XpkUEJDu71bRIhw1wGcWoIAAgK8quJ0dx8ZLuYoj4h1LwPhtwnVd%2BZrZQjPhEJJgUEVnwr2avsIeJJIBOClpg%3D%3D",
+													  type: "POST",
+													  data: JSON.stringify(data), // json 을 string으로 변환하여 전송
+													  dataType: "JSON",
+													  contentType: "application/json",
+													  accept: "application/json",
+													  success: function(result) {
+													      $("#verification").html(result.data[0].tax_type);
+													  },
+													  error: function(result) {
+													      console.log(result.responseText); //responseText의 에러메세지 확인
+													  }
+													})
+												})
+											})
+									</script>
 									
 									<input type="hidden" id="clType" name="clType">
 										
@@ -183,11 +215,18 @@
 												
 												$("#oneday").css("backgroundColor", "purple");
 												$("#clType").val(4);
+												
+												if($("#hiddenBusiness").hasClass("hiddenBusiness")){
+													$("#hiddenBusiness").removeClass("hiddenBusiness");
+												}
 											}else{
 												$("#socialing").css("display", "");
 												$("#club").css("display", "");
 												$("#challenge").css("display", "");
+												$("#business").val("");
+												$("#verification").html("");
 												
+												$("#hiddenBusiness").addClass("hiddenBusiness");
 												$("#oneday").css("backgroundColor", "");
 												$("#clType").val(0);
 											}
@@ -415,33 +454,55 @@
 									</div>
 									<br>
 									
+								    <!-- TOAST UI Editor가 들어갈 div태그 -->
+								    <div id="editor"></div>
+								    
+								    <!-- TOAST UI Editor CDN URL(JS) -->
+								    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+								
+								    <!-- TOAST UI Editor 생성 JavaScript 코드 -->
+								    <script>
+								        const editor = new toastui.Editor({
+								            el: document.querySelector('#editor'),
+								            previewStyle: 'vertical',
+								            height: '500px',
+								            initialValue: '안녕하세요. METASTAR입니다.',
+								        });
+								
+								        // editor.getHtml()을 사용해서 에디터 내용 받아오기
+								        see1 = function() {
+								            console.log(editor.getHTML());
+								        }
+								        see2 = function() {
+								            console.log(editor.getMarkdown());
+								        }
+								    </script>
+									
+									<!-- summernote
 									<div class="form-group">
-										<input type="button" id="summernote" value="내용작성시 버튼을 클릭해주세요">
+										<a id="summernoteLoad" data-toggle="modal" style="text-decoration: none;">내용작성시 버튼을 여기를 클릭해주세요</a>
 									</div>
 									
-									<textarea style="display: none;" name="classContent" value=""></textarea>
+									<div id="summernoteView">
+									</div>
+									
+									// <textarea style="display: none;" id="summernote" name="classContent">${ classContent }</textarea> 
+									<textarea style="display: none;" id="summernote" name="classContent">내용 테스트</textarea>
 									
 									<script>
-										$("#summernote").click(function(){
-											$.ajax({
-												success:()=>{
-													location.href="summer.pa"
-													console.log("성공");
-												},
-												error:()=>{
-													console.log("실패");
-												}
-											})
+										$("#summernoteLoad").click(function(){
+											$("#summernoteView").load("summer.pa");
 										})
 									</script>
+									 -->
+									 
+									<br>
 									
 									<h5>언제 만날까요?</h5>
 									<div class="form-group">
 										<input type="date" name="classDate">
 										<input type="time" name="classTime">
 									</div>
-									
-									
 																		
 									<h5>어디서 만날까요?</h5>
 									<div class="choiseMap">
@@ -499,6 +560,8 @@
 				                    키워드 : <input type="text" value="서울" id="keyword" size="15" name="classLocation" placeholder="키워드"> 
 				                    <button id="search" type="button" onclick="searchPlaces(); return false;">검색하기</button> 
 									</div>
+									<input type="hidden" name="latitude" id="latitude"> <!-- 위도 -->
+									<input type="hidden" name="longitude" id="longitude"> <!-- 경도 -->
 									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9c08fb064e6bc40cfa573768b020756&libraries=services"></script>
 									
 									<script>
@@ -585,6 +648,7 @@
 									        var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
 									            marker = addMarker(placePosition, i), 
 									            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+									            
 									        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 									        // LatLngBounds 객체에 좌표를 추가합니다
 									        bounds.extend(placePosition);
@@ -593,31 +657,21 @@
 									        // 해당 장소에 인포윈도우에 장소명을 표시합니다
 									        // mouseout 했을 때는 인포윈도우를 닫습니다
 									        (function(marker, title) {
-									            kakao.maps.event.addListener(marker, 'mouseover', function() {
-									                displayInfowindow(marker, title);
-									            });
-												
 									            kakao.maps.event.addListener(marker, 'click', function() {
 									            	map.setCenter(marker.getPosition());
 									            	$(this).addClass("addorange");
 									            	$(this).siblings().removeClass("addorange");
+
+									                $("#latitude").val(marker.getPosition().getLat()); // 위도 값 저장
+									                $("#longitude").val(marker.getPosition().getLng()); // 경도 값 저장
+									                
 									            });
-									            
-									            kakao.maps.event.addListener(marker, 'mouseout', function() {
-									                infowindow.close();
-									            });
-												/*
-									            itemEl.onmouseover =  function () {
-									                displayInfowindow(marker, title);
-									            };
-									
-									            itemEl.onmouseout =  function () {
-									                infowindow.close();
-									            };
-									            */
 									            
 									            itemEl.onclick = function(){
 									            	map.setCenter(marker.getPosition());
+									                $("#latitude").val(marker.getPosition().getLat()); // 위도 값 저장
+									                $("#longitude").val(marker.getPosition().getLng()); // 경도 값 저장
+													
 									            	if($(this).hasClass("addorange")){
 									            		$(this).removeClass("addorange");
 									            	}else{
@@ -836,7 +890,7 @@
 										}
 									</script>
 			
-									<input type="submit" value="모임등록">
+									<input type="submit" id="submitbtn" value="모임등록">
 								</form>		
 							</div>
 						</div>
@@ -848,5 +902,7 @@
 	</div>
 	<!-- Wrapper end-->
 	<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+	
 </body>
 </html>
