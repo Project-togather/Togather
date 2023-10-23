@@ -19,9 +19,8 @@
 
 <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-.map_wrap{margin:auto;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:610px;;height:400px; line-height: 1;}
+.map_wrap {position:relative; right:35px; width:610px;;height:400px; line-height: 1;}
 #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:200px;height:400px; margin:0px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
@@ -78,6 +77,7 @@
 .hiddenMap{
 	display: none;
 }
+.addorange{background-color: orange;}
 </style>		
 </head>
 <body>
@@ -416,11 +416,23 @@
 									<br>
 									
 									<div class="form-group">
-										<textarea id="summernote" name="classContent" style="color:black; resize: none" cols="70" rows="5" placeholder="소개글을 입력해 주세요"></textarea>
+										<input type="button" id="summernote" value="내용작성시 버튼을 클릭해주세요">
 									</div>
 									
+									<textarea style="display: none;" name="classContent" value=""></textarea>
+									
 									<script>
-										
+										$("#summernote").click(function(){
+											$.ajax({
+												success:()=>{
+													location.href="summer.pa"
+													console.log("성공");
+												},
+												error:()=>{
+													console.log("실패");
+												}
+											})
+										})
 									</script>
 									
 									<h5>언제 만날까요?</h5>
@@ -490,6 +502,12 @@
 									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9c08fb064e6bc40cfa573768b020756&libraries=services"></script>
 									
 									<script>
+									$(function(){
+										$("#offLine").click(function(){
+											 map.relayout();
+										})
+									})
+									
 									// 마커를 담을 배열입니다
 									var markers = [];
 									
@@ -504,9 +522,6 @@
 									
 									// 장소 검색 객체를 생성합니다
 									var ps = new kakao.maps.services.Places();  
-									
-									// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-									var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 									
 									// 키워드로 장소를 검색합니다
 									searchPlaces();
@@ -570,11 +585,10 @@
 									        var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
 									            marker = addMarker(placePosition, i), 
 									            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
-									
 									        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 									        // LatLngBounds 객체에 좌표를 추가합니다
 									        bounds.extend(placePosition);
-									
+									            
 									        // 마커와 검색결과 항목에 mouseover 했을때
 									        // 해당 장소에 인포윈도우에 장소명을 표시합니다
 									        // mouseout 했을 때는 인포윈도우를 닫습니다
@@ -582,11 +596,17 @@
 									            kakao.maps.event.addListener(marker, 'mouseover', function() {
 									                displayInfowindow(marker, title);
 									            });
-									
+												
+									            kakao.maps.event.addListener(marker, 'click', function() {
+									            	map.setCenter(marker.getPosition());
+									            	$(this).addClass("addorange");
+									            	$(this).siblings().removeClass("addorange");
+									            });
+									            
 									            kakao.maps.event.addListener(marker, 'mouseout', function() {
 									                infowindow.close();
 									            });
-									
+												/*
 									            itemEl.onmouseover =  function () {
 									                displayInfowindow(marker, title);
 									            };
@@ -594,7 +614,19 @@
 									            itemEl.onmouseout =  function () {
 									                infowindow.close();
 									            };
-									        })(marker, places[i].place_name);
+									            */
+									            
+									            itemEl.onclick = function(){
+									            	map.setCenter(marker.getPosition());
+									            	if($(this).hasClass("addorange")){
+									            		$(this).removeClass("addorange");
+									            	}else{
+									            		$(this).addClass("addorange");
+									            	}
+									            	$(this).siblings().removeClass("addorange");
+									            }
+									            
+									        })(marker, places[i]);
 									
 									        fragment.appendChild(itemEl);
 									    }
@@ -774,19 +806,6 @@
 									</div>
 									
 									<script>
-										
-									/*
-										$(document).ready(function() {
-										  $('#summernote').summernote({
-									 	    	placeholder: 'content',
-										        minHeight: 370,
-										        maxHeight: null,
-										        focus: true, 
-										        lang : 'ko-KR'
-										  });
-										});
-									*/
-
 										function chooseFile(num){
 											$("#file" + num).click();
 										}

@@ -300,5 +300,10 @@ public class ClubController {
 		int result = cService.checkLike(c);
 		return result;
 	}
+	
+	@RequestMapping("summer.pa")
+	public String summerNotePage() {
+		return "class/summerNotePage";
+	}
 		
 }
