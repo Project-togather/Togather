@@ -307,7 +307,7 @@ nav a.is-current {
 		
 		<!-- 소셜링 ajax 영역 -->
 		<section class="module">
-				<div class="container">
+			<div class="container">
 					<div class="socialing">
 						<div class="row">
 					
@@ -358,20 +358,16 @@ nav a.is-current {
 					  
 					</nav>
 				</div>
-				
-				</div>
 			</div>
 		</section>
 		
 		
 		
-		
-		
 		<!-- 클럽 ajax 영역 -->
 		<section class="module">
-				<div class="container">
-					<div class="club">
-						<div class="row">
+			<div class="container">
+				<div class="club">
+					<div class="row">
 					
 							<!--  
 							<div class="col-md-4 post-item">
@@ -390,41 +386,11 @@ nav a.is-current {
 							</div>
 							-->
 							
-						</div>
 					</div>
-					
-
-				<!-- 
-				<div id="pagingArea">
-					<nav aria-label="Page navigation example">
-					
-					  <ul class="pagination">
-					  
-					  	
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li class="page-item"><a class="page-link" href="#">1</a></li>
-					    <li class="page-item"><a class="page-link" href="#">2</a></li>
-					    <li class="page-item"><a class="page-link" href="#">3</a></li>
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					    
-					    
-					  </ul>
-					  
-					</nav>
-				</div>
-				 -->
-				
 				</div>
 			</div>
 		</section>
+		
 		
 		
 		
@@ -647,6 +613,39 @@ nav a.is-current {
 
 		
 		
+			 
+			<!-- 클럽 ajax 스크립트 영역 -->
+			 $(function() {
+				 $("#clubClick").click(function() {
+					 loadClubData(1);
+				 });
+				 
+				 function loadClubData(page) {
+					 
+					 $.ajax({
+						 url: "getList.cl",
+						 data: { cpage: page },
+						 success: function(response) {
+							 
+							 console.log(response);
+							 
+						 }, error: function() {
+							 console.log("ajax 통신 실패");
+						 }
+					 })
+					 
+				 }
+				 
+			 })
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
 		
 		
 		

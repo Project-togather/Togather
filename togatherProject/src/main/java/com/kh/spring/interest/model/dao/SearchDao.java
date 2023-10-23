@@ -44,9 +44,12 @@ public class SearchDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("clubMapper.selectSocialingList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClubList", null, rowBounds);
 		
 	}
+	
+	
+	
 	
 	
 	public ArrayList<Feed> selectFeedList(SqlSessionTemplate sqlSession) {
