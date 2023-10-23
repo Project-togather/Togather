@@ -312,9 +312,19 @@
 	    ,   c_title
 	    ,   c_location
 	    ,   c_date
-	    from class
-	    where status = 'Y'
+	    ,	cl_type
+	    	from class
+		  join attachment on (c_no = ref_fno)
+		 	where status = 'Y'
+		   and cl_type = 1
 	    order by c_no desc
+	</select>
+	
+	<select id="selectClubListCount" resultType="_int">
+		select
+		count(*)
+	from class
+	where status = 'Y'
 	</select>
 
 	<insert id="insertReply">
