@@ -29,7 +29,7 @@ public interface ClubService {
 	ArrayList<Club> selectMyClassList();
 	
 	// 모임 상세 조회
-	Club selectClassDetail(String classNo);
+	Club selectClassDetail(MyClass mc);
 	
 	// 댓글(모임) 등록
 	int insertReply(Reply r);
@@ -71,6 +71,6 @@ public interface ClubService {
 	int deleteClass(String classNo);
 	
 	// 모임에 가입한 멤버 확인
-	ArrayList<Member> classMemberList(String classNo);
+	ArrayList<Member> classMemberList(MyClass c);
 	
 }

@@ -30,7 +30,7 @@
 					<div class="row">
 						<div class="col-md-12 m-auto">
 							<div class="text-center">
-								<h6 class="text-uppercase"><span class="vacancy" id="class_info">&nbsp;잔여 ${ c.vacancy } 자리&nbsp;</span><span id="class_info">&nbsp;${ c.clName }&nbsp;</span></h6>
+								<h6 class="text-uppercase"><span class="vacancy" id="class_info">&nbsp;잔여 ${ c.peopleLimit - c.vacancy } 자리&nbsp;</span><span id="class_info">&nbsp;${ c.clName }&nbsp;</span></h6>
 								<h1 class="display-1">${ c.classTitle }</h1>
 								<div class="space" data-mY="40px"></div><a class="btn btn-white enter-btn" onclick="enterClass();" style="color:black;">모임 참가하기</a>
 							</div>
@@ -243,7 +243,7 @@
 						<div class="col-md-6 m-auto text-center">
 							<p class="subtitle">Tasty and crunchy</p>
 							<h1 class="display-1">참가중인 멤버 목록</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
+							<p class="lead">현재 ${ c.vacancy }명이 가입되어 있습니다!</p>
 							<div class="divider-border"></div>
 						</div>
 					</div>
@@ -255,80 +255,28 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="menu-simple">
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/1.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Wild Mushroom Bucatini with Kale</span></h6>
-										<p>Cheese, Garlic, Potato, Pork</p>
+								<c:forEach var="m" begin="0" end="4">
+									<div class="menu-simple-item">
+										<div class="menu-simple-item-img"><img src="${ list[m].img }" alt=""></div>
+										<div class="menu-simple-item-inner">
+											<h6><span>${ list[m].nickName }</span></h6>
+											<p>${ list[m].msg }</p>
+										</div>
 									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/2.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Lemon and Garlic Green Beans</span></h6>
-										<p>Pork meat, Sauces, Potato</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/3.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>American Brunch Combo Menu</span></h6>
-										<p>Bacon, Rice, Vegetables</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/4.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Smoked Paprika Hummus</span></h6>
-										<p>Shrimp, Vegetables, Sauce</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/5.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Italian Source Mushroom</span></h6>
-										<p>Steak, Spices, Sauces</p>
-									</div>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="menu-simple">
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/6.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Lemon and Garlic Green Beans</span></h6>
-										<p>Pork meat, Sauces, Potato</p>
+								<c:forEach var="m" begin="5" end="9">
+									<div class="menu-simple-item">
+										<div class="menu-simple-item-img"><img src="${ list[m].img }" alt=""></div>
+										<div class="menu-simple-item-inner">
+											<h6><span>${ list[m].nickName }</span></h6>
+											<p>${ list[m].msg }</p>
+										</div>
 									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/1.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>American Brunch Combo Menu</span></h6>
-										<p>Bacon, Rice, Vegetables</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/2.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Smoked Paprika Hummus</span></h6>
-										<p>Shrimp, Vegetables, Sauce</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/3.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Italian Source Mushroom</span></h6>
-										<p>Steak, Spices, Sauces</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/4.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Wild Mushroom Bucatini with Kale</span></h6>
-										<p>Cheese, Garlic, Potato, Pork</p>
-									</div>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>

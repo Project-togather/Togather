@@ -23,6 +23,6 @@ public class Reply {
 	private String refFno;
 	private String memNo;
 	
-	private String nickname;
+	private String nickName;
 	private String img;
 }

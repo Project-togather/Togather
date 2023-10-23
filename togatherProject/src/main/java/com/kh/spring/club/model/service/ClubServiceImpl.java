@@ -53,8 +53,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public Club selectClassDetail(String classNo) {
-		return cDao.selectClassDetail(classNo, sqlSession);
+	public Club selectClassDetail(MyClass mc) {
+		return cDao.selectClassDetail(mc, sqlSession);
 	}
 
 	@Override
@@ -124,14 +124,12 @@ public class ClubServiceImpl implements ClubService {
 
 	@Override
 	public int deleteClass(String classNo) {
-		int result = cDao.deleteClass(classNo, sqlSession);
-		System.out.println("서비스 : " + result);
-		return result;
+		return cDao.deleteClass(classNo, sqlSession);
 	}
 
 	@Override
-	public ArrayList<Member> classMemberList(String classNo) {
-		return null;
+	public ArrayList<Member> classMemberList(MyClass c) {
+		return cDao.classMemberList(c, sqlSession);
 	}
 	
 

@@ -43,12 +43,18 @@ public class MemberController {
    public String loginMember(Member m, Model model, HttpSession session) {
 	  //System.out.println("여기오냐?");
       Member loginMember = mService.loginMember(m);
+      
 
       if(loginMember != null) {
     	 //System.out.println(loginMember);
     	 Attachment pImg = mService.getProfileImg(loginMember.getMemNo());
     	 //System.out.println("컨트롤러에서 받아오자 " + pImg);
          //System.out.println("세션에 저장");
+    	 ArrayList<Member> clType = mService.selectClType(m);
+    	 
+    	 System.out.println("쏄탑 : " + clType);
+    	  
+    	 session.setAttribute("clType", clType);
 
          session.setAttribute("loginMember", loginMember);
          session.setAttribute("pImg", pImg);
