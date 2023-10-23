@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.reply.model.vo.Reply;
 import com.kh.spring.myClass.model.vo.MyClass;
 
@@ -202,9 +203,12 @@ public class ClubController {
 	}
 	
 	@RequestMapping("detail.cl")
-	public String selectClassDetail(String cNo, Model model) {
+	public String selectClassDetail(MyClass mc, Model model) {
 		
-		Club c = cService.selectClassDetail(cNo);
+		Club c = cService.selectClassDetail(mc);
+		ArrayList<Member> list = cService.classMemberList(mc);
+		
+		System.out.println("리스트 : " + list);
 
 		if(c.getClassApproval().equals("Y")) {
 			c.setClassApproval("승인제");
@@ -212,6 +216,7 @@ public class ClubController {
 			c.setClassApproval("선착순");
 		}
 		
+		model.addAttribute("list", list);
 		model.addAttribute("c", c);
 		return "class/classDetailView";
 	}
@@ -302,42 +307,40 @@ public class ClubController {
 	}
 	
 	@RequestMapping("classUpdateForm.cl")
-	public String classUpdateForm(String cNo, Model model) {
+	public String classUpdateForm(MyClass mc, Model model) {
 
-		Club c = cService.selectClassDetail(cNo);
+		Club c = cService.selectClassDetail(mc);
 		model.addAttribute("c", c);
 		
 		return "class/classUpdateForm";
 	}
 	
-	/*
-	@ResponseBody
 	@RequestMapping("deleteClass.cl")
 	public String deleteClass(String cNo, Model model) {
 		
-		System.out.println(cNo);
-		
 		int result = cService.deleteClass(cNo);
 		
-		System.out.println("결과 : " + result);
-		if(result> 0) {
-			System.out.println("성공했니");
-			return "result";
-		}else {
-			System.out.println("실패했니");
-			model.addAttribute("errorMsg", "실패!?");
-			return "/";
+		if(result > 0) {
+			return "redirect:/";			
+		} else {
+			model.addAttribute("errorMsg", "게시글 등록에 실패");
+			return "common/errorPage";
 		}
 	}
-	*/
 	
-	@RequestMapping("deleteClass.cl")
-	public String deleteClass(String cNo) {
-		
-		System.out.println("컨 : " + cNo);
-		int result = cService.deleteClass(cNo);
-		System.out.println("컨 결과 : " + result);
-		return "redirect:/";
+	@RequestMapping("memberListPage.cl")
+	public String memberListPage(String cNo, Model model) {
+		model.addAttribute("classNo", cNo);
+		return "class/classMemberList";
 	}
+	
+	@ResponseBody
+	@RequestMapping("classMemberList.cl")
+	public ArrayList<Member> classMemberList(MyClass c) {
+		ArrayList<Member> list = cService.classMemberList(c);
+		return list;
+		
+	}
+	
 		
 }

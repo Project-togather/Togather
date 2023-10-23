@@ -42,6 +42,8 @@ public interface MemberService {
 
 	//여기까지
 	
+	// 로그인 세션 + 해당 유저의 모임 가입상태 세션
+	ArrayList<Member> selectClType(Member m);
 	
 	
 }

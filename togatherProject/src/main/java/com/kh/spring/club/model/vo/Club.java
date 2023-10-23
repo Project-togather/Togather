@@ -40,6 +40,7 @@ public class Club {
 	private int vacancy; // 남은 자리
 	private String nickName; // 닉네임
 	
+	private int clTypeStatus; // 모임 가입상태
 	private Attachment attachment;
 	
 }

@@ -113,5 +113,10 @@ public class MemberServiceImpl implements MemberService {
 	public String selectThumbnail(String feNo) {
 		return mDao.selectThumbnail(sqlSession , feNo);
 	}
+
+	@Override
+	public ArrayList<Member> selectClType(Member m) {
+		return mDao.selectClType(m, sqlSession);
+	}
 	
 }

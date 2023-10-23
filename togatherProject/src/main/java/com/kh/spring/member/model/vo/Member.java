@@ -31,4 +31,6 @@ public class Member {
 	private String img ; 
 	private String msg;
 	
+	private int clTypeStatus; // 모임 가입 상태 (가입중 / 승인대기중 / 빈자리 대기중)
+	
 }

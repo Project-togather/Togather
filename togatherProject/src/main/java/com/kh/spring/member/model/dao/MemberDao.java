@@ -77,4 +77,8 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.selectThumbnail",feNo);
 	}
 	
+	public ArrayList<Member> selectClType(Member m, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectClType", m);
+	}
+
 }

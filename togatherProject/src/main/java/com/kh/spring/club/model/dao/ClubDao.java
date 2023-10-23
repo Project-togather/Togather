@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
 
@@ -33,8 +34,8 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.selectOneDayList");
 	}
 	
-	public Club selectClassDetail(String classNo, SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("clubMapper.selectClassDetail", classNo);
+	public Club selectClassDetail(MyClass mc, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("clubMapper.selectClassDetail", mc);
 	}
 	
 	public int insertReply(Reply r, SqlSessionTemplate sqlSession) {
@@ -93,9 +94,11 @@ public class ClubDao {
 	}
 	
 	public int deleteClass(String classNo, SqlSessionTemplate sqlSession) {
-		int result = sqlSession.update("clubMapper.deleteClass", classNo);
-		System.out.println("다오 : " + result);
-		return result;
+		return sqlSession.update("clubMapper.deleteClass", classNo);
+	}
+	
+	public ArrayList<Member> classMemberList(MyClass c, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("clubMapper.classMemberList", c);
 	}
 	
 	
