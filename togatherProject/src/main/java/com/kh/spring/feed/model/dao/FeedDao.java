@@ -1,6 +1,7 @@
 package com.kh.spring.feed.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -30,5 +31,14 @@ public class FeedDao {
 	
 	public Member selectReplyMember(SqlSessionTemplate sqlSession , String memNo) {
 		return sqlSession.selectOne("myfeedMapper.selectReplyMember" ,memNo);
+	}
+	
+	public ArrayList<Member> memberSearchList(SqlSessionTemplate sqlSession , HashMap<String, String> map){
+		return (ArrayList)sqlSession.selectList("myfeedMapper.memberSearchList" , map);
+	}
+	
+	//검색된 맴버 정보 가져오기
+	public Member searchUserPage(SqlSessionTemplate sqlSession , String memNo) {
+		return sqlSession.selectOne("myfeedMapper.searchUserPage", memNo);
 	}
 }

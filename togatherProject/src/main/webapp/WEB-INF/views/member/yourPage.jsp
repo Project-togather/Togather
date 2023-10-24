@@ -10,7 +10,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>myPage</title>
+		<title> ${targetMem.memName} 's Page</title>
 		<!-- Favicons-->
 		
 		<link rel="shortcut icon" href="assets/images/favicon.png">
@@ -69,7 +69,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="text-center">
-								<h2 class="display-1"> ${loginMember.memName} 's Page</h2>
+								<h2 class="display-1"> ${targetMem.memName} 's Page</h2>
 								<p>personal Page<br/> show who you are</p>
 							</div>
 						</div>
@@ -83,71 +83,43 @@
 			<div class="module">
 				<div class="container">
 					<div class="gallery-item">
-						<div class="gallery-image" data-background="${loginMember.img}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
+						<div class="gallery-image" data-background="${targetMem.img}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
 						
 						<br><br><br><br>
 					</div>
 				<table border="0" style="width: 800px; margin-top: 100px;" align="center">
 					<thead>
 					<tr>
-						<th>${loginMember.memName} 님
+						<th>${targetMem.memName} 님
 							
 						</th>
 							
-						<td><a href="">setMyProfile</a></td>
+						<td>
+							<a  id="requestFollw">Request Follow</a>
+						</td>
 						<td><a href="" id="testBtn" class="btn">search User</a></td>		
 					</tr>		
 					</thead>
 						<tr>
 							<th style="width: 100px;">FeedsCount</th>
-							<td>
-								<c:choose>
-									<c:when test="${not empty fList }">
-										${fn:length(fList)}
-									</c:when>
-									<c:otherwise>
-										0
-									</c:otherwise>
-								</c:choose>
-							
-							
-							</td>
+							<td>${fn:length(fList)}</td>
 							
 						</tr>
 						<tr>
 							<th>Following</th>
-							<td>
-								<c:choose>
-									<c:when test="${not empty followingList }">
-										<div> ${fn:length(followingList)}</div>
-									</c:when>
-									<c:otherwise>
-										0
-									</c:otherwise>
-								</c:choose>
-							</td>
+							<td>5</td>
 							
 						</tr>
 						<tr>
 							<th>Follower</th>
-							<td>
-								<c:choose>
-									<c:when test="${not empty followerList }">
-										 <div> ${fn:length(followerList)}</div>
-									</c:when>
-									<c:otherwise>
-										0
-									</c:otherwise>
-								</c:choose>
-							
-							</td>
+							<td>50</td>
 							
 						</tr>
 						<tr>
 							<th>introduce</th>
 							<td colspan="2">
 								
-								${loginMember.msg}
+								${targetMem.msg}
 							</td>
 						</tr>	
 						<tr>
@@ -166,17 +138,7 @@
 				</div>
 			</div>
 
-				<div class="container">
-					<div id="newFeed" class="row" style="margin-left: 100px;">
-						<img src="assets/images/new.png" onclick="test();">
-					</div>
-				</div>
-				<script>
-					function test(){
-						location.href ="feedEnrollForm.me"
-					}
-
-				</script>
+		
 			
 			<!-- Menu-->
 			<section class="module" >
@@ -472,59 +434,66 @@
 								
 						</div>
 						<div id="searchResultSection" class="modal-body">
-
+						
+						
+						
+							   
+							   
 						</div>
-						<div class="modal-footer">
-							<button class="btn" type="button" data-dismiss="modal">close</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-			<!-- 팔로잉 모달 -->
-			<div class="modal" id="followModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				
-				<div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" >
-								<select id = "option">
-								    <option value="id">id</option>
-								    <option value="nickNmae">nickName</option>
-								</select>
-							</h5>
 							
-							<input class="form-control" id="searchUser" type="search" placeholder="search here">
-										
-								
-						</div>
-						<div id="searchResultSection" class="modal-body">
+						
+			
+						
 
-						</div>
 						<div class="modal-footer">
 							<button class="btn" type="button" data-dismiss="modal">close</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			
-			
 			
 			<script>
+			    //유저검색 모달 열기
 				$('#testBtn').click(function(e){
 					e.preventDefault();
 					$('#testModal').modal("show");
-				});
+				})
+				
+				//팔로우
+				$('#requestFollw').click(function(){
+					$.ajax({
+						url: "requestFollw.me",
+		    			data: {
+		    				toMem : '${targetMem.memNo}'
+		    			   ,fromMem : '${loginMember.memNo}'
+		    			},
+		    			success : function(result){
+		    				if(result==1){
+		    					swal("Follow!")
+		    				}else if (result ==2){
+		    					swal("you Already Follow this User");
+		    				}
+		    				
+							
+		    			},
+		    			error :function(){
+		    				  console.log("통신실패");
+		    			}
+					})
+				})
+			
+				
+					
 				
 				
-				
+				//눌렀을때 회원페이지로 이동
 				 $(function(){
-				    //아이디를 입력하는 input 요소 객체 변수에 담아두기
+				 
 				    const $searchUser = $("#searchUser"); //
 				    const $option = $("#option");
 				    	$searchUser.keyup(function(){
 							$.ajax({
-								url: "userSearch.me",
+								url: "search.me",
 				    			data: {
 				    				searchKey : $searchUser.val(),
 				    				searchType : $option.val()
@@ -566,6 +535,7 @@
 						 var searchNo = ($(e).find(".ref").val());
 						 location.href = "searchUserPage.fe?searchNo="+searchNo ; 
 					}
+				
 				
 				
 			</script>

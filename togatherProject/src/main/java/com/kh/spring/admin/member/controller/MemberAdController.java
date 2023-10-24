@@ -75,9 +75,6 @@ public class MemberAdController {
         //엑셀다운로드용 메서드
         ArrayList<Member> list = Aservice.selectMemberList2();
         
-        System.out.println(list);
-        
-        
         // Body
         for (int i=0; i<list.size(); i++) {
             row = sheet.createRow(rowNum++);
@@ -97,7 +94,7 @@ public class MemberAdController {
 
         // 컨텐츠 타입과 파일명 지정
         response.setContentType("ms-vnd/excel");
-//        response.setHeader("Content-Disposition", "attachment;filename=example.xls");
+        //response.setHeader("Content-Disposition", "attachment;filename=example.xls");
         response.setHeader("Content-Disposition", "attachment;filename=example.xlsx");
 
         // Excel File Output

@@ -27,6 +27,9 @@
 	 	<mapper resource="/mappers/admember-mapper.xml"/>
 	 	<mapper resource="/mappers/adcustomer-mapper.xml"/>
 	 	<mapper resource="/mappers/myfeed-mapper.xml"/>
+	 	<mapper resource="/mappers/adclass-mapper.xml"/>
+	 	<mapper resource="/mappers/search-mapper.xml"/>
+
 	 	
 	 	
 	 </mappers>

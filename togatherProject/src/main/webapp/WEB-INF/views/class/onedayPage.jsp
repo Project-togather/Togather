@@ -17,7 +17,7 @@
 				<h1 class="display-1">원데이 클래스</h1>
 				<p class="lead">배우고 싶은 걸 <br/> 하루만에 배워보아요</p>
 			<div class="divider-border"></div>
-		</div>/div>
+		</div>
 		
 	
 		<!-- Menu-->

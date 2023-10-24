@@ -14,9 +14,10 @@ import com.kh.spring.member.model.vo.Member;
 @Repository
 public class SearchDao {
 	
+	/*
 	public int selectSocialingListCount(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("clubMapper.selectSocialingListCount");
+		return sqlSession.selectOne("searchMapper.ajaxSelectSocialingListCount");
 		
 	}
 	
@@ -27,13 +28,13 @@ public class SearchDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("clubMapper.selectSocialingList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectSocialingList", null, rowBounds);
 		
 	}
 	
 	public int selectClubListCount(SqlSessionTemplate sqlSession) {
 		
-		return sqlSession.selectOne("clubMapper.selectClubListCount");
+		return sqlSession.selectOne("searchMapper.ajaxSelectClubListCount");
 		
 	}
 	
@@ -44,20 +45,38 @@ public class SearchDao {
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
-		return (ArrayList)sqlSession.selectList("clubMapper.selectSocialingList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectClubList", null, rowBounds);
+		
+	}
+	*/
+	
+	public int searchClassListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("searchMapper.ajaxSelectClassListCount");
+		
+	}
+	
+	public ArrayList<Club> searchClassList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectClassList", null, rowBounds);
 		
 	}
 	
 	
 	public ArrayList<Feed> selectFeedList(SqlSessionTemplate sqlSession) {
 		
-		return (ArrayList)sqlSession.selectList("feedMapper.selectFeedList");
+		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectFeedList");
 		
 	}
 	
 	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession) {
 		
-		return (ArrayList)sqlSession.selectList("memberMapper.selectMemberList");
+		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectMemberList");
 		
 	}
 	
