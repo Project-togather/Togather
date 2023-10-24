@@ -115,7 +115,7 @@ public class FeedController {
 			rList.get(i).setNickName(m.getNickName());
 			rList.get(i).setImg(m.getImg());
 		}
-		System.out.println("언디파인 디버깅" + rList);
+		
 		return new Gson().toJson(rList);
 	}
 	
@@ -129,7 +129,7 @@ public class FeedController {
 		map.put("searchKey", searchKey);
 		map.put("searchType", searchType);
 		ArrayList<Member> memberList = fService.memberSearchList(map);
-		System.out.println(memberList);
+		
 		return new Gson().toJson(memberList);
 		
 		
@@ -145,7 +145,7 @@ public class FeedController {
 			return "redirect:/mypage.me";
 		}else {
 			Member targetMem = fService.searchUserPage(searchNo);//검색된 멤버의 정보 가져오자
-			System.out.println(targetMem);
+			//System.out.println(targetMem);
 			//피드가져오고
 			 ArrayList<Feed> fList = mService.selectFeedList(searchNo);
 			  //다음은 feed_no 를 기준으로 썸네일을 불러오자

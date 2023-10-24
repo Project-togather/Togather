@@ -94,7 +94,9 @@
 							
 						</th>
 							
-						<td><a href="">Request Follow</a></td>
+						<td>
+							<a  id="requestFollw">Request Follow</a>
+						</td>
 						<td><a href="" id="testBtn" class="btn">search User</a></td>		
 					</tr>		
 					</thead>
@@ -449,16 +451,44 @@
 					</div>
 				</div>
 			</div>
+			
 			<script>
+			    //유저검색 모달 열기
 				$('#testBtn').click(function(e){
 					e.preventDefault();
 					$('#testModal').modal("show");
-				});
+				})
+				
+				//팔로우
+				$('#requestFollw').click(function(){
+					$.ajax({
+						url: "requestFollw.me",
+		    			data: {
+		    				toMem : '${targetMem.memNo}'
+		    			   ,fromMem : '${loginMember.memNo}'
+		    			},
+		    			success : function(result){
+		    				if(result==1){
+		    					swal("Follow!")
+		    				}else if (result ==2){
+		    					swal("you Already Follow this User");
+		    				}
+		    				
+							
+		    			},
+		    			error :function(){
+		    				  console.log("통신실패");
+		    			}
+					})
+				})
+			
+				
+					
 				
 				
-				
+				//눌렀을때 회원페이지로 이동
 				 $(function(){
-				    //아이디를 입력하는 input 요소 객체 변수에 담아두기
+				 
 				    const $searchUser = $("#searchUser"); //
 				    const $option = $("#option");
 				    	$searchUser.keyup(function(){
@@ -505,6 +535,7 @@
 						 var searchNo = ($(e).find(".ref").val());
 						 location.href = "searchUserPage.fe?searchNo="+searchNo ; 
 					}
+				
 				
 				
 			</script>

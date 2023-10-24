@@ -292,4 +292,69 @@
 	 	   and mem_pwd = #{memPwd}
 	</select>
 	
+	<insert id = "insertFollow">
+		insert
+			into follow 
+		(
+		 to_mem 
+		,from_mem
+		)
+		values
+		(
+		 #{toMem}
+		,#{fromMem}
+		)
+	</insert>
+	
+	<select id ="checkFollow" resultType="_int">
+		select 
+			count(*)
+			from follow
+			where to_mem = #{toMem}
+			and from_mem = #{fromMem}
+	</select>
+	
+	
+	<select id ="getFollowingList" resultMap="MemberResult" >
+		select
+		       mem_no
+		     , mem_id
+		     , mem_name
+		     , nickname
+		     , email
+		     , gender
+		     , age
+		     , phone
+		     , enroll_date
+		     , manner
+		     , img
+		     , msg
+		  from member m 
+		 where mem_no in (select
+			to_mem
+		from follow
+		where from_mem = #{memNo)})
+	</select>
+	
+	<select id ="getFollowerList" resultMap="MemberResult">
+		select
+		       mem_no
+		     , mem_id
+		     , mem_name
+		     , nickname
+		     , email
+		     , gender
+		     , age
+		     , phone
+		     , enroll_date
+		     , manner
+		     , img
+		     , msg
+		  from member m 
+		 where mem_no in (select
+			to_mem
+		from follow
+		where to_mem = #{memNo)})
+	</select>
+	
 </mapper>

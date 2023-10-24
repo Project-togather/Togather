@@ -100,17 +100,47 @@
 					</thead>
 						<tr>
 							<th style="width: 100px;">FeedsCount</th>
-							<td>6</td>
+							<td>
+								<c:choose>
+									<c:when test="${not empty fList }">
+										${fn:length(fList)}
+									</c:when>
+									<c:otherwise>
+										0
+									</c:otherwise>
+								</c:choose>
+							
+							
+							</td>
 							
 						</tr>
 						<tr>
 							<th>Following</th>
-							<td>5</td>
+							<td>
+								<c:choose>
+									<c:when test="${not empty followingList }">
+										${fn:length(followingList)}
+									</c:when>
+									<c:otherwise>
+										0
+									</c:otherwise>
+								</c:choose>
+							</td>
 							
 						</tr>
 						<tr>
 							<th>Follower</th>
-							<td>50</td>
+							<td>
+								<c:choose>
+									<c:when test="${not empty followerList }">
+										${fn:length(followerList)}
+									</c:when>
+									<c:otherwise>
+										0
+									</c:otherwise>
+								</c:choose>
+							
+							</td>
 							
 						</tr>
 						<tr>
