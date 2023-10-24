@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="adClassMapper">
+
+
+	<resultMap type="Club" id="adresultclub">
+		<result column="c_no" property="classNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="c_title" property="classTitle"/>
+		<result column="c_content" property="classContent"/>
+		<result column="c_location" property="classLocation"/>
+		<result column="c_date" property="classDate"/>
+		<result column="c_time" property="classTime"/>
+		<result column="hour" property="hour"/>
+		<result column="c_price" property="classPrice"/>
+		<result column="avg_price" property="avgPrice"/>
+		<result column="c_approval" property="classApproval"/>
+		<result column="minage" property="minAge"/>
+		<result column="maxage" property="maxAge"/>
+		<result column="people_limit" property="peopleLimit"/>
+		<result column="vacancy" property="vacancy"/>
+		<result column="nickname" property="nickName"/>
+		<result column="cl_type" property="clType"/>
+		<result column="cl_type_Status" property="clTypeStatus"/>
+		<result column="cl_category" property="clCategory"/>
+		<result column="cl_name" property="clName"/>
+		<result column="curriculum" property="curriculum"/>
+		<result column="status" property="status"/>
+	</resultMap>
+
+	<select id="selectchallengeListCount" resultType="_int">
+		select
+				count(*)
+			from class
+		   where CL_TYPE = 3
+	</select>
+	
+	<select id="selectchallengeList" resultMap="adresultclub">
+		select 
+		       c_no
+		     , mem_no
+		     , c_title
+		     , c_content
+		     , c_location
+		     , c_date
+             , c_time
+		     , c_price
+		     , c_approval
+		     , minage
+             , maxage
+		     , people_limit
+             , cl_type
+		     , cl_category
+		  from class
+		 where status = 'Y'
+	</select>
+	
+
+</mapper>
