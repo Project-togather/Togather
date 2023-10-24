@@ -524,7 +524,7 @@
 				    const $option = $("#option");
 				    	$searchUser.keyup(function(){
 							$.ajax({
-								url: "search.me",
+								url: "userSearch.me",
 				    			data: {
 				    				searchKey : $searchUser.val(),
 				    				searchType : $option.val()

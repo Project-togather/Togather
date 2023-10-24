@@ -122,7 +122,7 @@ public class FeedController {
 	
 	//맴버 검색
 	@ResponseBody
-	@RequestMapping(value = "search.me" , produces="application/json ; charset=UTF-8")
+	@RequestMapping(value = "userSearch.me" , produces="application/json ; charset=UTF-8")
 	public String searchMember(String searchKey , String searchType) {
 		
 		HashMap <String,String> map = new HashMap<String, String>();
@@ -132,8 +132,8 @@ public class FeedController {
 		
 		return new Gson().toJson(memberList);
 		
-		
 	}
+	
 	
 	//검색된 맴버페이지로 이동
 	@RequestMapping(value = "searchUserPage.fe")
