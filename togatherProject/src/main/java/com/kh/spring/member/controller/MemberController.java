@@ -282,8 +282,6 @@ public class MemberController {
 	  ArrayList<Member> followingList = mService.getFollowingList(memNo);
 	  ArrayList<Member> followerList = mService.getFollowerList(memNo);
 	  
-	  System.out.println("팔로잉리스트 " + followingList);
-	  System.out.println("팔로워리스트 " + followerList);
 	  
 	  //리퀘스트에 담자
 	  request.setAttribute("followingList", followingList);
