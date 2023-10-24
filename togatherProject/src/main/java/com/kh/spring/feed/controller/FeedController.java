@@ -110,7 +110,7 @@ public class FeedController {
 			//맴버 닉네임하고 사진을 가져와야함
 			Member m = fService.selectReplyMember(memNo);
 			//가져와주고 rList 에 세팅 
-			rList.get(i).setNickname(m.getNickName());
+			rList.get(i).setNickName(m.getNickName());
 			rList.get(i).setImg(m.getImg());
 		}
 		return new Gson().toJson(rList);
