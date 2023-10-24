@@ -280,14 +280,6 @@
 		and thumbnail = 1
 	</select>
 	
-	<select id="selectMemberList" resultMap="MemberResult">
-		select
-            mem_no
-        ,   mem_name
-    from member
-    where m_status = 'Y'
-	</select>
-	
 	<select id="selectClType" resultMap="resultclub">
 		select
 		       c_no
@@ -298,14 +290,6 @@
 		  join member m on (mc.mem_no = m.mem_no)
 		 where mem_id = #{memId}
 	 	   and mem_pwd = #{memPwd}
-	</select>
-	
-	<select id="selectMemberList" resultMap="MemberResult">
-		select
-            mem_no
-        ,   mem_name
-    from member
-    where m_status = 'Y'
 	</select>
 	
 </mapper>

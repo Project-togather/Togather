@@ -307,59 +307,55 @@ nav a.is-current {
 		
 		<!-- 소셜링 ajax 영역 -->
 		<section class="module">
-				<div class="container">
-					<div class="socialing">
-						<div class="row">
+			<div class="container">
+				<div class="socialing">
+					<div class="row">
 					
-							<!--  
-							<div class="col-md-4 post-item">
-								<article class="post">
-									<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-									<div class="post-wrapper">
-										<div class="post-header">
-											<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-										</div>
-										<div class="post-content">
-											<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-										</div>
-										<div class="post-more"><a href="#">read more...</a></div>
+						<!--  
+						<div class="col-md-4 post-item">
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
 									</div>
-								</article>
-							</div>
-							-->
-							
+									<div class="post-content">
+										<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
+									</div>
+									<div class="post-more"><a href="#">read more...</a></div>
+								</div>
+							</article>
 						</div>
+						-->
+							
 					</div>
+				</div>
 					
-
 
 				<div id="pagingArea">
 					<nav aria-label="Page navigation example">
-					
-					  <ul class="pagination">
-					  
-					  	<!--
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li class="page-item"><a class="page-link" href="#">1</a></li>
-					    <li class="page-item"><a class="page-link" href="#">2</a></li>
-					    <li class="page-item"><a class="page-link" href="#">3</a></li>
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					    -->
-					    
-					  </ul>
-					  
+						<ul class="pagination">
+							
+								<!--
+								<li class="page-item">
+								<a class="page-link" href="#" aria-label="Previous">
+									<span aria-hidden="true">&laquo;</span>
+								</a>
+								</li>
+								<li class="page-item"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="#">2</a></li>
+								<li class="page-item"><a class="page-link" href="#">3</a></li>
+								<li class="page-item">
+								<a class="page-link" href="#" aria-label="Next">
+									<span aria-hidden="true">&raquo;</span>
+								</a>
+								</li>
+								-->
+								
+						</ul>
 					</nav>
 				</div>
-				
-				</div>
+
 			</div>
 		</section>
 		
@@ -369,63 +365,31 @@ nav a.is-current {
 		
 		<!-- 클럽 ajax 영역 -->
 		<section class="module">
-				<div class="container">
-					<div class="club">
-						<div class="row">
+			<div class="container">
+				<div class="club">
+					<div class="row">
 					
-							<!--  
-							<div class="col-md-4 post-item">
-								<article class="post">
-									<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-									<div class="post-wrapper">
-										<div class="post-header">
-											<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-										</div>
-										<div class="post-content">
-											<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-										</div>
-										<div class="post-more"><a href="#">read more...</a></div>
+						<!--  
+						<div class="col-md-4 post-item">
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
 									</div>
-								</article>
-							</div>
-							-->
-							
+									<div class="post-content">
+										<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
+									</div>
+									<div class="post-more"><a href="#">read more...</a></div>
+								</div>
+							</article>
 						</div>
+						-->
+							
 					</div>
-					
-
-				<!-- 
-				<div id="pagingArea">
-					<nav aria-label="Page navigation example">
-					
-					  <ul class="pagination">
-					  
-					  	
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Previous">
-					        <span aria-hidden="true">&laquo;</span>
-					      </a>
-					    </li>
-					    <li class="page-item"><a class="page-link" href="#">1</a></li>
-					    <li class="page-item"><a class="page-link" href="#">2</a></li>
-					    <li class="page-item"><a class="page-link" href="#">3</a></li>
-					    <li class="page-item">
-					      <a class="page-link" href="#" aria-label="Next">
-					        <span aria-hidden="true">&raquo;</span>
-					      </a>
-					    </li>
-					    
-					    
-					  </ul>
-					  
-					</nav>
-				</div>
-				 -->
-				
 				</div>
 			</div>
 		</section>
-		
 		
 		
 		
@@ -577,10 +541,6 @@ nav a.is-current {
 			                    
 			                    $(".socialing .row").append(row);
 			                    
-			                    $(".feed").hide();
-			                    
-			                    $(".socialing .row").show();
-			                    $(".pagination").show();
 			                });
 			                
 							
@@ -645,6 +605,119 @@ nav a.is-current {
 			    
 			});
 
+			 
+			 
+			 <!-- 클럽 ajax 스크립트 영역 -->
+			 $(function() {
+				 $("#clubClick").click(function() {
+					 loadClubData(1);
+				 });
+				 
+				 
+				 function loadClubData(page) {
+					 
+					 $.ajax({
+						 url: "getList.cl",
+						 data: { cpage: page },
+						 success: function(response) {
+							 
+							 console.log(response);
+							 
+							 let list = response.list;
+							 
+							 $(".club .row").empty();
+							 
+							 $.each(list, function(index, item) {
+								
+								 let row = $("<div class='col-md-4 post-item'>");
+								 let article = $("<article class='post'>");
+
+				                 let postPreview = $("<div class='post-preview'></div");
+				                 let postWrapper = $("<div class='post-wrapper'></div");
+				                 let postContent = $("<div class='post-content'></div");
+				                 let postMore = $("<div class='post-more'></div");
+				                 
+				                 // <a href='#'>를 추가
+				                    let link = $("<a href='#'></a>");
+
+			                    // <img src="assets/images/widgets/3.jpg" alt="">를 추가 (이미지 경로 수정)
+			                    let image = $("<img src='assets/images/widgets/3.jpg' alt='' />");
+
+			                    // 링크 안에 이미지를 넣음
+			                    link.append(image);
+
+			                    // postPreview 안에 링크를 넣음
+			                    postPreview.append(link);
+
+			                    // postWrapper 안에 post-header 추가
+			                    postWrapper.append("<div class='post-header'></div>");
+
+			                    let postHeader = postWrapper.find(".post-header");
+			                    let postTitle = $("<h2 class='socialing-title'></h2>");
+			                    let postLink = $("<a href='blog-single-1.html'></a>");
+			                    
+			                    // postLink를 postTitle에 추가
+			                    postTitle.append(postLink);
+
+			                    // postTitle를 postHeader에 추가
+			                    postHeader.append(postTitle);
+
+
+			                    // postMore 안에 <a href='#'></a>를 추가
+			                    let moreLink = $("<a href='#'></a>");
+			                    postMore.append(moreLink);
+
+			                    article.append(postPreview);
+			                    article.append(postWrapper);
+			                    article.append(postContent);
+			                    article.append(postMore);
+
+			                    row.append(article);
+			                    
+			                    
+			                    // item 넣기
+			                    
+			                    // 모임 명
+			                    postLink.text(item.classTitle);
+			                 	postTitle.append(postLink);
+			                 	
+			                 	// 모임 타입
+			                 	let paragraph = $("<p>" + item.clType + "</p>");
+								postContent.append(paragraph);
+			                 	
+			                 	// 모임 날짜
+			                 	moreLink.text(item.classDate);
+								postMore.append(moreLink);
+			                    
+				                 
+				                 
+				                 $(".club .row").append(row);
+				                 
+								 
+							 })
+							 
+							 
+							 
+						 }, error: function() {
+							 console.log("ajax 통신 실패");
+						 }
+					 });
+					 
+				 }
+				 
+				 
+			 })
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
 		
 		
 		
@@ -709,10 +782,6 @@ nav a.is-current {
 							
 							$(".feed").html(value);
 							
-							$(".socialing .row").hide();
-							$(".pagination").hide();
-							
-							$(".feed").show();
 							
 						}, error:function() {
 							console.log("ajax 통신 실패");
@@ -740,6 +809,38 @@ nav a.is-current {
 				underline.style.width = link.offsetWidth + 'px';
 				underline.style.left = left + 'px';
 			});
+			
+			
+			/* 삭제했다가 보이게 */
+			$(function() {
+				
+			})
+
+			
+			
+			
+			$(document).ready(function() {
+		    // Initially hide all content except the Socialing content.
+		    $(".club, .feed").remove();
+		
+		    // Click event handler for the Socialing button.
+		    $("#socialingClick").click(function() {
+		        $(".socialing").show();
+		        $(".club, .feed").remove();
+		    });
+		
+		    // Click event handler for the Club button.
+		    $("#clubClick").click(function() {
+		        $(".club").show();
+		        $(".socialing, .feed").remove();
+		    });
+		
+		    // Click event handler for the Feed button.
+		    $("#feedClick").click(function() {
+		        $(".feed").show();
+		        $(".socialing, .club").remove();
+		    });
+		});
 
 
 			
