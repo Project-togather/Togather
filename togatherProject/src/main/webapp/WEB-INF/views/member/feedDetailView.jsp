@@ -107,7 +107,7 @@
 									
 									
 									function test1(){
-										alert("할루");
+									
 										let hello ="RE16"
 											let value2 = "";
 											value2 +=
