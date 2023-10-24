@@ -38,7 +38,8 @@ public class SearchController {
 	}
 	
 
-	/* 소셜링 리스트 */
+	/*
+	소셜링 리스트
 	@ResponseBody
 	@RequestMapping(value = "getList.so", produces = "application/json; charset=utf-8;")
 	public String ajaxSelectSocialingList(Club c,
@@ -62,7 +63,7 @@ public class SearchController {
 	    return jsonResponse;
 	}
 	
-	/* 클럽 리스트 */
+	클럽 리스트
 	@ResponseBody
 	@RequestMapping(value = "getList.cl", produces = "application/json; charset=utf-8;")
 	public String ajaxSelectClubList(Club c,
@@ -87,6 +88,32 @@ public class SearchController {
 			return jsonResponse;
 			
 			
+	}
+	*/
+	
+	/* 소셜, 클럽, 챌린지 리스트 */
+	@ResponseBody
+	@RequestMapping(value = "getList.cl", produces = "application/json; charset=utf-8;")
+	public String ajaxSelectClassList(Club c,
+		    @RequestParam(value = "cpage", defaultValue = "1", required = false) int currentPage,
+		    @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
+		
+			int listCount = sService.searchClassListCount();
+			
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageSize, 9);
+			
+			ArrayList<Club> list = sService.searchClassList(pi);
+			
+			Map<String, Object> response = new HashMap<>();
+			
+			 response.put("list", list); // 페이징된 목록
+			 response.put("pageInfo", pi); // 페이지 정보
+			 
+			// Gson을 사용하여 Map을 JSON 문자열로 변환하여 반환
+			Gson gson = new Gson();
+		    String jsonResponse = gson.toJson(response);
+			    
+			return jsonResponse;
 	}
 	
 

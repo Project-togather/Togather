@@ -20,8 +20,9 @@ public class SearchServiceImpl implements SearchService {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession;
-
-	/* 소셜링 리스트가 보이는 페이지 서비스 (페이징 처리) */
+	
+	/*
+	// 소셜링 리스트가 보이는 페이지 서비스 (페이징 처리)
 	@Override
 	public int selectSocialingListCount() {
 		
@@ -36,7 +37,7 @@ public class SearchServiceImpl implements SearchService {
 		
 	}
 	
-	/* 클럽 리스트가 보이는 페이지 서비스 (페이징 처리) */
+	// 클럽 리스트가 보이는 페이지 서비스 (페이징 처리)
 	@Override
 	public int selectClubListCount() {
 		
@@ -50,6 +51,19 @@ public class SearchServiceImpl implements SearchService {
 		return sDao.selectClubList(sqlSession, pi);
 		
 	}
+	*/
+	
+	
+	@Override
+	public int searchClassListCount() {
+		return sDao.searchClassListCount(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<Club> searchClassList(PageInfo pi) {
+		return sDao.searchClassList(sqlSession, pi);
+	}
+	
 	
 	
 	/* 피드 리스트가 보이는 서비스 */
@@ -65,8 +79,5 @@ public class SearchServiceImpl implements SearchService {
 		return sDao.selectMemberList(sqlSession);
 	}
 
-	
-	
-	
 	
 }

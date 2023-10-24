@@ -10,19 +10,22 @@ import com.kh.spring.member.model.vo.Member;
 
 public interface SearchService {
 
-	// 1. 소셜링 리스트가 보이는 페이지 서비스 (페이징 처리)
+	/*
 	int selectSocialingListCount();
 	ArrayList<Club> selectSocialingList(PageInfo pi);
 	
-	// 2. 클럽 리스트가 보이는 페이지 서비스 (페이징 처리)
 	int selectClubListCount();
 	ArrayList<Club> selectClubList(PageInfo pi);
+	*/
 	
+	// 소셜링, 클럽, 챌린지 리스트가 보이는 페이지 서비스 (페이징 처리)
+	int searchClassListCount();
+	ArrayList<Club> searchClassList(PageInfo pi);
 	
-	// 4. 피드 리스트가 보이는 서비스
+	// 피드 리스트가 보이는 서비스
 	ArrayList<Feed> selectFeedList();
 	
-	// 5. 멤버 리스트가 보이는 서비스
+	// 멤버 리스트가 보이는 서비스
 	ArrayList<Member> selectMemberList();
 	
 }

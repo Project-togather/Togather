@@ -2,4 +2,147 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="searchMapper">
 
+	<resultMap type="Club" id="clubResult">
+		<result column="c_no" property="classNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="c_title" property="classTitle"/>
+		<result column="c_content" property="classContent"/>
+		<result column="c_location" property="classLocation"/>
+		<result column="c_date" property="classDate"/>
+		<result column="c_time" property="classTime"/>
+		<result column="hour" property="hour"/>
+		<result column="c_price" property="classPrice"/>
+		<result column="avg_price" property="avgPrice"/>
+		<result column="c_approval" property="classApproval"/>
+		<result column="minage" property="minAge"/>
+		<result column="maxage" property="maxAge"/>
+		<result column="people_limit" property="peopleLimit"/>
+		<result column="vacancy" property="vacancy"/>
+		<result column="nickname" property="nickName"/>
+		<result column="cl_type" property="clType"/>
+		<result column="cl_type_Status" property="clTypeStatus"/>
+		<result column="cl_category" property="clCategory"/>
+		<result column="cl_name" property="clName"/>
+		<result column="curriculum" property="curriculum"/>
+		<result column="status" property="status"/>
+	</resultMap>
+	
+	<resultMap type="Member" id="memberResult">
+		<result column="mem_no" property="memNo"/>
+		<result column="mem_id" property="memId"/>
+		<result column="mem_pwd" property="memPwd"/>
+		<result column="mem_name" property="memName"/>
+		<result column="nickname" property="nickName"/>
+		<result column="email" property="email"/>
+		<result column="gender" property="gender"/>
+		<result column="age" property="age"/>
+		<result column="phone" property="phone"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="m_status" property="mStatus"/>
+		<result column="manner" property="manner"/>
+		<result column="img" property="img"/>
+		<result column="msg" property="msg"/>
+		<result column="cl_type_Status" property="clTypeStatus"/>
+	</resultMap>
+	
+	<resultMap type="Feed" id="feedResult">
+		<result column="fe_no" property="feNo"/>
+		<result column="ref_cno" property="refCno"/>
+		<result column="fe_content" property="feContent"/>
+		<result column="fe_date" property="feDate"/>
+		<result column="fe_writer" property="feWriter"/>
+		<result column="fe_status" property="fStatus"/>
+	</resultMap>
+	
+	<!--
+	<select id="ajaxSelectSocialingListCount" resultType="_int">
+		select
+		count(*)
+	from class
+	where status = 'Y'
+	</select>
+	
+	<select id="ajaxSelectSocialingList" resultMap="clubResult">
+		select
+	        c_no
+	    ,   c_title
+	    ,   c_location
+	    ,   c_date
+	    ,	cl_type
+	    	from class
+		  join attachment on (c_no = ref_fno)
+		 	where status = 'Y'
+		   and cl_type = 1
+	    order by c_no desc
+	</select>
+	
+	<select id="ajaxSelectClubListCount" resultType="_int">
+		select
+		count(*)
+	from class
+	where status = 'Y'
+	</select>
+	
+	<select id="ajaxSelectClubList" resultMap="clubResult">
+		select
+	        c_no
+	    ,   c_title
+	    ,   c_location
+	    ,   c_date
+	    ,	cl_type
+	    	from class
+		  join attachment on (c_no = ref_fno)
+		 	where status = 'Y'
+		   and cl_type = 2
+	    order by c_no desc
+	</select>
+	 -->
+	 
+	<select id="ajaxSelectClassListCount" resultType="_int">
+	select
+		count(*)
+	from class
+	where status = 'Y'
+	</select>
+	
+	<select id="ajaxSelectClassList" resultMap="clubResult">
+		SELECT
+			    c_no,
+			    c_title,
+			    c_location,
+			    c_date,
+			    cl_type
+			FROM
+			    class
+			JOIN
+			    attachment ON (c_no = ref_fno)
+			WHERE
+			status = 'Y'
+		  <if test="clType != null">
+			and cl_type = #{clType}
+		  </if>
+	</select>
+	
+	
+	
+	<select id="ajaxSelectFeedList" resultMap="feedResult">
+		 select
+            fe_no
+        ,   ref_cno
+        ,   fe_content
+        ,   fe_date
+        ,   fe_writer
+        ,   f_status
+    from feed
+    where f_status = 'Y'
+	</select>
+	
+	<select id="ajaxSelectMemberList" resultMap="memberResult">
+		select
+            mem_no
+        ,   mem_name
+    from member
+    where m_status = 'Y'
+	</select>
+
 </mapper>
