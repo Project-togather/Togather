@@ -18,8 +18,9 @@
 		<result column="maxage" property="maxAge"/>
 		<result column="people_limit" property="peopleLimit"/>
 		<result column="vacancy" property="vacancy"/>
-		<result column="nickname" property="nickname"/>
+		<result column="nickname" property="nickName"/>
 		<result column="cl_type" property="clType"/>
+		<result column="cl_type_Status" property="clTypeStatus"/>
 		<result column="cl_category" property="clCategory"/>
 		<result column="cl_name" property="clName"/>
 		<result column="curriculum" property="curriculum"/>
@@ -48,7 +49,25 @@
 	<resultMap type="MyClass" id="myClassResult">
 		<result column="c_no" property="classNo"/>
 		<result column="mem_no" property="memNo"/>
-		<result column="cl_type" property="clType"/>
+		<result column="cl_type_Status" property="clTypeStatus"/>
+	</resultMap>
+	
+	<resultMap type="Member" id="MemberResult">
+		<result column="mem_no" property="memNo"/>
+		<result column="mem_id" property="memId"/>
+		<result column="mem_pwd" property="memPwd"/>
+		<result column="mem_name" property="memName"/>
+		<result column="nickname" property="nickName"/>
+		<result column="email" property="email"/>
+		<result column="gender" property="gender"/>
+		<result column="age" property="age"/>
+		<result column="phone" property="phone"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="m_status" property="mStatus"/>
+		<result column="manner" property="manner"/>
+		<result column="img" property="img"/>
+		<result column="msg" property="msg"/>
+		<result column="cl_type_Status" property="clTypeStatus"/>
 	</resultMap>
 	
 	<select id="selectClassList" resultMap="resultclub">
@@ -214,7 +233,8 @@
 		     , nickname
 		     , (select count(*)
                  from my_class
-                where c_no = 'C1') vacancy
+                where c_no = 'C1'
+                  and cl_type = 1) vacancy
 		  from class
 		  join member using (mem_no)
 		  join cl_category on (cl_category = cl_categoryno)
@@ -304,9 +324,19 @@
 	    ,   c_title
 	    ,   c_location
 	    ,   c_date
-	    from class
-	    where status = 'Y'
+	    ,	cl_type
+	    	from class
+		  join attachment on (c_no = ref_fno)
+		 	where status = 'Y'
+		   and cl_type = 1
 	    order by c_no desc
+	</select>
+	
+	<select id="selectClubListCount" resultType="_int">
+		select
+		count(*)
+	from class
+	where status = 'Y'
 	</select>
 
 	<insert id="insertReply">
@@ -405,7 +435,7 @@
 	
 	<select id="checkType" resultType="_int">
 		select 
-		       cl_type
+		       cl_type_status
 		  from my_class
 		 where c_no = #{classNo}
 		   and mem_no = #{memNo}
@@ -417,7 +447,7 @@
 		  (
 		  	c_no
 		  ,	mem_no
-		  , cl_type
+		  , cl_type_status
 		  )
 		  values
 		  (
@@ -454,5 +484,32 @@
 		  from favorites
 		 where c_no = #{classNo}
 		   and mem_no = #{memNo}
+	</select>
+	
+	<update id="deleteClass">
+		update class
+		   set status ='N'
+		 where c_no = #{classNo}
+	</update>
+	
+	<select id="classMemberList" resultMap="MemberResult">
+		select 
+		       mem_no
+		     , nickname
+		     , img
+		     , msg
+		     , cl_type_status
+		  from my_class
+		  join member using (mem_no)
+		 where c_no = #{classNo}
+		  <if test="clType == 1">
+		  and cl_type_status = 1
+		  </if>
+		  <if test="clType == 2">
+		  and cl_type_status = 2
+		  </if>
+		  <if test="clType == 3">
+		  and cl_type_status = 3
+		  </if>
 	</select>
 </mapper>

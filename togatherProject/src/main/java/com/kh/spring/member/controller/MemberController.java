@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.feed.model.vo.Feed;
+import com.kh.spring.follow.model.vo.Follow;
 import com.kh.spring.interest.model.vo.Interest;
 import com.kh.spring.member.model.service.MemberServiceImpl;
 import com.kh.spring.member.model.vo.Member;
@@ -43,12 +44,18 @@ public class MemberController {
    public String loginMember(Member m, Model model, HttpSession session) {
 	  //System.out.println("여기오냐?");
       Member loginMember = mService.loginMember(m);
+      
 
       if(loginMember != null) {
     	 //System.out.println(loginMember);
     	 Attachment pImg = mService.getProfileImg(loginMember.getMemNo());
     	 //System.out.println("컨트롤러에서 받아오자 " + pImg);
          //System.out.println("세션에 저장");
+    	 ArrayList<Member> clType = mService.selectClType(m);
+    	 
+    	 System.out.println("쏄탑 : " + clType);
+    	  
+    	 session.setAttribute("clType", clType);
 
          session.setAttribute("loginMember", loginMember);
          session.setAttribute("pImg", pImg);
@@ -270,6 +277,19 @@ public class MemberController {
 		  fList.get(i).setThumbnail(thumbFilePath);
 	  }
 	  //System.out.println(fList);
+	  
+	  //다음은 팔로잉 팔로워를 불러워야함 둘다 리스트뽑아서 보내주자
+	  ArrayList<Member> followingList = mService.getFollowingList(memNo);
+	  ArrayList<Member> followerList = mService.getFollowerList(memNo);
+	  
+	  System.out.println("팔로잉리스트 " + followingList);
+	  System.out.println("팔로워리스트 " + followerList);
+	  
+	  //리퀘스트에 담자
+	  request.setAttribute("followingList", followingList);
+	  request.setAttribute("followerList", followerList);
+	  
+	  
 	  request.setAttribute("fList", fList);
       return "member/myPage";
    }
@@ -296,13 +316,7 @@ public class MemberController {
 	   //ㅇㅋ 피드로 가셈
 	   result1 = mService.insertFeed(feed);
 	   //다녀왔어
-	   
-	   
-	   
-	   
-	   
-	   
-	   
+
 	   //db에 4번 다녀오자
 	   for (int i = 0 ; i< upfile.length ; i ++) {
 		   //첨부파일이 null 이 아닐때 required 걸어놔서 null 일경우는 없지만
@@ -343,15 +357,25 @@ public class MemberController {
 	   
 	   if (result1 * result2 != 0) {
 		   session.setAttribute("alertMsg", "피드가 성공적으로 작성되었습니다");
-	        return "redirect:/";
+	        return "redirect:/mypage.me";
 	   }else {
 		   model.addAttribute("errorMsg", "피드작성 실패");
 	       return "common/errorPage";
 	   }
-	   
-	   
-	   
-	   
+
+   }
+   //팔로우기능
+   @ResponseBody
+   @RequestMapping(value = "requestFollw.me")
+   public String requestFollw(Follow follow ,HttpSession session) {
+	   //먼저 팔로우했나 안했나 검사부터 하자
+	   int check = mService.checkFollow(follow);
+	   if(check ==0){
+	   String result = mService.insertFollow(follow) + "";
+	   return result; 
+	   }else {
+		   return 2+"";
+	   }
    }
   
 }

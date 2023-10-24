@@ -1,29 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>   
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title> ${targetMem.memName} 's Page</title>
+		<!-- Favicons-->
+		
+		<link rel="shortcut icon" href="assets/images/favicon.png">
+		<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+		<link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
+		<link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-touch-icon-114x114.png">
+		<!-- Web Fonts-->
+		<link href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700" rel="stylesheet">
+		<!-- Bootstrap core CSS-->
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Plugins and Icon Fonts-->
+		<link href="assets/css/plugins.min.css" rel="stylesheet">
+		<!-- Template core CSS-->
+		<link href="assets/css/template.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		
+		 <!-- 이거 필요한가?<script src="./bootstrapt/js/bootstrap.min.js"></script>-->
+
 		<style>
-			.col-md-12 :hover{
-				cursor: pointer;
+			.gallery-item:hover{
+				cursor:pointer
 			}
+			#newFeed :hover{
+				cursor:pointer
+			}
+			
+			
+
 		</style>
 	</head>
 	<body>
-		<jsp:include page="../common/menubar.jsp"></jsp:include>
 	
+	<jsp:include page="../common/menubar.jsp"></jsp:include>
+	
+	
+	
+	
+	
+	
+
 		<!-- Preloader-->
 		<div class="page-loader">
 			<div class="loader"></div>
 		</div>
 		<!-- Preloader end-->
-		
 
-		
 
 		<!-- Wrapper-->
+		<div class="wrapper" >
+
 			<!-- Hero-->
 			<section class="module-cover parallax" data-background="assets/images/black.jpg" data-overlay="1" data-gradient="1">
 				<div class="container">
@@ -32,224 +69,136 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="text-center">
-								<h2 class="display-1"> Write your Feed</h2>
-								<p>you can write anything you want<br/>show your daily Life to EveryBody!</p>
+								<h2 class="display-1"> ${targetMem.memName} 's Page</h2>
+								<p>personal Page<br/> show who you are</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 			<!-- Hero end-->
-		<div class="wrapper">
-		<section class="module">
-					<div class="container">
-						<div class="row">
+			
+			
+			
+			<div class="module">
+				<div class="container">
+					<div class="gallery-item">
+						<div class="gallery-image" data-background="${targetMem.img}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
 						
-						<div class="col-md-6 m-auto text-center">
-							<h1 class="display-1">Feed Image preView</h1>
-							<p class="lead">if you insert Images below insert tab<br/> you can check your images before enroll feed</p>
-							<div class="divider-border"></div>
-						</div>
-						
-							
-							<div class="owl-carousel menu-carousel" data-carousel-options="{&quot;nav&quot;: false}">
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a id="first" class="photo" href="assets/images/insertImage2.png"></a>
-									<img id = "titleImg"  src="assets/images/insertImage2.png" onclick="chooseFile(1);">
-										<div class="menu-classic-item-price">Image1
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-										<h6>ThumbNail Image</h6>
-										<p>it will be your thumbnail image of this feed</p>
-									</div>
-								</div>
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a id="second" class="photo" href="assets/images/insertImage2.png"></a>
-									<img id = "contentImg1"  src="assets/images/insertImage2.png" onclick="chooseFile(2);">
-										<div class="menu-classic-item-price">Image2
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-										<h6>Second Image</h6>
-										
-									</div>
-								</div>
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a id="third" class="photo" href="assets/images/insertImage2.png"></a>
-									<img id = "contentImg2"  src="assets/images/insertImage2.png" onclick="chooseFile(3);">
-										<div class="menu-classic-item-price">Image3
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-										<h6>Third Image</h6>
-										
-									</div>
-								</div>
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a id="forth" class="photo" href="assets/images/insertImage2.png"></a>
-									<img id = "contentImg3"  src="assets/images/insertImage2.png" onclick="chooseFile(4);">
-										<div class="menu-classic-item-price">Image4
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-										<h6>Fourth image</h6>
-										
-									</div>
-								</div>
-								
-						</div>
-							
+						<br><br><br><br>
 					</div>
-		</section>
-		
-			<div class="col-md-6 m-auto text-center">
-					<h1 class="display-1">Insert Image</h1>
-					<p class="lead">Click below insertImage section<br/>more than 1 image is required to wirte your new Feed</p>
-					<div class="divider-border"></div>
+				<table border="0" style="width: 800px; margin-top: 100px;" align="center">
+					<thead>
+					<tr>
+						<th>${targetMem.memName} 님
+							
+						</th>
+							
+						<td>
+							<a  id="requestFollw">Request Follow</a>
+						</td>
+						<td><a href="" id="testBtn" class="btn">search User</a></td>		
+					</tr>		
+					</thead>
+						<tr>
+							<th style="width: 100px;">FeedsCount</th>
+							<td>${fn:length(fList)}</td>
+							
+						</tr>
+						<tr>
+							<th>Following</th>
+							<td>5</td>
+							
+						</tr>
+						<tr>
+							<th>Follower</th>
+							<td>50</td>
+							
+						</tr>
+						<tr>
+							<th>introduce</th>
+							<td colspan="2">
+								
+								${targetMem.msg}
+							</td>
+						</tr>	
+						<tr>
+							<th>interest</th>
+							<th>
+								<c:forEach begin="0" end="${fn:length(interArr)}" step="1" var="i">
+						          	${interArr[i]} 
+						        </c:forEach>
+							</th>
+						</tr>
+					<tbody>
+
+					</tbody>
+				</table>
+						
+				</div>
 			</div>
+
 		
-		
-		
-			<section class="module">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12">
-								<img id = "titleImg1" width="250" height="170" src="assets/images/insertImage2.png" onclick="chooseFile(1);">
-								<img id = "contentImg11" width="250" height="170" src="assets/images/insertImage2.png" onclick="chooseFile(2);">
-								<img id = "contentImg21" width="250" height="170" src="assets/images/insertImage2.png" onclick="chooseFile(3);">
-								<img id = "contentImg31" width="250" height="170" src="assets/images/insertImage2.png" onclick="chooseFile(4);">
+			
+			<!-- Menu-->
+			<section class="module" >
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="gallery gallery-4-columns">
+								
+								
+								
+								<c:choose>
+									<c:when test="${not empty fList}">
+
+										<c:forEach var="i" begin="0" end="${ (fn:length(fList))-1}"  step="1">
+											<div class="gallery-item">
+												<input type="hidden" name="feNo" value="${fList[i].feNo}">	
+												<img src="${fList[i].thumbnail}" style="width: 400px; height: 270px;">									
+											</div>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<div class="gallery-item">
+											There is no Feed 
+										</div>
+									</c:otherwise>
+									
+								</c:choose>
+								
+								
+								
+								
+								
 								
 							</div>
 						</div>
 					</div>
-			</section>
-			
+					<script>
+						$(function(){
+							$(".gallery-item").click(function(){
+								var feNo =$(this).children().eq(0).val();
+								location.href = "feedDetail.fe?feNo="+feNo ; 
+						})
+						})
+						
+					</script>
 
-			<section class="module">
-				<div class="container">
 					<div class="row">
-						<div class="comment-respond">
-							<h5 class="comment-reply-title">Write your Feed</h5>
-							  	<p class="comment-notes">Add more than 1 picture and select yout thumbnail Image</p>
-									<form action="insertFeed.me" method="post" class="comment-form row" enctype="multipart/form-data">
-									
-										<div class="form-group col-md-4">
-											<div id="file-area" style = "display:none">
-								                <input class="form-control" type="file" name="upfile" id = "file1" onchange ="loadImg(this,1)" required>
-								                <input class="form-control" type="file" name="upfile" id = "file2" onchange ="loadImg(this,2)">
-								                <input class="form-control" type="file" name="upfile" id = "file3" onchange ="loadImg(this,3)">
-								                <input class="form-control" type="file" name="upfile" id = "file4" onchange ="loadImg(this,4)">
-								            </div>
-								         </div> 
-							            
-							            
-										<div class="form-group col-md-4">
-												  <input type="radio" id="option1" name="option" value="1" onclick="test1();">
-												  <label for="option1">Personal Feed</label></br>
-												  <input type="radio" id="option2" name="option" value="2" onclick="test2();">
-												  <label for="option2">Review</label></br>
-
-										</div>
-										<script>
-										
-											function test1(){
-												$("#checkTarget").css("display","none");
-											}
-											function test2(){
-												$("#checkTarget").css("display","block");
-											}
-										
-										</script>
-										<div id="checkTarget" class="form-group col-md-4" style = "display:none">
-											<select name="refCno" id="lang">
-											    <option value="example1">example1</option>
-											    <option value="example2">example2</option>
-											    <option value="example3">example3</option>
-											  </select>
-										</div>
-									
-
-										<div class="form-group col-md-12">
-											<textarea class="form-control" name="feContent" rows="8" placeholder="Comment"></textarea>
-										</div>
-											<div class="form-submit col-md-12">
-												<button class="btn btn-black" type="submit">Post Feed</button>
-											</div>
-									</form>
+						<div class="col-md-12">
+							<div class="space" data-mY="50px"></div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="space" data-mY="100px"></div>
 						</div>
 					</div>
 				</div>
 			</section>
-			
-			<script >
-            	function chooseFile(num){
-            		$("#file"+num).click();
-            	}
-            	function loadImg(inputFile , num){
-            		console.log(inputFile);
-
-            		if (inputFile.files.length == 1){
-            			console.log("이거좀봐" + inputFile.files.length);
-            			const reader = new FileReader();
-            			reader.readAsDataURL(inputFile.files[0]);
-            			reader.onload = function(e){
-            				switch (num){
-                                case 1: 
-                                $("#titleImg").attr("src",e.target.result);
-                                $("#titleImg1").attr("src",e.target.result);
-                                $("#first").attr("href",e.target.result);
-                                console.log(num);
-                                break;
-                                
-                                case 2: $("#contentImg1").attr("src",e.target.result);
-                                $("#contentImg11").attr("src",e.target.result);
-                                $("#second").attr("href",e.target.result);
-                                console.log(num);
-                                break;
-                               
-                                case 3: $("#contentImg2").attr("src",e.target.result);
-                                $("#contentImg21").attr("src",e.target.result);
-                                $("#third").attr("href",e.target.result);
-                                console.log(num);
-                                break;
-                                
-                                case 4: $("#contentImg3").attr("src",e.target.result);
-                                case 4: $("#contentImg31").attr("src",e.target.result);
-                                $("#forth").attr("href",e.target.result);
-                                console.log(num);
-                                break;
-                            }
-            			}
-            		}else{//파일이 빠졌을경우
-                        switch (num){
-                                case 1: $("#titleImg").attr("src","assets/images/insertImage2.png");
-                                break;
-                                case 2: $("#contentImg1").attr("src","assets/images/insertImage2.png");
-                                break;
-                                case 3: $("#contentImg2").attr("src","assets/images/insertImage2.png");
-                                break;
-                                case 4: $("#contentImg3").attr("src","assets/images/insertImage2.png");
-                                break;
-                            }
-            		}
-            	}
-            </script>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			<!-- Menu end-->
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
@@ -464,10 +413,154 @@
 				</div>
 			</div>
 		</div>
+		
+		
+		
+		  <!-- 회원검색  Modal-->
+			<div class="modal" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				
+				<div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" >
+								<select id = "option">
+								    <option value="id">id</option>
+								    <option value="nickNmae">nickName</option>
+								</select>
+							</h5>
+							
+							<input class="form-control" id="searchUser" type="search" placeholder="search here">
+										
+								
+						</div>
+						<div id="searchResultSection" class="modal-body">
+						
+						
+						
+							   
+							   
+						</div>
+							
+						
+			
+						
+
+						<div class="modal-footer">
+							<button class="btn" type="button" data-dismiss="modal">close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<script>
+			    //유저검색 모달 열기
+				$('#testBtn').click(function(e){
+					e.preventDefault();
+					$('#testModal').modal("show");
+				})
+				
+				//팔로우
+				$('#requestFollw').click(function(){
+					$.ajax({
+						url: "requestFollw.me",
+		    			data: {
+		    				toMem : '${targetMem.memNo}'
+		    			   ,fromMem : '${loginMember.memNo}'
+		    			},
+		    			success : function(result){
+		    				if(result==1){
+		    					swal("Follow!")
+		    				}else if (result ==2){
+		    					swal("you Already Follow this User");
+		    				}
+		    				
+							
+		    			},
+		    			error :function(){
+		    				  console.log("통신실패");
+		    			}
+					})
+				})
+			
+				
+					
+				
+				
+				//눌렀을때 회원페이지로 이동
+				 $(function(){
+				 
+				    const $searchUser = $("#searchUser"); //
+				    const $option = $("#option");
+				    	$searchUser.keyup(function(){
+							$.ajax({
+								url: "search.me",
+				    			data: {
+				    				searchKey : $searchUser.val(),
+				    				searchType : $option.val()
+				    			},
+				    			success : function(searchList){
+				    				  let value = "";
+				    				 
+				    				  for (let i = 0 ; i <searchList.length ; i++){
+				    					 
+				    					  let memNo = searchList[i].memNo;
+				    					  value += 
+				    						 "<div id ="+ memNo +">"	
+				    						+ "<div class='comment-author'><img class='avatar' src="+ searchList[i].img +" ></div>"
+											+"<div class='comment-body'>"
+												+"<div class='comment-meta'>"
+													+"<div class='comment-meta-author' onClick='searchUserPage(this);'><a href='#'> <input class='ref' type='hidden' value="+memNo +">"+searchList[i].memName + "</div>"
+												+"</div>"
+												+"<div class='comment-content'>"
+														+"<p>"+searchList[i].msg+"</p>"
+												+"</div>"
+										    +"</div>"
+										   +"</div>";
+											   
+				    				  }
+				    				  
+				    				  $("#searchResultSection").html(value);
+				    				  
+				    			},
+				    			error :function(){
+				    				  console.log("통신실패");
+				    			}
+							})
+				    	})
+				    	
+				    	
+				   })
+				   
+				   function searchUserPage(e){
+						 var searchNo = ($(e).find(".ref").val());
+						 location.href = "searchUserPage.fe?searchNo="+searchNo ; 
+					}
+				
+				
+				
+			</script>
+	 <!-- 회원검색 Modal-->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<!-- Reserve Popup end-->
 
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 
-
+		<!-- Scripts-->
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
+		<script src="assets/js/plugins.min.js"></script>
+		<script src="assets/js/custom.min.js"></script>
 	</body>
 </html>

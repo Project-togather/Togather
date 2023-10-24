@@ -30,7 +30,7 @@
 					<div class="row">
 						<div class="col-md-12 m-auto">
 							<div class="text-center">
-								<h6 class="text-uppercase"><span class="vacancy" id="class_info">&nbsp;잔여 ${ c.vacancy } 자리&nbsp;</span><span id="class_info">&nbsp;${ c.clName }&nbsp;</span></h6>
+								<h6 class="text-uppercase"><span class="vacancy" id="class_info">&nbsp;잔여 ${ c.peopleLimit - c.vacancy } 자리&nbsp;</span><span id="class_info">&nbsp;${ c.clName }&nbsp;</span></h6>
 								<h1 class="display-1">${ c.classTitle }</h1>
 								<div class="space" data-mY="40px"></div><a class="btn btn-white enter-btn" onclick="enterClass();" style="color:black;">모임 참가하기</a>
 							</div>
@@ -54,7 +54,7 @@
 						<div class="col-md-16 m-auto text-center">
 							<a href="# 마이페이지">
 								<span id="profile"><img src="resources/assets/images/detail/approval.png"></span> <br>
-								<span class="subtitle" id="profile_nickname">${ c.nickname }</span> <br><br>
+								<span class="subtitle" id="profile_nickname">${ c.nickName }</span> <br><br>
 							</a>
 							<p>
 								<c:choose>
@@ -164,7 +164,7 @@
 										</div>
 									</div>
 									<div class="menu-classic-item-inner">
-										<p>${ c.nickname }</p>
+										<p>${ c.nickName }</p>
 									</div>
 								</div>
 								<div class="menu-classic-item">
@@ -243,7 +243,7 @@
 						<div class="col-md-6 m-auto text-center">
 							<p class="subtitle">Tasty and crunchy</p>
 							<h1 class="display-1">참가중인 멤버 목록</h1>
-							<p class="lead">See how your users experience your website in realtime or view <br/> trends to see any changes in performance over time.</p>
+							<p class="lead">현재 ${ c.vacancy }명이 가입되어 있습니다!</p>
 							<div class="divider-border"></div>
 						</div>
 					</div>
@@ -255,80 +255,28 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div class="menu-simple">
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/1.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Wild Mushroom Bucatini with Kale</span></h6>
-										<p>Cheese, Garlic, Potato, Pork</p>
+								<c:forEach var="m" begin="0" end="4">
+									<div class="menu-simple-item">
+										<div class="menu-simple-item-img"><img src="${ list[m].img }" alt=""></div>
+										<div class="menu-simple-item-inner">
+											<h6><span>${ list[m].nickName }</span></h6>
+											<p>${ list[m].msg }</p>
+										</div>
 									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/2.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Lemon and Garlic Green Beans</span></h6>
-										<p>Pork meat, Sauces, Potato</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/3.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>American Brunch Combo Menu</span></h6>
-										<p>Bacon, Rice, Vegetables</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/4.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Smoked Paprika Hummus</span></h6>
-										<p>Shrimp, Vegetables, Sauce</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/5.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Italian Source Mushroom</span></h6>
-										<p>Steak, Spices, Sauces</p>
-									</div>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="menu-simple">
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/6.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Lemon and Garlic Green Beans</span></h6>
-										<p>Pork meat, Sauces, Potato</p>
+								<c:forEach var="m" begin="5" end="9">
+									<div class="menu-simple-item">
+										<div class="menu-simple-item-img"><img src="${ list[m].img }" alt=""></div>
+										<div class="menu-simple-item-inner">
+											<h6><span>${ list[m].nickName }</span></h6>
+											<p>${ list[m].msg }</p>
+										</div>
 									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/1.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>American Brunch Combo Menu</span></h6>
-										<p>Bacon, Rice, Vegetables</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/2.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Smoked Paprika Hummus</span></h6>
-										<p>Shrimp, Vegetables, Sauce</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/3.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Italian Source Mushroom</span></h6>
-										<p>Steak, Spices, Sauces</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-img"><img src="assets/images/widgets/4.jpg" alt=""></div>
-									<div class="menu-simple-item-inner">
-										<h6><span>Wild Mushroom Bucatini with Kale</span></h6>
-										<p>Cheese, Garlic, Potato, Pork</p>
-									</div>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
@@ -585,9 +533,9 @@
 										<div class="menu-simple-item">
 											<div class="menu-simple-item-img"><img src="${ loginMember.img }" alt=""></div>
 											<div class="menu-simple-item-inner" style="padding:0px;">
-												<h6>
-													<input type="text" name="reply" id="reply" class="form-control" placeholder="댓글달기" style="background-color: #f4f1ea; width:700px;">
-													<button class="btn btn-gray" id="enroll-btn" onclick="addReply();">댓글 등록</button>
+												<h6 style="text-align:center; width:100%;">
+													<input type="text" name="reply" id="reply" class="form-control" placeholder="댓글달기" style="background-color: #f4f1ea; width:700px; display :inline-block;">
+													<button class="btn btn-gray" id="enroll-btn1" onclick="addReply();" style="display :inline-block;">댓글 등록</button>
 												</h6>
 											</div>
 										</div>
@@ -616,7 +564,27 @@
 													let rvNo = rlist[i].rvNo;
 													
 													if(rlist[i].crNo == null){
+														       	
+														 reply += '<div class="comment">'
+																+	'<div class="comment-author"><img class="avatar" src="' + rlist[i].img + '"></div>'
+																+	'<div class="comment-body replybox">'
+																+		'<div class="comment-meta">'
+																+			'<div class="comment-meta-author"><a href="#">' + rlist[i].nickName + '</a></div>'
+																+			'<div class="comment-meta-date"><a href="#">' + rlist[i].rvDate + '</a></div>'
+																+		'</div>'
+																+		'<div class="comment-content">'
+																+			'<p>' + rlist[i].rvContent + '</p>'
+																+		'</div>'
+																+		'<div class="comment-reply"><a><span id="rreply' + rvNo + '">답글달기</span></a></div>'
+																+ 		'<div id="'+ rvNo + '" class="' + rvNo + '"></div>'
+													       		+ 		'<h6 class="rereply' + rvNo + '"style="display:none;">'
+													        	+ 			'<input type="text" name="reply" id="rereply' + rvNo + '" class="form-control rereply' + rvNo + '"placeholder="답글달기" style="background-color: #f4f1ea; width:700px; display:inline-block;">'
+													       	 	+ 			'<button class="btn btn-gray" id="enroll-btn" style="display :inline-block;">답글등록</button>'
+														        + 		'</h6>'
+																+	'</div>'
+																+	'</div>';
 														
+														/*
 														reply += '<div class="menu-simple-item">'
 														       + '<div class="menu-simple-item-img"><img src="' + rlist[i].img + '" alt=""></div>'
 														       + '<div class="menu-simple-item-inner replybox">'
@@ -630,9 +598,12 @@
 														       + '</h6>'
 														       + '</div>'
 														       + '</div>';
+														*/
+														
 													}    
 												}
 			
+												$(".comments-title").text("댓글수 : " + rlist.length);
 												
 												$(".replylist").html(reply);
 												
@@ -668,7 +639,7 @@
 															creply += '<div class="menu-simple-item">'
 															       + '<div class="menu-simple-item-img"><img src="' + rlist[j].img + '" alt=""></div>'
 															       + '<div class="menu-simple-item-inner">'
-															       + '<h6><span>' + rlist[j].nickname + '</span></h6>'
+															       + '<h6><span>' + rlist[j].nickName + '</span></h6>'
 															       + '<p>' + rlist[j].rvContent + '</p>'
 															       + '<p>' + rlist[j].rvDate + '<span id="rreply"></span>' + '</p>'
 															       + '</div>'
@@ -769,7 +740,7 @@
 										
 									})
 										
-									$(document).on("click", ".replybox>p>span", function(){
+									$(document).on("click", ".replybox>div>a>span", function(){
 										
 										let lm = "${loginMember}";
 										
@@ -795,7 +766,10 @@
 									})										
 								
 								</script>
-								<div class="menu-simple replylist">
+								<div class="comments-area">
+									<h5 class="comments-title"></h5>
+										<div class="comment-list replylist">
+										</div>
 								</div>
 							</div>
 						</div>
@@ -966,6 +940,7 @@
 					</div>
 				</div>
 			</section>
+			
 			<!-- News end-->
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
@@ -1130,7 +1105,7 @@
 		<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 		<c:if test="${loginMember.memNo eq c.memNo }">
 		</c:if>
-			<a class="classOption" href="#수정페이지"><span class="icon-gears"></span></a>		
+			<a class="classOption" href="classUpdateForm.cl?cNo=${ c.classNo }"><span class="icon-gears"></span></a>		
 		
 		<script>
 		

@@ -23,5 +23,6 @@ public class Feed {
 	private String feWriter;
 	private String feStatus;
 	private String thumbnail;
+	private int likeCount;
 	
 }

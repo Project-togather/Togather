@@ -43,7 +43,33 @@
 		<result column="f_status" property="feStatus"/>
 	</resultMap>
 	
+	<resultMap type="Club" id="resultclub">
+		<result column="c_no" property="classNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="c_title" property="classTitle"/>
+		<result column="c_content" property="classContent"/>
+		<result column="c_location" property="classLocation"/>
+		<result column="c_date" property="classDate"/>
+		<result column="c_time" property="classTime"/>
+		<result column="hour" property="hour"/>
+		<result column="c_price" property="classPrice"/>
+		<result column="avg_price" property="avgPrice"/>
+		<result column="c_approval" property="classApproval"/>
+		<result column="minage" property="minAge"/>
+		<result column="maxage" property="maxAge"/>
+		<result column="people_limit" property="peopleLimit"/>
+		<result column="vacancy" property="vacancy"/>
+		<result column="nickname" property="nickName"/>
+		<result column="cl_type" property="clType"/>
+		<result column="cl_type_status" property="clTypeStatus"/>
+		<result column="cl_category" property="clCategory"/>
+		<result column="cl_name" property="clName"/>
+		<result column="curriculum" property="curriculum"/>
+		<result column="status" property="status"/>
 	
+	</resultMap>
+	
+		<!--  <collection property="attachment" resultMap="attachment"/> -->
 	
 	<select id="loginMember" resultMap="MemberResult">
 		select
@@ -254,5 +280,81 @@
 		and thumbnail = 1
 	</select>
 	
+	<select id="selectClType" resultMap="resultclub">
+		select
+		       c_no
+		     , cl_type_status
+		     , c_title
+		  from class
+		  join my_class mc using(c_no)
+		  join member m on (mc.mem_no = m.mem_no)
+		 where mem_id = #{memId}
+	 	   and mem_pwd = #{memPwd}
+	</select>
+	
+	<insert id = "insertFollow">
+		insert
+			into follow 
+		(
+		 to_mem 
+		,from_mem
+		)
+		values
+		(
+		 #{toMem}
+		,#{fromMem}
+		)
+	</insert>
+	
+	<select id ="checkFollow" resultType="_int">
+		select 
+			count(*)
+			from follow
+			where to_mem = #{toMem}
+			and from_mem = #{fromMem}
+	</select>
+	
+	
+	<select id ="getFollowingList" resultMap="MemberResult" >
+		select
+		       mem_no
+		     , mem_id
+		     , mem_name
+		     , nickname
+		     , email
+		     , gender
+		     , age
+		     , phone
+		     , enroll_date
+		     , manner
+		     , img
+		     , msg
+		  from member m 
+		 where mem_no in (select
+			to_mem
+		from follow
+		where from_mem = #{memNo)})
+	</select>
+	
+	<select id ="getFollowerList" resultMap="MemberResult">
+		select
+		       mem_no
+		     , mem_id
+		     , mem_name
+		     , nickname
+		     , email
+		     , gender
+		     , age
+		     , phone
+		     , enroll_date
+		     , manner
+		     , img
+		     , msg
+		  from member m 
+		 where mem_no in (select
+			to_mem
+		from follow
+		where to_mem = #{memNo)})
+	</select>
 	
 </mapper>

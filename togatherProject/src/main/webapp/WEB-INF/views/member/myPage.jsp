@@ -12,6 +12,7 @@
 		<meta name="author" content="">
 		<title>myPage</title>
 		<!-- Favicons-->
+		
 		<link rel="shortcut icon" href="assets/images/favicon.png">
 		<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 		<link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
@@ -25,17 +26,30 @@
 		<!-- Template core CSS-->
 		<link href="assets/css/template.css" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		
+		 <!-- 이거 필요한가?<script src="./bootstrapt/js/bootstrap.min.js"></script>-->
 
 		<style>
 			.gallery-item:hover{
 				cursor:pointer
 			}
+			#newFeed :hover{
+				cursor:pointer
+			}
+			
+			
 
 		</style>
 	</head>
 	<body>
 	
 	<jsp:include page="../common/menubar.jsp"></jsp:include>
+	
+	
+	
+	
+	
+	
 
 		<!-- Preloader-->
 		<div class="page-loader">
@@ -80,22 +94,53 @@
 							
 						</th>
 							
-						<td colspan="2"><a href="">setMyProfile</a></td>	
+						<td><a href="">setMyProfile</a></td>
+						<td><a href="" id="testBtn" class="btn">search User</a></td>		
 					</tr>		
 					</thead>
 						<tr>
 							<th style="width: 100px;">FeedsCount</th>
-							<td>6</td>
+							<td>
+								<c:choose>
+									<c:when test="${not empty fList }">
+										${fn:length(fList)}
+									</c:when>
+									<c:otherwise>
+										0
+									</c:otherwise>
+								</c:choose>
+							
+							
+							</td>
 							
 						</tr>
 						<tr>
 							<th>Following</th>
-							<td>5</td>
+							<td>
+								<c:choose>
+									<c:when test="${not empty followingList }">
+										${fn:length(followingList)}
+									</c:when>
+									<c:otherwise>
+										0
+									</c:otherwise>
+								</c:choose>
+							</td>
 							
 						</tr>
 						<tr>
 							<th>Follower</th>
-							<td>50</td>
+							<td>
+								<c:choose>
+									<c:when test="${not empty followerList }">
+										${fn:length(followerList)}
+									</c:when>
+									<c:otherwise>
+										0
+									</c:otherwise>
+								</c:choose>
+							
+							</td>
 							
 						</tr>
 						<tr>
@@ -120,10 +165,9 @@
 						
 				</div>
 			</div>
-			
-			
+
 				<div class="container">
-					<div class="row" style="margin-left: 100px;">
+					<div id="newFeed" class="row" style="margin-left: 100px;">
 						<img src="assets/images/new.png" onclick="test();">
 					</div>
 				</div>
@@ -173,7 +217,7 @@
 						$(function(){
 							$(".gallery-item").click(function(){
 								var feNo =$(this).children().eq(0).val();
-								alert(feNo);
+								location.href = "feedDetail.fe?feNo="+feNo ; 
 						})
 						})
 						
@@ -407,6 +451,115 @@
 				</div>
 			</div>
 		</div>
+		
+		
+		
+		  <!-- 회원검색  Modal-->
+			<div class="modal" id="testModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				
+				<div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" >
+								<select id = "option">
+								    <option value="id">id</option>
+								    <option value="nickNmae">nickName</option>
+								</select>
+							</h5>
+							
+							<input class="form-control" id="searchUser" type="search" placeholder="search here">
+										
+								
+						</div>
+						<div id="searchResultSection" class="modal-body">
+						
+						
+						
+							   
+							   
+						</div>
+							
+						
+			
+						
+
+						<div class="modal-footer">
+							<button class="btn" type="button" data-dismiss="modal">close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<script>
+				$('#testBtn').click(function(e){
+					e.preventDefault();
+					$('#testModal').modal("show");
+				});
+				
+				
+				
+				 $(function(){
+				    //아이디를 입력하는 input 요소 객체 변수에 담아두기
+				    const $searchUser = $("#searchUser"); //
+				    const $option = $("#option");
+				    	$searchUser.keyup(function(){
+							$.ajax({
+								url: "search.me",
+				    			data: {
+				    				searchKey : $searchUser.val(),
+				    				searchType : $option.val()
+				    			},
+				    			success : function(searchList){
+				    				  let value = "";
+				    				 
+				    				  for (let i = 0 ; i <searchList.length ; i++){
+				    					 
+				    					  let memNo = searchList[i].memNo;
+				    					  value += 
+				    						 "<div id ="+ memNo +">"	
+				    						+ "<div class='comment-author'><img class='avatar' src="+ searchList[i].img +" ></div>"
+											+"<div class='comment-body'>"
+												+"<div class='comment-meta'>"
+													+"<div class='comment-meta-author' onClick='searchUserPage(this);'><a href='#'> <input class='ref' type='hidden' value="+memNo +">"+searchList[i].memName + "</div>"
+												+"</div>"
+												+"<div class='comment-content'>"
+														+"<p>"+searchList[i].msg+"</p>"
+												+"</div>"
+										    +"</div>"
+										   +"</div>";
+											   
+				    				  }
+				    				  
+				    				  $("#searchResultSection").html(value);
+				    				  
+				    			},
+				    			error :function(){
+				    				  console.log("통신실패");
+				    			}
+							})
+				    	})
+				    	
+				    	
+				   })
+				   
+				   function searchUserPage(e){
+						 var searchNo = ($(e).find(".ref").val());
+						 location.href = "searchUserPage.fe?searchNo="+searchNo ; 
+					}
+				
+				
+			</script>
+	 <!-- 회원검색 Modal-->
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<!-- Reserve Popup end-->
 
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>

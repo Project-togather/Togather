@@ -38,12 +38,15 @@ public class Club {
 	private String curriculum; // 커리큘럼
 	private String status; // 폐쇄상태
 	private int vacancy; // 남은 자리
-	private String nickname; // 닉네임
+	private String nickName; // 닉네임
 	
 	// 카카오맵 api 추가
 	private String latitude; // 위도
 	private String longitude; // 경도
 	
+
+	private int clTypeStatus; // 모임 가입상태
+
 	private Attachment attachment;
 	
 }

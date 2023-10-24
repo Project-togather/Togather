@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.feed.model.vo.Feed;
+import com.kh.spring.follow.model.vo.Follow;
 import com.kh.spring.member.model.dao.MemberDao;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.meminterest.model.vo.MemInterest;
@@ -81,7 +82,9 @@ public class MemberServiceImpl implements MemberService {
 	//관심사 가져오기
 	@Override
 	public ArrayList<MemInterest> getMemInterest(String memNo) {
+		
 		ArrayList<MemInterest> mi = mDao.getMemInterest(sqlSession, memNo);
+
 		return mi;
 	}
 	
@@ -110,6 +113,39 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String selectThumbnail(String feNo) {
 		return mDao.selectThumbnail(sqlSession , feNo);
+	}
+
+	@Override
+	public ArrayList<Member> selectClType(Member m) {
+		return mDao.selectClType(m, sqlSession);
+	}
+	
+	//팔로우기능
+	@Override
+	public int insertFollow(Follow f) {
+		return mDao.insertFollow(sqlSession, f);
+		
+	}
+	
+	//팔로우 체크
+	@Override
+	public int checkFollow(Follow f) {
+		return mDao.checkFollow(sqlSession, f);
+		
+	}
+
+	
+	//팔로잉리스트
+	@Override
+	public ArrayList<Member> getFollowingList(String memNo) {
+		
+		return mDao.getFollowingList(sqlSession, memNo);
+	}
+	//팔로워리스트
+	@Override
+	public ArrayList<Member> getFollowerList(String memNo) {
+		
+		return mDao.getFollowerList(sqlSession, memNo);
 	}
 	
 }

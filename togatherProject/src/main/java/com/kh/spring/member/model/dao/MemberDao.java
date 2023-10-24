@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.feed.model.vo.Feed;
+import com.kh.spring.follow.model.vo.Follow;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.meminterest.model.vo.MemInterest;
 
@@ -77,4 +78,25 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.selectThumbnail",feNo);
 	}
 	
+	public ArrayList<Member> selectClType(Member m, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectClType", m);
+	}
+	//팔로우 하기
+	public int insertFollow(SqlSessionTemplate sqlSession , Follow f) {
+		
+		return sqlSession.insert("memberMapper.insertFollow",f);
+	}
+	//팔로우 체크
+	public int checkFollow(SqlSessionTemplate sqlSession ,  Follow f) {
+		return sqlSession.selectOne("memberMapper.checkFollow",f);
+	}
+	
+	//마이페이지에 띄울 팔로잉리스트
+	public ArrayList<Member> getFollowingList(SqlSessionTemplate sqlSession , String memNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.getFollowingList", memNo);
+	}
+	
+	public ArrayList<Member>  getFollowerList(SqlSessionTemplate sqlSession , String memNo) {
+		return (ArrayList)sqlSession.selectList("memberMapper.getFollowerList", memNo);
+	}
 }

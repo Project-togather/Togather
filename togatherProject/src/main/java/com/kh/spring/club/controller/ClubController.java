@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.reply.model.vo.Reply;
 import com.kh.spring.myClass.model.vo.MyClass;
 
@@ -207,9 +208,12 @@ public class ClubController {
 	}
 	
 	@RequestMapping("detail.cl")
-	public String selectClassDetail(int cNo, Model model) {
+	public String selectClassDetail(MyClass mc, Model model) {
 		
-		Club c = cService.selectClassDetail(cNo);
+		Club c = cService.selectClassDetail(mc);
+		ArrayList<Member> list = cService.classMemberList(mc);
+		
+		System.out.println("리스트 : " + list);
 
 		if(c.getClassApproval().equals("Y")) {
 			c.setClassApproval("승인제");
@@ -217,6 +221,7 @@ public class ClubController {
 			c.setClassApproval("선착순");
 		}
 		
+		model.addAttribute("list", list);
 		model.addAttribute("c", c);
 		return "class/classDetailView";
 	}
@@ -304,6 +309,42 @@ public class ClubController {
 	public int checkLike(MyClass c) {
 		int result = cService.checkLike(c);
 		return result;
+	}
+	
+	@RequestMapping("classUpdateForm.cl")
+	public String classUpdateForm(MyClass mc, Model model) {
+
+		Club c = cService.selectClassDetail(mc);
+		model.addAttribute("c", c);
+		
+		return "class/classUpdateForm";
+	}
+	
+	@RequestMapping("deleteClass.cl")
+	public String deleteClass(String cNo, Model model) {
+		
+		int result = cService.deleteClass(cNo);
+		
+		if(result > 0) {
+			return "redirect:/";			
+		} else {
+			model.addAttribute("errorMsg", "게시글 등록에 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping("memberListPage.cl")
+	public String memberListPage(String cNo, Model model) {
+		model.addAttribute("classNo", cNo);
+		return "class/classMemberList";
+	}
+	
+	@ResponseBody
+	@RequestMapping("classMemberList.cl")
+	public ArrayList<Member> classMemberList(MyClass c) {
+		ArrayList<Member> list = cService.classMemberList(c);
+		return list;
+		
 	}
 	
 }

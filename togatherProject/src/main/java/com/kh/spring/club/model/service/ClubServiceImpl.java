@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.dao.ClubDao;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
 
@@ -52,8 +53,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public Club selectClassDetail(int classNo) {
-		return cDao.selectClassDetail(classNo, sqlSession);
+	public Club selectClassDetail(MyClass mc) {
+		return cDao.selectClassDetail(mc, sqlSession);
 	}
 
 	@Override
@@ -119,6 +120,16 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public int checkLike(MyClass c) {
 		return cDao.checkLike(c, sqlSession);
+	}
+
+	@Override
+	public int deleteClass(String classNo) {
+		return cDao.deleteClass(classNo, sqlSession);
+	}
+
+	@Override
+	public ArrayList<Member> classMemberList(MyClass c) {
+		return cDao.classMemberList(c, sqlSession);
 	}
 	
 
