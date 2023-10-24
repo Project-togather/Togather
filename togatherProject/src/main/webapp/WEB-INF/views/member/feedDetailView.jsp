@@ -53,9 +53,11 @@
 											</div>
 											<div class="post-footer">
 												<div class="post-tags">
-												 	<c:forEach var="i" begin="0" end="${ (fn:length(interArr))-1}"  step="1">
-												 		${interArr[i]} 
-												 	</c:forEach>
+													<c:if test="${not empty interArr}">
+													 	<c:forEach var="i" begin="0" end="${ (fn:length(interArr))-1}"  step="1">
+													 		${interArr[i]} 
+													 	</c:forEach>
+													</c:if> 	
 												</div>
 											</div>
 										</div>
@@ -150,7 +152,7 @@
 														+"<div class='comment-author'><img class='avatar' src=" + rList[i].img  +"></div>" 
 														+"<div class='comment-body'>"
 														+"	<div class='comment-meta'>"
-														+"		<div class='comment-meta-author'><a href='#'>"+ rList[i].nickname+ "</a></div>"
+														+"		<div class='comment-meta-author'><a href='#'>"+ rList[i].nickName+ "</a></div>"
 														+"		<div class='comment-meta-date'><a href='#'>"+rList[i].rvDate+"</a></div>"
 														+"	</div> "
 														+"	<div class='comment-content'>"

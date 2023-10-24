@@ -10,7 +10,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>myPage</title>
+		<title> ${targetMem.memName} 's Page</title>
 		<!-- Favicons-->
 		
 		<link rel="shortcut icon" href="assets/images/favicon.png">
@@ -69,7 +69,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="text-center">
-								<h2 class="display-1"> ${loginMember.memName} 's Page</h2>
+								<h2 class="display-1"> ${targetMem.memName} 's Page</h2>
 								<p>personal Page<br/> show who you are</p>
 							</div>
 						</div>
@@ -83,24 +83,24 @@
 			<div class="module">
 				<div class="container">
 					<div class="gallery-item">
-						<div class="gallery-image" data-background="${loginMember.img}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
+						<div class="gallery-image" data-background="${targetMem.img}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
 						
 						<br><br><br><br>
 					</div>
 				<table border="0" style="width: 800px; margin-top: 100px;" align="center">
 					<thead>
 					<tr>
-						<th>${loginMember.memName} 님
+						<th>${targetMem.memName} 님
 							
 						</th>
 							
-						<td><a href="">setMyProfile</a></td>
+						<td><a href="">Request Follow</a></td>
 						<td><a href="" id="testBtn" class="btn">search User</a></td>		
 					</tr>		
 					</thead>
 						<tr>
 							<th style="width: 100px;">FeedsCount</th>
-							<td>6</td>
+							<td>${fn:length(fList)}</td>
 							
 						</tr>
 						<tr>
@@ -117,7 +117,7 @@
 							<th>introduce</th>
 							<td colspan="2">
 								
-								${loginMember.msg}
+								${targetMem.msg}
 							</td>
 						</tr>	
 						<tr>
@@ -136,17 +136,7 @@
 				</div>
 			</div>
 
-				<div class="container">
-					<div id="newFeed" class="row" style="margin-left: 100px;">
-						<img src="assets/images/new.png" onclick="test();">
-					</div>
-				</div>
-				<script>
-					function test(){
-						location.href ="feedEnrollForm.me"
-					}
-
-				</script>
+		
 			
 			<!-- Menu-->
 			<section class="module" >

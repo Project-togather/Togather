@@ -1,6 +1,7 @@
 package com.kh.spring.feed.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ public class FeedController {
 	
 	@Autowired
 	private MemberServiceImpl mService;
+	
 	
 	
 	//피드번호로 피드 디테일 조회
@@ -102,7 +104,7 @@ public class FeedController {
 	@ResponseBody
 	@RequestMapping (value = "showFeedReply.re" , produces="application/json ; charset=UTF-8")
 	public String showFeedReply(String feNo) {
-		System.out.println(feNo);
+		//System.out.println(feNo);
 		ArrayList<Reply> rList = fService.showFeedReply(feNo);
 		ArrayList<Reply> toRlist = new ArrayList<Reply>();
 		for(int i = 0 ; i <rList.size() ; i ++ ) {
@@ -113,7 +115,78 @@ public class FeedController {
 			rList.get(i).setNickName(m.getNickName());
 			rList.get(i).setImg(m.getImg());
 		}
+		System.out.println("언디파인 디버깅" + rList);
 		return new Gson().toJson(rList);
 	}
 	
+	
+	//맴버 검색
+	@ResponseBody
+	@RequestMapping(value = "search.me" , produces="application/json ; charset=UTF-8")
+	public String searchMember(String searchKey , String searchType) {
+		
+		HashMap <String,String> map = new HashMap<String, String>();
+		map.put("searchKey", searchKey);
+		map.put("searchType", searchType);
+		ArrayList<Member> memberList = fService.memberSearchList(map);
+		System.out.println(memberList);
+		return new Gson().toJson(memberList);
+		
+		
+	}
+	
+	//검색된 맴버페이지로 이동
+	@RequestMapping(value = "searchUserPage.fe")
+	public String searchUserPage(String searchNo , HttpSession session , HttpServletRequest request) {
+		Member m = (Member)session.getAttribute("loginMember");
+		String loginMemberNo = m.getMemNo();
+		
+		if (searchNo.equals(loginMemberNo)) {
+			return "redirect:/mypage.me";
+		}else {
+			Member targetMem = fService.searchUserPage(searchNo);//검색된 멤버의 정보 가져오자
+			System.out.println(targetMem);
+			//피드가져오고
+			 ArrayList<Feed> fList = mService.selectFeedList(searchNo);
+			  //다음은 feed_no 를 기준으로 썸네일을 불러오자
+			  for(int i = 0 ; i < fList.size() ; i ++) {
+				  String thumbFilePath = mService.selectThumbnail(fList.get(i).getFeNo());
+				  fList.get(i).setThumbnail(thumbFilePath);
+			  }
+			  //System.out.println(fList);
+			 
+			
+			
+			
+			
+			//관심사도 가져와야함
+			  ArrayList<MemInterest> mi = mService.getMemInterest(searchNo);
+				 
+			  String [] interArr = new String [mi.size()];
+			   for (int i = 0 ; i < mi.size() ; i ++) {
+				 if(mi.get(i).getInNo() == 1) { 
+					 interArr[i] = "Music & Art" + "🎨" ;
+				 }else if (mi.get(i).getInNo() == 2) {
+					 interArr[i] = "Activity 🥅";
+				 }else if (mi.get(i).getInNo() == 3) {
+					 interArr[i] = "Food & Drink 🍻";
+				 }else if (mi.get(i).getInNo() == 4) { 
+					 interArr[i] = "Hooby 📸";
+				 }else if (mi.get(i).getInNo() == 5) {
+					 interArr[i] = "Party 🎉";
+				 }else if (mi.get(i).getInNo() == 6) {
+					 interArr[i] = "Date 💄";
+				 }else if (mi.get(i).getInNo() == 7) {
+					 interArr[i] = "InvestMent 💸";
+				 }else {
+					 interArr[i] = "Foreign Language 💬 ";
+				 }
+			  }
+			  //문화예술 1 액티비티2 푸드드링크3 취미4 파티소개팅5 동네친목6 제테크7 외국어8
+			request.setAttribute("fList", fList);
+			request.setAttribute("interArr",interArr);
+			request.setAttribute("targetMem", targetMem);
+			return "member/yourPage";
+		}
+	}
 }

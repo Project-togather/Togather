@@ -349,7 +349,7 @@ public class MemberController {
 	   
 	   if (result1 * result2 != 0) {
 		   session.setAttribute("alertMsg", "피드가 성공적으로 작성되었습니다");
-	        return "redirect:/";
+	        return "redirect:/mypage.me";
 	   }else {
 		   model.addAttribute("errorMsg", "피드작성 실패");
 	       return "common/errorPage";

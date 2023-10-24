@@ -36,6 +36,16 @@
 	<resultMap type="Member" id="FeedReplyMemberResult">
 		<result column="nickname" property="nickName"/>
 		<result column="img" property="img"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="msg" property="msg"/>
+		<result column="mem_id" property="memId"/>
+		<result column="mem_name" property="memName"/>
+		<result column="email" property="email"/>
+		<result column="gender" property="gender"/>
+		<result column="age" property="age"/>
+		<result column="phone" property="phone"/>
+		<result column="enroll_date" property="enrollDate"/>
+		<result column="manner" property="manner"/>
 	</resultMap>
 
 	<select id = "selectFeedDetail" resultMap = "myFeedResult">
@@ -112,6 +122,49 @@
 		    from member
 	    where mem_no = #{memNo}
 	</select>
+	
+	<select id ="memberSearchList" resultMap= "FeedReplyMemberResult">
+		select 
+		   mem_no
+		  ,mem_id
+		  ,mem_name
+		  ,nickname
+		  ,msg
+		  ,img
+		from member
+		<choose>
+			<when test="searchType == 'id'">
+				where mem_id
+			</when>
+			<otherwise>
+				where nickname
+			</otherwise>
+		</choose>	
+			 like '%'||#{searchKey}||'%'
+		
+		order by mem_no desc
+	</select>
+	
+	
+	
+	<select id = "searchUserPage" resultMap="FeedReplyMemberResult">
+		select
+		       mem_no
+		     , mem_id
+		     , mem_name
+		     , nickname
+		     , email
+		     , gender
+		     , age
+		     , phone
+		     , enroll_date
+		     , manner
+		     , img
+		     , msg
+		  from member
+		 where mem_no = #{memNo}
+	</select>
+	
 	
 	 
 </mapper>
