@@ -119,7 +119,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${not empty followingList }">
-										${fn:length(followingList)}
+										<div> ${fn:length(followingList)}</div>
 									</c:when>
 									<c:otherwise>
 										0
@@ -133,7 +133,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${not empty followerList }">
-										${fn:length(followerList)}
+										 <div> ${fn:length(followerList)}</div>
 									</c:when>
 									<c:otherwise>
 										0
@@ -472,23 +472,44 @@
 								
 						</div>
 						<div id="searchResultSection" class="modal-body">
-						
-						
-						
-							   
-							   
-						</div>
-							
-						
-			
-						
 
+						</div>
 						<div class="modal-footer">
 							<button class="btn" type="button" data-dismiss="modal">close</button>
 						</div>
 					</div>
 				</div>
 			</div>
+			
+			<!-- 팔로잉 모달 -->
+			<div class="modal" id="followModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				
+				<div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" >
+								<select id = "option">
+								    <option value="id">id</option>
+								    <option value="nickNmae">nickName</option>
+								</select>
+							</h5>
+							
+							<input class="form-control" id="searchUser" type="search" placeholder="search here">
+										
+								
+						</div>
+						<div id="searchResultSection" class="modal-body">
+
+						</div>
+						<div class="modal-footer">
+							<button class="btn" type="button" data-dismiss="modal">close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
 			<script>
 				$('#testBtn').click(function(e){
 					e.preventDefault();
