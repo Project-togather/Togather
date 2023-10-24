@@ -8,20 +8,13 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
-
-<!-- 카카오 지도 코드 보류
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.4.0/kakao.min.js" integrity="sha384-mXVrIX2T/Kszp6Z0aEWaA8Nm7J6/ZeWXbL8UpGRjKwWe56Srd/iyNmWMBhcItAjH" crossorigin="anonymous"></script>
-<script>
-	Kakao.init('JAVASCRIPT_KEY');
-	console.log(Kakao.isInitialized());
-</script>
--->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css"/>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+    
 <style>
 .map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-.map_wrap{margin:auto;}
 .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-.map_wrap {position:relative;width:610px;;height:400px; line-height: 1;}
+.map_wrap {position:relative; right:35px; width:610px;;height:400px; line-height: 1;}
 #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:200px;height:400px; margin:0px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
 .bg_white {background:#fff;}
 #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
@@ -78,6 +71,17 @@
 .hiddenMap{
 	display: none;
 }
+.hiddenBusiness{
+	display: none;
+}
+.addorange{background-color: orange;}
+.submitbtn:hover{background-color: orange;}
+.contentImg1{
+	width: 250px;
+	height: 250px;
+	object-fit: cover;
+}
+#editor{text-align: left;}
 </style>		
 </head>
 <body>
@@ -100,7 +104,7 @@
 							<div class="up-form">
 								<form action="enroll.cl" method="post" enctype="multipart/form-data">
 									<div class="form-group">
-										<input type="hidden" id="hidden" name="memNo" value="${ loginMember.memNo }">
+										<input type="hidden" name="memNo" value="${ loginMember.memNo }">
 										<h5>모임유형을 선택해주세요!</h5>
 									</div>
 									
@@ -116,6 +120,46 @@
 									<div class="form-group">
 										<div class="form-control" id="oneday" style="color: white;">원데이</div>
 									</div>
+									
+									<!-- 사업자 등록증 -->
+									<div class="hiddenBusiness" id="hiddenBusiness">
+										<div class="form-group">
+											<input class="form-control" type="text" id="business" style="color: white;" placeholder="사업자번호를 입력해주세요">
+											<div id="verification"></div>
+										</div>
+									</div>
+									
+									<script>
+										$(function(){
+											$("#business").keyup(function(){
+												var businessNum = $("#business").val()
+												var data = {
+													    b_no: [businessNum]
+													   }; 
+												$.ajax({
+													  url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=6XpkUEJDu71bRIhw1wGcWoIAAgK8quJ0dx8ZLuYoj4h1LwPhtwnVd%2BZrZQjPhEJJgUEVnwr2avsIeJJIBOClpg%3D%3D",
+													  type: "POST",
+													  data: JSON.stringify(data), // json 을 string으로 변환하여 전송
+													  dataType: "JSON",
+													  contentType: "application/json",
+													  accept: "application/json",
+													  success: function(result) {
+													      $("#verification").html(result.data[0].tax_type);
+													      if(result.data[0].tax_type == "국세청에 등록되지 않은 사업자등록번호입니다."){
+													    	  $("#submitbtn").attr("disabled", true);
+													    	  $("#submitbtn").removeClass("submitbtn");
+													      }else{
+													          $("#submitbtn").attr("disabled", false);
+													          $("#submitbtn").addClass("submitbtn");
+													      }
+													  },
+													  error: function(result) {
+													      console.log(result.responseText); //responseText의 에러메세지 확인
+													  }
+													})
+												})
+											})
+									</script>
 									
 									<input type="hidden" id="clType" name="clType">
 										
@@ -183,11 +227,18 @@
 												
 												$("#oneday").css("backgroundColor", "purple");
 												$("#clType").val(4);
+												
+												if($("#hiddenBusiness").hasClass("hiddenBusiness")){
+													$("#hiddenBusiness").removeClass("hiddenBusiness");
+												}
 											}else{
 												$("#socialing").css("display", "");
 												$("#club").css("display", "");
 												$("#challenge").css("display", "");
+												$("#business").val("");
+												$("#verification").html("");
 												
+												$("#hiddenBusiness").addClass("hiddenBusiness");
 												$("#oneday").css("backgroundColor", "");
 												$("#clType").val(0);
 											}
@@ -397,39 +448,118 @@
 									<hr>
 									
 									<h5>소셜링을 소개해볼까요?</h5>
-									<table>
+									<table style="margin: auto;">
 										<tr>
-											<td><img id="contentImg1" width="150" height="120" onclick="chooseFile(1);"></td>
-											<td><img id="contentImg2" width="150" height="120" onclick="chooseFile(2);"></td>
-											<td><img id="contentImg3" width="150" height="120" onclick="chooseFile(3);"></td>
-											<td><img id="contentImg4" width="150" height="120" onclick="chooseFile(4);"></td>
-											<td><img id="contentImg5" width="150" height="120" onclick="chooseFile(5);"></td>
+											<td><img id="contentImg1" class="contentImg1" onclick="chooseFile(1);"></td>
 										</tr>
 									</table>
 									<div style="display:none">
 										<input type="file" id="file1" name="upfile" onchange="loadImg(this, 1);">
-										<input type="file" id="file2" name="upfile" onchange="loadImg(this, 2);">
-										<input type="file" id="file3" name="upfile" onchange="loadImg(this, 3);">
-										<input type="file" id="file4" name="upfile" onchange="loadImg(this, 4);">
-										<input type="file" id="file5" name="upfile" onchange="loadImg(this, 5);">
-									</div>
-									<br>
-									
-									<div class="form-group">
-										<textarea id="summernote" name="classContent" style="color:black; resize: none" cols="70" rows="5" placeholder="소개글을 입력해 주세요"></textarea>
 									</div>
 									
 									<script>
-										
+										function chooseFile(num){
+											$("#file" + num).click();
+										}
+								
+										function loadImg(inputFile, num){
+											if(inputFile.files.length == 1){
+												const reader = new FileReader();
+												reader.readAsDataURL(inputFile.files[0]);
+												reader.onload = function(e){
+													switch(num){
+					        						case 1 : $("#contentImg1").attr("src", e.target.result); break;
+													}
+												}
+											}else {
+												switch(num){
+				        						case 1 : $("#contentImg1").attr("src", null); break;
+												}
+											}
+										}
 									</script>
+									
+									<br>
+									
+								    <!-- TOAST UI Editor가 들어갈 div태그 -->
+								    <div id="editor" style="margin: 0;"></div>
+								    
+								    <!-- TOAST UI Editor CDN URL(JS) -->
+								    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+								
+								    <!-- TOAST UI Editor 생성 JavaScript 코드 -->
+								    <script>
+								        const editor = new toastui.Editor({
+								            el: document.querySelector('#editor'),
+								            previewStyle: 'tab',
+								            height: '500px',
+								            initialValue: '안녕하세요. METASTAR입니다.',
+								            initialEditType: 'wysiwyg',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
+								            initialValue: '내용을 입력해 주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+								            previewStyle: 'vertical',                // 마크다운 프리뷰 스타일 (tab || vertical)
+								            language: 'ko',
+								            
+								            hooks: {
+										    	addImageBlobHook: (blob, callback) => {
+										    		
+										    		const formData = new FormData();
+										        	formData.append('image', blob);
+										        	
+										   			$.ajax({
+										           		url: "writeTest.do",
+										           		type: 'POST',
+										           		enctype: 'multipart/form-data',
+										           		data: formData,
+										           		dataType: 'json',
+										           		processData: false,
+										           		contentType: false,
+										           		cache: false,
+										           		timeout: 600000,
+										           		success: function(data) {
+										           			console.log(data);
+										           			//console.log('ajax 이미지 업로드 성공');
+										           			url = data.filename;
+										           			
+										           			// callback : 에디터(마크다운 편집기)에 표시할 텍스트, 뷰어에는 imageUrl 주소에 저장된 사진으로 나옴
+										        			// 형식 : ![대체 텍스트](주소)
+										           			callback(url, '사진 대체 텍스트 입력');
+										           		},
+										           		error: function(e) {
+										           			//console.log('ajax 이미지 업로드 실패');
+										           			//console.log(e.abort([statusText]));
+										           			console.log(data);
+										           			callback('image_load_fail', '사진 대체 텍스트 입력');
+										           		}
+										           	});
+										    	}
+										    }
+								        });
+								
+								        // editor.getHtml()을 사용해서 에디터 내용 받아오기
+								        see1 = function() {
+								            console.log(editor.getHTML());
+								        }
+								        see2 = function() {
+								            console.log(editor.getMarkdown());
+								        }
+								        
+								        $(function(){
+								        	$("#editor").keyup(function(){
+								        		let classContent = editor.getHTML().replace(/<p>/g, "").replace(/<\/p>/g, "\n");
+								        		$("#editor").val(classContent);
+								        		console.log($("#editor").val());
+								        	})
+								        })
+								        
+								    </script>
+									
+									<br>
 									
 									<h5>언제 만날까요?</h5>
 									<div class="form-group">
 										<input type="date" name="classDate">
 										<input type="time" name="classTime">
 									</div>
-									
-									
 																		
 									<h5>어디서 만날까요?</h5>
 									<div class="choiseMap">
@@ -487,9 +617,17 @@
 				                    키워드 : <input type="text" value="서울" id="keyword" size="15" name="classLocation" placeholder="키워드"> 
 				                    <button id="search" type="button" onclick="searchPlaces(); return false;">검색하기</button> 
 									</div>
+									<input type="hidden" name="latitude" id="latitude"> <!-- 위도 -->
+									<input type="hidden" name="longitude" id="longitude"> <!-- 경도 -->
 									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9c08fb064e6bc40cfa573768b020756&libraries=services"></script>
 									
 									<script>
+									$(function(){
+										$("#offLine").click(function(){
+											 map.relayout();
+										})
+									})
+									
 									// 마커를 담을 배열입니다
 									var markers = [];
 									
@@ -504,9 +642,6 @@
 									
 									// 장소 검색 객체를 생성합니다
 									var ps = new kakao.maps.services.Places();  
-									
-									// 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-									var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 									
 									// 키워드로 장소를 검색합니다
 									searchPlaces();
@@ -570,31 +705,39 @@
 									        var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
 									            marker = addMarker(placePosition, i), 
 									            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
-									
+									            
 									        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 									        // LatLngBounds 객체에 좌표를 추가합니다
 									        bounds.extend(placePosition);
-									
+									            
 									        // 마커와 검색결과 항목에 mouseover 했을때
 									        // 해당 장소에 인포윈도우에 장소명을 표시합니다
 									        // mouseout 했을 때는 인포윈도우를 닫습니다
 									        (function(marker, title) {
-									            kakao.maps.event.addListener(marker, 'mouseover', function() {
-									                displayInfowindow(marker, title);
+									            kakao.maps.event.addListener(marker, 'click', function() {
+									            	map.setCenter(marker.getPosition());
+									            	$(this).addClass("addorange");
+									            	$(this).siblings().removeClass("addorange");
+
+									                $("#latitude").val(marker.getPosition().getLat()); // 위도 값 저장
+									                $("#longitude").val(marker.getPosition().getLng()); // 경도 값 저장
+									                
 									            });
-									
-									            kakao.maps.event.addListener(marker, 'mouseout', function() {
-									                infowindow.close();
-									            });
-									
-									            itemEl.onmouseover =  function () {
-									                displayInfowindow(marker, title);
-									            };
-									
-									            itemEl.onmouseout =  function () {
-									                infowindow.close();
-									            };
-									        })(marker, places[i].place_name);
+									            
+									            itemEl.onclick = function(){
+									            	map.setCenter(marker.getPosition());
+									                $("#latitude").val(marker.getPosition().getLat()); // 위도 값 저장
+									                $("#longitude").val(marker.getPosition().getLng()); // 경도 값 저장
+													
+									            	if($(this).hasClass("addorange")){
+									            		$(this).removeClass("addorange");
+									            	}else{
+									            		$(this).addClass("addorange");
+									            	}
+									            	$(this).siblings().removeClass("addorange");
+									            }
+									            
+									        })(marker, places[i]);
 									
 									        fragment.appendChild(itemEl);
 									    }
@@ -772,52 +915,8 @@
 									<div class="form-group">
 										<input class="form-control" type="number" name="peopleLimit" placeholder="참가 인원수를 선택해주세요." style="color:white">
 									</div>
-									
-									<script>
-										
-									/*
-										$(document).ready(function() {
-										  $('#summernote').summernote({
-									 	    	placeholder: 'content',
-										        minHeight: 370,
-										        maxHeight: null,
-										        focus: true, 
-										        lang : 'ko-KR'
-										  });
-										});
-									*/
-
-										function chooseFile(num){
-											$("#file" + num).click();
-										}
-								
-										function loadImg(inputFile, num){
-											if(inputFile.files.length == 1){
-												const reader = new FileReader();
-												reader.readAsDataURL(inputFile.files[0]);
-												reader.onload = function(e){
-													switch(num){
-					        						case 1 : $("#contentImg1").attr("src", e.target.result); break;
-					        						case 2 : $("#contentImg2").attr("src", e.target.result); break;
-					        						case 3 : $("#contentImg3").attr("src", e.target.result); break;
-					        						case 4 : $("#contentImg4").attr("src", e.target.result); break;
-					        						case 5 : $("#contentImg5").attr("src", e.target.result); break;
-													
-													}
-												}
-											} else{
-												switch(num){
-				        						case 1 : $("#contentImg1").attr("src", null); break;
-				        						case 2 : $("#contentImg2").attr("src", null); break;
-				        						case 3 : $("#contentImg3").attr("src", null); break;
-				        						case 4 : $("#contentImg4").attr("src", null); break;
-				        						case 5 : $("#contentImg5").attr("src", null); break;
-											}
-										}
-										}
-									</script>
 			
-									<input type="submit" value="모임등록">
+									<input type="submit" id="submitbtn" class="submitbtn" value="모임등록">
 								</form>		
 							</div>
 						</div>
@@ -829,5 +928,7 @@
 	</div>
 	<!-- Wrapper end-->
 	<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+	
 </body>
 </html>

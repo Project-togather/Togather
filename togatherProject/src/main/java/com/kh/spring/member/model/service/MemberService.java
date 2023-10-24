@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.feed.model.vo.Feed;
+import com.kh.spring.follow.model.vo.Follow;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.meminterest.model.vo.MemInterest;
 
@@ -44,6 +45,15 @@ public interface MemberService {
 	
 	// 로그인 세션 + 해당 유저의 모임 가입상태 세션
 	ArrayList<Member> selectClType(Member m);
+
+	//팔로우하기
+	int insertFollow(Follow f);
+	//팔로우되어있나 체크
+	int checkFollow(Follow f);
+	
+	//팔로잉리스트 팔로워리스트
+	ArrayList<Member> getFollowingList (String memNo);
+	ArrayList<Member> getFollowerList (String memNo);
 	
 	
 }

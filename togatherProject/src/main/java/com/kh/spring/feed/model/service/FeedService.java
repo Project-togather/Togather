@@ -1,6 +1,7 @@
 package com.kh.spring.feed.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.feed.model.vo.Feed;
@@ -21,6 +22,10 @@ public interface FeedService {
 	ArrayList<Reply> showFeedReply(String feNo);
 	//피드 댓글 조회할때 멤버 정보 가져오기
 	Member selectReplyMember(String memNo);
+	//맴버 검색
+	ArrayList<Member> memberSearchList(HashMap<String, String> map);
+	//검색된 멤버페이지로 이동
+	Member searchUserPage(String memNo);
 	
 	
 }

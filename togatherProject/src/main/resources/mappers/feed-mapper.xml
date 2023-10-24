@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="feedMapper">
-
-
-<resultMap type="Feed" id="feedResult">
-	<result column="fe_no" property="feNo"/>
-	<result column="ref_cno" property="refCno"/>
-	<result column="fe_content" property="feContent"/>
-	<result column="fe_date" property="feDate"/>
-	<result column="fe_writer" property="feWriter"/>
-	<result column="fe_status" property="fStatus"/>
-</resultMap>
-
-	<select id="selectFeedList" resultMap="feedResult">
-		 select
-            fe_no
-        ,   ref_cno
-        ,   fe_content
-        ,   fe_date
-        ,   fe_writer
-        ,   f_status
-    from feed
-    where f_status = 'Y'
-	</select>
 	 
 	 
 </mapper>
