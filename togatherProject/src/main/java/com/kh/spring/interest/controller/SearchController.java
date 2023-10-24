@@ -55,7 +55,6 @@ public class SearchController {
 	    response.put("list", list); // 페이징된 목록
 	    response.put("pageInfo", pi); // 페이지 정보
 	    
-	    
 	    // Gson을 사용하여 Map을 JSON 문자열로 변환하여 반환
 	    Gson gson = new Gson();
 	    String jsonResponse = gson.toJson(response);
