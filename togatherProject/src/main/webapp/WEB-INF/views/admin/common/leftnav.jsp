@@ -72,7 +72,7 @@
 		<hr class="sidebar-divider my-0">
 
 		<!-- 모임 관리 대시보드 시작 -->
-		<li class="nav-item "><a class="nav-link collapsed" href="#"
+		<li class="nav-item "><a class="nav-link collapsed" href="challenge.cl"
 			data-toggle="collapse" data-target="#collapseUtilities"
 			aria-expanded="true" aria-controls="collapseUtilities"> <i
 				class="fas fa-fw fa-wrench"></i> <span>모임 관리</span>
@@ -81,10 +81,9 @@
 				aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">모임관리</h6>
-					<a class="collapse-item" href="utilities-color.html">챌린지</a> <a
-						class="collapse-item" href="utilities-border.html">모임1(소셜링)</a> <a
-						class="collapse-item" href="utilities-animation.html">모임1(클럽)</a>
-					<a class="collapse-item" href="utilities-other.html">11</a>
+					<a class="collapse-item" href="challenge.cl">챌린지</a> 
+					<a class="collapse-item" href="utilities-border.html">모임1(소셜링)</a> 
+					<a class="collapse-item" href="utilities-animation.html">모임1(클럽)</a>
 				</div>
 			</div></li>
 
