@@ -75,8 +75,13 @@
 	display: none;
 }
 .addorange{background-color: orange;}
-#summernoteLoad:hover{color: orange;}
-#summernoteView{width:800px;}
+.submitbtn:hover{background-color: orange;}
+.contentImg1{
+	width: 250px;
+	height: 250px;
+	object-fit: cover;
+}
+#editor{text-align: left;}
 </style>		
 </head>
 <body>
@@ -140,6 +145,13 @@
 													  accept: "application/json",
 													  success: function(result) {
 													      $("#verification").html(result.data[0].tax_type);
+													      if(result.data[0].tax_type == "국세청에 등록되지 않은 사업자등록번호입니다."){
+													    	  $("#submitbtn").attr("disabled", true);
+													    	  $("#submitbtn").removeClass("submitbtn");
+													      }else{
+													          $("#submitbtn").attr("disabled", false);
+													          $("#submitbtn").addClass("submitbtn");
+													      }
 													  },
 													  error: function(result) {
 													      console.log(result.responseText); //responseText의 에러메세지 확인
@@ -436,26 +448,41 @@
 									<hr>
 									
 									<h5>소셜링을 소개해볼까요?</h5>
-									<table>
+									<table style="margin: auto;">
 										<tr>
-											<td><img id="contentImg1" width="150" height="120" onclick="chooseFile(1);"></td>
-											<td><img id="contentImg2" width="150" height="120" onclick="chooseFile(2);"></td>
-											<td><img id="contentImg3" width="150" height="120" onclick="chooseFile(3);"></td>
-											<td><img id="contentImg4" width="150" height="120" onclick="chooseFile(4);"></td>
-											<td><img id="contentImg5" width="150" height="120" onclick="chooseFile(5);"></td>
+											<td><img id="contentImg1" class="contentImg1" onclick="chooseFile(1);"></td>
 										</tr>
 									</table>
 									<div style="display:none">
 										<input type="file" id="file1" name="upfile" onchange="loadImg(this, 1);">
-										<input type="file" id="file2" name="upfile" onchange="loadImg(this, 2);">
-										<input type="file" id="file3" name="upfile" onchange="loadImg(this, 3);">
-										<input type="file" id="file4" name="upfile" onchange="loadImg(this, 4);">
-										<input type="file" id="file5" name="upfile" onchange="loadImg(this, 5);">
 									</div>
+									
+									<script>
+										function chooseFile(num){
+											$("#file" + num).click();
+										}
+								
+										function loadImg(inputFile, num){
+											if(inputFile.files.length == 1){
+												const reader = new FileReader();
+												reader.readAsDataURL(inputFile.files[0]);
+												reader.onload = function(e){
+													switch(num){
+					        						case 1 : $("#contentImg1").attr("src", e.target.result); break;
+													}
+												}
+											}else {
+												switch(num){
+				        						case 1 : $("#contentImg1").attr("src", null); break;
+												}
+											}
+										}
+									</script>
+									
 									<br>
 									
 								    <!-- TOAST UI Editor가 들어갈 div태그 -->
-								    <div id="editor"></div>
+								    <div id="editor" style="margin: 0;"></div>
 								    
 								    <!-- TOAST UI Editor CDN URL(JS) -->
 								    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
@@ -464,9 +491,48 @@
 								    <script>
 								        const editor = new toastui.Editor({
 								            el: document.querySelector('#editor'),
-								            previewStyle: 'vertical',
+								            previewStyle: 'tab',
 								            height: '500px',
 								            initialValue: '안녕하세요. METASTAR입니다.',
+								            initialEditType: 'wysiwyg',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
+								            initialValue: '내용을 입력해 주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
+								            previewStyle: 'vertical',                // 마크다운 프리뷰 스타일 (tab || vertical)
+								            language: 'ko',
+								            
+								            hooks: {
+										    	addImageBlobHook: (blob, callback) => {
+										    		
+										    		const formData = new FormData();
+										        	formData.append('image', blob);
+										        	
+										   			$.ajax({
+										           		url: "writeTest.do",
+										           		type: 'POST',
+										           		enctype: 'multipart/form-data',
+										           		data: formData,
+										           		dataType: 'json',
+										           		processData: false,
+										           		contentType: false,
+										           		cache: false,
+										           		timeout: 600000,
+										           		success: function(data) {
+										           			console.log(data);
+										           			//console.log('ajax 이미지 업로드 성공');
+										           			url = data.filename;
+										           			
+										           			// callback : 에디터(마크다운 편집기)에 표시할 텍스트, 뷰어에는 imageUrl 주소에 저장된 사진으로 나옴
+										        			// 형식 : ![대체 텍스트](주소)
+										           			callback(url, '사진 대체 텍스트 입력');
+										           		},
+										           		error: function(e) {
+										           			//console.log('ajax 이미지 업로드 실패');
+										           			//console.log(e.abort([statusText]));
+										           			console.log(data);
+										           			callback('image_load_fail', '사진 대체 텍스트 입력');
+										           		}
+										           	});
+										    	}
+										    }
 								        });
 								
 								        // editor.getHtml()을 사용해서 에디터 내용 받아오기
@@ -476,26 +542,17 @@
 								        see2 = function() {
 								            console.log(editor.getMarkdown());
 								        }
+								        
+								        $(function(){
+								        	$("#editor").keyup(function(){
+								        		let classContent = editor.getHTML().replace(/<p>/g, "").replace(/<\/p>/g, "\n");
+								        		$("#editor").val(classContent);
+								        		console.log($("#editor").val());
+								        	})
+								        })
+								        
 								    </script>
 									
-									<!-- summernote
-									<div class="form-group">
-										<a id="summernoteLoad" data-toggle="modal" style="text-decoration: none;">내용작성시 버튼을 여기를 클릭해주세요</a>
-									</div>
-									
-									<div id="summernoteView">
-									</div>
-									
-									// <textarea style="display: none;" id="summernote" name="classContent">${ classContent }</textarea> 
-									<textarea style="display: none;" id="summernote" name="classContent">내용 테스트</textarea>
-									
-									<script>
-										$("#summernoteLoad").click(function(){
-											$("#summernoteView").load("summer.pa");
-										})
-									</script>
-									 -->
-									 
 									<br>
 									
 									<h5>언제 만날까요?</h5>
@@ -858,39 +915,8 @@
 									<div class="form-group">
 										<input class="form-control" type="number" name="peopleLimit" placeholder="참가 인원수를 선택해주세요." style="color:white">
 									</div>
-									
-									<script>
-										function chooseFile(num){
-											$("#file" + num).click();
-										}
-								
-										function loadImg(inputFile, num){
-											if(inputFile.files.length == 1){
-												const reader = new FileReader();
-												reader.readAsDataURL(inputFile.files[0]);
-												reader.onload = function(e){
-													switch(num){
-					        						case 1 : $("#contentImg1").attr("src", e.target.result); break;
-					        						case 2 : $("#contentImg2").attr("src", e.target.result); break;
-					        						case 3 : $("#contentImg3").attr("src", e.target.result); break;
-					        						case 4 : $("#contentImg4").attr("src", e.target.result); break;
-					        						case 5 : $("#contentImg5").attr("src", e.target.result); break;
-													
-													}
-												}
-											} else{
-												switch(num){
-				        						case 1 : $("#contentImg1").attr("src", null); break;
-				        						case 2 : $("#contentImg2").attr("src", null); break;
-				        						case 3 : $("#contentImg3").attr("src", null); break;
-				        						case 4 : $("#contentImg4").attr("src", null); break;
-				        						case 5 : $("#contentImg5").attr("src", null); break;
-											}
-										}
-										}
-									</script>
 			
-									<input type="submit" id="submitbtn" value="모임등록">
+									<input type="submit" id="submitbtn" class="submitbtn" value="모임등록">
 								</form>		
 							</div>
 						</div>
