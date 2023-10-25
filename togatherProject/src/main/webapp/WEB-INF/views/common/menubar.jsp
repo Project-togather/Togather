@@ -119,6 +119,11 @@
 							</a>
 						</div>
 					</li>
+					<c:if test="${not empty loginMember}">
+						<li>
+							<a href="logout.me">logOut</a>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 			
