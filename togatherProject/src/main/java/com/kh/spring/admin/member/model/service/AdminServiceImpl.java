@@ -30,10 +30,15 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<Member> selectMemberList1(PageInfo pi) {
 		return ADao.selectMemberList1(sqlSession, pi);
 	}
-
+	
 	@Override
 	public ArrayList<Member> selectMemberList2() {
 		return ADao.selectMemberList2(sqlSession);
+	}
+
+	@Override
+	public Member selectMemberList3(String memNo) {
+		return ADao.selectMemberList3(sqlSession,memNo);
 	}
 
 	@Override

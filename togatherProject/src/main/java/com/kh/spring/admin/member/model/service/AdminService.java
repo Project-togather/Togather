@@ -14,11 +14,14 @@ public interface AdminService  {
 	//페이지용 회원수 조회
 	int selectMemberListCount();
 	
-	//회원조회용
+	//회원조회용 
 	ArrayList<Member> selectMemberList1(PageInfo pi);
 	
-	//excel조회용
+	//엑셀조회용
 	ArrayList<Member> selectMemberList2();
+	
+	//회원상세조회
+	Member selectMemberList3(String memNo);
 	
 	//--------------블랙리스트 관리----------------
 	

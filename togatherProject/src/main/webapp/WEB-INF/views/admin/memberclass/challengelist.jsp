@@ -46,7 +46,7 @@
 									<th scope="row">${c.classNo}</th>
 									<td>${c.memNo }</td>
 									<td>${c.classTitle }</td>
-									<td>${c.clType }</td>
+									<td>${c.clCaName }</td>
 									<td>${c.classLocation }</td>
 									<td>${c.status }</td>
 								</tr>
