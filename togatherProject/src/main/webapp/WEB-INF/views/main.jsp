@@ -9,7 +9,11 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-
+.menu-classic-item-img img{
+	width: 384.89px;
+	height: 219.31px;
+	object-fit: cover;
+}
 </style>
 </head>
 <body>
@@ -61,30 +65,15 @@
 					<c:forEach var="c" items="${ list }">
 						<c:if test="${ c.clType eq 1 }">
 							<div class="col-md-4">
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
-										<div class="menu-classic-item-price">6/${ c.peopleLimit }
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-							       <c:choose>
-							           <c:when test="${fn:length(c.classTitle) > 18}">
-							            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-							           </c:when>
-							           <c:otherwise>
-							            	<c:out value="${c.classTitle}"/>
-						        	   </c:otherwise> 
-						          </c:choose>
-			    					  <c:choose>
-							           <c:when test="${fn:length(c.classContent) > 63}">
-							            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
-							           </c:when>
-							           <c:otherwise>
-							            	<c:out value="${c.classContent}"/>
-						        	   </c:otherwise> 
-						          </c:choose>
-									</div>
-								</div>
+								<div class="demo-preview"><a href="${ c.attachment.originName }"><img src="${ c.attachment.updateName }" alt="">
+					       <c:choose>
+					           <c:when test="${fn:length(c.classTitle) > 18}">
+					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+					           </c:when>
+					           <c:otherwise>
+					           		<h6>${c.classTitle}</h6></a></div>
+				        	   </c:otherwise> 
+				          </c:choose>
 							</div>
 						</c:if>
 					</c:forEach>
@@ -144,30 +133,15 @@
 					<c:forEach var="c" items="${ list }">
 						<c:if test="${ c.clType eq 2 }">
 							<div class="col-md-4">
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
-										<div class="menu-classic-item-price">6/${ c.peopleLimit }
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-							       <c:choose>
-							           <c:when test="${fn:length(c.classTitle) > 18}">
-							            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-							           </c:when>
-							           <c:otherwise>
-							            	<c:out value="${c.classTitle}"/>
-						        	   </c:otherwise> 
-						          </c:choose>
-			    					  <c:choose>
-							           <c:when test="${fn:length(c.classContent) > 63}">
-							            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
-							           </c:when>
-							           <c:otherwise>
-							            	<c:out value="${c.classContent}"/>
-						        	   </c:otherwise> 
-						          </c:choose>
-									</div>
-								</div>
+								<div class="demo-preview"><a href="${ c.attachment.originName }"><img src="${ c.attachment.updateName }" alt="">
+					       <c:choose>
+					           <c:when test="${fn:length(c.classTitle) > 18}">
+					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+					           </c:when>
+					           <c:otherwise>
+					           		<h6>${c.classTitle}</h6></a></div>
+				        	   </c:otherwise> 
+				          </c:choose>
 							</div>
 						</c:if>
 					</c:forEach>
@@ -227,30 +201,15 @@
 					<c:forEach var="c" items="${ list }">
 						<c:if test="${ c.clType eq 3 }">
 							<div class="col-md-4">
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
-										<div class="menu-classic-item-price">6/${ c.peopleLimit }
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-							       <c:choose>
-							           <c:when test="${fn:length(c.classTitle) > 18}">
-							            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-							           </c:when>
-							           <c:otherwise>
-							            	<c:out value="${c.classTitle}"/>
-						        	   </c:otherwise> 
-						          </c:choose>
-			    					  <c:choose>
-							           <c:when test="${fn:length(c.classContent) > 63}">
-							            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
-							           </c:when>
-							           <c:otherwise>
-							            	<c:out value="${c.classContent}"/>
-						        	   </c:otherwise> 
-						          </c:choose>
-									</div>
-								</div>
+								<div class="demo-preview"><a href="${ c.attachment.originName }"><img src="${ c.attachment.updateName }" alt="">
+					       <c:choose>
+					           <c:when test="${fn:length(c.classTitle) > 18}">
+					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+					           </c:when>
+					           <c:otherwise>
+					           		<h6>${c.classTitle}</h6></a></div>
+				        	   </c:otherwise> 
+				          </c:choose>
 							</div>
 						</c:if>
 					</c:forEach>
@@ -310,30 +269,15 @@
 					<c:forEach var="c" items="${ list }">
 						<c:if test="${ c.clType eq 4 }">
 							<div class="col-md-4">
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
-										<div class="menu-classic-item-price">6/${ c.peopleLimit }
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-							       <c:choose>
-							           <c:when test="${fn:length(c.classTitle) > 18}">
-							            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-							           </c:when>
-							           <c:otherwise>
-							            	<c:out value="${c.classTitle}"/>
-						        	   </c:otherwise> 
-						          </c:choose>
-			    					  <c:choose>
-							           <c:when test="${fn:length(c.classContent) > 63}">
-							            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
-							           </c:when>
-							           <c:otherwise>
-							            	<c:out value="${c.classContent}"/>
-						        	   </c:otherwise> 
-						          </c:choose>
-									</div>
-								</div>
+								<div class="demo-preview"><a href="${ c.attachment.originName }"><img src="${ c.attachment.updateName }" alt="">
+					       <c:choose>
+					           <c:when test="${fn:length(c.classTitle) > 18}">
+					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+					           </c:when>
+					           <c:otherwise>
+					           		<h6>${c.classTitle}</h6></a></div>
+				        	   </c:otherwise> 
+				          </c:choose>
 							</div>
 						</c:if>
 					</c:forEach>
@@ -390,33 +334,18 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<c:forEach var="f" items="${ list }">
-						<c:if test="${ c.feStatus eq 5 }">
+					<c:forEach var="c" items="${ list }">
+						<c:if test="${ fe.feStatus eq 5 }">
 							<div class="col-md-4">
-								<div class="menu-classic-item">
-									<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
-										<div class="menu-classic-item-price">6/${ c.peopleLimit }
-										</div>
-									</div>
-									<div class="menu-classic-item-inner">
-							       <c:choose>
-							           <c:when test="${fn:length(c.classTitle) > 18}">
-							            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-							           </c:when>
-							           <c:otherwise>
-							            	<c:out value="${c.classTitle}"/>
-						        	   </c:otherwise> 
-						          </c:choose>
-			    					  <c:choose>
-							           <c:when test="${fn:length(c.classContent) > 63}">
-							            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
-							           </c:when>
-							           <c:otherwise>
-							            	<c:out value="${c.classContent}"/>
-						        	   </c:otherwise> 
-						          </c:choose>
-									</div>
-								</div>
+								<div class="demo-preview"><a href="${ c.attachment.originName }"><img src="${ c.attachment.updateName }" alt="">
+					       <c:choose>
+					           <c:when test="${fn:length(c.classTitle) > 18}">
+					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+					           </c:when>
+					           <c:otherwise>
+					           		<h6>${c.classTitle}</h6></a></div>
+				        	   </c:otherwise> 
+				          </c:choose>
 							</div>
 						</c:if>
 					</c:forEach>

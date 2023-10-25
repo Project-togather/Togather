@@ -88,7 +88,6 @@
 	<!-- Header-->
 	<jsp:include page="../common/menubar.jsp"/>
 
-	
 	<!-- Wrapper-->
 	<div class="wrapper">
 
@@ -101,6 +100,7 @@
 							<div class="up-as">
 								<h4>모임 등록하기</h4>
 							</div>
+							
 							<div class="up-form">
 								<form action="enroll.cl" method="post" enctype="multipart/form-data">
 									<div class="form-group">
@@ -486,7 +486,9 @@
 								    
 								    <!-- TOAST UI Editor CDN URL(JS) -->
 								    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-								
+									
+									<textarea id="editorContent" style="display: none;" name="classContent"></textarea>
+									
 								    <!-- TOAST UI Editor 생성 JavaScript 코드 -->
 								    <script>
 								        const editor = new toastui.Editor({
@@ -505,8 +507,10 @@
 										    		const formData = new FormData();
 										        	formData.append('image', blob);
 										        	
+										  			let url = "";
+										  			
 										   			$.ajax({
-										           		url: "writeTest.do",
+										           		url: "content.do",
 										           		type: 'POST',
 										           		enctype: 'multipart/form-data',
 										           		data: formData,
@@ -516,25 +520,24 @@
 										           		cache: false,
 										           		timeout: 600000,
 										           		success: function(data) {
-										           			console.log(data);
-										           			//console.log('ajax 이미지 업로드 성공');
-										           			url = data.filename;
+										           			// console.log(data);
+										           			url = data.url;
 										           			
 										           			// callback : 에디터(마크다운 편집기)에 표시할 텍스트, 뷰어에는 imageUrl 주소에 저장된 사진으로 나옴
 										        			// 형식 : ![대체 텍스트](주소)
-										           			callback(url, '사진 대체 텍스트 입력');
+										           			callback(url, "");
 										           		},
 										           		error: function(e) {
 										           			//console.log('ajax 이미지 업로드 실패');
 										           			//console.log(e.abort([statusText]));
-										           			console.log(data);
-										           			callback('image_load_fail', '사진 대체 텍스트 입력');
+										           			callback(e, '사진 대체 텍스트 입력');
 										           		}
 										           	});
 										    	}
 										    }
 								        });
-								
+											
+								        /*
 								        // editor.getHtml()을 사용해서 에디터 내용 받아오기
 								        see1 = function() {
 								            console.log(editor.getHTML());
@@ -542,15 +545,16 @@
 								        see2 = function() {
 								            console.log(editor.getMarkdown());
 								        }
+								        */
 								        
 								        $(function(){
 								        	$("#editor").keyup(function(){
 								        		let classContent = editor.getHTML().replace(/<p>/g, "").replace(/<\/p>/g, "\n");
-								        		$("#editor").val(classContent);
+								        		$("#editorContent").val(classContent);
+								        		console.log($("#editorContent").val())
 								        		console.log($("#editor").val());
 								        	})
 								        })
-								        
 								    </script>
 									
 									<br>
@@ -905,8 +909,8 @@
 										})
 									</script>							
 									<div class="form-group">
-										<input type="hidden" id="age1" class="form-control" name="minAge" style="color:white" placeholder="최소나이제한"> <br>
-										<input type="hidden" id="age2" class="form-control" name="maxAge" style="color:white" placeholder="최대나이제한">
+										<input type="hidden" id="age1" class="form-control" name="minAge" style="color:white" value="0" placeholder="최소나이제한"> <br>
+										<input type="hidden" id="age2" class="form-control" name="maxAge" style="color:white" value="0" placeholder="최대나이제한">
 									</div>
 									
 									<div class="form-group">
