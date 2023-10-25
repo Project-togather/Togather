@@ -281,8 +281,7 @@ public class MemberController {
 	  //다음은 팔로잉 팔로워를 불러워야함 둘다 리스트뽑아서 보내주자
 	  ArrayList<Member> followingList = mService.getFollowingList(memNo);
 	  ArrayList<Member> followerList = mService.getFollowerList(memNo);
-	  
-	  
+
 	  //리퀘스트에 담자
 	  request.setAttribute("followingList", followingList);
 	  request.setAttribute("followerList", followerList);
@@ -374,6 +373,13 @@ public class MemberController {
 	   }else {
 		   return 2+"";
 	   }
+   }
+   //언팔기능
+   @ResponseBody
+   @RequestMapping(value = "unFollow.me")
+   public String unFollow(Follow follow ,HttpSession session) {
+	   int result = mService.deleteFollow(follow);
+	   return result+"" ;
    }
   
 }

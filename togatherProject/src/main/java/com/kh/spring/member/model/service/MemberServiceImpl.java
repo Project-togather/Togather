@@ -147,5 +147,10 @@ public class MemberServiceImpl implements MemberService {
 		
 		return mDao.getFollowerList(sqlSession, memNo);
 	}
+	//언팔하기
+	@Override
+	public int deleteFollow(Follow f) {
+		return mDao.deleteFollow(sqlSession , f);
+	}
 	
 }

@@ -99,4 +99,9 @@ public class MemberDao {
 	public ArrayList<Member>  getFollowerList(SqlSessionTemplate sqlSession , String memNo) {
 		return (ArrayList)sqlSession.selectList("memberMapper.getFollowerList", memNo);
 	}
+	//언팔하기
+	public int deleteFollow(SqlSessionTemplate sqlSession , Follow f) {
+		return sqlSession.delete("memberMapper.deleteFollow",f);
+	}
+	
 }
