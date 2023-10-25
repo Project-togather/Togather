@@ -54,7 +54,62 @@
 		<result column="fe_status" property="fStatus"/>
 	</resultMap>
 	
-	<!--
+	<select id="selectClassAllListCount" resultType="_int">
+		select
+		count(*)
+	from class
+	where status = 'Y'
+	</select>
+	
+	<select id="selectClassAllList" resultMap="clubResult">
+		select
+	        c_no
+	    ,   c_title
+	    ,   c_location
+	    ,   c_date
+	    ,	cl_type
+	    	from class
+		  join attachment on (c_no = ref_fno)
+		 	where status = 'Y'
+	    order by c_no desc
+	</select>
+	
+	<select id="searchKeywordListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM class c
+		JOIN attachment ON (c_no = ref_fno)
+		WHERE c.status = 'Y'
+		AND cl_type
+		LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="searchKeywordList" resultMap="clubResult">
+		select
+        		c_no
+	    ,   c_title
+	    ,   c_location
+	    ,   c_date
+	    ,	cl_type
+	    	from class
+    	join attachment on (c_no = ref_fno)
+		 	where status = 'Y'
+            <choose>
+    		<when test="condition == 'socialing'">
+    			and cl_type
+    		</when>
+    		<when test="condition == 'club'">
+    			and cl_type
+    		</when>
+    		<otherwise>
+    			and cl_type
+    		</otherwise>
+    	</choose>
+    	like '%' || #{keyword} || '%'
+    	order
+        	by c_no desc
+	</select>
+	
+	<!-- 
 	<select id="ajaxSelectSocialingListCount" resultType="_int">
 		select
 		count(*)
@@ -96,8 +151,30 @@
 		   and cl_type = 2
 	    order by c_no desc
 	</select>
+	
+	<select id="ajaxSelectChallengeListCount" resultType="_int">
+		select
+		count(*)
+	from class
+	where status = 'Y'
+	</select>
+	
+	<select id="ajaxSelectChallengeList" resultMap="clubResult">
+		select
+	        c_no
+	    ,   c_title
+	    ,   c_location
+	    ,   c_date
+	    ,	cl_type
+	    	from class
+		  join attachment on (c_no = ref_fno)
+		 	where status = 'Y'
+		   and cl_type = 3
+	    order by c_no desc
+	</select>
 	 -->
 	 
+	 <!--  
 	<select id="ajaxSelectClassListCount" resultType="_int">
 	select
 		count(*)
@@ -118,11 +195,9 @@
 			    attachment ON (c_no = ref_fno)
 			WHERE
 			status = 'Y'
-		  <if test="clType != null">
-			and cl_type = #{clType}
-		  </if>
+            and cl_type = 1
 	</select>
-	
+	-->
 	
 	
 	<select id="ajaxSelectFeedList" resultMap="feedResult">
