@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.feed.model.service.FeedServiceImpl;
 import com.kh.spring.feed.model.vo.Feed;
+import com.kh.spring.follow.model.vo.Follow;
 import com.kh.spring.member.model.service.MemberServiceImpl;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.meminterest.model.vo.MemInterest;
@@ -155,10 +156,7 @@ public class FeedController {
 			  }
 			  //System.out.println(fList);
 			 
-			
-			
-			
-			
+
 			//관심사도 가져와야함
 			  ArrayList<MemInterest> mi = mService.getMemInterest(searchNo);
 				 
@@ -183,6 +181,24 @@ public class FeedController {
 				 }
 			  }
 			  //문화예술 1 액티비티2 푸드드링크3 취미4 파티소개팅5 동네친목6 제테크7 외국어8
+			  //팔로잉 팔로워도 가져오자
+			//다음은 팔로잉 팔로워를 불러워야함 둘다 리스트뽑아서 보내주자
+			ArrayList<Member> followingList = mService.getFollowingList(searchNo);
+			ArrayList<Member> followerList = mService.getFollowerList(searchNo);
+			//팔로우된 상태인지 확인을 해볼까?
+			Follow follow = new Follow();//팔로우객체 생성
+			follow.setFromMem(loginMemberNo);
+			follow.setToMem(searchNo);//투맴 프롬맴 세팅
+			int check = mService.checkFollow(follow);
+			int followStatus = 0 ; 
+			if(check>0) {//팔로우된상태
+				followStatus = 1; //이것도 리퀘스트에 담아서 보내주고 이걸로 분기하자
+			}
+			
+			//리퀘스트에 담자
+			request.setAttribute("followStatus", followStatus);
+			request.setAttribute("followingList", followingList);
+			request.setAttribute("followerList", followerList);
 			request.setAttribute("fList", fList);
 			request.setAttribute("interArr",interArr);
 			request.setAttribute("targetMem", targetMem);

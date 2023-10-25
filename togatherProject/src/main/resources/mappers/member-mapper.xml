@@ -352,9 +352,17 @@
 		     , msg
 		  from member m 
 		 where mem_no in (select
-			to_mem
+			from_mem
 		from follow
 		where to_mem = #{memNo)})
 	</select>
+	
+	<delete id="deleteFollow">
+		delete follow
+		where from_mem = #{fromMem}
+		and to_mem = #{toMem}
+	</delete>
+	
+	
 	
 </mapper>

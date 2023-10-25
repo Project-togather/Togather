@@ -48,6 +48,8 @@ public interface MemberService {
 
 	//팔로우하기
 	int insertFollow(Follow f);
+	//언팔하기
+	int deleteFollow(Follow f);
 	//팔로우되어있나 체크
 	int checkFollow(Follow f);
 	
