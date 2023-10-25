@@ -21,6 +21,28 @@ public class SearchServiceImpl implements SearchService {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
+	// 검색 페이지 리스트
+	@Override
+	public int selectClassAllListCount() {
+		return sDao.selectClassAllListCount(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<Club> selectClassAllList(PageInfo pi) {
+		return sDao.selectClassAllList(sqlSession, pi);
+	}
+	
+	// 검색 키워드
+	@Override
+	public int searchKeywordListCount() {
+		return sDao.searchKeywordListCount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Club> searchKeywordList(PageInfo pi, String keyword, String condition) {
+		return sDao.searchKeywordList(sqlSession, pi, keyword, condition);
+	}
+	
 	/*
 	// 소셜링 리스트가 보이는 페이지 서비스 (페이징 처리)
 	@Override
@@ -51,9 +73,20 @@ public class SearchServiceImpl implements SearchService {
 		return sDao.selectClubList(sqlSession, pi);
 		
 	}
+	
+	// 챌린지 리스트가 보이는 페이지 서비스 (페이징 처리)
+	@Override
+	public int selectChallengeListCount() {
+		return sDao.selectChallengeListCount(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<Club> selectChallengeList(PageInfo pi) {
+		return sDao.selectChallengeList(sqlSession, pi);
+	}
 	*/
 	
-	
+	/*
 	@Override
 	public int searchClassListCount() {
 		return sDao.searchClassListCount(sqlSession);
@@ -63,7 +96,7 @@ public class SearchServiceImpl implements SearchService {
 	public ArrayList<Club> searchClassList(PageInfo pi) {
 		return sDao.searchClassList(sqlSession, pi);
 	}
-	
+	*/
 	
 	
 	/* 피드 리스트가 보이는 서비스 */
@@ -78,6 +111,7 @@ public class SearchServiceImpl implements SearchService {
 		
 		return sDao.selectMemberList(sqlSession);
 	}
+
 
 	
 }
