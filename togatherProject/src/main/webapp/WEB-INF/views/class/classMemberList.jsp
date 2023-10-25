@@ -121,6 +121,9 @@
 								classNo:'${classNo}',
 								clType:clType
 							}, success:list=>{
+								
+								console.log(list);
+								
 								$(".lead").text("현재" + list.length + "명이 가입되어 있습니다!");
 								let value = "";
 								

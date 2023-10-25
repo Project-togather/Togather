@@ -14,6 +14,42 @@ import com.kh.spring.member.model.vo.Member;
 @Repository
 public class SearchDao {
 	
+	
+	public int selectClassAllListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("searchMapper.selectClassAllListCount");
+		
+	}
+	
+	public ArrayList<Club> selectClassAllList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.selectClassAllList", null, rowBounds);
+		
+	}
+	
+	public int searchKeywordListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("searchMapper.searchKeywordListCount");
+		
+	}
+	
+	public ArrayList<Club> searchKeywordList(SqlSessionTemplate sqlSession, PageInfo pi, String keyword, String condition) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.searchKeywordList", null, rowBounds);
+		
+	}
+	
+	
 	/*
 	public int selectSocialingListCount(SqlSessionTemplate sqlSession) {
 		
@@ -48,8 +84,26 @@ public class SearchDao {
 		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectClubList", null, rowBounds);
 		
 	}
+	
+	public int selectChallengeListCount(SqlSessionTemplate sqlSession) {
+		
+		return sqlSession.selectOne("searchMapper.ajaxSelectChallengeListCount");
+		
+	}
+	
+	public ArrayList<Club> selectChallengeList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectChallengeList", null, rowBounds);
+		
+	}
 	*/
 	
+	/*
 	public int searchClassListCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("searchMapper.ajaxSelectClassListCount");
@@ -66,7 +120,7 @@ public class SearchDao {
 		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectClassList", null, rowBounds);
 		
 	}
-	
+	*/
 	
 	public ArrayList<Feed> selectFeedList(SqlSessionTemplate sqlSession) {
 		
