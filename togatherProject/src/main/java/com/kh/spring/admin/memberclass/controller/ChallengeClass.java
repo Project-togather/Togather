@@ -26,7 +26,6 @@ public class ChallengeClass {
 	public ModelAndView challengeList(@RequestParam(value="cpage",defaultValue = "1") int currentPage,ModelAndView mv) {
 		int challengeCount = Mservice.challengeListCount();
 		
-		System.out.println(challengeCount);
 		
 		PageInfo pi = Pagination.getPageInfo(challengeCount, currentPage, 10, 10);
 		

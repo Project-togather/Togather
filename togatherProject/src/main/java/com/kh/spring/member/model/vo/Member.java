@@ -13,7 +13,6 @@ import lombok.ToString;
 @Setter // setter 메소드
 @Getter // getter 메소드
 @ToString // toString 메소드
-
 public class Member {
 
 	private String memNo;
@@ -26,11 +25,10 @@ public class Member {
 	private String age;
 	private String phone;
 	private Date enrollDate;
-	private String mStatus;
+	private String memStatus;
 	private double manner;
 	private String img ; 
 	private String msg;
-	
 	private int clTypeStatus; // 모임 가입 상태 (가입중 / 승인대기중 / 빈자리 대기중)
 	
 }

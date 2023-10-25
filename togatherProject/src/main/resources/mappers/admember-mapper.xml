@@ -9,6 +9,7 @@
 		<result column="nickname" property="nickName"></result>
 		<result column="enroll_date" property="enrollDate"></result>
 		<result column="age" property="age"></result>
+		<result column="m_status" property="memStatus"></result>
 	</resultMap>
 	
 	<resultMap id="BlackListResult" type="BlackList">
@@ -20,9 +21,6 @@
 		<result column="black_enroll_date" property="blackEnrollDate"></result>
 	</resultMap>
 	
-	
-	
-
 	<select id="selectMemberList" resultMap="AdMemberResult" parameterType="Member">
 		select 
 		    mem_no,
@@ -30,9 +28,41 @@
 		    mem_id,
 		    nickName,
 		    enroll_date,
-		    age
+		    age,
+		    m_status
 		from member
 			where m_Status = 'Y'
+	</select>
+	
+	<select id="selectMemberList2" resultMap="AdMemberResult" parameterType="Member">
+		select 
+		    mem_no,
+		    mem_name,
+		    mem_id,
+		    nickName,
+		    enroll_date,
+		    age,
+		    m_status
+		from member
+			where m_Status = 'Y'
+	</select>
+	
+	<select id="selectMemberList3" resultMap="AdMemberResult">
+		select 
+		    mem_no,
+		    mem_name,
+		    MEM_PWD,
+		    mem_id,
+		    nickName,
+		    EMAIL,
+		    gender,
+		    enroll_date,
+		    phone,
+		    age,
+		    m_status
+		from member
+			where m_Status = 'Y'
+			and mem_No = #{memNo}
 	</select>
 	
 	<select id="selectMemberCount" resultType="_int">

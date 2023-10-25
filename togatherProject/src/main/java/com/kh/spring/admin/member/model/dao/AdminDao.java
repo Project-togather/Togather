@@ -27,9 +27,15 @@ public class AdminDao {
 		return (ArrayList)sqlsession.selectList("admemberMapper.selectMemberList",null, rowBounds);
 	}
 	
+	public ArrayList<Member> selectMemberList2(SqlSession sqlsession){
+		
+		
+		return (ArrayList)sqlsession.selectList("admemberMapper.selectMemberList2");
+	}
 	
-	public ArrayList<Member> selectMemberList2 (SqlSession sqlsession){
-		return  (ArrayList)sqlsession.selectList("admemberMapper.selectMemberList");
+	
+	public Member selectMemberList3 (SqlSession sqlsession,String memNo){
+		return  sqlsession.selectOne("admemberMapper.selectMemberList3",memNo);
 	}
 	
 	//-----블랙리스트 관리------

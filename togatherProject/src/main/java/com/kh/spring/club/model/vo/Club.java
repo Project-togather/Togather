@@ -3,6 +3,7 @@ package com.kh.spring.club.model.vo;
 import java.sql.Date;
 
 import com.kh.spring.attachment.model.vo.Attachment;
+import com.kh.spring.clType.model.vo.ClType;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,5 +49,9 @@ public class Club {
 	private int clTypeStatus; // 모임 가입상태
 
 	private Attachment attachment;
+	
+	//관리자페이지 모임 조회용
+	private ClType ClType;
+	private String clCaName;
 	
 }
