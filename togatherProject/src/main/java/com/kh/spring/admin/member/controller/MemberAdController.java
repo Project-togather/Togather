@@ -12,6 +12,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -71,6 +72,8 @@ public class MemberAdController {
         cell.setCellValue("가입일");
         cell = row.createCell(5);
         cell.setCellValue("나이");
+        cell = row.createCell(6);
+        cell.setCellValue("상태");
         
         //엑셀다운로드용 메서드
         ArrayList<Member> list = Aservice.selectMemberList2();
@@ -90,6 +93,8 @@ public class MemberAdController {
             cell.setCellValue(list.get(i).getEnrollDate());
             cell = row.createCell(5);
             cell.setCellValue(list.get(i).getAge());
+            cell = row.createCell(6);
+            cell.setCellValue(list.get(i).getMemStatus());
         }
 
         // 컨텐츠 타입과 파일명 지정
@@ -102,6 +107,16 @@ public class MemberAdController {
         wb.close();
     }
     
+	@RequestMapping("detail.mem")
+	public ModelAndView detailMember (String memNo,ModelAndView mv) {
+		System.out.println(memNo);
+		
+		 Member m = Aservice.selectMemberList3(memNo);
+		 System.out.println(m);
+		 mv.addObject("m",m).setViewName("admin/member/memberDetailView");
+		 return mv;
+		 
+	}
     
 
 }

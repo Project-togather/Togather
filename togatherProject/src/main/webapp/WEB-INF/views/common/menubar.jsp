@@ -114,11 +114,16 @@
 						<li>
 							<div class="search-box">
 							<input type="text" class="search-txt" name="" placeholder="지금 생각나는 취미를 검색하세요.">
-							<a class="search-btn" href="search.li">
+							<a class="search-btn" href="list.se">
 								<i class="fa fa-search" aria-hidden="true" type="submit"></i>
 							</a>
 						</div>
 					</li>
+					<c:if test="${not empty loginMember}">
+						<li>
+							<a href="logout.me">logOut</a>
+						</li>
+					</c:if>
 				</ul>
 			</div>
 			

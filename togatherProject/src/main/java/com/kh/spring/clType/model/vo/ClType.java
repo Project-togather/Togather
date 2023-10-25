@@ -14,6 +14,6 @@ import lombok.ToString;
 @Getter
 @ToString
 public class ClType {
-	private String clCaNo;
+	private int clCaNo;
 	private String clCaName;
 }

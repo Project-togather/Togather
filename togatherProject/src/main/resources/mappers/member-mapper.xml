@@ -12,7 +12,7 @@
 		<result column="age" property="age"/>
 		<result column="phone" property="phone"/>
 		<result column="enroll_date" property="enrollDate"/>
-		<result column="m_status" property="mStatus"/>
+		<result column="m_status" property="memStatus"/>
 		<result column="manner" property="manner"/>
 		<result column="img" property="img"/>
 		<result column="msg" property="msg"/>
@@ -352,9 +352,17 @@
 		     , msg
 		  from member m 
 		 where mem_no in (select
-			to_mem
+			from_mem
 		from follow
 		where to_mem = #{memNo)})
 	</select>
+	
+	<delete id="deleteFollow">
+		delete follow
+		where from_mem = #{fromMem}
+		and to_mem = #{toMem}
+	</delete>
+	
+	
 	
 </mapper>

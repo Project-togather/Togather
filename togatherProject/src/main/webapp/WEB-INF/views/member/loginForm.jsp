@@ -56,7 +56,11 @@
 										<div class="form-group">
 											<button class="btn btn-block btn-round btn-brand" type="submit">Login</button>
 										</div>
+										
 									</form>
+								</div>
+								<div class="form-group">
+									<img class="brand-light" src="assets/images/google.png" width="74px" alt=""><a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=43410666342-s8gt5o9p3qm69cb2h4ms0m5pqqhh2re5.apps.googleusercontent.com&redirect_uri=http://localhost:8012/spring/google&response_type=code&scope=email%20profile%20openid&access_type=offline">구글Login</a>
 								</div>
 								<div class="up-help">
 									<p class="m-b-5">Dont have an account yet? <a href="#">Create account</a></p>
@@ -66,6 +70,7 @@
 						</div>
 					</div>
 				</div>
+				
 			</section>
 			<!-- Hero end-->
 

@@ -343,6 +343,9 @@ public class ClubController {
 	@RequestMapping("classMemberList.cl")
 	public ArrayList<Member> classMemberList(MyClass c) {
 		ArrayList<Member> list = cService.classMemberList(c);
+		
+		System.out.println(list);
+		
 		return list;
 		
 	}

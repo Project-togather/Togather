@@ -20,13 +20,15 @@
 		<result column="people_limit" property="peopleLimit"/>
 		<result column="vacancy" property="vacancy"/>
 		<result column="nickname" property="nickName"/>
-		<result column="cl_type" property="clType"/>
 		<result column="cl_type_Status" property="clTypeStatus"/>
 		<result column="cl_category" property="clCategory"/>
 		<result column="cl_name" property="clName"/>
 		<result column="curriculum" property="curriculum"/>
 		<result column="status" property="status"/>
+		<result column="CL_CA_NAME" property="clCaName"/>
 	</resultMap>
+	
+	
 
 	<select id="selectchallengeListCount" resultType="_int">
 		select
@@ -36,7 +38,7 @@
 	</select>
 	
 	<select id="selectchallengeList" resultMap="adresultclub">
-		select 
+			select 
 		       c_no
 		     , mem_no
 		     , c_title
@@ -49,10 +51,13 @@
 		     , minage
              , maxage
 		     , people_limit
-             , cl_type
+             , cl_ca_name
 		     , cl_category
-		  from class
+		     , status
+		  from class c
+		  join CL_TYPE b on (c.cl_type = b.cl_ca_no)
 		 where status = 'Y'
+		 and cl_type = 3
 	</select>
 	
 

@@ -109,13 +109,12 @@
 										0
 									</c:otherwise>
 								</c:choose>
-							
-							
+
 							</td>
 							
 						</tr>
 						<tr>
-							<th>Following</th>
+							<th id="followingBtn">Following</th>
 							<td>
 								<c:choose>
 									<c:when test="${not empty followingList }">
@@ -129,7 +128,7 @@
 							
 						</tr>
 						<tr>
-							<th>Follower</th>
+							<th id="followerBtn">Follower</th>
 							<td>
 								<c:choose>
 									<c:when test="${not empty followerList }">
@@ -157,6 +156,9 @@
 						          	${interArr[i]} 
 						        </c:forEach>
 							</th>
+						</tr>
+						<tr>
+							<th colspan ="3" id ="subWayBtn">Are you goingto go appointment? click here</th>
 						</tr>
 					<tbody>
 
@@ -241,6 +243,22 @@
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>
 			</svg>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<!-- Footer-->
 			<footer class="footer">
 				<div class="container">
@@ -482,23 +500,99 @@
 			</div>
 			
 			<!-- 팔로잉 모달 -->
-			<div class="modal" id="followModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal" id="followingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				
 				<div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" >
-								<select id = "option">
-								    <option value="id">id</option>
-								    <option value="nickNmae">nickName</option>
-								</select>
+								your following member
 							</h5>
-							
-							<input class="form-control" id="searchUser" type="search" placeholder="search here">
-										
-								
 						</div>
-						<div id="searchResultSection" class="modal-body">
+						<div id="followingResultSection" class="modal-body">	
+							<c:choose>
+								<c:when test="${not empty followingList}">
+									<c:forEach var="i" begin="0" end="${fn:length(followingList)-1}" step="1">
+									    <div class="comment">
+												<div class="comment-author"><img class="avatar" src="${followingList[i].img}"></div>
+												<div class="comment-body">
+													<div class="comment-meta">
+														<div class="comment-meta-author" onClick="searchFollowingUserPage(this);"><input class="followingRef" type="hidden" value="${followingList[i].memNo}"> <a href="#">${followingList[i].memName}</a></div>
+													</div>
+													<div class="comment-content">
+														<p>${followingList[i].msg}</p>
+													</div>
+												</div>
+											</div>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+								🚫following List is empty
+									
+								</c:otherwise>	
+							</c:choose>
+						</div>
+						<div class="modal-footer">
+							<button class="btn" type="button" data-dismiss="modal">close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--이 아래는 팔로워모달 -->
+			<div class="modal" id="followerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				
+				<div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" >
+								your follower member
+							</h5>
+						</div>
+						<div id="followingResultSection" class="modal-body">
+							${followerList[0].memNo}	
+							<c:choose>
+								<c:when test="${not empty followerList}">
+									
+									<c:forEach var="i" begin="0" end="${fn:length(followerList)-1}" step="1">
+									    <div class="comment">
+												<div class="comment-author"><img class="avatar" src="${followerList[i].img}"></div>
+												<div class="comment-body">
+													<div class="comment-meta">
+														<div class="comment-meta-author" onClick="searchFollowerUserPage(this);"><input class="followerRef" type="hidden" value="${followerList[i].memNo}"> <a href="#">${followerList[i].memName}</a></div>
+													</div>
+													<div class="comment-content">
+														<p>${followerList[i].msg}</p>
+													</div>
+												</div>
+											</div>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+								🚫follower List is empty
+									
+								</c:otherwise>	
+							</c:choose>
+						</div>
+						<div class="modal-footer">
+							<button class="btn" type="button" data-dismiss="modal">close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			<!-- 공공데이터용 모달 -->
+			<div class="modal" id="subWayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				
+				<div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" >
+								subwayInfo
+							</h5>
+							<input class="form-control" id="subwayStation" type="search" placeholder="search here">	
+						</div>
+						<div id="subWayResultSection" class="modal-body">
 
 						</div>
 						<div class="modal-footer">
@@ -511,13 +605,30 @@
 			
 			
 			<script>
+				//검색 모달 onclick 으로 띄우기
 				$('#testBtn').click(function(e){
 					e.preventDefault();
 					$('#testModal').modal("show");
 				});
+				//팔로잉 모달 click 으로 띄우기
+				$('#followingBtn').click(function(e){
+					e.preventDefault();
+					$('#followingModal').modal("show");
+				});
+				//팔로워 모달 click으로 띄우기
+				$('#followerBtn').click(function(e){
+					e.preventDefault();
+					$('#followerModal').modal("show");
+				});
+				//공공데이터 모달 click으로 띄우기
+				$('#subWayBtn').click(function(e){
+					e.preventDefault();
+					$('#subWayModal').modal("show");
+				});
 				
 				
 				
+				//검색할때 input 넣을때마다 db다녀오는 ajax
 				 $(function(){
 				    //아이디를 입력하는 input 요소 객체 변수에 담아두기
 				    const $searchUser = $("#searchUser"); //
@@ -558,18 +669,41 @@
 				    			}
 							})
 				    	})
-				    	
-				    	
+
 				   })
+				
+				
+				
+				
+				
 				   
+					//검색결과 누르면 해당페이지로 이동
 				   function searchUserPage(e){
 						 var searchNo = ($(e).find(".ref").val());
 						 location.href = "searchUserPage.fe?searchNo="+searchNo ; 
 					}
+					
+				//팔로잉 리스트 누르면 해당페이지 이동
+					 function searchFollowingUserPage(e){
+						 var searchNo = ($(e).find(".followingRef").val());
+						 location.href = "searchUserPage.fe?searchNo="+searchNo ; 
+					}
+				//팔로워 리스트 누르면 해당페이지 이동
+					 function searchFollowerUserPage(e){
+						 var searchNo = ($(e).find(".followerRef").val());
+						 location.href = "searchUserPage.fe?searchNo="+searchNo ; 
+					}
+				
+				
 				
 				
 			</script>
 	 <!-- 회원검색 Modal-->
+		
+		
+		
+		
+		
 		
 		
 		

@@ -29,26 +29,28 @@
 					</div>
 					<br>
 					<br>
-					<table class="table table-hover">
+					<table class="table table-hover table table-sm " >
 						<thead>
-							<tr>
+							<tr class="table-warning">
 								<th scope="col">회원번호</th>
 								<th scope="col">이름</th>
 								<th scope="col">아이디</th>
 								<th scope="col">닉네임</th>
 								<th scope="col">나이</th>
 								<th scope="col">가입일</th>
+								<th scope="col">상태</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="m" items="${list}">
-								<tr>
-									<th scope="row">${m.memNo}</th>
-									<td>${m.memName }</td>
-									<td>${m.memId }</td>
-									<td>${m.nickName }</td>
-									<td>${m.age }</td>
-									<td>${m.enrollDate }</td>
+								<tr class="table-light" id="memberlist">
+									<th scope="row" id="memberNo">${ m.memNo }</th>
+									<td>${ m.memName }</td>
+									<td>${ m.memId }</td>
+									<td>${ m.nickName }</td>
+									<td>${ m.age }</td>
+									<td>${ m.enrollDate }</td>
+									<td>${ m.memStatus }</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -86,5 +88,15 @@
 				</div>
 			</div>
 		</div>
+		
+		<script>
+		$(function(){
+			$(document).on("click","#memberlist",function(){
+				let num = $(this).find("#memberNo").text();
+				console.log(num)
+				location.href='detail.mem?memNo='+num
+			})
+		})
+	</script>
 </body>
 </html>

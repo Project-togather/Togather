@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>   
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -95,24 +94,58 @@
 						</th>
 							
 						<td>
-							<a  id="requestFollw">Request Follow</a>
+							<c:choose>
+								<c:when test="${followStatus eq 0}">
+									<a  id="requestFollw">Request Follow</a>
+								</c:when>
+								<c:otherwise>
+									<a  id="unFollow">unFollow</a>
+								</c:otherwise>
+							</c:choose>
 						</td>
 						<td><a href="" id="testBtn" class="btn">search User</a></td>		
 					</tr>		
 					</thead>
 						<tr>
 							<th style="width: 100px;">FeedsCount</th>
-							<td>${fn:length(fList)}</td>
+							<td>
+								<c:choose>
+									<c:when test="${not empty fList }">
+										${fn:length(fList)}
+									</c:when>
+									<c:otherwise>
+										0
+									</c:otherwise>
+								</c:choose>
+							</td>
 							
 						</tr>
 						<tr>
 							<th>Following</th>
-							<td>5</td>
+							<td>
+								<c:choose>
+									<c:when test="${not empty followingList }">
+										<div> ${fn:length(followingList)}</div>
+									</c:when>
+									<c:otherwise>
+											0
+									</c:otherwise>
+								</c:choose>	
+							</td>
 							
 						</tr>
 						<tr>
 							<th>Follower</th>
-							<td>50</td>
+							<td>
+								<c:choose>
+									<c:when test="${not empty followerList }">
+										 <div> ${fn:length(followerList)}</div>
+									</c:when>
+									<c:otherwise>
+										0
+									</c:otherwise>
+								</c:choose>
+							</td>
 							
 						</tr>
 						<tr>
@@ -481,7 +514,29 @@
 		    			}
 					})
 				})
-			
+				//언팔로우
+				$('#unFollow').click(function(){
+					$.ajax({
+						url: "unFollow.me",
+		    			data: {
+		    				toMem : '${targetMem.memNo}'
+		    			   ,fromMem : '${loginMember.memNo}'
+		    			},
+		    			success : function(result){
+		    				if(result==1){
+		    					swal("unFollow!")
+		    				}else{
+		    					swal("Please refresh first");
+		    				}
+		    			},
+		    			error :function(){
+		    				  console.log("통신실패");
+		    			}
+					})
+				})
+				
+				
+				
 				
 					
 				
@@ -493,7 +548,7 @@
 				    const $option = $("#option");
 				    	$searchUser.keyup(function(){
 							$.ajax({
-								url: "search.me",
+								url: "userSearch.me",
 				    			data: {
 				    				searchKey : $searchUser.val(),
 				    				searchType : $option.val()

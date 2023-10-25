@@ -119,8 +119,6 @@
 		  join attachment on (c_no = ref_fno)
 		 where status = 'Y'
 		   and cl_type = 1
-		 order
-		    by c_date desc
 	</select>
 	
 		<select id="selectClubList" resultMap="resultclub">
@@ -147,8 +145,6 @@
 		  join attachment on (c_no = ref_fno)
 		 where status = 'Y'
 		   and cl_type = 2
-		 order
-		    by c_date desc
 	</select>
 	
 		<select id="selectChallengeList" resultMap="resultclub">
@@ -175,8 +171,6 @@
 		  join attachment on (c_no = ref_fno)
 		 where status = 'Y'
 		   and cl_type = 3
-		 order
-		    by c_date desc		   
 	</select>
 	
 		<select id="selectOneDayList" resultMap="resultclub">
@@ -203,8 +197,6 @@
 		  join attachment on (c_no = ref_fno)
 		 where status = 'Y'
 		   and cl_type = 4
-		 order
-		    by c_date desc
 	</select>
 	
 	<select id="selectClassDetail" resultMap="resultclub">
@@ -262,8 +254,6 @@
 			  , cl_type
 			  , cl_category
 			  , curriculum
-			  , latitude
-			  , longitude
 			 )
 		values
 			 (
@@ -282,8 +272,6 @@
 			  , #{clType}
 			  , #{clCategory}
 			  , #{curriculum}
-			  , #{latitude}
-			  , #{longitude}
 			 )
 	</insert>
 	
