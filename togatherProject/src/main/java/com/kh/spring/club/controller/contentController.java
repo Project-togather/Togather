@@ -4,15 +4,18 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +36,7 @@ public class contentController {
 		
 		String updateName = currentTime + ranNum + ext; 
 		
-		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
+		String savePath = session.getServletContext().getRealPath("resources/contentUploadImg/");
 		
 			try {
 				upfile.transferTo(new File(savePath + updateName));
@@ -44,37 +47,36 @@ public class contentController {
 		return updateName;
 	}
 	
-	@RequestMapping(value = "writeTest.do", method = RequestMethod.POST)
-	public ModelAndView writeTestPost(@RequestParam("image") MultipartFile multi, HttpSession session ,HttpServletRequest request, HttpServletResponse response) {
-		
-		// System.out.println(multi);
-		// MultipartFile[field="image", filename=KakaoTalk_20230517_091558666_02.jpg, contentType=image/jpeg, size=273016]
-
-		
+	@RequestMapping(value = "content.do", method = RequestMethod.GET)
+	public ModelAndView writeTestGet(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:enrollForm.cl");
+		return mv;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="content.do", method = RequestMethod.POST)
+	public String writeTestPost(@RequestParam("image") MultipartFile multi, HttpSession session ,HttpServletRequest request, HttpServletResponse response) {
+		
+		JSONObject jObj = new JSONObject(); // {}
 		
 		try {
-			String originFilename = multi.getOriginalFilename();
-			String updateName = saveFile(multi, session);
-			
-			// System.out.println(originFilename);  // KakaoTalk_20230517_091558666_02.jpg
-			// System.out.println(updateName); // 20231029716465669182.jpg 
+			String uploadPath = "resources/contentUploadImg/";
+			String updateName = saveFile(multi, session); // 20231029716465669182.jpg 
 			
 			if(!multi.isEmpty()) {
-				mv.addObject("filename", originFilename);
-				mv.addObject("uploadPath", updateName);
-				mv.addObject("url", "/resources/contentUploadImg/" + updateName);
 				
-				// System.out.println("url : " + multi.getOriginalFilename() + "resources/contentUploadImg/" + updateName);
-				// url : KakaoTalk_20230517_091558666_02.jpgresources/contentUploadImg/20231029716465669182.jpg
+				jObj.put("filename", updateName);
+				jObj.put("uploadPath", multi.getOriginalFilename());
+				jObj.put("url", uploadPath + updateName);
 				
-				mv.setViewName("image_Url_Json");
+				return jObj.toJSONString();
 			} else {
-				mv.setViewName("toast_UI_writer3");
+				return jObj.toJSONString();
 			}
 		} catch (Exception e) {
 			System.out.println("[Error] " + e.getMessage());
 		}
-		return mv;
+		return "";
 	}
 }

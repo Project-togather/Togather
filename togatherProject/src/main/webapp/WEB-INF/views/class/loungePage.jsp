@@ -7,6 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.menu-classic-item-img img{
+	width: 349.99px;
+	height: 204.07px;
+	object-fit: cover;
+}
+</style>
 </head>
 <body>
 		<jsp:include page="../common/menubar.jsp"/>
