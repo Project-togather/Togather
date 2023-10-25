@@ -157,6 +157,9 @@
 						        </c:forEach>
 							</th>
 						</tr>
+						<tr>
+							<th colspan ="3" id ="subWayBtn">Are you goingto go appointment? click here</th>
+						</tr>
 					<tbody>
 
 					</tbody>
@@ -578,6 +581,29 @@
 			</div>
 			
 			
+			<!-- 공공데이터용 모달 -->
+			<div class="modal" id="subWayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				
+				<div class="modal-dialog" role="document" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" >
+								subwayInfo
+							</h5>
+							<input class="form-control" id="subwayStation" type="search" placeholder="search here">	
+						</div>
+						<div id="subWayResultSection" class="modal-body">
+
+						</div>
+						<div class="modal-footer">
+							<button class="btn" type="button" data-dismiss="modal">close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			
+			
 			<script>
 				//검색 모달 onclick 으로 띄우기
 				$('#testBtn').click(function(e){
@@ -594,7 +620,11 @@
 					e.preventDefault();
 					$('#followerModal').modal("show");
 				});
-				
+				//공공데이터 모달 click으로 띄우기
+				$('#subWayBtn').click(function(e){
+					e.preventDefault();
+					$('#subWayModal').modal("show");
+				});
 				
 				
 				
@@ -639,9 +669,13 @@
 				    			}
 							})
 				    	})
-				    	
-				    	
+
 				   })
+				
+				
+				
+				
+				
 				   
 					//검색결과 누르면 해당페이지로 이동
 				   function searchUserPage(e){
