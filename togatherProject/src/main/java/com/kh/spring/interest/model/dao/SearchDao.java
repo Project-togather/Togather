@@ -1,6 +1,8 @@
 package com.kh.spring.interest.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -32,25 +34,28 @@ public class SearchDao {
 		
 	}
 	
-	public int searchKeywordListCount(SqlSessionTemplate sqlSession) {
-		
-		return sqlSession.selectOne("searchMapper.searchKeywordListCount");
-		
+	public int searchKeywordListCount(SqlSessionTemplate sqlSession, String keyword) {
+	    Map<String, String> parameterMap = new HashMap<>();
+	    parameterMap.put("keyword", keyword);
+	    return sqlSession.selectOne("searchMapper.searchKeywordListCount", parameterMap);
 	}
+
 	
-	public ArrayList<Club> searchKeywordList(SqlSessionTemplate sqlSession, PageInfo pi, String keyword, String condition) {
-		
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		
-		return (ArrayList)sqlSession.selectList("searchMapper.searchKeywordList", null, rowBounds);
-		
+	public ArrayList<Club> searchKeywordList(SqlSessionTemplate sqlSession, String keyword, PageInfo pi) {
+	    int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+	    int limit = pi.getBoardLimit();
+
+	    RowBounds rowBounds = new RowBounds(offset, limit);
+
+	    Map<String, Object> parameterMap = new HashMap<>();
+	    parameterMap.put("keyword", keyword);
+	    parameterMap.put("rowBounds", rowBounds);
+
+	    return (ArrayList)sqlSession.selectList("searchMapper.searchKeywordList", parameterMap);
 	}
+
 	
-	
-	/*
+	// ajax 영역
 	public int selectSocialingListCount(SqlSessionTemplate sqlSession) {
 		
 		return sqlSession.selectOne("searchMapper.ajaxSelectSocialingListCount");
@@ -101,7 +106,6 @@ public class SearchDao {
 		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectChallengeList", null, rowBounds);
 		
 	}
-	*/
 	
 	/*
 	public int searchClassListCount(SqlSessionTemplate sqlSession) {

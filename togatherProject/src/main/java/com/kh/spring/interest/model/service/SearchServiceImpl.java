@@ -34,16 +34,16 @@ public class SearchServiceImpl implements SearchService {
 	
 	// 검색 키워드
 	@Override
-	public int searchKeywordListCount() {
-		return sDao.searchKeywordListCount(sqlSession);
+	public int searchKeywordListCount(String keyword) {
+	    return sDao.searchKeywordListCount(sqlSession, keyword);
 	}
 
 	@Override
-	public ArrayList<Club> searchKeywordList(PageInfo pi, String keyword, String condition) {
-		return sDao.searchKeywordList(sqlSession, pi, keyword, condition);
+	public ArrayList<Club> searchKeywordList(String keyword, PageInfo pi) {
+	    return sDao.searchKeywordList(sqlSession, keyword, pi);
 	}
+
 	
-	/*
 	// 소셜링 리스트가 보이는 페이지 서비스 (페이징 처리)
 	@Override
 	public int selectSocialingListCount() {
@@ -84,7 +84,6 @@ public class SearchServiceImpl implements SearchService {
 	public ArrayList<Club> selectChallengeList(PageInfo pi) {
 		return sDao.selectChallengeList(sqlSession, pi);
 	}
-	*/
 	
 	/*
 	@Override

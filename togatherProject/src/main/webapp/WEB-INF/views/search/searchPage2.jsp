@@ -6,8 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+
+
 <style>
+
 /* 서치바 영역 */
+
 .searchBar {
   position: relative;
   height: 130px;
@@ -18,13 +23,24 @@
   background-color: white;
 }
 
+#searchBar.focused {
+    background-color: white;
+    border: 1px solid orange;
+}
+
 .searchBox {
-  height: 60px;
+  height: 50px;
   width: 600px;
   background-color: #f5f5f5;
   border-radius: 40px;
   display: flex;
   align-items: center;
+  transition: all 0.3s; /* Add a transition for smooth effect */
+}
+
+.searchBox:focus-within {
+  background-color: white;
+  border: 1px solid orange;
 }
 
 .searchTxt {
@@ -34,57 +50,80 @@
   background: none;
   outline: none;
   font-size: 1rem;
-  line-height: 60px;
-  margin-left: 10px; /* 오른쪽 마진 추가 */
+  line-height: 40px;
+  margin-left: 20px; /* Add right margin */
 }
 
 .searchBtn {
-  
-  margin-right: 20px;
+	background-color: transparent;
+    color: orange; /* Set the color to orange without any other effects */
+    transition: none; /* Remove any transitions */
+
+  	margin-right: 20px;
+}
+
+.searchBtn:focus {
+    outline: none;
+}
+
+.searchBox:focus-within .fa-search {
+  color: orange;
 }
 
 .post-title {
   font-size: 1px;
 }
 
-/* 모달 */
-#modalOpenButton, #modalCloseButton {
-  cursor: pointer;
-  
-  border: 1px solid lightgray;
-  border-radius: 10%;
-  background-color: white;
-  color: black;
-  font-weight: 200;
-
-  margin-left: 21%;
+/* 모달 버튼 스타일 */
+.modal-btn {
+	margin-top: 3%;
+	margin-left: 21%;
 }
 
-#modalContainer {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 999; /* Set a high z-index value to bring the modal to the front */
+.btn.btn-primary {
+
+    border-radius: 10px; /* 버튼을 둥글게 만들기 */
+    background-color: #ffffff; /* 배경색을 하얀색으로 설정 */
+    border: 1px solid lightgray; /* 테두리 선을 라이트 그레이로 설정 */
+    color: #333; /* 텍스트 색상 설정 */
+
+	padding: 10px 20px; /* 수정된 부분: 버튼 내부의 내용과 패딩을 조절하여 버튼 크기를 변경합니다. */
+    font-size: 14px; /* 수정된 부분: 원하는 글꼴 크기로 조절합니다. */
 }
 
-
-#modalContent {
-  position: absolute;
-  background-color: #ffffff;
-  width: 500px;
-  height: 500px;
-  padding: 15px;
+/* 버튼 호버 시 스타일 */
+.btn.btn-primary:hover {
+    background-color: #ffffff; /* 마우스 호버 시 배경색 변경 */
+    border: 1px solid #fcb251; /* 마우스 호버 시 테두리 선 변경 */
+	color: #333;
 }
 
-#modalContainer.hidden {
-  display: none;
+/* 모달 닫기 버튼 스타일 */
+.modal-footer .btn.btn-apply {
+    display: block;
+    margin: 0 auto; /* 가운데 정렬 */
+    width: 200px; /* 가로 크기 조정 */
+	height: 50px;
+    border-radius: 5px; /* 둥글게 만들기 */
+    background-color: #fcb251; /* 밝은 파란색 배경색 */
+    color: #ffffff; /* 흰색 텍스트 색상 */
 }
+
+/* 닫기 버튼 호버 시 스타일 */
+.modal-footer .btn.btn-apply:hover {
+    background-color: #ffd19d; /* 호버 시 배경색 변경 */
+}
+
+/* 인스타 아이콘 */
+.instagram-container{
+	padding-left: 2%;
+}
+
+.fa-instagram{
+	
+}
+
+/* 모달 위치 조정 */
 
 
 </style>
@@ -102,6 +141,7 @@
 	<!-- Preloader end-->
 	
 	<div class="search-wrapper">
+	
 		
 		<!-- 서치바 -->
         <div class="searchBar" style="background-color: white;">
@@ -110,30 +150,76 @@
 		        <div class="searchBox">
 		            <input type="text" class="searchTxt" name="keyword" value="${ keyword }" placeholder="지금 생각나는 취미를 검색하세요.">
 		            <button class="searchBtn" type="submit" style="border:none;">
-		                <i class="fa fa-search fa-3x" aria-hidden="true" style="color: orange;"></i>
+		                <i class="fa fa-search fa-2x" aria-hidden="true" style="color: orange;"></i>
 		            </button>
 		        </div>
 		    </form>
+
+			<div class="instagram-container" id="instagramLink">
+				<i class="fa fa-brands fa-instagram fa-2x"></i>
+				<!-- <div class="feedText">feed</div> -->
+			</div>
+
 		</div>
 		
+		
+		
+		<!-- 모달 -->
+		<!-- modal 구동 버튼 (trigger) -->
+		<div class="modal-btn">
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+				필터
+			</button>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">필터</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+					</div>
+
+
+					<div class="modal-body">
+						<h5>정렬</h5>
+						<label>
+							소셜링 <input type="radio" name="options" value="option1">
+						</label>
+						<br>
+						<label>
+							클럽 <input type="radio" name="options" value="option2">
+						</label>
+						<br>
+						<label>
+							피드 <input type="radio" name="options" value="option3">
+						</label>
+					</div>
+
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-apply" data-dismiss="modal">적용하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal-btn2"></div>
+
 		<br><br>
 		
-		<button id="modalOpenButton">필터</button>
+		<!-- 알림 메시지 표시 -->
+		<c:if test="${not empty errorMessage}">
+		    <div class="alert" style="text-align: center;">
+		        ${errorMessage}
+		    </div>
+		</c:if>
 
-		<div id="modalContainer" class="hidden">
-		  <div id="modalContent">
-		  	<div class="radioBtn" name="condition">
-			   소셜링<input type="radio" name="chk_info" value="socialing"><br>
-				클럽<input type="radio" name="chk_info" value="club"><br>
-				피드<input type="radio" name="chk_info" value="feed"><br>
-			</div>
-		    <button id="modalCloseButton">닫기</button>
-		  </div>
-		</div>
 		
 		
 		
-		<section class="module" id="module1">
 			<div class="container">
 				<div class="search-class">
 					<div class="row">
@@ -141,15 +227,15 @@
 						<c:forEach var="c" items="${ list }">
 							<div class="col-md-4 post-item">
 								<article class="post">
-									<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
+									<div class="post-preview"><a href="#"><img src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/KakaoTalk_20220327_184200992_08_5db3013d2eaf663853f3a86bc7904ceaf407b8c40c77c10f97f6c440fbb5b546" alt=""></a></div>
 									<div class="post-wrapper">
 										<div class="post-header">
-											<h2 class="post-title display-1"><a href="blog-single-1.html">${ c.classTitle }</a></h2>
+											<h4 class="post-title1"><a href="blog-single-1.html">${ c.classTitle }</a></h4>
 										</div>
 										<div class="post-content">
-											<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
+											<p>${c.classLocation }</p>
 										</div>
-										<div class="post-more"><a href="#">read more...</a></div>
+										<div class="post-more"><a href="#">${ c.classDate }</a></div>
 									</div>
 								</article>
 							</div>
@@ -172,7 +258,7 @@
                 	</c:choose>
                 	
                 	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                		<li class="page-item"><a class="page-link" href="list.se?cpage=${ p }">${ p }</a></li>
+                		<li class="page-item"><a class="page-link" href="search.li?cpage=${ p }&keyword=${ keyword }">${ p }</a></li>
                  	</c:forEach>
                  	
                  	<c:choose>
@@ -189,27 +275,30 @@
 		        </div>
 
 			</div>
-		</section>
+		
 		
 		
 		<script>
-		
-			const modalOpenButton = document.getElementById('modalOpenButton');
-			const modalCloseButton = document.getElementById('modalCloseButton');
-			const modal = document.getElementById('modalContainer');
-	
-			modalOpenButton.addEventListener('click', () => {
-				  modal.classList.remove('hidden');
-				  document.body.style.overflow = 'hidden'; // Disable scrolling
+			<!-- list.al 이동 -->
+			document.addEventListener("DOMContentLoaded", function() {
+				// 인스타그램 아이콘을 클릭할 때 실행되는 함수
+				function handleInstagramIconClick() {
+					// 여기에 페이지 이동 로직을 추가합니다.
+					// window.location.href를 사용하여 페이지를 이동합니다.
+					window.location.href = "list.al"; // 이동할 페이지 URL로 변경하세요.
+				}
+
+				// 인스타그램 아이콘을 클릭 이벤트에 연결
+				var instagramLink = document.getElementById("instagramLink");
+				if (instagramLink) {
+					instagramLink.addEventListener("click", handleInstagramIconClick);
+				}
 			});
 
-				modalCloseButton.addEventListener('click', () => {
-				  modal.classList.add('hidden');
-				  document.body.style.overflow = 'auto'; // Enable scrolling
-			});
-				
 		</script>
-		
+
+
+
 		
 		</div>
 	

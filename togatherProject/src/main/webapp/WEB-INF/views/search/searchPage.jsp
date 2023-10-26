@@ -56,6 +56,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 <style>
 
 /* 서치바 영역 */
+
 .searchBar {
   position: relative;
   height: 130px;
@@ -66,13 +67,24 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
   background-color: white;
 }
 
+#searchBar.focused {
+    background-color: white;
+    border: 1px solid orange;
+}
+
 .searchBox {
-  height: 60px;
+  height: 50px;
   width: 600px;
   background-color: #f5f5f5;
   border-radius: 40px;
   display: flex;
   align-items: center;
+  transition: all 0.3s; /* Add a transition for smooth effect */
+}
+
+.searchBox:focus-within {
+  background-color: white;
+  border: 1px solid orange;
 }
 
 .searchTxt {
@@ -82,13 +94,67 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
   background: none;
   outline: none;
   font-size: 1rem;
-  line-height: 60px;
-  margin-left: 10px; /* 오른쪽 마진 추가 */
+  line-height: 40px;
+  margin-left: 20px; /* Add right margin */
 }
 
 .searchBtn {
-  
-  margin-right: 20px;
+	background-color: transparent;
+    color: orange; /* Set the color to orange without any other effects */
+    transition: none; /* Remove any transitions */
+
+  	margin-right: 20px;
+}
+
+.searchBtn:focus {
+    outline: none;
+}
+
+.searchBox:focus-within .fa-search {
+  color: orange;
+}
+
+.post-title {
+  font-size: 1px;
+}
+
+/* 모달 버튼 스타일 */
+.btn.btn-primary {
+    border-radius: 10px; /* 버튼을 둥글게 만들기 */
+    background-color: #ffffff; /* 배경색을 하얀색으로 설정 */
+    border: 2px solid lightgray; /* 테두리 선을 라이트 그레이로 설정 */
+    color: #333; /* 텍스트 색상 설정 */
+}
+
+/* 버튼 호버 시 스타일 */
+.btn.btn-primary:hover {
+    background-color: #ffffff; /* 마우스 호버 시 배경색 변경 */
+    border: 2px solid #fcb251; /* 마우스 호버 시 테두리 선 변경 */
+	color: #333;
+}
+
+/* 모달 닫기 버튼 스타일 */
+.modal-footer .btn.btn-apply {
+    display: block;
+    margin: 0 auto; /* 가운데 정렬 */
+    width: 150px; /* 가로 크기 조정 */
+    border-radius: 5px; /* 둥글게 만들기 */
+    background-color: #fcb251; /* 밝은 파란색 배경색 */
+    color: #ffffff; /* 흰색 텍스트 색상 */
+}
+
+/* 닫기 버튼 호버 시 스타일 */
+.modal-footer .btn.btn-apply:hover {
+    background-color: #ffd19d; /* 호버 시 배경색 변경 */
+}
+
+/* 인스타 아이콘 */
+.instagram-container{
+	padding-left: 2%;
+}
+
+.fa-instagram{
+	
 }
 
 .post-title {
@@ -113,9 +179,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 #searchNav {
     position: relative;
     display: flex;
-    width: 80%;
+    width: 50%;
     margin: 1em auto;
-    font-size: 20px;
+    font-size: 15px;
 }
 #searchNav a {
     display: block;
@@ -170,11 +236,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 }
 
 .row {
+
 	display: flex;
 	flex: 1; /* Equal distribution of available space */
 }
 
 .feed-item {
+
 	width: 480px; /* 변경: 너비를 480px로 설정 */
 	background-color: white;
 	height: 480px;
@@ -281,15 +349,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 		
 		<!-- 서치바 -->
         <div class="searchBar" style="background-color: white;">
-		    <form action="#" method="get">
+		    <form action="search.li" method="get">
 		        <input type="hidden" name="cpage" value="1">
 		        <div class="searchBox">
 		            <input type="text" class="searchTxt" name="keyword" value="${ keyword }" placeholder="지금 생각나는 취미를 검색하세요.">
 		            <button class="searchBtn" type="submit" style="border:none;">
-		                <i class="fa fa-search fa-3x" aria-hidden="true" style="color: orange;"></i>
+		                <i class="fa fa-search fa-2x" aria-hidden="true" style="color: orange;"></i>
 		            </button>
 		        </div>
 		    </form>
+
+			<div class="instagram-container" id="instagramLink">
+				<i class="fa fa-brands fa-instagram fa-2x"></i>
+				<!-- <div class="feedText">feed</div> -->
+			</div>
+
 		</div>
 
         
@@ -322,7 +396,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
         
         
         
-        <!-- 소셜링, 클럽, 챌린지 ajax 영역 -->
+        <!-- 소셜링, 클럽, 챌린지, 피드, 멤버 ajax 영역 -->
 		<section class="module" id="module1">
 			<div class="container">
 				<div class="search-class">

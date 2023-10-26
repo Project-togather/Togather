@@ -9,6 +9,7 @@ import org.apache.ibatis.javassist.expr.NewArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,28 +46,52 @@ public class SearchController {
 		
 		mv.addObject("pi", pi).addObject("list", list).setViewName("search/searchPage2");
 		
+		System.out.println(list);
 		
 		return mv;
 	}
 	
 	// 검색 화면
 	@RequestMapping(value = "search.li")
-	public String searchKeywordList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, 
-									@RequestParam(value = "keyword", required = false) String keyword,
-									@RequestParam(value = "condition", required = false) String condition, Model model) {
-	
-		
-		int searchCount = sService.searchKeywordListCount();
-		
-		PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, 10, 9);
-		
-		ArrayList<Club> searchResult = sService.searchKeywordList(pi, keyword, condition);
-		
-		return "search/searchPage2";
+	public String searchKeywordList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+	                                @RequestParam(value = "keyword", required = true) String keyword, Model model) {
+	    // 검색 결과의 총 개수를 가져오는 메소드
+	    int searchCount = sService.searchKeywordListCount(keyword);
+
+	    if (searchCount == 0) {
+	        // 검색 결과가 없을 때 알림 메시지를 설정
+	        model.addAttribute("errorMessage", "검색 결과가 없습니다.");
+	    } else {
+	        // 페이지 정보를 계산합니다.
+	        PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, 10, 9);
+
+	        // 검색 결과를 가져오는 메소드
+	        ArrayList<Club> list = sService.searchKeywordList(keyword, pi);
+
+	        // Model을 사용하여 데이터를 전달합니다.
+	        model.addAttribute("pi", pi);
+	        model.addAttribute("list", list);
+	    }
+
+	    model.addAttribute("keyword", keyword);
+
+	    return "search/searchPage2";
 	}
 	
 	
-	/*
+	
+	
+	
+	
+
+	// ajax 피드 화면
+	@RequestMapping("list.al")
+	public String ajaxSelectAllPage() {
+		
+		return "search/searchPage";
+	}
+	
+	
 	// 소셜링
 	@ResponseBody
 	@RequestMapping(value = "getList.so", produces = "application/json; charset=utf-8;")
@@ -90,9 +115,6 @@ public class SearchController {
 	    
 	    return jsonResponse;
 	}
-	
-	
-	// 소셜링 검색
 	
 	
 	// 클럽
@@ -149,7 +171,6 @@ public class SearchController {
 				
 				
 		}
-		*/
 		
 	
 	

@@ -15,10 +15,9 @@ public interface SearchService {
 	ArrayList<Club> selectClassAllList(PageInfo pi);
 	
 	// 검색 조회
-	int searchKeywordListCount();
-	ArrayList<Club> searchKeywordList(PageInfo pi, String keyword, String condition);
+	int searchKeywordListCount(String keyword);
+	ArrayList<Club> searchKeywordList(String keyword, PageInfo pi);
 	
-	/*
 	// 소셜링
 	int selectSocialingListCount();
 	ArrayList<Club> selectSocialingList(PageInfo pi);
@@ -32,7 +31,6 @@ public interface SearchService {
 	// 챌린지
 	int selectChallengeListCount();
 	ArrayList<Club> selectChallengeList(PageInfo pi);
-	*/
 	
 	/*
 	// 소셜링, 클럽, 챌린지 리스트가 보이는 페이지 서비스 (페이징 처리)
