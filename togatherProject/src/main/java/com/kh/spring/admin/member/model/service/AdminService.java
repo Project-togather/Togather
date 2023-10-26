@@ -37,4 +37,8 @@ public interface AdminService  {
 	ArrayList<BlackList> selectBlackList(PageInfo pi);
 	
 	int updateBlackList(String memId);
+	
+	int adUpdateMember(Member m);
+	
+	int insertExcel(Member excel);
 }

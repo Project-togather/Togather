@@ -363,6 +363,29 @@
 		and to_mem = #{toMem}
 	</delete>
 	
+	<update id="updateMember">
+		update member 
+		set
+		    nickname = #{nickName},
+		    img = #{img},
+		    msg = #{msg}
+		where mem_no = #{memNo}
+	</update>
+
+	<update id = "updateProfileImg">
+		update attachment
+		set
+		    origin_name = #{originName},
+		    update_name = #{updateName},
+		    file_path = #{filePath}
+		where ref_fno = #{refFno}
+	</update>
+	
+	<delete id = "deleteInterest">
+		delete from 
+	     mem_interest
+	where mem_no = #{memNo}
+	</delete>
 	
 	
 </mapper>

@@ -46,6 +46,32 @@ public class NoticeController {
 
 		return mv;
 	}
+	
+	//사용자페이지 공지사항 노출
+	
+		@RequestMapping("usnoticelist.pa")
+		public ModelAndView usnoticeListPage(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,ModelAndView mv) {
+
+			int noticeListCount = Cservice.selectNoticeListCount();
+			
+
+			PageInfo pi = Pagination.getPageInfo(noticeListCount, currentPage, 10, 10);
+
+			ArrayList<Notice> list = Cservice.selectNoticeList(pi);
+
+			
+			if (list.size() > 0) {
+				mv.addObject("pi", pi).addObject("list", list).setViewName("admin/customercenter/userNoticeListView");
+
+			} else {
+				mv.addObject("pi", pi).addObject("list", list).setViewName("admin/customercenter/userNoticeListView");
+				// mv.addObject("errorMsg", "블랙리스트조회실패");
+				// mv.setViewName("common/errorPage");
+			}
+
+			return mv;
+		}
+		
 	//insert페이지 이동
 	@RequestMapping("insertno.pa")
 	public String insertNoticePage() {
@@ -67,7 +93,7 @@ public class NoticeController {
 		}
 		
 	}
-	
+	//관리자 페이지 공지사항 상세보기
 	@RequestMapping("detail.no")
 	public ModelAndView noticeDetailview(int noticeNo,ModelAndView mv) {
 		
@@ -84,6 +110,25 @@ public class NoticeController {
 		return mv;
 	}
 	
+	//사용자 페이지 공지사항 상세보기
+		@RequestMapping("usdetail.no")
+		public ModelAndView usnoticeDetailview(int noticeNo,ModelAndView mv) {
+			
+			Notice n = Cservice.noticeDetailview(noticeNo);
+			
+			
+			if(n !=null){
+				mv.addObject("n",n).setViewName("admin/customercenter/usernoticeDetailView");
+			}else {
+				mv.addObject("n",n).setViewName("admin/customercenter/usernoticeDetailView");
+				
+			}
+			
+			return mv;
+		}
+	
+	
+	
 	@RequestMapping("update.no")
 	public String updateNotice(Notice n,Model model,HttpSession session) {
 		
@@ -98,4 +143,6 @@ public class NoticeController {
 			
 		}
 	}
+	
+	
 }

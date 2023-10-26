@@ -103,5 +103,18 @@ public class MemberDao {
 	public int deleteFollow(SqlSessionTemplate sqlSession , Follow f) {
 		return sqlSession.delete("memberMapper.deleteFollow",f);
 	}
+	//맴버 기본정보 업데이트
+	public int updateMember(SqlSessionTemplate sqlSession , Member m) {
+		return sqlSession.update("memberMapper.updateMember" , m);
+	}
+	//프사수정 attachment
+	public int updateProfileImg(SqlSessionTemplate sqlSession , Attachment at) {
+		
+		return sqlSession.update("memberMapper.updateProfileImg", at);
+	}
+	//흥미삭제
+	public int deleteInterest(SqlSessionTemplate sqlSession , String memNo) {
+		return sqlSession.delete("memberMapper.deleteInterest", memNo);
+	}
 	
 }

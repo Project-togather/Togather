@@ -152,5 +152,24 @@ public class MemberServiceImpl implements MemberService {
 	public int deleteFollow(Follow f) {
 		return mDao.deleteFollow(sqlSession , f);
 	}
+
+	//회원기본정보수정
+	@Override
+	public int updateMember(Member m) {
+		return mDao.updateMember(sqlSession, m);
+	}
+
+	//프사 업데이트 attachment
+	@Override
+	public int updateProfileImg(Attachment at) {
+		return mDao.updateProfileImg(sqlSession, at);
+		
+	}
+
+	//흥미 삭제
+	@Override
+	public int deleteInterest(String memNo) {
+		return mDao.deleteInterest(sqlSession, memNo);
+	}
 	
 }

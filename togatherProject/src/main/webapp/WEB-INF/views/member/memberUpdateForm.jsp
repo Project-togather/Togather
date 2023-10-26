@@ -1,18 +1,84 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>   
+<%@ taglib prefix="c" uri= "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>   
+<%
+	//String str = (String)request.getAttribute("memNo");
+	//System.out.println(str);
+%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-	<style>
+	<style >
+		ul {
+		  list-style-type: none;
+		}
 		
+		li {
+		  display: inline-block;
+		}
 		
+		input[type="checkbox"][id^="myCheckbox"] {
+		  display: none;
+		}
+		
+		label {
+		  border: 1px solid #fff;
+		  padding: 10px;
+		  display: block;
+		  position: relative;
+		  margin: 10px;
+		  cursor: pointer;
+		}
+		
+		label:before {
+		  background-color: white;
+		  color: white;
+		  content: " ";
+		  display: block;
+		  border-radius: 50%;
+		  border: 1px solid grey;
+		  position: absolute;
+		  top: -5px;
+		  left: -5px;
+		  width: 25px;
+		  height: 25px;
+		  text-align: center;
+		  line-height: 28px;
+		  transition-duration: 0.4s;
+		  transform: scale(0);
+		}
+		
+		label img {
+		  height: 100px;
+		  width: 220px;
+		  transition-duration: 0.2s;
+		  transform-origin: 50% 50%;
+		}
+		
+		:checked + label {
+		  border-color: #ddd;
+		}
+		
+		:checked + label:before {
+		  content: "✓";
+		  background-color: grey;
+		  transform: scale(1);
+		}
+		
+		:checked + label img {
+		  transform: scale(0.9);
+		  /* box-shadow: 0 0 5px #333; */
+		  z-index: -1;
+}
 	</style>
+	
+	
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+		<title>updateYourProfile</title>
 		<!-- Favicons-->
 		<link rel="shortcut icon" href="assets/images/favicon.png">
 		<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -28,6 +94,9 @@
 		<link href="assets/css/template.css" rel="stylesheet">
 	</head>
 	<body>
+		<jsp:include page="../common/menubar.jsp"></jsp:include>
+		
+	
 
 		<!-- Preloader-->
 		<div class="page-loader">
@@ -35,55 +104,183 @@
 		</div>
 		<!-- Preloader end-->
 
-		<jsp:include page="../common/menubar.jsp"></jsp:include>
+		
 
 		<!-- Wrapper-->
 		<div class="wrapper">
-
+		
 			<!-- Hero-->
-			<section class="module-cover fullscreen parallax" data-background="assets/images/portfolio/10.jpg" data-overlay="0.7">
+			<section class="module-cover parallax" data-background="assets/images/black.jpg" data-overlay="1" data-gradient="1">
 				<div class="container">
 					<div class="row">
-						<div class="col-md-4 m-auto">
+						<div class="col-md-12">
 							<div class="text-center">
-								<div class="up-as">
-									<h5>Sign into your account</h5>
-								</div>
-								<div  class="up-form">
-									<form action="login.me" method="post">
-										<div class="form-group">
-											<input class="form-control" name="memId" type="text" placeholder="Id" style="color: white;">
-										</div>
-										<div class="form-group">
-											<input class="form-control" name="memPwd" type="password" placeholder="Pasword" style="color: white;">
-										</div>
-										<div class="form-group">
-											<button class="btn btn-block btn-round btn-brand" type="submit">Login</button>
-										</div>
-										
-									</form>
-								</div>
-								<div class="form-group">
-											<button id="googleLoginBtn" class="btn btn-block btn-round btn-brand" type="button" onClick="googleLogin();"><img class="brand-light" src="assets/images/google3.png" width="30px" height="30px" alt="">Login with GoogleId</button>
-								</div>
-								
-								<div class="up-help">
-									<p class="m-b-5">Dont have an account yet? <a href="#">Create account</a></p>
-									<p>Forgot your username or password? <a href="#">Recover account</a></p>
-								</div>
+								<h1 class="display-1">update my Information</h1>
+								<p>show your interest and tell me who you are <br/>if you set your profile detail, you can join club more easily  </p>
 							</div>
 						</div>
 					</div>
 				</div>
-				
-				<script >
-					function googleLogin(){
-						location.href = "https://accounts.google.com/o/oauth2/v2/auth?client_id=43410666342-clrgc0u7iriccl044k80v7rquclsh41j.apps.googleusercontent.com&redirect_uri=http://localhost:8012/togather/google&response_type=code&scope=email%20profile%20openid&access_type=offline";	
-					}
-				</script>
-				
 			</section>
 			<!-- Hero end-->
+
+			<!---->
+			<section class="module">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6 m-auto text-center">
+							<p class="subtitle">update my Information</p>
+							<h1 class="display-1">MyProfile</h1>
+							<p class="lead">show your interest and tell me who you are <br/> if you set your profile detail, you can join club more easily.</p>
+							<div class="divider-border"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="space" data-mY="60px"></div>
+						</div>
+					</div>
+					
+				
+					<div class="row">
+						<div class="col-md-12">
+							<form action="update.me" method="post" enctype="multipart/form-data" novalidate>
+							<input type="hidden" name="memNo" value ="${memNo}"/>
+								
+							
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											 <div class="select">
+											     <ul>
+												  <li>
+												    <input type="checkbox" id="myCheckbox1" name="interest" value="1" />
+												    <label for="myCheckbox1"><img src="assets/images/interest/newMusic.png" /></label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox2" name="interest" value="2"/>
+												    <label for="myCheckbox2"><img src="assets/images/interest/newActivity.png" /></label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox3" name="interest" value="3" />
+												    <label for="myCheckbox3"><img src="assets/images/interest/newFood.png" /></label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox4" name="interest" value="4" />
+												    <label for="myCheckbox4"><img src="assets/images/interest/newHobby.png" /></label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox5" name="interest" value="5"/>
+												    <label for="myCheckbox5"><img src="assets/images/interest/newParty.png" /></label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox6" name="interest" value="6"/>
+												    <label for="myCheckbox6"><img src="assets/images/interest/newDate.png" /></label>
+												  </li>
+												  <li>
+												
+												    <input type="checkbox" id="myCheckbox7" name="interest" value="7"/>
+												    <label for="myCheckbox7"><img src="assets/images/interest/newInvestment.png" /></label>
+												  </li>
+												  <li>
+												    <input type="checkbox" id="myCheckbox8" name="interest" value="8"/>
+												    <label for="myCheckbox8"><img src="assets/images/interest/newLanguage.png" /></label>
+												  </li>
+												</ul>
+											</div>
+										</div>
+									</div>						
+									<div class="col-md-12">
+										<div class="form-group">
+											<textarea class="form-control" name="msg" placeholder="comment" rows="6"  required>${loginMember.msg}</textarea>
+										</div>
+									</div>
+
+										<div class="col-md-12">
+											<div class="form-group">
+												newNickName
+												<input class="form-control" name="nickName" type="text" placeholder="nickName" value="${loginMember.nickName}"  required>
+												newProfileImg<br>
+												<img src="${loginMember.img}"  id="titleImg" width="250" height="170" onclick="chooseFile(1);" style="border-radius: 150px;">
+												  <div id="file-area" style = "display:none">
+									                <input type="file" name="upfile" id = "file1" onchange ="loadImg(this,1)" required>
+									             </div>
+											</div>
+										</div>
+										
+									
+							                    
+										
+									
+									
+									<div class="col-md-12">
+										<div class="text-center">
+											<input class="btn btn-black" type="submit" value="Reserve">
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="space" data-mY="100px"></div>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			
+			<script>
+				 function chooseFile(num){
+	          		$("#file"+num).click();
+	          	}
+	          	function loadImg(inputFile , num){
+	          		if (inputFile.files.length == 1){//파일이 선택된경우 => 파일읽어들여서 미리보기
+	          			
+	          			const reader = new FileReader();
+	          			reader.readAsDataURL(inputFile.files[0]);
+	          			//해당파일을 읽어들이는 순간 해당 파일만이 가지고 있는 url 을 부여해줌
+	          			//파일 읽어들이기가 완료가 되었다면 실행할 함수는?
+	          			reader.onload = function(e){
+	          			//e.target.result -> 읽어들인 파일의 고유한 url 이 들어가 있다	
+	          				switch (num){
+	                              case 1: $("#titleImg").attr("src",e.target.result);
+	                              break; 
+	                          }
+	          			}
+	          		}else{//파일이 빠졌을경우
+	                      switch (num){
+	                              case 1: $("#titleImg").attr("src",null);
+	                              break;
+	                          }
+	          		}
+	
+	          		
+	          	}
+			
+			</script>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 
 			<svg class="footer-circle" xmlns="http://www.w3.org/2000/svg" version="1.1" width="100%" height="100" viewbox="0 0 100 100" preserveaspectratio="none">
 				<path d="M0 100 C40 0 60 0 100 100 Z"></path>

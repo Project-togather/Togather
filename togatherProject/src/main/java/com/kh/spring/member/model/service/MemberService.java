@@ -56,6 +56,11 @@ public interface MemberService {
 	//팔로잉리스트 팔로워리스트
 	ArrayList<Member> getFollowingList (String memNo);
 	ArrayList<Member> getFollowerList (String memNo);
-	
+	//기본회원정보수정
+	int updateMember(Member m);
+	//프사 수정 attachment
+	int updateProfileImg(Attachment at);
+	//흥미 삭제
+	int deleteInterest(String memNo);
 	
 }
