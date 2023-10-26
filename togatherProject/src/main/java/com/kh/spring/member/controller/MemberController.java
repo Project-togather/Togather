@@ -382,5 +382,110 @@ public class MemberController {
 	   int result = mService.deleteFollow(follow);
 	   return result+"" ;
    }
+   
+   //맴버 수정폼 이동
+   //넘겨줄 값 닉네임 한마디 이미지인데.. 지금 생각해보니까 이미세션에 띄워져있네?
+   @RequestMapping(value = "updateForm.me")
+   public String memberUpdateForm() {
+	   return "member/memberUpdateForm";
+   }
+   
+   
+   //맴버 수정
+   @RequestMapping(value = "update.me")
+   public String updateMember(Member m ,MultipartFile upfile , HttpSession session , Model model , MultipartFile[] upfile2 , HttpServletRequest request) {
+		   	
+	   String memNo = ((Member)session.getAttribute("loginMember")).getMemNo();
+	   
+	   
+		    String oldImg =  ((Member)session.getAttribute("loginMember")).getImg();
+		    
+		   
+		    String interArrS [] = request.getParameterValues("interest"); 
+		    
+		   
+		    
+		    
+		   //사진부터 수정해볼까나
+
+	      String changeName ="";
+	      String originName = upfile.getOriginalFilename();
+	      String savePath = "";
+	      String filePath = "";
+	      
+	      if(!upfile.getOriginalFilename().equals("")) {
+	    	  if( (oldImg.charAt(0))!= 'h' ) { //구글로그인은 이미지가 없단말야
+	    		  new File(session.getServletContext().getRealPath(oldImg)).delete();//기존파일 지우고
+	    	  }
+	    	  	 String arr[] = saveFile(upfile , session);
+	    	  	 //파일저장하고 경로좀 받아오자
+	    	  	 changeName = arr[0];
+	    	  	 savePath = arr[1];
+	    	  	 filePath = "resources/uploadFiles/"+changeName;
+				//System.out.println(changeName);
+	    	  	 //System.out.println(filePath);
+			}
+	     
+	      //먼저 member insert합시다
+	      Member upMem = new Member();
+	      upMem.setMemNo(memNo);
+	      upMem.setNickName(m.getNickName());//새로운 닉네임
+	      upMem.setMsg(m.getMsg());	      //새로운 메세지
+	      upMem.setImg(filePath);//새로운 이미지주소
+	      
+	      int result1 = mService.updateMember(upMem);
+	      
+	      //attachment 에 넣고
+
+	      //파일을 attach에 insert하면 됨
+	      Attachment at = new Attachment();
+	      at.setRefFno(memNo);
+	      at.setUpdateName(changeName);
+	      at.setOriginName(originName);
+	      at.setFilePath(filePath);
+	      int result2 = mService.updateProfileImg(at);
+	      
+	      //interarr 도 넣어야함 먼저 전부 삭제후 새로 넣는식으로 하자
+	      int result3 = mService.deleteInterest(memNo);
+	      
+	      //삭제했으면 넣어라
+	      
+	      int result4 = 0 ; 
+	      if(interArrS!=null){
+			    int interArr[] = new int [interArrS.length];
+				   for(int i = 0 ; i < interArrS.length ; i ++) {
+					   interArr[i] = Integer.parseInt(interArrS[i]);
+				   }
+				   for(int i = 0 ; i < interArr.length ; i ++) {
+						  MemInterest mi = new MemInterest();
+						  mi.setMemNo(memNo);
+						  mi.setInNo(interArr[i]);
+						  //System.out.println("DB로갈 mi" + mi);
+						  result4 = mService.insertInterest(mi);
+					   }  
+			}
+	      
+		   
+		
+		  
+		  //내가 구조를 이상하게 짜놔서 다시 띄워줘야함 그냥 세션을 싹 지우고 다시 띄워주자
+		  
+		  //다시 로그인 해야하나봐
+		  Member nowLogin = (Member)session.getAttribute("loginMember");//현재 로그인한 맴버 정보
+		  Member reLoginMem = new Member();//새로 세션에 넣어줄 로그인 정보
+		 
+		  reLoginMem.setMemId(nowLogin.getMemId());
+		  reLoginMem.setMemPwd(nowLogin.getMemPwd());
+		  Member loginMember = mService.loginMember(reLoginMem);
+		  
+		  
+		  session.setAttribute("loginMember",loginMember);
+		  session.setAttribute("pImg", filePath);
+		  return "redirect:/mypage.me";
+
+   }
+   
+   
+   
   
 }

@@ -47,41 +47,41 @@
 								<div class="up-form">
 									<form action="insertMember.me" method="post" enctype="multipart/form-data">
 										<div class="form-group">
-											<input class="form-control" id="idInput" name="memId" type="text" placeholder="Id" style="color: white;">
+											<input class="form-control" id="idInput" name="memId" type="text" placeholder="Id" style="color: white;" required>
 										</div>
 										<div id="checkResult">
 											
 										</div>
 										<div class="form-group">
-											<input class="form-control" name="memName" type="text" placeholder="Name" style="color: white;">
+											<input class="form-control" name="memName" type="text" placeholder="Name" style="color: white;" required>
 										</div>
 										<div class="form-group">
-											<input class="form-control" name="email" type="email" placeholder="Email" style="color: white;">
+											<input class="form-control" name="email" type="email" placeholder="Email" style="color: white;" required>
 										</div>
 										<div class="form-group">
-											<input class="form-control" name="memPwd" type="password" placeholder="Pasword" style="color: white;">
+											<input class="form-control" name="memPwd" type="password" placeholder="Pasword" style="color: white;" required>
 										</div>
 										<div class="form-group">
-											<input class="form-control" type="password" placeholder="Confirm password" style="color: white;">
+											<input class="form-control" type="password" placeholder="Confirm password" style="color: white;" required>
 										</div>
 										<div class="form-group">
-											<input class="form-control" name="nickName" type="text" placeholder="nickName" style="color: white;">
+											<input class="form-control" name="nickName" type="text" placeholder="nickName" style="color: white;" required>
 										</div>
 										<div class="form-group">
-											<input class="form-control" name="phone" type="text" placeholder="phone" style="color: white;">
+											<input class="form-control" name="phone" type="text" placeholder="phone" style="color: white;" required>
 										</div>
 										<div class="form-group">
 											<input type='radio'
 											       name='gender' 
 											       value='F' 
-											       />Female
+											       required/>Female
 											<input type='radio' 
 											       name='gender' 
 											       value='M' 
 											       />Male
 											<br>
 											AGE
-											<select name = "age">
+											<select name = "age" >
 												<c:forEach begin="10" end="60" step="1" var ="i">
 												  <option value='${i}'>${i}</option>
 											    </c:forEach>	  
