@@ -6,7 +6,12 @@
 		<result column="mem_no" property="memNo"></result>
 		<result column="mem_name" property="memName"></result>
 		<result column="mem_id" property="memId"></result>
+		<result column="mem_pwd" property="memPwd"></result>
 		<result column="nickname" property="nickName"></result>
+		<result column="email" property="email"></result>
+		<result column="gender" property="gender"></result>
+		<result column="phone" property="phone"></result>
+		<result column="manner" property="manner"></result>
 		<result column="enroll_date" property="enrollDate"></result>
 		<result column="age" property="age"></result>
 		<result column="m_status" property="memStatus"></result>
@@ -31,7 +36,7 @@
 		    age,
 		    m_status
 		from member
-			where m_Status = 'Y'
+			order by mem_no desc
 	</select>
 	
 	<select id="selectMemberList2" resultMap="AdMemberResult" parameterType="Member">
@@ -39,12 +44,16 @@
 		    mem_no,
 		    mem_name,
 		    mem_id,
+		    mem_pwd,
 		    nickName,
-		    enroll_date,
+		    email,
+		    gender,
 		    age,
+		    phone,
+		    enroll_date,
+		    manner,
 		    m_status
 		from member
-			where m_Status = 'Y'
 	</select>
 	
 	<select id="selectMemberList3" resultMap="AdMemberResult">
@@ -61,8 +70,7 @@
 		    age,
 		    m_status
 		from member
-			where m_Status = 'Y'
-			and mem_No = #{memNo}
+			where mem_No = #{memNo}
 	</select>
 	
 	<select id="selectMemberCount" resultType="_int">
@@ -135,4 +143,46 @@
 		  set black_status ='N'
 		    where black_id = #{memId}
 	</update>
+	
+	<update id="adUpdateMember">
+		update
+			Member
+		  set nickname = #{nickName},
+		   	  phone = #{phone},
+		   	  email = #{email},
+		   	  m_Status = #{memStatus}
+		  	where mem_no = #{memNo}
+	</update>
+	
+	<insert id="insertExcel">
+		insert 
+			into member
+			(
+				mem_No,
+				mem_id,
+				mem_pwd,
+				mem_name,
+				nickname,
+				email,
+				gender,
+				age,
+				phone,
+				manner,
+				m_status
+			)
+			values
+			(
+				#{memNo},
+				#{memId},
+				#{memPwd},
+				#{memName},
+				#{nickName},
+				#{email},
+				#{gender},
+				#{age},
+				#{phone},
+				#{manner},
+				#{memStatus}
+			)
+	</insert>
 </mapper>

@@ -19,6 +19,8 @@
 
 					<!-- Button trigger modal -->
 					<button type="button" class="btn btn-warning btn-sm float-right"
+						onclick="noticeWriter2();">사용자페이지 공지사항</button>
+					<button type="button" class="btn btn-warning btn-sm float-right"
 						onclick="noticeWriter();">공지사항 추가하기</button>
 
 					<br> <br>
@@ -47,26 +49,6 @@
 											data-bs-toggle="modal" data-bs-target="#cancel">글삭제</button>
 									</td>
 								</tr>
-								<!-- Modal -->
-								<div class="modal fade" id="blackcancel" tabindex="-1"
-									aria-labelledby="exampleModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">블랙리스트
-													해제하기</h5>
-												<button type="button" class="btn-close"
-													data-bs-dismiss="modal" aria-label="Close"></button>
-											</div>
-											<div id="modalbody" class="modal-body"></div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-warning" id="deletebtn">해제하기</button>
-												<button type="button" class="btn btn-secondary"
-													data-bs-dismiss="modal">취소하기</button>
-											</div>
-										</div>
-									</div>
-								</div>
 							</c:forEach>
 						</tbody>
 					</table>
@@ -110,6 +92,12 @@
 	<script>
 		function noticeWriter(){
 			location.href="insertno.pa"
+			}
+	</script>
+	
+	<script>
+		function noticeWriter2(){
+			location.href="usnoticelist.pa"
 			}
 	</script>
 	<script>

@@ -65,6 +65,18 @@ public class AdminServiceImpl implements AdminService {
 	public int updateBlackList(String memId) {
 		return ADao.updateBlackList(sqlSession,memId);
 	}
+
+	@Override
+	public int adUpdateMember(Member m) {
+		return ADao.adUpdateMember(sqlSession,m);
+	}
+
+	@Override
+	public int insertExcel(Member excel) {
+		
+		System.out.println("asd"+excel );
+		return ADao.insertExcel(sqlSession, excel);
+	}
 	
 
 }

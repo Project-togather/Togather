@@ -72,12 +72,12 @@
 
                 <div class="tab-pane fade show active profile-edit pt-3" id="profile-edit">
                   <!-- Profile Edit Form -->
-                  <form>
-                    <input type="hidden" value="userNo"/>
+                  <form action="adupdate.mem" method="post">
+                    <input type="hidden" name="memNo" value="${m.memNo}"/>
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">아이디</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName" value="${m.memId }" disabled>
+                        <input name="memId" type="text" class="form-control" id="fullName" value="${m.memId }" disabled>
                       </div>
                     </div>
 
@@ -91,21 +91,21 @@
                     <div class="row mb-3">
                       <label for="name" class="col-md-4 col-lg-3 col-form-label">이름</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" name="$admin" value="${m.memName }" class="form-control">
+                        <input type="text" name="memName" value="${m.memName }" class="form-control" disabled>
                       </div>
                     </div>
                     
                     <div class="row mb-3">
-                      <label for="nickName" class="col-md-4 col-lg-3 col-form-label">이름</label>
+                      <label for="nickName" class="col-md-4 col-lg-3 col-form-label">닉네임</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="text" name="$admin" value="${m.nickName }" class="form-control">
+                        <input type="text" name="nickName" value="${m.nickName }" class="form-control">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="birthday" class="col-md-4 col-lg-3 col-form-label">가입일</label>
                       <div class="col-md-8 col-lg-9">
-                        <input type="date" name="$2023-10-25" value="${m.enrollDate }" class="form-control" placeholder="생년월일 8자리 [ex)230824]">
+                        <input type="date" name="enrollDate" value="${m.enrollDate }" class="form-control" placeholder="생년월일 8자리 [ex)230824]" disabled>
                       </div>
                     </div>
 
@@ -126,9 +126,17 @@
                     <div class="row mb-3">
                       <label for="gender" class="col-md-4 col-lg-3 col-form-label">회원 상태</label>
                       <div class="col-md-8 col-lg-9">
-                        <select name="gender" class="form-control">
-                          <option value="Y">${m.memStatus }</option>
-                          <option value="N">N</option>
+                        <select name="memStatus" class="form-control">
+                        <c:choose>
+                        	 <c:when test = "${m.memStatus eq 'Y'}"> 
+                        	 	<option value="Y">${m.memStatus }</option>
+                          		<option value="N">N</option>
+                        	 </c:when>
+                        	 <c:otherwise>
+                        	 	<option value="N">${m.memStatus }</option>
+                          		<option value="Y">Y</option>
+                        	 </c:otherwise>
+                        </c:choose>
                       </select>
                       </div>
                     </div>
