@@ -49,7 +49,7 @@
 				const id = document.getElementById('id').value;
 				console.log(id);
 
-				var eventSource = new EventSource(`/subscribe/` + id);
+				var eventSource = new EventSource('http://localhost:8012/togather/subscribe/1');
 				
 				eventSource.onmessage =  function(event) {
 					console.log(event.data);
