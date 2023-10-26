@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -50,7 +51,7 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 .display{display: none;}
 #oneday:hover{background-color: purple;}
-.clCategorydiv, .classApproval, .choiseMap{
+.clCategorydiv, .classApproval, .choiseMap, .ageLimit{
 	display: inline-flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -61,12 +62,12 @@
 	height: 50px;
 }
 
- .classApproval div, .choiseMap div{
+ .classApproval div, .choiseMap div, .ageLimit div{
  	width: 200px;
 	height: 50px;
  }
 
-.form-group:hover{ cursor: pointer;}
+.form-group:hover, #age1:hover, #age2:hover{ cursor: pointer;}
 .clCategorydiv div:hover, .classApproval div:hover{ background-color: orange;}
 .hiddenMap{
 	display: none;
@@ -82,6 +83,94 @@
 	object-fit: cover;
 }
 #editor{text-align: left;}
+
+<!-- 양방향 range -->
+#ageLimitDiv {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5e5e5;
+}
+
+.middle {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+}
+
+.slider {
+  position: relative;
+  z-index: 1;
+  height: 15px;
+  margin: 0 15px;
+}
+
+.slider > .track {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #ffcf00;
+}
+
+.slider > .range {
+  position: absolute;
+  z-index: 2;
+  left: 15%;
+  right: 15%;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: orange;
+}
+
+.slider > .thumbl, .slider > .thumbr {
+  position: absolute;
+  top: -5px;
+  z-index: 3;
+  width: 30px;
+  height: 30px;
+  background-color: #da813f;
+  border-radius: 50%;
+}
+
+.slider > .thumbl {
+  left: 15%;
+}
+.slider > .thumbr {
+  right: 15%;
+}
+
+input[type="range"] {
+  position: absolute;
+  /* opacity로 가린 것을 이벤트도 비활성화하기 위해 */
+  pointer-events: none;
+  -webkit-appearance: none;
+  z-index: 3;
+  height: 10px;
+  width: 100%;
+  top: -7px;
+  opacity: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  /* 겹쳐진 두 thumb를 모두 활성화 */
+  pointer-events: all;
+  width: 30px;
+  height: 30px;
+  border-radius: 0;
+  border: 0 none;
+  background-color: red;
+  cursor: pointer;
+  /* appearance를 해야 위의 스타일들을 볼 수 있음 */
+  -webkit-appearance: none;
+}
 </style>		
 </head>
 <body>
@@ -104,7 +193,7 @@
 							<div class="up-form">
 								<form action="enroll.cl" method="post" enctype="multipart/form-data">
 									<div class="form-group">
-										<input type="hidden" name="memNo" value="${ loginMember.memNo }">
+										<input type="text" style="display:none;" name="memNo" value="${ loginMember.memNo }">
 										<h5>모임유형을 선택해주세요!</h5>
 									</div>
 									
@@ -161,7 +250,7 @@
 											})
 									</script>
 									
-									<input type="hidden" id="clType" name="clType">
+									<input type="text" style="display:none;" id="clType" name="clType" required>
 										
 									<script>
 										// 모임 유형 선택 (div)시 다른 div 체크해제 + 히든에 값주기
@@ -179,7 +268,7 @@
 												$("#oneday").css("display", "");
 												
 												$("#socialing").css("backgroundColor", "");
-												$("#clType").val(0);
+												$("#clType").val("");
 											}
 										})
 										
@@ -197,7 +286,7 @@
 												$("#oneday").css("display", "");
 												
 												$("#club").css("backgroundColor", "");
-												$("#clType").val(0);
+												$("#clType").val("");
 											}
 										})
 										
@@ -215,7 +304,7 @@
 												$("#oneday").css("display", "");
 												
 												$("#challenge").css("backgroundColor", "");
-												$("#clType").val(0);
+												$("#clType").val("");
 											}
 										})
 										
@@ -240,7 +329,7 @@
 												
 												$("#hiddenBusiness").addClass("hiddenBusiness");
 												$("#oneday").css("backgroundColor", "");
-												$("#clType").val(0);
+												$("#clType").val("");
 											}
 										})
 									</script> 
@@ -279,7 +368,7 @@
 										</div>
 									</div>
 								
-									<input type="hidden" name="clCategory" id="clCategory">
+									<input type="text" name="clCategory" id="clCategory" style="display:none;" required>
 									
 									<br>
 									
@@ -289,7 +378,7 @@
 												if($("#culture").hasClass("orange")){
 													$("#culture").removeClass("orange");
 													$("#culture").css("backgroundColor","");
-													$("#clCategory").val(0);
+													$("#clCategory").val("");
 												}else{
 													$("#culture").addClass("orange");
 													$("#culture").css("backgroundColor","orange");
@@ -308,7 +397,7 @@
 												if($("#activity").hasClass("orange")){
 													$("#activity").removeClass("orange");
 													$("#activity").css("backgroundColor","");
-													$("#clCategory").val(0);
+													$("#clCategory").val("");
 												}else{
 													$("#activity").addClass("orange");
 													$("#activity").css("backgroundColor","orange");
@@ -327,7 +416,7 @@
 												if($("#food").hasClass("orange")){
 													$("#food").removeClass("orange");
 													$("#food").css("backgroundColor","");
-													$("#clCategory").val(0);
+													$("#clCategory").val("");
 												}else{
 													$("#food").addClass("orange");
 													$("#food").css("backgroundColor","orange");
@@ -346,7 +435,7 @@
 												if($("#hobby").hasClass("orange")){
 													$("#hobby").removeClass("orange");
 													$("#hobby").css("backgroundColor","");
-													$("#clCategory").val(0);
+													$("#clCategory").val("");
 												}else{
 													$("#hobby").addClass("orange");
 													$("#hobby").css("backgroundColor","orange");
@@ -365,7 +454,7 @@
 												if($("#party").hasClass("orange")){
 													$("#party").removeClass("orange");
 													$("#party").css("backgroundColor","");
-													$("#clCategory").val(0);
+													$("#clCategory").val("");
 												}else{
 													$("#party").addClass("orange");
 													$("#party").css("backgroundColor","orange");
@@ -384,7 +473,7 @@
 												if($("#neighbor").hasClass("orange")){
 													$("#neighbor").removeClass("orange");
 													$("#neighbor").css("backgroundColor","");
-													$("#clCategory").val(0);
+													$("#clCategory").val("");
 												}else{
 													$("#neighbor").addClass("orange");
 													$("#neighbor").css("backgroundColor","orange");
@@ -403,7 +492,7 @@
 												if($("#Investment").hasClass("orange")){
 													$("#Investment").removeClass("orange");
 													$("#Investment").css("backgroundColor","");
-													$("#clCategory").val(0);
+													$("#clCategory").val("");
 												}else{
 													$("#Investment").addClass("orange");
 													$("#Investment").css("backgroundColor","orange");
@@ -422,7 +511,7 @@
 												if($("#foreign").hasClass("orange")){
 													$("#foreign").removeClass("orange");
 													$("#foreign").css("backgroundColor","");
-													$("#clCategory").val(0);
+													$("#clCategory").val("");
 												}else{
 													$("#foreign").addClass("orange");
 													$("#foreign").css("backgroundColor","orange");
@@ -442,9 +531,9 @@
 									<hr>
 									<h5>(소셜링, 클럽, 챌린지)정보를 입력할 차례에요!</h5>
 									<div class="form-group">
-										<input class="form-control" type="text" name="classTitle" placeholder="소셜링 제목을 작성해주세요!" style="color:white"> <!-- 글자수체크 추가 -->
+										<input class="form-control" type="text" name="classTitle" placeholder="소셜링 제목을 작성해주세요!" style="color:white" required>
 									</div>
-									
+									 <!-- 글자수체크 추가 -->
 									<hr>
 									
 									<h5>소셜링을 소개해볼까요?</h5>
@@ -454,7 +543,7 @@
 										</tr>
 									</table>
 									<div style="display:none">
-										<input type="file" id="file1" name="upfile" onchange="loadImg(this, 1);">
+										<input type="file" id="file1" name="upfile" onchange="loadImg(this, 1);" required>
 									</div>
 									
 									<script>
@@ -487,7 +576,7 @@
 								    <!-- TOAST UI Editor CDN URL(JS) -->
 								    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
 									
-									<textarea id="editorContent" style="display: none;" name="classContent"></textarea>
+									<textarea id="editorContent" style="display: none;" name="classContent" required></textarea>
 									
 								    <!-- TOAST UI Editor 생성 JavaScript 코드 -->
 								    <script>
@@ -525,7 +614,7 @@
 										           			
 										           			// callback : 에디터(마크다운 편집기)에 표시할 텍스트, 뷰어에는 imageUrl 주소에 저장된 사진으로 나옴
 										        			// 형식 : ![대체 텍스트](주소)
-										           			callback(url, "");
+										           			callback(url, "사진 대체 텍스트 입력");
 										           		},
 										           		error: function(e) {
 										           			//console.log('ajax 이미지 업로드 실패');
@@ -551,8 +640,8 @@
 								        	$("#editor").keyup(function(){
 								        		let classContent = editor.getHTML().replace(/<p>/g, "").replace(/<\/p>/g, "\n");
 								        		$("#editorContent").val(classContent);
-								        		console.log($("#editorContent").val())
-								        		console.log($("#editor").val());
+								        		// console.log($("#editorContent").val())
+								        		// console.log($("#editor").val());
 								        	})
 								        })
 								    </script>
@@ -607,6 +696,8 @@
 									
 									<br>
 									
+									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9c08fb064e6bc40cfa573768b020756&libraries=services"></script>
+									
 									<div class="hiddenMap" id="hiddenMap">
 									<div class="map_wrap">
 									    <div id="menu_wrap" class="bg_white">
@@ -621,9 +712,9 @@
 				                    키워드 : <input type="text" value="서울" id="keyword" size="15" name="classLocation" placeholder="키워드"> 
 				                    <button id="search" type="button" onclick="searchPlaces(); return false;">검색하기</button> 
 									</div>
+									
 									<input type="hidden" name="latitude" id="latitude"> <!-- 위도 -->
 									<input type="hidden" name="longitude" id="longitude"> <!-- 경도 -->
-									<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a9c08fb064e6bc40cfa573768b020756&libraries=services"></script>
 									
 									<script>
 									$(function(){
@@ -867,7 +958,7 @@
 										</div>
 									</div>
 									
-									<input type="hidden" id="classApproval" name="classApproval">
+									<input type="text" style="display:none;" id="classApproval" name="classApproval">
 									
 									<script>
 										$(function(){
@@ -875,10 +966,12 @@
 												if($("#approval").hasClass("orange")){
 													$("#approval").removeClass("orange");
 													$("#approval").css("backgroundColor","");
+													$("#classApproval").val('Y');
 												}else{
 													$("#approval").addClass("orange");
 													$("#approval").css("backgroundColor","orange");
 													$("#First-come").css("backgroundColor","");
+													$("#classApproval").val('');
 												}
 											})
 											
@@ -886,10 +979,12 @@
 												if($("#First-come").hasClass("orange")){
 													$("#First-come").removeClass("orange");
 													$("#First-come").css("backgroundColor","");
+													$("#classApproval").val('N');
 												}else{
 													$("#First-come").addClass("orange");
 													$("#First-come").css("backgroundColor","orange");
 													$("#approval").css("backgroundColor","");
+													$("#classApproval").val('');
 												}
 											})
 										})
@@ -901,17 +996,95 @@
 										나이제한이 필요하시면 버튼을 클릭해주세요 <br>
 										<button type="button" id="ageLimit">나이제한</button>
 									</div>
+									
+									<br>
+									
 									<script>
 										$("#ageLimit").click(function(){
-											$("#age1").attr("type", "number");
-											$("#age2").attr("type", "number");
 											$("#remove").remove();
+											$("#ageLimitDiv").removeClass("display");
 										})
-									</script>							
-									<div class="form-group">
-										<input type="hidden" id="age1" class="form-control" name="minAge" style="color:white" value="0" placeholder="최소나이제한"> <br>
-										<input type="hidden" id="age2" class="form-control" name="maxAge" style="color:white" value="0" placeholder="최대나이제한">
+									</script>
+									
+									<div id="ageLimitDiv" class="display">
+										<div class="middle">
+										  <div class="multi-range-slider">
+											<input type="range" id="age1" class="form-control" min="20" max="50" step="5" name="minAge" style="color:white" value="25" placeholder="최소나이제한">
+											<input type="range" id="age2" class="form-control" min="20" max="50" step="5" name="maxAge" style="color:white" value="45" placeholder="최대나이제한">
+											
+										    <!-- 커스텀 슬라이더 -->
+										    <div class="slider">
+										      <div class="track"></div>
+										      <div class="range"></div>
+										      <div class="thumbl"></div>
+										      <div class="thumbr"></div>
+										    </div>
+										  </div>
+										</div>
 									</div>
+									
+									<script>
+										const inputLeft = document.getElementById("age1");
+										const inputRight = document.getElementById("age2");
+										
+										const thumbLeft = document.querySelector(".slider>.thumbl");
+										const thumbRight = document.querySelector(".slider>.thumbr");
+										const range = document.querySelector(".slider > .range");
+
+										const setLeftValue = () => {
+										  const _this = inputLeft;
+										  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+										  
+										  _this.value = Math.min(parseInt(_this.value), parseInt(inputRight.value) - 5);
+										  
+										  // input, thumb 같이 움직이도록
+										  const percent = ((_this.value - min) / (max - min)) * 100;
+										  thumbLeft.style.left = percent + "%";
+										  range.style.left = percent + "%";
+										};
+
+										const setRightValue = () => {
+										  const _this = inputRight;
+										  const [min, max] = [parseInt(_this.min), parseInt(_this.max)];
+										  
+										  _this.value = Math.max(parseInt(_this.value), parseInt(inputLeft.value) + 5);
+										  
+										  // input, thumb 같이 움직이도록
+										  const percent = ((_this.value - min) / (max - min)) * 100;
+										  thumbRight.style.right = 100 - percent + "%";
+										  range.style.right = 100 - percent + "%";
+										};
+
+										inputLeft.addEventListener("input", setLeftValue);
+										inputRight.addEventListener("input", setRightValue);
+										
+										$("#age1").change(function(){
+											$("#ageText").removeClass("display");
+											$("#minAgeText").html($("#age1").val());
+											$("#maxAgeText").html($("#age2").val());
+										})
+										
+										$("#age2").change(function(){
+											$("#ageText").removeClass("display");
+											$("#minAgeText").html($("#age1").val());
+											$("#maxAgeText").html($("#age2").val());
+										})
+									</script>
+									
+									<br>
+									
+									<div class="display" id="ageText">
+										<div class="ageLimit">
+											<div class="form-group">
+												최소 나이<div class="form-control" id="minAgeText" style="color: orange; font-size: 15px;"></div>
+											</div> &nbsp;&nbsp;
+											<div class="form-group">
+												최대 나이<div class="form-control" id="maxAgeText" style="color: orange; font-size: 15px;"></div>
+											</div>
+										</div>
+									</div>
+																		
+									<br><br>
 									
 									<div class="form-group">
 										<input class="form-control" type="number" name="classPrice" placeholder="참가비가 없다면 0을 입력해주세요." style="color:white">
@@ -919,8 +1092,15 @@
 									<div class="form-group">
 										<input class="form-control" type="number" name="peopleLimit" placeholder="참가 인원수를 선택해주세요." style="color:white">
 									</div>
-			
-									<input type="submit" id="submitbtn" class="submitbtn" value="모임등록">
+									
+									<c:choose>
+										<c:when test="${ not empty loginMember }">
+											<input type="submit" id="submitbtn" class="submitbtn" value="모임등록">
+										</c:when>
+										<c:otherwise>
+											<input type="submit" id="submitbtn" value="모임등록" disabled>
+										</c:otherwise>
+									</c:choose>
 								</form>		
 							</div>
 						</div>
