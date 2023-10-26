@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
+	<style>
+		
+		
+	</style>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
@@ -60,8 +64,9 @@
 									</form>
 								</div>
 								<div class="form-group">
-									<img class="brand-light" src="assets/images/google.png" width="74px" alt=""><a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=43410666342-clrgc0u7iriccl044k80v7rquclsh41j.apps.googleusercontent.com&redirect_uri=http://localhost:8012/togather/google&response_type=code&scope=email%20profile%20openid&access_type=offline";">구글Login</a>
+											<button id="googleLoginBtn" class="btn btn-block btn-round btn-brand" type="button" onClick="googleLogin();"><img class="brand-light" src="assets/images/google3.png" width="30px" height="30px" alt="">Login with GoogleId</button>
 								</div>
+								
 								<div class="up-help">
 									<p class="m-b-5">Dont have an account yet? <a href="#">Create account</a></p>
 									<p>Forgot your username or password? <a href="#">Recover account</a></p>
@@ -70,6 +75,12 @@
 						</div>
 					</div>
 				</div>
+				
+				<script >
+					function googleLogin(){
+						location.href = "https://accounts.google.com/o/oauth2/v2/auth?client_id=43410666342-clrgc0u7iriccl044k80v7rquclsh41j.apps.googleusercontent.com&redirect_uri=http://localhost:8012/togather/google&response_type=code&scope=email%20profile%20openid&access_type=offline";	
+					}
+				</script>
 				
 			</section>
 			<!-- Hero end-->
