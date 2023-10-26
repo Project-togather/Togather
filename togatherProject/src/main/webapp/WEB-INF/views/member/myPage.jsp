@@ -83,7 +83,7 @@
 			<div class="module">
 				<div class="container">
 					<div class="gallery-item">
-						<div class="gallery-image" data-background="${loginMember.img}"  style ="width: 200px; border-radius: 100px;"></div><a href="assets/images/avatar/1.jpg" title="Title 1"></a>
+						<div class="gallery-image" data-background="${loginMember.img}"  style ="width: 200px; border-radius: 100px;"></div><a href="${loginMember.img}" title="Title 1"></a>
 						
 						<br><br><br><br>
 					</div>
@@ -95,7 +95,8 @@
 						</th>
 							
 						<td><a href="">setMyProfile</a></td>
-						<td><a href="" id="testBtn" class="btn">search User</a></td>		
+						<td><a href="" id="testBtn" class="btn">search User</a></td>
+						
 					</tr>		
 					</thead>
 						<tr>
