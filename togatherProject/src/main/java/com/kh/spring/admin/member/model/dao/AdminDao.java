@@ -61,8 +61,15 @@ public class AdminDao {
 	}
 	//블랙리스트 삭제
 	public int updateBlackList(SqlSession sqlsession,String memId) {
-		System.out.println(memId);
 		return sqlsession.update("admemberMapper.updateBlackList",memId);
-		
+	}
+	
+	//회원수정
+	public int adUpdateMember(SqlSession sqlsession,Member m) {
+		return sqlsession.update("admemberMapper.adUpdateMember",m);
+	}
+	
+	public int insertExcel(SqlSession sqlsession,Member excel) {
+		return sqlsession.insert("admemberMapper.insertExcel",excel);
 	}
 }
