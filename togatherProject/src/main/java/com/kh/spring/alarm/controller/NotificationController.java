@@ -12,15 +12,28 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.kh.spring.alarm.model.service.NotificationServiceImpl;
 
 @RestController
-@RequestMapping("/togather")
 @RequiredArgsConstructor
 public class NotificationController {
     private final NotificationServiceImpl notificationServiceImpl;
 
-    @GetMapping(value = "/subscribe/{id}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public SseEmitter subscribe(
-            @PathVariable Long id) {
-        return notificationServiceImpl.subscribe(id);
+    @RequestMapping(value = "sse.do", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public SseEmitter subscribe(String id) {
+    	
+    	SseEmitter emitter = new SseEmitter();
+    	
+    	try {
+    	    emitter.send(SseEmitter.event()
+    	            .name("login-event")
+    	            .data("User logged in"));
+    	    emitter.complete();
+    	} catch (Exception e) {
+    	    emitter.completeWithError(e);
+    	}
+    	
+    	System.out.println(emitter);
+    	
+    	return emitter;
+
     }
 
     @PostMapping("/send-data/{id}")

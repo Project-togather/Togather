@@ -49,13 +49,13 @@
 				const id = document.getElementById('id').value;
 				console.log(id);
 
-				var eventSource = new EventSource('http://localhost:8012/togather/subscribe/1');
+				var eventSource = new EventSource("sse.do?id=123");
 				
 				eventSource.onmessage =  function(event) {
 					console.log(event.data);
 					var message = event.data;
 					
-					$("#sseTest2").text("내가 받은 쿠키 : " + message);
+					$("#sseTest2").text("내가 받은 메세지 : " + message);
 				};
 			}
 			
