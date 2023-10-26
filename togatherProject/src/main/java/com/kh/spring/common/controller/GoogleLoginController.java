@@ -26,9 +26,9 @@ import com.kh.spring.member.model.vo.Member;
 
 @Controller
 public class GoogleLoginController {
-    @Value("43410666342-s8gt5o9p3qm69cb2h4ms0m5pqqhh2re5.apps.googleusercontent.com")
+    @Value("43410666342-clrgc0u7iriccl044k80v7rquclsh41j.apps.googleusercontent.com")
     private String googleClientId;
-    @Value("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")
+    @Value("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")
     private String googleClientPw;
     @Autowired
     private MemberServiceImpl mService ;
@@ -50,7 +50,7 @@ public class GoogleLoginController {
                 .clientId(googleClientId)
                 .clientSecret(googleClientPw)
                 .code(authCode)
-                .redirectUri("http://localhost:8012/spring/google")
+                .redirectUri("http://localhost:8012/togather/google")
                 .grantType("authorization_code").build();
         ResponseEntity<GoogleResponse> resultEntity = restTemplate.postForEntity("https://oauth2.googleapis.com/token",
                 googleOAuthRequestParam, GoogleResponse.class);
