@@ -16,7 +16,7 @@
 		<typeAlias type="com.kh.spring.reply.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.spring.admin.customercenter.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.spring.myClass.model.vo.MyClass" alias="MyClass"/>
-		
+		<typeAlias type="com.kh.spring.alarm.model.vo.Notification" alias="Notification"/>
 	</typeAliases>
 	 
 	 <mappers>
@@ -27,6 +27,7 @@
 	 	<mapper resource="/mappers/admember-mapper.xml"/>
 	 	<mapper resource="/mappers/adcustomer-mapper.xml"/>
 	 	<mapper resource="/mappers/myfeed-mapper.xml"/>
+	 	<mapper resource="/mappers/notification-mapper.xml"/>
 	 	
 	 	
 	 </mappers>

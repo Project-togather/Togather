@@ -68,9 +68,7 @@
 		<result column="status" property="status"/>
 	
 	</resultMap>
-	
-		<!--  <collection property="attachment" resultMap="attachment"/> -->
-	
+		
 	<select id="loginMember" resultMap="MemberResult">
 		select
 		       mem_no

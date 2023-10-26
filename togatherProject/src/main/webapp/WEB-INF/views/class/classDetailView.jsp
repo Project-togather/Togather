@@ -33,6 +33,9 @@
 								<h6 class="text-uppercase"><span class="vacancy" id="class_info">&nbsp;잔여 ${ c.peopleLimit - c.vacancy } 자리&nbsp;</span><span id="class_info">&nbsp;${ c.clName }&nbsp;</span></h6>
 								<h1 class="display-1">${ c.classTitle }</h1>
 								<div class="space" data-mY="40px"></div><a class="btn btn-white enter-btn" onclick="enterClass();" style="color:black;">모임 참가하기</a>
+								<input type="text" id="id">
+								<button type="button" onclick="test();">테스트</button>
+								<div id="sseTest2"></div>
 							</div>
 						</div>
 					</div>
@@ -40,8 +43,27 @@
 			</section>
 
 			<script>
+				
+			function test(){
+				
+				const id = document.getElementById('id').value;
+				console.log(id);
+
+				var eventSource = new EventSource(`/subscribe/` + id);
+				
+				eventSource.onmessage =  function(event) {
+					console.log(event.data);
+					var message = event.data;
+					
+					$("#sseTest2").text("내가 받은 쿠키 : " + message);
+				};
+			}
+			
+			
+			
 				let vac = ${ c.vacancy }
-				if( vac >= 28){ // 숫자 수정
+				let limit = ${ c.peopleLimit }
+				if( vac == limit * 0.8 ){ // 숫자 수정
 					$(".vacancy").css("background-color","red");
 				}
 			</script>
