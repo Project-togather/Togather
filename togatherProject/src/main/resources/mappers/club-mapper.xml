@@ -26,6 +26,8 @@
 		<result column="curriculum" property="curriculum"/>
 		<result column="status" property="status"/>
 		<result column="cl_ca_name" property="clCaName"/>		
+		<result column="latitude" property="latitude"/>		
+		<result column="longitude" property="longitude"/>		
 	
 		<collection property="attachment" resultMap="attachment"/>
 	</resultMap>
@@ -263,6 +265,8 @@
 			  , cl_type
 			  , cl_category
 			  , curriculum
+			  , latitude
+			  , longitude
 			 )
 		values
 			 (
@@ -281,6 +285,8 @@
 			  , #{clType}
 			  , #{clCategory}
 			  , #{curriculum}
+			  , #{latitude}
+			  , #{longitude}
 			 )
 	</insert>
 	
