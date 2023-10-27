@@ -14,17 +14,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.google.gson.Gson;
+import com.kh.spring.QuitReason.model.vo.QuitReason;
+import com.kh.spring.alarm.model.service.NotificationServiceImpl;
 import com.kh.spring.attachment.model.vo.Attachment;
+import com.kh.spring.club.model.service.ClubService;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.reply.model.vo.Reply;
 import com.kh.spring.myClass.model.vo.MyClass;
 
 @Controller
 public class ClubController {
+	
+	@Autowired
+	private NotificationServiceImpl nService;
 
 	@Autowired
 	private ClubServiceImpl cService;
@@ -208,8 +216,6 @@ public class ClubController {
 		Club c = cService.selectClassDetail(mc);
 		ArrayList<Member> list = cService.classMemberList(mc);
 		
-		System.out.println("리스트 : " + list);
-
 		if(c.getClassApproval().equals("Y")) {
 			c.setClassApproval("승인제");
 		} else {
@@ -224,9 +230,10 @@ public class ClubController {
 	@ResponseBody
 	@RequestMapping("enroll.rv")
 	public String insertReply(Reply r) {
-		
+
 		int result = cService.insertReply(r);
 		return result>0 ? "success" : "fail";
+		
 
 	}
 
@@ -273,7 +280,16 @@ public class ClubController {
 		
 		int result = cService.enterClass(c);
 		return result>0 ? "success" : "fail";
+	}
+	
+	@ResponseBody
+	@RequestMapping("quitClass.cl")
+	public String quitClass(QuitReason qr) {
 		
+		System.out.println("퀵 : " + qr);
+		
+		int result = cService.quitClass(qr);
+		return result>0 ? "success" : "fail";
 	}
 	
 	@ResponseBody
@@ -341,6 +357,20 @@ public class ClubController {
 		return list;
 		
 	}
+	
+	@RequestMapping("quitClassForm.cl")
+	public String quitClassForm(MyClass mc, Model model) {
+		
+		Club c = cService.selectClassDetail(mc);
+		int price = cService.selectPayPrice(mc);
+		
+		model.addAttribute("price", price);
+		model.addAttribute("c", c);
+		return "class/quitClassForm";
+		
+	}
+	
+	
 	
 		
 }

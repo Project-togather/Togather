@@ -4,50 +4,79 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import com.kh.spring.alarm.model.vo.Notification;
+import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.reply.model.vo.Reply;
+
 import java.io.IOException;
+import java.util.Map;
 
 @Service
-@RequiredArgsConstructor
 public class NotificationServiceImpl {
     // 기본 타임아웃 설정
     private static final Long DEFAULT_TIMEOUT = 60L * 1000 * 60;
 
     private final EmitterRepository emitterRepository;
+    
+    public NotificationServiceImpl(EmitterRepository emitterRepository) {
+        this.emitterRepository = emitterRepository;
+    }
 
-    /**
-     * 클라이언트가 구독을 위해 호출하는 메서드.
-     *
-     * @param userId - 구독하는 클라이언트의 사용자 아이디.
-     * @return SseEmitter - 서버에서 보낸 이벤트 Emitter
-     */
-    public SseEmitter subscribe(Long userId) {
+    public SseEmitter subscribe(String userId) {
+    	
         SseEmitter emitter = createEmitter(userId);
-
+        
+        System.out.println("에미터1 : " + emitter);
+        
+        // 503 에러 방지를 위한 더미 이벤트 전송
         sendToClient(userId, "EventStream Created. [userId=" + userId + "]");
+        
         return emitter;
     }
 
-    /**
-     * 서버의 이벤트를 클라이언트에게 보내는 메서드
-     *
-     * @param userId - 메세지를 전송할 사용자의 아이디.
-     * @param event  - 전송할 이벤트 객체.
-     */
-    public void notify(Long userId, Object event) {
+   
+    public void notify(String userId, Object event) {
         sendToClient(userId, event);
     }
+    /*
+    public void notifyComment(Member receiver, Reply reply, String content) {
+        Notification notification = createCommentNotification(receiver, reply, content);
+        String id = String.valueOf(receiver.getMemId());
 
-    /**
-     * 클라이언트에게 데이터를 전송
-     *
-     * @param id   - 데이터를 받을 사용자의 아이디.
-     * @param data - 전송할 데이터.
-     */
-    private void sendToClient(Long id, Object data) {
+        // 로그인 한 유저의 SseEmitter 모두 가져오기
+        Map<String, SseEmitter> sseEmitters = emitterRepository.findAllEmitterStartWithById(id);
+        sseEmitters.forEach(
+            (key, emitter) -> {
+                // 데이터 캐시 저장(유실된 데이터 처리하기 위함)
+                emitterRepository.saveEventCache(key, notification);
+                // 데이터 전송
+                sendToClient(emitter, key, NotificationResponse.from(notification));
+            }
+        );
+    }
+
+    private Notification createCommentNotification(Member receiver, Reply reply, String content) {
+        return Notification.builder()
+                           .receiver(receiver)
+                           .content(content)
+                           .reply(reply)
+                           .url("/reviews/" + reply.getImg())
+                           .isRead(false)
+                           .build();
+    }
+    */
+    
+    
+   
+   
+    public void sendToClient(String id, Object data) {
+    	System.out.println("send to client");
         SseEmitter emitter = emitterRepository.get(id);
+        System.out.println("에미터2 : " + emitter.toString());
         if (emitter != null) {
             try {
                 emitter.send(SseEmitter.event().id(String.valueOf(id)).name("sse").data(data));
+                System.out.println("에미터3 : " + emitter);
             } catch (IOException exception) {
                 emitterRepository.deleteById(id);
                 throw new RuntimeException("연결 오류!");
@@ -61,7 +90,8 @@ public class NotificationServiceImpl {
      * @param id - 사용자 아이디.
      * @return SseEmitter - 생성된 이벤트 Emitter.
      */
-    private SseEmitter createEmitter(Long id) {
+    
+    private SseEmitter createEmitter(String id) {
         SseEmitter emitter = new SseEmitter(DEFAULT_TIMEOUT);
         emitterRepository.save(id, emitter);
 
@@ -72,4 +102,5 @@ public class NotificationServiceImpl {
 
         return emitter;
     }
+    
 }

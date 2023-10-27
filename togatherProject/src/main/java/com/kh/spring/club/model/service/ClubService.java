@@ -2,6 +2,7 @@ package com.kh.spring.club.model.service;
 
 import java.util.ArrayList;
 
+import com.kh.spring.QuitReason.model.vo.QuitReason;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
 import com.kh.spring.member.model.vo.Member;
@@ -58,6 +59,9 @@ public interface ClubService {
 	// 모임 가입
 	int enterClass(MyClass c);
 	
+	// 모임 탈퇴
+	int quitClass(QuitReason qr);
+	
 	// 모임 즐찾 등록
 	int likeClass(MyClass c);
 	
@@ -72,5 +76,8 @@ public interface ClubService {
 	
 	// 모임에 가입한 멤버 확인
 	ArrayList<Member> classMemberList(MyClass c);
+	
+	// 모임 가입할떄 결제한 가입비 조회
+	int selectPayPrice(MyClass c);
 	
 }

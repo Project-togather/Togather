@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.QuitReason.model.vo.QuitReason;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.dao.ClubDao;
 import com.kh.spring.club.model.vo.Club;
@@ -106,6 +107,11 @@ public class ClubServiceImpl implements ClubService {
 	public int enterClass(MyClass c) {
 		return cDao.enterClass(c, sqlSession);
 	}
+	
+	@Override
+	public int quitClass(QuitReason qr) {
+		return cDao.quitClass(qr, sqlSession);
+	}
 
 	@Override
 	public int likeClass(MyClass c) {
@@ -131,6 +137,13 @@ public class ClubServiceImpl implements ClubService {
 	public ArrayList<Member> classMemberList(MyClass c) {
 		return cDao.classMemberList(c, sqlSession);
 	}
+
+	@Override
+	public int selectPayPrice(MyClass c) {
+		return cDao.selectPayPrice(c, sqlSession);
+	}
+
+	
 	
 
 }

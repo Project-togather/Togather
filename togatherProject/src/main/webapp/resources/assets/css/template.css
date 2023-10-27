@@ -4403,12 +4403,12 @@ body.off-canvas-sidebar-open:after {
 .likeClass {
     position: fixed;
     display: block;
-    bottom: 78px;
-    right: 90px;
+    bottom: 135px;
+    right: 20px;
     z-index: 10;
     background: #fff;
     border-radius: 40px;
-    line-height: 36px;
+    line-height: 43px;
     height: 38px;
     width: 38px;
     text-align: center;
@@ -4427,8 +4427,8 @@ body.off-canvas-sidebar-open:after {
 .enterClass {
     position: fixed;
     display: block;
-    bottom: 148px;
-    right: 20px;
+    bottom: 78px;
+    right: 80px;
     z-index: 10;
     background: #fff;
     border-radius: 40px;
@@ -4445,12 +4445,12 @@ body.off-canvas-sidebar-open:after {
 .classOption {
     position: fixed;
     display: block;
-    bottom: 78px;
-    right: 160px;
+    bottom: 250px;
+    right: 20px;
     z-index: 10;
     background: #fff;
     border-radius: 40px;
-    line-height: 36px;
+    line-height: 43px;
     height: 38px;
     width: 38px;
     text-align: center;
@@ -4474,3 +4474,91 @@ body.off-canvas-sidebar-open:after {
 	cursor:pointer;
 }
 
+.notification{
+	position: fixed;
+    display: block;
+    bottom: 193px;
+    right: 20px;
+    z-index: 10;
+    background: #fff;
+    border-radius: 40px;
+    line-height: 36px;
+    height: 38px;
+    width: 38px;
+    text-align: center;
+    font-size: 17px;
+    box-shadow: 0 0 0 5px rgba(0, 0, 0, .05);
+    transition: .5s all ease;
+    -webkit-transform: translateY(58px);
+            transform: translateY(58px);
+}
+
+#noti-form:hover{
+	cursor:pointer;
+}
+
+
+.notification-num{
+	position: fixed;
+    bottom: 222px;
+    right: 18px;
+    z-index: 10;
+    background: red;
+    color:white;
+    border-radius: 40px;
+    line-height: 18px;
+    height: 18px;
+    width: 18px;
+    text-align: center;
+    font-size: 17px;
+    transition: .5s all ease;
+    -webkit-transform: translateY(58px);
+            transform: translateY(58px);
+}
+
+.alarm-container{
+	position: fixed;
+    bottom: 156px;
+    right: 80px;
+    z-index: 10;
+    background: white;
+    /*color:white;*/
+    /*border-radius: 40px;*/
+    /*line-height: 18px;*/
+    height: 500px;
+    width: 400px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 17px;
+    transition: .5s all ease;
+    -webkit-transform: translateY(58px);
+            transform: translateY(58px);
+    display:none;
+}
+
+.quitClassContainer{
+	position: fixed;
+    bottom: 245px;
+    right: 80px;
+    z-index: 10;
+    background: white;
+    /*color:white;*/
+    /*border-radius: 40px;*/
+    height: 50px;
+    width: 180px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 17px;
+    transition: .5s all ease;
+    -webkit-transform: translateY(58px);
+            transform: translateY(58px);
+    display:none;
+}
+
+.quit_admit{
+	color:black;
+}
+
+.quit_admit:hover{
+	cursor:pointer;
+}

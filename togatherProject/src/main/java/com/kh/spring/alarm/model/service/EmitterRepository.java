@@ -13,15 +13,16 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EmitterRepository {
     // 모든 Emitters를 저장하는 ConcurrentHashMap
-    private final Map<Long, SseEmitter> emitters = new ConcurrentHashMap<>();
-
+    private final Map<String, SseEmitter> emitters = new ConcurrentHashMap<>();
+    private final Map<String, Object> eventCache = new ConcurrentHashMap<>();
+    
     /**
      * 주어진 아이디와 이미터를 저장
      *
      * @param id      - 사용자 아이디.
      * @param emitter - 이벤트 Emitter.
      */
-    public void save(Long id, SseEmitter emitter) {
+    public void save(String id, SseEmitter emitter) {
         emitters.put(id, emitter);
     }
 
@@ -30,7 +31,7 @@ public class EmitterRepository {
      *
      * @param id - 사용자 아이디.
      */
-    public void deleteById(Long id) {
+    public void deleteById(String id) {
         emitters.remove(id);
     }
 
@@ -40,7 +41,18 @@ public class EmitterRepository {
      * @param id - 사용자 아이디.
      * @return SseEmitter - 이벤트 Emitter.
      */
-    public SseEmitter get(Long id) {
+    public SseEmitter get(String id) {
         return emitters.get(id);
     }
+    
+    public void saveEventCache(String eventCacheId, Object event) {
+        eventCache.put(eventCacheId, event);
+    }
+    
+    public Map<String, SseEmitter> findAllEmitterStartWithById(String memberId) {
+        return emitters.entrySet().stream()
+                .filter(entry -> entry.getKey().startsWith(memberId))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+    }
+
 }

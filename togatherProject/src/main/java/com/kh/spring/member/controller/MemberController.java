@@ -40,7 +40,7 @@ public class MemberController {
    
    // 로그인
    @RequestMapping("login.me")
-   public String loginMember(Member m, Model model, HttpSession session) {
+   public String loginMember(Member m, Model model, HttpSession session, HttpServletRequest request) {
 	  //System.out.println("여기오냐?");
       Member loginMember = mService.loginMember(m);
       
@@ -59,7 +59,9 @@ public class MemberController {
          session.setAttribute("loginMember", loginMember);
          session.setAttribute("pImg", pImg);
          session.setAttribute("alertMsg", "어서오십시오");
+
          return "redirect:/";
+         
       } else {
     	
     	  model.addAttribute("errorMsg", "로그인 실패");

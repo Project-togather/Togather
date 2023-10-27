@@ -42,5 +42,6 @@ public class Club {
 	
 	private int clTypeStatus; // 모임 가입상태
 	private Attachment attachment;
+	private String clCaName; // 소셜링 챌린지 라는 이름
 	
 }
