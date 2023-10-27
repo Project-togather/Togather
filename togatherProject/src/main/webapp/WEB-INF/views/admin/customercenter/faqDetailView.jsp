@@ -15,23 +15,23 @@
 				<jsp:include page="../common/topvar.jsp"></jsp:include>
 					<div class="container-fluid ">
 						<div class="container">
-							<h1>공지사항</h1>
-							<form action="update.no" method="post">
-								<input type="hidden" name="NoticeNo" value="${n.noticeNo}">
+							<h1>FAQ</h1>
+							<form action="update.fa" method="post">
+								<input type="hidden" name="faqNo" value="${f.faqNo}">
 								<div class="form-group">
 									<label for="제목">제목</label> 
-									<input type="text" name="noticeTitle"  class="form-control" id="제목" value="${n.noticeTitle}" >
+									<input type="text" name="faqTitle"  class="form-control" id="제목" value="${f.faqTitle}" >
 									
 								</div>
 								<div class="form-group">
 									<label for="내용">내용</label>
 									<textarea class="form-control" id="내용" rows="20"
-										name="noticeContent"   value="${n.noticeContent }">${n.noticeContent }</textarea>
+										name="faqContent"  value="${f.faqContent }">${f.faqContent }</textarea>
 								</div>
 								<div class="btn-group float-right" role="group" aria-label="Basic mixed styles example">
 								<button type="button" class="btn btn-secondary float-right" onclick="history.back();">뒤로가기</button>
-								<button type="button" class="btn btn-danger float-right" onclick="deletenotice();" >삭제하기</button>
-								<button type="submit" class="btn btn-warning float-right">공지사항 수정</button>
+								<button type="button" class="btn btn-danger float-right" onclick="deletefaq();" >삭제하기</button>
+								<button type="submit" class="btn btn-warning float-right">faq 수정</button>
 							</div>
 							</form>
 						</div>
@@ -41,11 +41,11 @@
 	</div>
 	
 	<script>
-		function deletenotice(){
+		function deletefaq(){
 			if(confirm("정말 해당글을 삭제하시겠습니까?")){
-			 	location.href='delete.no?noticeNo='+${n.noticeNo}
+			 	location.href='delete.fa?faqNo='+${f.faqNo}
 			}else{
-				location.href='detail.no?noticeNo='+${n.noticeNo}
+				location.href='detail.fa?faqNo='+${f.faqNo}
 			}
 		}
 	</script>

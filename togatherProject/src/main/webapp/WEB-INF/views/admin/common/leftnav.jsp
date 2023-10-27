@@ -108,7 +108,7 @@
 				<div class="bg-white py-2 collapse-inner rounded">
 					<h6 class="collapse-header">고객센터</h6>
 					<a class="collapse-item" href="notice.list">공지사항 </a> <a
-						class="collapse-item" href="register.html">FAQ </a>
+						class="collapse-item" href="faq.list">FAQ </a>
 					<!--   <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>

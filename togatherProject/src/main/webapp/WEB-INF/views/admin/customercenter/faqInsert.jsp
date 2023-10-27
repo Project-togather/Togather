@@ -15,23 +15,22 @@
 				<jsp:include page="../common/topvar.jsp"></jsp:include>
 					<div class="container-fluid ">
 						<div class="container">
-							<h1>공지사항</h1>
-							<form action="update.no" method="post">
-								<input type="hidden" name="NoticeNo" value="${n.noticeNo}">
+							<h1>FAQ</h1>
+							<form action="insert.fq" method="post">
+								<input type="hidden" name="memId" value="${loginMember.memId}">
 								<div class="form-group">
-									<label for="제목">제목</label> 
-									<input type="text" name="noticeTitle"  class="form-control" id="제목" value="${n.noticeTitle}" >
-									
+									<label for="제목">질문</label> <input type="text"
+										name="faqTitle" class="form-control" id="제목" placeholder="제목을 입력하세요">
 								</div>
 								<div class="form-group">
-									<label for="내용">내용</label>
+									<label for="내용">답변</label>
 									<textarea class="form-control" id="내용" rows="20"
-										name="noticeContent"   value="${n.noticeContent }">${n.noticeContent }</textarea>
+										name="faqContent" placeholder="내용을 입력하세요"></textarea>
 								</div>
 								<div class="btn-group float-right" role="group" aria-label="Basic mixed styles example">
 								<button type="button" class="btn btn-secondary float-right" onclick="history.back();">뒤로가기</button>
-								<button type="button" class="btn btn-danger float-right" onclick="deletenotice();" >삭제하기</button>
-								<button type="submit" class="btn btn-warning float-right">공지사항 수정</button>
+								<button type="reset" class="btn btn-danger float-right">다시쓰기</button>
+								<button type="submit" class="btn btn-warning float-right">faq 등록</button>
 							</div>
 							</form>
 						</div>
@@ -39,15 +38,7 @@
 			</div>
 		</div>
 	</div>
-	
-	<script>
-		function deletenotice(){
-			if(confirm("정말 해당글을 삭제하시겠습니까?")){
-			 	location.href='delete.no?noticeNo='+${n.noticeNo}
-			}else{
-				location.href='detail.no?noticeNo='+${n.noticeNo}
-			}
-		}
-	</script>
+
+
 </body>
 </html>

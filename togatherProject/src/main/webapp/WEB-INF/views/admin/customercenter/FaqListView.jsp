@@ -14,34 +14,30 @@
 			<div id="content">
 				<jsp:include page="../common/topvar.jsp"></jsp:include>
 				<div class="container-fluid ">
-					<div>공지사항</div>
+					<div>FAQ</div>
 
 
 					<!-- Button trigger modal -->
 					<button type="button" class="btn btn-warning btn-sm float-right"
-						onclick="noticeWriter2();">사용자페이지 공지사항</button>
+						onclick="faqWriter2();">사용자페이지 faq</button>
 					<button type="button" class="btn btn-warning btn-sm float-right"
-						onclick="noticeWriter();">공지사항 추가하기</button>
+						onclick="faqWriter();">faq 추가하기</button>
 
 					<br> <br>
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th scope="col">공지사항_No</th>
+								<th scope="col">FAQ_No</th>
 								<th scope="col">제목</th>
-								<th scope="col">작성일</th>
-								<th scope="col">조회수</th>
 								<th scope="col">게시상태</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="n" items="${list}">
-								<tr id="noticetr">
-									<th scope="row" id="noticeTh">${n.noticeNo}</th>
-									<td>${n.noticeTitle }</td>
-									<td>${n.noticeDate }</td>
-									<td>${n.noticeViews }</td>
-									<td>${n.noticeStatus }</td>
+							<c:forEach var="f" items="${list}">
+								<tr id="faqtr">
+									<th scope="row" id="faqTh">${f.faqNo}</th>
+									<td>${f.faqTitle }</td>
+									<td>${f.faqStatus }</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -58,12 +54,12 @@
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="notice.list?cpage=${pi.currentPage -1}">Previous</a></li>
+										href="faq.list?cpage=${pi.currentPage -1}">Previous</a></li>
 								</c:otherwise>
 							</c:choose>
 							<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
 								<li class="page-item"><a class="page-link"
-									href="notice.list?cpage=${p }">${p }</a></li>
+									href="faq.list?cpage=${p }">${p }</a></li>
 							</c:forEach>
 							<c:choose>
 								<c:when test="${pi.currentPage eq pi.maxPage }">
@@ -72,7 +68,7 @@
 								</c:when>
 								<c:otherwise>
 									<li class="page-item"><a class="page-link"
-										href="notice.list?cpage=${pi.currentPage +1}">Next</a></li>
+										href="faq.list?cpage=${pi.currentPage +1}">Next</a></li>
 								</c:otherwise>
 							</c:choose>
 						</ul>
@@ -84,21 +80,21 @@
 
 
 	<script>
-		function noticeWriter(){
-			location.href="insertno.pa"
+		function faqWriter(){
+			location.href="insertfaq.pa"
 			}
 	</script>
 	
 	<script>
-		function noticeWriter2(){
-			location.href="usnoticelist.pa"
+		function faqWriter2(){
+			location.href="usfaqlist.pa"
 			}
 	</script>
 	<script>
 		$(function(){
-			$(document).on("click","#noticetr",function(){
-				let num = $(this).find("#noticeTh").text();
-				location.href='detail.no?noticeNo='+num
+			$(document).on("click","#faqtr",function(){
+				let num = $(this).find("#faqTh").text();
+				location.href='detail.fa?faqNo='+num
 			})
 		})
 	</script>

@@ -16,6 +16,7 @@
 		<typeAlias type="com.kh.spring.reply.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.spring.admin.customercenter.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.spring.myClass.model.vo.MyClass" alias="MyClass"/>
+		<typeAlias type="com.kh.spring.admin.customercenter.model.vo.Faq" alias="Faq"/>
 	</typeAliases>
 	 
 	 <mappers>

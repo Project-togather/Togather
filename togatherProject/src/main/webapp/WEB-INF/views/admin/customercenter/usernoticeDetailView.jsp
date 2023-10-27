@@ -32,14 +32,15 @@
 	<div class="container" style="margin-top: 50px">
 		<div>
 			<h3>공지사항 제목</h3>
-
+			<p>${n.noticeTitle}</p>
+		</div>
+		<div>
+			<h4>조회수: ${n.noticeViews}</h4>
 		</div>
 		<div>
 			<h4>공지사항 내용</h4>
-			
+			<p>${n.noticeContent}</p>
 		</div>
-
-
 
 		<h5>답글달기</h5>
 		<div class="form-floating">

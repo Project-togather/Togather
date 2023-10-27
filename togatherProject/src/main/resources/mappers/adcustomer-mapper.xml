@@ -12,6 +12,13 @@
 		<result column="notice_status" property="noticeStatus"></result>
 	</resultMap>
 	
+	<resultMap id="AdFaqResult" type="Faq">
+		<result column="faq_no" property="faqNo"></result>
+		<result column="faq_title" property="faqTitle"></result>
+		<result column="faq_content" property="faqContent"></result>
+		<result column="faq_status" property="faqStatus"></result>
+	</resultMap>
+	
 	
 	<select id="selectNoticeList" resultMap="AdNoticeResult" parameterType="Notice">
 		select 
@@ -23,7 +30,19 @@
 		    notice_date,
 		    notice_Status
 		from notice
+			where notice_Status = 'Y'
 			order by notice_no desc
+	</select>
+	
+	<select id="selectFaqList" resultMap="AdFaqResult" parameterType="Faq">
+		select 
+		    faq_no,
+		    faq_title,
+		    faq_content,
+		    faq_Status
+		from faq
+			where faq_Status = 'Y'
+			order by faq_no desc
 	</select>
 	
 	<select id="selectNoticeCount" resultType="_int">
@@ -31,6 +50,13 @@
 				count(*)
 			from notice
 		   where notice_Status = 'Y'
+	</select>
+	
+	<select id="selectFaqListCount" resultType="_int">
+		select
+				count(*)
+			from faq
+		   where faq_Status = 'Y'
 	</select>
 	
 	<insert id="insertNoticeBoard">
@@ -70,6 +96,16 @@
 			where notice_no = #{noticeNo}
 	</select>
 	
+	<select id="faqDetailview" resultMap="AdFaqResult">
+		select
+			faq_no,
+		    faq_title,
+		    faq_content,
+		    faq_Status
+		from faq
+			where faq_no = #{faqNo}
+	</select>
+	
 	<update id="updateNotice">
 		update
 			notice
@@ -77,4 +113,54 @@
 		 	,notice_Content = #{noticeContent}
 		 where notice_no = #{noticeNo}
 	</update>
+	
+	<update id="deleteNotice">
+		update
+			notice
+		 set NOTICE_STATUS = 'N'
+		 where notice_no = #{noticeNo}
+	</update>
+	
+	<update id="updateFaq">
+		update
+			faq
+		 set faq_title = #{faqTitle}
+		 	,faq_Content = #{faqContent}
+		 where faq_no = #{faqNo}
+	</update>
+	
+	<update id="deletefaq">
+		update
+			faq
+		 set faq_status = 'N'
+		 where faq_no = #{faqNo}
+	</update>
+	
+	<insert id="insertfaqBoard">
+		insert 
+			into faq
+			(
+				faq_no
+			   ,faq_title
+			   ,faq_content
+			   ,faq_status
+			)
+			values
+			(
+				seq_fano.nextval
+			   ,#{faqTitle}
+			   ,#{faqContent}
+			   ,'Y'
+			)
+	</insert>
+	
+	<update id="increaseNotice">
+		update
+			notice
+		set notice_views = notice_views+1
+			where notice_no =#{noticeNo}
+			and notice_status = 'Y'
+	</update>
+	
+	
 </mapper>
