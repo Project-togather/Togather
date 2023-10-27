@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.QuitReason.model.vo.QuitReason;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
 import com.kh.spring.member.model.vo.Member;
@@ -73,12 +74,15 @@ public class ClubDao {
 	
 	public int checkType(MyClass c, SqlSessionTemplate sqlSession) {
 		int a = sqlSession.selectOne("clubMapper.checkType", c);
-		System.out.println(a);
 		return a;
 	}
 	
 	public int enterClass(MyClass c, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("clubMapper.enterClass", c);
+	}
+	
+	public int quitClass(QuitReason qr, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("clubMapper.quitClass", qr);
 	}
 	
 	public int likeClass(MyClass c, SqlSessionTemplate sqlSession) {
@@ -101,5 +105,7 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.classMemberList", c);
 	}
 	
-	
+	public int selectPayPrice(MyClass c, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("clubMapper.selectPayPrice", c);
+	}
 }

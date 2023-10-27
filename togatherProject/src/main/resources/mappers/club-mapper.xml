@@ -25,6 +25,7 @@
 		<result column="cl_name" property="clName"/>
 		<result column="curriculum" property="curriculum"/>
 		<result column="status" property="status"/>
+		<result column="cl_ca_name" property="clCaName"/>		
 	
 		<collection property="attachment" resultMap="attachment"/>
 	</resultMap>
@@ -68,6 +69,13 @@
 		<result column="img" property="img"/>
 		<result column="msg" property="msg"/>
 		<result column="cl_type_Status" property="clTypeStatus"/>
+	</resultMap>
+	
+	<resultMap type="QuitReason" id="quitReasonResult">
+		<result column="c_no" property="classNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="quitReason" property="quitReason"/>
+		<result column="detailReason" property="detailReason"/>
 	</resultMap>
 	
 	<select id="selectClassList" resultMap="resultclub">
@@ -217,7 +225,7 @@
 		     , minage
 		     , maxage
 		     , people_limit
-		     , cl_type
+		     , cl_ca_name
 		     , cl_category
 		     , cl_name
 		     , curriculum
@@ -226,9 +234,10 @@
 		     , (select count(*)
                  from my_class
                 where c_no = 'C1'
-                  and cl_type = 1) vacancy
+                  and cl_type_status = 1) vacancy
 		  from class
 		  join member using (mem_no)
+          join cl_type on(cl_type = cl_ca_no)
 		  join cl_category on (cl_category = cl_categoryno)
 		 where c_no = 'C1'
 		   and status = 'Y'
@@ -298,6 +307,34 @@
 			   , #{category}
 			 )
 	</insert>
+
+	<select id="selectSocialingListCount" resultType="_int">
+		select
+		count(*)
+	from class
+	where status = 'Y'
+	</select>
+	
+	<select id="selectSocialingList" resultMap="resultclub">
+		select
+	        c_no
+	    ,   c_title
+	    ,   c_location
+	    ,   c_date
+	    ,	cl_type
+	    	from class
+		  join attachment on (c_no = ref_fno)
+		 	where status = 'Y'
+		   and cl_type = 1
+	    order by c_no desc
+	</select>
+	
+	<select id="selectClubListCount" resultType="_int">
+		select
+		count(*)
+	from class
+	where status = 'Y'
+	</select>
 
 	<insert id="insertReply">
 		insert
@@ -417,6 +454,13 @@
 		  )
 	</insert>
 	
+	<delete id="quitClass">
+		delete 
+			   my_class
+		 where c_no = #{classNo}
+		   and mem_no = #{memNo}
+	</delete>
+	
 	<insert id="likeClass">
 		insert
 		  into favorites
@@ -472,4 +516,30 @@
 		  and cl_type_status = 3
 		  </if>
 	</select>
+	
+	<select id="selectPayPrice" resultType="_int">
+		select c_price
+		  from class c
+		  join payment p on (c.c_no = p.c_no)
+		 where p.c_no = #{classNo}
+		   and p.mem_no = #{memNo}
+	</select>
+	
+	<insert id="insertQuitReason">
+		insert
+		  into quitReason
+			  (
+			  	c_no
+			  , mem_no
+			  , quitReason
+			  , detailReason	
+			  )
+		  values
+			  (
+			  	#{classNo}
+			  , #{memNo}	
+			  , #{quitReason}
+			  , #{detailReason}
+			  )
+	</insert>
 </mapper>

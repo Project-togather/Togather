@@ -16,6 +16,9 @@
 		<typeAlias type="com.kh.spring.reply.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.spring.admin.customercenter.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.spring.myClass.model.vo.MyClass" alias="MyClass"/>
+		<typeAlias type="com.kh.spring.alarm.model.vo.Notification" alias="Notification"/>
+		<typeAlias type="com.kh.spring.payment.model.vo.Payment" alias="Payment"/>
+		<typeAlias type="com.kh.spring.QuitReason.model.vo.QuitReason" alias="QuitReason"/>
 		<typeAlias type="com.kh.spring.admin.customercenter.model.vo.Faq" alias="Faq"/>
 	</typeAliases>
 	 
@@ -27,9 +30,10 @@
 	 	<mapper resource="/mappers/admember-mapper.xml"/>
 	 	<mapper resource="/mappers/adcustomer-mapper.xml"/>
 	 	<mapper resource="/mappers/myfeed-mapper.xml"/>
+	 	<mapper resource="/mappers/notification-mapper.xml"/>
+	 	<mapper resource="/mappers/payment-mapper.xml"/>
 	 	<mapper resource="/mappers/adclass-mapper.xml"/>
 	 	<mapper resource="/mappers/search-mapper.xml"/>
-
 	 	
 	 	
 	 </mappers>
