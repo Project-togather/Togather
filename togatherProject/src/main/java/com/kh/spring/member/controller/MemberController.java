@@ -196,13 +196,21 @@ public class MemberController {
    public String insertProfile(HttpServletRequest request , String memNo , String profileMessage , HttpSession session) {
 	   //System.out.println(memNo);
 	   //System.out.println(profileMessage);
+	   int result2 = 0 ; 
+	   
 	   String arr [] = request.getParameterValues("interest"); 
 	   int interArr[] = new int [arr.length];
 	   for(int i = 0 ; i < arr.length ; i ++) {
-		   //System.out.println(arr[i]);
-	   }
-	   for(int i = 0 ; i < arr.length ; i ++) {
 		   interArr[i] = Integer.parseInt(arr[i]);
+	   }
+	   
+	   for(int i = 0 ; i < interArr.length ; i ++) {
+		  MemInterest mi = new MemInterest();
+		  mi.setMemNo(memNo);
+		  mi.setInNo(interArr[i]);
+		  //System.out.println("DB로갈 mi" + mi);
+		  result2 = mService.insertInterest(mi);
+		  
 	   }
 	   
 	   Member m = new Member();
@@ -214,15 +222,7 @@ public class MemberController {
 	   int result1 = mService.insertMsg(m);
 
 	   //DB 에 취향을 넣어봅시다. 프로필 한마디도 넣어야함
-	   int result2 = 0 ; 
-	   for(int i = 0 ; i < interArr.length ; i ++) {
-		  MemInterest mi = new MemInterest();
-		  mi.setMemNo(memNo);
-		  mi.setInNo(interArr[i]);
-		  //System.out.println("DB로갈 mi" + mi);
-		  result2 = mService.insertInterest(mi);
-		  
-	   }
+	
 	   if(result1 * result2 != 0) {
 		   session.setAttribute("alertMsg", "가입을 축하드립니다!");
 		   return "redirect:/";
@@ -244,6 +244,7 @@ public class MemberController {
 	  //관심사 가져오기
 	  ArrayList<MemInterest> mi = mService.getMemInterest(memNo);
 	 
+	  if(mi != null) {
 	  String [] interArr = new String [mi.size()];
 	   for (int i = 0 ; i < mi.size() ; i ++) {
 		 if(mi.get(i).getInNo() == 1) { 
@@ -264,8 +265,12 @@ public class MemberController {
 			 interArr[i] = "Foreign Language 💬 ";
 		 }
 	  }
+	  
+	   
+	   
 	  //문화예술 1 액티비티2 푸드드링크3 취미4 파티소개팅5 동네친목6 제테크7 외국어8
 	  request.setAttribute("interArr",interArr);
+	  }
 	  //나의 피드 불러오기
 	  ArrayList<Feed> fList = mService.selectFeedList(memNo);
 	 
@@ -398,12 +403,12 @@ public class MemberController {
 	   String memNo = ((Member)session.getAttribute("loginMember")).getMemNo();
 	   
 	   
-		    String oldImg =  ((Member)session.getAttribute("loginMember")).getImg();
+		    String oldImg =  ((Member)session.getAttribute("loginMember")).getImg(); //수정전 파일
 		    
 		   
 		    String interArrS [] = request.getParameterValues("interest"); 
 		    
-		   
+		  
 		    
 		    
 		   //사진부터 수정해볼까나
@@ -412,6 +417,8 @@ public class MemberController {
 	      String originName = upfile.getOriginalFilename();
 	      String savePath = "";
 	      String filePath = "";
+	      
+	      
 	      
 	      if(!upfile.getOriginalFilename().equals("")) {
 	    	  if( (oldImg.charAt(0))!= 'h' ) { //구글로그인은 이미지가 없단말야
@@ -426,25 +433,34 @@ public class MemberController {
 	    	  	 //System.out.println(filePath);
 			}
 	     
+	      
+	      
+	      
 	      //먼저 member insert합시다
 	      Member upMem = new Member();
 	      upMem.setMemNo(memNo);
 	      upMem.setNickName(m.getNickName());//새로운 닉네임
 	      upMem.setMsg(m.getMsg());	      //새로운 메세지
+	      
+	      if(!upfile.getOriginalFilename().equals("")) { //새로올라온 파일이 있을때 이야기임
 	      upMem.setImg(filePath);//새로운 이미지주소
+	      }else{
+	    	 upMem.setImg(oldImg);
+	      }
 	      
 	      int result1 = mService.updateMember(upMem);
 	      
 	      //attachment 에 넣고
 
 	      //파일을 attach에 insert하면 됨
-	      Attachment at = new Attachment();
-	      at.setRefFno(memNo);
-	      at.setUpdateName(changeName);
-	      at.setOriginName(originName);
-	      at.setFilePath(filePath);
+	      if(!upfile.getOriginalFilename().equals("")) {
+		      Attachment at = new Attachment();
+		      at.setRefFno(memNo);
+		      at.setUpdateName(changeName);
+		      at.setOriginName(originName);
+		      at.setFilePath(filePath);
 	      int result2 = mService.updateProfileImg(at);
-	      
+	      }
 	      //interarr 도 넣어야함 먼저 전부 삭제후 새로 넣는식으로 하자
 	      int result3 = mService.deleteInterest(memNo);
 	      

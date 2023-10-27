@@ -36,7 +36,13 @@
 			#newFeed :hover{
 				cursor:pointer
 			}
-			
+
+			#subWayBtn2 :hover{
+				cursor:pointer
+			}
+			#subwayBtn2{
+				color: red;
+			}
 			
 
 		</style>
@@ -159,7 +165,9 @@
 							</th>
 						</tr>
 						<tr>
-							<th colspan ="3" id ="subWayBtn">Are you goingto go appointment? click here</th>
+							<th colspan ="3" id ="subWayBtn"> 
+								<div id="subWayBtn2" style="color: silver;">Are you going to go appointment? click here</div>
+							</th>
 						</tr>
 					<tbody>
 
@@ -589,9 +597,9 @@
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" >
-								subwayInfo
+							
 							</h5>
-							<input class="form-control" id="subwayStation" type="search" placeholder="search here">	
+							<input class="form-control" id="stationName" type="search" placeholder="search station">	
 						</div>
 						<div id="subWayResultSection" class="modal-body">
 
@@ -670,6 +678,84 @@
 				    			}
 							})
 				    	})
+				    	
+				    	//지하철 ajax
+				    	const $station = $("#stationName");
+				    	$station.keyup(function(){
+				    		$.ajax({
+				    			url : "subway.op",
+				    			data : {station : $station.val()},
+				    			success : function(data){
+				    				console.log(data.realtimeArrivalList);
+				    				let subArr = data.realtimeArrivalList;
+				    				let value = "";
+				    				for (let i = 0; i < subArr.length ; i ++ ){
+
+				    					let line = "";
+
+				    					if(subArr[i].subwayId == 1001){
+				    						line = "1️호선";
+				    					}else if(subArr[i].subwayId == 1002){
+				    						line = "2️호선";
+				    					}else if (subArr[i].subwayId == 1003){
+				    						line = "3️호선";
+				    					}else if (subArr[i].subwayId == 1004){
+				    						line = "4️호선";
+				    					}else if (subArr[i].subwayId == 1005){
+				    						line = "5️호선";
+				    					}else if (subArr[i].subwayId == 1006){
+				    						line = "6️호선";
+				    					}else if (subArr[i].subwayId == 1007){
+				    						line = "7️호선";
+				    					}else if (subArr[i].subwayId == 1008){
+				    						line = "8️호선";
+				    					}else if (subArr[i].subwayId == 1009){
+				    						line = "9️호선";
+				    					}else if (subArr[i].subwayId == 1061){
+				    						line = "중앙선";
+				    					}else if (subArr[i].subwayId == 1063){
+				    						line = "경의중앙선";
+				    					}else if (subArr[i].subwayId == 1065){
+				    						line = "공항철도";
+				    					}else if (subArr[i].subwayId == 1067){
+				    						line = "경춘선";
+				    					}else if (subArr[i].subwayId == 1075){
+				    						line = "수인분당선";
+				    					}else if (subArr[i].subwayId == 1077){
+				    						line = "신분당선";
+				    					}else if (subArr[i].subwayId == 1092){
+				    						line = "우이실설선";
+				    					}else if (subArr[i].subwayId == 1093){
+				    						line = "서해선";
+				    					}else if (subArr[i].subwayId == 1081){
+				    						line = "경강선";
+				    					}
+				    					
+										value +=
+					    						 "<div class='comment-author'><img class='avatar' src='assets/images/subway.jpg' ></div>"
+												+"<div class='comment-body'>"
+													+"<div class='comment-meta'>"
+														+"<div class='comment-meta-author' onClick='searchUserPage(this);'>"+
+														line + "||"+ subArr[i].updnLine + "||" + subArr[i].btrainSttus
+
+														+ "</div>"
+													+"</div>"
+													+"<div class='comment-content'>"
+															+"<p> 열차방향 : "+subArr[i].trainLineNm +"</p>"
+															+"<p> 이번열차 : "+subArr[i].arvlMsg2+"</p>"
+													+"</div>"
+											    +"</div>";
+											 
+											}
+				    				$("#subWayResultSection").html(value);
+				    				
+				    			},error : function(){
+				    				console.log("ajax통신실패");
+				    			}
+				    		})
+				    	})
+				    	
+				    	
 
 				   })
 				
