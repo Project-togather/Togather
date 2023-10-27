@@ -125,7 +125,34 @@
 
 /* 모달 위치 조정 */
 
+/* 모달 안으로 줄이기 */
+.modal-header h4 {
+	padding-left: 10%; /* 왼쪽 패딩 설정 */
+    padding-right: 10%; /* 오른쪽 패딩 설정 */
+	padding-top: 5%;
+}
 
+.modal-body div, h5, label {
+
+    padding-left: 10%; /* 왼쪽 패딩 설정 */
+    padding-right: 10%; /* 오른쪽 패딩 설정 */
+}
+
+/* 모달 밑줄 */
+.modal-body::after {
+    content: "";
+    display: block;
+    border-bottom: 1px solid rgba(204, 204, 204, 0.5); /* 투명한 밑줄 스타일 설정 */
+    margin-left: 10%; /* 왼쪽 패딩 설정 */
+    margin-right: 10%; /* 오른쪽 패딩 설정 */
+}
+
+.postPreview img {
+
+	width: 300px;
+  	height: 300px;
+  	object-fit: cover;
+}
 </style>
 </head>
 <body>
@@ -174,34 +201,106 @@
 
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			<div class="modal-dialog" role="document">
+			<div class="modal-dialog" role="document" style="max-width: 500px; max-height: 900px;">
 				<div class="modal-content">
+					<form action="search.li" method="get">
 
-					<div class="modal-header">
-						<h4 class="modal-title" id="myModalLabel">필터</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-					</div>
+						<div class="modal-header">
+							<h4 class="modal-title" id="myModalLabel">필터</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+						</div>
 
+						<div id="modal-body" style="max-height: 700px; overflow-y: auto;">
+							
+							
+							<div class="modal-body">
+								<h5>유형</h5>
+								<label>
+									소셜링 <input type="radio" name="options" value="option1">
+								</label>
+								<br>
+								<label>
+									클럽 <input type="radio" name="options" value="option2">
+								</label>
+								<br>
+								<label>
+									피드 <input type="radio" name="options" value="option3">
+								</label>
+							</div>
 
-					<div class="modal-body">
-						<h5>정렬</h5>
-						<label>
-							소셜링 <input type="radio" name="options" value="option1">
-						</label>
-						<br>
-						<label>
-							클럽 <input type="radio" name="options" value="option2">
-						</label>
-						<br>
-						<label>
-							피드 <input type="radio" name="options" value="option3">
-						</label>
-					</div>
+							<div class="modal-body">
+								<h5>정렬</h5>
+								<label>
+									인기순 <input type="radio" name="options" value="option4">
+								</label>
+								<br>
+								<label>
+									온라인 <input type="radio" name="options" value="option5">
+								</label>
+								<br>
+								<label>
+									페쇄 여부 <input type="radio" name="options" value="option6">
+								</label>
+							</div>
+							
+							<div class="modal-body">
+								<h5>카테고리</h5>
+								<label>
+									문화, 예술 <input type="radio" name="options" value="option7">
+								</label>
+								<br>
+								<label>
+									취미 <input type="radio" name="options" value="option8">
+								</label>
+								<br>
+								<label>
+									재테크 <input type="radio" name="options" value="option9">
+								</label>
+							</div>
 
+							<div class="modal-body">
+								<h5>정원</h5>
+								<label>
+									1~5명 <input type="radio" name="options" value="option10">
+								</label>
+								<br>
+								<label>
+									6~10명 <input type="radio" name="options" value="option11">
+								</label>
+								<br>
+								<label>
+									11~15명 <input type="radio" name="options" value="option12">
+								</label>
+								<br>
+							</div>
 
-					<div class="modal-footer">
-						<button type="button" class="btn btn-apply" data-dismiss="modal">적용하기</button>
-					</div>
+							<div class="modal-body">
+								<h5>나이</h5>
+								<label>
+									<input type="radio" name="options" value="option13">
+								</label>
+							</div>
+
+							<div class="modal-body">
+								<h5>지역</h5>
+								<label>
+									소셜링 <input type="radio" name="options" value="option14">
+								</label>
+							</div>
+
+							<div class="modal-body">
+								<h5>온라인 / 오프라인</h5>
+								<label>
+									<input type="radio" name="options" value="option15">
+								</label>
+							</div>
+						</div>
+
+						<div class="modal-footer">
+							<button type="submit" class="btn btn-apply">적용하기</button>
+						</div>
+						
+					</form>
 				</div>
 			</div>
 		</div>
@@ -223,26 +322,31 @@
 			<div class="container">
 				<div class="search-class">
 					<div class="row">
-					
-						<c:forEach var="c" items="${ list }">
+						<c:forEach var="c" items="${list}" varStatus="loop">
 							<div class="col-md-4 post-item">
 								<article class="post">
-									<div class="post-preview"><a href="#"><img src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/KakaoTalk_20220327_184200992_08_5db3013d2eaf663853f3a86bc7904ceaf407b8c40c77c10f97f6c440fbb5b546" alt=""></a></div>
+									<div class="postPreview">
+										<a href="detail.cl?classNo=${c.classNo}&clType=${c.clType}">
+											<img src="${alist[loop.index].updateName}" alt="">
+										</a>
+									</div>
+									<br>
 									<div class="post-wrapper">
 										<div class="post-header">
-											<h4 class="post-title1"><a href="blog-single-1.html">${ c.classTitle }</a></h4>
+											<h4 class="post-title1"><a href="blog-single-1.html">${c.classTitle}</a></h4>
 										</div>
 										<div class="post-content">
-											<p>${c.classLocation }</p>
+											<p>${c.classLocation}</p>
 										</div>
-										<div class="post-more"><a href="#">${ c.classDate }</a></div>
+										<div class="post-more"><a href="#">${c.classDate}</a></div>
 									</div>
 								</article>
 							</div>
 						</c:forEach>
-							
 					</div>
 				</div>
+			</div>
+
 					
 
 				<div id="pagingArea">

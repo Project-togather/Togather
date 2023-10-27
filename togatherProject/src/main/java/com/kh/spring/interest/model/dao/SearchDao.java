@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.feed.model.vo.Feed;
@@ -34,6 +35,19 @@ public class SearchDao {
 		
 	}
 	
+	public ArrayList<Attachment> selectImageAllList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.selectImageAllList", null, rowBounds);
+		
+	}
+	
+	
+	
 	public int searchKeywordListCount(SqlSessionTemplate sqlSession, String keyword) {
 	    Map<String, String> parameterMap = new HashMap<>();
 	    parameterMap.put("keyword", keyword);
@@ -53,6 +67,21 @@ public class SearchDao {
 
 	    return (ArrayList)sqlSession.selectList("searchMapper.searchKeywordList", parameterMap);
 	}
+	
+	public ArrayList<Attachment> selectImageSearchList(SqlSessionTemplate sqlSession, String keyword, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.selectImageSearchList", null, rowBounds);
+		
+	}
+	
+	
+	
+	// 상세 조회
 
 	
 	// ajax 영역

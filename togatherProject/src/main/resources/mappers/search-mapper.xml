@@ -54,28 +54,65 @@
 		<result column="fe_status" property="fStatus"/>
 	</resultMap>
 	
+	<resultMap type="Attachment" id="AttResult">
+		<result column="att_no" property="attNo"/>
+		<result column="ref_fno" property="refFno"/>
+		<result column="origin_name" property="originName"/>
+		<result column="update_name" property="updateName"/>
+		<result column="file_path" property="filePath"/>
+		<result column="enroll_date" property="enrollDate"/>
+	</resultMap>
+	
 	<select id="selectClassAllListCount" resultType="_int">
 		select
 		count(*)
 	from class
+	join attachment on (c_no = ref_fno)
 	where status = 'Y'
 	</select>
 	
 	<select id="selectClassAllList" resultMap="clubResult">
-		select
-	        c_no
-	    ,   c_title
-	    ,   c_location
-	    ,   c_date
-	    ,	cl_type
-	    	from class
-		 	where status = 'Y'
+		select 
+		       c_no
+		     , mem_no
+		     , c_title
+		     , c_content
+		     , c_location
+		     , c_date
+             , c_time
+		     , c_price
+		     , c_approval
+		     , minage
+             , maxage
+		     , people_limit
+             , cl_type
+		     , cl_category
+		     , curriculum
+		     , origin_name
+		     , update_name
+		     , file_path
+		  from class
+		  join attachment on (c_no = ref_fno)
 	    order by c_date desc
 	</select>
+	
+	<select id="selectImageAllList" resultMap="AttResult">
+		select
+        att_no
+    ,   ref_fno
+    ,   origin_name
+    ,	update_name
+    ,	file_path
+    ,	enroll_date
+        from attachment
+	</select>
+	
+	<!-- 검색 조회 -->
 	
 	<select id="searchKeywordListCount" resultType="_int">
 		SELECT COUNT(*)
 			FROM class c
+			join attachment on (c_no = ref_fno)
 			WHERE c.status = 'Y'
 			AND c.c_title like '%' || #{keyword} || '%'
 	</select>
@@ -88,11 +125,26 @@
 	,   c_date
 	,	cl_type
 	    from class
+	    join attachment on (c_no = ref_fno)
 	    where status = 'Y'
 	AND c_title like '%' || #{keyword} || '%'
 	order
 	    by c_no desc
 	</select>
+	
+	<select id="selectImageSearchList" resultMap="AttResult">
+		select
+        att_no
+    ,   ref_fno
+    ,   origin_name
+    ,	update_name
+    ,	file_path
+    ,	enroll_date
+        from attachment
+	</select>
+	
+	<!-- 상세 조회 -->
+	
 	
 	
 	

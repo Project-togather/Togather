@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.feed.model.vo.Feed;
@@ -32,6 +33,13 @@ public class SearchServiceImpl implements SearchService {
 		return sDao.selectClassAllList(sqlSession, pi);
 	}
 	
+	@Override
+	public ArrayList<Attachment> selectImageAllList(PageInfo pi) {
+		return sDao.selectImageAllList(sqlSession, pi);
+	}
+	
+
+	
 	// 검색 키워드
 	@Override
 	public int searchKeywordListCount(String keyword) {
@@ -42,7 +50,14 @@ public class SearchServiceImpl implements SearchService {
 	public ArrayList<Club> searchKeywordList(String keyword, PageInfo pi) {
 	    return sDao.searchKeywordList(sqlSession, keyword, pi);
 	}
-
+	
+	@Override
+	public ArrayList<Attachment> selectImageSearchList(String keyword, PageInfo pi) {
+		return sDao.selectImageSearchList(sqlSession, keyword, pi);
+	}
+	 
+	// 상세 조회
+	
 	
 	// 소셜링 리스트가 보이는 페이지 서비스 (페이징 처리)
 	@Override
@@ -110,7 +125,6 @@ public class SearchServiceImpl implements SearchService {
 		
 		return sDao.selectMemberList(sqlSession);
 	}
-
-
+	
 	
 }
