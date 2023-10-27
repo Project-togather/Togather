@@ -100,8 +100,9 @@
 							
 						</th>
 							
-						<td><a href="updateForm.me">setMyProfile</a></td>
+						<td><a href="updateForm.me" class="btn">setMyProfile</a></td>
 						<td><a href="" id="testBtn" class="btn">search User</a></td>
+
 						
 					</tr>		
 					</thead>
