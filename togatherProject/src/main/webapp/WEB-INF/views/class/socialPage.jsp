@@ -35,9 +35,8 @@
 					<c:forEach var="c"  items="${ list }">
 						<div class="col-md-4">
 						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
-								<div class="menu-classic-item-price">6/${ c.peopleLimit }
-								</div>
+							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
+								<img src="${ c.attachment.updateName }">
 							</div>
 							<div class="menu-classic-item-inner">
 					       <c:choose>
@@ -45,17 +44,12 @@
 					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
 					           </c:when>
 					           <c:otherwise>
-					            	<c:out value="${c.classTitle}"/>
+					            	<h6><c:out value="${c.classTitle}"/></h6>
 				        	   </c:otherwise> 
 				          </c:choose>
-     					  <c:choose>
-					           <c:when test="${fn:length(c.classContent) > 63}">
-					            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
-					           </c:when>
-					           <c:otherwise>
-					            	<c:out value="${c.classContent}"/>
-				        	   </c:otherwise> 
-				          </c:choose>
+				          	${ c.clName } / 추천 4번째 까지만 <br>
+				          	${ c.clCaName }, ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
+				          	참가중인 프로필 이미지... / ${ c.vacancy }/${ c.peopleLimit } <br>
 							</div>
 						</div>
 					</div>
