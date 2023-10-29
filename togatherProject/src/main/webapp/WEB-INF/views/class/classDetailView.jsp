@@ -57,7 +57,6 @@
 
 		<script>
 			
-			
 				function requestPay() {
 					
 				    IMP.init("imp15430315"); 
@@ -108,16 +107,50 @@
 			/* sse Test */ 
 			function test(){
 				
+				/* EventSource 지원 여부 확인
+				if(typeof(EventSource) !== "undefined") {
+					console.log("지원");
+				}
+					console.log("미지원");
+					*/
+					
+				/* sse Test 시작 */
 				const id = document.getElementById('id').value;
 
 				var eventSource = new EventSource(`sse/` + id);
 				
+					
 				eventSource.addEventListener("sse", function(event) {
 					console.log(event.data);
 					console.log(event)
+					
+					const data = JSON.parse(event.data);
+					
+					console.log(data);
+					
 					var message = event.data;
 					
-					swal(message);
+					let notification;
+			        let notificationPermission = Notification.permission;
+			        
+			        if (notificationPermission === "granted") {
+			            //Notification을 이미 허용한 사람들에게 보여주는 알람창
+			            notification = new Notification('🔔 알람이 도착했습니다 !', {
+			                body : data.receiver + "님이 " + data.content,
+			                url : data.url
+			            });
+			            
+			            setTimeout(()=>{
+			            	notification.close();
+			            }, 10 * 1000);
+			            
+			            notification.addEventListener('click', ()=>{
+			            	window.open("http://localhost:8012/togather/index.jsp", '_blank');
+			            })
+			        } 
+					
+					
+					
 					$("#sseTest2").text("내가 받은 메세지 : " + message);
 				});
 			}

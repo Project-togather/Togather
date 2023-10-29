@@ -296,6 +296,10 @@ public class ClubController {
 	@RequestMapping("likeClass.cl")
 	public String likeClass(MyClass c) {
 		
+		nService.send(c.getMemNo(), c.getClassNo(), "즐겨찾기 등록했답니다");
+		
+		System.out.println("왜안돼 씨발아");
+		
 		int check = cService.checkLike(c);
 		int result = 0;
 		if(check > 0) {

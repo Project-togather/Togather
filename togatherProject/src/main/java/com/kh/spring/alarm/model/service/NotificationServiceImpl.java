@@ -1,11 +1,11 @@
 package com.kh.spring.alarm.model.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.kh.spring.alarm.model.vo.Notification;
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
 
 import java.io.IOException;
@@ -22,22 +22,43 @@ public class NotificationServiceImpl {
         this.emitterRepository = emitterRepository;
     }
 
-    public SseEmitter subscribe(String userId) {
+    public SseEmitter subscribe(Long userId, String lastEventId) {
     	
-        SseEmitter emitter = createEmitter(userId);
-        
-        System.out.println("에미터1 : " + emitter);
+    	//String id = userId + "_" + System.currentTimeMillis();
+    	
+    	String id = String.valueOf(userId);
+    	
+    	SseEmitter emitter = new SseEmitter(DEFAULT_TIMEOUT);
+        emitterRepository.save(id, emitter);
+    	
+        // Emitter가 완료될 때(모든 데이터가 성공적으로 전송된 상태) Emitter를 삭제한다.
+        emitter.onCompletion(() -> emitterRepository.deleteById(id));
+        // Emitter가 타임아웃 되었을 때(지정된 시간동안 어떠한 이벤트도 전송되지 않았을 때) Emitter를 삭제한다.
+        emitter.onTimeout(() -> emitterRepository.deleteById(id));
+    	
+        System.out.println("구독에미터 : " + emitter);
         
         // 503 에러 방지를 위한 더미 이벤트 전송
-        sendToClient(userId, "EventStream Created. [userId=" + userId + "]");
+        sendToClient(emitter, id, "EventStream Created. [userId=" + userId + "]");
+        
+        /*
+        if (!lastEventId.isEmpty()) {
+            Map<String, Object> events = emitterRepository.findAllEventCacheStartById(String.valueOf(userId));
+            events.entrySet().stream()
+                  .filter(entry -> lastEventId.compareTo(entry.getKey()) < 0)
+                  .forEach(entry -> sendToClient(emitter, entry.getKey(), entry.getValue()));
+        }
+        */
         
         return emitter;
     }
 
-   
+   /*
     public void notify(String userId, Object event) {
         sendToClient(userId, event);
     }
+    */
+    
     /*
     public void notifyComment(Member receiver, Reply reply, String content) {
         Notification notification = createCommentNotification(receiver, reply, content);
@@ -65,42 +86,58 @@ public class NotificationServiceImpl {
                            .build();
     }
     */
+
     
+    public void send(String receiver, String reply, String content) {
+    	
+    	
+    	System.out.println("센드 오긴함 ??");
+    	Notification notification = createNotification(receiver, reply, content);
+    	System.out.println(notification);
+    	String id = "44";
+    	
+    	//로그인 한 유저의 SseEmitter 모두 가져오기
+    	Map<String, SseEmitter> sseEmitters = emitterRepository.findAllEmitterStartWithById(id);
+    	System.out.println("findAll");
+    	System.out.println(sseEmitters);
+    	sseEmitters.forEach(
+    			(key, emitter) -> {
+    				sendToClient(emitter, key, notification);
+    				System.out.println("send 보내 좀 썅년아");
+    				// 데이터 캐시 저장
+    				emitterRepository.saveEventCache(key, notification);
+    				System.out.println("saveCache");
+    				// 데이터 전송
+    			}
+		);
+    }
     
-   
-   
-    public void sendToClient(String id, Object data) {
+    private Notification createNotification(String receiver, String reply, String content) {
+    	System.out.println("크노티 오긴함??");
+        return Notification.builder()
+                           .receiver(receiver)
+                           .content(content)
+                           .reply(reply)
+                           .url("http://localhost:8012/togather/index.jsp")
+                           .isRead(false)
+                           .build();
+        
+    }
+    
+    public void sendToClient(SseEmitter emitter, String id, Object data) {
     	System.out.println("send to client");
-        SseEmitter emitter = emitterRepository.get(id);
-        System.out.println("에미터2 : " + emitter.toString());
-        if (emitter != null) {
-            try {
-                emitter.send(SseEmitter.event().id(String.valueOf(id)).name("sse").data(data));
-                System.out.println("에미터3 : " + emitter);
-            } catch (IOException exception) {
-                emitterRepository.deleteById(id);
-                throw new RuntimeException("연결 오류!");
-            }
+        
+    	try {
+    		emitter.send(SseEmitter.event()
+                                   .id(id)
+                                   .name("sse")
+                                   .data(data));
+        } catch (IOException exception) {
+            emitterRepository.deleteById(id);
+            throw new RuntimeException("연결 오류!");
         }
-    }
-
-    /**
-     * 사용자 아이디를 기반으로 이벤트 Emitter를 생성
-     *
-     * @param id - 사용자 아이디.
-     * @return SseEmitter - 생성된 이벤트 Emitter.
-     */
-    
-    private SseEmitter createEmitter(String id) {
-        SseEmitter emitter = new SseEmitter(DEFAULT_TIMEOUT);
-        emitterRepository.save(id, emitter);
-
-        // Emitter가 완료될 때(모든 데이터가 성공적으로 전송된 상태) Emitter를 삭제한다.
-        emitter.onCompletion(() -> emitterRepository.deleteById(id));
-        // Emitter가 타임아웃 되었을 때(지정된 시간동안 어떠한 이벤트도 전송되지 않았을 때) Emitter를 삭제한다.
-        emitter.onTimeout(() -> emitterRepository.deleteById(id));
-
-        return emitter;
+    	
     }
     
+
 }

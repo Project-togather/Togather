@@ -24,6 +24,7 @@ public class EmitterRepository {
      */
     public void save(String id, SseEmitter emitter) {
         emitters.put(id, emitter);
+        System.out.println("에밋레포저장 : " + emitters);
     }
 
     /**
@@ -42,6 +43,7 @@ public class EmitterRepository {
      * @return SseEmitter - 이벤트 Emitter.
      */
     public SseEmitter get(String id) {
+    	System.out.println("에밋레포겟 : " + emitters);
         return emitters.get(id);
     }
     
@@ -50,6 +52,11 @@ public class EmitterRepository {
     }
     
     public Map<String, SseEmitter> findAllEmitterStartWithById(String memberId) {
+    	System.out.println("find 애미터짐 도착");
+    	
+    	System.out.println(emitters.entrySet().stream()
+                .filter(entry -> entry.getKey().startsWith(memberId))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
         return emitters.entrySet().stream()
                 .filter(entry -> entry.getKey().startsWith(memberId))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
