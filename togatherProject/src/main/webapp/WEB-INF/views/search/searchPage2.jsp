@@ -153,6 +153,95 @@
   	height: 300px;
   	object-fit: cover;
 }
+
+/* 조절 바 */
+#ageLimitDiv {
+  margin: 0;
+  padding-bottom: 10%;
+  padding-right: 60%;
+  height: 0vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+.middle {
+  position: relative;
+  max-width: 300px;
+  width: 100%;
+}
+
+.slider {
+  position: relative;
+  z-index: 1;
+  height: 10px; /* 높이를 조절 */
+  margin: 0 15px;
+}
+
+.slider > .track {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #e2e2e2;
+}
+
+.slider > .range {
+  position: absolute;
+  z-index: 2;
+  left: 15%;
+  right: 15%;
+  top: 0;
+  bottom: 0;
+  border-radius: 5px;
+  background-color: #616161;
+}
+
+.slider > .thumbl, .slider > .thumbr {
+  position: absolute;
+  top: -5px;
+  z-index: 3;
+  width: 20px; /* 너비를 조절 */
+  height: 20px; /* 높이를 조절 */
+  background-color: #000000;
+  border-radius: 50%;
+}
+
+.slider > .thumbl {
+  left: 15%;
+}
+.slider > .thumbr {
+  right: 15%;
+}
+
+input[type="range"] {
+  position: absolute;
+  /* opacity로 가린 것을 이벤트도 비활성화하기 위해 */
+  pointer-events: none;
+  -webkit-appearance: none;
+  z-index: 3;
+  height: 10px;
+  width: 100%;
+  top: -7px;
+  opacity: 0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  /* 겹쳐진 두 thumb를 모두 활성화 */
+  pointer-events: all;
+  width: 30px;
+  height: 30px;
+  border-radius: 0;
+  border: 0 none;
+  background-color: red;
+  cursor: pointer;
+  /* appearance를 해야 위의 스타일들을 볼 수 있음 */
+  -webkit-appearance: none;
+}
 </style>
 </head>
 <body>
@@ -204,7 +293,8 @@
 			<div class="modal-dialog" role="document" style="max-width: 500px; max-height: 900px;">
 				<div class="modal-content">
 					<form action="search.li" method="get">
-
+						<input type="hidden" name="cpage" value="1">
+						<input type="hidden" name="keyword" value="${ keyword }">
 						<div class="modal-header">
 							<h4 class="modal-title" id="myModalLabel">필터</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
@@ -214,86 +304,71 @@
 							
 							
 							<div class="modal-body">
-								<h5>유형</h5>
-								<label>
-									소셜링 <input type="radio" name="options" value="option1">
-								</label>
-								<br>
-								<label>
-									클럽 <input type="radio" name="options" value="option2">
-								</label>
-								<br>
-								<label>
-									피드 <input type="radio" name="options" value="option3">
-								</label>
+							    <h5>유형</h5>
+							    <label>
+							        소셜링 <input type="radio" name="options" value="1" <c:if test="${options == '1'}">checked</c:if>>
+							    </label>
+							    <br>
+							    <label>
+							        클럽 <input type="radio" name="options" value="2" <c:if test="${options == '2'}">checked</c:if>>
+							    </label>
+							    <br>
+							    <label>
+							        챌린지  <input type="radio" name="options" value="3" <c:if test="${options == '3'}">checked</c:if>>
+							    </label>
 							</div>
 
+
 							<div class="modal-body">
-								<h5>정렬</h5>
-								<label>
-									인기순 <input type="radio" name="options" value="option4">
-								</label>
-								<br>
-								<label>
-									온라인 <input type="radio" name="options" value="option5">
-								</label>
-								<br>
-								<label>
-									페쇄 여부 <input type="radio" name="options" value="option6">
-								</label>
+							    <h5>정렬</h5>
+							    <label>
+							        인기순 <input type="radio" name="sorting" value="4">
+							    </label>
+							    <br>
+							    <label>
+							        온 / 오프 라인 <input type="radio" name="sorting" value="5">
+							    </label>
+							    <br>
+							    <label>
+							        페쇄 여부 <input type="radio" name="sorting" value="6">
+							    </label>
 							</div>
 							
 							<div class="modal-body">
 								<h5>카테고리</h5>
 								<label>
-									문화, 예술 <input type="radio" name="options" value="option7">
+									문화, 예술 <input type="radio" name="category" value="7">
 								</label>
 								<br>
 								<label>
-									취미 <input type="radio" name="options" value="option8">
+									액티비티 <input type="radio" name="category" value="8">
 								</label>
 								<br>
 								<label>
-									재테크 <input type="radio" name="options" value="option9">
+									푸드 드링크 <input type="radio" name="category" value="9">
+								</label>
+								<br>
+								<label>
+									취미 <input type="radio" name="category" value="10">
+								</label>
+								<br>
+								<label>
+									파티 소개팅 <input type="radio" name="category" value="11">
+								</label>
+								<br>
+								<label>
+									동네 친목 <input type="radio" name="category" value="12">
+								</label>
+								<br>
+								<label>
+									재테크 <input type="radio" name="category" value="13">
+								</label>
+								<br>
+								<label>
+									외국어 <input type="radio" name="category" value="14">
 								</label>
 							</div>
 
-							<div class="modal-body">
-								<h5>정원</h5>
-								<label>
-									1~5명 <input type="radio" name="options" value="option10">
-								</label>
-								<br>
-								<label>
-									6~10명 <input type="radio" name="options" value="option11">
-								</label>
-								<br>
-								<label>
-									11~15명 <input type="radio" name="options" value="option12">
-								</label>
-								<br>
-							</div>
-
-							<div class="modal-body">
-								<h5>나이</h5>
-								<label>
-									<input type="radio" name="options" value="option13">
-								</label>
-							</div>
-
-							<div class="modal-body">
-								<h5>지역</h5>
-								<label>
-									소셜링 <input type="radio" name="options" value="option14">
-								</label>
-							</div>
-
-							<div class="modal-body">
-								<h5>온라인 / 오프라인</h5>
-								<label>
-									<input type="radio" name="options" value="option15">
-								</label>
-							</div>
 						</div>
 
 						<div class="modal-footer">
@@ -320,32 +395,33 @@
 		
 		
 			<div class="container">
-				<div class="search-class">
-					<div class="row">
-						<c:forEach var="c" items="${list}" varStatus="loop">
-							<div class="col-md-4 post-item">
-								<article class="post">
-									<div class="postPreview">
-										<a href="detail.cl?classNo=${c.classNo}&clType=${c.clType}">
-											<img src="${alist[loop.index].updateName}" alt="">
-										</a>
-									</div>
-									<br>
-									<div class="post-wrapper">
-										<div class="post-header">
-											<h4 class="post-title1"><a href="blog-single-1.html">${c.classTitle}</a></h4>
-										</div>
-										<div class="post-content">
-											<p>${c.classLocation}</p>
-										</div>
-										<div class="post-more"><a href="#">${c.classDate}</a></div>
-									</div>
-								</article>
-							</div>
-						</c:forEach>
-					</div>
-				</div>
+			    <div class="search-class">
+			        <div class="row">
+			            <c:forEach var="c" items="${flist}" varStatus="loop">
+			                <div class="col-md-4 post-item">
+			                    <article class="post">
+			                        <div class="postPreview">
+			                            <a href="detail.cl?classNo=${c.classNo}&clType=${c.clType}">
+			                                <img src="${alist[loop.index].updateName}" alt="">
+			                            </a>
+			                        </div>
+			                        <br>
+			                        <div class="post-wrapper">
+			                            <div class="post-header">
+			                                <h4 class="post-title1"><a href="blog-single-1.html">${c.classTitle}</a></h4>
+			                            </div>
+			                            <div class="post-content">
+			                                <p>${c.classLocation}</p>
+			                            </div>
+			                            <div class="post-more"><a href="#">${c.classDate}</a></div>
+			                        </div>
+			                    </article>
+			                </div>
+			            </c:forEach>
+			        </div>
+			    </div>
 			</div>
+
 
 					
 
@@ -362,7 +438,7 @@
                 	</c:choose>
                 	
                 	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                		<li class="page-item"><a class="page-link" href="search.li?cpage=${ p }&keyword=${ keyword }">${ p }</a></li>
+                		<li class="page-item"><a class="page-link" href="search.li?cpage=${ p }&keyword=${ keyword }&options=${ options }">${ p }</a></li>
                  	</c:forEach>
                  	
                  	<c:choose>
@@ -398,6 +474,10 @@
 					instagramLink.addEventListener("click", handleInstagramIconClick);
 				}
 			});
+
+			
+			
+			<!-- 조절 바 -->
 
 		</script>
 

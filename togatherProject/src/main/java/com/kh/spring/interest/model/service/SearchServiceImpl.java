@@ -58,6 +58,21 @@ public class SearchServiceImpl implements SearchService {
 	 
 	// 상세 조회
 	
+	@Override
+	public int searchFilterListCount(String keyword, String options) {
+		return sDao.searchFilterListCount(sqlSession, keyword, options);
+	}
+
+	@Override
+	public ArrayList<Club> searchFilterList(String keyword, PageInfo fpi, String options) {
+		return sDao.searchFilterList(sqlSession, keyword, fpi, options);
+	}
+
+	@Override
+	public ArrayList<Attachment> selectFilterImageSearchList(String keyword, PageInfo fpi, String options) {
+		return sDao.selectFilterImageSearchList(sqlSession, keyword, fpi, options);
+	}
+	
 	
 	// 소셜링 리스트가 보이는 페이지 서비스 (페이징 처리)
 	@Override

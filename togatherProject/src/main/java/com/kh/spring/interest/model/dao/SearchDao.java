@@ -82,6 +82,40 @@ public class SearchDao {
 	
 	
 	// 상세 조회
+	public int searchFilterListCount(SqlSessionTemplate sqlSession, String keyword, String options) {
+	    Map<String, String> parameterMap = new HashMap<>();
+	    parameterMap.put("keyword", keyword);
+	    parameterMap.put("options", options);
+	    
+	    return sqlSession.selectOne("searchMapper.searchFilterListCount", parameterMap);
+	}
+
+	
+	public ArrayList<Club> searchFilterList(SqlSessionTemplate sqlSession, String keyword, PageInfo fpi, String options) {
+	    int offset = (fpi.getCurrentPage() - 1) * fpi.getBoardLimit();
+	    int limit = fpi.getBoardLimit();
+
+	    RowBounds rowBounds = new RowBounds(offset, limit);
+
+	    Map<String, Object> parameterMap = new HashMap<>();
+	    parameterMap.put("keyword", keyword);
+	    parameterMap.put("rowBounds", rowBounds);
+	    parameterMap.put("options", options);
+
+	    return (ArrayList)sqlSession.selectList("searchMapper.searchFilterList", parameterMap);
+	}
+	
+	public ArrayList<Attachment> selectFilterImageSearchList(SqlSessionTemplate sqlSession, String keyword, PageInfo fpi, String options) {
+		
+		int offset = (fpi.getCurrentPage() - 1) * fpi.getBoardLimit();
+		int limit = fpi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.selectFilterImageSearchList", null, rowBounds);
+		
+	}
+	
 
 	
 	// ajax 영역
