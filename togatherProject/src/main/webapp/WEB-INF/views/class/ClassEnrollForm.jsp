@@ -1,3 +1,5 @@
+enrollForm
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -51,7 +53,7 @@
 #pagination .on {font-weight: bold; cursor: default;color:#777;}
 .display{display: none;}
 #oneday:hover{background-color: purple;}
-.clCategorydiv, .classApproval, .choiseMap, .ageLimit{
+.clCategorydiv, .classApproval, .choiseMap, .ageLimit, .classTime{
 	display: inline-flex;
 	flex-direction: row;
 	justify-content: space-around;
@@ -62,7 +64,7 @@
 	height: 50px;
 }
 
- .classApproval div, .choiseMap div, .ageLimit div{
+ .classApproval div, .choiseMap div, .ageLimit div, .classTime input{
  	width: 200px;
 	height: 50px;
  }
@@ -141,15 +143,14 @@
 }
 
 .slider > .thumbl {
-  left: 15%;
+  left: 12%;
 }
 .slider > .thumbr {
-  right: 15%;
+  right: 10%;
 }
 
 input[type="range"] {
   position: absolute;
-  /* opacity로 가린 것을 이벤트도 비활성화하기 위해 */
   pointer-events: none;
   -webkit-appearance: none;
   z-index: 3;
@@ -160,7 +161,6 @@ input[type="range"] {
 }
 
 input[type="range"]::-webkit-slider-thumb {
-  /* 겹쳐진 두 thumb를 모두 활성화 */
   pointer-events: all;
   width: 30px;
   height: 30px;
@@ -168,7 +168,6 @@ input[type="range"]::-webkit-slider-thumb {
   border: 0 none;
   background-color: red;
   cursor: pointer;
-  /* appearance를 해야 위의 스타일들을 볼 수 있음 */
   -webkit-appearance: none;
 }
 </style>		
@@ -649,11 +648,26 @@ input[type="range"]::-webkit-slider-thumb {
 									<br>
 									
 									<h5>언제 만날까요?</h5>
-									<div class="form-group">
-										<input type="date" name="classDate">
-										<input type="time" name="classTime">
+									
+									<div class="classTime">
+										<div class="form-group">
+											<input type="date" id="classDate" name="classDate" class="form-control" style="color: white;">
+										</div> &nbsp;&nbsp;
+										<div class="form-group">
+											<input type="time" id="classTime" name="classTime" class="form-control" style="color: white;">										
+										</div>
 									</div>
-																		
+									
+									<script>
+										$("#classDate").change(function(){
+											$(this).css("color", "orange");
+										})
+										
+										$("#classTime").change(function(){
+											$(this).css("color", "orange");
+										})
+									</script>
+									
 									<h5>어디서 만날까요?</h5>
 									<div class="choiseMap">
 										<div class="form-group">
@@ -963,10 +977,11 @@ input[type="range"]::-webkit-slider-thumb {
 									<script>
 										$(function(){
 											$("#approval").click(function(){
+												$("#classApproval").val('Y');
+												console.log($("#classApproval").val());
 												if($("#approval").hasClass("orange")){
 													$("#approval").removeClass("orange");
 													$("#approval").css("backgroundColor","");
-													$("#classApproval").val('Y');
 												}else{
 													$("#approval").addClass("orange");
 													$("#approval").css("backgroundColor","orange");
@@ -976,10 +991,11 @@ input[type="range"]::-webkit-slider-thumb {
 											})
 											
 											$("#First-come").click(function(){
+												$("#classApproval").val('N');
+												console.log($("#classApproval").val());
 												if($("#First-come").hasClass("orange")){
 													$("#First-come").removeClass("orange");
 													$("#First-come").css("backgroundColor","");
-													$("#classApproval").val('N');
 												}else{
 													$("#First-come").addClass("orange");
 													$("#First-come").css("backgroundColor","orange");
@@ -1003,14 +1019,17 @@ input[type="range"]::-webkit-slider-thumb {
 										$("#ageLimit").click(function(){
 											$("#remove").remove();
 											$("#ageLimitDiv").removeClass("display");
+											$("#submitbtn").attr("disabled", true);
+											$("#submitbtn").removeClass("submitbtn");
 										})
 									</script>
 									
+									<!-- 양방향 range -->
 									<div id="ageLimitDiv" class="display">
 										<div class="middle">
 										  <div class="multi-range-slider">
-											<input type="range" id="age1" class="form-control" min="20" max="50" step="5" name="minAge" style="color:white" value="25" placeholder="최소나이제한">
-											<input type="range" id="age2" class="form-control" min="20" max="50" step="5" name="maxAge" style="color:white" value="45" placeholder="최대나이제한">
+											<input type="range" id="age1" class="form-control" min="20" max="70" step="5" name="minAge" style="color:white" value="25" placeholder="최소나이제한">
+											<input type="range" id="age2" class="form-control" min="20" max="70" step="5" name="maxAge" style="color:white" value="65" placeholder="최대나이제한">
 											
 										    <!-- 커스텀 슬라이더 -->
 										    <div class="slider">
@@ -1062,12 +1081,16 @@ input[type="range"]::-webkit-slider-thumb {
 											$("#ageText").removeClass("display");
 											$("#minAgeText").html($("#age1").val());
 											$("#maxAgeText").html($("#age2").val());
+											$("#submitbtn").attr("disabled", false);
+											$("#submitbtn").addClass("submitbtn");
 										})
 										
 										$("#age2").change(function(){
 											$("#ageText").removeClass("display");
 											$("#minAgeText").html($("#age1").val());
 											$("#maxAgeText").html($("#age2").val());
+											$("#submitbtn").attr("disabled", false);
+											$("#submitbtn").addClass("submitbtn");
 										})
 									</script>
 									

@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
-.menu-classic-item-img img{
+.demo-preview img{
 	width: 384.89px;
 	height: 219.31px;
 	object-fit: cover;
@@ -62,23 +62,26 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<c:forEach var="c" items="${ list }">
+					<c:forEach var="c"  items="${ list }">
 						<c:if test="${ c.clType eq 1 }">
-							<div class="col-md-4">
-								<div class="demo-preview"><a href="${ c.attachment.originName }"><img src="${ c.attachment.updateName }" alt="">
-					       <c:choose>
-					           <c:when test="${fn:length(c.classTitle) > 18}">
-					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-					           </c:when>
-					           <c:otherwise>
-					           		<h6>${c.classTitle}</h6></a></div>
-				        	   </c:otherwise> 
-				          </c:choose>
+						<div class="col-md-4">
+							<div class="demo-preview" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
+							<a>
+								<img src="${ c.attachment.updateName }">
+						       <c:choose>
+						           <c:when test="${fn:length(c.classTitle) > 18}">
+						            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6></a></div>
+						           </c:when>
+						           <c:otherwise>
+						            	<h6><c:out value="${c.classTitle}"/></h6></a></div>
+					        	   </c:otherwise> 
+					          </c:choose>
 							</div>
-						</c:if>
+				          </c:if>
 					</c:forEach>
+
 					<div class="col-md-4">
-						<div class="demo-preview"><a href="index-2.html"><img src="assets/images/demo/2.jpg" alt="">
+						<div class="demo-preview"><a href="detail.cl?classNo=${ c.classNo }&clType=${ c.clType }"><img src="assets/images/demo/2.jpg" alt="">
 								<h6>02. Slider</h6></a></div>
 					</div>
 					<div class="col-md-4">

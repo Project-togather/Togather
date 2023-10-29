@@ -40,6 +40,8 @@ public class Club {
 	private String status; // 폐쇄상태
 	private int vacancy; // 남은 자리
 	private String nickName; // 닉네임
+	private String enrollDate; // 모임등록 날짜
+
 	
 	// 카카오맵 api 추가
 	private String latitude; // 위도

@@ -103,7 +103,10 @@
 		  from class
 		  join attachment on (c_no = ref_fno)
 		 where status = 'Y'
+		 order
+		    by enrollDate desc;
 	</select>
+
 	
 	<select id="selectSocialList" resultMap="resultclub">
         select 
@@ -125,10 +128,20 @@
 		     , origin_name
 		     , update_name
 		     , file_path
+		     , cl_name
+		     , cl_ca_name
+   		     , (select count(*)
+                 from my_class
+                where c_no = #{classNo}
+                  and cl_type_status = 1) vacancy
 		  from class
 		  join attachment on (c_no = ref_fno)
+		  join cl_category on (cl_category = cl_categoryno)
+		  join cl_type on (cl_type = cl_ca_no)
 		 where status = 'Y'
 		   and cl_type = 1
+   		 order
+		    by enrollDate desc
 	</select>
 	
 		<select id="selectClubList" resultMap="resultclub">
@@ -151,10 +164,20 @@
 		     , origin_name
 		     , update_name
 		     , file_path
+		     , cl_name
+		     , cl_ca_name
+   		     , (select count(*)
+                 from my_class
+                where c_no = #{classNo}
+                  and cl_type_status = 1) vacancy
 		  from class
 		  join attachment on (c_no = ref_fno)
+		  join cl_category on (cl_category = cl_categoryno)
+		  join cl_type on (cl_type = cl_ca_no)
 		 where status = 'Y'
 		   and cl_type = 2
+   		 order
+		    by enrollDate desc;
 	</select>
 	
 		<select id="selectChallengeList" resultMap="resultclub">
@@ -177,10 +200,20 @@
 		     , origin_name
 		     , update_name
 		     , file_path
+		     , cl_name
+		     , cl_ca_name
+   		     , (select count(*)
+                 from my_class
+                where c_no = #{classNo}
+                  and cl_type_status = 1) vacancy
 		  from class
 		  join attachment on (c_no = ref_fno)
+		  join cl_category on (cl_category = cl_categoryno)
+		  join cl_type on (cl_type = cl_ca_no)
 		 where status = 'Y'
 		   and cl_type = 3
+   		 order
+		    by enrollDate desc;
 	</select>
 	
 		<select id="selectOneDayList" resultMap="resultclub">
@@ -203,11 +236,22 @@
 		     , origin_name
 		     , update_name
 		     , file_path
+		     , cl_name
+		     , cl_ca_name
+   		     , (select count(*)
+                 from my_class
+                where c_no = #{classNo}
+                  and cl_type_status = 1) vacancy
 		  from class
 		  join attachment on (c_no = ref_fno)
+		  join cl_category on (cl_category = cl_categoryno)
+		  join cl_type on (cl_type = cl_ca_no)
 		 where status = 'Y'
 		   and cl_type = 4
+   		 order
+		    by enrollDate desc;
 	</select>
+
 	
 	<select id="selectClassDetail" resultMap="resultclub">
 		select
@@ -267,6 +311,7 @@
 			  , curriculum
 			  , latitude
 			  , longitude
+		  	  , enrollDate
 			 )
 		values
 			 (
@@ -287,6 +332,7 @@
 			  , #{curriculum}
 			  , #{latitude}
 			  , #{longitude}
+			  , sysdate
 			 )
 	</insert>
 	
