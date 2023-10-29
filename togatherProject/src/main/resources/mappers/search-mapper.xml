@@ -144,8 +144,57 @@
 	</select>
 	
 	<!-- 상세 조회 -->
+	<select id="searchFilterListCount" resultType="_int">
+		SELECT COUNT(*)
+			FROM class c
+			JOIN attachment ON c_no = ref_fno
+			WHERE c.status = 'Y'
+			AND c.c_title like '%' || #{keyword} || '%'
+			<if test="options == 1">
+			  AND c.cl_type = 1
+			</if>
+			<if test="options == 2">
+			  AND c.cl_type = 2
+			</if>
+			<if test="options == 3">
+			  AND c.cl_type = 3
+			</if>
+	</select>
 	
+	<select id="searchFilterList" resultMap="clubResult">
+		SELECT
+		    c_no,
+		    c_title,
+		    c_location,
+		    c_date,
+		    cl_type
+		FROM class
+		JOIN attachment ON (c_no = ref_fno)
+		WHERE status = 'Y'
+		    AND c_title like '%' || #{keyword} || '%'
+			<if test="options == 1">
+			  AND cl_type = 1
+			</if>
+			<if test="options == 2">
+			  AND cl_type = 2
+			</if>
+			<if test="options == 3">
+			  AND cl_type = 3
+			</if>
+			order
+	   			by c_no desc
+	</select>
 	
+	<select id="selectFilterImageSearchList" resultMap="AttResult">
+		select
+        att_no
+    ,   ref_fno
+    ,   origin_name
+    ,	update_name
+    ,	file_path
+    ,	enroll_date
+        from attachment
+	</select>
 	
 	
 	

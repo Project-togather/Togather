@@ -21,6 +21,10 @@ public interface SearchService {
 	ArrayList<Club> searchKeywordList(String keyword, PageInfo pi);
 	ArrayList<Attachment> selectImageSearchList(String keyword, PageInfo pi);
 	
+	int searchFilterListCount(String keyword, String options);
+	ArrayList<Club> searchFilterList(String keyword, PageInfo fpi, String options);
+	ArrayList<Attachment> selectFilterImageSearchList(String keyword, PageInfo fpi, String options);
+	
 	
 	// 소셜링
 	int selectSocialingListCount();
