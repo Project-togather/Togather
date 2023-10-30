@@ -75,15 +75,52 @@
 </style>
 </head>
 <body>
-
+	
 	<script>
-	
-	
-	
+	 
+	/* sse Test */
+    function sse(id) {
+		
+        // 비동기 작업을 위한 프로미스 반환
+        return new Promise((resolve, reject) => {
+            const eventSource = new EventSource(`sse/` + id);
+            
+            eventSource.addEventListener("sse", function(event) {
+                console.log("오셨습니까...");
+                const data = JSON.parse(event.data);
+                console.log(data);
+
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+
+                toastr.info(data.reply.classTitle + "모임에 <span style='color: orange'>" + data.receiver.nickName + "</span>님이" + data.content, '🔔 알람이 도착했습니다 !');
+
+                // 비동기 작업이 완료되면 프로미스 해결
+                resolve(data);
+            });
+
+            eventSource.addEventListener("error", function(event) {
+                // 에러 발생 시 프로미스 거부
+                reject(event);
+            });
+        });
+    }
 	
 	</script>
-	
-	
 	
 	<c:if test="${not empty alertMsg}">
 		<script >

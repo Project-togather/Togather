@@ -78,10 +78,10 @@
 				<script >	
 				
 				// 전역스코프 설정
-/*
+				/*
 				$("#loginBTN").click(function(){
-					mem_id_sse = $("#memId_sse").val();
-					sse(mem_id_sse);
+					const id = $("#memId_sse").val();
+					sse(id);
 				})
 				*/
 				
