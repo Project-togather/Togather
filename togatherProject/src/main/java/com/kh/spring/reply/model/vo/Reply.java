@@ -25,4 +25,5 @@ public class Reply {
 	
 	private String nickName;
 	private String img;
+	private String classTitle;
 }

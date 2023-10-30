@@ -16,8 +16,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />	
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- Favicons-->
 <link rel="shortcut icon" href="assets/images/favicon.png">
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -31,6 +33,7 @@
 <link href="assets/css/plugins.min.css" rel="stylesheet">
 <!-- Template core CSS-->
 <link href="assets/css/template.css" rel="stylesheet">
+
 
 <style>
 .menu-item-span{
@@ -72,6 +75,16 @@
 </style>
 </head>
 <body>
+
+	<script>
+	
+	
+	
+	
+	</script>
+	
+	
+	
 	<c:if test="${not empty alertMsg}">
 		<script >
 			//swal("${alertMsg}");

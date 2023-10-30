@@ -30,7 +30,7 @@ public class NotificationController {
 	*/
 	
     @GetMapping(value = "sse/{id}", produces = "text/event-stream")
-    public SseEmitter subscribe(@PathVariable Long id,
+    public SseEmitter subscribe(@PathVariable String id,
     							@RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId) {
     	
     	return notificationserviceImpl.subscribe(id, lastEventId);

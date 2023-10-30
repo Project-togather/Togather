@@ -47,7 +47,7 @@ public class Club {
 	private String latitude; // 위도
 	private String longitude; // 경도
 	
-
+	private String memId;
 	private int clTypeStatus; // 모임 가입상태
 
 	private Attachment attachment;

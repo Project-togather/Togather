@@ -52,15 +52,14 @@
 								<div  class="up-form">
 									<form action="login.me" method="post">
 										<div class="form-group">
-											<input class="form-control" name="memId" type="text" placeholder="Id" style="color: white;">
+											<input class="form-control" name="memId" type="text" placeholder="Id" style="color: white;" id="memId_sse">
 										</div>
 										<div class="form-group">
 											<input class="form-control" name="memPwd" type="password" placeholder="Pasword" style="color: white;">
 										</div>
 										<div class="form-group">
-											<button class="btn btn-block btn-round btn-brand" type="submit">Login</button>
+											<button class="btn btn-block btn-round btn-brand" type="submit" id="loginBTN">Login</button>
 										</div>
-										
 									</form>
 								</div>
 								<div class="form-group">
@@ -76,7 +75,16 @@
 					</div>
 				</div>
 				
-				<script >
+				<script >	
+				
+				// 전역스코프 설정
+/*
+				$("#loginBTN").click(function(){
+					mem_id_sse = $("#memId_sse").val();
+					sse(mem_id_sse);
+				})
+				*/
+				
 					function googleLogin(){
 						location.href = "https://accounts.google.com/o/oauth2/v2/auth?client_id=43410666342-clrgc0u7iriccl044k80v7rquclsh41j.apps.googleusercontent.com&redirect_uri=http://localhost:8012/togather/google&response_type=code&scope=email%20profile%20openid&access_type=offline";	
 					}

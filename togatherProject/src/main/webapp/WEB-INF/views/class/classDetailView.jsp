@@ -13,6 +13,9 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	
+
+
 <title>${ c.classTitle }</title>
 </head>
 <body>
@@ -42,13 +45,15 @@
 							</h6>
 							<h3 class="display-1">${ c.classTitle }</h3>
 							<div class="space" data-mY="40px"></div>
-							<a class="btn btn-white enter-btn" onclick="enterClass();"
-								style="color: black;">모임 참가하기</a> <input type="text" id="id">
-							<button type="button" onclick="test();">테스트</button>
+							<a class="btn btn-white enter-btn" onclick="enterClass();" style="color: black;">모임 참가하기</a> 
+							<!--  -->
+							<input type="text" id="id">
+							<button type="button" onclick="sse();">테스트</button>
 							<div id="sseTest2"></div>
 							<br>
 							<button type="button" class="btn btn-outline btn-sm btn-brand"
 								onclick="requestPay();">결제하기</button>
+								
 						</div>
 					</div>
 				</div>
@@ -103,58 +108,80 @@
 						  });
 					  });
 					}
-
-			/* sse Test */ 
-			function test(){
 				
-				/* EventSource 지원 여부 확인
-				if(typeof(EventSource) !== "undefined") {
-					console.log("지원");
-				}
-					console.log("미지원");
-					*/
-					
-				/* sse Test 시작 */
-				const id = document.getElementById('id').value;
+				/* sse Test */ 
+				function sse(){
 
-				var eventSource = new EventSource(`sse/` + id);
+					/* EventSource 지원 여부 확인
+					if(typeof(EventSource) !== "undefined") {
+						console.log("지원");
+					}
+						console.log("미지원");
+						*/
+						
+					/* sse Test 시작 */
+					const id = document.getElementById('id').value;
+						
+					console.log(id);
+						
+					var eventSource = new EventSource(`sse/` + id);
+						
+					eventSource.addEventListener("sse", function(event) {
+						
+					console.log("오셨습니까...");
+						
+						const data = JSON.parse(event.data);
+						
+						console.log(data);
+						
+						toastr.options = {
+								  "closeButton": true,
+								  "debug": false,
+								  "newestOnTop": false,
+								  "progressBar": true,
+								  "positionClass": "toast-top-right",
+								  "preventDuplicates": false,
+								  "onclick": function () { location.href="http://localhost:8012/togather" },
+								  "showDuration": "300",
+								  "hideDuration": "1000",
+								  "timeOut": "5000",
+								  "extendedTimeOut": "1000",
+								  "showEasing": "swing",
+								  "hideEasing": "linear",
+								  "showMethod": "fadeIn",
+								  "hideMethod": "fadeOut"
+								}
+														
+										
+							
+							      toastr.info(data.reply.classTitle + "모임에 <span style='color: orange'>" + data.receiver.nickName + "</span>님이" + data.content, '🔔 알람이 도착했습니다 !');
+
+						/* web notification 방식
+						let notification;
+				        let notificationPermission = Notification.permission;
+				        
+				        if (notificationPermission === "granted") {
+				            //Notification을 이미 허용한 사람들에게 보여주는 알람창
+				            notification = new Notification('🔔 알람이 도착했습니다 !', {
+				                body : data.receiver.classTitle + "모임에 " + data.receiver.nickName + "님이" + data.content,
+				                url : data.url
+				            });
+				            
+				            setTimeout(()=>{
+				            	notification.close();
+				            }, 10 * 1000);
+				            
+				            notification.addEventListener('click', ()=>{
+				            	window.open(data.url, '_blank');
+				            })
+				        } 
+
+						$("#sseTest2").text("내가 받은 메세지 : " + message);
+						*/
+					});
 				
-					
-				eventSource.addEventListener("sse", function(event) {
-					console.log(event.data);
-					console.log(event)
-					
-					const data = JSON.parse(event.data);
-					
-					console.log(data);
-					
-					var message = event.data;
-					
-					let notification;
-			        let notificationPermission = Notification.permission;
-			        
-			        if (notificationPermission === "granted") {
-			            //Notification을 이미 허용한 사람들에게 보여주는 알람창
-			            notification = new Notification('🔔 알람이 도착했습니다 !', {
-			                body : data.receiver + "님이 " + data.content,
-			                url : data.url
-			            });
-			            
-			            setTimeout(()=>{
-			            	notification.close();
-			            }, 10 * 1000);
-			            
-			            notification.addEventListener('click', ()=>{
-			            	window.open("http://localhost:8012/togather/index.jsp", '_blank');
-			            })
-			        } 
-					
-					
-					
-					$("#sseTest2").text("내가 받은 메세지 : " + message);
-				});
-			}
-			
+				}	
+				
 			
 			/* 잔여자리에 따른 css 변경*/
 			let vac = ${ c.peopleLimit - c.vacancy }
@@ -842,7 +869,10 @@
 												data:{
 													rvContent:$("#reply").val(),
 													refFno:'${c.classNo}',
-													memNo:'${loginMember.memNo}',												
+													memNo:'${loginMember.memNo}',
+													classTitle:'${c.classTitle}',
+													nickName:'${loginMember.nickName}',
+													memId:'${c.memId}'
 													},success:result=>{
 													if(result == "success"){
 														$("#reply").val("");

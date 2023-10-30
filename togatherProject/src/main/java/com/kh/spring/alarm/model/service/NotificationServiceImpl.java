@@ -22,11 +22,11 @@ public class NotificationServiceImpl {
         this.emitterRepository = emitterRepository;
     }
 
-    public SseEmitter subscribe(Long userId, String lastEventId) {
+    public SseEmitter subscribe(String id, String lastEventId) {
     	
     	//String id = userId + "_" + System.currentTimeMillis();
     	
-    	String id = String.valueOf(userId);
+    	System.out.println("id : " + id);
     	
     	SseEmitter emitter = new SseEmitter(DEFAULT_TIMEOUT);
         emitterRepository.save(id, emitter);
@@ -39,7 +39,7 @@ public class NotificationServiceImpl {
         System.out.println("구독에미터 : " + emitter);
         
         // 503 에러 방지를 위한 더미 이벤트 전송
-        sendToClient(emitter, id, "EventStream Created. [userId=" + userId + "]");
+        sendToClient(emitter, id, "EventStream Created. [userId=" + id + "]");
         
         /*
         if (!lastEventId.isEmpty()) {
@@ -88,13 +88,13 @@ public class NotificationServiceImpl {
     */
 
     
-    public void send(String receiver, String reply, String content) {
+    public void send(Member receiver, Reply reply, String content) {
     	
     	
     	System.out.println("센드 옴");
     	Notification notification = createNotification(receiver, reply, content);
     	System.out.println(notification);
-    	String id = "44";
+    	String id = receiver.getMemId();
     	
     	//로그인 한 유저의 SseEmitter 모두 가져오기
     	Map<String, SseEmitter> sseEmitters = emitterRepository.findAllEmitterStartWithById(id);
@@ -102,6 +102,8 @@ public class NotificationServiceImpl {
     	System.out.println(sseEmitters);
     	sseEmitters.forEach(
     			(key, emitter) -> {
+    				System.out.println("key : " +  key);
+    				System.out.println("emitter : " +  emitter);
     				sendToClient(emitter, key, notification);
     				System.out.println("send 보냈나요");
     				// 데이터 캐시 저장
@@ -112,13 +114,13 @@ public class NotificationServiceImpl {
 		);
     }
     
-    private Notification createNotification(String receiver, String reply, String content) {
+    private Notification createNotification(Member receiver, Reply reply, String content) {
     	System.out.println("크노티 옴");
         return Notification.builder()
                            .receiver(receiver)
                            .content(content)
                            .reply(reply)
-                           .url("http://localhost:8012/togather/index.jsp")
+                           .url("http://localhost:8012/togather/detail.cl?classNo=" + reply.getRefFno())
                            .isRead(false)
                            .build();
         

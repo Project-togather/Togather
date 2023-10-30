@@ -28,6 +28,7 @@
 		<result column="cl_ca_name" property="clCaName"/>		
 		<result column="latitude" property="latitude"/>		
 		<result column="longitude" property="longitude"/>		
+		<result column="mem_id" property="memId"/>		
 	
 		<collection property="attachment" resultMap="attachment"/>
 	</resultMap>
@@ -281,6 +282,7 @@
                  from my_class
                 where c_no = 'C1'
                   and cl_type_status = 1) vacancy
+             , mem_id     
 		  from class
 		  join member using (mem_no)
           join cl_type on(cl_type = cl_ca_no)
