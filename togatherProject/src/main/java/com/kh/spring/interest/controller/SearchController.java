@@ -63,131 +63,46 @@ public class SearchController {
 	}
 	
 	
-	// 페이지 화면
-	@RequestMapping(value = "list.se")
-	public ModelAndView searchPageList(@RequestParam(value="cpage", defaultValue = "1") int currentPage, HttpServletRequest request , HttpSession session, ModelAndView mv) {
-		
-		int listCount = sService.selectClassAllListCount();
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
-		
-		ArrayList<Club> list = sService.selectClassAllList(pi);
-		
-		ArrayList<Attachment> alist =sService.selectImageAllList(pi); 
-		
-		
-		
-		// System.out.println(pi);
-		// System.out.println(list);
-		// System.out.println(alist);
-		
-		
-		
-		mv.addObject("pi", pi).addObject("list", list).addObject("alist", alist).setViewName("search/searchPage2");
-		
-		
-		return mv;
-	}
-	
-	
-	
 	// 검색 화면
 	@RequestMapping(value = "search.li")
 	public String searchKeywordList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
-	                                @RequestParam(value = "keyword", required = true) String keyword,
-	                                @RequestParam(value = "options", required = false) String options, Model model) {
-	    // 검색 결과의 총 개수를 가져오는 메소드
-	    int searchCount = sService.searchKeywordListCount(keyword);
-	    
-	    // 필터(옵션) 결과의 총 개수를 가져오는 메소드
-	    int filterCount = sService.searchFilterListCount(keyword, options);
-	    
-	    
-	    
-
-	    if (searchCount == 0) {
+									@RequestParam(value = "keyword", required = true) String keyword,
+									@RequestParam(value = "options", required = false) String options,
+									@RequestParam(value = "sorting", required = false) String sorting, Model model) {
 	    	
-	        // 검색 결과가 없을 때 알림 메시지를 설정
-	        model.addAttribute("errorMessage", "검색 결과가 없습니다.");
-	        
-	    } else {
-	    	
-	        // 페이지 정보 계산
-	        PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, 10, 9);
-
-	        // 검색 결과 가져오는 메소드
-	        ArrayList<Club> list = sService.searchKeywordList(keyword, pi);
-	        ArrayList<Attachment> alist =sService.selectImageSearchList(keyword, pi);
-	        
-	        
-
-	        // Model을 사용하여 데이터 전달
-	        model.addAttribute("pi", pi);
-	        model.addAttribute("list", list);
-	        model.addAttribute("alist", alist);
-	        
-	        
-	        System.out.println("------------- 검색 -----------------");
-	        
-	        System.out.println("keyword :" + keyword);
-	        
-	        System.out.println("검색 결과 : " + list);
-	    }
+		System.out.println(currentPage);
+		
+		
+		// 검색 결과 총 개수
+	    int listCount = sService.searchListCount(keyword, options, sorting);
 	    
+	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 	    
+	    ArrayList<Club> list = sService.searchList(keyword, options, sorting, pi);
+	    ArrayList<Attachment> alist = sService.searchImageList(keyword, options, sorting, pi);
 	    
-	    
-	    if (searchCount == 0 && filterCount == 0) {
-	        // 검색 결과나 필터 결과가 없는 경우 알림 메시지 설정
-	        model.addAttribute("errorMessage", "검색 결과를 찾을 수 없습니다.");
-	    } else {
-	        // 검색 및 필터 결과 모두에 대한 페이지 정보 초기화
-	        PageInfo pi = null;
-	        PageInfo fpi = null;
-	        ArrayList<Club> list = null;
-	        ArrayList<Attachment> alist = null;
-	        ArrayList<Club> flist = null;
-	        ArrayList<Attachment> falist = null;
-
-	        // 검색 결과가 있는지 확인
-	        if (searchCount > 0) {
-	            pi = Pagination.getPageInfo(searchCount, currentPage, 10, 9);
-	            list = sService.searchKeywordList(keyword, pi);
-	            alist = sService.selectImageSearchList(keyword, pi);
-	        }
-
-	        // 필터 결과가 있는지 확인
-	        if (filterCount > 0) {
-	            fpi = Pagination.getPageInfo(filterCount, currentPage, 10, 9);
-	            flist = sService.searchFilterList(keyword, fpi, options);
-	            falist = sService.selectFilterImageSearchList(keyword, fpi, options);
-	        }
-
-	        // Model을 사용하여 데이터 전달
-	        model.addAttribute("pi", pi);
-	        model.addAttribute("list", list);
-	        model.addAttribute("alist", alist);
-	        model.addAttribute("fpi", fpi);
-	        model.addAttribute("flist", flist);
-	        model.addAttribute("falist", falist);
-
-	        System.out.println("------------- 검색 및 필터 결과 -----------------");
-	        System.out.println("키워드: " + keyword);
-	        System.out.println("옵션: " + options);
-	        System.out.println("필터 결과: " + flist);
-	    }
-
 	    model.addAttribute("keyword", keyword);
 	    model.addAttribute("options", options);
+	    model.addAttribute("sorting", sorting);
+	    
+	    model.addAttribute("pi", pi);
+        model.addAttribute("list", list);
+        model.addAttribute("alist", alist);
+	    
+	    
+        System.out.println("pi :" + pi);
+        System.out.println("키워드 :" + keyword);
+        System.out.println("유형 :" + options);
+        System.out.println("정렬 :" + sorting);
+        System.out.println("검색 결과: " + list);
+        System.out.println("검색 사진 :" + alist);
+        
+	    
 
 	    return "search/searchPage2";
 	}
 
-	
-	
-	
-	
-	// 상세 조회
+
 	
 	
 	

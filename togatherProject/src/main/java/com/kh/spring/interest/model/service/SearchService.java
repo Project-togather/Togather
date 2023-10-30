@@ -11,20 +11,17 @@ import com.kh.spring.member.model.vo.Member;
 
 public interface SearchService {
 
-	// 전체 조회
-	int selectClassAllListCount();
-	ArrayList<Club> selectClassAllList(PageInfo pi);
-	ArrayList<Attachment> selectImageAllList(PageInfo pi);
+	// 임시
+	int searchListCount(String keyword, String options, String sorting);
+	ArrayList<Club> searchList(String keyword, String options, String sorting, PageInfo pi);
+	ArrayList<Attachment> searchImageList(String keyword, String options, String sorting, PageInfo pi);
 	
 	// 검색 조회
-	int searchKeywordListCount(String keyword);
-	ArrayList<Club> searchKeywordList(String keyword, PageInfo pi);
-	ArrayList<Attachment> selectImageSearchList(String keyword, PageInfo pi);
-	
-	int searchFilterListCount(String keyword, String options);
-	ArrayList<Club> searchFilterList(String keyword, PageInfo fpi, String options);
-	ArrayList<Attachment> selectFilterImageSearchList(String keyword, PageInfo fpi, String options);
-	
+	/*
+	int searchKeywordListCount(String keyword, String options);
+	ArrayList<Club> searchFilterList(String keyword, String options, PageInfo pi);
+	ArrayList<Attachment> selectFilterImageSearchList(String keyword, String options, PageInfo pi);
+	*/
 	
 	// 소셜링
 	int selectSocialingListCount();

@@ -322,15 +322,11 @@ input[type="range"]::-webkit-slider-thumb {
 							<div class="modal-body">
 							    <h5>정렬</h5>
 							    <label>
-							        인기순 <input type="radio" name="sorting" value="4">
+							        온라인 <input type="radio" name="sorting" value="4" <c:if test="${sorting == '4'}">checked</c:if>>
 							    </label>
 							    <br>
 							    <label>
-							        온 / 오프 라인 <input type="radio" name="sorting" value="5">
-							    </label>
-							    <br>
-							    <label>
-							        페쇄 여부 <input type="radio" name="sorting" value="6">
+							        오프라인 <input type="radio" name="sorting" value="5" <c:if test="${sorting == '5'}">checked</c:if>>
 							    </label>
 							</div>
 							
@@ -397,7 +393,7 @@ input[type="range"]::-webkit-slider-thumb {
 			<div class="container">
 			    <div class="search-class">
 			        <div class="row">
-			            <c:forEach var="c" items="${flist}" varStatus="loop">
+			            <c:forEach var="c" items="${list}" varStatus="loop">
 			                <div class="col-md-4 post-item">
 			                    <article class="post">
 			                        <div class="postPreview">
@@ -423,8 +419,6 @@ input[type="range"]::-webkit-slider-thumb {
 			</div>
 
 
-					
-
 				<div id="pagingArea">
             		<ul class="pagination">
             	
@@ -433,12 +427,12 @@ input[type="range"]::-webkit-slider-thumb {
 	                		<li class="page-item disabled"><a class="page-link" href="">&lt;</a></li>
 	                	</c:when>
 	                	<c:otherwise>
-	                		<li class="page-item"><a class="page-link" href="list.se?cpage=${ pi.currentPage - 1 }">&lt;</a></li>
+	                		<li class="page-item"><a class="page-link" href="search.li?cpage=${ pi.currentPage - 1 }&keyword=${ keyword }">&lt;</a></li>
 	                	</c:otherwise>
                 	</c:choose>
                 	
                 	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-                		<li class="page-item"><a class="page-link" href="search.li?cpage=${ p }&keyword=${ keyword }&options=${ options }">${ p }</a></li>
+                		<li class="page-item"><a class="page-link" href="search.li?cpage=${ p }&keyword=${ keyword }">${ p }</a></li>
                  	</c:forEach>
                  	
                  	<c:choose>
@@ -446,7 +440,7 @@ input[type="range"]::-webkit-slider-thumb {
                  			<li class="page-item disabled"><a class="page-link" href="">&gt;</a></li>
                  		</c:when>
                  		<c:otherwise>
-                 			<li class="page-item"><a class="page-link" href="list.se?cpage=${ pi.currentPage + 1 }">&gt;</a></li>
+                 			<li class="page-item"><a class="page-link" href="search.li?cpage=${ pi.currentPage + 1 }&keyword=${ keyword }">&gt;</a></li>
                  		</c:otherwise>
                  	</c:choose>
                  	

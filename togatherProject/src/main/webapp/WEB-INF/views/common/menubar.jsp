@@ -69,6 +69,58 @@
 .col-md-6 .lead{
 	font-size: 30px;
 }
+
+/* 서치바 영역 */
+li .m-searchBar {
+  background-color: orange;
+  width: 300px;
+  height: 25px;
+  margin: 0 auto;
+  position: relative;
+  top: 4px; /* 위로 조금 올립니다 */
+  border-radius: 50px;
+}
+
+li .m-searchBox {
+  position: relative;
+}
+
+li .m-searchTxt {
+  border: none;
+  border-radius: 50px;
+  width: 100%;
+  height: 30px;
+  background-color: white;
+  position: relative;
+  top: -5px;
+  text-align: left;
+  font-size: 1em;
+  line-height: 30px;
+  padding-left: 10px; /* Adjust this value to move the text to the right */
+}
+
+li .m-searchBtn {
+  border: none;
+  background: none;
+  position: absolute;
+  top: -3px; /* 아이콘을 위로 조금 올립니다 */
+  right: 0;
+}
+
+li .m-searchBtn:focus {
+	outline: none;
+}
+
+li .m-searchBtn i {
+  font-size: 2em;
+  color: orange;
+}
+
+
+/* 추가적인 스타일을 원하실 경우 여기에 추가하실 수 있습니다. */
+
+
+
 </style>
 </head>
 <body>
@@ -112,13 +164,18 @@
                   </c:choose> 	
 
 						<li>
-							<div class="search-box">
-							<input type="text" class="search-txt" name="" placeholder="지금 생각나는 취미를 검색하세요.">
-							<a class="search-btn" href="list.se">
-								<i class="fa fa-search" aria-hidden="true" type="submit"></i>
-							</a>
-						</div>
-					</li>
+							<div class="m-searchBar" style="background-color: white;">
+							    <form action="search.li" method="get">
+							        <input type="hidden" name="cpage" value="1">
+							        <div class="m-searchBox">
+							            <input type="text" class="m-searchTxt" name="keyword" value="${ keyword }" placeholder="지금 생각나는 취미를 검색하세요.">
+							            <button class="m-searchBtn" type="submit" style="border:none;">
+							                <i class="fa fa-search fa-2x" aria-hidden="true" style="color: orange;"></i>
+							            </button>
+							        </div>
+							    </form>
+							</div>
+						</li>
 					<c:if test="${not empty loginMember}">
 						<li>
 							<a href="logout.me">logOut</a>

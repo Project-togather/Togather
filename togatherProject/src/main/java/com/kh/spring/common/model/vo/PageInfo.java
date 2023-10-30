@@ -15,13 +15,13 @@ import lombok.ToString;
 @ToString // toString 메소드
 public class PageInfo {
 	
-	private int listCount;
-	private int currentPage;
-	private int pageLimit;
-	private int boardLimit;
+	private int listCount;		// 총 게시글의 개수
+	private int currentPage;	// 현재페이지(즉, 요청한 페이지)
+	private int pageLimit;		// 하단에 보여질 페이징바의 페이지 목록 최대 개수
+	private int boardLimit;		// 해당 페이지에 보여질 게시글의 최대 개수
 	
-	private int maxPage;
-	private int startPage;
-	private int endPage;
+	private int maxPage;		// 가장 마지막의 페이지 수 (listCount, boardLimit을 가지고 구함)
+	private int startPage;		// 해당 페이지에 보여질 페이징바의 시작 수 (pageLimit, currentPage를 가지고 구함)
+	private int endPage;		// 해당 페이지에 보여질 페이징바의 끝 수 (startPage, pageLimit, maxPage)
 	
 }
