@@ -16,8 +16,6 @@
 		<result column="manner" property="manner"/>
 		<result column="img" property="img"/>
 		<result column="msg" property="msg"/>
-		
-
 	</resultMap>
 	
 	<resultMap type="Attachment" id="AttachResult">

@@ -102,6 +102,7 @@
 							
 						<td><a href="updateForm.me" class="btn">setMyProfile</a></td>
 						<td><a href="" id="testBtn" class="btn">search User</a></td>
+						<td><a href="chat.ch" id="testBtn" class="btn">chat</a></td>
 
 						
 					</tr>		
@@ -666,6 +667,7 @@
 												+"<div class='comment-content'>"
 														+"<p>"+searchList[i].msg+"</p>"
 												+"</div>"
+												+"<div class='comment-reply'><a href='chat.ch?targetNo="+memNo+"'>💌</a></div>"
 										    +"</div>"
 										   +"</div>";
 											   
@@ -770,6 +772,8 @@
 						 var searchNo = ($(e).find(".ref").val());
 						 location.href = "searchUserPage.fe?searchNo="+searchNo ; 
 					}
+				
+				
 					
 				//팔로잉 리스트 누르면 해당페이지 이동
 					 function searchFollowingUserPage(e){
