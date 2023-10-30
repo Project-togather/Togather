@@ -972,38 +972,36 @@ input[type="range"]::-webkit-slider-thumb {
 										</div>
 									</div>
 									
-									<input type="text" style="display:none;" id="classApproval" name="classApproval">
+									<input type="text" style="display:none;" id="classApproval" name="classApproval" required>
 									
 									<script>
-										$(function(){
 											$("#approval").click(function(){
 												$("#classApproval").val('Y');
-												console.log($("#classApproval").val());
 												if($("#approval").hasClass("orange")){
 													$("#approval").removeClass("orange");
 													$("#approval").css("backgroundColor","");
+													$("#classApproval").val('');
 												}else{
 													$("#approval").addClass("orange");
 													$("#approval").css("backgroundColor","orange");
 													$("#First-come").css("backgroundColor","");
-													$("#classApproval").val('');
 												}
+												console.log($("#classApproval").val());
 											})
 											
 											$("#First-come").click(function(){
 												$("#classApproval").val('N');
-												console.log($("#classApproval").val());
 												if($("#First-come").hasClass("orange")){
 													$("#First-come").removeClass("orange");
 													$("#First-come").css("backgroundColor","");
+													$("#classApproval").val('');
 												}else{
 													$("#First-come").addClass("orange");
 													$("#First-come").css("backgroundColor","orange");
 													$("#approval").css("backgroundColor","");
-													$("#classApproval").val('');
 												}
+												console.log($("#classApproval").val());
 											})
-										})
 									</script>
 									
 									<hr>

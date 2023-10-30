@@ -370,7 +370,27 @@ public class ClubController {
 		
 	}
 	
-	
-	
+	@ResponseBody
+	@RequestMapping(value="category.so", produces = "application/json; charset=utf-8")
+	public String selectSocialCategory(HttpSession session, Model model,int clCategory, String classNo) {
+		Club c = new Club();
+		c.setClassNo(classNo);
+		c.setClCategory(clCategory);
 		
+		ArrayList<Club> list = cService.selectSocialCategory(c);
+		
+		if(list != null) {
+			session.setAttribute("list", list);
+			return new Gson().toJson(list);
+		}else {
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
+		}
+	}
+	
+	@RequestMapping("category.solist")
+	public String socialCategory() {
+		return "class/socialCategory";
+	}
+	
 }
