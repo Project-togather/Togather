@@ -91,7 +91,7 @@ public class NotificationServiceImpl {
     public void send(String receiver, String reply, String content) {
     	
     	
-    	System.out.println("센드 오긴함 ??");
+    	System.out.println("센드 옴");
     	Notification notification = createNotification(receiver, reply, content);
     	System.out.println(notification);
     	String id = "44";
@@ -103,7 +103,7 @@ public class NotificationServiceImpl {
     	sseEmitters.forEach(
     			(key, emitter) -> {
     				sendToClient(emitter, key, notification);
-    				System.out.println("send 보내 좀 썅년아");
+    				System.out.println("send 보냈나요");
     				// 데이터 캐시 저장
     				emitterRepository.saveEventCache(key, notification);
     				System.out.println("saveCache");
@@ -113,7 +113,7 @@ public class NotificationServiceImpl {
     }
     
     private Notification createNotification(String receiver, String reply, String content) {
-    	System.out.println("크노티 오긴함??");
+    	System.out.println("크노티 옴");
         return Notification.builder()
                            .receiver(receiver)
                            .content(content)

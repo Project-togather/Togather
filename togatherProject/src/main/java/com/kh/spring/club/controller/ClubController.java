@@ -298,7 +298,7 @@ public class ClubController {
 		
 		nService.send(c.getMemNo(), c.getClassNo(), "즐겨찾기 등록했답니다");
 		
-		System.out.println("왜안돼 씨발아");
+		System.out.println("즐겨찾기 왔나요?");
 		
 		int check = cService.checkLike(c);
 		int result = 0;

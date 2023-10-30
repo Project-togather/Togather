@@ -195,63 +195,6 @@
 						<div class="divider-border"></div>
 					</div>
 
-					<script>
-							// 즐겨찾기 조회
-							/*
-							function checkFavorite(classNo){
-								$.ajax({
-									url:"checkFavorite.me",
-									data:{
-										classNo:${ c.classNo }
-									},
-									success:result=>{
-										
-									}, error:()=>{
-										console.log("즐겨찾기 조회 ajax 실패");
-									}
-								})
-							}
-							
-							checkFavorite();
-							
-							// 즐겨찾기 추가, 해제
-							function updateFavorite(){
-								$.ajax({
-									url:"updateFavorite.me",
-									data:{
-										classNo:${ c.classNo }
-									},
-									success:result=>{
-										
-										checkFavorite(classNo);
-									}, error:()=>{
-										console.log("즐겨찾기 조회 ajax 실패");
-									}
-								})
-							}
-							*/
-						</script>
-
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="space" data-mY="20px"></div>
-					</div>
-				</div>
-				<!--** for문으로 사진넣기 -->
-				<div class="row">
-					<div class="col-md-3">
-						<p>
-							<a class="photo" href="assets/images/main/1.jpg"><img
-								src="assets/images/main/1.jpg" alt=""></a>
-						</p>
-					</div>
-					<div class="col-md-3">
-						<p>
-							<a class="photo" href="assets/images/main/3.jpg"><img
-								src="assets/images/main/3.jpg" alt=""></a>
-						</p>
-					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
@@ -1388,8 +1331,7 @@
 
 	<!-- To top button-->
 	<div class="space" data-mY="40px"></div>
-	<a class="btn btn-white enterClass enter-btn" onclick="enterClass();">모임
-		참가하기</a>
+	<!--  <a class="btn btn-white enterClass enter-btn" onclick="enterClass();">모임	참가하기</a> -->
 	<a class="likeClass"><span class="icon_heart_alt"
 		onclick="likeClass();"></span></a>
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>

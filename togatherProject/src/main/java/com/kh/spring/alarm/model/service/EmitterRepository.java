@@ -52,7 +52,7 @@ public class EmitterRepository {
     }
     
     public Map<String, SseEmitter> findAllEmitterStartWithById(String memberId) {
-    	System.out.println("find 애미터짐 도착");
+    	System.out.println("find emitter 도착");
     	
     	System.out.println(emitters.entrySet().stream()
                 .filter(entry -> entry.getKey().startsWith(memberId))
