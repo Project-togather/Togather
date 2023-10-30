@@ -239,6 +239,7 @@ public class MemberController {
    //마이페이지이동
    @RequestMapping(value = "mypage.me")
    public String myPage(HttpSession session , HttpServletRequest request ) {
+	  
 	  Member loginMember = (Member)session.getAttribute("loginMember");
 	  String memNo = loginMember.getMemNo();
 	  //관심사 가져오기

@@ -23,6 +23,16 @@
 		where chat_mem = #{memNo}
 	</select>
 	
+	<select id="selectChatList" resultMap="ChatResult">
+		select 
+		   CHAT_WRITER
+		    ,CHAT_CONTENT
+		    ,CREATE_DATE
+		    ,CHAT_ROOM
+		from chat
+		where chat_room = #{chatRoomNo}
+		order by create_date 
+	</select>
 
 
 </mapper>
