@@ -17,83 +17,62 @@ import com.kh.spring.member.model.vo.Member;
 @Repository
 public class SearchDao {
 	
-	
-	public int selectClassAllListCount(SqlSessionTemplate sqlSession) {
-		
-		return sqlSession.selectOne("searchMapper.selectClassAllListCount");
-		
-	}
-	
-	public ArrayList<Club> selectClassAllList(SqlSessionTemplate sqlSession, PageInfo pi) {
-		
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		
-		return (ArrayList)sqlSession.selectList("searchMapper.selectClassAllList", null, rowBounds);
-		
-	}
-	
-	public ArrayList<Attachment> selectImageAllList(SqlSessionTemplate sqlSession, PageInfo pi) {
-		
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		
-		return (ArrayList)sqlSession.selectList("searchMapper.selectImageAllList", null, rowBounds);
-		
-	}
-	
-	
-	
-	public int searchKeywordListCount(SqlSessionTemplate sqlSession, String keyword) {
-	    Map<String, String> parameterMap = new HashMap<>();
-	    parameterMap.put("keyword", keyword);
-	    return sqlSession.selectOne("searchMapper.searchKeywordListCount", parameterMap);
-	}
-
-	
-	public ArrayList<Club> searchKeywordList(SqlSessionTemplate sqlSession, String keyword, PageInfo pi) {
-	    int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-	    int limit = pi.getBoardLimit();
-
-	    RowBounds rowBounds = new RowBounds(offset, limit);
-
-	    Map<String, Object> parameterMap = new HashMap<>();
-	    parameterMap.put("keyword", keyword);
-	    parameterMap.put("rowBounds", rowBounds);
-
-	    return (ArrayList)sqlSession.selectList("searchMapper.searchKeywordList", parameterMap);
-	}
-	
-	public ArrayList<Attachment> selectImageSearchList(SqlSessionTemplate sqlSession, String keyword, PageInfo pi) {
-		
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		int limit = pi.getBoardLimit();
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		
-		return (ArrayList)sqlSession.selectList("searchMapper.selectImageSearchList", null, rowBounds);
-		
-	}
-	
-	
-	
-	// 상세 조회
-	public int searchFilterListCount(SqlSessionTemplate sqlSession, String keyword, String options) {
-	    Map<String, String> parameterMap = new HashMap<>();
+	// 임시
+	public int searchListCount(SqlSessionTemplate sqlSession, String keyword, String options, String sorting) {
+	    
+		Map<String, Object> parameterMap = new HashMap<>();
 	    parameterMap.put("keyword", keyword);
 	    parameterMap.put("options", options);
+	    parameterMap.put("sorting", sorting);
+		
+	    return sqlSession.selectOne("searchMapper.searchListCount", parameterMap);
+	}
+	
+	public ArrayList<Club> searchList(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		Map<String, Object> parameterMap = new HashMap<>();
+	    parameterMap.put("keyword", keyword);
+	    parameterMap.put("options", options);
+	    parameterMap.put("sorting", sorting);
+
+	    return (ArrayList)sqlSession.selectList("searchMapper.searchList", parameterMap, rowBounds);
+	}
+	
+	
+	public ArrayList<Attachment> searchImageList(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		Map<String, Object> parameterMap = new HashMap<>();
+	    parameterMap.put("keyword", keyword);
+	    parameterMap.put("options", options);
+	    parameterMap.put("sorting", sorting);
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.searchImageList", parameterMap, rowBounds);
+		
+	}
+	
+	
+	// 검색 조회
+	/*
+	public int searchKeywordListCount(SqlSessionTemplate sqlSession) {
 	    
-	    return sqlSession.selectOne("searchMapper.searchFilterListCount", parameterMap);
+	    return sqlSession.selectOne("searchMapper.searchKeywordListCount");
 	}
 
+
 	
-	public ArrayList<Club> searchFilterList(SqlSessionTemplate sqlSession, String keyword, PageInfo fpi, String options) {
-	    int offset = (fpi.getCurrentPage() - 1) * fpi.getBoardLimit();
-	    int limit = fpi.getBoardLimit();
+	public ArrayList<Club> searchFilterList(SqlSessionTemplate sqlSession, String keyword, PageInfo pi, String options) {
+	    int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+	    int limit = pi.getBoardLimit();
 
 	    RowBounds rowBounds = new RowBounds(offset, limit);
 
@@ -105,16 +84,17 @@ public class SearchDao {
 	    return (ArrayList)sqlSession.selectList("searchMapper.searchFilterList", parameterMap);
 	}
 	
-	public ArrayList<Attachment> selectFilterImageSearchList(SqlSessionTemplate sqlSession, String keyword, PageInfo fpi, String options) {
+	public ArrayList<Attachment> selectFilterImageSearchList(SqlSessionTemplate sqlSession, String keyword, PageInfo pi, String options) {
 		
-		int offset = (fpi.getCurrentPage() - 1) * fpi.getBoardLimit();
-		int limit = fpi.getBoardLimit();
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
 		return (ArrayList)sqlSession.selectList("searchMapper.selectFilterImageSearchList", null, rowBounds);
 		
 	}
+	*/
 	
 
 	
