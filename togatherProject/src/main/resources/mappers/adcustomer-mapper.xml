@@ -7,7 +7,7 @@
 		<result column="mem_Id" property="memId"></result>
 		<result column="notice_title" property="noticeTitle"></result>
 		<result column="notice_content" property="noticeContent"></result>
-		<result column="notcie_views" property="noticeViews"></result>
+		<result column="notice_views" property="noticeViews"></result>
 		<result column="notice_date" property="noticeDate"></result>
 		<result column="notice_status" property="noticeStatus"></result>
 	</resultMap>
@@ -42,7 +42,7 @@
 		    faq_Status
 		from faq
 			where faq_Status = 'Y'
-			order by faq_no desc
+			order by faq_no
 	</select>
 	
 	<select id="selectNoticeCount" resultType="_int">

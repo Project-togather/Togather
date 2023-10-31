@@ -30,26 +30,40 @@
 	</div>
 
 	<div class="container" style="margin-top: 50px">
-		<div>
+		
+		<div >
 			<h3>공지사항 제목</h3>
 			<p>${n.noticeTitle}</p>
 		</div>
+		
 		<div>
 			<h4>조회수: ${n.noticeViews}</h4>
 		</div>
+		
 		<div>
 			<h4>공지사항 내용</h4>
 			<p>${n.noticeContent}</p>
 		</div>
+		
+		<hr>
+		<div>
+			<h5>댓글</h5>
+			<p>${n.noticeContent}</p>
+		</div>
+		
+		<div>
 
 		<h5>답글달기</h5>
 		<div class="form-floating">
 			<textarea class="form-control" placeholder="Leave a comment here"
 				id="floatingTextarea2" style="height: 100px"></textarea>
-			<label for="floatingTextarea2">Comments</label>
+				<br>
+			<input type="submit" class="btn-warning float-right" value="답글등록"/> 
 		</div>
 
 	</div>
+	</div>
+	
 
 
 	<div class="col-md-12">

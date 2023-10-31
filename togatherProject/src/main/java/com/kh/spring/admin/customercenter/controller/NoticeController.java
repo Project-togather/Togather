@@ -158,15 +158,12 @@ public class NoticeController {
 		
 		int result = Cservice.increaseNotice(noticeNo);
 		
-		System.out.println(result);
 
-		Notice n = Cservice.noticeDetailview(noticeNo);
-		
-		System.out.println(n);
-
-		if (n != null) {
+		if (result > 0) {
+			Notice n = Cservice.noticeDetailview(noticeNo);
 			mv.addObject("n", n).setViewName("admin/customercenter/usernoticeDetailView");
 		} else {
+			Notice n = Cservice.noticeDetailview(noticeNo);
 			mv.addObject("n", n).setViewName("admin/customercenter/usernoticeDetailView");
 
 		}

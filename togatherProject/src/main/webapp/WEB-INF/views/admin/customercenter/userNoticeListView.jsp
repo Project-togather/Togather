@@ -46,7 +46,7 @@
 							<th scope="row" id="noticeTh">${n.noticeNo}</th>
 							<td>${n.noticeTitle }</td>
 							<td>${n.noticeDate }</td>
-							<td>${n.noticeViews }</td>
+							<td>${n.noticeViews}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
