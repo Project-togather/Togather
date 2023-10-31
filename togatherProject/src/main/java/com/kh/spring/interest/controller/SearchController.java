@@ -68,22 +68,27 @@ public class SearchController {
 	public String searchKeywordList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
 									@RequestParam(value = "keyword", required = true) String keyword,
 									@RequestParam(value = "options", required = false) String options,
-									@RequestParam(value = "sorting", required = false) String sorting, Model model) {
+									@RequestParam(value = "sorting", required = false) String sorting,
+									@RequestParam(value = "category", required = false) String category,
+									@RequestParam(value = "dateValue", required = false) String dateValue, Model model) {
 	    	
 		System.out.println(currentPage);
 		
 		
 		// 검색 결과 총 개수
-	    int listCount = sService.searchListCount(keyword, options, sorting);
+	    int listCount = sService.searchListCount(keyword, options, sorting, category, dateValue);
 	    
 	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 	    
-	    ArrayList<Club> list = sService.searchList(keyword, options, sorting, pi);
-	    ArrayList<Attachment> alist = sService.searchImageList(keyword, options, sorting, pi);
+	    ArrayList<Club> list = sService.searchList(keyword, options, sorting, category, dateValue, pi);
+	    ArrayList<Attachment> alist = sService.searchImageList(keyword, options, sorting, category, dateValue, pi);
+	    
 	    
 	    model.addAttribute("keyword", keyword);
 	    model.addAttribute("options", options);
 	    model.addAttribute("sorting", sorting);
+	    model.addAttribute("category", category);
+	    model.addAttribute("dateValue", dateValue);
 	    
 	    model.addAttribute("pi", pi);
         model.addAttribute("list", list);
@@ -92,8 +97,10 @@ public class SearchController {
 	    
         System.out.println("pi :" + pi);
         System.out.println("키워드 :" + keyword);
+        System.out.println("날짜 :" + dateValue);
         System.out.println("유형 :" + options);
         System.out.println("정렬 :" + sorting);
+        System.out.println("카테고리 :" + category);
         System.out.println("검색 결과: " + list);
         System.out.println("검색 사진 :" + alist);
         
@@ -115,116 +122,6 @@ public class SearchController {
 	}
 	
 	
-	// 소셜링
-	@ResponseBody
-	@RequestMapping(value = "getList.so", produces = "application/json; charset=utf-8;")
-	public String ajaxSelectSocialingList(Club c,
-			@RequestParam(value = "cpage", defaultValue = "1", required = false) int currentPage,
-			@RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
-		
-		
-		int listCount = sService.selectSocialingListCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageSize, 9);
-		ArrayList<Club> list = sService.selectSocialingList(pi);
-		
-		
-		Map<String, Object> response = new HashMap<>();
-		response.put("list", list); // 페이징된 목록
-		response.put("pageInfo", pi); // 페이지 정보
-		
-		// Gson을 사용하여 Map을 JSON 문자열로 변환하여 반환
-		Gson gson = new Gson();
-		String jsonResponse = gson.toJson(response);
-		
-		return jsonResponse;
-	}
-	
-	
-	// 클럽
-	@ResponseBody
-	@RequestMapping(value = "getList.cl", produces = "application/json; charset=utf-8;")
-	public String ajaxSelectClubList(Club c,
-			@RequestParam(value = "cpage", defaultValue = "1", required = false) int currentPage,
-			@RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
-		
-		int listCount = sService.selectClubListCount();
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageSize, 9);
-		
-		ArrayList<Club> list = sService.selectClubList(pi);
-		
-		Map<String, Object> response = new HashMap<>();
-		
-		response.put("list", list);
-		response.put("pageInfo", pi);
-		
-		
-		Gson gson = new Gson();
-		String jsonResponse = gson.toJson(response);
-		
-		return jsonResponse;
-		
-		
-	}
-	
-	
-	// 챌린지
-	@ResponseBody
-	@RequestMapping(value = "getList.ch", produces = "application/json; charset=utf-8;")
-	public String ajaxSelectChallengeList(Club c,
-			@RequestParam(value = "cpage", defaultValue = "1", required = false) int currentPage,
-			@RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
-		
-		int listCount = sService.selectChallengeListCount();
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageSize, 9);
-		
-		ArrayList<Club> list = sService.selectChallengeList(pi);
-		
-		Map<String, Object> response = new HashMap<>();
-		
-		response.put("list", list);
-		response.put("pageInfo", pi);
-		
-		
-		Gson gson = new Gson();
-		String jsonResponse = gson.toJson(response);
-		
-		return jsonResponse;
-		
-		
-	}
-	
-	
-	
-	/*
-	@ResponseBody
-	@RequestMapping(value = "getList.cl", produces = "application/json; charset=utf-8;")
-	public String ajaxSelectClassList(Club c,
-		    @RequestParam(value = "cpage", defaultValue = "1", required = false) int currentPage,
-		    @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize) {
-		
-			int listCount = sService.searchClassListCount();
-			
-			PageInfo pi = Pagination.getPageInfo(listCount, currentPage, pageSize, 9);
-			
-			ArrayList<Club> list = sService.searchClassList(pi);
-			
-			Map<String, Object> response = new HashMap<>();
-			
-			 response.put("list", list); // 페이징된 목록
-			 response.put("pageInfo", pi); // 페이지 정보
-			 
-			// Gson을 사용하여 Map을 JSON 문자열로 변환하여 반환
-			Gson gson = new Gson();
-		    String jsonResponse = gson.toJson(response);
-		    
-		    System.out.println(response);
-			    
-			return jsonResponse;
-	}
-	 */
-	
 	
 	/* 피드 */
 	@ResponseBody
@@ -232,8 +129,6 @@ public class SearchController {
 	public String ajaxSelectFeedList() {
 		
 		ArrayList<Feed> list = sService.selectFeedList();
-		
-		// System.out.println(new Gson().toJson(list));
 		
 		return new Gson().toJson(list);
 		
@@ -254,56 +149,6 @@ public class SearchController {
 	}
 	
 }
-	
-	/*
-	@RequestMapping(value = "search.li")
-    public String searchAndFilterList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
-                                      @RequestParam(value = "keyword", required = true) String keyword,
-                                      @RequestParam(value = "filter", required = false) String filter, Model model) {
-
-        // 검색 결과의 총 개수를 가져오는 메소드
-        int searchCount = sService.searchKeywordListCount(keyword);
-
-        if (searchCount == 0) {
-            // 검색 결과가 없을 때 알림 메시지를 설정
-            model.addAttribute("errorMessage", "검색 결과가 없습니다.");
-        } else {
-            // 페이지 정보 계산
-            PageInfo pi = Pagination.getPageInfo(searchCount, currentPage, 10, 9);
-
-            // 검색 결과 가져오는 메소드
-            ArrayList<Club> list = sService.searchKeywordList(keyword, pi);
-
-            // 필터링 처리
-            if (filter != null && !filter.isEmpty()) {
-            	
-                ArrayList<Club> filteredList = new ArrayList<>();
-                
-                for (Club club : list) {
-                	
-                    if (club.getFilterProperty().equals(filter)) { // 필터 조건을 정확히 지정하세요.
-                    	
-                        filteredList.add(club);
-                    }
-                }
-                
-                model.addAttribute("list", filteredList);
-                
-            } else {
-            	
-                // 필터링 조건이 주어지지 않은 경우, 원래 검색 결과를 사용
-                model.addAttribute("list", list);
-            }
-
-            // Model을 사용하여 데이터 전달
-            model.addAttribute("pi", pi);
-        }
-
-        model.addAttribute("keyword", keyword);
-
-        return "search/searchPage2";
-    }
-	*/
 	
 	
 

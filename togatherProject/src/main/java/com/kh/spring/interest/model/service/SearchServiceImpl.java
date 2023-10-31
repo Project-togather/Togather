@@ -25,18 +25,18 @@ public class SearchServiceImpl implements SearchService {
 
 	//임시
 	@Override
-	public int searchListCount(String keyword, String options, String sorting) {
-		return sDao.searchListCount(sqlSession, keyword, options, sorting);
+	public int searchListCount(String keyword, String options, String sorting, String category, String dateValue) {
+		return sDao.searchListCount(sqlSession, keyword, options, sorting, category, dateValue);
 	}
 
 	@Override
-	public ArrayList<Club> searchList(String keyword, String options, String sorting, PageInfo pi) {
-		return sDao.searchList(sqlSession, keyword, options, sorting, pi);
+	public ArrayList<Club> searchList(String keyword, String options, String sorting, String category, String dateValue, PageInfo pi) {
+		return sDao.searchList(sqlSession, keyword, options, sorting, category, dateValue, pi);
 	}
 
 	@Override
-	public ArrayList<Attachment> searchImageList(String keyword, String options, String sorting, PageInfo pi) {
-		return sDao.searchImageList(sqlSession, keyword, options, sorting, pi);
+	public ArrayList<Attachment> searchImageList(String keyword, String options, String sorting, String category, String dateValue, PageInfo pi) {
+		return sDao.searchImageList(sqlSession, keyword, options, sorting, category, dateValue, pi);
 	}
 	
 	
@@ -60,59 +60,6 @@ public class SearchServiceImpl implements SearchService {
 	*/
 	
 	
-	// 소셜링 리스트가 보이는 페이지 서비스 (페이징 처리)
-	@Override
-	public int selectSocialingListCount() {
-		
-		return sDao.selectSocialingListCount(sqlSession);
-		
-	}
-
-	@Override
-	public ArrayList<Club> selectSocialingList(PageInfo pi) {
-		
-		return sDao.selectSocialingList(sqlSession, pi);
-		
-	}
-	
-	// 클럽 리스트가 보이는 페이지 서비스 (페이징 처리)
-	@Override
-	public int selectClubListCount() {
-		
-		return sDao.selectClubListCount(sqlSession);
-		
-	}
-	
-	@Override
-	public ArrayList<Club> selectClubList(PageInfo pi) {
-		
-		return sDao.selectClubList(sqlSession, pi);
-		
-	}
-	
-	// 챌린지 리스트가 보이는 페이지 서비스 (페이징 처리)
-	@Override
-	public int selectChallengeListCount() {
-		return sDao.selectChallengeListCount(sqlSession);
-	}
-	
-	@Override
-	public ArrayList<Club> selectChallengeList(PageInfo pi) {
-		return sDao.selectChallengeList(sqlSession, pi);
-	}
-	
-	/*
-	@Override
-	public int searchClassListCount() {
-		return sDao.searchClassListCount(sqlSession);
-	}
-	
-	@Override
-	public ArrayList<Club> searchClassList(PageInfo pi) {
-		return sDao.searchClassList(sqlSession, pi);
-	}
-	*/
-	
 	
 	/* 피드 리스트가 보이는 서비스 */
 	@Override
@@ -126,5 +73,6 @@ public class SearchServiceImpl implements SearchService {
 		
 		return sDao.selectMemberList(sqlSession);
 	}
+
 	
 }
