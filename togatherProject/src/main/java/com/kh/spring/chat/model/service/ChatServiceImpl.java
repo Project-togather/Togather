@@ -29,8 +29,25 @@ public class ChatServiceImpl implements ChatService{
 	public ArrayList<Chat> selectChatList(String chatRoomNo){
 		return chatDao.selectChatList(sqlSession,chatRoomNo );
 	}
+	
+	//채팅방 만들기1
+	@Override
+	public int createChatRoom(String memNo) {
+		return chatDao.createChatRoom(sqlSession, memNo);
+	}
 
+	//채팅방만들기2
+	@Override
+	public int createChatRoom2(String memNo) {
+		return chatDao.createChatRoom2(sqlSession, memNo);
+	}
 	
-	
+	//채팅입력
+	@Override
+	public int chatInput(Chat ch) {
+		return chatDao.chatInput(sqlSession , ch);
+	}
+
+
 	
 }

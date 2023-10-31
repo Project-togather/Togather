@@ -1,8 +1,5 @@
 <%@page import="java.util.Date"%>
 <%@page import="javax.naming.spi.DirStateFactory.Result"%>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
@@ -12,6 +9,9 @@
 <html>
 	<head>
 		<title>Chat</title>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -277,6 +277,9 @@ margin-bottom: 15px !important;
 						
 						</div>
 						<div class="card-body msg_card_body" id ="test1">
+						
+						
+						
 						<!--내 메세지 볼때 -->
                             
                             <%-- 
@@ -335,60 +338,61 @@ margin-bottom: 15px !important;
             
            	})
         
-
-            function selectChat(){
-                $.ajax({
-                    url : "select.ch",
-                    success : function(result){
-                    	console.log(result);
-						console.log(result[0].createDate);
+			function selectChat(){
+				//alert("채팅조회");
+				console.log("채팅조회");
+				  $.ajax({
+					  url : "selectChatList.ch",
+					  data : {chatRoomNo : '${chatRoomNo}'},
+					  success : function(chatList){
 						
-						
-						let value = "";
-						 for (let i = 0 ; i < result.length ; i ++){
-							//console.log(result[i].userId);
-							//console.log(result[i].CreateDate);
-							
-							if(result[i].userId != ${loginMember.memId}){
-								
-							value += 
-							"<div class='d-flex justify-content-start mb-4'>"
-						+"			<div class='img_cont_msg'>"
-						+"			<img src=''' class='rounded-circle user_img_msg'>"	
-						+"			</div>"
-						+"			<div class='msg_cotainer'>"	
-						+				result[i].content
-						+"			<span class='msg_time'>" +result[i].userId +"<br>" + result[i].CreateDate +"</span>"
-		
-						+"			</div>"
-						+"	</div>"
-								
-							}else{
-								value += 
+							 
+							let value = "";
+							for(let i = 0 ; i<chatList.length ; i ++ ){
+								if(chatList[i].chatWriter == '${loginMember.memNo}'){//내가친 메세지
+									value += 
+										
+										"<div class='d-flex justify-content-end mb-4'>"
+									+"		<div class='msg_cotainer_send'>"
+									+			chatList[i].chatContent 
+									+"			<span class='msg_time_send'>" + chatList[i].chatWriter+"<br>" + chatList[i].CreateDate +"</span>"
 									
-								"<div class='d-flex justify-content-end mb-4'>"
-							+"		<div class='msg_cotainer_send'>"
-							+			result[i].content 
-							+"			<span class='msg_time_send'>" + result[i].userId+"<br>" + result[i].CreateDate +"</span>"
+									+"		</div>"
+									+"		<div class='img_cont_msg'>"
+									+"	        <img src='' class='rounded-circle user_img_msg'>"
+									+"		</div>"	
+									+"	</div>"
+								}else{
+									value += 
+										"<div class='d-flex justify-content-start mb-4'>"
+									+"			<div class='img_cont_msg'>"
+									+"			<img src=''' class='rounded-circle user_img_msg'>"	
+									+"			</div>"
+									+"			<div class='msg_cotainer'>"	
+									+				chatList[i].chatContent
+									+"			<span class='msg_time'>" +chatList[i].chatWriter +"<br>" + chatList[i].CreateDate +"</span>"
+					
+									+"			</div>"
+									+"	</div>"
+									
+								}
+								
+									
+							}//for문끝
 							
-							+"		</div>"
-							+"		<div class='img_cont_msg'>"
-							+"	        <img src='' class='rounded-circle user_img_msg'>"
-							+"		</div>"	
-							+"	</div>"
-
-							}
-	
-						 }
-						
-
-						$("#test1").html(value);
-                    },
-                    error : function(result){
-						alert("시발 ㅠㅠ");
-                    }
-                })
-            }
+						  	$("#test1").html(value);
+						  	//alert(value);
+							
+							
+					 	 },error : function(){
+						  console.log("채팅조회 통신 실패");
+					  }
+				  })
+				  
+				  
+			}
+			
+        
 
 
 
@@ -397,12 +401,19 @@ margin-bottom: 15px !important;
              
                $.ajax({
             	   url : "chatInput.ch",
-            	   data : {input :$("#input-text").val()},
+            	   data : {
+            		   chatWriter :'${loginMember.memNo}',
+            		   chatContent :$("#input-text").val(),
+            		   chatRoom : '${chatRoomNo}'
+            	   },
             	   success : function(result){
-            		   selectChat();
+            		  selectChat();
+            		  
+            		 
+            		  
             	   },
             	   error : function(){
-            		   alert("채팅 입력 실패");
+            		   alert("통신 실패");
             	   }
                })
                $("#input-text").val("");

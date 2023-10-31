@@ -33,6 +33,49 @@
 		where chat_room = #{chatRoomNo}
 		order by create_date 
 	</select>
+	
+	<insert id = "createChatRoom">
+		insert into chat_room
+		(
+		    chatroom_no
+		    ,chat_mem
+		)
+		values
+		(
+		    'CH'||SEQ_CHATROOM.NEXTVAL
+		    ,#{memNo}
+		)
+	</insert>
+	
+		<insert id = "createChatRoom2">
+		insert into chat_room
+		(
+		    chatroom_no
+		    ,chat_mem
+		)
+		values
+		(
+		    'CH'||SEQ_CHATROOM.CURRVAL
+		    ,#{memNo}
+		)
+	</insert>
+	
+	<insert id="chatInput">
+		insert into chat
+		(
+		    CHAT_WRITER
+		   ,CHAT_CONTENT
+		   ,CREATE_DATE
+		   ,CHAT_ROOM
+		)
+		values
+		(
+		     #{chatWriter}
+		    ,#{chatContent}
+		    ,SYSDATE
+		    ,#{chatRoom}
+		)
+	</insert>
 
 
 </mapper>

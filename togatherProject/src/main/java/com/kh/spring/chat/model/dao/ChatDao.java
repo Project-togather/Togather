@@ -21,4 +21,18 @@ public class ChatDao {
 	public ArrayList<Chat> selectChatList(SqlSessionTemplate sqlSession , String chatRoomNo){
 		return (ArrayList)sqlSession.selectList("chatMapper.selectChatList" , chatRoomNo);
 	}
+	
+	//채팅방 만들기1
+	public int createChatRoom(SqlSessionTemplate sqlSession , String memNo) {
+		return sqlSession.insert("chatMapper.createChatRoom" , memNo);
+	}
+	//채팅방만들기2
+	public int createChatRoom2(SqlSessionTemplate sqlSession , String memNo) {
+		return sqlSession.insert("chatMapper.createChatRoom2" , memNo);
+	}
+	//채팅입력
+	public int chatInput(SqlSessionTemplate sqlSession , Chat ch) {
+		return sqlSession.insert("chatMapper.chatInput",ch);
+	}
+	
 }
