@@ -187,12 +187,12 @@ li .m-searchBtn i {
          <div class="navigation navigation-center">
             <div class="container-fluid">
                <!-- Brand-->
-               <div class="inner-header"><a class="inner-brand" href="main.pa"><img class="brand-dark" src="assets/images/logo.png" width="74px" alt=""><img class="brand-light" src="assets/images/logo-light.png" width="74px" alt=""></a></div>
+               <div class="inner-header"><a class="inner-brand" href="index.do"><img class="brand-dark" src="assets/images/logo.png" width="74px" alt=""><img class="brand-light" src="assets/images/logo-light.png" width="74px" alt=""></a></div>
                <!-- Navigation-->
                <div class="inner-navigation collapse">
                   <div class="inner-nav onepage-nav">
                      <ul>
-						<li><a href="main.pa"><span class="menu-item-span">Home</span></a></li>
+						<li><a href="index.do"><span class="menu-item-span">Home</span></a></li>
 						<li><a href="social.pa"><span class="menu-item-span">SOCIAL</span></a></li>
 						<li><a href="club.pa"><span class="menu-item-span">CLUB</span></a></li>
 						<li><a href="challenge.pa"><span class="menu-item-span">CHALLENGE</span></a></li>

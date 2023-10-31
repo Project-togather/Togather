@@ -104,7 +104,18 @@ public class ClubController {
 		
 		ArrayList<Club> list = cService.selectSocialList();
 		
+		ArrayList<Member> imgList1 = new ArrayList<Member>();
 		if(list != null) {
+			for(int i=0; i<list.size(); i++) {
+				c.setClassNo(list.get(i).getClassNo());
+				ArrayList<Member> imgList = cService.selectImgList(c);
+				imgList1.addAll(0, imgList);
+				
+				if(!imgList.isEmpty()) {
+					session.setAttribute("imgList1", imgList1);
+				}
+			}
+			
 			session.setAttribute("list", list);
 			return "class/socialPage";
 		}else {
@@ -121,9 +132,20 @@ public class ClubController {
 		
 		ArrayList<Club> list = cService.selectClubList();
 		
+		ArrayList<Member> imgList1 = new ArrayList<Member>();
 		if(list != null) {
+			for(int i=0; i<list.size(); i++) {
+				c.setClassNo(list.get(i).getClassNo());
+				ArrayList<Member> imgList = cService.selectImgList(c);
+				imgList1.addAll(0, imgList);
+				
+				if(!imgList.isEmpty()) {
+					session.setAttribute("imgList1", imgList1);
+				}
+			}
+			
 			session.setAttribute("list", list);
-			return "class/clubPage";
+			return "class/socialPage";
 		}else {
 			model.addAttribute("errorMsg", "실패!?");
 			return "/";
@@ -138,9 +160,20 @@ public class ClubController {
 		
 		ArrayList<Club> list = cService.selectChallengeList();
 		
+		ArrayList<Member> imgList1 = new ArrayList<Member>();
 		if(list != null) {
+			for(int i=0; i<list.size(); i++) {
+				c.setClassNo(list.get(i).getClassNo());
+				ArrayList<Member> imgList = cService.selectImgList(c);
+				imgList1.addAll(0, imgList);
+				
+				if(!imgList.isEmpty()) {
+					session.setAttribute("imgList1", imgList1);
+				}
+			}
+			
 			session.setAttribute("list", list);
-			return "class/challengePage";
+			return "class/socialPage";
 		}else {
 			model.addAttribute("errorMsg", "실패!?");
 			return "/";
@@ -155,9 +188,20 @@ public class ClubController {
 		
 		ArrayList<Club> list = cService.selectOneDayList();
 		
+		ArrayList<Member> imgList1 = new ArrayList<Member>();
 		if(list != null) {
+			for(int i=0; i<list.size(); i++) {
+				c.setClassNo(list.get(i).getClassNo());
+				ArrayList<Member> imgList = cService.selectImgList(c);
+				imgList1.addAll(0, imgList);
+				
+				if(!imgList.isEmpty()) {
+					session.setAttribute("imgList1", imgList1);
+				}
+			}
+			
 			session.setAttribute("list", list);
-			return "class/onedayPage";
+			return "class/socialPage";
 		}else {
 			model.addAttribute("errorMsg", "실패!?");
 			return "/";
@@ -374,7 +418,32 @@ public class ClubController {
 		
 	}
 	
-	
-	
+	@ResponseBody
+	@RequestMapping(value="category.so", produces = "application/json; charset=utf-8")
+	public String selectSocialCategory(HttpSession session, Model model, Club c) {
+		ArrayList<Club> list = cService.selectSocialCategory(c);
 		
+		if(list != null) {
+			for(int i=0; i<list.size(); i++) {
+				c.setClassNo(list.get(i).getClassNo());
+				
+				ArrayList<Member> imgList = cService.selectImgList(c);
+				if(!imgList.isEmpty()) {
+					session.setAttribute("imgList", imgList);
+				}
+			}
+			
+			session.setAttribute("list", list);
+			return new Gson().toJson(list);
+		}else {
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
+		}
+	}
+	
+	@RequestMapping("category.solist")
+	public String socialCategory() {
+		return "class/socialCategory";
+	}
+	
 }

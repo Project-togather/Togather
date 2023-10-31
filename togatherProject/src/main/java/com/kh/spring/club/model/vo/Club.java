@@ -41,7 +41,9 @@ public class Club {
 	private int vacancy; // 남은 자리
 	private String nickName; // 닉네임
 	private String enrollDate; // 모임등록 날짜
-
+	
+	// 프로필 이미지
+	private String img;
 	
 	// 카카오맵 api 추가
 	private String latitude; // 위도

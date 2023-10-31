@@ -27,7 +27,8 @@
 		<result column="status" property="status"/>
 		<result column="cl_ca_name" property="clCaName"/>		
 		<result column="latitude" property="latitude"/>		
-		<result column="longitude" property="longitude"/>		
+		<result column="longitude" property="longitude"/>
+		<result column="img" property="img"/>	
 	
 		<collection property="attachment" resultMap="attachment"/>
 	</resultMap>
@@ -71,6 +72,7 @@
 		<result column="img" property="img"/>
 		<result column="msg" property="msg"/>
 		<result column="cl_type_Status" property="clTypeStatus"/>
+		<result column="c_no" property="classNo"/>
 	</resultMap>
 	
 	<resultMap type="QuitReason" id="quitReasonResult">
@@ -100,11 +102,19 @@
 		     , origin_name
 		     , update_name
 		     , file_path
+		     , cl_name
+		     , cl_ca_name
+   		     , (select count(*)
+                 from my_class
+                where my_class.c_no = class.c_no
+                  and cl_type_status = 1) vacancy
 		  from class
 		  join attachment on (c_no = ref_fno)
+		  join cl_category on (cl_category = cl_categoryno)
+		  join cl_type on (cl_type = cl_ca_no)
 		 where status = 'Y'
-		 order
-		    by enrollDate desc;
+   		 order
+		    by enrollDate desc
 	</select>
 
 	
@@ -130,21 +140,45 @@
 		     , file_path
 		     , cl_name
 		     , cl_ca_name
-   		     , (select count(*)
-                 from my_class
-                where c_no = #{classNo}
-                  and cl_type_status = 1) vacancy
-		  from class
-		  join attachment on (c_no = ref_fno)
-		  join cl_category on (cl_category = cl_categoryno)
-		  join cl_type on (cl_type = cl_ca_no)
-		 where status = 'Y'
-		   and cl_type = 1
-   		 order
-		    by enrollDate desc
+		   	 , (select count(*)
+		         from my_class
+		        where cl_type_status = 1
+		          and my_class.c_no = class.c_no
+		       ) vacancy
+		 from class
+		 left join attachment on (c_no = ref_fno)
+		 join cl_category on (cl_category = cl_categoryno)
+		 join cl_type on (cl_type = cl_ca_no)
+		where status = 'Y'
+		  and cl_type = 1
+		group 
+		   by
+		 	  c_no
+		    , mem_no
+		    , c_title
+		    , c_content
+		    , c_location
+		    , c_date
+		    , c_time
+		    , c_price
+		    , c_approval
+		    , minage
+		    , maxage
+		    , people_limit
+		    , cl_type
+		    , cl_category
+		    , curriculum
+		    , origin_name
+		    , update_name
+		    , file_path
+ 		    , cl_name
+		    , cl_ca_name
+		    , enrolldate
+		order 
+		   by enrolldate desc
 	</select>
 	
-		<select id="selectClubList" resultMap="resultclub">
+	<select id="selectClubList" resultMap="resultclub">
         select 
 		       c_no
 		     , mem_no
@@ -180,7 +214,7 @@
 		    by enrollDate desc;
 	</select>
 	
-		<select id="selectChallengeList" resultMap="resultclub">
+	<select id="selectChallengeList" resultMap="resultclub">
         select 
 		       c_no
 		     , mem_no
@@ -215,8 +249,8 @@
    		 order
 		    by enrollDate desc;
 	</select>
-	
-		<select id="selectOneDayList" resultMap="resultclub">
+
+	<select id="selectOneDayList" resultMap="resultclub">
         select 
 		       c_no
 		     , mem_no
@@ -279,13 +313,13 @@
 		     , nickname
 		     , (select count(*)
                  from my_class
-                where c_no = 'C1'
+                where c_no = #{classNo}
                   and cl_type_status = 1) vacancy
 		  from class
 		  join member using (mem_no)
           join cl_type on(cl_type = cl_ca_no)
 		  join cl_category on (cl_category = cl_categoryno)
-		 where c_no = 'C1'
+		 where c_no = #{classNo}
 		   and status = 'Y'
 	</select>
 	
@@ -594,4 +628,84 @@
 			  , #{detailReason}
 			  )
 	</insert>
+	
+	<select id="selectSocialCategory" resultMap="resultclub">
+		select 
+		   	   c_no
+		   	 , mem_no
+		     , c_title
+		  	 , c_content
+		  	 , c_location
+		  	 , c_date
+		   	, c_time
+		  	 , c_price
+		  	 , c_approval
+		   	, minage
+		   	, maxage
+		   	, people_limit
+		   	, cl_type
+		   	, cl_category
+		  	, curriculum
+		   	, origin_name
+		   	, update_name
+		   	, file_path
+		   	, cl_name
+		   	, cl_ca_name
+		   	, (select count(*)
+		         from my_class
+		        where cl_type_status = 1
+		          and my_class.c_no = class.c_no
+		       ) vacancy
+		 from class
+		 left join attachment on (c_no = ref_fno)
+		 join cl_category on (cl_category = cl_categoryno)
+		 join cl_type on (cl_type = cl_ca_no)
+		where status = 'Y'
+		  and cl_type = 1
+		  <if test="clCategory != 0">
+		  and cl_category = #{clCategory}
+		  </if>
+		group 
+		   by
+		 	  c_no
+		    , mem_no
+		    , c_title
+		    , c_content
+		    , c_location
+		    , c_date
+		    , c_time
+		    , c_price
+		    , c_approval
+		    , minage
+		    , maxage
+		    , people_limit
+		    , cl_type
+		    , cl_category
+		    , curriculum
+		    , origin_name
+		    , update_name
+		    , file_path
+ 		    , cl_name
+		    , cl_ca_name
+		    , enrolldate
+		order 
+		   by enrolldate desc
+	</select>
+	
+	<select id="selectImgList" resultMap="MemberResult">
+		select 
+		       img
+		     , c_no
+		  from my_class
+		  left join member using (mem_no)
+		 where c_no = #{classNo}
+		  and cl_type_status = 1
+	</select>
+	
+	<select id="vancy">
+      select count(*)
+        from my_class
+       where cl_type_status = 1
+         and c_no = #{classNo}	
+	</select>
 </mapper>

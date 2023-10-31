@@ -108,4 +108,12 @@ public class ClubDao {
 	public int selectPayPrice(MyClass c, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("clubMapper.selectPayPrice", c);
 	}
+	
+	public ArrayList<Club> selectSocialCategory(SqlSessionTemplate sqlSession, Club c){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectSocialCategory", c);
+	}
+	
+	public ArrayList<Member> selectImgList(SqlSessionTemplate sqlSession, Club c){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectImgList", c);
+	}
 }

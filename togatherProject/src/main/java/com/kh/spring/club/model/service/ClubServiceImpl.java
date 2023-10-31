@@ -143,6 +143,16 @@ public class ClubServiceImpl implements ClubService {
 		return cDao.selectPayPrice(c, sqlSession);
 	}
 
+	@Override
+	public ArrayList<Club> selectSocialCategory(Club c) {
+		return cDao.selectSocialCategory(sqlSession, c);
+	}
+
+	@Override
+	public ArrayList<Member> selectImgList(Club c) {
+		return cDao.selectImgList(sqlSession, c);
+	}
+
 	
 	
 
