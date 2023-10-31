@@ -28,7 +28,9 @@
 		<result column="cl_ca_name" property="clCaName"/>		
 		<result column="latitude" property="latitude"/>		
 		<result column="longitude" property="longitude"/>		
-		<result column="mem_id" property="memId"/>		
+		<result column="mem_id" property="memId"/>
+		<result column="placeid" property="placeId"/>
+				
 	
 		<collection property="attachment" resultMap="attachment"/>
 	</resultMap>
@@ -280,14 +282,17 @@
 		     , nickname
 		     , (select count(*)
                  from my_class
-                where c_no = 'C1'
+                where c_no = #{classNo}
                   and cl_type_status = 1) vacancy
-             , mem_id     
+             , mem_id
+             , latitude
+             , longitude
+             , placeId     
 		  from class
 		  join member using (mem_no)
           join cl_type on(cl_type = cl_ca_no)
 		  join cl_category on (cl_category = cl_categoryno)
-		 where c_no = 'C1'
+		 where c_no = #{classNo}
 		   and status = 'Y'
 	</select>
 	
@@ -314,6 +319,7 @@
 			  , latitude
 			  , longitude
 		  	  , enrollDate
+		  	  , placeId
 			 )
 		values
 			 (
@@ -335,6 +341,7 @@
 			  , #{latitude}
 			  , #{longitude}
 			  , sysdate
+			  , #{placeId}
 			 )
 	</insert>
 	

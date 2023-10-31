@@ -82,8 +82,10 @@
     function sse(id) {
 		
         // 비동기 작업을 위한 프로미스 반환
+        /*
         return new Promise((resolve, reject) => {
-            const eventSource = new EventSource(`sse/` + id);
+        */  
+        	const eventSource = new EventSource(`sse/` + id);
             
             eventSource.addEventListener("sse", function(event) {
                 console.log("오셨습니까...");
@@ -99,6 +101,7 @@
                     "preventDuplicates": false,
                     "showDuration": "300",
                     "hideDuration": "1000",
+                    "onclick": function(){location.href="http://localhost:8012/togather/detail.cl?classNo=" + data.reply.refFno;},
                     "timeOut": "5000",
                     "extendedTimeOut": "1000",
                     "showEasing": "swing",
@@ -112,12 +115,13 @@
                 // 비동기 작업이 완료되면 프로미스 해결
                 resolve(data);
             });
-
+/*
             eventSource.addEventListener("error", function(event) {
                 // 에러 발생 시 프로미스 거부
                 reject(event);
             });
         });
+*/
     }
 	
 	</script>

@@ -13,7 +13,7 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-	
+<!-- kakao map api -->
 
 
 <title>${ c.classTitle }</title>
@@ -82,7 +82,7 @@
 					    pay_method: "card",
 					    merchant_uid : 'merchant_'+new Date().getTime(),
 					    name : '(주)ToGather',
-					    amount : 1,
+					    amount : amount,
 					    buyer_email : email,
 					    buyer_name : name,
 					    buyer_tel : tel,
@@ -994,10 +994,35 @@
 				<div class="col-md-6 m-auto text-center">
 					<p class="subtitle">From the blog</p>
 					<h1 class="display-1">유사한 모임 (위치 or 카테고리) + 지도api</h1>
-					<p class="lead">
-						See how your users experience your website in realtime or view <br />
-						trends to see any changes in performance over time.
-					</p>
+					<div id="map" style="width:500px;height:400px;"></div>
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06"></script>
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06&libraries=LIBRARY"></script>
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06&libraries=services"></script>
+					<script>
+						var container = document.getElementById('map');
+						var options = {
+							center: new kakao.maps.LatLng(${ c.latitude }, ${ c.longitude }),
+							level: 3
+						};
+				
+						var map = new kakao.maps.Map(container, options);
+						
+						var markerPosition = new kakao.maps.LatLng(${ c.latitude }, ${ c.longitude });
+						
+						var marker = new kakao.maps.Marker({
+							position: markerPosition
+						});
+						
+						marker.setMap(map);
+						
+						console.log(${c.placeId});
+						
+					</script>
+					<br>
+					<a href="https://map.kakao.com/link/map/${ c.placeId }">카카오맵으로 상세보기</a>
+					<br>
+					<a href="roadView.cl?latitude=${ c.latitude }&longitude=${ c.longitude }">로드뷰 상세보기</a>
+					
 					<div class="divider-border"></div>
 				</div>
 			</div>
@@ -1303,7 +1328,7 @@
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 	<c:choose>
 		<c:when test="${ loginMember.memNo eq c.memNo }">
-			<a class="classOption" href="classUpdateForm.cl?cNo=${ c.classNo }"><span
+			<a class="classOption" href="classUpdateForm.cl?classNo=${ c.classNo }"><span
 				class="icon-gears"></span></a>
 		</c:when>
 		<c:otherwise>

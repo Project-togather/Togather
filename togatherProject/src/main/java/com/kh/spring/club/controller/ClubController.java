@@ -183,7 +183,7 @@ public class ClubController {
 	
 	@RequestMapping("enroll.cl")
 	public String insertClass(Club c, Attachment at, MultipartFile upfile , HttpSession session , Model model) {
-		System.out.println(c);
+		System.out.println("클래스동록 : " + c);
 		int result = cService.insertClass(c);
 		
 		if(!upfile.getOriginalFilename().equals("")) {
@@ -331,7 +331,7 @@ public class ClubController {
 	
 	@RequestMapping("classUpdateForm.cl")
 	public String classUpdateForm(MyClass mc, Model model) {
-
+		
 		Club c = cService.selectClassDetail(mc);
 		model.addAttribute("c", c);
 		
@@ -352,8 +352,9 @@ public class ClubController {
 	}
 	
 	@RequestMapping("memberListPage.cl")
-	public String memberListPage(String cNo, Model model) {
-		model.addAttribute("classNo", cNo);
+	public String memberListPage(String classNo, Model model) {
+		
+		model.addAttribute("classNo", classNo);
 		return "class/classMemberList";
 	}
 	
@@ -377,6 +378,13 @@ public class ClubController {
 		
 	}
 	
+	@RequestMapping("roadView.cl")
+	public String roadView(String latitude, String longitude, Model model) {
+
+		model.addAttribute("latitude", latitude);
+		model.addAttribute("longitude", longitude);
+		return "class/classRoadView";
+	}
 	
 	
 		

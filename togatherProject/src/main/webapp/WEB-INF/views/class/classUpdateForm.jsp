@@ -42,7 +42,7 @@
 									</div>
 								</div>
 								<div class="menu-simple-item">
-									<div class="menu-simple-item-inner" onclick="location.href='memberListPage.cl?cNo=${c.classNo}'" style="cursor:pointer;">
+									<div class="menu-simple-item-inner" onclick="location.href='memberListPage.cl?classNo=${c.classNo}'" style="cursor:pointer;">
 										<h6><span style="font-size:20px;">클럽 멤버 관리</span><span class="pull-right">></span></h6>
 										<p>가입되어있는 멤버, 승인 대기중인 멤버 등을 확인하실 수 있어요!</p>
 									</div>
