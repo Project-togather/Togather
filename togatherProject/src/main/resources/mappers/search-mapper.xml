@@ -107,6 +107,33 @@
 		    <if test="sorting == 5">
 		     AND c.c_location != '온라인'
 		    </if>
+		    <if test="category == 1">
+			  AND c.cl_category = 1
+			</if>
+			<if test="category == 2">
+			  AND c.cl_category = 2
+			</if>
+			<if test="category == 3">
+			  AND c.cl_category = 3
+			</if>
+			<if test="category == 4">
+    		AND c.cl_category = 4
+  			</if>
+  			<if test="category == 5">
+    		AND c.cl_category = 5
+  			</if>
+  			<if test="category == 6">
+    		AND c.cl_category = 6
+  			</if>
+  			<if test="category == 7">
+    		AND c.cl_category = 7
+  			</if>
+  			<if test="category == 8">
+    		AND c.cl_category = 8
+  			</if>
+  			<if test="dateValue != null">
+			  AND c.c_date = #{dateValue}
+			</if>
 			order by c_no desc
 	</select>
 	
@@ -136,6 +163,33 @@
   			<if test="sorting == 5">
     		AND c_location != '온라인'
   			</if>
+  			<if test="category == 1">
+			  AND cl_category = 1
+			</if>
+			<if test="category == 2">
+			  AND cl_category = 2
+			</if>
+			<if test="category == 3">
+			  AND cl_category = 3
+			</if>
+			<if test="category == 4">
+    		AND cl_category = 4
+  			</if>
+  			<if test="category == 5">
+    		AND cl_category = 5
+  			</if>
+  			<if test="category == 6">
+    		AND cl_category = 6
+  			</if>
+  			<if test="category == 7">
+    		AND cl_category = 7
+  			</if>
+  			<if test="category == 8">
+    		AND cl_category = 8
+  			</if>
+  			<if test="dateValue != null">
+			  AND c_date = #{dateValue}
+			</if>
 			order by c_no desc
 	</select>
 	
@@ -150,6 +204,49 @@
         from attachment
         join class on (c_no = ref_fno)
 			WHERE status = 'Y'
+			AND c_title like '%' || #{keyword} || '%'
+			<if test="options == 1">
+			  AND cl_type = 1
+			</if>
+			<if test="options == 2">
+			  AND cl_type = 2
+			</if>
+			<if test="options == 3">
+			  AND cl_type = 3
+			</if>
+			<if test="sorting == 4">
+    		AND c_location = '온라인'
+  			</if>
+  			<if test="sorting == 5">
+    		AND c_location != '온라인'
+  			</if>
+  			<if test="category == 1">
+			  AND cl_category = 1
+			</if>
+			<if test="category == 2">
+			  AND cl_category = 2
+			</if>
+			<if test="category == 3">
+			  AND cl_category = 3
+			</if>
+			<if test="category == 4">
+    		AND cl_category = 4
+  			</if>
+  			<if test="category == 5">
+    		AND cl_category = 5
+  			</if>
+  			<if test="category == 6">
+    		AND cl_category = 6
+  			</if>
+  			<if test="category == 7">
+    		AND cl_category = 7
+  			</if>
+  			<if test="category == 8">
+    		AND cl_category = 8
+  			</if>
+  			<if test="dateValue != null">
+			  AND c_date = #{dateValue}
+			</if>
 			order by c_no desc
 	</select>
 	 
@@ -211,94 +308,6 @@
 	 -->
 	
 	<!-- ajax 영역 -->
-	<select id="ajaxSelectSocialingListCount" resultType="_int">
-		select
-		count(*)
-	from class
-	where status = 'Y'
-	</select>
-	
-	<select id="ajaxSelectSocialingList" resultMap="clubResult">
-		select
-	        c_no
-	    ,   c_title
-	    ,   c_location
-	    ,   c_date
-	    ,	cl_type
-	    	from class
-		  join attachment on (c_no = ref_fno)
-		 	where status = 'Y'
-		   and cl_type = 1
-	    order by c_no desc
-	</select>
-	
-	<select id="ajaxSelectClubListCount" resultType="_int">
-		select
-		count(*)
-	from class
-	where status = 'Y'
-	</select>
-	
-	<select id="ajaxSelectClubList" resultMap="clubResult">
-		select
-	        c_no
-	    ,   c_title
-	    ,   c_location
-	    ,   c_date
-	    ,	cl_type
-	    	from class
-		  join attachment on (c_no = ref_fno)
-		 	where status = 'Y'
-		   and cl_type = 2
-	    order by c_no desc
-	</select>
-	
-	<select id="ajaxSelectChallengeListCount" resultType="_int">
-		select
-		count(*)
-	from class
-	where status = 'Y'
-	</select>
-	
-	<select id="ajaxSelectChallengeList" resultMap="clubResult">
-		select
-	        c_no
-	    ,   c_title
-	    ,   c_location
-	    ,   c_date
-	    ,	cl_type
-	    	from class
-		  join attachment on (c_no = ref_fno)
-		 	where status = 'Y'
-		   and cl_type = 3
-	    order by c_no desc
-	</select>
-	 
-	 <!--  
-	<select id="ajaxSelectClassListCount" resultType="_int">
-	select
-		count(*)
-	from class
-	where status = 'Y'
-	</select>
-	
-	<select id="ajaxSelectClassList" resultMap="clubResult">
-		SELECT
-			    c_no,
-			    c_title,
-			    c_location,
-			    c_date,
-			    cl_type
-			FROM
-			    class
-			JOIN
-			    attachment ON (c_no = ref_fno)
-			WHERE
-			status = 'Y'
-            and cl_type = 1
-	</select>
-	-->
-	
 	
 	<select id="ajaxSelectFeedList" resultMap="feedResult">
 		 select

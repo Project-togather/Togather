@@ -174,55 +174,43 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 
 
 
-/* 네비바 영역 */
-
+/* 네비게이션 바 영역 */
 #searchNav {
     position: relative;
     display: flex;
-    width: 50%;
-    margin: 1em auto;
+    justify-content: center; /* 수평 가운데 정렬을 위해 사용 */
+    width: 80%; /* 네비게이션 바의 너비를 80%로 설정 */
+    margin: 0 auto; /* 네비게이션 바를 수평 가운데로 배치하기 위해 좌우 마진을 자동으로 설정 */
     font-size: 15px;
 }
 #searchNav a {
     display: block;
-    width: 20%;
+    width: 25%; /* 각 링크의 너비를 조정합니다 (필요에 따라 조절할 수 있음). */
     padding: .75em 0;
     color: #333;
     text-decoration: none;
     text-align: center;
-    cursor: pointer; /* 추가: 링크에 커서 스타일 적용 */
+    cursor: pointer;
 }
 
 .nav-underline {
     position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 20%;
-    height: 2px;
-    background: #333;
-    transition: all .3s ease-in-out;
-}
+  }
 
-/* 추가: 클릭한 페이지의 링크에 대한 스타일 */
+/* 추가: 클릭한 페이지의 링크 스타일 */
 #searchNav a.is-current {
-    color: black; /* 클릭한 링크의 텍스트 색상 변경 */
+    color: black;
 }
-
 
 /* 페이징 디자인 */
 .wrapper {
-	
-	position: relative;
+    position: relative;
 }
-
 
 #pagingArea {
-
-	position: absolute;
-
-	left: 42%;
+    position: absolute;
+    left: 42%;
 }
-
 
 
 /* 피드 디자인 */
@@ -329,7 +317,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
     object-fit: cover;
 }
 
-
+.gallery-item  {
+	box-sizing: border-box;
+	border: 1px solid black;
+}
 </style>
 </head>
 <body>
@@ -373,15 +364,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
         
         <!-- 네비바 -->
         <nav id="searchNav">
-			<a href="#" id="socialingClick" onclick="searchClassList(1);">
-				<i class="fas fa-duotone fa-bolt" style="color: rgba(46, 102, 255, 0.918);"></i>&nbsp;Socialing
-			</a>
-			<a href="#" id="clubClick" onclick="searchClassList(2);">
-				<i class="fas fa-regular fa-star" style="color: rgba(255, 233, 35, 0.918);"></i>&nbsp;Club
-			</a>
-			<a href="#" id="challengeClick" onclick="searchClassList(3);">
-				<i class="fas fa-regular fa-fire" style="color: rgba(255, 98, 36, 0.918);"></i>&nbsp;Challenge
-			</a>
 			<a href="#" id="feedClick">
 				<i class="fas fa-light fa-comment" style="color: rgba(114, 114, 114, 0.918);"></i>&nbsp;Feed
 			</a>
@@ -393,69 +375,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 		
 		
 		
-        
-        
-        
-        <!-- 소셜링, 클럽, 챌린지, 피드, 멤버 ajax 영역 -->
-		<section class="module" id="module1">
-			<div class="container">
-				<div class="search-class">
-					<div class="row">
-					
-						<!--  
-						<div class="col-md-4 post-item">
-							<article class="post">
-								<div class="post-preview"><a href="#"><img src="assets/images/menu/1.jpg" alt=""></a></div>
-								<div class="post-wrapper">
-									<div class="post-header">
-										<h2 class="post-title display-1"><a href="blog-single-1.html">Which Lamb is the Best: American, Australian or New Zealand?</a></h2>
-									</div>
-									<div class="post-content">
-										<p>See how your users experience your website in realtime or view trends to see any changes in performance over time...</p>
-									</div>
-									<div class="post-more"><a href="#">read more...</a></div>
-								</div>
-							</article>
-						</div>
-						-->
-							
-					</div>
-				</div>
-					
-
-				<div id="pagingArea">
-					<nav aria-label="Page navigation example">
-						<ul class="pagination">
-							
-								<!--
-								<li class="page-item">
-								<a class="page-link" href="#" aria-label="Previous">
-									<span aria-hidden="true">&laquo;</span>
-								</a>
-								</li>
-								<li class="page-item"><a class="page-link" href="#">1</a></li>
-								<li class="page-item"><a class="page-link" href="#">2</a></li>
-								<li class="page-item"><a class="page-link" href="#">3</a></li>
-								<li class="page-item">
-								<a class="page-link" href="#" aria-label="Next">
-									<span aria-hidden="true">&raquo;</span>
-								</a>
-								</li>
-								-->
-								
-						</ul>
-					</nav>
-				</div>
-
-			</div>
-		</section>
-		
-		
-		
 		
 		
 		<!-- 피드 ajax 영역 -->
-		<section class="module" id="module3">
+		<section class="module">
 			<div class="container">
 				<div class="feed">
 
@@ -496,6 +419,38 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 					</div>
 					 -->
 
+					<!--
+					 <div class="row">
+						<div class="col-md-12">
+							<div class="gallery">
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/1.jpg"></div><a href="assets/images/portfolio/1.jpg" title="Title 1"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/5.jpg"></div><a href="assets/images/portfolio/5.jpg" title="Title 2"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/3.jpg"></div><a href="assets/images/portfolio/3.jpg" title="Title 3"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/4.jpg"></div><a href="assets/images/portfolio/4.jpg" title="Title 4"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/2.jpg"></div><a href="assets/images/portfolio/2.jpg" title="Title 5"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/6.jpg"></div><a href="assets/images/portfolio/6.jpg" title="Title 6"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/7.jpg"></div><a href="assets/images/portfolio/7.jpg" title="Title 7"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/8.jpg"></div><a href="assets/images/portfolio/8.jpg" title="Title 8"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					-->
 
 				</div>
 			</div>
@@ -504,506 +459,71 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 
 
 		<script>
-		<!-- 소셜링 ajax 스크립트 영역 -->
-		 $(function() {
-		    $("#socialingClick").click(function() {
-		        loadSocialingData(1); // 초기 페이지 번호 (1)로 데이터 로드
-		    });
-		    
-		    
-		    
-		    // 페이징 버튼 클릭 시 해당 페이지 데이터 로드
-		    $(document).on("click", ".pagination a", function(e) {
-		        e.preventDefault();
-		        let page = $(this).data("page");
-		        loadSocialingData(page);
-		    });
-		    
+			<!-- 먼저 보이는 feed -->
+			<!-- $(function() {
+					
+					$.ajax({
+						url:"getList.fe",
+						success:function(list) {
+							
+							
+							console.log(list);
+							
+							let value = "";
+							
+							for(let i in list) {
+								
+								let item = list[i];
+								
+								value += "<div class='feed-item'>" 
+											+ "<div class='feed-box'>" 
+											
+												+ "<div class='feed_name'>" 
+													+ "<div class='profile_box'>" 
+														+ "<img class='profile_img' src='https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_org.jpg?61e575e8653e5920470a38d1482d7312/melon/optimize/90'>"
+													+ "</div>"
+													+ "<span class='feed_name_txt'>" + item.feWriter + "</span>"
+													
+												+ "</div>" 
+												
+												+ "<img class='feed_img' src='https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/%EC%95%8C%EB%A0%88%EC%98%AC%EB%A0%88_e1e634ae5a2fb6377b1dd828a0fb8c2ce5f12723fc34df3da578ea3e8e35eb62'>"
+												
+												+ "<div class='feed_icon'>" 
+													+ "<div>"
+														+ "<span class='material-icons-outlined'>" + "favorite_border" + "</span>"
+														+ "<span class='material-icons-outlined'>" + "mode_comment" + "</span>"
+													+ "</div>"
+													
+													+ "<div>"
+														+ "<span class='material-icons-outlined'>" + "turned_in_not" + "</span>"
+													+ "</div>"
+													
+												+ "</div>"
+												
+												+ "<div class='feed_like'>" 
+													+ "<p class='feed_txt'>" + "<b>" + "좋아요 10개" + "</b>" + "</p>"
+												+ "</div>"
+												
+												+ "<div class='feed_content'>" 
+													+ "<p class='feed_txt'>" + item.feContent + "</p>"
+												+ "</div>"
+												
+									+ "</div>"
+								+ "</div>"
+								
+							}
 
-		    function loadSocialingData(page) {
-		    	
-		        $.ajax({
-		            url: "getList.so",
-		            data: { cpage: page },
-		            success: function(response) {
-		            	
-		                console.log(response);
-		                
-		                let list = response.list;
-		                
-		                
-		                $(".search-class .row").empty();
+							$(".feed").html(value);
+							
+							
+						}, error:function() {
+							console.log("ajax 통신 실패");
+						}
+					
+				})
 
-		                
-		                $.each(list, function(index, item) {
-		                	
-		                	let row = $("<div class='col-md-4 post-item'>");
-		                    let article = $("<article class='post'>");
-
-		                    let postPreview = $("<div class='post-preview'></div");
-		                    let postWrapper = $("<div class='post-wrapper'></div");
-		                    let postContent = $("<div class='post-content'></div");
-		                    let postMore = $("<div class='post-more'></div");
-
-		                    // <a href='#'>를 추가
-		                    let link = $("<a href='#'></a>");
-
-		                    // <img src="assets/images/widgets/3.jpg" alt="">를 추가 (이미지 경로 수정)
-		                    let image = $("<img src='assets/images/widgets/3.jpg' alt='' />");
-
-		                    // 링크 안에 이미지를 넣음
-		                    link.append(image);
-
-		                    // postPreview 안에 링크를 넣음
-		                    postPreview.append(link);
-
-		                    // postWrapper 안에 post-header 추가
-		                    postWrapper.append("<div class='post-header'></div>");
-
-		                    let postHeader = postWrapper.find(".post-header");
-		                    let postTitle = $("<h2 class='socialing-title'></h2>");
-		                    let postLink = $("<a href='blog-single-1.html'></a>");
-		                    
-		                    // postLink를 postTitle에 추가
-		                    postTitle.append(postLink);
-
-		                    // postTitle를 postHeader에 추가
-		                    postHeader.append(postTitle);
-
-
-		                    // postMore 안에 <a href='#'></a>를 추가
-		                    let moreLink = $("<a href='#'></a>");
-		                    postMore.append(moreLink);
-
-		                    article.append(postPreview);
-		                    article.append(postWrapper);
-		                    article.append(postContent);
-		                    article.append(postMore);
-
-		                    row.append(article);
-
-		                 	// item 넣기
-		                 	
-		                 	// 모임 명
-		                    postLink.text(item.classTitle);
-		                 	postTitle.append(postLink);
-		                 	
-		                 	// 모임 타입
-		                 	let paragraph = $("<p>" + item.clType + "</p>");
-							postContent.append(paragraph);
-		                 	
-		                 	// 모임 날짜
-		                 	moreLink.text(item.classDate);
-							postMore.append(moreLink);
-		                 	
-		                    
-		                    $(".search-class .row").append(row);
-
-		                    
-		                });
-		                
-						
-		                // 페이징 버튼 업데이트
-		                updatePagination(response.pageInfo);
-						
-		            },
-		            error: function() {
-		                console.log("ajax 통신 실패");
-		            }
-		        });
-		    }
-			
-		    <!-- 소셜링 페이징바 영역 -->
-		    function updatePagination(pageInfo) {
-		        let pagination = $(".pagination");
-		        pagination.empty();
-
-		        // << 버튼
-		        if (pageInfo.currentPage > 1) {
-		            let prevPageLink = $("<a class='page-link' href='#' aria-label='Previous'>&laquo;</a>");
-		            prevPageLink.data("page", pageInfo.currentPage - 1);
-		            pagination.append($("<li class='page-item'></li>").append(prevPageLink));
-		            prevPageLink.click(function() {
-		                loadSocialingData(pageInfo.currentPage - 1);
-		            });
-		        } else {
-		            pagination.append($("<li class='page-item disabled'></li").append($("<a class='page-link' href='#' aria-label='Previous'>&laquo;</a>")));
-		        }
-
-		        // 숫자 버튼
-		        for (let i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
-		            let pageLink = $("<a class='page-link' href='#'></a>").text(i);
-		            pageLink.data("page", i);
-		            if (i === pageInfo.currentPage) {
-		                pageLink.parent().addClass("active");
-		            }
-		            let pageItem = $("<li class='page-item'></li").append(pageLink);
-		            pagination.append(pageItem);
-
-		            // Clicking a page number loads the corresponding page
-		            pageLink.click(function() {
-		                loadSocialingData(i);
-		            });
-		        }
-
-		        // >> 버튼
-		        if (pageInfo.currentPage < pageInfo.maxPage) {
-		            let nextPageLink = $("<a class='page-link' href='#' aria-label='Next'>&raquo;</a>");
-		            nextPageLink.data("page", pageInfo.currentPage + 1);
-		            pagination.append($("<li class='page-item'></li").append(nextPageLink));
-		            nextPageLink.click(function() {
-		                loadSocialingData(pageInfo.currentPage + 1);
-		            });
-		        } else {
-		            pagination.append($("<li class='page-item disabled'></li").append($("<a class='page-link' href='#' aria-label='Next'>&raquo;</a>")));
-		        }
-		    }
-		    
-		});
 		 
-		 
-		 
-		 
-		 
-		 <!-- 소셜링 ajax 스크립트 검색 -->
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 
-		 <!-- 클럽 ajax 스크립트 영역 -->
-		 $(function() {
-		    $("#clubClick").click(function() {
-		        loadSocialingData(1); // 초기 페이지 번호 (1)로 데이터 로드
-		    });
-		    
-		    
-		    
-		    // 페이징 버튼 클릭 시 해당 페이지 데이터 로드
-		    $(document).on("click", ".pagination a", function(e) {
-		        e.preventDefault();
-		        let page = $(this).data("page");
-		        loadSocialingData(page);
-		    });
-		    
-
-		    function loadSocialingData(page) {
-		    	
-		        $.ajax({
-		            url: "getList.cl",
-		            data: { cpage: page },
-		            success: function(response) {
-		            	
-		                console.log(response);
-		                
-		                let list = response.list;
-		                
-		                
-		                $(".search-class .row").empty();
-
-		                
-		                $.each(list, function(index, item) {
-		                	
-		                	let row = $("<div class='col-md-4 post-item'>");
-		                    let article = $("<article class='post'>");
-
-		                    let postPreview = $("<div class='post-preview'></div");
-		                    let postWrapper = $("<div class='post-wrapper'></div");
-		                    let postContent = $("<div class='post-content'></div");
-		                    let postMore = $("<div class='post-more'></div");
-
-		                    // <a href='#'>를 추가
-		                    let link = $("<a href='#'></a>");
-
-		                    // <img src="assets/images/widgets/3.jpg" alt="">를 추가 (이미지 경로 수정)
-		                    let image = $("<img src='assets/images/widgets/3.jpg' alt='' />");
-
-		                    // 링크 안에 이미지를 넣음
-		                    link.append(image);
-
-		                    // postPreview 안에 링크를 넣음
-		                    postPreview.append(link);
-
-		                    // postWrapper 안에 post-header 추가
-		                    postWrapper.append("<div class='post-header'></div>");
-
-		                    let postHeader = postWrapper.find(".post-header");
-		                    let postTitle = $("<h2 class='socialing-title'></h2>");
-		                    let postLink = $("<a href='blog-single-1.html'></a>");
-		                    
-		                    // postLink를 postTitle에 추가
-		                    postTitle.append(postLink);
-
-		                    // postTitle를 postHeader에 추가
-		                    postHeader.append(postTitle);
-
-
-		                    // postMore 안에 <a href='#'></a>를 추가
-		                    let moreLink = $("<a href='#'></a>");
-		                    postMore.append(moreLink);
-
-		                    article.append(postPreview);
-		                    article.append(postWrapper);
-		                    article.append(postContent);
-		                    article.append(postMore);
-
-		                    row.append(article);
-
-		                 	// item 넣기
-		                 	
-		                 	// 모임 명
-		                    postLink.text(item.classTitle);
-		                 	postTitle.append(postLink);
-		                 	
-		                 	// 모임 타입
-		                 	let paragraph = $("<p>" + item.clType + "</p>");
-							postContent.append(paragraph);
-		                 	
-		                 	// 모임 날짜
-		                 	moreLink.text(item.classDate);
-							postMore.append(moreLink);
-		                 	
-		                    
-		                    $(".search-class .row").append(row);
-
-		                    
-		                });
-		                
-						
-		                // 페이징 버튼 업데이트
-		                updatePagination(response.pageInfo);
-						
-		            },
-		            error: function() {
-		                console.log("ajax 통신 실패");
-		            }
-		        });
-		    }
-			
-		    <!-- 클럽 페이징바 영역 -->
-		    function updatePagination(pageInfo) {
-		        let pagination = $(".pagination");
-		        pagination.empty();
-
-		        // << 버튼
-		        if (pageInfo.currentPage > 1) {
-		            let prevPageLink = $("<a class='page-link' href='#' aria-label='Previous'>&laquo;</a>");
-		            prevPageLink.data("page", pageInfo.currentPage - 1);
-		            pagination.append($("<li class='page-item'></li>").append(prevPageLink));
-		            prevPageLink.click(function() {
-		                loadSocialingData(pageInfo.currentPage - 1);
-		            });
-		        } else {
-		            pagination.append($("<li class='page-item disabled'></li").append($("<a class='page-link' href='#' aria-label='Previous'>&laquo;</a>")));
-		        }
-
-		        // 숫자 버튼
-		        for (let i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
-		            let pageLink = $("<a class='page-link' href='#'></a>").text(i);
-		            pageLink.data("page", i);
-		            if (i === pageInfo.currentPage) {
-		                pageLink.parent().addClass("active");
-		            }
-		            let pageItem = $("<li class='page-item'></li").append(pageLink);
-		            pagination.append(pageItem);
-
-		            // Clicking a page number loads the corresponding page
-		            pageLink.click(function() {
-		                loadSocialingData(i);
-		            });
-		        }
-
-		        // >> 버튼
-		        if (pageInfo.currentPage < pageInfo.maxPage) {
-		            let nextPageLink = $("<a class='page-link' href='#' aria-label='Next'>&raquo;</a>");
-		            nextPageLink.data("page", pageInfo.currentPage + 1);
-		            pagination.append($("<li class='page-item'></li").append(nextPageLink));
-		            nextPageLink.click(function() {
-		                loadSocialingData(pageInfo.currentPage + 1);
-		            });
-		        } else {
-		            pagination.append($("<li class='page-item disabled'></li").append($("<a class='page-link' href='#' aria-label='Next'>&raquo;</a>")));
-		        }
-		    }
-		    
-		});
-		 
-		 
-		 
-		 
-		 
-		 <!-- 챌린지 ajax 스크립트 영역 -->
-		 $(function() {
-		    $("#challengeClick").click(function() {
-		        loadSocialingData(1); // 초기 페이지 번호 (1)로 데이터 로드
-		    });
-		    
-		    
-		    
-		    // 페이징 버튼 클릭 시 해당 페이지 데이터 로드
-		    $(document).on("click", ".pagination a", function(e) {
-		        e.preventDefault();
-		        let page = $(this).data("page");
-		        loadSocialingData(page);
-		    });
-		    
-
-		    function loadSocialingData(page) {
-		    	
-		        $.ajax({
-		            url: "getList.ch",
-		            data: { cpage: page },
-		            success: function(response) {
-		            	
-		                console.log(response);
-		                
-		                let list = response.list;
-		                
-		                
-		                $(".search-class .row").empty();
-
-		                
-		                $.each(list, function(index, item) {
-		                	
-		                	let row = $("<div class='col-md-4 post-item'>");
-		                    let article = $("<article class='post'>");
-
-		                    let postPreview = $("<div class='post-preview'></div");
-		                    let postWrapper = $("<div class='post-wrapper'></div");
-		                    let postContent = $("<div class='post-content'></div");
-		                    let postMore = $("<div class='post-more'></div");
-
-		                    // <a href='#'>를 추가
-		                    let link = $("<a href='#'></a>");
-
-		                    // <img src="assets/images/widgets/3.jpg" alt="">를 추가 (이미지 경로 수정)
-		                    let image = $("<img src='assets/images/widgets/3.jpg' alt='' />");
-
-		                    // 링크 안에 이미지를 넣음
-		                    link.append(image);
-
-		                    // postPreview 안에 링크를 넣음
-		                    postPreview.append(link);
-
-		                    // postWrapper 안에 post-header 추가
-		                    postWrapper.append("<div class='post-header'></div>");
-
-		                    let postHeader = postWrapper.find(".post-header");
-		                    let postTitle = $("<h2 class='socialing-title'></h2>");
-		                    let postLink = $("<a href='blog-single-1.html'></a>");
-		                    
-		                    // postLink를 postTitle에 추가
-		                    postTitle.append(postLink);
-
-		                    // postTitle를 postHeader에 추가
-		                    postHeader.append(postTitle);
-
-
-		                    // postMore 안에 <a href='#'></a>를 추가
-		                    let moreLink = $("<a href='#'></a>");
-		                    postMore.append(moreLink);
-
-		                    article.append(postPreview);
-		                    article.append(postWrapper);
-		                    article.append(postContent);
-		                    article.append(postMore);
-
-		                    row.append(article);
-
-		                 	// item 넣기
-		                 	
-		                 	// 모임 명
-		                    postLink.text(item.classTitle);
-		                 	postTitle.append(postLink);
-		                 	
-		                 	// 모임 타입
-		                 	let paragraph = $("<p>" + item.clType + "</p>");
-							postContent.append(paragraph);
-		                 	
-		                 	// 모임 날짜
-		                 	moreLink.text(item.classDate);
-							postMore.append(moreLink);
-		                 	
-		                    
-		                    $(".search-class .row").append(row);
-
-		                    
-		                });
-		                
-						
-		                // 페이징 버튼 업데이트
-		                updatePagination(response.pageInfo);
-						
-		            },
-		            error: function() {
-		                console.log("ajax 통신 실패");
-		            }
-		        });
-		    }
-			
-		    <!-- 챌린지 페이징바 영역 -->
-		    function updatePagination(pageInfo) {
-		        let pagination = $(".pagination");
-		        pagination.empty();
-
-		        // << 버튼
-		        if (pageInfo.currentPage > 1) {
-		            let prevPageLink = $("<a class='page-link' href='#' aria-label='Previous'>&laquo;</a>");
-		            prevPageLink.data("page", pageInfo.currentPage - 1);
-		            pagination.append($("<li class='page-item'></li>").append(prevPageLink));
-		            prevPageLink.click(function() {
-		                loadSocialingData(pageInfo.currentPage - 1);
-		            });
-		        } else {
-		            pagination.append($("<li class='page-item disabled'></li").append($("<a class='page-link' href='#' aria-label='Previous'>&laquo;</a>")));
-		        }
-
-		        // 숫자 버튼
-		        for (let i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
-		            let pageLink = $("<a class='page-link' href='#'></a>").text(i);
-		            pageLink.data("page", i);
-		            if (i === pageInfo.currentPage) {
-		                pageLink.parent().addClass("active");
-		            }
-		            let pageItem = $("<li class='page-item'></li").append(pageLink);
-		            pagination.append(pageItem);
-
-		            // Clicking a page number loads the corresponding page
-		            pageLink.click(function() {
-		                loadSocialingData(i);
-		            });
-		        }
-
-		        // >> 버튼
-		        if (pageInfo.currentPage < pageInfo.maxPage) {
-		            let nextPageLink = $("<a class='page-link' href='#' aria-label='Next'>&raquo;</a>");
-		            nextPageLink.data("page", pageInfo.currentPage + 1);
-		            pagination.append($("<li class='page-item'></li").append(nextPageLink));
-		            nextPageLink.click(function() {
-		                loadSocialingData(pageInfo.currentPage + 1);
-		            });
-		        } else {
-		            pagination.append($("<li class='page-item disabled'></li").append($("<a class='page-link' href='#' aria-label='Next'>&raquo;</a>")));
-		        }
-		    }
-		    
-		});
-		 
-		 
-		 
-		 
-		 
-			
-		 
-		 
-		 <!-- 피드 ajax 스크립트 영역 -->
+			<!-- 피드 ajax 스크립트 영역 -->
 			<!-- $(function() {
 				$("#feedClick").click(function() {
 					
@@ -1055,6 +575,38 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 												
 									+ "</div>"
 								+ "</div>"
+								
+							}
+
+							$(".feed").html(value);
+							
+							
+						}, error:function() {
+							console.log("ajax 통신 실패");
+						}
+					})
+					
+				})
+
+			
+			<!-- 멤버 ajax 스크립트 영역 -->
+			<!-- $(function() {
+				$("#memberClick").click(function() {
+					
+					$.ajax({
+						url:"getList.me",
+						success:function(list) {
+							
+							
+							console.log(list);
+							
+							let value = "";
+							
+							for(let i in list) {
+								
+								let item = list[i];
+								
+								value += "<div class='row'>" + "<div class='col-md-12'>" + "<div class='gallery'>" + "<div class='gallery-item'>" + "<div class='gallery-image' data-background='assets/images/portfolio/1.jpg'>" + "</div>" + "<a href='assets/images/portfolio/1.jpg' title='Title 1'>" + "</a>" + "</div>" + "</div>" + "</div>" + "</div>"
 								
 							}
 
