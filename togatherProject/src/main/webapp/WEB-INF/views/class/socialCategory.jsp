@@ -52,7 +52,7 @@ li:hover {cursor: pointer; background-color: orange;}
         </div>
         <div class="categorybarDiv">
     		<ul class="categorybar">
-	        	<li onclick="category(0);">전체</li>
+	        	<li onclick="location.href='social.pa'">전체</li>
 	        	<li onclick="category(1);"><img src="https://images.munto.kr/munto-web/culture_icon.svg" width="17.33" height="26" style="color: transparent;"> 문화·예술</li>
 	        	<li onclick="category(2);"><img src="https://images.munto.kr/munto-web/activite_icon.svg" width="17.33" height="26" style="color: transparent;"> 액티비티</li>
 	        	<li onclick="category(3);"><img src="https://images.munto.kr/munto-web/food_icon.svg" width="17.33" height="26" style="color: transparent;"> 푸드·드링크</li>
@@ -73,7 +73,6 @@ li:hover {cursor: pointer; background-color: orange;}
 						clCategory:categorynum,
 						},
 					success:(list)=>{
-						console.log(list);
 						location.href="category.solist";
 					},
 					error:()=>{
@@ -87,7 +86,7 @@ li:hover {cursor: pointer; background-color: orange;}
 		<section class="module">
 			<div class="container">
 				<div class="row">
-					<c:forEach var="c" items="${ list }" end="3">
+					<c:forEach var="c" items="${ list }">
 						<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
@@ -102,32 +101,14 @@ li:hover {cursor: pointer; background-color: orange;}
 					            	<h6><c:out value="${c.classTitle}"/></h6>
 				        	   </c:otherwise> 
 				          </c:choose>
-				          	<span class="bestDiv1"> ${ c.clName } </span> &nbsp;
-				          	<span class="bestDiv2"> 추천 </span> <br>
+				          	<span class="bestDiv1"> ${ c.clName } </span> <br>
 				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
-				          		<img src="${ c.img }">  ${ c.vacancy }/${ c.peopleLimit } <br>
-							</div>
-						</div>
-					</div>
-					</c:forEach>
-					<c:forEach var="c" items="${ list }" begin="4">
-						<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
-								<img src="${ c.attachment.updateName }">
-							</div>
-							<div class="menu-classic-item-inner">
-					       <c:choose>
-					           <c:when test="${fn:length(c.classTitle) > 18}">
-					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-					           </c:when>
-					           <c:otherwise>
-					            	<h6><c:out value="${c.classTitle}"/></h6>
-				        	   </c:otherwise> 
-				          </c:choose>
-				          	${ c.clName } <br>
-				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
-			          		<img src="${ c.img }">  ${ c.vacancy }/${ c.peopleLimit } <br>
+    					    <c:forEach var="i" items="${ imgList1 }">
+    					    	<c:if test="${ c.classNo eq i.classNo }">
+			          				<img src="${ i.img }">
+			          			</c:if>
+			          		</c:forEach>
+			          		${ c.vacancy }/${ c.peopleLimit } <br>
 							</div>
 						</div>
 					</div>
