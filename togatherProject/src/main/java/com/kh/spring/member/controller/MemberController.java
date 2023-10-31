@@ -113,7 +113,6 @@ public class MemberController {
       
       
       
-      
       //파일을 attach에 insert하면 됨
       Attachment at = new Attachment();
       at.setRefFno(memNo);
