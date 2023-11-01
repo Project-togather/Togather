@@ -17,7 +17,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
      <style>
 
 body,html{
@@ -35,9 +35,13 @@ body,html{
     margin-bottom: auto;
 }
 .card{
-    height: 500px;
+    height: 680px;
+    width : 500px;
     border-radius: 15px !important;
+	
     background-color: rgba(0,0,0,0.4) !important;
+	margin: auto;
+    
 }
 .contacts_body{
     padding:  0.75rem 0 !important;
@@ -264,12 +268,11 @@ margin-bottom: 15px !important;
 						<div class="card-header msg_head">
 							<div class="d-flex bd-highlight">
 								<div class="img_cont">
-									<img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" class="rounded-circle user_img">
+									<img src="${targetImg}" class="rounded-circle user_img">
 									<span class="online_icon"></span>
 								</div>
 								<div class="user_info">
-									<span>단톡방</span>
-									
+									<span> 채팅 </span>						
 								</div>
 
 							</div>
@@ -280,33 +283,71 @@ margin-bottom: 15px !important;
 						
 						
 						
-						<!--내 메세지 볼때 -->
+						<!--상대 메세지 볼때 -->
                             
-                            <%-- 
+                         <%-- 
 							<div class="d-flex justify-content-start mb-4">
-								<div class="img_cont_msg">
-									<img src="" class="rounded-circle user_img_msg">
-								</div>
-								<div class="msg_cotainer">
-									내용을 여따 입력하는거 맞냐
-									<span class="msg_time">시간입력</span>
-								</div>
+
+									<div class="img_cont_msg">
+										<img src="" class="rounded-circle user_img_msg">
+									</div>
+									<div class="msg_cotainer">
+										내용입력
+										<span class="msg_time">시간입력</span>
+									</div>
+									
 							</div>
 
-                            <!-- 상대 메세지 볼때-->
-							<div class="d-flex justify-content-end mb-4">
-								<div class="msg_cotainer_send">
-									내용입력
-									<span class="msg_time_send">시간입력</span>
-								</div>
-								<div class="img_cont_msg">
-							        <img src="" class="rounded-circle user_img_msg">
-								</div>
+                            <!-- 내 메세지 볼때-->
+                            	
+							<div class="d-flex justify-content-end mb-4" >
+								<ul>
+								<li>
+									<img src="resources/uploadFiles/2023110103404994436.png" style="width: 200px; height: 200px;">
+								</li>
+								<li>
+										<div class="msg_cotainer_send">
+											내용입력내용입력내용입력내용입력내용입력
+											<span class="msg_time_send">시간입력</span>
+										</div>
+										<div class="img_cont_msg">
+											<img src="" class="rounded-circle user_img_msg">
+										</div>
+								</li>
+								</ul>
 							</div>
-							--%>
+
+							<div class="d-flex justify-content-end mb-4">
+								
+									<div class="msg_cotainer_send">
+										내용입력
+										<span class="msg_time_send">시간입력</span>
+									</div>
+									<div class="img_cont_msg">
+								        <img src="" class="rounded-circle user_img_msg">
+									</div>
+								
+							</div>
+							<div class="d-flex justify-content-end mb-4">
+								
+									<div class="msg_cotainer_send">
+										내용입력
+										<span class="msg_time_send">시간입력</span>
+									</div>
+									<div class="img_cont_msg">
+								        <img src="" class="rounded-circle user_img_msg">
+									</div>
+								
+							</div>
+						--%>
+						</div>	
+						
+
+							
+							 
 							
 
-						</div>
+						
 
 
 
@@ -315,20 +356,57 @@ margin-bottom: 15px !important;
 						<div class="card-footer">
 							<div class="input-group">
 								<div class="input-group-append">
-									<span class="input-group-text attach_btn"><i class="fas fa-paperclip"></i></span>
+									<span class="input-group-text attach_btn"><i class="fas fa-paperclip" onclick="chooseFile(1);"></i></span>
 								</div>
-								<textarea id = "input-text" class="form-control type_msg" placeholder="Type your message..."></textarea>
+									
+										<div id="file-area" style = "display:none" >
+											<input type="file" name="file1" id = "file1" onchange ="loadImg(this,1)">
+										</div>
+									<textarea id = "input-text" name="chatContent" class="form-control type_msg" placeholder="Type your message..."></textarea>
 								<div class="input-group-append">
 									<span class="input-group-text send_btn" onclick="inputChat()"><i class="fas fa-location-arrow"></i></span>
 								</div>
+								<img id = "chatImg" width="50" height="50" onclick="chooseFile(1);" style="display: none;">
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		
         <script>
+        //파일첨부 관련 스크립트
         
+        	function chooseFile(num){
+            		$("#file"+num).click();
+            	}
+        	function loadImg(inputFile , num){
+					$("#chatImg").css("display","block");
+            		if (inputFile.files.length == 1){//파일이 선택된경우 => 파일읽어들여서 미리보기
+            			
+            			const reader = new FileReader();
+            			reader.readAsDataURL(inputFile.files[0]);
+            			reader.onload = function(e){
+            				switch (num){
+                                case 1: $("#chatImg").attr("src",e.target.result);
+                                break; 
+                            }
+            			}
+            		}else{//파일이 빠졌을경우
+                        switch (num){
+                                case 1: $("#chatImg").attr("src",null);
+                                break;
+                            }
+            		}
+            	}
+        
+        
+        
+        
+        
+        
+        	//달러 펑션
 			$(function(){
             
             setInterval (function(){
@@ -338,6 +416,7 @@ margin-bottom: 15px !important;
             
            	})
         
+        	//채팅조회
 			function selectChat(){
 				//alert("채팅조회");
 				console.log("채팅조회");
@@ -350,30 +429,73 @@ margin-bottom: 15px !important;
 							let value = "";
 							for(let i = 0 ; i<chatList.length ; i ++ ){
 								if(chatList[i].chatWriter == '${loginMember.memNo}'){//내가친 메세지
-									value += 
-										
-										"<div class='d-flex justify-content-end mb-4'>"
-									+"		<div class='msg_cotainer_send'>"
-									+			chatList[i].chatContent 
-									+"			<span class='msg_time_send'>" + chatList[i].chatWriter+"<br>" + chatList[i].CreateDate +"</span>"
+									if(chatList[i].img == null){
+											value += 
+											  "<div class='d-flex justify-content-end mb-4'>"
+											+"		<div class='msg_cotainer_send'>"
+											+			chatList[i].chatContent 
+											+"			<span class='msg_time_send'>" + chatList[i].createDate +"</span>"
+											+"		</div>"
+											+"			<div class='img_cont_msg'>"
+											+"				<img src='${loginMember.img}' class='rounded-circle user_img_msg'>"	
+											+"			</div>"
+											+"</div>";
+										}else{//내가친 메세지고 파일은 있을때
+											value += 
+											"<div class='d-flex justify-content-end mb-4' >"
+										+"		<ul>"
+										+"		<li>"
+										+"			<img src='"+chatList[i].img +"'style='width: 200px; height: 200px;'>"
+										+"		</li>"
+										+"		<li>";
+										if(chatList[i].chatContent !=null) {//내가 친 메세지고 파일은 있고 채팅도 있을때
+											value += 
+												"				<div class='msg_cotainer_send'>"
+												+ chatList[i].chatContent 
+												+"				<span class='msg_time_send'>"+chatList[i].createDate+"</span>"
+												+"</div>"
+										}					
+											value+=			
+										"		</li>"
+										+"		</ul>"
+										+"	</div>";
+									}
 									
-									+"		</div>"
-									+"		<div class='img_cont_msg'>"
-									+"	        <img src='' class='rounded-circle user_img_msg'>"
-									+"		</div>"	
-									+"	</div>"
+
 								}else{
+									if(chatList[i].img == null){
 									value += 
 										"<div class='d-flex justify-content-start mb-4'>"
 									+"			<div class='img_cont_msg'>"
-									+"			<img src=''' class='rounded-circle user_img_msg'>"	
+									+"			<img src='${targetImg}' class='rounded-circle user_img_msg'>"	
 									+"			</div>"
 									+"			<div class='msg_cotainer'>"	
 									+				chatList[i].chatContent
-									+"			<span class='msg_time'>" +chatList[i].chatWriter +"<br>" + chatList[i].CreateDate +"</span>"
-					
+									+"			<span class='msg_time'>" + chatList[i].createDate +"</span>"
 									+"			</div>"
-									+"	</div>"
+									+"	</div>";
+									}else{
+										value += 
+											"<div class='d-flex justify-content-start mb-4'>"
+										+"		<ul>"
+										+"		<li>"
+										+"			<img src='"+chatList[i].img +"'style='width: 200px; height: 200px;'>"
+										+"		</li>"
+										+"		<li>";
+										if(chatList[i].chatContent !=null){
+											value +=
+
+											"				<div class='msg_cotainer'>"
+											+		 			chatList[i].chatContent 
+											+"					<span class='msg_time'>"+chatList[i].createDate+"</span>"
+											+"				</div>";
+										}
+										value +=
+										"		</li>"
+										+"		</ul>"
+										+"	</div>";
+										
+									}
 									
 								}
 								
@@ -391,33 +513,56 @@ margin-bottom: 15px !important;
 				  
 				  
 			}
-			
+        	
+			 
         
 
-
-
-
+			//채팅입력 (사진첨부) 이거 먼저 해서 세션에 띄워놓자
             function inputChat(){
-             
+            	var form = $('#file1')[0].files[0];
+        		var formData = new FormData();
+        		formData.append('chatImg', form);
+               $.ajax({
+            	   url : "chatInputFile.ch",
+            	   data : formData,
+            	    type : "POST",
+            	    contentType: false,
+    		        cache: false,
+    		        timeout: 600000,
+            	    processData: false,
+            	   success : function(result){
+            		   alert(result);
+            		   inputChat2();
+            	   },
+            	   error : function(){
+            		   alert("통신 실패");
+            	   }
+               })
+               $("#file1").val("");
+               $("#chatImg").css("display","none");
+            }
+			
+          //채팅글자 insert
+            function inputChat2(){
+            	 alert($("#input-text").val());
                $.ajax({
             	   url : "chatInput.ch",
             	   data : {
             		   chatWriter :'${loginMember.memNo}',
+            		   chatRoom : '${chatRoomNo}',
             		   chatContent :$("#input-text").val(),
-            		   chatRoom : '${chatRoomNo}'
             	   },
             	   success : function(result){
-            		  selectChat();
-            		  
-            		 
-            		  
+            		   selectChat();
             	   },
             	   error : function(){
             		   alert("통신 실패");
             	   }
                })
                $("#input-text").val("");
-            }
+            }  
+               
+             
 
         </script>
 	</body>

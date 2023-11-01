@@ -9,10 +9,12 @@
 	</resultMap>
 	
 	<resultMap type="Chat" id="ChatResult">
+		<result column="CHAT_NO" property="chatNo"/>
 		<result column="CHAT_WRITER" property="chatWriter"/>
 		<result column="CHAT_CONTENT" property="chatContent"/>
-		<result column="CREATE_DATE" property="createDate"/>
+		<result column="TO_CHAR(CREATE_DATE,'HH24:MI')" property="createDate"/>
 		<result column="CHAT_ROOM" property="chatRoom"/>
+		<result column="IMG" property="img"/>
 	</resultMap>
 
 	<select id="checkChatRoom" resultMap="ChatRoomResult">
@@ -25,10 +27,12 @@
 	
 	<select id="selectChatList" resultMap="ChatResult">
 		select 
-		   CHAT_WRITER
+			 CHAT_NO
+		  	,CHAT_WRITER
 		    ,CHAT_CONTENT
-		    ,CREATE_DATE
+		    ,TO_CHAR(CREATE_DATE,'HH24:MI')
 		    ,CHAT_ROOM
+		    ,IMG
 		from chat
 		where chat_room = #{chatRoomNo}
 		order by create_date 
@@ -62,18 +66,22 @@
 	
 	<insert id="chatInput">
 		insert into chat
-		(
-		    CHAT_WRITER
+		(	
+			CHAT_NO
+		   ,CHAT_WRITER
 		   ,CHAT_CONTENT
 		   ,CREATE_DATE
 		   ,CHAT_ROOM
+		   ,IMG
 		)
 		values
 		(
-		     #{chatWriter}
+			 'CHAT'||SEQ_CHAT.NEXTVAL
+		    ,#{chatWriter}
 		    ,#{chatContent}
 		    ,SYSDATE
 		    ,#{chatRoom}
+		    ,#{img}
 		)
 	</insert>
 

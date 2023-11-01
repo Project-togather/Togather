@@ -14,9 +14,11 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Chat {
+	private String chatNo;
 	private String chatWriter;
 	private String chatContent;
-	private Date createDate;
+	private String createDate;
 	private String chatRoom;
+	private String img;
 	
 }
