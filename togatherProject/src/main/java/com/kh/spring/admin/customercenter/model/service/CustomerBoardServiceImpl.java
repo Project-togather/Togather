@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.admin.customercenter.model.dao.CustomerBoardDao;
 import com.kh.spring.admin.customercenter.model.vo.Faq;
 import com.kh.spring.admin.customercenter.model.vo.Notice;
+import com.kh.spring.admin.customercenter.model.vo.NoticeReply;
 import com.kh.spring.common.model.vo.PageInfo;
 
 
@@ -86,6 +87,16 @@ public class CustomerBoardServiceImpl implements CustomerBoardService {
 	@Override
 	public int increaseNotice(String noticeNo) {
 		return Cdao.increaseNotice(sqlSession,noticeNo);
+	}
+
+	@Override
+	public ArrayList<NoticeReply> selectNoticeReply(String noticeNo) {
+		return Cdao.selectNoticeReply(sqlSession,noticeNo);
+	}
+
+	@Override
+	public int insertReplyNotice(NoticeReply nr) {
+		return Cdao.insertReplyNotice(sqlSession,nr);
 	} 
 	
 

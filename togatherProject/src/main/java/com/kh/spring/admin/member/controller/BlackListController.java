@@ -18,6 +18,7 @@ import com.kh.spring.admin.member.model.vo.BlackList;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.common.template.Pagination;
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.report.model.vo.Report;
 
 @Controller
 public class BlackListController {
@@ -86,6 +87,11 @@ public class BlackListController {
 					model.addAttribute("errorMsg","블랙리스트 해제에 실패했습니다.");
 					return "common/errorPage";
 				}
+			}
+			
+			@RequestMapping("throwComplain.bl")
+			public String insertComplain(Report r) {
+				return "";
 			}
 
 }
