@@ -22,7 +22,7 @@
 		<typeAlias type="com.kh.spring.admin.customercenter.model.vo.Faq" alias="Faq"/>
 		<typeAlias type="com.kh.spring.chat.model.vo.Chat" alias="Chat"/>
 		<typeAlias type="com.kh.spring.chat.model.vo.ChatRoom" alias="ChatRoom"/>
-
+		<typeAlias type="com.kh.spring.admin.customercenter.model.vo.NoticeReply" alias="NoticeReply"/>
 	</typeAliases>
 	 
 	 <mappers>

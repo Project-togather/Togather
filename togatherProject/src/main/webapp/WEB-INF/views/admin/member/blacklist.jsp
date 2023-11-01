@@ -21,7 +21,9 @@
 					<button type="button" class="btn btn-warning btn-sm float-right"
 						data-bs-toggle="modal" data-bs-target="#blackinsert"
 						data-bs-whatever="@mdo">블랙리스트 추가하기</button>
-
+					<button type="button" class="btn btn-warning btn-sm float-right"
+					onclick="inputblacklist();">사용자페이지 블랙리스트 신고</button>
+						
 					<div class="modal fade" id="blackinsert" tabindex="-1"
 						aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -210,11 +212,16 @@
 		<script>
 			$(function(){
 				$(document).on("click", "#deletebtn", function () {
-						
 				     let content = $("#modalbody").text().split('I',1)[0];
 					 location.href='black.de?memId='+content;
 				})
 			})
+		</script>
+		
+		<script>
+			function inputblacklist(){
+				location.href='complain.bl'
+			}
 		</script>
 </body>
 </html>

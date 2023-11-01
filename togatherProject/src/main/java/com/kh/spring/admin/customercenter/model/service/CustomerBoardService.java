@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.spring.admin.customercenter.model.vo.Faq;
 import com.kh.spring.admin.customercenter.model.vo.Notice;
+import com.kh.spring.admin.customercenter.model.vo.NoticeReply;
 import com.kh.spring.common.model.vo.PageInfo;
 
 
@@ -34,4 +35,8 @@ public interface CustomerBoardService {
 	int insertfaqBoard(Faq f);
 	
 	int increaseNotice(String noticeNo);
+
+	ArrayList<NoticeReply> selectNoticeReply(String noticeNo);
+	
+	int insertReplyNotice(NoticeReply nr);
 }
