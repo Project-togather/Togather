@@ -464,29 +464,37 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 					
 					$.ajax({
 						url:"getList.fe",
-						success:function(list) {
+						success:function(object) {
 							
 							
-							console.log(list);
+							console.log(object.list);
+							console.log(object.alist);
 							
 							let value = "";
 							
-							for(let i in list) {
+							for(let i in object.alist) {
 								
-								let item = list[i];
-								
+								let item = object.list[i];
+								let item2 = object.alist[i];
+								let item3 = object.mlist[i];
+
+								console.log(item2.filePath);
+
+								$(".feed_img").attr("src", item2.filePath);
+								$(".profile_img").attr("src", item3.filePath);
+
 								value += "<div class='feed-item'>" 
 											+ "<div class='feed-box'>" 
 											
 												+ "<div class='feed_name'>" 
 													+ "<div class='profile_box'>" 
-														+ "<img class='profile_img' src='https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_org.jpg?61e575e8653e5920470a38d1482d7312/melon/optimize/90'>"
+														+ "<img class='profile_img' src='" + item3.img + "'>"
 													+ "</div>"
-													+ "<span class='feed_name_txt'>" + item.feWriter + "</span>"
+													+ "<span class='feed_name_txt'>" + item3.nickName + "</span>"
 													
 												+ "</div>" 
 												
-												+ "<img class='feed_img' src='https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/%EC%95%8C%EB%A0%88%EC%98%AC%EB%A0%88_e1e634ae5a2fb6377b1dd828a0fb8c2ce5f12723fc34df3da578ea3e8e35eb62'>"
+												+ "<img class='feed_img' src='" + item2.filePath + "'>"
 												
 												+ "<div class='feed_icon'>" 
 													+ "<div>"
@@ -529,16 +537,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 					
 					$.ajax({
 						url:"getList.fe",
-						success:function(list) {
+						success:function(object) {
 							
 							
-							console.log(list);
+							console.log(object.list);
 							
 							let value = "";
 							
-							for(let i in list) {
+							for(let i in object.list) {
 								
-								let item = list[i];
+								let item = object.list[i];
+								let item2 = object.alist[i];
+
+								console.log(item2);
 								
 								value += "<div class='feed-item'>" 
 											+ "<div class='feed-box'>" 
@@ -551,7 +562,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 													
 												+ "</div>" 
 												
-												+ "<img class='feed_img' src='https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/%EC%95%8C%EB%A0%88%EC%98%AC%EB%A0%88_e1e634ae5a2fb6377b1dd828a0fb8c2ce5f12723fc34df3da578ea3e8e35eb62'>"
+												+ "<img class='feed_img' src='" + item2.filePath + "'>"
 												
 												+ "<div class='feed_icon'>" 
 													+ "<div>"

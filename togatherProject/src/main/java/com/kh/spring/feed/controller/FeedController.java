@@ -154,7 +154,7 @@ public class FeedController {
 				  String thumbFilePath = mService.selectThumbnail(fList.get(i).getFeNo());
 				  fList.get(i).setThumbnail(thumbFilePath);
 			  }
-			  //System.out.println(fList);
+			  System.out.println(fList);
 			 
 
 			//관심사도 가져와야함

@@ -67,6 +67,17 @@ public class SearchServiceImpl implements SearchService {
 		return sDao.selectFeedList(sqlSession);
 	}
 	
+	@Override
+	public ArrayList<Attachment> selectImageFeedList() {
+		return sDao.selectImageFeedList(sqlSession);
+	}
+	
+	@Override
+	public ArrayList<Member> selectImageMemberFeedList() {
+		return sDao.selectImageMemberFeedList(sqlSession);
+	}
+
+	
 	/* 멤버 리스트가 보이는 서비스 */
 	@Override
 	public ArrayList<Member> selectMemberList() {

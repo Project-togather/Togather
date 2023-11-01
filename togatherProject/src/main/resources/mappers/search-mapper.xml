@@ -38,7 +38,7 @@
 		<result column="age" property="age"/>
 		<result column="phone" property="phone"/>
 		<result column="enroll_date" property="enrollDate"/>
-		<result column="m_status" property="mStatus"/>
+		<result column="m_status" property="memStatus"/>
 		<result column="manner" property="manner"/>
 		<result column="img" property="img"/>
 		<result column="msg" property="msg"/>
@@ -318,7 +318,46 @@
         ,   fe_writer
         ,   f_status
     from feed
+    join attachment on (fe_no = ref_fno)
     where f_status = 'Y'
+    order by enroll_date desc
+	</select>
+	
+	<select id="ajaxSelectImageFeedList" resultMap="AttResult">
+		 select
+        att_no
+    ,   ref_fno
+    ,   origin_name
+    ,	update_name
+    ,	file_path
+    ,	enroll_date
+        from attachment
+        join feed on (fe_no = ref_fno)
+			WHERE f_status = 'Y'
+			order by enroll_date desc
+	</select>
+	
+	<select id="ajaxSelectImageMemberFeedList" resultMap="memberResult">
+		 select
+		       mem_no
+		     , mem_id
+		     , mem_pwd
+		     , mem_name
+		     , nickname
+		     , email
+		     , gender
+		     , age
+		     , phone
+		     , a.enroll_date
+		     , m_status
+		     , manner
+		     , img
+		     , msg
+		  from member
+		  join feed on (mem_no = fe_writer)
+		  join attachment a on (mem_no = ref_fno)
+		 WHERE m_status = 'Y'
+		    order by a.enroll_date desc
 	</select>
 	
 	<select id="ajaxSelectMemberList" resultMap="memberResult">

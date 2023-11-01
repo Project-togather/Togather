@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
 import com.kh.spring.common.model.vo.PageInfo;
@@ -128,11 +129,27 @@ public class SearchController {
 	@RequestMapping(value = "getList.fe", produces = "application/json; charset=utf-8;")
 	public String ajaxSelectFeedList() {
 		
-		ArrayList<Feed> list = sService.selectFeedList();
-		
-		return new Gson().toJson(list);
-		
+	    ArrayList<Feed> list = sService.selectFeedList();
+	    
+	    // 이미지 피드 목록을 가져옴
+	    ArrayList<Attachment> alist = sService.selectImageFeedList();
+	    
+	    ArrayList<Member> mlist = sService.selectImageMemberFeedList();
+	    
+	    System.out.println(list);
+	    System.out.println(alist);
+	    System.out.println(mlist);
+	    
+	    // list와 alist를 JSON으로 변환하여 반환
+	    Gson gson = new Gson();
+	    JsonObject jsonObject = new JsonObject();
+	    jsonObject.add("list", gson.toJsonTree(list));
+	    jsonObject.add("alist", gson.toJsonTree(alist));
+	    jsonObject.add("mlist", gson.toJsonTree(mlist));
+
+	    return jsonObject.toString();
 	}
+
 	
 	
 	/* 멤버 */
