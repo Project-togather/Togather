@@ -112,6 +112,19 @@ public class SearchDao {
 		
 	}
 	
+	public ArrayList<Attachment> selectImageFeedList(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectImageFeedList");
+		
+	}
+	
+	public ArrayList<Member> selectImageMemberFeedList(SqlSessionTemplate sqlSession) {
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectImageMemberFeedList");
+		
+	}
+	
+	
 	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession) {
 		
 		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectMemberList");

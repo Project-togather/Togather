@@ -26,6 +26,8 @@ public interface SearchService {
 	
 	// 피드 리스트가 보이는 서비스
 	ArrayList<Feed> selectFeedList();
+	ArrayList<Attachment> selectImageFeedList();
+	ArrayList<Member> selectImageMemberFeedList();
 	
 	// 멤버 리스트가 보이는 서비스
 	ArrayList<Member> selectMemberList();
