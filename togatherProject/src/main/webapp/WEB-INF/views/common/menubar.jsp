@@ -206,7 +206,7 @@ li .m-searchBtn i {
 						<li><a href="mypage.me"><span class="menu-item-span">MYPAGE</span></a></li>
 
 					
-					 <c:if test="${ loginMember.memId == 'ADMIN' }">
+					 <c:if test="${ loginMember.memId == 'admin' }">
 					 </c:if> 
 					 	<li><a href="admin.pa"><span class="menu-item-span">관리자페이지</span></a></li>
 						

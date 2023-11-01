@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.spring.admin.customercenter.model.vo.Faq;
 import com.kh.spring.admin.customercenter.model.vo.Notice;
+import com.kh.spring.admin.customercenter.model.vo.NoticeReply;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.member.model.vo.Member;
 
@@ -76,5 +77,11 @@ public class CustomerBoardDao {
 		}
 		public int increaseNotice(SqlSession sqlsession,String noticeNo) {
 			return sqlsession.update("adcustomerMapper.increaseNotice",noticeNo);
+		}
+		public ArrayList<NoticeReply> selectNoticeReply(SqlSession sqlsession,String noticeNo){
+			return (ArrayList)sqlsession.selectList("adcustomerMapper.selectNoticeReply",noticeNo);
+		}
+		public int insertReplyNotice(SqlSession sqlsession,NoticeReply nr) {
+			return sqlsession.insert("adcustomerMapper.insertReplyNotice",nr);
 		}
 }
