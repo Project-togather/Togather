@@ -20,7 +20,9 @@
 		<typeAlias type="com.kh.spring.payment.model.vo.Payment" alias="Payment"/>
 		<typeAlias type="com.kh.spring.QuitReason.model.vo.QuitReason" alias="QuitReason"/>
 		<typeAlias type="com.kh.spring.admin.customercenter.model.vo.Faq" alias="Faq"/>
+		<!-- 
 		<typeAlias type="com.kh.spring.chat.model.vo.Chat" alias="Chat"/>
+		 -->
 		<typeAlias type="com.kh.spring.chat.model.vo.ChatRoom" alias="ChatRoom"/>
 
 	</typeAliases>
@@ -37,6 +39,8 @@
 	 	<mapper resource="/mappers/payment-mapper.xml"/>
 	 	<mapper resource="/mappers/adclass-mapper.xml"/>
 	 	<mapper resource="/mappers/search-mapper.xml"/>
+	 	<!-- 
 	 	<mapper resource="/mappers/chat-mapper.xml"/>
+	 	 -->
 	 </mappers>
 </configuration>

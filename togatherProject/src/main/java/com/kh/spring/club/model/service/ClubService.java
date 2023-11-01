@@ -80,8 +80,8 @@ public interface ClubService {
 	// 모임 가입할떄 결제한 가입비 조회
 	int selectPayPrice(MyClass c);
 	
-	// 소셜링 카테고리별 모임 리스트 조회
-	ArrayList<Club> selectSocialCategory(Club c);
+	// 카테고리별 모임 리스트 조회
+	ArrayList<Club> selectCategoryList(Club c);
 	
 	// 참여중인 프로필 이미지 조회
 	ArrayList<Member> selectImgList(Club c);

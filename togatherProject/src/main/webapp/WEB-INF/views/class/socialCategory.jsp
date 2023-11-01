@@ -68,9 +68,10 @@ li:hover {cursor: pointer; background-color: orange;}
 			function category(e){
 				let categorynum = e;
 				$.ajax({
-					url:"category.so",
+					url:"category.list",
 					data:{
 						clCategory:categorynum,
+						clType: 1,
 						},
 					success:(list)=>{
 						location.href="category.solist";
@@ -127,13 +128,5 @@ li:hover {cursor: pointer; background-color: orange;}
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 	
 		<jsp:include page="../common/footer.jsp"/>
-		
-		<!-- Scripts-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-		<script src="assets/js/plugins.min.js"></script>
-		<script src="assets/js/custom.min.js"></script>
 </body>
 </html>

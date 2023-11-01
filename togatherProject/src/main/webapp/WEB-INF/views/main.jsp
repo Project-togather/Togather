@@ -264,38 +264,6 @@
 							</div>
 						</c:if>
 					</c:forEach>
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index-2.html"><img src="assets/images/demo/2.jpg" alt="">
-								<h6>02. Slider</h6></a></div>
-					</div>
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index-3.html"><img src="assets/images/demo/3.jpg" alt="">
-								<h6>03. Text Slider</h6></a></div>
-					</div>
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index-4.html"><img src="assets/images/demo/4.jpg" alt="">
-								<h6>04. Youtube</h6></a></div>
-					</div>
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index-5.html"><img src="assets/images/demo/5.jpg" alt="">
-								<h6>05. Vimeo</h6></a></div>
-					</div>
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index-6.html"><img src="assets/images/demo/6.jpg" alt="">
-								<h6>06. Local Video</h6></a></div>
-					</div>
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index-12.html"><img src="assets/images/demo/12.jpg" alt="">
-								<h6>07. Video & Sound</h6></a></div>
-					</div>
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index-13.html"><img src="assets/images/demo/13.jpg" alt="">
-								<h6>08. Small Hero</h6></a></div>
-					</div>
-					<div class="col-md-4">
-						<div class="demo-preview"><a href="index-14.html"><img src="assets/images/demo/14.jpg" alt="">
-								<h6>09. Without Hero</h6></a></div>
-					</div>
 				</div>
 			</div>
 		</section>
