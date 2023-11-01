@@ -101,7 +101,6 @@ public class ClubController {
 	 */
 	@RequestMapping("social.pa")
 	public String selectSocialList(Club c, Attachment at, MultipartFile upfile, HttpSession session, Model model) {
-		
 		ArrayList<Club> list = cService.selectSocialList();
 		
 		ArrayList<Member> imgList1 = new ArrayList<Member>();
@@ -125,6 +124,52 @@ public class ClubController {
 	}
 	
 	/**
+	 * 카테고리별 리스트조회
+	 */
+	@ResponseBody
+	@RequestMapping(value="category.list", produces = "application/json; charset=utf-8")
+	public String selectCategoryList(HttpSession session, Model model, Club c) {
+		ArrayList<Club> list = cService.selectCategoryList(c);
+		
+		if(list != null) {
+			for(int i=0; i<list.size(); i++) {
+				c.setClassNo(list.get(i).getClassNo());
+				
+				ArrayList<Member> imgList = cService.selectImgList(c);
+				if(!imgList.isEmpty()) {
+					session.setAttribute("imgList", imgList);
+				}
+			}
+			
+			session.setAttribute("list", list);
+			return new Gson().toJson(list);
+		}else {
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
+		}
+	}
+	
+	@RequestMapping("category.solist")
+	public String socialCategory() {
+		return "class/socialCategory";
+	}
+	
+	@RequestMapping("category.cllist")
+	public String clubCategory() {
+		return "class/clubCategory";
+	}
+	
+	@RequestMapping("category.chlist")
+	public String challengeCategory() {
+		return "class/challengeCategory";
+	}
+	
+	@RequestMapping("category.onlist")
+	public String onedayCategory() {
+		return "class/onedayCategory";
+	}
+	
+	/**
 	 * 클럽 전체 조회
 	 */
 	@RequestMapping("club.pa")
@@ -145,7 +190,7 @@ public class ClubController {
 			}
 			
 			session.setAttribute("list", list);
-			return "class/socialPage";
+			return "class/clubPage";
 		}else {
 			model.addAttribute("errorMsg", "실패!?");
 			return "/";
@@ -173,7 +218,7 @@ public class ClubController {
 			}
 			
 			session.setAttribute("list", list);
-			return "class/socialPage";
+			return "class/challengePage";
 		}else {
 			model.addAttribute("errorMsg", "실패!?");
 			return "/";
@@ -201,7 +246,7 @@ public class ClubController {
 			}
 			
 			session.setAttribute("list", list);
-			return "class/socialPage";
+			return "class/onedayPage";
 		}else {
 			model.addAttribute("errorMsg", "실패!?");
 			return "/";
@@ -418,32 +463,6 @@ public class ClubController {
 		
 	}
 	
-	@ResponseBody
-	@RequestMapping(value="category.so", produces = "application/json; charset=utf-8")
-	public String selectSocialCategory(HttpSession session, Model model, Club c) {
-		ArrayList<Club> list = cService.selectSocialCategory(c);
-		
-		if(list != null) {
-			for(int i=0; i<list.size(); i++) {
-				c.setClassNo(list.get(i).getClassNo());
-				
-				ArrayList<Member> imgList = cService.selectImgList(c);
-				if(!imgList.isEmpty()) {
-					session.setAttribute("imgList", imgList);
-				}
-			}
-			
-			session.setAttribute("list", list);
-			return new Gson().toJson(list);
-		}else {
-			model.addAttribute("errorMsg", "실패!?");
-			return "/";
-		}
-	}
-	
-	@RequestMapping("category.solist")
-	public String socialCategory() {
-		return "class/socialCategory";
-	}
+
 	
 }

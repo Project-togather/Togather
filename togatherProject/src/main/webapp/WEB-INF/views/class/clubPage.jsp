@@ -47,12 +47,12 @@ li:hover {cursor: pointer; background-color: orange;}
 		<br><br><br><br><br>
 		
 		<div class="col-md-6 m-auto text-center">
-			<h1 class="display-1">소셜링</h1>
-			<p class="lead">똑같은 일상을 다채롭게 <br/> 만들어 줄 원데이 취향 모임</p>
+			<h1 class="display-1">클럽</h1>
+			<p class="lead">지속형 모임으로 <br/> 계속해서 친하게 지내요</p>
         </div>
         <div class="categorybarDiv">
     		<ul class="categorybar">
-	        	<li onclick="location.href='#'">전체</li>
+	        	<li onclick="location.href='club.pa'">전체</li>
 	        	<li onclick="category(1);"><img src="https://images.munto.kr/munto-web/culture_icon.svg" width="17.33" height="26" style="color: transparent;"> 문화·예술</li>
 	        	<li onclick="category(2);"><img src="https://images.munto.kr/munto-web/activite_icon.svg" width="17.33" height="26" style="color: transparent;"> 액티비티</li>
 	        	<li onclick="category(3);"><img src="https://images.munto.kr/munto-web/food_icon.svg" width="17.33" height="26" style="color: transparent;"> 푸드·드링크</li>
@@ -68,12 +68,13 @@ li:hover {cursor: pointer; background-color: orange;}
 			function category(e){
 				let categorynum = e;
 				$.ajax({
-					url:"category.so",
+					url:"category.list",
 					data:{
 						clCategory:categorynum,
+						clType: 2,
 						},
 					success:(list)=>{
-						location.href="#";
+						location.href="category.cllist";
 					},
 					error:()=>{
 						console.log("실패");
@@ -141,7 +142,7 @@ li:hover {cursor: pointer; background-color: orange;}
 						</div>
 					</div>
 					</c:forEach>
-					
+					<!-- 
 					<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/5.jpg"></a><img src="assets/images/menu/5.jpg" alt="">
@@ -154,18 +155,7 @@ li:hover {cursor: pointer; background-color: orange;}
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/6.jpg"></a><img src="assets/images/menu/6.jpg" alt="">
-								<div class="menu-classic-item-price">$17
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Spicy Fried Rice &amp; Bacon</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
+					 -->
 				</div>
 				<div class="row">
 					<div class="col-md-12">
@@ -180,13 +170,5 @@ li:hover {cursor: pointer; background-color: orange;}
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 	
 		<jsp:include page="../common/footer.jsp"/>
-		
-		<!-- Scripts-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-		<script src="assets/js/plugins.min.js"></script>
-		<script src="assets/js/custom.min.js"></script>
 </body>
 </html>

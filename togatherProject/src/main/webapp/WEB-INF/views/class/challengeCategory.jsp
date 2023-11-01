@@ -42,7 +42,7 @@ li:hover {cursor: pointer; background-color: orange;}
 </style>
 </head>
 <body>
-		<jsp:include page="../common/menubar.jsp"/>
+	<jsp:include page="../common/menubar.jsp"/>
 
 		<br><br><br><br><br>
 		
@@ -51,7 +51,7 @@ li:hover {cursor: pointer; background-color: orange;}
 				<p class="lead">같은 목표를 가진 <br/> 멤버들과 함께 도전해요</p>
 			<div class="divider-border"></div>
 		</div>
-	
+		
         <div class="categorybarDiv">
     		<ul class="categorybar">
 	        	<li onclick="location.href='challenge.pa'">전체</li>
@@ -89,7 +89,7 @@ li:hover {cursor: pointer; background-color: orange;}
 		<section class="module">
 			<div class="container">
 				<div class="row">
-					<c:forEach var="c" items="${ list }" end="5">
+					<c:forEach var="c" items="${ list }">
 						<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
@@ -104,35 +104,7 @@ li:hover {cursor: pointer; background-color: orange;}
 					            	<h6><c:out value="${c.classTitle}"/></h6>
 				        	   </c:otherwise> 
 				          </c:choose>
-				          	<span class="bestDiv1"> ${ c.clName } </span> &nbsp;
-				          	<span class="bestDiv2"> 추천 </span> <br>
-				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
-    					    <c:forEach var="i" items="${ imgList1 }">
-    					    	<c:if test="${ c.classNo eq i.classNo }">
-			          				<img src="${ i.img }">
-			          			</c:if>
-			          		</c:forEach>
-				          		${ c.vacancy }/${ c.peopleLimit } <br>
-							</div>
-						</div>
-					</div>
-					</c:forEach>
-					<c:forEach var="c" items="${ list }" begin="6">
-						<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
-								<img src="${ c.attachment.updateName }">
-							</div>
-							<div class="menu-classic-item-inner">
-					       <c:choose>
-					           <c:when test="${fn:length(c.classTitle) > 18}">
-					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-					           </c:when>
-					           <c:otherwise>
-					            	<h6><c:out value="${c.classTitle}"/></h6>
-				        	   </c:otherwise> 
-				          </c:choose>
-				          	${ c.clName } <br>
+				          	<span class="bestDiv1"> ${ c.clName } </span> <br>
 				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
     					    <c:forEach var="i" items="${ imgList1 }">
     					    	<c:if test="${ c.classNo eq i.classNo }">
@@ -145,7 +117,6 @@ li:hover {cursor: pointer; background-color: orange;}
 					</div>
 					</c:forEach>
 					
-				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="space" data-mY="100px"></div>

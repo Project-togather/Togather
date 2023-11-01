@@ -13,6 +13,32 @@
 	height: 204.07px;
 	object-fit: cover;
 }
+.categorybarDiv{ width: 1000px; margin:0 auto;}
+.categorybar{ float:left; text-align:center;}
+.categorybar li{ display:inline-block; text-align:center; margin-left: 20px;}
+li:hover {cursor: pointer; background-color: orange;}
+.bestDiv1{
+    padding: 4px 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    border-radius: 5px;
+    color: white;
+    background-color: orange;
+}
+.bestDiv2{
+    padding: 4px 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(255, 63, 51);
+}
+.menu-classic-item-inner img{
+	width: 30px; 
+	height: 30px;
+}
 </style>
 </head>
 <body>
@@ -25,18 +51,48 @@
 				<p class="lead">배우고 싶은 걸 <br/> 하루만에 배워보아요</p>
 			<div class="divider-border"></div>
 		</div>
+        <div class="categorybarDiv">
+    		<ul class="categorybar">
+	        	<li onclick="location.href='oneday.pa'">전체</li>
+	        	<li onclick="category(1);"><img src="https://images.munto.kr/munto-web/culture_icon.svg" width="17.33" height="26" style="color: transparent;"> 문화·예술</li>
+	        	<li onclick="category(2);"><img src="https://images.munto.kr/munto-web/activite_icon.svg" width="17.33" height="26" style="color: transparent;"> 액티비티</li>
+	        	<li onclick="category(3);"><img src="https://images.munto.kr/munto-web/food_icon.svg" width="17.33" height="26" style="color: transparent;"> 푸드·드링크</li>
+	        	<li onclick="category(4);"><img src="https://images.munto.kr/munto-web/hobby_icon.svg" width="17.33" height="26" style="color: transparent;"> 취미</li>
+	        	<li onclick="category(5);"><img src="https://images.munto.kr/munto-web/icon_category_blind-date.svg" width="17.33" height="26" style="color: transparent;"> 파티·소개팅</li>
+	        	<li onclick="category(6);"><img src="https://images.munto.kr/munto-web/icon_category_peer.svg" width="28" height="48" style="color: transparent;"> 동네·친목</li>
+	        	<li onclick="category(7);"><img src="https://images.munto.kr/munto-web/financial_tech_icon.svg" width="17.33" height="26" style="color: transparent;"> 재테크</li>
+	        	<li onclick="category(8);"><img src="https://images.munto.kr/munto-web/foreign_language_icon.svg" width="28" height="48" style="color: transparent;"> 외국어</li>
+	        </ul>
+		</div>
 		
-	
+		<script>
+			function category(e){
+				let categorynum = e;
+				$.ajax({
+					url:"category.list",
+					data:{
+						clCategory:categorynum,
+						clType: 4,
+						},
+					success:(list)=>{
+						location.href="category.onlist";
+					},
+					error:()=>{
+						console.log("실패");
+					}
+				})
+			}
+		</script>
+		
 		<!-- Menu-->
 		<section class="module">
 			<div class="container">
 				<div class="row">
-					<c:forEach var="c"  items="${ list }">
-					<div class="col-md-4">
+					<c:forEach var="c" items="${ list }" end="5">
+						<div class="col-md-4">
 						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
-								<div class="menu-classic-item-price">6/${ c.peopleLimit }
-								</div>
+							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
+								<img src="${ c.attachment.updateName }">
 							</div>
 							<div class="menu-classic-item-inner">
 					       <c:choose>
@@ -44,166 +100,49 @@
 					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
 					           </c:when>
 					           <c:otherwise>
-					            	<c:out value="${c.classTitle}"/>
+					            	<h6><c:out value="${c.classTitle}"/></h6>
 				        	   </c:otherwise> 
 				          </c:choose>
-     					  <c:choose>
-					           <c:when test="${fn:length(c.classContent) > 63}">
-					            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
-					           </c:when>
-					           <c:otherwise>
-					            	<c:out value="${c.classContent}"/>
-				        	   </c:otherwise> 
-				          </c:choose>
+				          	<span class="bestDiv1"> ${ c.clName } </span> &nbsp;
+				          	<span class="bestDiv2"> 추천 </span> <br>
+				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
+    					    <c:forEach var="i" items="${ imgList1 }">
+    					    	<c:if test="${ c.classNo eq i.classNo }">
+			          				<img src="${ i.img }">
+			          			</c:if>
+			          		</c:forEach>
+				          		${ c.vacancy }/${ c.peopleLimit } <br>
 							</div>
 						</div>
 					</div>
 					</c:forEach>
-					
-					<div class="col-md-4">
+					<c:forEach var="c" items="${ list }" begin="6">
+						<div class="col-md-4">
 						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/1.jpg"></a><img src="assets/images/menu/1.jpg" alt="">
-								<div class="menu-classic-item-price">$15
-								</div>
+							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
+								<img src="${ c.attachment.updateName }">
 							</div>
 							<div class="menu-classic-item-inner">
-								<h6>Masala-Spiced Chickpeas</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
+					       <c:choose>
+					           <c:when test="${fn:length(c.classTitle) > 18}">
+					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
+					           </c:when>
+					           <c:otherwise>
+					            	<h6><c:out value="${c.classTitle}"/></h6>
+				        	   </c:otherwise> 
+				          </c:choose>
+				          	${ c.clName } <br>
+				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
+    					    <c:forEach var="i" items="${ imgList1 }">
+    					    	<c:if test="${ c.classNo eq i.classNo }">
+			          				<img src="${ i.img }">
+			          			</c:if>
+			          		</c:forEach>
+			          		${ c.vacancy }/${ c.peopleLimit } <br>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/2.jpg"></a><img src="assets/images/menu/2.jpg" alt="">
-								<div class="menu-classic-item-price">$18
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Kung Pao Chicken</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/3.jpg"></a><img src="assets/images/menu/3.jpg" alt="">
-								<div class="menu-classic-item-price">$13
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Sweet &amp; Spicy Pork</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/4.jpg"></a><img src="assets/images/menu/4.jpg" alt="">
-								<div class="menu-classic-item-price">$12
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Chicken Stew</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/5.jpg"></a><img src="assets/images/menu/5.jpg" alt="">
-								<div class="menu-classic-item-price">$21
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Jalapeno-Mango Salsa</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/6.jpg"></a><img src="assets/images/menu/6.jpg" alt="">
-								<div class="menu-classic-item-price">$17
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Spicy Fried Rice &amp; Bacon</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/1.jpg"></a><img src="assets/images/menu/1.jpg" alt="">
-								<div class="menu-classic-item-price">$15
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Masala-Spiced Chickpeas</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/2.jpg"></a><img src="assets/images/menu/2.jpg" alt="">
-								<div class="menu-classic-item-price">$18
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Kung Pao Chicken</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/3.jpg"></a><img src="assets/images/menu/3.jpg" alt="">
-								<div class="menu-classic-item-price">$13
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Sweet &amp; Spicy Pork</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/4.jpg"></a><img src="assets/images/menu/4.jpg" alt="">
-								<div class="menu-classic-item-price">$12
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Chicken Stew</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/5.jpg"></a><img src="assets/images/menu/5.jpg" alt="">
-								<div class="menu-classic-item-price">$21
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Jalapeno-Mango Salsa</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/6.jpg"></a><img src="assets/images/menu/6.jpg" alt="">
-								<div class="menu-classic-item-price">$17
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Spicy Fried Rice &amp; Bacon</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
+					</c:forEach>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
@@ -214,17 +153,8 @@
 		</section>
 		<!-- Menu end-->
 
-
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 	
 		<jsp:include page="../common/footer.jsp"/>
-		
-		<!-- Scripts-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-		<script src="assets/js/plugins.min.js"></script>
-		<script src="assets/js/custom.min.js"></script>
 </body>
 </html>
