@@ -6,4 +6,24 @@
 		<result column="" property=""/>
 	</resultMap>
 -->
+	<insert id="insertAlarm" parameterType="hashmap">
+		insert
+		  into alarm
+		  	(
+		  	  a_no
+		  	, receiver
+		  	, content
+		  	, url
+		  	, isread
+		  	)
+		  values
+		  	(
+		  	  seq_notino.nextval
+		  	, #{receiver.memNo}
+		  	, #{content}
+		  	, null
+		  	, 'N' 
+		  	)	
+	</insert>
+
 </mapper>	

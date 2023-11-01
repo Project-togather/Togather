@@ -1,8 +1,11 @@
 package com.kh.spring.alarm.model.service;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import com.kh.spring.alarm.model.dao.NotificationDao;
 import com.kh.spring.alarm.model.vo.Notification;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.myClass.model.vo.MyClass;
@@ -13,6 +16,13 @@ import java.util.Map;
 
 @Service
 public class NotificationServiceImpl {
+	
+	@Autowired
+	private NotificationDao nDao; 
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
     // 기본 타임아웃 설정
     private static final Long DEFAULT_TIMEOUT = 60L * 1000 * 60;
 
@@ -25,8 +35,6 @@ public class NotificationServiceImpl {
     public SseEmitter subscribe(String id, String lastEventId) {
     	
     	//String id = userId + "_" + System.currentTimeMillis();
-    	
-    	System.out.println("id : " + id);
     	
     	SseEmitter emitter = new SseEmitter(DEFAULT_TIMEOUT);
         emitterRepository.save(id, emitter);
@@ -90,10 +98,7 @@ public class NotificationServiceImpl {
     
     public void send(Member receiver, Reply reply, String content) {
     	
-    	
-    	System.out.println("센드 옴");
     	Notification notification = createNotification(receiver, reply, content);
-    	System.out.println(notification);
     	String id = receiver.getMemId();
     	
     	//로그인 한 유저의 SseEmitter 모두 가져오기
@@ -102,20 +107,19 @@ public class NotificationServiceImpl {
     	System.out.println(sseEmitters);
     	sseEmitters.forEach(
     			(key, emitter) -> {
-    				System.out.println("key : " +  key);
-    				System.out.println("emitter : " +  emitter);
     				sendToClient(emitter, key, notification);
-    				System.out.println("send 보냈나요");
+    				System.out.println("센드 완료");
     				// 데이터 캐시 저장
     				emitterRepository.saveEventCache(key, notification);
-    				System.out.println("saveCache");
     				// 데이터 전송
     			}
 		);
+    	
+    	nDao.insertAlarm(receiver, content, sqlSession);
+    	
     }
     
     private Notification createNotification(Member receiver, Reply reply, String content) {
-    	System.out.println("크노티 옴");
         return Notification.builder()
                            .receiver(receiver)
                            .content(content)
@@ -127,7 +131,6 @@ public class NotificationServiceImpl {
     }
     
     public void sendToClient(SseEmitter emitter, String id, Object data) {
-    	System.out.println("send to client");
         
     	try {
     		emitter.send(SseEmitter.event()

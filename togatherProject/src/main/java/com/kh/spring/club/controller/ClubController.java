@@ -231,12 +231,7 @@ public class ClubController {
 	@RequestMapping("enroll.rv")
 	public String insertReply(Reply r, Member m) {
 		
-		System.out.println("r : " + r);
-		System.out.println("m : " + m);
-		
 		nService.send(m, r, "댓글이 등록되었습니다!");
-		
-		System.out.println("댓글 왔나요?");
 
 		int result = cService.insertReply(r);
 		return result>0 ? "success" : "fail";
