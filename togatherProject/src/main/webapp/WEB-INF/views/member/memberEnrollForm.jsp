@@ -151,6 +151,8 @@
    			  function chooseFile(num){
             		$("#file"+num).click();
             	}
+    
+    
             	function loadImg(inputFile , num){
             		if (inputFile.files.length == 1){//파일이 선택된경우 => 파일읽어들여서 미리보기
             			
