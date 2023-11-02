@@ -14,16 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.google.gson.Gson;
 import com.kh.spring.QuitReason.model.vo.QuitReason;
 import com.kh.spring.alarm.model.service.NotificationServiceImpl;
 import com.kh.spring.attachment.model.vo.Attachment;
-import com.kh.spring.club.model.service.ClubService;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
-import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.reply.model.vo.Reply;
 import com.kh.spring.myClass.model.vo.MyClass;
@@ -381,6 +378,30 @@ public class ClubController {
 		return "class/classRoadView";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="admitClass.me", produces = "application/json; charset=UTF-8")
+	public int admitClass(MyClass c) {
+		
+		int result = cService.admitEnrollMember(c);
+		
+		if(result>0) {
+			return result;
+		} else {
+			return result;
+		}
+	}
 	
+	@ResponseBody
+	@RequestMapping(value="refuseClass.me", produces = "application/json; charset=UTF-8")
+	public int refuseClass(MyClass c) {
+		
+		int result = cService.refuseEnrollMember(c);
+		
+		if(result>0) {
+			return result;
+		} else {
+			return result;
+		}
+	}
 		
 }

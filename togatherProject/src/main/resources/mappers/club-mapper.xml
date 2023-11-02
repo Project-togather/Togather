@@ -516,10 +516,10 @@
 	</insert>
 	
 	<delete id="quitClass">
-		delete 
-			   my_class
-		 where c_no = #{classNo}
-		   and mem_no = #{memNo}
+		update my_class
+		   set cl_type_status = 6
+		 where mem_no = #{memNo}
+		   and c_no = #{classNo}
 	</delete>
 	
 	<insert id="likeClass">
@@ -603,4 +603,18 @@
 			  , #{detailReason}
 			  )
 	</insert>
+	
+	<update id="admitMember">
+		update my_class
+		   set cl_type_status = 4
+		 where mem_no = #{memNo}
+		   and c_no = #{classNo}
+	</update>
+	
+	<update id="refuseMember">
+		update my_class
+		   set cl_type_status = 5
+		 where mem_no = #{memNo}
+		   and c_no = #{classNo}
+	</update>
 </mapper>

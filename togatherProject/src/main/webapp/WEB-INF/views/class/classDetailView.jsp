@@ -87,6 +87,10 @@
 					    buyer_name : name,
 					    buyer_tel : tel,
 					  }, function (rsp) { // callback
+						  
+						  console.log("-----");
+						  console.log(rsp);
+						  
 						  $.ajax({
 							  type:"POST",
 							  url:"verifyIamport/" + rsp.imp_uid

@@ -108,4 +108,12 @@ public class ClubDao {
 	public int selectPayPrice(MyClass c, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("clubMapper.selectPayPrice", c);
 	}
+	
+	public int admitMember(MyClass c, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("clubMapper.admitMember", c);
+	}
+	
+	public int refuseMember(MyClass c, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("clubMapper.refuseMember", c);
+	}
 }

@@ -80,4 +80,10 @@ public interface ClubService {
 	// 모임 가입할떄 결제한 가입비 조회
 	int selectPayPrice(MyClass c);
 	
+	// 호스트가 멤버 가입 승인
+	int admitEnrollMember(MyClass c);
+	
+	// 호스트가 멤버 가입 거절
+	int refuseEnrollMember(MyClass c);
+	
 }

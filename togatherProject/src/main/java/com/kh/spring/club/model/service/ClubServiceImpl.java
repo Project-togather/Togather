@@ -143,6 +143,16 @@ public class ClubServiceImpl implements ClubService {
 		return cDao.selectPayPrice(c, sqlSession);
 	}
 
+	@Override
+	public int admitEnrollMember(MyClass c) {
+		return cDao.admitMember(c, sqlSession);
+	}
+
+	@Override
+	public int refuseEnrollMember(MyClass c) {
+		return cDao.refuseMember(c, sqlSession);
+	}
+
 	
 	
 
