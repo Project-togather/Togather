@@ -23,6 +23,7 @@ import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubService;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.reply.model.vo.Reply;
@@ -86,8 +87,17 @@ public class ClubController {
 	
 	// 라운지 페이지 이동
 	@RequestMapping(value = "lounge.pa")
-	public String loungePage() {
-		return "class/loungePage";
+	public String loungePage(HttpSession session, Model model) {
+		ArrayList<Feed> list = cService.feedLists();
+		
+		if(list != null) {
+			
+			session.setAttribute("list", list);
+			return "class/loungePage";
+		}else {
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
+		}
 	}
 	
    // 내모임 리스트 조회
@@ -95,6 +105,29 @@ public class ClubController {
    public String selectMyClass() {
       return "class/myClassPage";
    }
+   
+   //
+   @ResponseBody
+   @RequestMapping(value="myclass.list", produces = "application/json; charset=utf-8")
+   public String myclassList(Member m, HttpSession session, Model model) {
+    	ArrayList<Club> list = cService.selectMyClassList(m);
+		
+		if(list != null) {
+			
+			session.setAttribute("list", list);
+			return "";
+		}else {
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
+		}
+   }
+	
+	/*
+	// 내 즐겨찾기 조회
+	public void selectMyList() {
+		ArrayList<Club> list = cService.selectMyList();
+	}
+	*/
 	
 	/**
 	 * 소셜링 전체 조회
@@ -253,13 +286,6 @@ public class ClubController {
 		}
 	}
 	
-	/**
-	 * 내 즐겨찾기 조회
-	 */
-	@RequestMapping
-	public void selectMyList() {
-		ArrayList<Club> list = cService.selectMyClassList();
-	}
 	
 	/**
 	 * 모임등록 폼 이동 
@@ -462,7 +488,5 @@ public class ClubController {
 		return "class/quitClassForm";
 		
 	}
-	
-
 	
 }

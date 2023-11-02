@@ -200,11 +200,12 @@ li .m-searchBtn i {
 						<li><a href="lounge.pa"><span class="menu-item-span">ROUNGE</span></a></li>
 						
 					 <c:if test="${ not empty loginMember }"> 
-					 </c:if> 
+					 </c:if>
 						<li><a href="myclass.pa"><span class="menu-item-span">MYCLASS</span></a></li>
+						<input type="hidden" name="memNo" value="${ loginMember.memNo }">
+												
 						<li><a href="enrollForm.cl"><span class="menu-item-span">ENROLL CLASS</span></a></li>
 						<li><a href="mypage.me"><span class="menu-item-span">MYPAGE</span></a></li>
-
 					
 					 <c:if test="${ loginMember.memId == 'ADMIN' }">
 					 </c:if> 

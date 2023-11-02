@@ -13,28 +13,82 @@
 	height: 204.07px;
 	object-fit: cover;
 }
+.categorybarDiv{ width: 500px; margin:0 auto;}
+.categorybar{ float:left; text-align:center;}
+.categorybar li{ display:inline-block; text-align:center; margin-left: 50px;}
+li:hover {cursor: pointer; background-color: orange;}
 </style>
 </head>
 <body>
-		<jsp:include page="../common/menubar.jsp"/>
+	<jsp:include page="../common/menubar.jsp"/>
 
 		<br><br><br><br><br>
 		
 		<div class="col-md-6 m-auto text-center">
-			<h1 class="display-1">내 모임</h1>
+				<h1 class="display-1">내모임</h1>
+			<div class="divider-border"></div>
+		</div>
+        <div class="categorybarDiv">
+    		<ul class="categorybar">
+	        	<li onclick="myClass(1)"> <h5> 🏃 참가중인 모임 </h5> </li>
+	        	<li onclick="myClass(2)"> <h5> ⌛ 승인 대기중 </h5> </li>
+	        	<li onclick="myClass(3)"> <h5> 🌟 즐겨찾기 </h5> </li>
+	        	<li onclick="myClass(4)"> <h5> 🕧 진행중인 모임 </h5> </li>
+	        </ul>
 		</div>
 		
-	
+		<input type="hidden" id="memNo" name="memNo" value="${ loginMember.memNo }">
+		
+		<script>
+			function myClass(e){
+				
+				$(".row").html("");
+				
+				console.log(status);
+				$.ajax({
+					url:"myclass.list",
+					data:{
+						feStatus:e,
+						memNo:$("#memNo").val();
+						},
+					success:(data)=>{
+						console.log(data);
+						let value = "";
+						for(let i in data){
+							console.log(data);
+							console.log(data[i].img);
+							value += "<div class='col-md-4'>" 
+								    + "<div class='menu-classic-item'>"
+								    + "<div class='menu-classic-item-img' onclick=" + "'location.href='" + "'feedDetail.fe?feNo=" + data[i].feNo + "'>"
+								    + "<img src=" + data[i].img + ">"
+								    + "</div>"
+								    + "<div class='menu-classic-item-inner'>"
+								    + "<h6>" 
+								    + (data[i].feContent.length >= 30 ? data[i].feContent.substring(0, 29) : data[i].feContent)
+								    + "</h6>"
+								    + "</div>"
+								    + "</div>"
+								    + "</div>"
+								  ;
+						}
+						$(".row").html(value);
+					},
+					error:()=>{
+						console.log("실패")
+					}
+				})
+			}
+		</script>
+		
 		<!-- Menu-->
 		<section class="module">
 			<div class="container">
 				<div class="row">
-					<c:forEach var="c"  items="${ list }">
-					<div class="col-md-4">
+					<c:forEach var="c" items="${ list }">
+						<div class="col-md-4">
 						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="${ c.attachment.originName }"></a><img src="${ c.attachment.updateName }">
-								<div class="menu-classic-item-price">6/${ c.peopleLimit }
-								</div>
+							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
+								<img src="${ c.attachment.updateName }">
 							</div>
 							<div class="menu-classic-item-inner">
 					       <c:choose>
@@ -42,171 +96,21 @@
 					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
 					           </c:when>
 					           <c:otherwise>
-					            	<c:out value="${c.classTitle}"/>
+					            	<h6><c:out value="${c.classTitle}"/></h6>
 				        	   </c:otherwise> 
 				          </c:choose>
-     					  <c:choose>
-					           <c:when test="${fn:length(c.classContent) > 63}">
-					            	<p><c:out value="${fn:substring(c.classContent, 0,62)}"/>...</p>
-					           </c:when>
-					           <c:otherwise>
-					            	<c:out value="${c.classContent}"/>
-				        	   </c:otherwise> 
-				          </c:choose>
+				          	<span class="bestDiv1"> ${ c.clName } </span> <br>
+				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
+    					    <c:forEach var="i" items="${ imgList1 }">
+    					    	<c:if test="${ c.classNo eq i.classNo }">
+			          				<img src="${ i.img }">
+			          			</c:if>
+			          		</c:forEach>
+			          		${ c.vacancy }/${ c.peopleLimit } <br>
 							</div>
 						</div>
 					</div>
 					</c:forEach>
-				
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/1.jpg"></a><img src="assets/images/menu/1.jpg" alt="">
-								<div class="menu-classic-item-price">$15
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Masala-Spiced Chickpeas</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/2.jpg"></a><img src="assets/images/menu/2.jpg" alt="">
-								<div class="menu-classic-item-price">$18
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Kung Pao Chicken</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/3.jpg"></a><img src="assets/images/menu/3.jpg" alt="">
-								<div class="menu-classic-item-price">$13
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Sweet &amp; Spicy Pork</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/4.jpg"></a><img src="assets/images/menu/4.jpg" alt="">
-								<div class="menu-classic-item-price">$12
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Chicken Stew</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/5.jpg"></a><img src="assets/images/menu/5.jpg" alt="">
-								<div class="menu-classic-item-price">$21
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Jalapeno-Mango Salsa</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/6.jpg"></a><img src="assets/images/menu/6.jpg" alt="">
-								<div class="menu-classic-item-price">$17
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Spicy Fried Rice &amp; Bacon</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/1.jpg"></a><img src="assets/images/menu/1.jpg" alt="">
-								<div class="menu-classic-item-price">$15
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Masala-Spiced Chickpeas</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/2.jpg"></a><img src="assets/images/menu/2.jpg" alt="">
-								<div class="menu-classic-item-price">$18
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Kung Pao Chicken</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/3.jpg"></a><img src="assets/images/menu/3.jpg" alt="">
-								<div class="menu-classic-item-price">$13
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Sweet &amp; Spicy Pork</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/4.jpg"></a><img src="assets/images/menu/4.jpg" alt="">
-								<div class="menu-classic-item-price">$12
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Chicken Stew</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/5.jpg"></a><img src="assets/images/menu/5.jpg" alt="">
-								<div class="menu-classic-item-price">$21
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Jalapeno-Mango Salsa</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="menu-classic-item">
-							<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/6.jpg"></a><img src="assets/images/menu/6.jpg" alt="">
-								<div class="menu-classic-item-price">$17
-								</div>
-							</div>
-							<div class="menu-classic-item-inner">
-								<h6>Spicy Fried Rice &amp; Bacon</h6>
-								<p>Vanilla, Various Fruit, Cookies</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="space" data-mY="100px"></div>
-					</div>
 				</div>
 			</div>
 		</section>
@@ -215,13 +119,5 @@
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 	
 		<jsp:include page="../common/footer.jsp"/>
-		
-		<!-- Scripts-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
-		<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
-		<script src="assets/js/plugins.min.js"></script>
-		<script src="assets/js/custom.min.js"></script>
 </body>
 </html>

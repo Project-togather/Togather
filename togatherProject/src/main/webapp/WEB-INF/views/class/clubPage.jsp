@@ -49,7 +49,9 @@ li:hover {cursor: pointer; background-color: orange;}
 		<div class="col-md-6 m-auto text-center">
 			<h1 class="display-1">클럽</h1>
 			<p class="lead">지속형 모임으로 <br/> 계속해서 친하게 지내요</p>
+			<h4>나와 같은 관심사를 가진 친구들과 <br> 매일 함께하고 싶다면 클럽에서 만나요!</h4>
         </div>
+        <br>
         <div class="categorybarDiv">
     		<ul class="categorybar">
 	        	<li onclick="location.href='club.pa'">전체</li>

@@ -49,7 +49,9 @@ li:hover {cursor: pointer; background-color: orange;}
 		<div class="col-md-6 m-auto text-center">
 			<h1 class="display-1">소셜링</h1>
 			<p class="lead">똑같은 일상을 다채롭게 <br/> 만들어 줄 원데이 취향 모임</p>
+			<h4>누구나 열고 참여할 수 있는 원데이 모임, <br> 소셜링으로 가볍고 즐겁게 만나보세요!</h4>
         </div>
+        <br>
         <div class="categorybarDiv">
     		<ul class="categorybar">
 	        	<li onclick="location.href='social.pa'">전체</li>

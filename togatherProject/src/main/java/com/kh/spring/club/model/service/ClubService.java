@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.spring.QuitReason.model.vo.QuitReason;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
@@ -26,8 +27,11 @@ public interface ClubService {
 	// 원데이 전체 조회
 	ArrayList<Club> selectOneDayList();
 	
+	// 라운지 전체 조회
+	ArrayList<Feed> feedLists();
+	
 	// 내 즐겨찾기 조회
-	ArrayList<Club> selectMyClassList();
+	ArrayList<Club> selectMyClassList(Member m);
 	
 	// 모임 상세 조회
 	Club selectClassDetail(MyClass mc);

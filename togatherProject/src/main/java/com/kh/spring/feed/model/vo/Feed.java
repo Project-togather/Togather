@@ -2,6 +2,9 @@ package com.kh.spring.feed.model.vo;
 
 import java.sql.Date;
 
+import com.kh.spring.attachment.model.vo.Attachment;
+import com.kh.spring.great.model.vo.Great;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,5 +27,9 @@ public class Feed {
 	private String feStatus;
 	private String thumbnail;
 	private int likeCount;
+	private String img;
 	
+	private Attachment attachment;
+	private Great Great;
+	private String grNo;
 }
