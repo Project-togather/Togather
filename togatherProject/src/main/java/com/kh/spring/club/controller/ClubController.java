@@ -102,7 +102,9 @@ public class ClubController {
 	
    // 내모임 리스트 조회
    @RequestMapping(value = "myclass.pa")
-   public String selectMyClass() {
+   public String selectMyClass(Member m) {
+	  System.out.println(m);
+	  // ArrayList<Club> list = cService.selectMyClass();
       return "class/myClassPage";
    }
    

@@ -781,7 +781,7 @@
          and c_no = #{classNo}	
 	</select>
 	
-	<select id="selectMyClassList" resultMap="">
+	<select id="selectMyClassList" resultMap="resultclub">
         select 
 		       c_no
 		     , mem_no

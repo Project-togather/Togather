@@ -30,6 +30,8 @@ public interface ClubService {
 	// 라운지 전체 조회
 	ArrayList<Feed> feedLists();
 	
+	ArrayList<Club> selectMyClass(Member m);
+	
 	// 내 즐겨찾기 조회
 	ArrayList<Club> selectMyClassList(Member m);
 	

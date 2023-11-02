@@ -22,7 +22,7 @@
 		<result column="fe_no" property="feNo"/>
 	</resultMap>
 	
-	<select id="feedLists">
+	<select id="feedLists" resultMap="ResultFeed">
 		select 
 		       fe_no
 		     , ref_cno
@@ -57,23 +57,23 @@
            and fe_no = ref_fno
 	</select>
 	 
-	<select id="selectgoodFeedLists" resultMap="ResultFeed">
+	<select id="FollowingFeedLists" resultMap="ResultFeed">
 		select 
-		       f.fe_no
-		     , f.ref_cno
-		     , f.fe_content
-		     , f.fe_date
-		     , f.fe_writer
-		     , f.f_status
-		     , f.like_count
-             , g.fe_no grNo
-		     , (select file_path
+		       fe_no
+		     , ref_cno
+		     , fe_content
+		     , fe_date
+		     , fe_writer
+		     , f_status
+		     , like_count
+             , to_mem
+		     ,(select file_path
 				  from attachment
-				 where f.fe_no = ref_fno) img
-		  from great g
-          join feed f on (f.fe_no = g.fe_no)
-          join attachment on (f.fe_no = ref_fno)
-         where mem_no = #{memNo}
+				 where fe_no = ref_fno) img
+		  from feed
+          join follow on (fe_writer = to_mem)
+          join attachment on (fe_no = ref_fno)
+         where from_mem = #{memNo}
 	</select>
 	
 </mapper>

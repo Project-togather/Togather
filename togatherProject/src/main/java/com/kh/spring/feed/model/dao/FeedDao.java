@@ -47,8 +47,8 @@ public class FeedDao {
 		return (ArrayList)sqlSession.selectList("feedMapper.selectFeedLists", feStatus);
 	}
 	
-	// 좋아요 한 피드 리스트 조회
-	public ArrayList<Feed> selectFeedLists(SqlSessionTemplate sqlSession, Member m){
-		return (ArrayList)sqlSession.selectList("feedMapper.selectgoodFeedLists", m);
+	// 팔로잉 한 피드 리스트 조회
+	public ArrayList<Feed> FollowingFeedLists(SqlSessionTemplate sqlSession, Member m){
+		return (ArrayList)sqlSession.selectList("feedMapper.FollowingFeedLists", m);
 	}
 }

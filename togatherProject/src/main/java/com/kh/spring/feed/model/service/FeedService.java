@@ -31,5 +31,5 @@ public interface FeedService {
 	ArrayList<Feed> selectFeedLists(String feStatus);
 	
 	// 좋아요 한 피드 리스트 조회
-	ArrayList<Feed> selectFeedLists(Member m);
+	ArrayList<Feed> FollowingFeedLists(Member m);
 }

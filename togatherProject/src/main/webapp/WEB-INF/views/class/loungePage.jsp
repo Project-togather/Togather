@@ -34,7 +34,7 @@ li:hover {cursor: pointer; background-color: orange;}
     		<ul class="categorybar">
 	        	<li onclick="feedPage(1)"> <h5> 🔥 인기피드 </h5> </li>
 	        	<li onclick="feedPage(2)"> <h5> 😁 모임후기 </h5> </li>
-	        	<li onclick="feedPage(3)"> <h5> ❤️ 좋아요 </h5> </li>
+	        	<li onclick="feedPage(3)"> <h5> ❤️ 팔로잉 </h5> </li>
 	        </ul>
 		</div>
 		<input type="hidden" id="memNo" name="memNo" value="${ loginMember.memNo }">
@@ -69,7 +69,7 @@ li:hover {cursor: pointer; background-color: orange;}
 							console.log(data[i].img);
 							value += "<div class='col-md-4'>" 
 								    + "<div class='menu-classic-item'>"
-								    + "<div class='menu-classic-item-img' onclick=" + "'location.href='" + "'feedDetail.fe?feNo=" + data[i].feNo + "'>"
+								    + "<div class='menu-classic-item-img' onclick=location.href='feedDetail.fe?feNo="+ data[i].feNo+"'>"
 								    + "<img src=" + data[i].img + ">"
 								    + "</div>"
 								    + "<div class='menu-classic-item-inner'>"
@@ -81,7 +81,7 @@ li:hover {cursor: pointer; background-color: orange;}
 								    + "</div>"
 								  ;
 						}
-						$(".row").html(value);
+						$("#row").html(value);
 					},
 					error:()=>{
 						console.log("실패")
@@ -93,11 +93,11 @@ li:hover {cursor: pointer; background-color: orange;}
 		<!-- Menu-->
 		<section class="module">
 			<div class="container">
-				<div class="row">
+				<div class="row" id="row">
 					<c:forEach var="f" items="${ list }" end="5">
 						<div class="col-md-4">
 						<div class="menu-classic-item">
-							<div class="menu-classic-item-img" onclick="location.href='detail.cl?feNo=${ f.feNo }">
+							<div class="menu-classic-item-img" onclick="location.href='feedDetail.fe?feNo=${ f.feNo }'">
 								<img src="${ f.img }">
 							</div>
 							<div class="menu-classic-item-inner">

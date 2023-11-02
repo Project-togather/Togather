@@ -13,7 +13,7 @@
 	height: 204.07px;
 	object-fit: cover;
 }
-.categorybarDiv{ width: 500px; margin:0 auto;}
+.categorybarDiv{ width: 800px; margin:0 auto;}
 .categorybar{ float:left; text-align:center;}
 .categorybar li{ display:inline-block; text-align:center; margin-left: 50px;}
 li:hover {cursor: pointer; background-color: orange;}

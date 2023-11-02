@@ -214,7 +214,7 @@ public class FeedController {
 	@RequestMapping(value="feed.list" , produces = "application/json; charset=utf-8")
 	public String selectFeedLists(String feStatus, HttpSession session, Model model, Member m) {
 		if(feStatus.equals("G")) {
-			ArrayList<Feed> list = fService.selectFeedLists(m);
+			ArrayList<Feed> list = fService.FollowingFeedLists(m);
 			if(list != null) {
 				session.setAttribute("list", list);
 				return new Gson().toJson(list);
@@ -226,7 +226,6 @@ public class FeedController {
 		}else {
 			ArrayList<Feed> list = fService.selectFeedLists(feStatus);
 			if(list != null) {
-				System.out.println(list);
 				session.setAttribute("list", list);
 				return new Gson().toJson(list);
 			}else {
