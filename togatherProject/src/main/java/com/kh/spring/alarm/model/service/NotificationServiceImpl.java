@@ -1,8 +1,11 @@
 package com.kh.spring.alarm.model.service;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import com.kh.spring.alarm.model.dao.NotificationDao;
 import com.kh.spring.alarm.model.vo.Notification;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.myClass.model.vo.MyClass;
@@ -13,6 +16,13 @@ import java.util.Map;
 
 @Service
 public class NotificationServiceImpl {
+	
+	@Autowired
+	private NotificationDao nDao; 
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
     // 기본 타임아웃 설정
     private static final Long DEFAULT_TIMEOUT = 60L * 1000 * 60;
 
@@ -22,11 +32,9 @@ public class NotificationServiceImpl {
         this.emitterRepository = emitterRepository;
     }
 
-    public SseEmitter subscribe(Long userId, String lastEventId) {
+    public SseEmitter subscribe(String id, String lastEventId) {
     	
     	//String id = userId + "_" + System.currentTimeMillis();
-    	
-    	String id = String.valueOf(userId);
     	
     	SseEmitter emitter = new SseEmitter(DEFAULT_TIMEOUT);
         emitterRepository.save(id, emitter);
@@ -39,7 +47,7 @@ public class NotificationServiceImpl {
         System.out.println("구독에미터 : " + emitter);
         
         // 503 에러 방지를 위한 더미 이벤트 전송
-        sendToClient(emitter, id, "EventStream Created. [userId=" + userId + "]");
+        sendToClient(emitter, id, "EventStream Created. [userId=" + id + "]");
         
         /*
         if (!lastEventId.isEmpty()) {
@@ -88,13 +96,10 @@ public class NotificationServiceImpl {
     */
 
     
-    public void send(String receiver, String reply, String content) {
+    public void send(Member receiver, Reply reply, String content) {
     	
-    	
-    	System.out.println("센드 옴");
     	Notification notification = createNotification(receiver, reply, content);
-    	System.out.println(notification);
-    	String id = "44";
+    	String id = receiver.getMemId();
     	
     	//로그인 한 유저의 SseEmitter 모두 가져오기
     	Map<String, SseEmitter> sseEmitters = emitterRepository.findAllEmitterStartWithById(id);
@@ -103,29 +108,29 @@ public class NotificationServiceImpl {
     	sseEmitters.forEach(
     			(key, emitter) -> {
     				sendToClient(emitter, key, notification);
-    				System.out.println("send 보냈나요");
+    				System.out.println("센드 완료");
     				// 데이터 캐시 저장
     				emitterRepository.saveEventCache(key, notification);
-    				System.out.println("saveCache");
     				// 데이터 전송
     			}
 		);
+    	
+    	nDao.insertAlarm(receiver, content, sqlSession);
+    	
     }
     
-    private Notification createNotification(String receiver, String reply, String content) {
-    	System.out.println("크노티 옴");
+    private Notification createNotification(Member receiver, Reply reply, String content) {
         return Notification.builder()
                            .receiver(receiver)
                            .content(content)
                            .reply(reply)
-                           .url("http://localhost:8012/togather/index.jsp")
+                           .url("http://localhost:8012/togather/detail.cl?classNo=" + reply.getRefFno())
                            .isRead(false)
                            .build();
         
     }
     
     public void sendToClient(SseEmitter emitter, String id, Object data) {
-    	System.out.println("send to client");
         
     	try {
     		emitter.send(SseEmitter.event()

@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
 import com.kh.spring.common.model.vo.PageInfo;
@@ -70,25 +71,25 @@ public class SearchController {
 									@RequestParam(value = "options", required = false) String options,
 									@RequestParam(value = "sorting", required = false) String sorting,
 									@RequestParam(value = "category", required = false) String category,
-									@RequestParam(value = "dateValue", required = false) String dateValue, Model model) {
+									@RequestParam(value = "hiddenDate", required = false) String hiddenDate, Model model) {
 	    	
 		System.out.println(currentPage);
 		
 		
 		// 검색 결과 총 개수
-	    int listCount = sService.searchListCount(keyword, options, sorting, category, dateValue);
+	    int listCount = sService.searchListCount(keyword, options, sorting, category, hiddenDate);
 	    
 	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
 	    
-	    ArrayList<Club> list = sService.searchList(keyword, options, sorting, category, dateValue, pi);
-	    ArrayList<Attachment> alist = sService.searchImageList(keyword, options, sorting, category, dateValue, pi);
+	    ArrayList<Club> list = sService.searchList(keyword, options, sorting, category, hiddenDate, pi);
+	    ArrayList<Attachment> alist = sService.searchImageList(keyword, options, sorting, category, hiddenDate, pi);
 	    
 	    
 	    model.addAttribute("keyword", keyword);
 	    model.addAttribute("options", options);
 	    model.addAttribute("sorting", sorting);
 	    model.addAttribute("category", category);
-	    model.addAttribute("dateValue", dateValue);
+	    model.addAttribute("dateValue", hiddenDate);
 	    
 	    model.addAttribute("pi", pi);
         model.addAttribute("list", list);
@@ -97,7 +98,7 @@ public class SearchController {
 	    
         System.out.println("pi :" + pi);
         System.out.println("키워드 :" + keyword);
-        System.out.println("날짜 :" + dateValue);
+        System.out.println("날짜 :" + hiddenDate);
         System.out.println("유형 :" + options);
         System.out.println("정렬 :" + sorting);
         System.out.println("카테고리 :" + category);
@@ -126,13 +127,43 @@ public class SearchController {
 	/* 피드 */
 	@ResponseBody
 	@RequestMapping(value = "getList.fe", produces = "application/json; charset=utf-8;")
-	public String ajaxSelectFeedList() {
+	public String ajaxSelectFeedList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage) {
 		
-		ArrayList<Feed> list = sService.selectFeedList();
 		
-		return new Gson().toJson(list);
+		System.out.println(currentPage);
 		
+		
+		// 검색 결과 총 개수
+	    int listCount = sService.searchFeedMoreListCount();
+	    
+	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		
+	    ArrayList<Feed> list = sService.selectFeedList(pi);
+	    
+	    // 이미지 피드 목록을 가져옴
+	    ArrayList<Attachment> alist = sService.selectImageFeedList(pi);
+	    
+	    ArrayList<Member> mlist = sService.selectImageMemberFeedList(pi);
+	    
+	    System.out.println("pi :" + pi);
+	    
+	    System.out.println(list);
+	    System.out.println(alist);
+	    System.out.println(mlist);
+	    
+	    // list와 alist를 JSON으로 변환하여 반환
+	    Gson gson = new Gson();
+	    JsonObject jsonObject = new JsonObject();
+	    jsonObject.add("pi", gson.toJsonTree(pi));
+	    jsonObject.add("list", gson.toJsonTree(list));
+	    jsonObject.add("alist", gson.toJsonTree(alist));
+	    jsonObject.add("mlist", gson.toJsonTree(mlist));
+
+	    return jsonObject.toString();
 	}
+
+
 	
 	
 	/* 멤버 */

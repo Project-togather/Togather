@@ -78,7 +78,14 @@ public class GoogleLoginController {
         	m.setNickName(email);
         	int result2 = mService.insertMember(m);//db에 넣어보자 어케되나
         	//넣었으면 이거 가지고 chooseInterest로 가보자 chooseInterest 는 memNo 가 필요하니까
+        	//attachment에도 넣우주긴 합시다
         	String memNo = mService.bringMemNo(m);
+            Attachment at = new Attachment();
+            at.setRefFno(memNo);
+            at.setFilePath(img);
+            
+            int atResult = mService.insertProfileImage(at);//attachment에도 들어가 시벌
+
         	request.setAttribute("memNo", memNo);//chooseInterest 에 있는 form 은 memNo 가 필요해용 줍시다
         	session.setAttribute("alertMsg", "처음오셨네요? 취향을 알려주세요");
         	return "member/chooseInterest";

@@ -16,8 +16,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />	
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- Favicons-->
 <link rel="shortcut icon" href="assets/images/favicon.png">
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
@@ -31,6 +38,7 @@
 <link href="assets/css/plugins.min.css" rel="stylesheet">
 <!-- Template core CSS-->
 <link href="assets/css/template.css" rel="stylesheet">
+
 
 <style>
 .menu-item-span{
@@ -124,6 +132,99 @@ li .m-searchBtn i {
 </style>
 </head>
 <body>
+
+  <script>
+      var socket = null;
+      
+      $(document).ready(function(){
+	      if(${loginMember != null}){
+	   		
+	      connectWs();
+	      }
+      })
+      
+      function connectWs(){
+    	
+		console.log("tttttt")
+		var ws = new SockJS("http://localhost:8012/togather/alram");
+		socket = ws;
+		//alert(socket);
+		console.log(socket);
+		
+			ws.onopen = function() {
+		 
+ 		};
+ 		
+	 		ws.onmessage = function(event) {
+	 			
+	 		alert(event.data);	
+	 			
+	 	};
+
+	 		ws.onclose = function() {
+	 		   //alert("onclose");
+	 	 };
+ 	 
+ 		
+ 		
+      
+      };
+
+      
+      </script>
+      
+	
+	<script>
+	 
+	/* sse Test */
+    function sse(id) {
+		
+        // 비동기 작업을 위한 프로미스 반환
+        /*
+        return new Promise((resolve, reject) => {
+        */  
+        	const eventSource = new EventSource(`sse/` + id);
+            
+            eventSource.addEventListener("sse", function(event) {
+                console.log("오셨습니까...");
+                const data = JSON.parse(event.data);
+                console.log(data);
+
+                toastr.options = {
+                    "closeButton": true,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": true,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "onclick": function(){location.href="http://localhost:8012/togather/detail.cl?classNo=" + data.reply.refFno;},
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+
+                toastr.info(data.reply.classTitle + "모임에 <span style='color: orange'>" + data.receiver.nickName + "</span>님이" + data.content, '🔔 알람이 도착했습니다 !');
+
+                // 비동기 작업이 완료되면 프로미스 해결
+                resolve(data);
+            });
+/*
+            eventSource.addEventListener("error", function(event) {
+                // 에러 발생 시 프로미스 거부
+                reject(event);
+            });
+        });
+*/
+    }
+	
+	</script>
+	
+
 	<c:if test="${not empty alertMsg}">
 		<script >
 			//swal("${alertMsg}");
@@ -205,7 +306,8 @@ li .m-searchBtn i {
 						<li><a href="mypage.me"><span class="menu-item-span">MYPAGE</span></a></li>
 					 </c:if>
 					
-					 <c:if test="${ loginMember.memId == 'ADMIN' }">
+					 <c:if test="${ loginMember.memId == 'admin' }">
+					 </c:if> 
 					 	<li><a href="admin.pa"><span class="menu-item-span">관리자페이지</span></a></li>
 					 </c:if> 
 						
@@ -218,6 +320,13 @@ li .m-searchBtn i {
             </div>
          </div>
       </header>
+      
+    
+      
+      
+      
+      
+      
       <!-- Header end-->
       
       <!-- Scripts-->

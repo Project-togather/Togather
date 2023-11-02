@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="adcustomerMapper">
-	
+
 	<resultMap id="AdNoticeResult" type="Notice">
 		<result column="notice_no" property="noticeNo"></result>
 		<result column="mem_Id" property="memId"></result>
@@ -11,156 +11,196 @@
 		<result column="notice_date" property="noticeDate"></result>
 		<result column="notice_status" property="noticeStatus"></result>
 	</resultMap>
-	
+
 	<resultMap id="AdFaqResult" type="Faq">
 		<result column="faq_no" property="faqNo"></result>
 		<result column="faq_title" property="faqTitle"></result>
 		<result column="faq_content" property="faqContent"></result>
 		<result column="faq_status" property="faqStatus"></result>
 	</resultMap>
-	
-	
-	<select id="selectNoticeList" resultMap="AdNoticeResult" parameterType="Notice">
-		select 
-		    notice_no,
-		   	mem_id,
-		    notice_title,
-		    notice_content,
-		    notice_views,
-		    notice_date,
-		    notice_Status
+
+	<resultMap id="NoticeReplyResult" type="NoticeReply">
+		<result column="NOTICEREPLY_NO" property="noticeReplyNo"></result>
+		<result column="NOTICE_COMMENT" property="noticeComment"></result>
+		<result column="COMMENT_WRITER" property="commentWriter"></result>
+		<result column="COMMENT_CREATE_DATE"
+			property="commentCreateDate"></result>
+	</resultMap>
+
+
+
+	<select id="selectNoticeList" resultMap="AdNoticeResult"
+		parameterType="Notice">
+		select
+		notice_no,
+		mem_id,
+		notice_title,
+		notice_content,
+		notice_views,
+		notice_date,
+		notice_Status
 		from notice
-			where notice_Status = 'Y'
-			order by notice_no desc
+		where notice_Status = 'Y'
+		order by notice_no desc
 	</select>
-	
-	<select id="selectFaqList" resultMap="AdFaqResult" parameterType="Faq">
-		select 
-		    faq_no,
-		    faq_title,
-		    faq_content,
-		    faq_Status
+
+	<select id="selectFaqList" resultMap="AdFaqResult"
+		parameterType="Faq">
+		select
+		faq_no,
+		faq_title,
+		faq_content,
+		faq_Status
 		from faq
-			where faq_Status = 'Y'
-			order by faq_no
+		where faq_Status = 'Y'
+		order by faq_no
 	</select>
-	
+
 	<select id="selectNoticeCount" resultType="_int">
 		select
-				count(*)
-			from notice
-		   where notice_Status = 'Y'
+		count(*)
+		from notice
+		where notice_Status = 'Y'
 	</select>
-	
+
 	<select id="selectFaqListCount" resultType="_int">
 		select
-				count(*)
-			from faq
-		   where faq_Status = 'Y'
+		count(*)
+		from faq
+		where faq_Status = 'Y'
 	</select>
-	
+
 	<insert id="insertNoticeBoard">
-		insert 
-			into notice
-			(
-				notice_no
-			   ,mem_id
-			   ,notice_title
-			   ,notice_content
-			   ,notice_views
-			   ,notice_date
-			   ,notice_status
-			)
-			values
-			(
-				seq_nono.nextval
-			   ,#{memId}
-			   ,#{noticeTitle}
-			   ,#{noticeContent}
-			   ,default
-			   ,sysdate
-			   ,default
-			)
+		insert
+		into notice
+		(
+		notice_no
+		,mem_id
+		,notice_title
+		,notice_content
+		,notice_views
+		,notice_date
+		,notice_status
+		)
+		values
+		(
+		seq_nono.nextval
+		,#{memId}
+		,#{noticeTitle}
+		,#{noticeContent}
+		,default
+		,sysdate
+		,default
+		)
 	</insert>
-	
+
 	<select id="noticeDetailview" resultMap="AdNoticeResult">
 		select
-			notice_no,
-		   	mem_id,
-		    notice_title,
-		    notice_content,
-		    notice_views,
-		    notice_date,
-		    notice_Status
+		notice_no,
+		mem_id,
+		notice_title,
+		notice_content,
+		notice_views,
+		notice_date,
+		notice_Status
 		from notice
-			where notice_no = #{noticeNo}
+		where notice_no = #{noticeNo}
 	</select>
-	
+
 	<select id="faqDetailview" resultMap="AdFaqResult">
 		select
-			faq_no,
-		    faq_title,
-		    faq_content,
-		    faq_Status
+		faq_no,
+		faq_title,
+		faq_content,
+		faq_Status
 		from faq
-			where faq_no = #{faqNo}
+		where faq_no = #{faqNo}
 	</select>
-	
+
 	<update id="updateNotice">
 		update
-			notice
-		 set notice_title = #{noticeTitle}
-		 	,notice_Content = #{noticeContent}
-		 where notice_no = #{noticeNo}
+		notice
+		set notice_title = #{noticeTitle}
+		,notice_Content = #{noticeContent}
+		where notice_no = #{noticeNo}
 	</update>
-	
+
 	<update id="deleteNotice">
 		update
-			notice
-		 set NOTICE_STATUS = 'N'
-		 where notice_no = #{noticeNo}
+		notice
+		set NOTICE_STATUS = 'N'
+		where notice_no = #{noticeNo}
 	</update>
-	
+
 	<update id="updateFaq">
 		update
-			faq
-		 set faq_title = #{faqTitle}
-		 	,faq_Content = #{faqContent}
-		 where faq_no = #{faqNo}
+		faq
+		set faq_title = #{faqTitle}
+		,faq_Content = #{faqContent}
+		where faq_no = #{faqNo}
 	</update>
-	
+
 	<update id="deletefaq">
 		update
-			faq
-		 set faq_status = 'N'
-		 where faq_no = #{faqNo}
+		faq
+		set faq_status = 'N'
+		where faq_no = #{faqNo}
 	</update>
-	
+
 	<insert id="insertfaqBoard">
-		insert 
-			into faq
-			(
-				faq_no
-			   ,faq_title
-			   ,faq_content
-			   ,faq_status
-			)
-			values
-			(
-				seq_fano.nextval
-			   ,#{faqTitle}
-			   ,#{faqContent}
-			   ,'Y'
-			)
+		insert
+		into faq
+		(
+		faq_no
+		,faq_title
+		,faq_content
+		,faq_status
+		)
+		values
+		(
+		seq_fano.nextval
+		,#{faqTitle}
+		,#{faqContent}
+		,'Y'
+		)
 	</insert>
-	
+
 	<update id="increaseNotice">
 		update
-			notice
+		notice
 		set notice_views = notice_views+1
-			where notice_no =#{noticeNo}
-			and notice_status = 'Y'
+		where notice_no =#{noticeNo}
+		and notice_status = 'Y'
 	</update>
-	
-	
+
+	<select id="selectNoticeReply" resultMap="NoticeReplyResult">
+		select
+		NOTICEREPLY_NO,
+		NOTICE_COMMENT,
+		COMMENT_WRITER,
+		COMMENT_CREATE_DATE
+		from noticereply
+		where NOTICEREPLY_NO = #{noticeNo}
+		order by comment_create_date desc
+	</select>
+
+	<insert id="insertReplyNotice">
+		insert
+		into noticereply
+		(
+		NOTICEREPLY_NO
+		,NOTICE_COMMENT
+		,COMMENT_WRITER
+		,COMMENT_CREATE_DATE
+		)
+		values
+		(
+		#{noticeReplyNo}
+		,#{noticeComment}
+		,#{commentWriter}
+		,default
+		)
+	</insert>
+
+
 </mapper>

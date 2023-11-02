@@ -27,7 +27,9 @@
 		<result column="status" property="status"/>
 		<result column="cl_ca_name" property="clCaName"/>		
 		<result column="latitude" property="latitude"/>		
-		<result column="longitude" property="longitude"/>
+		<result column="longitude" property="longitude"/>		
+		<result column="mem_id" property="memId"/>
+		<result column="placeid" property="placeId"/>
 		<result column="img" property="img"/>	
 	
 		<collection property="attachment" resultMap="attachment"/>
@@ -387,6 +389,10 @@
                  from my_class
                 where c_no = #{classNo}
                   and cl_type_status = 1) vacancy
+             , mem_id
+             , latitude
+             , longitude
+             , placeId     
 		  from class
 		  join member using (mem_no)
           join cl_type on(cl_type = cl_ca_no)
@@ -418,6 +424,7 @@
 			  , latitude
 			  , longitude
 		  	  , enrollDate
+		  	  , placeId
 			 )
 		values
 			 (
@@ -439,6 +446,7 @@
 			  , #{latitude}
 			  , #{longitude}
 			  , sysdate
+			  , #{placeId}
 			 )
 	</insert>
 	
@@ -613,10 +621,10 @@
 	</insert>
 	
 	<delete id="quitClass">
-		delete 
-			   my_class
-		 where c_no = #{classNo}
-		   and mem_no = #{memNo}
+		update my_class
+		   set cl_type_status = 6
+		 where mem_no = #{memNo}
+		   and c_no = #{classNo}
 	</delete>
 	
 	<insert id="likeClass">
@@ -700,6 +708,20 @@
 			  , #{detailReason}
 			  )
 	</insert>
+	
+	<update id="admitMember">
+		update my_class
+		   set cl_type_status = 4
+		 where mem_no = #{memNo}
+		   and c_no = #{classNo}
+	</update>
+	
+	<update id="refuseMember">
+		update my_class
+		   set cl_type_status = 5
+		 where mem_no = #{memNo}
+		   and c_no = #{classNo}
+	</update>
 	
 	<select id="selectCategoryList" resultMap="resultclub">
 		select 

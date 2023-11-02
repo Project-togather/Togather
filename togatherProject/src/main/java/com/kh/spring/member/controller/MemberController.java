@@ -49,7 +49,6 @@ public class MemberController {
       if(loginMember != null) {
     	 //System.out.println(loginMember);
     	 Attachment pImg = mService.getProfileImg(loginMember.getMemNo());
-    	 System.out.println("일반로그인");
     	 //System.out.println("컨트롤러에서 받아오자 " + pImg);
          //System.out.println("세션에 저장");
     	 ArrayList<Member> clType = mService.selectClType(m);

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.spring.admin.customercenter.model.service.CustomerBoardServiceImpl;
 import com.kh.spring.admin.customercenter.model.vo.Faq;
 import com.kh.spring.admin.customercenter.model.vo.Notice;
+import com.kh.spring.admin.customercenter.model.vo.NoticeReply;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.common.template.Pagination;
 
@@ -161,11 +162,13 @@ public class NoticeController {
 
 		if (result > 0) {
 			Notice n = Cservice.noticeDetailview(noticeNo);
-			mv.addObject("n", n).setViewName("admin/customercenter/usernoticeDetailView");
+			ArrayList<NoticeReply> nr = Cservice.selectNoticeReply(noticeNo);
+			mv.addObject("n", n).addObject("nr",nr).setViewName("admin/customercenter/usernoticeDetailView");
+			
 		} else {
 			Notice n = Cservice.noticeDetailview(noticeNo);
-			mv.addObject("n", n).setViewName("admin/customercenter/usernoticeDetailView");
-
+			ArrayList<NoticeReply> nr = Cservice.selectNoticeReply(noticeNo);
+			mv.addObject("n", n).addObject("nr",nr).setViewName("admin/customercenter/usernoticeDetailView");
 		}
 
 		return mv;
@@ -249,4 +252,24 @@ public class NoticeController {
 
 		return "redirect:faq.list";
 	}
+	
+	@RequestMapping("comment.no")
+	public String commentNotice(NoticeReply nr,HttpSession session) {
+		
+		int result = Cservice.insertReplyNotice(nr);
+		
+		if (result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 댓글등록 되었습니다.");
+			return "redirect:usnoticelist.pa";
+		} else {
+			session.setAttribute("errorMsg", "댓글등록에 실패했습니다.");
+			return "redirect:usnoticelist.pa";
+		}
+	}
+	
+	@RequestMapping("complain.bl")
+	public String complainBlackList() {
+		return "admin/member/complainBlackList";
+	}
+
 }

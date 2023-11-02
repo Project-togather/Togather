@@ -145,10 +145,20 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
+	public int admitEnrollMember(MyClass c) {
+		return cDao.admitMember(c, sqlSession);
+	}
+
+	@Override
+	public int refuseEnrollMember(MyClass c) {
+		return cDao.refuseMember(c, sqlSession);
+	}
+
+	@Override
 	public ArrayList<Club> selectCategoryList(Club c) {
 		return cDao.selectCategoryList(sqlSession, c);
 	}
-	
+
 	@Override
 	public ArrayList<Member> selectImgList(Club c) {
 		return cDao.selectImgList(sqlSession, c);

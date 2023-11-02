@@ -25,18 +25,18 @@ public class SearchServiceImpl implements SearchService {
 
 	//임시
 	@Override
-	public int searchListCount(String keyword, String options, String sorting, String category, String dateValue) {
-		return sDao.searchListCount(sqlSession, keyword, options, sorting, category, dateValue);
+	public int searchListCount(String keyword, String options, String sorting, String category, String hiddenDate) {
+		return sDao.searchListCount(sqlSession, keyword, options, sorting, category, hiddenDate);
 	}
 
 	@Override
-	public ArrayList<Club> searchList(String keyword, String options, String sorting, String category, String dateValue, PageInfo pi) {
-		return sDao.searchList(sqlSession, keyword, options, sorting, category, dateValue, pi);
+	public ArrayList<Club> searchList(String keyword, String options, String sorting, String category, String hiddenDate, PageInfo pi) {
+		return sDao.searchList(sqlSession, keyword, options, sorting, category, hiddenDate, pi);
 	}
 
 	@Override
-	public ArrayList<Attachment> searchImageList(String keyword, String options, String sorting, String category, String dateValue, PageInfo pi) {
-		return sDao.searchImageList(sqlSession, keyword, options, sorting, category, dateValue, pi);
+	public ArrayList<Attachment> searchImageList(String keyword, String options, String sorting, String category, String hiddenDate, PageInfo pi) {
+		return sDao.searchImageList(sqlSession, keyword, options, sorting, category, hiddenDate, pi);
 	}
 	
 	
@@ -63,9 +63,29 @@ public class SearchServiceImpl implements SearchService {
 	
 	/* 피드 리스트가 보이는 서비스 */
 	@Override
-	public ArrayList<Feed> selectFeedList() {
-		return sDao.selectFeedList(sqlSession);
+	public int searchFeedMoreListCount() {
+		return sDao.searchFeedMoreListCount(sqlSession);
 	}
+	
+	@Override
+	public ArrayList<Feed> selectFeedList(PageInfo pi) {
+		return sDao.selectFeedList(sqlSession, pi);
+	}
+	
+	@Override
+	public ArrayList<Attachment> selectImageFeedList(PageInfo pi) {
+		return sDao.selectImageFeedList(sqlSession, pi);
+	}
+	
+	@Override
+	public ArrayList<Member> selectImageMemberFeedList(PageInfo pi) {
+		return sDao.selectImageMemberFeedList(sqlSession, pi);
+	}
+	
+	/* 피드 무한 스크롤 */
+
+	
+
 	
 	/* 멤버 리스트가 보이는 서비스 */
 	@Override
@@ -74,5 +94,4 @@ public class SearchServiceImpl implements SearchService {
 		return sDao.selectMemberList(sqlSession);
 	}
 
-	
 }

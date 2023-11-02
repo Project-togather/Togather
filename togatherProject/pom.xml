@@ -97,6 +97,7 @@
 					<groupId>com.sun.jmx</groupId>
 					<artifactId>jmxri</artifactId>
 				</exclusion>
+				
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>
@@ -240,16 +241,10 @@
 		
 		<!-- WebSocket Start-->
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-websocket</artifactId>
-			<version>4.0.9.RELEASE</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>javax.websocket</groupId>
-			<artifactId>javax.websocket-api</artifactId>
-			<version>1.1</version>
-		</dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-websocket</artifactId>
+	        <version>${org.springframework-version}</version>
+   	    </dependency>
 		<!-- WebSocket End-->
 
 

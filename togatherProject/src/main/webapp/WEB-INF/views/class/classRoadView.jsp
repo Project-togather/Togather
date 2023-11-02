@@ -26,10 +26,10 @@
 	<body>
 		<!-- Wrapper-->
 		<div class="wrapper">
-
+			<div>${c.classTitle }</div>
 			<!-- Map-->
 			<section class="maps-container">
-				<div class="map" data-addresses="[48.859822, 1.352647]" data-info="[Lorem ipsum dolor sit amet.]" data-icon="assets/images/map-icon.png" data-zoom="15" data-street-view="1"></div>
+				<div class="map" data-addresses="[${ latitude }, ${ longitude }]" data-info="[Lorem ipsum dolor sit amet.]" data-icon="assets/images/map-icon.png" data-zoom="15" data-street-view="1"></div>
 			</section>
 			<!-- Map end-->
 		</div>

@@ -1,19 +1,27 @@
 package com.kh.spring.chat.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.chat.model.service.ChatServiceImpl;
 import com.kh.spring.chat.model.vo.Chat;
 import com.kh.spring.chat.model.vo.ChatRoom;
+import com.kh.spring.member.model.service.MemberServiceImpl;
 import com.kh.spring.member.model.vo.Member;
 
 @Controller
@@ -21,6 +29,9 @@ public class ChatController {
 	
 	@Autowired
 	private ChatServiceImpl chatService ; 
+	
+	@Autowired 
+	private MemberServiceImpl mService;
 	
 	
 	//채팅창 입장
@@ -61,19 +72,28 @@ public class ChatController {
 		if(cr1 != null && cr2 != null) {
 		for(int i = 0 ; i < cr1.size(); i++) {
 			
-			for(int j = 0 ; j < cr2.size() ; j ++) {
-			
-				if(cr1.get(i).getChatRoomNo().equals(cr2.get(j).getChatRoomNo())) {
-					//System.out.println(i + "  "  + j);
-					//System.out.println("곂치는거 : " + cr1.get(i).getChatRoomNo()  + cr2.get(j).getChatRoomNo() );
-					chatRoomNo = cr1.get(i).getChatRoomNo();
-					count ++ ; 
+				for(int j = 0 ; j < cr2.size() ; j ++) {
+				
+					if(cr1.get(i).getChatRoomNo().equals(cr2.get(j).getChatRoomNo())) {
+						//System.out.println(i + "  "  + j);
+						//System.out.println("곂치는거 : " + cr1.get(i).getChatRoomNo()  + cr2.get(j).getChatRoomNo() );
+						chatRoomNo = cr1.get(i).getChatRoomNo();
+						count ++ ; 
+					}
 				}
 			}
+			System.out.println("이미 둘은 채팅 기록이 있음 ");
+			System.out.println(chatRoomNo); //count 는 무조건 1 나옴
 		}
-		System.out.println("이미 둘은 채팅 기록이 있음 ");
-		System.out.println(chatRoomNo); //count 는 무조건 1 나옴
-		}
+		//채팅에쓰일 사진 세팅
+		//내 사진은 세션에서 뺴다 쓸거고 타겟 사진만 가져오자
+		Attachment targetImgat = mService.getProfileImg(targetNo);
+		String targetImg = targetImgat.getFilePath();
+		
+		System.out.println(targetImg);
+		
+		request.setAttribute("targetImg", targetImg);
+		
 		
 		//채팅방 불러오기
 		if(count != 0 ) { //채팅방이 이미 존재 할경우엔 채팅 리스트를 불러와야겠지
@@ -87,6 +107,7 @@ public class ChatController {
 			//채팅방번호도 set 이건 따로 db다녀올 필요 없이 그냥 방번호 저장되어 있는거 가져오면 되겠군
 			//아까 꺼내놨었네 55번쨰 줄
 			request.setAttribute("chatRoomNo", chatRoomNo);
+			
 			System.out.println("이미 둘은 채팅 기록이 있고 채팅 내용은 " + chatList + "(주소값)이고 채팅방은 " + chatRoomNo);
 			return "common/chat";
 			
@@ -120,8 +141,13 @@ public class ChatController {
 	//채팅입력하고 DB에 넣기 
 	@ResponseBody
 	@RequestMapping(value = "chatInput.ch" , produces = "text/html ; charset =UTF-8 ")
-	public String chatInput(Chat ch) {
-		System.out.println(ch);
+	public String chatInput(Chat ch ,HttpSession session) {
+		//System.out.println("첨부파일 아직 안합쳐짐"+ ch);
+		String img =  (String)session.getAttribute("chattingFilePath");
+		ch.setImg(img); //세션에서 첨부파일 합치고 
+		//세션에서 chattingFilePath 는 지워주자
+		session.removeAttribute("chattingFilePath");
+		//System.out.println("첨부파일 합쳐짐"+ ch);
 		int result = chatService.chatInput(ch);
 		if(result != 0) {
 			return "채팅작성성공";
@@ -129,13 +155,65 @@ public class ChatController {
 			return "채팅작성 실패";
 		}
 	}
+	
+	
+	//채팅 파일첨부
+	@ResponseBody
+	@RequestMapping(value = "chatInputFile.ch", produces = "text/html ; charset =UTF-8 ")
+	public String chatFileInput(MultipartFile[] chatImg , HttpSession session) {
+		if(chatImg != null) {
+			if (!chatImg[0].getOriginalFilename().equals("")) {
+				String changeName = "";
+				String originName = chatImg[0].getOriginalFilename();
+				String filePath = "";
+	
+				changeName = saveFile(chatImg[0], session);
+				filePath = "resources/uploadFiles/" + changeName;
+				// System.out.println(filePath);
+				session.setAttribute("chattingFilePath", filePath);
+	
+			}
+			return "파일첨부 성공";
+		}
+		return "파일첨부 없음";
+	}
+	
+	
+	
 	//채팅조회
 	@ResponseBody
 	@RequestMapping(value = "selectChatList.ch" ,produces = "application/json ; charset =UTF-8 " )
 	public ArrayList<Chat> selectChatList(String chatRoomNo){
 		ArrayList<Chat> chatList = chatService.selectChatList(chatRoomNo);
+	
 		//System.out.println(chatList);
 		return chatList;
+	}
+	
+	
+	
+	//파일저장 리팩토링 메서드
+	public String saveFile(MultipartFile chatImg, HttpSession session) { //리팩토링1
+		String originName = chatImg.getOriginalFilename();
+		
+		String currentTime = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		int ranNum = (int)(Math.random() * 90000 + 10000);//5자리 랜덤값
+		String ext =originName.substring(originName.lastIndexOf("."));
+		
+		String changeName = currentTime+ ranNum + ext ; //새로운 이름
+		//업로드 시키고자 하는 폴더의 물리적 경로를 알아내보자
+		String savePath = session.getServletContext().getRealPath("resources/uploadFiles/");
+
+		try {
+			chatImg.transferTo(new File(savePath + changeName)); //io 라서 예외처리 실제 저장하는중
+		} catch (IllegalStateException e) {
+			
+			e.printStackTrace();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		return changeName;
 	}
 	
 }
