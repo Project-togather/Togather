@@ -31,24 +31,22 @@
 	</div>
 	
 		<div class="container" style="margin-top: 50px" >
-			<form action="throwComplain.bl" method="post">
-			<input type="hidden" name="memId" value="${loginMember.memId}">
-			<div class="mb-3">
-			  <h4 >신고 제목 </h4>
-			  <input type="text" class="form-control" id="exampleFormControlInput1" name="complainTitle">
-			</div>
+			<form action="throwComplain.bl" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="reMem" value="${loginMember.memId}">
+			<input type="hidden" name="reCategory" value="1">
+			
 			<div class="mb-3">
 			  <h4>신고할 유저 아이디 </h4>
-			  <input type="text" class="form-control" id="exampleFormControlInput1" name="respondent">
+			  <input type="text" class="form-control" id="rePmem" name="rePmem">
 			</div>
 			<div class="mb-3">
 			  <h4>신고 내용 </h4>
-			  <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" name="complainContent"></textarea>
+			  <textarea class="form-control" id="reContent" rows="20" name="reContent"></textarea>
 			</div>
 			
 			<div class="mb-3">
 			  <h4>첨부파일 </h4>
-			  <input class="form-control" type="file" id="formFile" >
+			  <input class="form-control" type="file" id="originName" name="upfile" >
 			</div>
 			<input type="submit" class="btn btn-warining" value="신고하기">
 		</form>
@@ -59,9 +57,6 @@
 		<div class="col-md-12">
 			<div class="space" data-my="100px" style="margin-top: 100px;"></div>
 		</div>
-		
-
-
 
 	<!-- To top button-->
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>

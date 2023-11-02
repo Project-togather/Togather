@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.spring.admin.member.model.vo.BlackList;
 import com.kh.spring.common.model.vo.PageInfo;
 import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.report.model.vo.Report;
 
 public interface AdminService  {
 	
@@ -19,6 +20,9 @@ public interface AdminService  {
 	
 	//엑셀조회용
 	ArrayList<Member> selectMemberList2();
+	
+	ArrayList<Report> selectReport(PageInfo pi);
+	
 	
 	//회원상세조회
 	Member selectMemberList3(String memNo);
@@ -41,4 +45,8 @@ public interface AdminService  {
 	int adUpdateMember(Member m);
 	
 	int insertExcel(Member excel);
+	
+	int insertReport(Report r);
+	
+	int selectReportCount();
 }

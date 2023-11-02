@@ -729,6 +729,7 @@ input[type="range"]::-webkit-slider-thumb {
 									
 									<input type="hidden" name="latitude" id="latitude"> <!-- 위도 -->
 									<input type="hidden" name="longitude" id="longitude"> <!-- 경도 -->
+									<input type="hidden" name="placeId" id="placeId"> <!-- 장소 ID 값 -->
 									
 									<script>
 									$(function(){
@@ -776,7 +777,7 @@ input[type="range"]::-webkit-slider-thumb {
 									        // 정상적으로 검색이 완료됐으면
 									        // 검색 목록과 마커를 표출합니다
 									        displayPlaces(data);
-									
+
 									        // 페이지 번호를 표출합니다
 									        displayPagination(pagination);
 									
@@ -814,6 +815,9 @@ input[type="range"]::-webkit-slider-thumb {
 									        var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
 									            marker = addMarker(placePosition, i), 
 									            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
+											var	placeId = places[i].id
+												
+								            	console.log(placeId);
 									            
 									        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 									        // LatLngBounds 객체에 좌표를 추가합니다
@@ -822,14 +826,18 @@ input[type="range"]::-webkit-slider-thumb {
 									        // 마커와 검색결과 항목에 mouseover 했을때
 									        // 해당 장소에 인포윈도우에 장소명을 표시합니다
 									        // mouseout 했을 때는 인포윈도우를 닫습니다
-									        (function(marker, title) {
+									        (function(marker, title, placeId) {
 									            kakao.maps.event.addListener(marker, 'click', function() {
 									            	map.setCenter(marker.getPosition());
 									            	$(this).addClass("addorange");
 									            	$(this).siblings().removeClass("addorange");
+									            										            	
+									            	console.log("----pa----");
+									            	console.log(placeId);
 
 									                $("#latitude").val(marker.getPosition().getLat()); // 위도 값 저장
 									                $("#longitude").val(marker.getPosition().getLng()); // 경도 값 저장
+									                $("#placeId").val(placeId); // 위치장소 id 값 저장
 									                
 									            });
 									            
@@ -837,6 +845,7 @@ input[type="range"]::-webkit-slider-thumb {
 									            	map.setCenter(marker.getPosition());
 									                $("#latitude").val(marker.getPosition().getLat()); // 위도 값 저장
 									                $("#longitude").val(marker.getPosition().getLng()); // 경도 값 저장
+									                $("#placeId").val(placeId); // 위치장소 id 값 저장
 													
 									            	if($(this).hasClass("addorange")){
 									            		$(this).removeClass("addorange");
@@ -846,7 +855,7 @@ input[type="range"]::-webkit-slider-thumb {
 									            	$(this).siblings().removeClass("addorange");
 									            }
 									            
-									        })(marker, places[i]);
+									        })(marker, places[i], placeId);
 									
 									        fragment.appendChild(itemEl);
 									    }

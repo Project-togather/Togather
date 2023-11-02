@@ -18,19 +18,19 @@ import com.kh.spring.member.model.vo.Member;
 public class SearchDao {
 	
 	// 임시
-	public int searchListCount(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String dateValue) {
+	public int searchListCount(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String hiddenDate) {
 	    
 		Map<String, Object> parameterMap = new HashMap<>();
 	    parameterMap.put("keyword", keyword);
 	    parameterMap.put("options", options);
 	    parameterMap.put("sorting", sorting);
 	    parameterMap.put("category", category);
-	    parameterMap.put("dateValue", dateValue);
+	    parameterMap.put("hiddenDate", hiddenDate);
 		
 	    return sqlSession.selectOne("searchMapper.searchListCount", parameterMap);
 	}
 	
-	public ArrayList<Club> searchList(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String dateValue, PageInfo pi) {
+	public ArrayList<Club> searchList(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String hiddenDate, PageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
@@ -42,13 +42,13 @@ public class SearchDao {
 	    parameterMap.put("options", options);
 	    parameterMap.put("sorting", sorting);
 	    parameterMap.put("category", category);
-	    parameterMap.put("dateValue", dateValue);
+	    parameterMap.put("dateValue", hiddenDate);
 
 	    return (ArrayList)sqlSession.selectList("searchMapper.searchList", parameterMap, rowBounds);
 	}
 	
 	
-	public ArrayList<Attachment> searchImageList(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String dateValue, PageInfo pi) {
+	public ArrayList<Attachment> searchImageList(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String hiddenDate, PageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
@@ -60,7 +60,7 @@ public class SearchDao {
 	    parameterMap.put("options", options);
 	    parameterMap.put("sorting", sorting);
 	    parameterMap.put("category", category);
-	    parameterMap.put("dateValue", dateValue);
+	    parameterMap.put("dateValue", hiddenDate);
 		
 		return (ArrayList)sqlSession.selectList("searchMapper.searchImageList", parameterMap, rowBounds);
 		
@@ -105,25 +105,48 @@ public class SearchDao {
 
 	
 	// ajax 영역
-	
-	public ArrayList<Feed> selectFeedList(SqlSessionTemplate sqlSession) {
+	public int searchFeedMoreListCount(SqlSessionTemplate sqlSession) {
+	    
 		
-		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectFeedList");
+	    return sqlSession.selectOne("searchMapper.searchFeedMoreListCount");
+	}
+	
+	
+	public ArrayList<Feed> selectFeedList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectFeedList", rowBounds);
 		
 	}
 	
-	public ArrayList<Attachment> selectImageFeedList(SqlSessionTemplate sqlSession) {
+	public ArrayList<Attachment> selectImageFeedList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		
-		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectImageFeedList");
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectImageFeedList", rowBounds);
 		
 	}
 	
-	public ArrayList<Member> selectImageMemberFeedList(SqlSessionTemplate sqlSession) {
+	public ArrayList<Member> selectImageMemberFeedList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		
-		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectImageMemberFeedList");
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		int limit = pi.getBoardLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.ajaxSelectImageMemberFeedList", rowBounds);
 		
 	}
 	
+	
+	// 멤버 부분
 	
 	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession) {
 		

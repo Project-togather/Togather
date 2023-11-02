@@ -321,6 +321,17 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 	box-sizing: border-box;
 	border: 1px solid black;
 }
+
+/* 무한 스크롤 */
+.module {
+	position: relative;
+}
+
+#loadingIcon {
+	position: absolute;
+	left: 50%;
+}
+
 </style>
 </head>
 <body>
@@ -380,7 +391,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 		<!-- 피드 ajax 영역 -->
 		<section class="module">
 			<div class="container">
-				<div class="feed">
+				<div id="feedContainer" class="feed">
 
 					<!-- 
 					<div class="feed-item" style="border: 1px solid lightgray;">
@@ -454,21 +465,108 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 
 				</div>
 			</div>
+
 		</section>
+
+
+		<!-- 무한 스크롤 영역 -->
+		<section class="module">
+			<div class="container">
+				<div id="feedContainer2" class="feed2">
+
+					<!-- 
+					<div class="feed-item" style="border: 1px solid lightgray;">
+						<div class="feed-box">
+
+							<div class="feed_name">
+								<div class="profile_box">
+								  <img class="profile_img" src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_org.jpg?61e575e8653e5920470a38d1482d7312/melon/optimize/90">
+								</div>
+								<span class="feed_name_txt"> jin.99 </span>
+							</div>
+
+							<img class="feed_img " src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/%EC%95%8C%EB%A0%88%EC%98%AC%EB%A0%88_e1e634ae5a2fb6377b1dd828a0fb8c2ce5f12723fc34df3da578ea3e8e35eb62">
+							<div class="feed_icon">
+								<div>
+								  <span class="material-icons-outlined">
+									favorite_border
+								  </span>
+								  <span class="material-icons-outlined">
+									mode_comment
+								  </span>
+								</div>
+								<div>
+								  <span class="material-icons-outlined">
+									turned_in_not
+								  </span>
+								</div>
+							  </div>
+							  <div class="feed_like">
+								<p class="feed_txt"> <b>좋아요 10개</b></p>
+							  </div>
+							<div class="feed_content">
+							  <p class="feed_txt">제목</p>
+							</div>
+						</div>
+					</div>
+					 -->
+
+					<!--
+					 <div class="row">
+						<div class="col-md-12">
+							<div class="gallery">
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/1.jpg"></div><a href="assets/images/portfolio/1.jpg" title="Title 1"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/5.jpg"></div><a href="assets/images/portfolio/5.jpg" title="Title 2"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/3.jpg"></div><a href="assets/images/portfolio/3.jpg" title="Title 3"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/4.jpg"></div><a href="assets/images/portfolio/4.jpg" title="Title 4"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/2.jpg"></div><a href="assets/images/portfolio/2.jpg" title="Title 5"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/6.jpg"></div><a href="assets/images/portfolio/6.jpg" title="Title 6"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/7.jpg"></div><a href="assets/images/portfolio/7.jpg" title="Title 7"></a>
+								</div>
+								<div class="gallery-item">
+									<div class="gallery-image" data-background="assets/images/portfolio/8.jpg"></div><a href="assets/images/portfolio/8.jpg" title="Title 8"></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					-->
+
+				</div>
+			</div>
+
+		</section>
+
+		<div id="loadingIcon" style="display: none;">
+			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+		</div>
+
 		
 
-
+		
 		<script>
-			<!-- 먼저 보이는 feed -->
-			<!-- $(function() {
+		<!-- 먼저 보이는 feed -->
+			$(function() {
 					
 					$.ajax({
 						url:"getList.fe",
 						success:function(object) {
 							
 							
-							console.log(object.list);
-							console.log(object.alist);
+							
+							
 							
 							let value = "";
 							
@@ -478,7 +576,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 								let item2 = object.alist[i];
 								let item3 = object.mlist[i];
 
-								console.log(item2.filePath);
+								console.log(item3.filePath);
 
 								$(".feed_img").attr("src", item2.filePath);
 								$(".profile_img").attr("src", item3.filePath);
@@ -529,10 +627,20 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 						}
 					
 				})
+			});
+
+
+
+
+			<!-- 무한 스크롤 -->
+
+
+
+			
 
 		 
 			<!-- 피드 ajax 스크립트 영역 -->
-			<!-- $(function() {
+			$(function() {
 				$("#feedClick").click(function() {
 					
 					$.ajax({
@@ -548,17 +656,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 								
 								let item = object.list[i];
 								let item2 = object.alist[i];
+								let item3 = object.mlist[i];
 
-								console.log(item2);
+								console.log(item3.filePath);
+
+								$(".feed_img").attr("src", item2.filePath);
+								$(".profile_img").attr("src", item3.filePath);
 								
 								value += "<div class='feed-item'>" 
 											+ "<div class='feed-box'>" 
 											
 												+ "<div class='feed_name'>" 
 													+ "<div class='profile_box'>" 
-														+ "<img class='profile_img' src='https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_org.jpg?61e575e8653e5920470a38d1482d7312/melon/optimize/90'>"
+														+ "<img class='profile_img' src='" + item3.img + "'>"
 													+ "</div>"
-													+ "<span class='feed_name_txt'>" + item.feWriter + "</span>"
+													+ "<span class='feed_name_txt'>" + item3.nickName + "</span>"
 													
 												+ "</div>" 
 												
@@ -598,10 +710,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 					})
 					
 				})
+			})
 
 			
 			<!-- 멤버 ajax 스크립트 영역 -->
-			<!-- $(function() {
+			$(function() {
 				$("#memberClick").click(function() {
 					
 					$.ajax({
@@ -630,6 +743,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 					})
 					
 				})
+			})
 		 	
 			
 			
@@ -650,7 +764,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 				underline.style.width = link.offsetWidth + 'px';
 				underline.style.left = left + 'px';
 			});
-		
+
+
 		</script>
 		
 	</div>
@@ -663,7 +778,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 		
 	<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 	
-	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br>
 	<jsp:include page="../common/footer.jsp"/>
 	
 	
