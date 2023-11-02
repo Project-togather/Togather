@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="feedMapper">
+
+ 	<resultMap type="Feed" id="ResultFeed" >
+		<result column="fe_no" property="feNo"/>
+		<result column="ref_cno" property="refCno"/>
+		<result column="fe_content" property="feContent"/>
+		<result column="fe_date" property="feDate"/>
+		<result column="fe_writer" property="feWriter"/>
+		<result column="f_status" property="feStatus"/>
+		<result column="like_count" property="likeCount"/>
+		<result column="thumbnail" property="thumbnail"/>
+		<result column="img" property="img"/>
+		<result column="grNo" property="grNo"/>
+		
+		<collection property="Great" resultMap="Great"/>
+	</resultMap>
+	
+	<resultMap type="Great" id="Great">
+		<result column="mem_no" property="memNo"/>
+		<result column="fe_no" property="feNo"/>
+	</resultMap>
+	
+	<select id="feedLists" resultMap="ResultFeed">
+		select 
+		       fe_no
+		     , ref_cno
+		     , fe_content
+		     , fe_date
+		     , fe_writer
+		     , f_status
+		     , like_count
+		     , (select file_path
+		          from attachment
+		         where fe_no = ref_fno) img
+		  from feed
+		 order 
+		    by like_count desc
+	</select>
+	
+	<select id="selectFeedLists" resultMap="ResultFeed">
+		select 
+		       fe_no
+		     , ref_cno
+		     , fe_content
+		     , fe_date
+		     , fe_writer
+		     , f_status
+		     , like_count
+		     , (select file_path
+				  from attachment
+				 where fe_no = ref_fno) img
+		  from feed f
+          join attachment on (fe_no = ref_fno)
+		 where f_status = #{feStatus}
+           and fe_no = ref_fno
+	</select>
 	 
-	 
+	<select id="FollowingFeedLists" resultMap="ResultFeed">
+		select 
+		       fe_no
+		     , ref_cno
+		     , fe_content
+		     , fe_date
+		     , fe_writer
+		     , f_status
+		     , like_count
+             , to_mem
+		     ,(select file_path
+				  from attachment
+				 where fe_no = ref_fno) img
+		  from feed
+          join follow on (fe_writer = to_mem)
+          join attachment on (fe_no = ref_fno)
+         where from_mem = #{memNo}
+	</select>
+	
 </mapper>

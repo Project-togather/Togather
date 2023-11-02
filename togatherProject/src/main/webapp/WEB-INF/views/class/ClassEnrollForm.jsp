@@ -723,7 +723,8 @@ input[type="range"]::-webkit-slider-thumb {
 										</div>
 									</div>
 									<br>
-				                    키워드 : <input type="text" value="서울" id="keyword" size="15" name="classLocation" placeholder="키워드"> 
+				                    키워드 : <input type="text" value="서울" id="keyword" size="15" placeholder="키워드">
+				                    <input type="hidden" id="classLocation" name="classLocation">
 				                    <button id="search" type="button" onclick="searchPlaces(); return false;">검색하기</button> 
 									</div>
 									
@@ -845,13 +846,18 @@ input[type="range"]::-webkit-slider-thumb {
 									            	map.setCenter(marker.getPosition());
 									                $("#latitude").val(marker.getPosition().getLat()); // 위도 값 저장
 									                $("#longitude").val(marker.getPosition().getLng()); // 경도 값 저장
+									                $("#classLocation").val(title.address_name);
+									               
 									                $("#placeId").val(placeId); // 위치장소 id 값 저장
-													
+
 									            	if($(this).hasClass("addorange")){
 									            		$(this).removeClass("addorange");
+									            		$("#classLocation").val('');
 									            	}else{
 									            		$(this).addClass("addorange");
+									            		$("#classLocation").val(title.address_name);
 									            	}
+									            	
 									            	$(this).siblings().removeClass("addorange");
 									            }
 									            
@@ -995,7 +1001,6 @@ input[type="range"]::-webkit-slider-thumb {
 													$("#approval").css("backgroundColor","orange");
 													$("#First-come").css("backgroundColor","");
 												}
-												console.log($("#classApproval").val());
 											})
 											
 											$("#First-come").click(function(){
@@ -1009,7 +1014,6 @@ input[type="range"]::-webkit-slider-thumb {
 													$("#First-come").css("backgroundColor","orange");
 													$("#approval").css("backgroundColor","");
 												}
-												console.log($("#classApproval").val());
 											})
 									</script>
 									

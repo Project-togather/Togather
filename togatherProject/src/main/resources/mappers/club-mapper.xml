@@ -802,4 +802,111 @@
        where cl_type_status = 1
          and c_no = #{classNo}	
 	</select>
+	
+	<select id="selectMyClassList" resultMap="resultclub">
+        select 
+		       c_no
+		     , mem_no
+		     , c_title
+		     , c_content
+		     , c_location
+		     , c_date
+             , c_time
+		     , c_price
+		     , c_approval
+		     , minage
+             , maxage
+		     , people_limit
+             , cl_type
+		     , cl_category
+		     , curriculum
+		     , origin_name
+		     , update_name
+		     , file_path
+		     , cl_name
+		     , cl_ca_name
+   		     , (select count(*)
+                 from my_class
+                where my_class.c_no = class.c_no
+                  and cl_type_status = 1) vacancy
+		  from class
+		  join attachment on (c_no = ref_fno)
+		  join cl_category on (cl_category = cl_categoryno)
+		  join cl_type on (cl_type = cl_ca_no)
+		 where status = 'Y'
+		   and mem_no = #{memNo}
+           and category in ('1', '2', '3', '4')
+   		 order
+		    by enrollDate desc
+	</select>
+	
+	<select id="waitTypeClass" resultMap="resultclub">
+        select 
+		       c.c_no
+		     , c.mem_no
+		     , c_title
+		     , c_content
+		     , c_location
+		     , c_date
+             , c_time
+		     , c_price
+		     , c_approval
+		     , minage
+             , maxage
+		     , people_limit
+             , cl_type
+		     , cl_category
+		     , curriculum
+		     , update_name as "img"
+		     , cl_name
+		     , cl_ca_name
+   		     , (select count(*)
+                 from my_class
+                where my_class.c_no = c.c_no
+                  and cl_type_status = 1) vacancy
+		  from my_class mc
+		  left join class c on (c.c_no = mc.c_no)
+          join cl_category on (cl_category = cl_categoryno)
+          join cl_type on (cl_type = cl_ca_no)
+          left join attachment on (mc.c_no = ref_fno)
+		 where mc.mem_no = #{memNo} 
+		   and mc.cl_type_status = #{clTypeStatus}
+    	 order
+		    by enrollDate desc
+	</select>
+	
+	<select id="likeClassList" resultMap="resultclub">
+        select 
+		       c.c_no
+		     , c.mem_no
+		     , c_title
+		     , c_content
+		     , c_location
+		     , c_date
+             , c_time
+		     , c_price
+		     , c_approval
+		     , minage
+             , maxage
+		     , people_limit
+             , cl_type
+		     , cl_category
+		     , curriculum
+		     , update_name as "img"
+		     , cl_name
+		     , cl_ca_name
+   		     , (select count(*)
+                 from my_class
+                where my_class.c_no = c.c_no
+                  and cl_type_status = 1) vacancy
+		  from favorites f
+		  left join class c on (c.c_no = f.c_no)
+          join cl_category on (cl_category = cl_categoryno)
+          join cl_type on (cl_type = cl_ca_no)
+          left join attachment on (f.c_no = ref_fno)
+		 where f.mem_no = #{memNo}
+		 order
+		    by enrollDate desc
+	</select>
+	
 </mapper>

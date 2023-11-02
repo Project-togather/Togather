@@ -21,6 +21,9 @@ import com.kh.spring.alarm.model.service.NotificationServiceImpl;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.feed.model.vo.Feed;
+import com.kh.spring.member.model.service.MemberService;
+
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.reply.model.vo.Reply;
 import com.kh.spring.myClass.model.vo.MyClass;
@@ -83,15 +86,65 @@ public class ClubController {
 	
 	// 라운지 페이지 이동
 	@RequestMapping(value = "lounge.pa")
-	public String loungePage() {
-		return "class/loungePage";
+	public String loungePage(HttpSession session, Model model) {
+		ArrayList<Feed> list = cService.feedLists();
+		
+		if(list != null) {
+			
+			session.setAttribute("list", list);
+			return "class/loungePage";
+		}else {
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
+		}
 	}
 	
-   // 내모임 리스트 조회
-   @RequestMapping(value = "myclass.pa")
-   public String selectMyClass() {
-      return "class/myClassPage";
-   }
+    // 내모임 리스트 조회
+    @RequestMapping(value="myclass.pa")
+    public String myclassList(Member m, HttpSession session, Model model) {
+    	 m = (Member)session.getAttribute("loginMember");
+    	 
+    	 ArrayList<Club> list = cService.selectMyClassList(m);
+		 if(list != null) {
+			 session.setAttribute("list", list);
+			 return "class/myClassPage";
+		 }else {
+			 model.addAttribute("errorMsg", "실패!?");
+			 return "/";
+		 }
+    }
+    
+    // 내모임 진행상황에 따른 페이지 || 찜
+    @ResponseBody
+    @RequestMapping(value="myclass.list", produces = "application/json; charset=utf-8")
+    public String waitTypeClass(Club c, HttpSession session, Model model) {
+    	
+	   ArrayList<Club> list = cService.waitTypeClass(c);
+	   
+		 if(list != null) {
+			 session.setAttribute("list", list);
+			 return new Gson().toJson(list);
+		 }else {
+			 model.addAttribute("errorMsg", "실패!?");
+			 return "/";
+		 }
+    }
+    
+    // 내 즐겨찾기 조회
+    @ResponseBody
+    @RequestMapping(value="likeclass.list", produces = "application/json; charset=utf-8")
+    public String likeClassList(Club c, HttpSession session, Model model){
+    	
+	    ArrayList<Club> list = cService.likeClassList(c);
+	    
+		if(list != null) {
+			session.setAttribute("list", list);
+			return new Gson().toJson(list);
+		}else {
+			model.addAttribute("errorMsg", "실패!?");
+			return "/";
+		}
+    }
 	
 	/**
 	 * 소셜링 전체 조회
@@ -250,13 +303,6 @@ public class ClubController {
 		}
 	}
 	
-	/**
-	 * 내 즐겨찾기 조회
-	 */
-	@RequestMapping
-	public void selectMyList() {
-		ArrayList<Club> list = cService.selectMyClassList();
-	}
 	
 	/**
 	 * 모임등록 폼 이동 
@@ -269,7 +315,9 @@ public class ClubController {
 	
 	@RequestMapping("enroll.cl")
 	public String insertClass(Club c, Attachment at, MultipartFile upfile , HttpSession session , Model model) {
+
 		System.out.println("클래스동록 : " + c);
+
 		int result = cService.insertClass(c);
 		
 		if(!upfile.getOriginalFilename().equals("")) {

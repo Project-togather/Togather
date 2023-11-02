@@ -41,4 +41,14 @@ public class FeedDao {
 	public Member searchUserPage(SqlSessionTemplate sqlSession , String memNo) {
 		return sqlSession.selectOne("myfeedMapper.searchUserPage", memNo);
 	}
+	
+	// 피드 리스트 조회
+	public ArrayList<Feed> selectFeedLists(SqlSessionTemplate sqlSession, String feStatus){
+		return (ArrayList)sqlSession.selectList("feedMapper.selectFeedLists", feStatus);
+	}
+	
+	// 팔로잉 한 피드 리스트 조회
+	public ArrayList<Feed> FollowingFeedLists(SqlSessionTemplate sqlSession, Member m){
+		return (ArrayList)sqlSession.selectList("feedMapper.FollowingFeedLists", m);
+	}
 }

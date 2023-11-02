@@ -301,15 +301,15 @@ li .m-searchBtn i {
 						<li><a href="lounge.pa"><span class="menu-item-span">ROUNGE</span></a></li>
 						
 					 <c:if test="${ not empty loginMember }"> 
-					 </c:if> 
 						<li><a href="myclass.pa"><span class="menu-item-span">MYCLASS</span></a></li>
 						<li><a href="enrollForm.cl"><span class="menu-item-span">ENROLL CLASS</span></a></li>
 						<li><a href="mypage.me"><span class="menu-item-span">MYPAGE</span></a></li>
-
+					 </c:if>
 					
 					 <c:if test="${ loginMember.memId == 'admin' }">
 					 </c:if> 
 					 	<li><a href="admin.pa"><span class="menu-item-span">관리자페이지</span></a></li>
+					 </c:if> 
 						
                      </ul>
                   </div>

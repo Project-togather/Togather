@@ -180,13 +180,6 @@ public class MemberController {
             return "NNNNY";
          }      
       }
-
-//   // 내모임 페이지 이동
-//   @RequestMapping(value = "myclass.pa")
-//   public String myClassPage() {
-//      return "member/myClassPage";
-//   }
-   
    
    
    //취향선택인듯

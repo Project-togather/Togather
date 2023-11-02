@@ -27,5 +27,9 @@ public interface FeedService {
 	//검색된 멤버페이지로 이동
 	Member searchUserPage(String memNo);
 	
+	// 피드 리스트 조회
+	ArrayList<Feed> selectFeedLists(String feStatus);
 	
+	// 좋아요 한 피드 리스트 조회
+	ArrayList<Feed> FollowingFeedLists(Member m);
 }
