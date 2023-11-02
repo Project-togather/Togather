@@ -25,14 +25,11 @@ public interface SearchService {
 	
 	
 	// 피드 리스트가 보이는 서비스
-	ArrayList<Feed> selectFeedList();
-	ArrayList<Attachment> selectImageFeedList();
-	ArrayList<Member> selectImageMemberFeedList();
+	int searchFeedMoreListCount();
+	ArrayList<Feed> selectFeedList(PageInfo pi);
+	ArrayList<Attachment> selectImageFeedList(PageInfo pi);
+	ArrayList<Member> selectImageMemberFeedList(PageInfo pi);
 	
-	// 피드 무한 스크롤
-	ArrayList<Feed> selectMoreFeedList(int startIndex, int itemsPerPage);
-	ArrayList<Attachment> selectMoreImageFeedList(int startIndex, int itemsPerPage);
-	ArrayList<Member> selectMoreImageMemberFeedList(int startIndex, int itemsPerPage);
 	
 	// 멤버 리스트가 보이는 서비스
 	ArrayList<Member> selectMemberList();
