@@ -12,9 +12,9 @@ import com.kh.spring.member.model.vo.Member;
 public interface SearchService {
 
 	// 임시
-	int searchListCount(String keyword, String options, String sorting, String category, String dateValue);
-	ArrayList<Club> searchList(String keyword, String options, String sorting, String category, String dateValue, PageInfo pi);
-	ArrayList<Attachment> searchImageList(String keyword, String options, String sorting, String category, String dateValue, PageInfo pi);
+	int searchListCount(String keyword, String options, String sorting, String category, String hiddenDate);
+	ArrayList<Club> searchList(String keyword, String options, String sorting, String category, String hiddenDate, PageInfo pi);
+	ArrayList<Attachment> searchImageList(String keyword, String options, String sorting, String category, String hiddenDate, PageInfo pi);
 	
 	// 검색 조회
 	/*
@@ -28,6 +28,11 @@ public interface SearchService {
 	ArrayList<Feed> selectFeedList();
 	ArrayList<Attachment> selectImageFeedList();
 	ArrayList<Member> selectImageMemberFeedList();
+	
+	// 피드 무한 스크롤
+	ArrayList<Feed> selectMoreFeedList(int startIndex, int itemsPerPage);
+	ArrayList<Attachment> selectMoreImageFeedList(int startIndex, int itemsPerPage);
+	ArrayList<Member> selectMoreImageMemberFeedList(int startIndex, int itemsPerPage);
 	
 	// 멤버 리스트가 보이는 서비스
 	ArrayList<Member> selectMemberList();
