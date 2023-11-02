@@ -97,6 +97,7 @@
 					<groupId>com.sun.jmx</groupId>
 					<artifactId>jmxri</artifactId>
 				</exclusion>
+				
 			</exclusions>
 			<scope>runtime</scope>
 		</dependency>

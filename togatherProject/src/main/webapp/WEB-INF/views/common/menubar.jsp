@@ -219,6 +219,36 @@ li .m-searchBtn i {
             </div>
          </div>
       </header>
+      
+      <script>
+      var socket = null;
+      $(document).ready(function(){
+	      if(${loginMember != null}){
+	   		alert("넌되는거맞지");
+	      connectWs();
+	      }
+      })
+      
+      function connectWs(){
+		console.log("tttttt")
+		var ws = new SockJS("/alram");
+		socket = ws;
+		
+			ws.onopen = function() {
+		 console.log('open');
+ 
+ 		};
+      
+      }
+
+      
+      </script>
+      
+      
+      
+      
+      
+      
       <!-- Header end-->
       
       <!-- Scripts-->
