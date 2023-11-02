@@ -187,6 +187,14 @@
 														},
 												success : function (result){
 													if(result == "YYYYY"){
+														
+														if('${loginMember.memId}' != '${f.feWriter}'){
+											           		if(socket){
+											        			let socketMsg = "reply,"+'${loginMember.memId}'+","+'${f.feWriter}'+","+'${f.feNo}';
+											        			socket.send(socketMsg);
+											           		}
+											        	}
+														
 														showFeedReply();
 													}
 													else{
