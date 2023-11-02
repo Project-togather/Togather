@@ -16,7 +16,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />	
 <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -127,6 +132,47 @@ li .m-searchBtn i {
 </style>
 </head>
 <body>
+
+  <script>
+      var socket = null;
+      
+      $(document).ready(function(){
+	      if(${loginMember != null}){
+	   		
+	      connectWs();
+	      }
+      })
+      
+      function connectWs(){
+    	
+		console.log("tttttt")
+		var ws = new SockJS("http://localhost:8012/togather/alram");
+		socket = ws;
+		//alert(socket);
+		console.log(socket);
+		
+			ws.onopen = function() {
+		 
+ 		};
+ 		
+	 		ws.onmessage = function(event) {
+	 			
+	 		alert(event.data);	
+	 			
+	 	};
+
+	 		ws.onclose = function() {
+	 		   //alert("onclose");
+	 	 };
+ 	 
+ 		
+ 		
+      
+      };
+
+      
+      </script>
+      
 	
 	<script>
 	 
@@ -178,6 +224,7 @@ li .m-searchBtn i {
 	
 	</script>
 	
+
 	<c:if test="${not empty alertMsg}">
 		<script >
 			//swal("${alertMsg}");
@@ -274,30 +321,7 @@ li .m-searchBtn i {
          </div>
       </header>
       
-      <script>
-      var socket = null;
-      $(document).ready(function(){
-	      if(${loginMember != null}){
-	   		alert("넌되는거맞지");
-	      connectWs();
-	      }
-      })
-      
-      function connectWs(){
-		console.log("tttttt")
-		var ws = new SockJS("/alram");
-		socket = ws;
-		
-			ws.onopen = function() {
-		 console.log('open');
- 
- 		};
-      
-      }
-
-      
-      </script>
-      
+    
       
       
       
