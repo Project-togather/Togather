@@ -116,8 +116,11 @@
 										value += '<div class="menu-simple-item">'
 											   + '<div class="menu-simple-item-img"><img src="' + list[i].img + '" alt=""></div>'
 											   + '<div class="menu-simple-item-inner">'
-											   + '<h6><span>' + list[i].nickName + '</span></h6>'
-											   + '<span class="pull-right">$10</span>'
+											   if(clType==2){
+												value += '<button class="pull-right btn btn-white refuse" data-refuse="' + list[i].memNo + '"style="margin-left:20px; color:red;">거절</button>' 
+												   	   + '<button class="pull-right btn btn-white admit" data-admit="' + list[i].memNo + '"style="color:blue;">승인</button>'												   
+											   }
+										value += '<h6><span>' + list[i].nickName + '</span></h6>'
 											   + '<p>' + list[i].msg + '</p>'
 											   + '</div>'
 											   + '</div>';
@@ -125,15 +128,14 @@
 										value2 += '<div class="menu-simple-item">'
 											   + '<div class="menu-simple-item-img"><img src="' + list[i].img + '" alt=""></div>'
 											   + '<div class="menu-simple-item-inner">'
+											   + '<button class="pull-right btn btn-white" id="refuse" data-refuse="' + list[i].memNo + '"style="margin-left:20px; color:red;">거절</button>' 
+											   + '<button class="pull-right btn btn-white" id="admit" data-admit="' + list[i].memNo + '"style="color:blue;">승인</button>'
 											   + '<h6><span>' + list[i].nickName + '</span></h6>'
-											   + '<span class="pull-right">$10</span>'
 											   + '<p>' + list[i].msg + '</p>'
 											   + '</div>'
 											   + '</div>';
 									}
 								}
-								
-								console.log(value);
 								
 								
 								$(".first").html(value);
@@ -146,6 +148,49 @@
 					}
 					
 					memberList(1);
+					
+					$(document).on("click", ".admit", function(){
+						
+						var memNo = $(this).data("admit");
+						
+						$.ajax({
+							url:"admitClass.me",
+							data:{
+								memNo:memNo,
+								classNo:'${classNo}'
+								},
+							success:()=>{
+								swal("참가 승인에 성공하였습니다!", "참가 희망자의 결제 후 최종 참가 됩니다.", "success");
+								memberList(2);
+							}, error:()=>{
+								swal("참가 승인에 실패하였습니다!","","error");
+								memberList(2);
+							}
+						})
+					});
+					
+					$(document).on("click", ".refuse", function(){
+						
+						var memNo = $(this).data("refuse");
+						
+						$.ajax({
+							url:"refuseClass.me",
+							data:{
+								memNo:memNo,
+								classNo:'${classNo}'
+								},
+							success:result=>{
+								swal("참가 거절에 성공하였습니다!", "", "success");
+								memberList(2);
+							}, error:()=>{
+								swal("참가 거절에 성공하였습니다!", "", "success");
+								memberList(2);
+							}
+						})
+					});
+					
+					
+					
 				</script>
 			
 		<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>

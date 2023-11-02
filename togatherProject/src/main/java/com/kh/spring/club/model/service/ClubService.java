@@ -85,5 +85,10 @@ public interface ClubService {
 	
 	// 참여중인 프로필 이미지 조회
 	ArrayList<Member> selectImgList(Club c);
+	// 호스트가 멤버 가입 승인
+	int admitEnrollMember(MyClass c);
+	
+	// 호스트가 멤버 가입 거절
+	int refuseEnrollMember(MyClass c);
 	
 }

@@ -14,16 +14,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.google.gson.Gson;
 import com.kh.spring.QuitReason.model.vo.QuitReason;
 import com.kh.spring.alarm.model.service.NotificationServiceImpl;
 import com.kh.spring.attachment.model.vo.Attachment;
-import com.kh.spring.club.model.service.ClubService;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
-import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.reply.model.vo.Reply;
 import com.kh.spring.myClass.model.vo.MyClass;
@@ -272,7 +269,7 @@ public class ClubController {
 	
 	@RequestMapping("enroll.cl")
 	public String insertClass(Club c, Attachment at, MultipartFile upfile , HttpSession session , Model model) {
-		System.out.println(c);
+		System.out.println("클래스동록 : " + c);
 		int result = cService.insertClass(c);
 		
 		if(!upfile.getOriginalFilename().equals("")) {
@@ -318,7 +315,9 @@ public class ClubController {
 	
 	@ResponseBody
 	@RequestMapping("enroll.rv")
-	public String insertReply(Reply r) {
+	public String insertReply(Reply r, Member m) {
+		
+		nService.send(m, r, "댓글이 등록되었습니다!");
 
 		int result = cService.insertReply(r);
 		return result>0 ? "success" : "fail";
@@ -385,10 +384,6 @@ public class ClubController {
 	@RequestMapping("likeClass.cl")
 	public String likeClass(MyClass c) {
 		
-		nService.send(c.getMemNo(), c.getClassNo(), "즐겨찾기 등록했답니다");
-		
-		System.out.println("즐겨찾기 왔나요?");
-		
 		int check = cService.checkLike(c);
 		int result = 0;
 		if(check > 0) {
@@ -417,7 +412,7 @@ public class ClubController {
 	
 	@RequestMapping("classUpdateForm.cl")
 	public String classUpdateForm(MyClass mc, Model model) {
-
+		
 		Club c = cService.selectClassDetail(mc);
 		model.addAttribute("c", c);
 		
@@ -438,8 +433,9 @@ public class ClubController {
 	}
 	
 	@RequestMapping("memberListPage.cl")
-	public String memberListPage(String cNo, Model model) {
-		model.addAttribute("classNo", cNo);
+	public String memberListPage(String classNo, Model model) {
+		
+		model.addAttribute("classNo", classNo);
 		return "class/classMemberList";
 	}
 	
@@ -463,6 +459,43 @@ public class ClubController {
 		
 	}
 	
+<<<<<<< HEAD
 
 	
+=======
+	@RequestMapping("roadView.cl")
+	public String roadView(String latitude, String longitude, Model model) {
+
+		model.addAttribute("latitude", latitude);
+		model.addAttribute("longitude", longitude);
+		return "class/classRoadView";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="admitClass.me", produces = "application/json; charset=UTF-8")
+	public int admitClass(MyClass c) {
+		
+		int result = cService.admitEnrollMember(c);
+		
+		if(result>0) {
+			return result;
+		} else {
+			return result;
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="refuseClass.me", produces = "application/json; charset=UTF-8")
+	public int refuseClass(MyClass c) {
+		
+		int result = cService.refuseEnrollMember(c);
+		
+		if(result>0) {
+			return result;
+		} else {
+			return result;
+		}
+	}
+		
+>>>>>>> sse6
 }

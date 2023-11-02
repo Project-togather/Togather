@@ -38,6 +38,7 @@ public class PaymentController {
 					  , Locale locale
 					  , HttpSession session
 					  , @PathVariable(value="imp_uid") String imp_uid) throws IamportResponseException, IOException{
+		System.out.println(imp_uid);
 		return api.paymentByImpUid(imp_uid);
 	}
 	
