@@ -458,11 +458,7 @@ public class ClubController {
 		return "class/quitClassForm";
 		
 	}
-	
-<<<<<<< HEAD
 
-	
-=======
 	@RequestMapping("roadView.cl")
 	public String roadView(String latitude, String longitude, Model model) {
 
@@ -497,5 +493,4 @@ public class ClubController {
 		}
 	}
 		
->>>>>>> sse6
 }
