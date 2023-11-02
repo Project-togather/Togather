@@ -17,9 +17,15 @@ public class Report {
 	
 	private String reNo;
 	private String reMem;
-	private String refCno;
+	private String originName;
+	private String updateName;
+	private String filePath;
 	private String rePmem;
 	private String reContent;
 	private Date reDate;
+	private String reResult;
+	private int reCategory;
+	
+	
 	
 }

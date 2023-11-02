@@ -62,29 +62,21 @@
 					<table class="table table-hover" id="blacktable">
 						<thead>
 							<tr>
-								<th scope="col">블랙리스트.No</th>
-								<th scope="col">아이디</th>
-								<th scope="col">이름</th>
-								<th scope="col">닉네임</th>
-								<th scope="col">누적신고횟수</th>
-								<th scope="col">블랙리스트 추가 날짜</th>
-								<th scope="col">블랙리스트 해제</th>
+								<th scope="col">신고번호</th>
+								<th scope="col">신고자</th>
+								<th scope="col">신고 날짜</th>
+								<th scope="col">처리결과</th>
+								<th scope="col">신고분류</th>
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="b" items="${list}">
+							<c:forEach var="r" items="${list}">
 								<tr>
-									<th scope="row">${b.blackNo}</th>
-									<td id="blackId">${b.blackId }</td>
-									<td >${b.blackName }</td>
-									<td>${b.nickName }</td>
-									<td>${b.blackrpCount }</td>
-									<td>${b.blackEnrollDate }</td>
-									<td>
-										<button id="blackbtn" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#blackcancel">
-										블랙리스트 해제
-										</button>
-									</td>
+									<th scope="row">${r.reNo}</th>
+									<td id="blackId">${r.reMem}</td>
+									<td >${r.reDate}</td>
+									<td>${r.reResult}</td>
+									<td>${r.reCategory }</td>
 								</tr>
 									<!-- Modal -->
 										<div class="modal fade" id="blackcancel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

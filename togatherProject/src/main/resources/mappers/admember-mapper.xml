@@ -26,6 +26,20 @@
 		<result column="black_enroll_date" property="blackEnrollDate"></result>
 	</resultMap>
 	
+	<resultMap id="ReportResult" type="Report">
+		<result column="RE_NO" property="reNo"></result>
+		<result column="RE_MEM" property="reMem"></result>
+		<result column="RE_PMEM" property="rePmem"></result>
+		<result column="ORIGIN_NAME" property="originName"></result>
+		<result column="UPDATE_NAME" property="updateName"></result>
+		<result column="RE_CONTENT" property="reContent"></result>
+		<result column="RE_DATE" property="reDate"></result>
+		<result column="RE_RESULT" property="reResult"></result>
+		<result column="RE_CATEGORY" property="reCategory"></result>
+	</resultMap>
+	
+	
+	
 	<select id="selectMemberList" resultMap="AdMemberResult" parameterType="Member">
 		select 
 		    mem_no,
@@ -54,6 +68,24 @@
 		    manner,
 		    m_status
 		from member
+	</select>
+	
+	<select id="selectReport" resultMap="ReportResult">
+		select 
+		    RE_NO,
+		    RE_MEM,
+		    RE_PMEM,
+		    ORIGIN_NAME,
+		    UPDATE_NAME,
+		    FILE_PATH,
+		    RE_CONTENT,
+		    RE_DATE,
+		    RE_RESULT,
+		    RE_CATEGORY
+		from report
+		where RE_CATEGORY = 1
+		and RE_RESULT = 'N'
+		
 	</select>
 	
 	<select id="selectMemberList3" resultMap="AdMemberResult">
@@ -185,4 +217,39 @@
 				#{memStatus}
 			)
 	</insert>
+	
+	<insert id="insertReport">
+		insert
+			into report
+			(
+			   RE_NO
+			  ,RE_MEM
+			  ,RE_PMEM
+			  ,ORIGIN_NAME
+			  ,UPDATE_NAME
+			  ,RE_CONTENT
+			  ,RE_DATE
+			  ,RE_RESULT
+			  ,RE_CATEGORY		
+			)
+			values
+			(
+			   SEQ_RNO.nextval
+			  ,#{reMem}
+			  ,#{rePmem}
+			  ,#{originName}
+			  ,#{updateName}
+			  ,#{reContent} 
+			  ,SYSDATE
+			  ,'N'
+			  ,#{reCategory}
+			)
+	</insert>
+	
+	<select id="selectReportCount" resultType="_int">
+		select
+				count(*)
+			from report
+		   where RE_CATEGORY = 1
+	</select>
 </mapper>
