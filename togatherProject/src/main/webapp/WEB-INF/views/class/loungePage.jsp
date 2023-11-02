@@ -34,7 +34,9 @@ li:hover {cursor: pointer; background-color: orange;}
     		<ul class="categorybar">
 	        	<li onclick="feedPage(1)"> <h5> 🔥 인기피드 </h5> </li>
 	        	<li onclick="feedPage(2)"> <h5> 😁 모임후기 </h5> </li>
+	        	<c:if test="${ not empty loginMember }">
 	        	<li onclick="feedPage(3)"> <h5> ❤️ 팔로잉 </h5> </li>
+	        	</c:if>
 	        </ul>
 		</div>
 		<input type="hidden" id="memNo" name="memNo" value="${ loginMember.memNo }">
@@ -42,7 +44,7 @@ li:hover {cursor: pointer; background-color: orange;}
 		<script>
 			function feedPage(e){
 				
-				$(".row").html("");
+				$("#row").html("");
 				
 				let status = "";
 				

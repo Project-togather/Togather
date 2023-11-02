@@ -126,4 +126,12 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.selectMyClassList", m);
 	}
 	
+	public ArrayList<Club> waitTypeClass(SqlSessionTemplate sqlSession, Club c){
+		return (ArrayList)sqlSession.selectList("clubMapper.waitTypeClass", c);
+	}
+	
+	public ArrayList<Club> likeClassList(SqlSessionTemplate sqlSession, Club c){
+		return (ArrayList)sqlSession.selectList("clubMapper.likeClassList", c);
+	}
+	
 }

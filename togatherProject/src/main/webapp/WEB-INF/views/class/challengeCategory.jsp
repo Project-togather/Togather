@@ -105,7 +105,8 @@ li:hover {cursor: pointer; background-color: orange;}
 				        	   </c:otherwise> 
 				          </c:choose>
 				          	<span class="bestDiv1"> ${ c.clName } </span> <br>
-				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
+				          	${ c.clCaName }  ${ c.classLocation }<br>
+				          	 ${ c.classDate } ${ c.classTime } <br>
     					    <c:forEach var="i" items="${ imgList1 }">
     					    	<c:if test="${ c.classNo eq i.classNo }">
 			          				<img src="${ i.img }">

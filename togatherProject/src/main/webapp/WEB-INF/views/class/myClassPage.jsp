@@ -13,10 +13,33 @@
 	height: 204.07px;
 	object-fit: cover;
 }
-.categorybarDiv{ width: 800px; margin:0 auto;}
+.categorybarDiv{ width: 600px; margin:0 auto;}
 .categorybar{ float:left; text-align:center;}
-.categorybar li{ display:inline-block; text-align:center; margin-left: 50px;}
+.categorybar li{ display:inline-block; text-align:center; margin-left: 20px;}
 li:hover {cursor: pointer; background-color: orange;}
+.bestDiv1{
+    padding: 4px 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    border-radius: 5px;
+    color: white;
+    background-color: orange;
+}
+.bestDiv2{
+    padding: 4px 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(255, 63, 51);
+}
+.menu-classic-item-inner img{
+	width: 30px; 
+	height: 30px;
+}
+li>h5{margin-bottom: 0px;}
 </style>
 </head>
 <body>
@@ -30,10 +53,10 @@ li:hover {cursor: pointer; background-color: orange;}
 		</div>
         <div class="categorybarDiv">
     		<ul class="categorybar">
+	        	<li onclick="location.href='myclass.pa'"> <h5> 🕧 내가 만든 모임 </h5> </li>
 	        	<li onclick="myClass(1)"> <h5> 🏃 참가중인 모임 </h5> </li>
 	        	<li onclick="myClass(2)"> <h5> ⌛ 승인 대기중 </h5> </li>
-	        	<li onclick="myClass(3)"> <h5> 🌟 즐겨찾기 </h5> </li>
-	        	<li onclick="myClass(4)"> <h5> 🕧 진행중인 모임 </h5> </li>
+	        	<li onclick="likeClass()"> <h5> 🌟 찜한 모임 </h5> </li>
 	        </ul>
 		</div>
 		
@@ -42,39 +65,73 @@ li:hover {cursor: pointer; background-color: orange;}
 		<script>
 			function myClass(e){
 				
-				$(".row").html("");
-				
-				console.log(status);
 				$.ajax({
 					url:"myclass.list",
 					data:{
-						feStatus:e,
-						memNo:$("#memNo").val();
+						clTypeStatus:e,
+						memNo:$("#memNo").val(),
 						},
 					success:(data)=>{
-						console.log(data);
 						let value = "";
 						for(let i in data){
-							console.log(data);
-							console.log(data[i].img);
 							value += "<div class='col-md-4'>" 
 								    + "<div class='menu-classic-item'>"
-								    + "<div class='menu-classic-item-img' onclick=" + "'location.href='" + "'feedDetail.fe?feNo=" + data[i].feNo + "'>"
+								    + "<div class='menu-classic-item-img' onclick=location.href='detail.cl?classNo="+ data[i].classNo+"'>"
 								    + "<img src=" + data[i].img + ">"
 								    + "</div>"
 								    + "<div class='menu-classic-item-inner'>"
 								    + "<h6>" 
-								    + (data[i].feContent.length >= 30 ? data[i].feContent.substring(0, 29) : data[i].feContent)
+								    + (data[i].classContent.length >= 18 ? data[i].classTitle.substring(0, 17) : data[i].classTitle)
 								    + "</h6>"
+								    + "<span class='bestDiv1'>" + data[i].clName + "</span>  " + data[i].clCaName + "<br>"
+								    + data[i].classLocation + "<br>"
+								    + data[i].classDate + " " + data[i].classTime + " "
+								    + data[i].vacancy + "/" + data[i].peopleLimit + "<br>"
 								    + "</div>"
 								    + "</div>"
 								    + "</div>"
-								  ;
+								  	;
 						}
-						$(".row").html(value);
+						$("#row").html(value);
 					},
 					error:()=>{
 						console.log("실패")
+					}
+				})
+			}
+			
+			function likeClass(){
+				$.ajax({
+					url:"likeclass.list",
+					data:{
+						memNo:$("#memNo").val(),
+					},
+					success:(data)=>{
+						console.log(data);
+						let value = "";
+						for(let i in data){
+							value += "<div class='col-md-4'>" 
+								    + "<div class='menu-classic-item'>"
+								    + "<div class='menu-classic-item-img' onclick=location.href='detail.cl?classNo="+ data[i].classNo+"'>"
+								    + "<img src=" + data[i].img + ">"
+								    + "</div>"
+								    + "<div class='menu-classic-item-inner'>"
+								    + "<h6>" 
+								    + (data[i].classContent.length >= 18 ? data[i].classTitle.substring(0, 17) : data[i].classTitle)
+								    + "</h6>"
+								    + "<span class='bestDiv1'>" + data[i].clName + "</span>  " + data[i].clCaName + "<br>"
+								    + data[i].classLocation + "<br>"
+								    + data[i].classDate + " " + data[i].classTime + " "
+								    + data[i].vacancy + "/" + data[i].peopleLimit + "<br>"
+								    + "</div>"
+								    + "</div>"
+								    + "</div>"
+								  	;
+						}
+						$("#row").html(value);
+					},
+					error:()=>{
+						console.log("실패!")
 					}
 				})
 			}
@@ -83,7 +140,7 @@ li:hover {cursor: pointer; background-color: orange;}
 		<!-- Menu-->
 		<section class="module">
 			<div class="container">
-				<div class="row">
+				<div class="row" id="row">
 					<c:forEach var="c" items="${ list }">
 						<div class="col-md-4">
 						<div class="menu-classic-item">
@@ -99,13 +156,9 @@ li:hover {cursor: pointer; background-color: orange;}
 					            	<h6><c:out value="${c.classTitle}"/></h6>
 				        	   </c:otherwise> 
 				          </c:choose>
-				          	<span class="bestDiv1"> ${ c.clName } </span> <br>
-				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
-    					    <c:forEach var="i" items="${ imgList1 }">
-    					    	<c:if test="${ c.classNo eq i.classNo }">
-			          				<img src="${ i.img }">
-			          			</c:if>
-			          		</c:forEach>
+				          	<span class="bestDiv1"> ${ c.clName } </span> &nbsp;&nbsp; ${ c.clCaName }   <br>
+				          	 ${ c.classLocation } <br>
+				          	 ${ c.classDate } ${ c.classTime } &nbsp;
 			          		${ c.vacancy }/${ c.peopleLimit } <br>
 							</div>
 						</div>

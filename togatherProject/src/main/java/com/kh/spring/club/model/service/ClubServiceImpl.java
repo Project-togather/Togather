@@ -159,9 +159,15 @@ public class ClubServiceImpl implements ClubService {
 		return cDao.feedLists(sqlSession);
 	}
 
+
 	@Override
-	public ArrayList<Club> selectMyClass(Member m) {
-		return null;
+	public ArrayList<Club> waitTypeClass(Club c) {
+		return cDao.waitTypeClass(sqlSession, c);
+	}
+
+	@Override
+	public ArrayList<Club> likeClassList(Club c) {
+		return cDao.likeClassList(sqlSession, c);
 	}
 
 }
