@@ -278,7 +278,6 @@ li .m-searchBtn i {
       var socket = null;
       $(document).ready(function(){
 	      if(${loginMember != null}){
-	   		alert("넌되는거맞지");
 	      connectWs();
 	      }
       })

@@ -492,5 +492,48 @@ public class ClubController {
 			return result;
 		}
 	}
+	
+	@RequestMapping("classDetailUpdateForm.cl")
+	public String classDetailUpdateForm(MyClass mc, Model model) {
+		Club c = cService.selectClassDetail(mc);
 		
+		model.addAttribute("c", c);
+		return "class/classDetailUpdateForm";	
+	}
+	
+	@RequestMapping("update.cl")
+	public String updateClass(Club c, MyClass mc, Attachment at, MultipartFile upfile , HttpSession session , Model model) {
+		int result = cService.updateClass(c);
+		
+		if(!upfile.getOriginalFilename().equals("")) {
+			
+			String updateName = saveFile(upfile, session);
+			at.setOriginName(upfile.getOriginalFilename());
+			at.setUpdateName("resources/uploadFiles/" + updateName);
+			at.setFilePath(upfile.getOriginalFilename() + "resources/uploadFiles/" + updateName);
+			at.setClassNo(c.getClassNo());
+			
+			System.out.println("at : " + at);
+		}
+		
+		if(result > 0) {
+			System.out.println("업데이트 성공1");
+			
+			at.setCategory(c.getClType()+"");
+			
+			int result2 = cService.insertImg(at);
+			
+			if(result2 > 0) {
+				System.out.println("성공왓니");
+				cService.selectClassDetail(mc);
+				session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");
+				return "class/classDetailView";
+			}else {
+				model.addAttribute("errorMsg", "게시글 등록에 실패");
+				return "common/errorPage";
+			}
+		}
+		System.out.println("실패????");
+		return null;
+	}
 }

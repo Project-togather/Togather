@@ -163,4 +163,9 @@ public class ClubServiceImpl implements ClubService {
 		return cDao.selectImgList(sqlSession, c);
 	}
 
+	@Override
+	public int updateClass(Club c) {
+		return cDao.updateClass(c, sqlSession);
+	}
+
 }

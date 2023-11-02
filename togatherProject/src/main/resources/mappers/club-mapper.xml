@@ -30,8 +30,9 @@
 		<result column="longitude" property="longitude"/>		
 		<result column="mem_id" property="memId"/>
 		<result column="placeid" property="placeId"/>
-		<result column="img" property="img"/>	
-	
+		<result column="img" property="img"/>
+		<result column="update_name" property="updateName"/>	
+			
 		<collection property="attachment" resultMap="attachment"/>
 	</resultMap>
 	
@@ -392,8 +393,11 @@
              , mem_id
              , latitude
              , longitude
-             , placeId     
+             , placeId
+             , update_name
+             , cl_type     
 		  from class
+          join attachment on (c_no = ref_fno)
 		  join member using (mem_no)
           join cl_type on(cl_type = cl_ca_no)
 		  join cl_category on (cl_category = cl_categoryno)
@@ -451,6 +455,12 @@
 	</insert>
 	
 	<insert id="insertImg">
+	
+		DECLARE
+	  curr_val NUMBER
+	BEGIN
+	  SELECT seq_cno.currval INTO curr_val FROM DUAL
+	  IF curr_val IS NOT NULL THEN
 		insert 
 		  into attachment	
 			 (
@@ -472,6 +482,30 @@
 			   , sysdate
 			   , #{category}
 			 )
+	  ELSE
+	  	insert 
+		  into attachment	
+			 (
+			    att_no
+			   ,ref_fno
+			   ,origin_name
+			   ,update_name
+			   ,file_path
+			   ,enroll_date
+			   ,category
+			 )
+		values
+			 (
+			    'A'||seq_ano.nextval
+			   , #{classNo}
+			   , #{originName}
+			   , #{updateName}
+			   , #{filePath}
+			   , sysdate
+			   , #{category}
+			 )
+	  END IF
+	END
 	</insert>
 
 	<select id="selectSocialingListCount" resultType="_int">
@@ -802,4 +836,23 @@
        where cl_type_status = 1
          and c_no = #{classNo}	
 	</select>
+	
+	<update id="updateClass">
+		update class
+		   set c_title = #{classTitle}
+			 , c_content = #{classContent}
+			 , c_location = #{classLocation}
+			 , c_date = #{classDate}
+			 , c_time = #{classTime}
+			 , c_price = #{classPrice}
+			 , c_approval = #{classApproval}
+			 , minage = #{minAge}
+			 , maxage = #{maxAge}
+			 , people_limit = #{peopleLimit}
+			 , cl_category = #{clCategory}
+			 , latitude = #{latitude}
+			 , longitude = #{longitude}
+ 			 , placeId = #{placeId}	   
+ 	     where c_no = #{classNo}
+	</update>
 </mapper>

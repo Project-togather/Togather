@@ -21,4 +21,6 @@ public class Attachment {
 	private String enrollDate;
 	private String category;
 	private int  thumbnail;
+	
+	private String classNo; 
 }

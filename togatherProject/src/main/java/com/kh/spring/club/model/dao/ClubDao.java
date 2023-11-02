@@ -125,5 +125,8 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.selectImgList", c);
 	}
 	
+	public int updateClass(Club c, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("clubMapper.updateClass", c);
+	}
 	
 }

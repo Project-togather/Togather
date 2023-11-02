@@ -1330,16 +1330,12 @@
 	<a class="likeClass"><span class="icon_heart_alt"
 		onclick="likeClass();"></span></a>
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
-	<c:choose>
-		<c:when test="${ loginMember.memNo eq c.memNo }">
+		<c:if test="${ loginMember.memNo eq c.memNo }">
 			<a class="classOption" href="classUpdateForm.cl?classNo=${ c.classNo }"><span
 				class="icon-gears"></span></a>
-		</c:when>
-		<c:otherwise>
-			<span class="classOption quit_option"><span class="ti-more-alt"></span></span>
-			<div class="quitClassContainer btn btn-outline btn-sm btn-brand" onclick="location.href='quitClassForm.cl?classNo=${c.classNo}&memNo=${ loginMember.memNo }'">클럽 탈퇴하기</div>
-		</c:otherwise>
-	</c:choose>
+		</c:if>
+		<span class="classOption quit_option" style="display:none"><span class="ti-more-alt"></span></span>
+		<div class="quitClassContainer btn btn-outline btn-sm btn-brand" onclick="location.href='quitClassForm.cl?classNo=${c.classNo}&memNo=${ loginMember.memNo }'">클럽 탈퇴하기</div>
 	<div id="noti-form">
 		<span class="notification"><img
 			src="resources/assets/images/detail/notification.png"></span> <span
@@ -1411,7 +1407,8 @@
 						}, success:result=>{
 							switch (result){
 								case 0 : ""; break;
-								case 1 : $(".enter-btn").text("참가중인 모임 입니다."); break;
+								case 1 : $(".enter-btn").text("참가중인 모임 입니다."); 
+										 $(".quit_option").css("display", "block"); break;
 								case 2 : $(".enter-btn").text("호스트 승인 대기중 입니다."); break;
 								case 3 : $(".enter-btn").text("빈자리가 나오기를 대기중입니다."); break;
 							}

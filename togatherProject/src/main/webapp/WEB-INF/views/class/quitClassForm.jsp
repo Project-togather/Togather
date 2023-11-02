@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +48,12 @@
 										<textarea class="form-control" name="detailReason" placeholder="취소하는 상세한 사유를 입력해 주세요.(선택)" rows="12" style="resize:none;"></textarea>
 								</div>
 							</div>
-							<p style="color:red">환불 금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${ price }원</p>
+							<c:if test="${ price ne 0 }">
+								<p style="color:red">환불 금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${ price }원</p>
+							</c:if>
+							<c:if test="${ price eq 0 }">
+								<p style="color:red">환불 금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0원</p>
+							</c:if>
 					</div>
 				</div>
 			</div>

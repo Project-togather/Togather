@@ -91,4 +91,6 @@ public interface ClubService {
 	// 호스트가 멤버 가입 거절
 	int refuseEnrollMember(MyClass c);
 	
+	// 모임 수정
+	int updateClass(Club c);
 }
