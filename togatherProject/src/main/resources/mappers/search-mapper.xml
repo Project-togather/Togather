@@ -309,6 +309,7 @@
 	
 	<!-- ajax 영역 -->
 	
+	<!-- 피드 부분 -->
 	<select id="ajaxSelectFeedList" resultMap="feedResult">
 		 select
             fe_no
@@ -359,6 +360,10 @@
 		 WHERE m_status = 'Y'
 		    order by a.enroll_date desc
 	</select>
+	
+	<!-- 피드 무한 스크롤링 부분 -->
+
+	
 	
 	<select id="ajaxSelectMemberList" resultMap="memberResult">
 		select

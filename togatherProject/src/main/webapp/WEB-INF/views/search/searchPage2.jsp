@@ -402,11 +402,21 @@ a { color:#000000;text-decoration:none; }
 								</table>
 								<br>
 								<div id="selectedDate">
-									선택 날짜 : <span id="dateValue" name="dateValue" value="${ dateValue }"></span>
+									선택 날짜 : <span id="dateValue"></span>
+									<input type="hidden" id="hiddenDate" name="hiddenDate" value="${ hiddenDate }">
 								</div>
 								<br>
 							</div>
-
+							
+							<div class="modal-body">
+							    <h5>종료된 모임도 표시하기</h5>
+							    <div class="wrapper">
+									<input type="checkbox" id="switch">
+									<label for="switch" class="switch_label">
+									  <span class="onf_btn"></span>
+									</label>
+								  </div>
+							</div>
 
 							<div class="modal-body">
 							    <h5>유형</h5>
@@ -432,16 +442,6 @@ a { color:#000000;text-decoration:none; }
 								<label>
 									오프라인 <input type="radio" name="sorting" value="2" <c:if test="${sorting == '2'}">checked</c:if>>
 								</label>
-							</div>
-
-							<div class="modal-body">
-							    <h5>종료된 모임도 표시하기</h5>
-							    <div class="wrapper">
-									<input type="checkbox" id="switch">
-									<label for="switch" class="switch_label">
-									  <span class="onf_btn"></span>
-									</label>
-								  </div>
 							</div>
 							
 							<div class="modal-body">
@@ -815,6 +815,9 @@ a { color:#000000;text-decoration:none; }
 		// 선택한 날짜를 한글로 표시
 		var koreanDate = selectedYear + "년 " + monthsInKorean[parseInt(selectedMonth)] + " " + selectedDate + "일";
 		document.getElementById("dateValue").innerText = koreanDate;
+		
+		// hidden input에 선택한 날짜를 설정합니다.
+        document.getElementById("hiddenDate").value = selectedYear + "-" + selectedMonth + "-" + selectedDate;
 	}
 
 

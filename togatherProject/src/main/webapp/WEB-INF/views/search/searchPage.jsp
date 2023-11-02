@@ -380,7 +380,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 		<!-- 피드 ajax 영역 -->
 		<section class="module">
 			<div class="container">
-				<div class="feed">
+				<div id="feedContainer" class="feed">
 
 					<!-- 
 					<div class="feed-item" style="border: 1px solid lightgray;">
@@ -455,20 +455,24 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 				</div>
 			</div>
 		</section>
+
+		<div id="feedMore" class="feedMore">
+			
+		</div>
 		
 
 
 		<script>
 			<!-- 먼저 보이는 feed -->
-			<!-- $(function() {
+			$(function() {
 					
 					$.ajax({
 						url:"getList.fe",
 						success:function(object) {
 							
 							
-							console.log(object.list);
-							console.log(object.alist);
+							
+							
 							
 							let value = "";
 							
@@ -478,7 +482,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 								let item2 = object.alist[i];
 								let item3 = object.mlist[i];
 
-								console.log(item2.filePath);
+								console.log(item3.filePath);
 
 								$(".feed_img").attr("src", item2.filePath);
 								$(".profile_img").attr("src", item3.filePath);
@@ -529,10 +533,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 						}
 					
 				})
+			});
 
 		 
 			<!-- 피드 ajax 스크립트 영역 -->
-			<!-- $(function() {
+			$(function() {
 				$("#feedClick").click(function() {
 					
 					$.ajax({
@@ -548,17 +553,21 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 								
 								let item = object.list[i];
 								let item2 = object.alist[i];
+								let item3 = object.mlist[i];
 
-								console.log(item2);
+								console.log(item3.filePath);
+
+								$(".feed_img").attr("src", item2.filePath);
+								$(".profile_img").attr("src", item3.filePath);
 								
 								value += "<div class='feed-item'>" 
 											+ "<div class='feed-box'>" 
 											
 												+ "<div class='feed_name'>" 
 													+ "<div class='profile_box'>" 
-														+ "<img class='profile_img' src='https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_org.jpg?61e575e8653e5920470a38d1482d7312/melon/optimize/90'>"
+														+ "<img class='profile_img' src='" + item3.img + "'>"
 													+ "</div>"
-													+ "<span class='feed_name_txt'>" + item.feWriter + "</span>"
+													+ "<span class='feed_name_txt'>" + item3.nickName + "</span>"
 													
 												+ "</div>" 
 												
@@ -598,10 +607,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 					})
 					
 				})
+			})
 
 			
 			<!-- 멤버 ajax 스크립트 영역 -->
-			<!-- $(function() {
+			$(function() {
 				$("#memberClick").click(function() {
 					
 					$.ajax({
@@ -630,6 +640,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 					})
 					
 				})
+			})
 		 	
 			
 			
@@ -650,7 +661,28 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 				underline.style.width = link.offsetWidth + 'px';
 				underline.style.left = left + 'px';
 			});
-		
+
+
+			// 무한 스크롤
+			$(function() {
+					
+					$.ajax({
+						url:"getMoreFeeds.fe",
+						success:function(list) {
+							
+							
+							console.log(list);
+							
+
+							$(".feedMore").html(value);
+							
+							
+						}, error:function() {
+							console.log("ajax 통신 실패");
+						}
+					})
+			})
+
 		</script>
 		
 	</div>
