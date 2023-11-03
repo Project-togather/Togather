@@ -641,6 +641,31 @@ input[type="range"]::-webkit-slider-thumb {
 								        		$("#editorContent").val(classContent);
 								        		// console.log($("#editorContent").val())
 								        		// console.log($("#editor").val());
+								        		String.prototype.getBytes = function() {
+												    const contents = this;
+												    let str_character;
+												    let int_char_count = 0;
+												    let int_contents_length = contents.length;
+												
+												    for (k = 0; k < int_contents_length; k++) {
+												        str_character = contents.charAt(k);
+												        if (escape(str_character).length > 4)
+												            int_char_count += 3;
+												        else
+												            int_char_count++;
+												    }
+												    return int_char_count;
+												}
+								        		
+								        		const test = $("#editorContent").val();
+								        		console.log(test.getBytes() + "Byte");
+								        		
+								        		if(test.getBytes() >= 4000){
+								        			alert("입력가능한 글자수가 넘었습니다.");
+								        			str = test.substr(0, test.length - 1);
+								        			$("#editorContent").val(str);
+								        			
+								        		}
 								        	})
 								        })
 								    </script>
@@ -703,6 +728,7 @@ input[type="range"]::-webkit-slider-thumb {
 													$("#onLine").css("backgroundColor","orange");
 													$("#offLine").css("backgroundColor","");
 													$("#hiddenMap").addClass("hiddenMap");
+													$("#classLocation").val("온라인");
 												}
 											})
 										})
@@ -818,7 +844,7 @@ input[type="range"]::-webkit-slider-thumb {
 									            itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
 											var	placeId = places[i].id
 												
-								            	console.log(placeId);
+								            	// console.log(placeId);
 									            
 									        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
 									        // LatLngBounds 객체에 좌표를 추가합니다
@@ -833,8 +859,8 @@ input[type="range"]::-webkit-slider-thumb {
 									            	$(this).addClass("addorange");
 									            	$(this).siblings().removeClass("addorange");
 									            										            	
-									            	console.log("----pa----");
-									            	console.log(placeId);
+									            	// console.log("----pa----");
+									            	// console.log(placeId);
 
 									                $("#latitude").val(marker.getPosition().getLat()); // 위도 값 저장
 									                $("#longitude").val(marker.getPosition().getLng()); // 경도 값 저장

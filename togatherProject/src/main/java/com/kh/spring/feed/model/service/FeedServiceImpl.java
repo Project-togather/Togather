@@ -76,6 +76,12 @@ public class FeedServiceImpl implements FeedService {
 	public ArrayList<Feed> FollowingFeedLists(Member m) {
 		return fDao.FollowingFeedLists(sqlSession, m);
 	}
+
+	// 피드 전체 리스트 조회
+	@Override
+	public ArrayList<Feed> selectListFeeds() {
+		return fDao.selectListFeeds(sqlSession);
+	}
 	
 
 

@@ -470,7 +470,7 @@
 			   , #{updateName}
 			   , #{filePath}
 			   , sysdate
-			   , #{category}
+			   , 'class'
 			 )
 	</insert>
 
@@ -835,7 +835,7 @@
 		  join cl_type on (cl_type = cl_ca_no)
 		 where status = 'Y'
 		   and mem_no = #{memNo}
-           and category in ('1', '2', '3', '4')
+           and category = 'class'
    		 order
 		    by enrollDate desc
 	</select>
@@ -857,7 +857,7 @@
              , cl_type
 		     , cl_category
 		     , curriculum
-		     , update_name as "img"
+		     , file_path as "img"
 		     , cl_name
 		     , cl_ca_name
    		     , (select count(*)
@@ -892,7 +892,7 @@
              , cl_type
 		     , cl_category
 		     , curriculum
-		     , update_name as "img"
+		     , file_path as "img"
 		     , cl_name
 		     , cl_ca_name
    		     , (select count(*)

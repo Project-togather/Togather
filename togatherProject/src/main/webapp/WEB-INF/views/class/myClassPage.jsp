@@ -85,7 +85,6 @@ li>h5{margin-bottom: 0px;}
 								    + "</h6>"
 								    + "<span class='bestDiv1'>" + data[i].clName + "</span>  " + data[i].clCaName + "<br>"
 								    + data[i].classLocation + "<br>"
-								    + data[i].classDate + " " + data[i].classTime + " "
 								    + data[i].vacancy + "/" + data[i].peopleLimit + "<br>"
 								    + "</div>"
 								    + "</div>"
@@ -121,7 +120,6 @@ li>h5{margin-bottom: 0px;}
 								    + "</h6>"
 								    + "<span class='bestDiv1'>" + data[i].clName + "</span>  " + data[i].clCaName + "<br>"
 								    + data[i].classLocation + "<br>"
-								    + data[i].classDate + " " + data[i].classTime + " "
 								    + data[i].vacancy + "/" + data[i].peopleLimit + "<br>"
 								    + "</div>"
 								    + "</div>"
@@ -145,7 +143,7 @@ li>h5{margin-bottom: 0px;}
 						<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
-								<img src="${ c.attachment.updateName }">
+								<img src="${ c.attachment.filePath }">
 							</div>
 							<div class="menu-classic-item-inner">
 					       <c:choose>
@@ -158,7 +156,6 @@ li>h5{margin-bottom: 0px;}
 				          </c:choose>
 				          	<span class="bestDiv1"> ${ c.clName } </span> &nbsp;&nbsp; ${ c.clCaName }   <br>
 				          	 ${ c.classLocation } <br>
-				          	 ${ c.classDate } ${ c.classTime } &nbsp;
 			          		${ c.vacancy }/${ c.peopleLimit } <br>
 							</div>
 						</div>

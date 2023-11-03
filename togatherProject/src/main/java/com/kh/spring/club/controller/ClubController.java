@@ -21,6 +21,7 @@ import com.kh.spring.alarm.model.service.NotificationServiceImpl;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.feed.model.service.FeedServiceImpl;
 import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.service.MemberService;
 
@@ -36,6 +37,9 @@ public class ClubController {
 
 	@Autowired
 	private ClubServiceImpl cService;
+	
+	@Autowired
+	private FeedServiceImpl fService;
 	
 	/**
 	 * 이미지 경로 저장
@@ -68,8 +72,10 @@ public class ClubController {
 		
 		ArrayList<Club> list = cService.selectClassList();
 		// 피드 리스트 조회 추가!
+		ArrayList<Feed> list1 = fService.selectListFeeds();
 		
 		if(list != null) {
+			session.setAttribute("list1", list1);
 			session.setAttribute("list", list);
 			return "main";
 		}else {
@@ -324,8 +330,8 @@ public class ClubController {
 			
 			String updateName = saveFile(upfile, session);
 			at.setOriginName(upfile.getOriginalFilename());
-			at.setUpdateName("resources/uploadFiles/" + updateName);
-			at.setFilePath(upfile.getOriginalFilename() + "resources/uploadFiles/" + updateName);
+			at.setUpdateName(updateName);
+			at.setFilePath("resources/uploadFiles/" + updateName);
 		}
 		
 		if(result > 0) {
@@ -335,7 +341,7 @@ public class ClubController {
 			
 			if(result2 > 0) {
 				session.setAttribute("alertMsg", "성공적으로 게시글이 등록되었습니다.");
-				return "class/myClassPage";
+				return "redirect:/index.do";
 			}else {
 				model.addAttribute("errorMsg", "게시글 등록에 실패");
 				return "common/errorPage";
