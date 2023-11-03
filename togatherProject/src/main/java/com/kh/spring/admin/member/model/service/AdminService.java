@@ -49,4 +49,14 @@ public interface AdminService  {
 	int insertReport(Report r);
 	
 	int selectReportCount();
+	
+	Report selectReportList(String reNo);
+	
+	//멤버 신고 카운트 누적
+	int rcountUpdate(Report r);
+	//멤버 신고 카운트 누적 이후 신고내역 리스트 삭제
+	int reResultupdate(Report r);
+	
+	//관리자 확인 - 누적신고3회이상 블랙리스트 자동 등록
+	int insertblackList2(Report r);
 }

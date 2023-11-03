@@ -35,7 +35,7 @@
 								<th scope="col">모임번호</th>
 								<th scope="col">호스트 번호</th>
 								<th scope="col">모임명</th>
-								<th scope="col">모임타입 번호</th>
+								<th scope="col">모임분류</th>
 								<th scope="col">모임 위치</th>
 								<th scope="col">폐쇄여부</th>
 							</tr>
