@@ -24,6 +24,7 @@
 		<result column="nickname" property="nickName"></result>
 		<result column="blackrp_count" property="blackrpCount"></result>
 		<result column="black_enroll_date" property="blackEnrollDate"></result>
+		<result column="RP_COUNT" property="rpCount"></result>
 	</resultMap>
 	
 	<resultMap id="ReportResult" type="Report">
@@ -36,6 +37,8 @@
 		<result column="RE_DATE" property="reDate"></result>
 		<result column="RE_RESULT" property="reResult"></result>
 		<result column="RE_CATEGORY" property="reCategory"></result>
+		<result column="RE_Name" property="reName"></result>
+		<result column="RP_COUNT" property="rpCount"></result>
 	</resultMap>
 	
 	
@@ -81,11 +84,14 @@
 		    RE_CONTENT,
 		    RE_DATE,
 		    RE_RESULT,
-		    RE_CATEGORY
-		from report
+		    RE_CATEGORY,
+		    RE_Name,
+		    RP_Count
+		from report a
+		join reporttype using (RE_CATEGORY)
+		join member m on(m.mem_id = a.re_Pmem)
 		where RE_CATEGORY = 1
 		and RE_RESULT = 'N'
-		
 	</select>
 	
 	<select id="selectMemberList3" resultMap="AdMemberResult">
@@ -143,7 +149,6 @@
 				, m.PHONE
 				, SYSDATE
 				, 'Y'
-			
 			FROM Member m
 			WHERE m.MEM_ID = #{userID}
 	</insert>
@@ -160,10 +165,11 @@
 			    black_no,
 			    black_id,
 			    black_name,
-			    nickname,
-			    blackrp_count,
+			    b.nickname,
+			    rp_count,
 			    black_enroll_date
-			from blackList
+			from blackList b
+				join member m on (b.black_id = m.mem_id)
 				where black_Status = 'Y'
 				order
 				by black_no desc 
@@ -230,7 +236,7 @@
 			  ,RE_CONTENT
 			  ,RE_DATE
 			  ,RE_RESULT
-			  ,RE_CATEGORY		
+			  ,RE_CATEGORY
 			)
 			values
 			(
@@ -252,4 +258,63 @@
 			from report
 		   where RE_CATEGORY = 1
 	</select>
+	
+	<select id="selectReportList" resultMap="ReportResult">
+		select 
+		    RE_NO,
+		    RE_MEM,
+		    RE_PMEM,
+		    ORIGIN_NAME,
+		    UPDATE_NAME,
+		    FILE_PATH,
+		    RE_CONTENT,
+		    RE_DATE,
+		    RE_RESULT,
+		    RE_CATEGORY,
+		    rp_count
+		  from report r
+		  join member m on (r.RE_PMEM = m.mem_id)
+		  where re_No = #{reNo}
+		
+	</select>
+	
+	<update id="rcountUpdate">
+		update
+			Member
+			set RP_COUNT = RP_COUNT+1
+		where MEM_ID = #{rePmem}
+	</update>
+	
+	<update id="reResultupdate">
+		update
+			report
+			set re_result = 'Y'
+		where re_no = #{reNo}
+	</update>
+	
+	<insert id="insertblackList2">
+		insert
+			into blacklist
+			(
+			   BLACK_NO
+			  ,BLACK_ID
+			  ,BLACK_NAME
+			  ,NICKNAME
+			  ,GENDER
+			  ,PHONE
+			  ,BLACK_ENROLL_DATE
+			  ,BLACK_STATUS
+			)
+			select
+			     SEQ_BLNO.NEXTVAL
+				, m.MEM_ID
+				, m.MEM_NAME
+				, m.NICKNAME
+				, m.GENDER
+				, m.PHONE
+				, SYSDATE
+				, 'Y'
+			FROM Member m
+			WHERE m.MEM_ID = #{rePmem}
+	</insert>
 </mapper>

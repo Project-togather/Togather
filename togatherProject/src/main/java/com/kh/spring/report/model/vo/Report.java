@@ -2,6 +2,9 @@ package com.kh.spring.report.model.vo;
 
 import java.sql.Date;
 
+import com.kh.spring.member.model.vo.Member;
+import com.kh.spring.reportType.model.vo.ReportType;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +28,13 @@ public class Report {
 	private Date reDate;
 	private String reResult;
 	private int reCategory;
+	
+	private ReportType reportType;
+	private String reName;
+	
+	private Member member;
+	private int rpCount;
+	
 	
 	
 	

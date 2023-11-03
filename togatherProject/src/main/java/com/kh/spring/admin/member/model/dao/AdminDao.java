@@ -89,4 +89,19 @@ public class AdminDao {
 	public int selectReportCount(SqlSession sqlsession) {
 		return sqlsession.selectOne("admemberMapper.selectReportCount");
 	}
+	
+	public Report selectReportList(SqlSession sqlSession,String reNo) {
+		return sqlSession.selectOne("admemberMapper.selectReportList",reNo);
+	}
+	
+	public int rcountUpdate(SqlSession sqlSession,Report r) {
+		return sqlSession.update("admemberMapper.rcountUpdate",r);
+	}
+	public int reResultupdate(SqlSession sqlSession,Report r) {
+		return sqlSession.update("admemberMapper.reResultupdate",r);
+	}
+	
+	public int insertblackList2(SqlSession sqlSession,Report r) {
+		return sqlSession.insert("admemberMapper.insertblackList2",r);
+	}
 }

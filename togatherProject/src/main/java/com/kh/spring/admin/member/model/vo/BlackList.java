@@ -2,6 +2,8 @@ package com.kh.spring.admin.member.model.vo;
 
 import java.sql.Date;
 
+import com.kh.spring.member.model.vo.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,4 +28,7 @@ public class BlackList {
 	private Date blackEnrollDate;
 	private String blackStatus;
 
+	private Member member;
+	private int rpCount;
+	
 }

@@ -78,7 +78,7 @@
 									<td id="blackId">${b.blackId }</td>
 									<td >${b.blackName }</td>
 									<td>${b.nickName }</td>
-									<td>${b.blackrpCount }</td>
+									<td>${b.rpCount }</td>
 									<td>${b.blackEnrollDate }</td>
 									<td>
 										<button id="blackbtn" type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#blackcancel">

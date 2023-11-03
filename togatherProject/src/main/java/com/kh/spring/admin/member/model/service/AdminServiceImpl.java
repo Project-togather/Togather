@@ -95,4 +95,24 @@ public class AdminServiceImpl implements AdminService {
 		return ADao.selectReportCount(sqlSession);
 	}
 
+	@Override
+	public Report selectReportList(String reNo) {
+		return ADao.selectReportList(sqlSession,reNo);
+	}
+	//신고카운트누적
+	@Override
+	public int rcountUpdate(Report r) {
+		return ADao.rcountUpdate(sqlSession,r);
+	}
+
+	@Override
+	public int reResultupdate(Report r) {
+		return ADao.reResultupdate(sqlSession,r);
+	}
+	//자동블랙리스트 추가
+	@Override
+	public int insertblackList2(Report r) {
+		return ADao.insertblackList2(sqlSession,r);
+	}
+
 }

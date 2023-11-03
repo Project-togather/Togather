@@ -64,6 +64,8 @@
 							<tr>
 								<th scope="col">신고번호</th>
 								<th scope="col">신고자</th>
+								<th scope="col">피신고자</th>
+								<th scope="col">피신고자 신고누적횟수</th>
 								<th scope="col">신고 날짜</th>
 								<th scope="col">처리결과</th>
 								<th scope="col">신고분류</th>
@@ -71,12 +73,14 @@
 						</thead>
 						<tbody>
 							<c:forEach var="r" items="${list}">
-								<tr>
-									<th scope="row">${r.reNo}</th>
+								<tr id="reportList">
+									<th scope="row" id="reportNo">${r.reNo}</th>
 									<td id="blackId">${r.reMem}</td>
+									<td >${r.rePmem}</td>
+									<td >${r.rpCount}</td>
 									<td >${r.reDate}</td>
 									<td>${r.reResult}</td>
-									<td>${r.reCategory }</td>
+									<td>${r.reName }</td>
 								</tr>
 									<!-- Modal -->
 										<div class="modal fade" id="blackcancel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -222,6 +226,16 @@
 				location.href='select.bl'
 			}
 		</script>
+		
+		<script>
+		$(function(){
+			$(document).on("click","#reportList",function(){
+				let num = $(this).find("#reportNo").text();
+				console.log(num)
+				location.href='detail.re?reNo='+num
+			})
+		})
+	</script>
 		
 		
 </body>
