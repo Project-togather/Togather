@@ -193,6 +193,7 @@ input[type="range"]::-webkit-slider-thumb {
 								<form action="update.cl" method="post" enctype="multipart/form-data">
 									<input type="hidden" name="clType" value=${ c.clType }>
 									<input type="hidden" name="classNo" value=${ c.classNo }>
+									<input type="hidden" name="condition" value="1">
 									<div class="form-group">
 										<input type="text" style="display:none;" name="memNo" value="${ loginMember.memNo }">
 										<h5 style="color:orange;">모임유형은 변경할 수 없어요!</h5>
@@ -991,10 +992,10 @@ input[type="range"]::-webkit-slider-thumb {
 									
 									<c:choose>
 										<c:when test="${ not empty loginMember }">
-											<input type="submit" id="submitbtn" class="submitbtn" value="모임등록">
+											<input type="submit" id="submitbtn" class="submitbtn" value="수정하기">
 										</c:when>
 										<c:otherwise>
-											<input type="submit" id="submitbtn" value="모임등록" disabled>
+											<input type="submit" id="submitbtn" value="수정하기" disabled>
 										</c:otherwise>
 									</c:choose>
 								</form>		

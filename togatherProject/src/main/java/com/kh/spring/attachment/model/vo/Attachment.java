@@ -23,4 +23,5 @@ public class Attachment {
 	private int  thumbnail;
 	
 	private String classNo; 
+	private String condition; // 등록인지 수정인지
 }

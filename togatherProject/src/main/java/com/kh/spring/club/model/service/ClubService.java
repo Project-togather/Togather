@@ -3,8 +3,10 @@ package com.kh.spring.club.model.service;
 import java.util.ArrayList;
 
 import com.kh.spring.QuitReason.model.vo.QuitReason;
+import com.kh.spring.alarm.model.vo.Notification;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
@@ -93,4 +95,17 @@ public interface ClubService {
 	
 	// 모임 수정
 	int updateClass(Club c);
+	
+	// 모임 프사, 썸네일 조회
+	ArrayList<Attachment> selectClassAttachment(MyClass c);
+	
+	// 상세페이지의 피드 조회
+	ArrayList<Feed> selectClassFeedList(MyClass c);
+	
+	// 상세페이지의 피드 프로필사진
+	ArrayList<Feed> selectClassFeedPfList(MyClass c);
+	
+	// 상세페이지의 피드 썸네일
+	ArrayList<Feed> selectClassFeedTnList(MyClass c);
+	
 }

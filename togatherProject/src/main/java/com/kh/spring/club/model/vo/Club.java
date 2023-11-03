@@ -60,4 +60,5 @@ public class Club {
 	private String clCaName;
 	
 	private String updateName;
+	private String filePath;
 }

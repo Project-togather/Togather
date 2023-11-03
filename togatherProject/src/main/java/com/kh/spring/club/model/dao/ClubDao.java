@@ -6,8 +6,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.QuitReason.model.vo.QuitReason;
+import com.kh.spring.alarm.model.vo.Notification;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
@@ -129,4 +131,20 @@ public class ClubDao {
 		return sqlSession.update("clubMapper.updateClass", c);
 	}
 	
+	public ArrayList<Attachment> selectClassAttachment(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClassAttachment", c);
+	}
+	
+	public ArrayList<Feed> selectClassFeedList(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClassFeedList", c);
+	}
+	
+	public ArrayList<Feed> selectClassFeedPfList(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClassFeedPfList", c);
+	}
+	
+	public ArrayList<Feed> selectClassFeedTnList(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClassFeedTnList", c);
+	}
+
 }

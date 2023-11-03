@@ -18,9 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.kh.spring.QuitReason.model.vo.QuitReason;
 import com.kh.spring.alarm.model.service.NotificationServiceImpl;
+import com.kh.spring.alarm.model.vo.Notification;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.reply.model.vo.Reply;
 import com.kh.spring.myClass.model.vo.MyClass;
@@ -276,8 +278,8 @@ public class ClubController {
 			
 			String updateName = saveFile(upfile, session);
 			at.setOriginName(upfile.getOriginalFilename());
-			at.setUpdateName("resources/uploadFiles/" + updateName);
-			at.setFilePath(upfile.getOriginalFilename() + "resources/uploadFiles/" + updateName);
+			at.setUpdateName(updateName);
+			at.setFilePath("resources/uploadFiles/" + updateName);
 		}
 		
 		if(result > 0) {
@@ -297,10 +299,27 @@ public class ClubController {
 	}
 	
 	@RequestMapping("detail.cl")
-	public String selectClassDetail(MyClass mc, Model model) {
+	public String selectClassDetail(MyClass mc, Model model, HttpSession session) {
+		
+		/*
+		if((Member)session.getAttribute("loginMember") != null) {
+			Member loginMember = (Member)session.getAttribute("loginMember");
+			mc.setMemNo(loginMember.getMemNo()); 			
+		}
+		*/
+
+		mc.setClType(1);
 		
 		Club c = cService.selectClassDetail(mc);
-		ArrayList<Member> list = cService.classMemberList(mc);
+		
+		mc.setMemNo(c.getMemNo());
+		
+		ArrayList<Attachment> atList = cService.selectClassAttachment(mc); // 모임 프사, 썸네일 조회
+		ArrayList<Feed> fList = cService.selectClassFeedList(mc); // 모임 피드
+		ArrayList<Feed> fpfList = cService.selectClassFeedPfList(mc); // 피드 프로필사진
+		ArrayList<Feed> ftnList = cService.selectClassFeedTnList(mc); // 피드 썸네일
+		ArrayList<Member> list = cService.classMemberList(mc); // 모임 가입 명단
+		
 		
 		if(c.getClassApproval().equals("Y")) {
 			c.setClassApproval("승인제");
@@ -309,6 +328,10 @@ public class ClubController {
 		}
 		
 		model.addAttribute("list", list);
+		model.addAttribute("atList", atList);
+		model.addAttribute("fList", fList);
+		model.addAttribute("fpfList", fpfList);
+		model.addAttribute("ftnList", ftnList);
 		model.addAttribute("c", c);
 		return "class/classDetailView";
 	}
@@ -433,9 +456,10 @@ public class ClubController {
 	}
 	
 	@RequestMapping("memberListPage.cl")
-	public String memberListPage(String classNo, Model model) {
-		
-		model.addAttribute("classNo", classNo);
+	public String memberListPage(MyClass mc, Model model) {
+		Club c = cService.selectClassDetail(mc);
+		System.out.println("멤리 : " + c);
+		model.addAttribute("c", c);
 		return "class/classMemberList";
 	}
 	
@@ -470,6 +494,8 @@ public class ClubController {
 	@ResponseBody
 	@RequestMapping(value="admitClass.me", produces = "application/json; charset=UTF-8")
 	public int admitClass(MyClass c) {
+		
+		System.out.println("c:" + c);
 		
 		int result = cService.admitEnrollMember(c);
 		
@@ -533,7 +559,8 @@ public class ClubController {
 				return "common/errorPage";
 			}
 		}
-		System.out.println("실패????");
 		return null;
 	}
+	
+	
 }

@@ -25,4 +25,9 @@ public class Feed {
 	private String thumbnail;
 	private int likeCount;
 	
+	private String attNo;
+	private String refFno;
+	private String filePath;
+	private String nickName;
+	
 }

@@ -98,7 +98,7 @@
 						$.ajax({
 							url:"classMemberList.cl",
 							data:{
-								classNo:'${classNo}',
+								classNo:'${c.classNo}',
 								clType:clType
 							}, success:list=>{
 								if(clType == 1){
@@ -157,7 +157,8 @@
 							url:"admitClass.me",
 							data:{
 								memNo:memNo,
-								classNo:'${classNo}'
+								classNo:'${c.classNo}',
+								price:'${c.classPrice}'
 								},
 							success:()=>{
 								swal("참가 승인에 성공하였습니다!", "참가 희망자의 결제 후 최종 참가 됩니다.", "success");

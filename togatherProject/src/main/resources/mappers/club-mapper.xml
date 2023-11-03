@@ -32,6 +32,7 @@
 		<result column="placeid" property="placeId"/>
 		<result column="img" property="img"/>
 		<result column="update_name" property="updateName"/>	
+		<result column="file_path" property="filePath"/>	
 			
 		<collection property="attachment" resultMap="attachment"/>
 	</resultMap>
@@ -83,6 +84,18 @@
 		<result column="mem_no" property="memNo"/>
 		<result column="quitReason" property="quitReason"/>
 		<result column="detailReason" property="detailReason"/>
+	</resultMap>
+	
+	<resultMap type="Feed" id="feedResult">
+		<result column="fe_no" property="feNo"/>
+		<result column="ref_cno" property="refCno"/>
+		<result column="fe_content" property="feContent"/>
+		<result column="fe_date" property="feDate"/>
+		<result column="fe_writer" property="feWriter"/>
+		<result column="att_no" property="attNo"/>
+		<result column="ref_fno" property="refFno"/>
+		<result column="file_path" property="filePath"/>
+		<result column="nickname" property="nickName"/>
 	</resultMap>
 	
 	<select id="selectClassList" resultMap="resultclub">
@@ -394,10 +407,8 @@
              , latitude
              , longitude
              , placeId
-             , update_name
-             , cl_type     
+             , cl_type    
 		  from class
-          join attachment on (c_no = ref_fno)
 		  join member using (mem_no)
           join cl_type on(cl_type = cl_ca_no)
 		  join cl_category on (cl_category = cl_categoryno)
@@ -455,12 +466,6 @@
 	</insert>
 	
 	<insert id="insertImg">
-	
-		DECLARE
-	  curr_val NUMBER
-	BEGIN
-	  SELECT seq_cno.currval INTO curr_val FROM DUAL
-	  IF curr_val IS NOT NULL THEN
 		insert 
 		  into attachment	
 			 (
@@ -474,38 +479,21 @@
 			 )
 		values
 			 (
-			    'A'||seq_ano.nextval
-			   ,'C'||seq_cno.currval
+			    'AT'||seq_ano.nextval
+			   <choose>
+				   <when test="condition == 1">
+			   	   		, #{classNo}
+				   </when>
+				   <otherwise>
+				   		,'C'||seq_cno.currval
+				   </otherwise>	
+			   </choose>
 			   , #{originName}
 			   , #{updateName}
 			   , #{filePath}
 			   , sysdate
 			   , #{category}
 			 )
-	  ELSE
-	  	insert 
-		  into attachment	
-			 (
-			    att_no
-			   ,ref_fno
-			   ,origin_name
-			   ,update_name
-			   ,file_path
-			   ,enroll_date
-			   ,category
-			 )
-		values
-			 (
-			    'A'||seq_ano.nextval
-			   , #{classNo}
-			   , #{originName}
-			   , #{updateName}
-			   , #{filePath}
-			   , sysdate
-			   , #{category}
-			 )
-	  END IF
-	END
 	</insert>
 
 	<select id="selectSocialingListCount" resultType="_int">
@@ -745,7 +733,12 @@
 	
 	<update id="admitMember">
 		update my_class
+		<if test="price > 0">
 		   set cl_type_status = 4
+		</if>
+		<if test="price == 0">
+		   set cl_type_status = 1
+		</if>
 		 where mem_no = #{memNo}
 		   and c_no = #{classNo}
 	</update>
@@ -855,4 +848,52 @@
  			 , placeId = #{placeId}	   
  	     where c_no = #{classNo}
 	</update>
+	
+	<select id="selectClassAttachment" resultMap="attachment">
+		select file_path
+		  from attachment
+		 where ref_fno = #{memNo}
+		    or ref_fno = #{classNo}
+		   and category in ('class', 'profileImage') 
+		 order
+		    by category
+	</select>
+	
+	<select id="selectClassFeedList" resultMap="feedResult">
+		select 
+		       fe_no
+		     , ref_cno
+		     , fe_content
+		     , fe_date
+		     , fe_writer
+		     , fe_date
+		     , nickname
+		  from feed
+		  join member on (mem_no = fe_writer)
+		 where ref_cno = #{classNo}
+		   and f_status = 'Y'
+	</select>
+	
+	<select id="selectClassFeedPfList" resultMap="feedResult">
+		select  
+		       att_no
+		     , ref_fno
+		     , file_path
+		  from attachment
+		  join feed on (ref_fno = fe_writer)
+		   and category = 'profileImage'
+	</select>
+	
+	<select id="selectClassFeedTnList" resultMap="feedResult">
+		select  
+		       att_no
+		     , ref_fno
+		     , file_path
+		  from attachment
+		  join feed on (ref_fno = fe_no)
+		 where ref_cno = #{classNo}
+		   and category = 'FEED'
+		   and thumbnail = 1
+	</select>
+	
 </mapper>
