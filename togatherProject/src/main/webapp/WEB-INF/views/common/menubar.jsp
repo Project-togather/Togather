@@ -299,6 +299,7 @@ li .m-searchBtn i {
 						<li><a href="challenge.pa"><span class="menu-item-span">CHALLENGE</span></a></li>
 						<li><a href="oneday.pa"><span class="menu-item-span">ONEDAY</span></a></li>
 						<li><a href="lounge.pa"><span class="menu-item-span">ROUNGE</span></a></li>
+						<li><a href="#"><span class="menu-item-span">NOTICE</span></a></li>
 						
 					 <c:if test="${ not empty loginMember }"> 
 						<li><a href="myclass.pa"><span class="menu-item-span">MYCLASS</span></a></li>
@@ -307,7 +308,6 @@ li .m-searchBtn i {
 					 </c:if>
 					
 					 <c:if test="${ loginMember.memId == 'admin' }">
-					 </c:if> 
 					 	<li><a href="admin.pa"><span class="menu-item-span">관리자페이지</span></a></li>
 					 
 						

@@ -51,4 +51,8 @@ public class FeedDao {
 	public ArrayList<Feed> FollowingFeedLists(SqlSessionTemplate sqlSession, Member m){
 		return (ArrayList)sqlSession.selectList("feedMapper.FollowingFeedLists", m);
 	}
+	
+	public ArrayList<Feed> selectListFeeds(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("feedMapper.selectListFeeds");
+	}
 }

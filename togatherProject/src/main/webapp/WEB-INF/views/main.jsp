@@ -101,20 +101,20 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="container-fluid custom-container">
 				<div class="row">
 					<c:forEach var="c"  items="${ list }" end="8">
 						<c:if test="${ c.clType eq 1 }">
 						<div class="col-md-4">
 							<div class="demo-preview" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
-							<a>
-								<img src="${ c.attachment.updateName }">
+								<img src="${ c.attachment.filePath }">
 						       <c:choose>
 						           <c:when test="${fn:length(c.classTitle) > 18}">
-						            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6></a></div>
+						            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6></div>
 						           </c:when>
 						           <c:otherwise>
-						            	<h6><c:out value="${c.classTitle}"/></h6></a></div>
+						            	<h6>${c.classTitle}</h6></div>
 					        	   </c:otherwise> 
 					          </c:choose>
 							</div>
@@ -133,28 +133,30 @@
 						<div class="divider-border"></div>
 					</div>
 				</div>
-				<div class="row">
+			<div class="row">
 					<div class="col-md-12">
 						<div class="space" data-mY="40px"></div>
 					</div>
 				</div>
 			</div>
+			
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<c:forEach var="c" items="${ list }" end="8">
+					<c:forEach var="c"  items="${ list }" end="8">
 						<c:if test="${ c.clType eq 2 }">
-							<div class="col-md-4">
-								<div class="demo-preview"><a href="${ c.attachment.originName }"><img src="${ c.attachment.updateName }" alt="">
-					       <c:choose>
-					           <c:when test="${fn:length(c.classTitle) > 18}">
-					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-					           </c:when>
-					           <c:otherwise>
-					           		<h6>${c.classTitle}</h6></a></div>
-				        	   </c:otherwise> 
-				          </c:choose>
+						<div class="col-md-4">
+							<div class="demo-preview" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
+								<img src="${ c.attachment.filePath }">
+						       <c:choose>
+						           <c:when test="${fn:length(c.classTitle) > 18}">
+						            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6></div>
+						           </c:when>
+						           <c:otherwise>
+						            	<h6>${c.classTitle}</h6></div>
+					        	   </c:otherwise> 
+					          </c:choose>
 							</div>
-						</c:if>
+				          </c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -177,20 +179,21 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<c:forEach var="c" items="${ list }" end="8">
+					<c:forEach var="c"  items="${ list }" end="8">
 						<c:if test="${ c.clType eq 3 }">
-							<div class="col-md-4">
-								<div class="demo-preview"><a href="${ c.attachment.originName }"><img src="${ c.attachment.updateName }" alt="">
-					       <c:choose>
-					           <c:when test="${fn:length(c.classTitle) > 18}">
-					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-					           </c:when>
-					           <c:otherwise>
-					           		<h6>${c.classTitle}</h6></a></div>
-				        	   </c:otherwise> 
-				          </c:choose>
+						<div class="col-md-4">
+							<div class="demo-preview" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
+								<img src="${ c.attachment.filePath }">
+						       <c:choose>
+						           <c:when test="${fn:length(c.classTitle) > 18}">
+						            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6></div>
+						           </c:when>
+						           <c:otherwise>
+						            	<h6>${c.classTitle}</h6></div>
+					        	   </c:otherwise> 
+					          </c:choose>
 							</div>
-						</c:if>
+				          </c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -213,20 +216,21 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<c:forEach var="c" items="${ list }" end="8">
+					<c:forEach var="c"  items="${ list }" end="8">
 						<c:if test="${ c.clType eq 4 }">
-							<div class="col-md-4">
-								<div class="demo-preview"><a href="${ c.attachment.originName }"><img src="${ c.attachment.updateName }" alt="">
-					       <c:choose>
-					           <c:when test="${fn:length(c.classTitle) > 18}">
-					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-					           </c:when>
-					           <c:otherwise>
-					           		<h6>${c.classTitle}</h6></a></div>
-				        	   </c:otherwise> 
-				          </c:choose>
+						<div class="col-md-4">
+							<div class="demo-preview" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
+								<img src="${ c.attachment.filePath }">
+						       <c:choose>
+						           <c:when test="${fn:length(c.classTitle) > 18}">
+						            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6></div>
+						           </c:when>
+						           <c:otherwise>
+						            	<h6>${c.classTitle}</h6></div>
+					        	   </c:otherwise> 
+					          </c:choose>
 							</div>
-						</c:if>
+				          </c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -249,20 +253,19 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<c:forEach var="c" items="${ list }" end="8">
-						<c:if test="${ fe.feStatus eq 5 }">
-							<div class="col-md-4">
-								<div class="demo-preview"><a href="${ c.attachment.originName }"><img src="${ c.attachment.updateName }" alt="">
-					       <c:choose>
-					           <c:when test="${fn:length(c.classTitle) > 18}">
-					            	<h6><c:out value="${fn:substring(c.classTitle, 0,17)}"/>...</h6>
-					           </c:when>
-					           <c:otherwise>
-					           		<h6>${c.classTitle}</h6></a></div>
-				        	   </c:otherwise> 
-				          </c:choose>
+					<c:forEach var="f"  items="${ list1 }" end="8">
+						<div class="col-md-4">
+							<div class="demo-preview" onclick="location.href='feedDetail.cl?feNo=${ f.feNo }'">
+								<img src="${ f.img }">
+						       <c:choose>
+						           <c:when test="${fn:length(f.feContent) > 18}">
+						            	<h6><c:out value="${fn:substring(f.feContent, 0,17)}"/>...</h6></div>
+						           </c:when>
+						           <c:otherwise>
+						            	<h6>${f.feContent}</h6></div>
+					        	   </c:otherwise> 
+					          </c:choose>
 							</div>
-						</c:if>
 					</c:forEach>
 				</div>
 			</div>

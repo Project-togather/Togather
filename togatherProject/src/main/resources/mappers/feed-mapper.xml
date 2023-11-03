@@ -39,6 +39,22 @@
 		    by like_count desc
 	</select>
 	
+	<select id="selectListFeeds" resultMap="ResultFeed">
+		select 
+		       fe_no
+		     , ref_cno
+		     , fe_content
+		     , fe_date
+		     , fe_writer
+		     , f_status
+		     , like_count
+		     , (select file_path
+				  from attachment
+				 where fe_no = ref_fno) img
+		  from feed f
+          join attachment on (fe_no = ref_fno)
+	</select>
+	
 	<select id="selectFeedLists" resultMap="ResultFeed">
 		select 
 		       fe_no
