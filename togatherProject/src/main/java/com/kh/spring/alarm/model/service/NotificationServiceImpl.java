@@ -12,6 +12,7 @@ import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 @Service
@@ -115,7 +116,7 @@ public class NotificationServiceImpl {
     			}
 		);
     	
-    	nDao.insertAlarm(receiver, content, sqlSession);
+    	nDao.insertAlarm(receiver, reply, content, sqlSession);
     	
     }
     
@@ -125,7 +126,7 @@ public class NotificationServiceImpl {
                            .content(content)
                            .reply(reply)
                            .url("http://localhost:8012/togather/detail.cl?classNo=" + reply.getRefFno())
-                           .isRead(false)
+                           .isRead("N")
                            .build();
         
     }
@@ -143,6 +144,13 @@ public class NotificationServiceImpl {
         }
     	
     }
-    
 
+	public ArrayList<Notification> selectAlarmList(String receiveNo) {
+		return nDao.selectAlarmList(receiveNo, sqlSession);
+	}
+    
+	public int deleteAlarm(String aNo) {
+		return nDao.deleteAlarm(aNo, sqlSession);
+	}
+	
 }

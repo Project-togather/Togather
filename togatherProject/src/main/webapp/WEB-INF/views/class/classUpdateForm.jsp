@@ -36,7 +36,7 @@
 						<div class="col-md-8 m-auto">
 							<div class="menu-simple">
 								<div class="menu-simple-item">
-									<div class="menu-simple-item-inner" onclick="location.href='';" style="cursor:pointer;">
+									<div class="menu-simple-item-inner" onclick="location.href='classDetailUpdateForm.cl?classNo=${c.classNo}';" style="cursor:pointer;">
 										<h6><span style="font-size:20px;">클럽 수정하기</span><span class="pull-right">></span></h6>
 										<p>클럽에 대한 기본 정보를 수정하실 수 있어요!</p>
 									</div>

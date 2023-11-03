@@ -26,4 +26,7 @@ public class Reply {
 	private String nickName;
 	private String img;
 	private String classTitle;
+	
+	private String happen;
+	private String refMno; // 댓글을 단 모임의 호스트번호
 }

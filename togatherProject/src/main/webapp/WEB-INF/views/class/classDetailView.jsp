@@ -33,7 +33,7 @@
 
 		<!-- Hero-->
 		<section class="module-cover parallax fullscreen" id="home"
-			data-background="assets/images/detail/sunset.jpg" data-overlay="1"
+			data-background="${ atList[0].filePath }" data-overlay="1"
 			data-gradient="1">
 			<div class="container">
 				<div class="row">
@@ -51,8 +51,7 @@
 							<button type="button" onclick="sse();">테스트</button>
 							<div id="sseTest2"></div>
 							<br>
-							<button type="button" class="btn btn-outline btn-sm btn-brand"
-								onclick="requestPay();">결제하기</button>
+							<button type="button" class="btn btn-outline btn-sm btn-brand" onclick="requestPay();">결제하기</button>
 								
 						</div>
 					</div>
@@ -78,7 +77,7 @@
 					var tel = '${loginMember.phone}'
 					
 					  IMP.request_pay({
-					    pg: "kakaopay",
+					    pg: "inicis",
 					    pay_method: "card",
 					    merchant_uid : 'merchant_'+new Date().getTime(),
 					    name : '(주)ToGather',
@@ -87,9 +86,6 @@
 					    buyer_name : name,
 					    buyer_tel : tel,
 					  }, function (rsp) { // callback
-						  
-						  console.log("-----");
-						  console.log(rsp);
 						  
 						  $.ajax({
 							  type:"POST",
@@ -137,12 +133,24 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-16 m-auto text-center">
-						<a href="# 마이페이지"> <span id="profile"><img
-								src="resources/assets/images/detail/approval.png"></span> <br>
+					<c:choose>
+						<c:when test="${ loginMember.memNo eq c.memNo }">
+							<a href="mypage.me"> 
+								<span id="profile"><img	src="${ atList[1].filePath }"></span> <br>
+								<span class="subtitle" id="profile_nickname">${ c.nickName }</span>
+								<br>
+								<br>
+							</a>
+						</c:when>
+						<c:when test="${ loginMember eq null }">
+							<a href="javascript:loginAlert()"> 
+							<span id="profile"><img	src="${ atList[1].filePath }"></span> <br>
 							<span class="subtitle" id="profile_nickname">${ c.nickName }</span>
 							<br>
-						<br>
+							<br>
 						</a>
+						</c:when>
+					</c:choose>
 						<p>
 							<c:choose>
 								<c:when test="${ c.classApproval eq '승인제' }">
@@ -184,11 +192,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 m-auto text-center">
-						<p class="subtitle">This is Vela Cuisine</p>
+						<p class="subtitle">Feed List</p>
 						<h1 class="display-1">모임 후기 목록</h1>
 						<p class="lead">
-							See how your users experience your website in realtime or view <br />
-							trends to see any changes in performance over time.
+							이 모임에 대한 후기를 볼 수 있어요! <br/>
 						</p>
 						<div class="divider-border"></div>
 					</div>
@@ -200,90 +207,30 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<div class="owl-carousel menu-carousel"
-							data-carousel-options="{&quot;nav&quot;: false}">
+						<div class="owl-carousel menu-carousel"	data-carousel-options="{&quot;nav&quot;: false}">
+							<c:forEach var="f" items="${ fList }">
 							<div class="menu-classic-item">
 								<div class="menu-classic-item-img">
-									<a class="photo" href="assets/images/menu/1.jpg"></a><img
-										src="assets/images/menu/1.jpg" alt="">
+								<c:forEach var="ftn" items="${ ftnList }">
+									<c:if test="${ f.feNo eq ftn.refFno }">
+										<a class="photo" href="feedDetail.fe?feNo=${ f.feNo }"></a><img src="${ ftn.filePath }" alt="">
+									</c:if>
+								</c:forEach>
 									<div class="menu-classic-item-price">
-										<img src="resources/assets/images/detail/gamst.PNG">
+										<c:forEach var="fpf" items="${ fpfList }">
+											<c:if test="${ f.feWriter eq fpf.refFno }">
+												<img src="${ fpf.filePath }">
+											</c:if>
+										</c:forEach>
 									</div>
 								</div>
 								<div class="menu-classic-item-inner">
-									<p>${ c.nickName }</p>
+									<h6>${ f.nickName }</h6>
+									<p>${ f.feDate }</p>
+									<p>${ f.feContent }
 								</div>
 							</div>
-							<div class="menu-classic-item">
-								<div class="menu-classic-item-img">
-									<a class="photo" href="assets/images/menu/2.jpg"></a><img
-										src="assets/images/menu/2.jpg" alt="">
-									<div class="menu-classic-item-price">
-										<img src="resources/assets/images/detail/gamst.PNG">
-									</div>
-								</div>
-								<div class="menu-classic-item-inner">
-									<h6>Kung Pao Chicken</h6>
-									<p>Vanilla, Various Fruit, Cookies</p>
-								</div>
-							</div>
-							<div class="menu-classic-item">
-								<div class="menu-classic-item-img">
-									<a class="photo" href="assets/images/menu/3.jpg"></a><img
-										src="assets/images/menu/3.jpg" alt="">
-									<div class="menu-classic-item-price">
-										<img src="resources/assets/images/detail/gamst.PNG">
-									</div>
-								</div>
-								<div class="menu-classic-item-inner">
-									<h6>Sweet &amp; Spicy Pork</h6>
-									<p>Vanilla, Various Fruit, Cookies</p>
-								</div>
-							</div>
-							<div class="menu-classic-item">
-								<div class="menu-classic-item-img">
-									<a class="photo" href="assets/images/menu/4.jpg"></a><img
-										src="assets/images/menu/4.jpg" alt="">
-									<div class="menu-classic-item-price">$12</div>
-								</div>
-								<div class="menu-classic-item-inner">
-									<h6>Chicken Stew</h6>
-									<p>Vanilla, Various Fruit, Cookies</p>
-								</div>
-							</div>
-							<div class="menu-classic-item">
-								<div class="menu-classic-item-img">
-									<a class="photo" href="assets/images/menu/5.jpg"></a><img
-										src="assets/images/menu/5.jpg" alt="">
-									<div class="menu-classic-item-price">$21</div>
-								</div>
-								<div class="menu-classic-item-inner">
-									<h6>Jalapeno-Mango Salsa</h6>
-									<p>Vanilla, Various Fruit, Cookies</p>
-								</div>
-							</div>
-							<div class="menu-classic-item">
-								<div class="menu-classic-item-img">
-									<a class="photo" href="assets/images/menu/6.jpg"></a><img
-										src="assets/images/menu/6.jpg" alt="">
-									<div class="menu-classic-item-price">$17</div>
-								</div>
-								<div class="menu-classic-item-inner">
-									<h6>Spicy Fried Rice &amp; Bacon</h6>
-									<p>Vanilla, Various Fruit, Cookies</p>
-								</div>
-							</div>
-							<div class="menu-classic-item">
-								<div class="menu-classic-item-img">
-									<a class="photo" href="assets/images/menu/1.jpg"></a><img
-										src="assets/images/menu/1.jpg" alt="">
-									<div class="menu-classic-item-price">$15</div>
-								</div>
-								<div class="menu-classic-item-inner">
-									<h6>Masala-Spiced Chickpeas</h6>
-									<p>Vanilla, Various Fruit, Cookies</p>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -812,7 +759,8 @@
 													memNo:'${loginMember.memNo}',
 													classTitle:'${c.classTitle}',
 													nickName:'${loginMember.nickName}',
-													memId:'${c.memId}'
+													memId:'${c.memId}',
+													refMno:'${c.memNo}'
 													},success:result=>{
 													if(result == "success"){
 														$("#reply").val("");
@@ -976,15 +924,14 @@
 				<div class="col-md-6">
 					<p class="subtitle">Professional cook team</p>
 					<h1 class="display-1">호스트 자기소개</h1>
-					<p class="lead">Professional chefs rely on a battery of tools
-						and equipment. Chefs must be conscious of their kitchen tools when
-						planning a menu and understand their use and production capacity.</p>
+					<p class="lead">🎁 안녕하세요 여러분 <br>
+						모임을 좋아해서 호스트를 하는 지경까지 이른 모임에 미친 사람이에요! 🎉<p>
 					<div class="divider-border-left"></div>
 					<div class="space" data-mY="60px"></div>
 					<a class="btn btn-black" href="#">View our menu</a>
 				</div>
 				<div class="col-md-6">
-					<img src="assets/images/chef-1.png" alt="">
+					<img src="${ atList[1].filePath }" alt="">
 				</div>
 			</div>
 		</div>
@@ -997,7 +944,7 @@
 			<div class="row map">
 				<div class="col-md-6 m-auto text-center">
 					<p class="subtitle">From the blog</p>
-					<h1 class="display-1">유사한 모임 (위치 or 카테고리) + 지도api</h1>
+					<h1 class="display-1">상세지도</h1>
 					<div id="map" style="width:500px;height:400px;"></div>
 					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06"></script>
 					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06&libraries=LIBRARY"></script>
@@ -1035,83 +982,35 @@
 					<div class="space" data-mY="60px"></div>
 				</div>
 			</div>
-			<div class="row appear-childer blog-grid">
-				<div class="col-md-4 post-item">
-
-					<!-- Post-->
-					<article class="post">
-						<div class="post-preview">
-							<a href="#"><img src="assets/images/menu/4.jpg" alt=""></a>
+			<div class="row">
+					<div class="col-md-12">
+						<div class="owl-carousel menu-carousel"	data-carousel-options="{&quot;nav&quot;: false}">
+							<c:forEach var="f" items="${ fList }">
+							<div class="menu-classic-item">
+								<div class="menu-classic-item-img">
+								<c:forEach var="ftn" items="${ ftnList }">
+									<c:if test="${ f.feNo eq ftn.refFno }">
+										<a class="photo" href="feedDetail.fe?feNo=${ f.feNo }"></a><img src="${ ftn.filePath }" alt="">
+									</c:if>
+								</c:forEach>
+									<div class="menu-classic-item-price">
+										<c:forEach var="fpf" items="${ fpfList }">
+											<c:if test="${ f.feWriter eq fpf.refFno }">
+												<img src="${ fpf.filePath }">
+											</c:if>
+										</c:forEach>
+									</div>
+								</div>
+								<div class="menu-classic-item-inner">
+									<h6>${ f.nickName }</h6>
+									<p>${ f.feDate }</p>
+									<p>${ f.feContent }</p>
+								</div>
+							</div>
+							</c:forEach>
 						</div>
-						<div class="post-wrapper">
-							<div class="post-header">
-								<h2 class="post-title display-1">
-									<a href="blog-single-1.html">Which Lamb is the Best:
-										American, Australian or New Zealand?</a>
-								</h2>
-							</div>
-							<div class="post-content">
-								<p>See how your users experience your website in realtime or
-									view trends to see any changes in performance over time...</p>
-							</div>
-							<div class="post-more">
-								<a href="#">read more...</a>
-							</div>
-						</div>
-					</article>
-					<!-- Post end-->
+					</div>
 				</div>
-				<div class="col-md-4 post-item">
-
-					<!-- Post-->
-					<article class="post">
-						<div class="post-preview">
-							<a href="#"><img src="assets/images/menu/5.jpg" alt=""></a>
-						</div>
-						<div class="post-wrapper">
-							<div class="post-header">
-								<h2 class="post-title display-1">
-									<a href="blog-single-1.html">The Caipirinha Is The
-										Brazilian Cocktail You’ve Been Too Afraid To Pronounce</a>
-								</h2>
-							</div>
-							<div class="post-content">
-								<p>See how your users experience your website in realtime or
-									view trends to see any changes in performance over time...</p>
-							</div>
-							<div class="post-more">
-								<a href="#">read more...</a>
-							</div>
-						</div>
-					</article>
-					<!-- Post end-->
-				</div>
-				<div class="col-md-4 post-item">
-
-					<!-- Post-->
-					<article class="post">
-						<div class="post-preview">
-							<a href="#"><img src="assets/images/menu/6.jpg" alt=""></a>
-						</div>
-						<div class="post-wrapper">
-							<div class="post-header">
-								<h2 class="post-title display-1">
-									<a href="blog-single-1.html">The Plum Recipes That’ll Make
-										You Fall In Love With This Stone Fruit</a>
-								</h2>
-							</div>
-							<div class="post-content">
-								<p>See how your users experience your website in realtime or
-									view trends to see any changes in performance over time...</p>
-							</div>
-							<div class="post-more">
-								<a href="#">read more...</a>
-							</div>
-						</div>
-					</article>
-					<!-- Post end-->
-				</div>
-			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="space" data-mY="60px"></div>
@@ -1330,42 +1229,78 @@
 	<a class="likeClass"><span class="icon_heart_alt"
 		onclick="likeClass();"></span></a>
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
-	<c:choose>
-		<c:when test="${ loginMember.memNo eq c.memNo }">
+		<c:if test="${ loginMember.memNo eq c.memNo }">
 			<a class="classOption" href="classUpdateForm.cl?classNo=${ c.classNo }"><span
 				class="icon-gears"></span></a>
-		</c:when>
-		<c:otherwise>
-			<span class="classOption quit_option"><span class="ti-more-alt"></span></span>
-			<div class="quitClassContainer btn btn-outline btn-sm btn-brand" onclick="location.href='quitClassForm.cl?classNo=${c.classNo}&memNo=${ loginMember.memNo }'">클럽 탈퇴하기</div>
-		</c:otherwise>
-	</c:choose>
+		</c:if>
+		<span class="classOption quit_option" style="display:none"><span class="ti-more-alt"></span></span>
+		<div class="quitClassContainer btn btn-outline btn-sm btn-brand" onclick="location.href='quitClassForm.cl?classNo=${c.classNo}&memNo=${ loginMember.memNo }'">클럽 탈퇴하기</div>
 	<div id="noti-form">
 		<span class="notification"><img
-			src="resources/assets/images/detail/notification.png"></span> <span
-			class="notification-num">3</span>
+			src="resources/assets/images/detail/notification.png"></span> 
+			<span class="notification-num"></span>
 	</div>
 	
 	<!-- 알람창 display none -->
 	<div class="alarm-container">
-		<table border=1 id="alarm-box">
-			<thead>
-				<tr>
-					<th>알림창</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>댓글 알람 입니다.</td>
-				</tr>
-			</tbody>
-
-		</table>
+		<div class="alarm-box" style="margin-top:15px;">
+			<ul>
+			</ul>
+		</div>
 	</div>
 	<script>
+		function alarmList(){
+			
+			$.ajax({
+				url:"alarm.al",
+				data:{receiveNo:'${loginMember.memNo}'},
+				success:alist=>{
+					
+					let value = "";
+					
+					if(alist.length == 0){
+						value = "알림이 없습니다.";
+					} 
+					
+					for(let i in alist){
+						value += "<a href='" + alist[i].url + "'>"
+						 	   + "<li data-ano='" + alist[i].aNo + "' data-re='" + alist[i].receiver.receiver + "'>" + alist[i].happen + "... 에 <b style='color:blue'>" + alist[i].nickName + "</b>님의" + alist[i].content + "</li><hr>"
+						 	   + "</a>"
+					}
+					
+					
+					$(".alarm-box>ul").html(value);
+					$(".notification-num").text(alist.length);
+					
+				}, error:()=>{
+					console.log("알람 ajax 실패")
+				}
+			})
+		}
+		
+		alarmList();
+		
+		
+		$(document).on("click", ".alarm-box li", function(){
+			
+			var ano = $(this).data("ano");
+			
+			$.ajax({
+				url:"delete.al",
+				data:{aNo:ano},
+				success:()=>{
+					alarmList();
+					console.log("알림 삭제 ajax 성공");
+				},error:()=>{
+					console.log("알림 삭제 ajax 실패");
+				}
+			})
+			
+		});
+		
 		
 		  function quitClass(){
-			  $.ajax({
+			  $.ajax({	
 					url:"quitClass.cl",
 					data:{
 						memNo:'${loginMember.memNo}',
@@ -1411,9 +1346,11 @@
 						}, success:result=>{
 							switch (result){
 								case 0 : ""; break;
-								case 1 : $(".enter-btn").text("참가중인 모임 입니다."); break;
+								case 1 : $(".enter-btn").text("참가중인 모임 입니다."); 
+										 $(".quit_option").css("display", "block"); break;
 								case 2 : $(".enter-btn").text("호스트 승인 대기중 입니다."); break;
 								case 3 : $(".enter-btn").text("빈자리가 나오기를 대기중입니다."); break;
+								case 4 : $(".enter-btn").text("결제 후 참가가 완료됩니다!"); break;
 							}
 						}, error:()=>{
 							console.log("가입상태 ajax 실패");
@@ -1512,6 +1449,23 @@
 						}
 					})
 				}
+			}
+			
+			function loginAlert(){
+				swal({
+					  title: "로그인 후 이용하실 수 있습니다.",
+					  text: "로그인 하시겠습니까?",
+					  icon: "warning",
+					  buttons: true,
+					  dangerMode: true,
+					})
+					.then((willLogin) => {
+					  if (willLogin) {
+						location.href="loginForm.me";
+					  } else {
+					    swal("로그인을 취소합니다!");
+					  }
+					});
 			}
 				
 		</script>

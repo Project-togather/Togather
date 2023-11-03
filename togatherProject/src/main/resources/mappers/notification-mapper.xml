@@ -1,17 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="notificationMapper">
-<!--  
-	<resultMap type="Notification" id="notificationResult">
-		<result column="" property=""/>
+
+	<resultMap type="Notification" id="alarmResult">
+		<result column="a_no" property="aNo"/>
+		<result column="happen" property="happen"/>
+		<result column="content" property="content"/>
+		<result column="isread" property="isRead"/>
+		<result column="url" property="url"/>
+		<result column="nickname" property="nickName"/>
+		<association property="receiver" javaType="Member">
+	        <result column="receiver" property="receiver"/>
+    	</association>
+		<association property="reply" javaType="Reply">
+	        <result column="happen" property="happen"/>
+	    </association>
 	</resultMap>
--->
+
 	<insert id="insertAlarm" parameterType="hashmap">
 		insert
 		  into alarm
 		  	(
 		  	  a_no
 		  	, receiver
+		  	, happen
 		  	, content
 		  	, url
 		  	, isread
@@ -19,11 +31,33 @@
 		  values
 		  	(
 		  	  seq_notino.nextval
-		  	, #{receiver.memNo}
+		  	, #{reply.refMno}
+		  	, #{reply.classTitle}
 		  	, #{content}
-		  	, null
+		  	, 'detail.cl?classNo='||#{reply.refFno}
 		  	, 'N' 
 		  	)	
 	</insert>
+
+	<select id="selectAlarmList" resultMap="alarmResult">
+		select 
+		       a_no
+		     , receiver
+		     , substr(happen,0,15) happen
+		     , content
+		     , isread
+		     , url
+		     , nickName
+		  from alarm
+		  join member on (mem_no = receiver)
+		 where receiver = #{receiveNo}
+		   and isread = 'N' 
+	</select>
+	
+	<update id="deleteAlarm">
+		update alarm
+		   set isread = 'Y'
+		 where a_no = #{aNo}
+	</update>
 
 </mapper>	

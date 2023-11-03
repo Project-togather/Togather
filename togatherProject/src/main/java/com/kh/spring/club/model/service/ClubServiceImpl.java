@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.QuitReason.model.vo.QuitReason;
+import com.kh.spring.alarm.model.vo.Notification;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.dao.ClubDao;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
@@ -162,5 +164,33 @@ public class ClubServiceImpl implements ClubService {
 	public ArrayList<Member> selectImgList(Club c) {
 		return cDao.selectImgList(sqlSession, c);
 	}
+
+	@Override
+	public int updateClass(Club c) {
+		return cDao.updateClass(c, sqlSession);
+	}
+
+	@Override
+	public ArrayList<Attachment> selectClassAttachment(MyClass c) {
+		return cDao.selectClassAttachment(c, sqlSession);
+	}
+
+	@Override
+	public ArrayList<Feed> selectClassFeedList(MyClass c) {
+		return cDao.selectClassFeedList(c, sqlSession);
+	}
+
+	@Override
+	public ArrayList<Feed> selectClassFeedPfList(MyClass c) {
+		return cDao.selectClassFeedPfList(c, sqlSession);
+
+	}
+
+	@Override
+	public ArrayList<Feed> selectClassFeedTnList(MyClass c) {
+		return cDao.selectClassFeedTnList(c, sqlSession);
+
+	}
+
 
 }
