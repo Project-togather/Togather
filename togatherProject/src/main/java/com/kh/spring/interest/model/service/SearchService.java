@@ -33,5 +33,5 @@ public interface SearchService {
 	
 	// 멤버 리스트가 보이는 서비스
 	ArrayList<Member> selectMemberList();
-	
+	ArrayList<Attachment> selectImageMemberList();
 }

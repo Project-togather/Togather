@@ -148,9 +148,9 @@ public class SearchController {
 	    
 	    System.out.println("pi :" + pi);
 	    
-	    System.out.println(list);
-	    System.out.println(alist);
-	    System.out.println(mlist);
+	    // System.out.println(list);
+	    // System.out.println(alist);
+	    // System.out.println(mlist);
 	    
 	    // list와 alist를 JSON으로 변환하여 반환
 	    Gson gson = new Gson();
@@ -172,10 +172,17 @@ public class SearchController {
 	public String ajaxSelectMemberList() {
 		
 		ArrayList<Member> list = sService.selectMemberList();
+		ArrayList<Attachment> alist = sService.selectImageMemberList();
 		
 		System.out.println(list);
+		System.out.println(alist);
 		
-		return new Gson().toJson(list);
+		Gson gson = new Gson();
+	    JsonObject jsonObject = new JsonObject();
+	    jsonObject.add("list", gson.toJsonTree(list));
+	    jsonObject.add("alist", gson.toJsonTree(alist));
+		
+	    return jsonObject.toString();
 		
 	}
 	

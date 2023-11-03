@@ -154,5 +154,12 @@ public class SearchDao {
 		
 	}
 	
+	public ArrayList<Attachment> selectImageMemberList(SqlSessionTemplate sqlSession) {
+		
+		
+		return (ArrayList)sqlSession.selectList("searchMapper.selectImageMemberList");
+		
+	}
+	
 
 }

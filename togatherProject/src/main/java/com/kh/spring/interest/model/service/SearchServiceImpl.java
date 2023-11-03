@@ -94,4 +94,9 @@ public class SearchServiceImpl implements SearchService {
 		return sDao.selectMemberList(sqlSession);
 	}
 
+	@Override
+	public ArrayList<Attachment> selectImageMemberList() {
+		return sDao.selectImageMemberList(sqlSession);
+	}
+
 }

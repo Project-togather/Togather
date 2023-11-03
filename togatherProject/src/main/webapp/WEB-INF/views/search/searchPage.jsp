@@ -239,7 +239,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 	justify-content: center; /* 내부 요소 가로 중앙 정렬 */
 	align-items: center; /* 내부 요소 세로 중앙 정렬 */
 
+
 	border-top: 1px solid lightgray;
+
+	margin-right: 1px; /* 오른쪽 마진을 추가하여 간격을 만듭니다. */
+    padding-right: 0; /* 오른쪽 패딩을 제거합니다. */h
 }
 
 .feed-box {
@@ -287,9 +291,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
     padding: 5px 5px 0px 5px;
     display: flex;
     justify-content: space-between;
-}span{
+}
+
+span{
      padding-right: 5px;
  }
+
+        
 
 
 /* 프로필, 리스트 아이콘 관련 스타일 */
@@ -331,6 +339,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 	position: absolute;
 	left: 50%;
 }
+
 
 </style>
 </head>
@@ -391,168 +400,100 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 		<!-- 피드 ajax 영역 -->
 		<section class="module">
 			<div class="container">
-				<div id="feedContainer" class="feed">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="gallery gallery-2-columns" id="memberAge">
+								<div class="feed">
 
-					<!-- 
-					<div class="feed-item" style="border: 1px solid lightgray;">
-						<div class="feed-box">
+									<!-- 
+									<div class="feed-item" style="border: 1px solid lightgray;">
+										<div class="feed-box">
 
-							<div class="feed_name">
-								<div class="profile_box">
-								  <img class="profile_img" src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_org.jpg?61e575e8653e5920470a38d1482d7312/melon/optimize/90">
-								</div>
-								<span class="feed_name_txt"> jin.99 </span>
-							</div>
+											<div class="feed_name">
+												<div class="profile_box">
+												<img class="profile_img" src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_org.jpg?61e575e8653e5920470a38d1482d7312/melon/optimize/90">
+												</div>
+												<span class="feed_name_txt"> jin.99 </span>
+											</div>
 
-							<img class="feed_img " src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/%EC%95%8C%EB%A0%88%EC%98%AC%EB%A0%88_e1e634ae5a2fb6377b1dd828a0fb8c2ce5f12723fc34df3da578ea3e8e35eb62">
-							<div class="feed_icon">
-								<div>
-								  <span class="material-icons-outlined">
-									favorite_border
-								  </span>
-								  <span class="material-icons-outlined">
-									mode_comment
-								  </span>
-								</div>
-								<div>
-								  <span class="material-icons-outlined">
-									turned_in_not
-								  </span>
-								</div>
-							  </div>
-							  <div class="feed_like">
-								<p class="feed_txt"> <b>좋아요 10개</b></p>
-							  </div>
-							<div class="feed_content">
-							  <p class="feed_txt">제목</p>
+											<img class="feed_img " src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/%EC%95%8C%EB%A0%88%EC%98%AC%EB%A0%88_e1e634ae5a2fb6377b1dd828a0fb8c2ce5f12723fc34df3da578ea3e8e35eb62">
+											<div class="feed_icon">
+												<div>
+												<span class="material-icons-outlined">
+													favorite_border
+												</span>
+												<span class="material-icons-outlined">
+													mode_comment
+												</span>
+												</div>
+												<div>
+												<span class="material-icons-outlined">
+													turned_in_not
+												</span>
+												</div>
+											</div>
+											<div class="feed_like">
+												<p class="feed_txt"> <b>좋아요 10개</b></p>
+											</div>
+											<div class="feed_content">
+											<p class="feed_txt">제목</p>
+											</div>
+										</div>
+									</div>
+									-->
+
+									<!--
+									<div class="row">
+										<div class="col-md-12">
+											<div class="gallery">
+												<div class="gallery-item">
+													<div class="gallery-image" data-background="assets/images/portfolio/1.jpg"></div><a href="assets/images/portfolio/1.jpg" title="Title 1"></a>
+												</div>
+												<div class="gallery-item">
+													<div class="gallery-image" data-background="assets/images/portfolio/5.jpg"></div><a href="assets/images/portfolio/5.jpg" title="Title 2"></a>
+												</div>
+												<div class="gallery-item">
+													<div class="gallery-image" data-background="assets/images/portfolio/3.jpg"></div><a href="assets/images/portfolio/3.jpg" title="Title 3"></a>
+												</div>
+												<div class="gallery-item">
+													<div class="gallery-image" data-background="assets/images/portfolio/4.jpg"></div><a href="assets/images/portfolio/4.jpg" title="Title 4"></a>
+												</div>
+												<div class="gallery-item">
+													<div class="gallery-image" data-background="assets/images/portfolio/2.jpg"></div><a href="assets/images/portfolio/2.jpg" title="Title 5"></a>
+												</div>
+												<div class="gallery-item">
+													<div class="gallery-image" data-background="assets/images/portfolio/6.jpg"></div><a href="assets/images/portfolio/6.jpg" title="Title 6"></a>
+												</div>
+												<div class="gallery-item">
+													<div class="gallery-image" data-background="assets/images/portfolio/7.jpg"></div><a href="assets/images/portfolio/7.jpg" title="Title 7"></a>
+												</div>
+												<div class="gallery-item">
+													<div class="gallery-image" data-background="assets/images/portfolio/8.jpg"></div><a href="assets/images/portfolio/8.jpg" title="Title 8"></a>
+												</div>
+											</div>
+										</div>
+									</div>
+									-->
 							</div>
 						</div>
 					</div>
-					 -->
-
-					<!--
-					 <div class="row">
-						<div class="col-md-12">
-							<div class="gallery">
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/1.jpg"></div><a href="assets/images/portfolio/1.jpg" title="Title 1"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/5.jpg"></div><a href="assets/images/portfolio/5.jpg" title="Title 2"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/3.jpg"></div><a href="assets/images/portfolio/3.jpg" title="Title 3"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/4.jpg"></div><a href="assets/images/portfolio/4.jpg" title="Title 4"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/2.jpg"></div><a href="assets/images/portfolio/2.jpg" title="Title 5"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/6.jpg"></div><a href="assets/images/portfolio/6.jpg" title="Title 6"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/7.jpg"></div><a href="assets/images/portfolio/7.jpg" title="Title 7"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/8.jpg"></div><a href="assets/images/portfolio/8.jpg" title="Title 8"></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					-->
-
 				</div>
 			</div>
 
 		</section>
 
-
-		<!-- 무한 스크롤 영역 -->
+		<!-- 멤버 ajax 영역 -->
 		<section class="module">
 			<div class="container">
-				<div id="feedContainer2" class="feed2">
-
-					<!-- 
-					<div class="feed-item" style="border: 1px solid lightgray;">
-						<div class="feed-box">
-
-							<div class="feed_name">
-								<div class="profile_box">
-								  <img class="profile_img" src="https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_org.jpg?61e575e8653e5920470a38d1482d7312/melon/optimize/90">
-								</div>
-								<span class="feed_name_txt"> jin.99 </span>
-							</div>
-
-							<img class="feed_img " src="https://res.cloudinary.com/frientrip/image/upload/ar_1:1,c_fill,dpr_2,f_auto,q_auto,w_375/%EC%95%8C%EB%A0%88%EC%98%AC%EB%A0%88_e1e634ae5a2fb6377b1dd828a0fb8c2ce5f12723fc34df3da578ea3e8e35eb62">
-							<div class="feed_icon">
-								<div>
-								  <span class="material-icons-outlined">
-									favorite_border
-								  </span>
-								  <span class="material-icons-outlined">
-									mode_comment
-								  </span>
-								</div>
-								<div>
-								  <span class="material-icons-outlined">
-									turned_in_not
-								  </span>
-								</div>
-							  </div>
-							  <div class="feed_like">
-								<p class="feed_txt"> <b>좋아요 10개</b></p>
-							  </div>
-							<div class="feed_content">
-							  <p class="feed_txt">제목</p>
-							</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="gallery gallery-2-columns" id="memberAge">
+							
 						</div>
 					</div>
-					 -->
-
-					<!--
-					 <div class="row">
-						<div class="col-md-12">
-							<div class="gallery">
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/1.jpg"></div><a href="assets/images/portfolio/1.jpg" title="Title 1"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/5.jpg"></div><a href="assets/images/portfolio/5.jpg" title="Title 2"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/3.jpg"></div><a href="assets/images/portfolio/3.jpg" title="Title 3"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/4.jpg"></div><a href="assets/images/portfolio/4.jpg" title="Title 4"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/2.jpg"></div><a href="assets/images/portfolio/2.jpg" title="Title 5"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/6.jpg"></div><a href="assets/images/portfolio/6.jpg" title="Title 6"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/7.jpg"></div><a href="assets/images/portfolio/7.jpg" title="Title 7"></a>
-								</div>
-								<div class="gallery-item">
-									<div class="gallery-image" data-background="assets/images/portfolio/8.jpg"></div><a href="assets/images/portfolio/8.jpg" title="Title 8"></a>
-								</div>
-							</div>
-						</div>
-					</div>
-					-->
-
 				</div>
 			</div>
-
 		</section>
-
-		<div id="loadingIcon" style="display: none;">
-			<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-		</div>
-
 		
 
 		
@@ -718,32 +659,36 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 				$("#memberClick").click(function() {
 					
 					$.ajax({
-						url:"getList.me",
-						success:function(list) {
-							
-							
-							console.log(list);
+						url: "getList.me",
+						success: function(object) {
+							console.log(object);
 							
 							let value = "";
 							
-							for(let i in list) {
+							for (let i in object.alist) {
+								let item = object.list[i];
+								let item2 = object.alist[i];
 								
-								let item = list[i];
+								// 숫자를 계속 증가시키면서 타이틀 생성
+								let titleNumber = parseInt(i) + 1;
+								let title = "Title " + titleNumber;
 								
-								value += "<div class='row'>" + "<div class='col-md-12'>" + "<div class='gallery'>" + "<div class='gallery-item'>" + "<div class='gallery-image' data-background='assets/images/portfolio/1.jpg'>" + "</div>" + "<a href='assets/images/portfolio/1.jpg' title='Title 1'>" + "</a>" + "</div>" + "</div>" + "</div>" + "</div>"
-								
+								value += "<div class='gallery-item'>" +
+										"<div class='gallery-image' style='background-image: url(" + item.img + "); background-size: cover;'>" +
+										"</div>" +
+										"<a href='" + item2.filePath + "' title='" + title + "'>" +
+										"</a>" + "</div>";
 							}
-
+							
 							$(".feed").html(value);
-							
-							
-						}, error:function() {
+						}, 
+						error: function() {
 							console.log("ajax 통신 실패");
 						}
-					})
-					
-				})
-			})
+					});
+				});
+			});
+
 		 	
 			
 			
@@ -764,6 +709,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
 				underline.style.width = link.offsetWidth + 'px';
 				underline.style.left = left + 'px';
 			});
+
+
+			/* 피드 선 */
+
 
 
 		</script>
