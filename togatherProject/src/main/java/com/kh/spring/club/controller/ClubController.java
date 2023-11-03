@@ -22,14 +22,11 @@ import com.kh.spring.alarm.model.vo.Notification;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
-<<<<<<< HEAD
 import com.kh.spring.feed.model.vo.Feed;
-=======
 import com.kh.spring.feed.model.service.FeedServiceImpl;
 import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.service.MemberService;
 
->>>>>>> 8a8bae8ac3393724bbe82c3ede8ce47172fc22ff
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.reply.model.vo.Reply;
 import com.kh.spring.myClass.model.vo.MyClass;
