@@ -309,7 +309,7 @@ li .m-searchBtn i {
 					
 					 <c:if test="${ loginMember.memId == 'admin' }">
 					 	<li><a href="admin.pa"><span class="menu-item-span">관리자페이지</span></a></li>
-					 
+					 </c:if>
 						
                      </ul>
                   </div>
