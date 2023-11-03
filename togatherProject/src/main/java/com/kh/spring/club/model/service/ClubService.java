@@ -28,8 +28,17 @@ public interface ClubService {
 	// 원데이 전체 조회
 	ArrayList<Club> selectOneDayList();
 	
-	// 내 즐겨찾기 조회
-	ArrayList<Club> selectMyClassList();
+	// 라운지 전체 조회
+	ArrayList<Feed> feedLists();
+	
+	// 마이클래스 대기상태별 조회
+	ArrayList<Club> waitTypeClass(Club c);
+	
+	// 내가 만든 모임 리스트 조회
+	ArrayList<Club> selectMyClassList(Member m);
+	
+	// 찜한 모임 리스트 조회
+	ArrayList<Club> likeClassList(Club c);
 	
 	// 모임 상세 조회
 	Club selectClassDetail(MyClass mc);

@@ -362,15 +362,38 @@
 	</select>
 	
 	<!-- 피드 무한 스크롤링 부분 -->
-
+	<select id="searchFeedMoreListCount" resultType="_int">
+		    SELECT COUNT(*)
+			FROM feed f
+			join attachment on (fe_no = ref_fno)
+    where f.f_status = 'Y'
+    order by enroll_date desc
+	</select>
 	
 	
 	<select id="ajaxSelectMemberList" resultMap="memberResult">
 		select
             mem_no
         ,   mem_name
+        ,   img
     from member
+    join attachment a on (mem_no = ref_fno)
     where m_status = 'Y'
+    order by a.enroll_date desc
+	</select>
+	
+	<select id="selectImageMemberList" resultMap="AttResult">
+		 select
+        att_no
+    ,   ref_fno
+    ,   origin_name
+    ,	update_name
+    ,	file_path
+    ,	a.enroll_date
+        from attachment a
+        join member on (mem_no = ref_fno)
+			WHERE m_status = 'Y'
+			order by enroll_date desc
 	</select>
 
 </mapper>

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -213,4 +214,34 @@ public class FeedController {
 			return "member/yourPage";
 		}
 	}
+	
+	
+	
+	// 피드 리스트 조회
+	@ResponseBody
+	@RequestMapping(value="feed.list" , produces = "application/json; charset=utf-8")
+	public String selectFeedLists(String feStatus, HttpSession session, Model model, Member m) {
+		if(feStatus.equals("G")) {
+			ArrayList<Feed> list = fService.FollowingFeedLists(m);
+			if(list != null) {
+				session.setAttribute("list", list);
+				return new Gson().toJson(list);
+			}else {
+				model.addAttribute("errorMsg", "실패!?");
+				return "/";
+			}
+			
+		}else {
+			ArrayList<Feed> list = fService.selectFeedLists(feStatus);
+			if(list != null) {
+				session.setAttribute("list", list);
+				return new Gson().toJson(list);
+			}else {
+				model.addAttribute("errorMsg", "실패!?");
+				return "/";
+			}
+			
+		}
+	}
+	
 }

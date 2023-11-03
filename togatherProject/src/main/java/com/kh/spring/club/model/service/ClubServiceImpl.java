@@ -12,6 +12,7 @@ import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.dao.ClubDao;
 import com.kh.spring.club.model.vo.Club;
 import com.kh.spring.feed.model.vo.Feed;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
@@ -51,8 +52,8 @@ public class ClubServiceImpl implements ClubService {
 	}
 
 	@Override
-	public ArrayList<Club> selectMyClassList() {
-		return null;
+	public ArrayList<Club> selectMyClassList(Member m) {
+		return cDao.selectMyClassList(sqlSession, m);
 	}
 
 	@Override
@@ -163,6 +164,22 @@ public class ClubServiceImpl implements ClubService {
 	@Override
 	public ArrayList<Member> selectImgList(Club c) {
 		return cDao.selectImgList(sqlSession, c);
+	}
+
+	@Override
+	public ArrayList<Feed> feedLists() {
+		return cDao.feedLists(sqlSession);
+	}
+
+
+	@Override
+	public ArrayList<Club> waitTypeClass(Club c) {
+		return cDao.waitTypeClass(sqlSession, c);
+	}
+
+	@Override
+	public ArrayList<Club> likeClassList(Club c) {
+		return cDao.likeClassList(sqlSession, c);
 	}
 
 	@Override

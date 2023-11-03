@@ -10,6 +10,7 @@ import com.kh.spring.alarm.model.vo.Notification;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
 import com.kh.spring.feed.model.vo.Feed;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
@@ -123,8 +124,24 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.selectCategoryList", c);
 	}
 	
+	public ArrayList<Feed> feedLists(SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("feedMapper.feedLists");
+	}
+	
 	public ArrayList<Member> selectImgList(SqlSessionTemplate sqlSession, Club c){
 		return (ArrayList)sqlSession.selectList("clubMapper.selectImgList", c);
+	}
+	
+	public ArrayList<Club> selectMyClassList(SqlSessionTemplate sqlSession, Member m){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectMyClassList", m);
+	}
+	
+	public ArrayList<Club> waitTypeClass(SqlSessionTemplate sqlSession, Club c){
+		return (ArrayList)sqlSession.selectList("clubMapper.waitTypeClass", c);
+	}
+	
+	public ArrayList<Club> likeClassList(SqlSessionTemplate sqlSession, Club c){
+		return (ArrayList)sqlSession.selectList("clubMapper.likeClassList", c);
 	}
 	
 	public int updateClass(Club c, SqlSessionTemplate sqlSession) {

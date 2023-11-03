@@ -63,21 +63,28 @@ public class SearchServiceImpl implements SearchService {
 	
 	/* 피드 리스트가 보이는 서비스 */
 	@Override
-	public ArrayList<Feed> selectFeedList() {
-		return sDao.selectFeedList(sqlSession);
+	public int searchFeedMoreListCount() {
+		return sDao.searchFeedMoreListCount(sqlSession);
 	}
 	
 	@Override
-	public ArrayList<Attachment> selectImageFeedList() {
-		return sDao.selectImageFeedList(sqlSession);
+	public ArrayList<Feed> selectFeedList(PageInfo pi) {
+		return sDao.selectFeedList(sqlSession, pi);
 	}
 	
 	@Override
-	public ArrayList<Member> selectImageMemberFeedList() {
-		return sDao.selectImageMemberFeedList(sqlSession);
+	public ArrayList<Attachment> selectImageFeedList(PageInfo pi) {
+		return sDao.selectImageFeedList(sqlSession, pi);
+	}
+	
+	@Override
+	public ArrayList<Member> selectImageMemberFeedList(PageInfo pi) {
+		return sDao.selectImageMemberFeedList(sqlSession, pi);
 	}
 	
 	/* 피드 무한 스크롤 */
+
+	
 
 	
 	/* 멤버 리스트가 보이는 서비스 */
@@ -87,5 +94,9 @@ public class SearchServiceImpl implements SearchService {
 		return sDao.selectMemberList(sqlSession);
 	}
 
-	
+	@Override
+	public ArrayList<Attachment> selectImageMemberList() {
+		return sDao.selectImageMemberList(sqlSession);
+	}
+
 }

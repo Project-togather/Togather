@@ -92,7 +92,7 @@ li:hover {cursor: pointer; background-color: orange;}
 						<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
-								<img src="${ c.attachment.updateName }">
+								<img src="${ c.attachment.filePath }">
 							</div>
 							<div class="menu-classic-item-inner">
 					       <c:choose>
@@ -105,7 +105,12 @@ li:hover {cursor: pointer; background-color: orange;}
 				          </c:choose>
 				          	<span class="bestDiv1"> ${ c.clName } </span> &nbsp;
 				          	<span class="bestDiv2"> 추천 </span> <br>
-				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
+				          	${ c.clCaName }  ${ c.classLocation } <br>
+     	     	 			<c:if test="${ not empty c.classDate }">
+     	     	 			<c:if test="${ not empty c.classDate }">
+				          	 	${ c.classDate } ${ c.classTime } <br>
+				          	</c:if>
+				          	</c:if>
     					    <c:forEach var="i" items="${ imgList1 }">
     					    	<c:if test="${ c.classNo eq i.classNo }">
 			          				<img src="${ i.img }">
@@ -120,7 +125,7 @@ li:hover {cursor: pointer; background-color: orange;}
 						<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
-								<img src="${ c.attachment.updateName }">
+								<img src="${ c.attachment.filePath }">
 							</div>
 							<div class="menu-classic-item-inner">
 					       <c:choose>
@@ -132,7 +137,10 @@ li:hover {cursor: pointer; background-color: orange;}
 				        	   </c:otherwise> 
 				          </c:choose>
 				          	${ c.clName } <br>
-				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
+				          	${ c.clCaName }  ${ c.classLocation } <br>
+     	     	 			<c:if test="${ not empty c.classDate }">
+				          	 	${ c.classDate } ${ c.classTime } <br>
+				          	</c:if>
     					    <c:forEach var="i" items="${ imgList1 }">
     					    	<c:if test="${ c.classNo eq i.classNo }">
 			          				<img src="${ i.img }">

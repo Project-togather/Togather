@@ -49,9 +49,9 @@ li:hover {cursor: pointer; background-color: orange;}
 		<div class="col-md-6 m-auto text-center">
 				<h1 class="display-1">챌린지</h1>
 				<p class="lead">같은 목표를 가진 <br/> 멤버들과 함께 도전해요</p>
-			<div class="divider-border"></div>
-		</div>
-		
+			<h4>혼자 하기 어려운 큰 목표부터 작은 목표까지 <br> 멤버들과 함께 즐기면서 쉽게 달성해요!</h4>
+        </div>
+        <br>
         <div class="categorybarDiv">
     		<ul class="categorybar">
 	        	<li onclick="location.href='challenge.pa'">전체</li>
@@ -93,7 +93,7 @@ li:hover {cursor: pointer; background-color: orange;}
 						<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
-								<img src="${ c.attachment.updateName }">
+								<img src="${ c.attachment.filePath }">
 							</div>
 							<div class="menu-classic-item-inner">
 					       <c:choose>
@@ -105,7 +105,10 @@ li:hover {cursor: pointer; background-color: orange;}
 				        	   </c:otherwise> 
 				          </c:choose>
 				          	<span class="bestDiv1"> ${ c.clName } </span> <br>
-				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
+				          	${ c.clCaName }  ${ c.classLocation }<br>
+     	     	 			<c:if test="${ not empty c.classDate }">
+				          	 	${ c.classDate } ${ c.classTime } <br>
+				          	</c:if>
     					    <c:forEach var="i" items="${ imgList1 }">
     					    	<c:if test="${ c.classNo eq i.classNo }">
 			          				<img src="${ i.img }">

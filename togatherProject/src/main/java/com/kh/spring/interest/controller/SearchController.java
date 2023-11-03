@@ -127,56 +127,37 @@ public class SearchController {
 	/* 피드 */
 	@ResponseBody
 	@RequestMapping(value = "getList.fe", produces = "application/json; charset=utf-8;")
-	public String ajaxSelectFeedList() {
+	public String ajaxSelectFeedList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage) {
 		
-	    ArrayList<Feed> list = sService.selectFeedList();
+		
+		System.out.println(currentPage);
+		
+		
+		// 검색 결과 총 개수
+	    int listCount = sService.searchFeedMoreListCount();
+	    
+	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		
+	    ArrayList<Feed> list = sService.selectFeedList(pi);
 	    
 	    // 이미지 피드 목록을 가져옴
-	    ArrayList<Attachment> alist = sService.selectImageFeedList();
+	    ArrayList<Attachment> alist = sService.selectImageFeedList(pi);
 	    
-	    ArrayList<Member> mlist = sService.selectImageMemberFeedList();
+	    ArrayList<Member> mlist = sService.selectImageMemberFeedList(pi);
 	    
-	    System.out.println(list);
-	    System.out.println(alist);
-	    System.out.println(mlist);
+	    System.out.println("pi :" + pi);
+	    
+	    // System.out.println(list);
+	    // System.out.println(alist);
+	    // System.out.println(mlist);
 	    
 	    // list와 alist를 JSON으로 변환하여 반환
 	    Gson gson = new Gson();
 	    JsonObject jsonObject = new JsonObject();
+	    jsonObject.add("pi", gson.toJsonTree(pi));
 	    jsonObject.add("list", gson.toJsonTree(list));
 	    jsonObject.add("alist", gson.toJsonTree(alist));
-	    jsonObject.add("mlist", gson.toJsonTree(mlist));
-
-	    return jsonObject.toString();
-	}
-	
-	/* 피드 무한 스크롤 */
-	@ResponseBody
-	@RequestMapping(value = "getMoreFeeds.fe", produces = "application/json; charset=utf-8;")
-	public String ajaxMoreSelectFeedList(@RequestParam("page") int page) {
-	    // 페이지 번호를 이용하여 페이징 처리를 하고 더 많은 피드를 가져옵니다.
-	    int itemsPerPage = 10; // 한 페이지에 표시할 아이템 수
-	    int startIndex = (page - 1) * itemsPerPage; // 시작 아이템 인덱스
-	    
-	    System.out.println(itemsPerPage);
-	    System.out.println(startIndex);
-
-	    ArrayList<Feed> moreList = sService.selectMoreFeedList(startIndex, itemsPerPage);
-	    
-	    // 이미지 피드 목록을 가져옴
-	    ArrayList<Attachment> moreAlist = sService.selectMoreImageFeedList(startIndex, itemsPerPage);
-	    
-	    ArrayList<Member> mlist = sService.selectMoreImageMemberFeedList(startIndex, itemsPerPage);
-	    
-	    System.out.println(moreList);
-	    System.out.println(moreAlist);
-	    System.out.println(mlist);
-	    
-	    // moreList와 moreAlist를 JSON으로 변환하여 반환
-	    Gson gson = new Gson();
-	    JsonObject jsonObject = new JsonObject();
-	    jsonObject.add("list", gson.toJsonTree(moreList));
-	    jsonObject.add("alist", gson.toJsonTree(moreAlist));
 	    jsonObject.add("mlist", gson.toJsonTree(mlist));
 
 	    return jsonObject.toString();
@@ -191,10 +172,17 @@ public class SearchController {
 	public String ajaxSelectMemberList() {
 		
 		ArrayList<Member> list = sService.selectMemberList();
+		ArrayList<Attachment> alist = sService.selectImageMemberList();
 		
 		System.out.println(list);
+		System.out.println(alist);
 		
-		return new Gson().toJson(list);
+		Gson gson = new Gson();
+	    JsonObject jsonObject = new JsonObject();
+	    jsonObject.add("list", gson.toJsonTree(list));
+	    jsonObject.add("alist", gson.toJsonTree(alist));
+		
+	    return jsonObject.toString();
 		
 	}
 	

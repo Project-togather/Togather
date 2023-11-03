@@ -49,7 +49,9 @@ li:hover {cursor: pointer; background-color: orange;}
 		<div class="col-md-6 m-auto text-center">
 			<h1 class="display-1">클럽</h1>
 			<p class="lead">지속형 모임으로 <br/> 계속해서 친하게 지내요</p>
+			<h4>나와 같은 관심사를 가진 친구들과 <br> 매일 함께하고 싶다면 클럽에서 만나요!</h4>
         </div>
+        <br>
         <div class="categorybarDiv">
     		<ul class="categorybar">
 	        	<li onclick="location.href='club.pa'">전체</li>
@@ -91,7 +93,7 @@ li:hover {cursor: pointer; background-color: orange;}
 						<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
-								<img src="${ c.attachment.updateName }">
+								<img src="${ c.attachment.filePath }">
 							</div>
 							<div class="menu-classic-item-inner">
 					       <c:choose>
@@ -103,7 +105,10 @@ li:hover {cursor: pointer; background-color: orange;}
 				        	   </c:otherwise> 
 				          </c:choose>
 				          	<span class="bestDiv1"> ${ c.clName } </span> <br>
-				          	${ c.clCaName }  ${ c.classLocation }, ${ c.classDate } ${ c.classTime } <br>
+				          	${ c.clCaName }  ${ c.classLocation } <br>
+     	     	 			<c:if test="${ not empty c.classDate }">
+				          	 	${ c.classDate } ${ c.classTime } <br>
+				          	</c:if>
     					    <c:forEach var="i" items="${ imgList1 }">
     					    	<c:if test="${ c.classNo eq i.classNo }">
 			          				<img src="${ i.img }">
