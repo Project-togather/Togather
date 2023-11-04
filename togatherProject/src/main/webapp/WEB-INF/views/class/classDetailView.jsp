@@ -45,13 +45,16 @@
 							</h6>
 							<h3 class="display-1">${ c.classTitle }</h3>
 							<div class="space" data-mY="40px"></div>
-							<a class="btn btn-white enter-btn" onclick="enterClass();" style="color: black;">모임 참가하기</a> 
-							<!--  -->
+							<c:if test="${ loginMember.memNo ne c.memNo }">
+								<a class="btn btn-white enter-btn" onclick="enterClass();" style="color: black;">모임 참가하기</a> 
+							</c:if>
+							<!--  
 							<input type="text" id="id">
-							<button type="button" onclick="sse();">테스트</button>
+							<button type="button" onclick="sse();">테스트</button>-->
 							<div id="sseTest2"></div>
 							<br>
 							<button type="button" class="btn btn-outline btn-sm btn-brand" onclick="requestPay();">결제하기</button>
+							<button type="button" class="btn btn-outline btn-sm btn-brand" onclick="refund();">환불하기</button>
 								
 						</div>
 					</div>
@@ -87,6 +90,10 @@
 					    buyer_tel : tel,
 					  }, function (rsp) { // callback
 						  
+						  console.log("==========");
+						  console.log(rsp);
+						  console.log(rsp.imp_uid);
+						  
 						  $.ajax({
 							  type:"POST",
 							  url:"verifyIamport/" + rsp.imp_uid
@@ -98,10 +105,12 @@
 								        	data:{
 								        		classNo : '${c.classNo}',
 								        		memNo : '${loginMember.memNo}',
-								        		payEmail : email
+								        		payEmail : email,
+								        		iUid : rsp.imp_uid,
+								        		mUid : rsp.merchant_uid
 								        	}, success:()=>{
 								        		swal("결제가 완료되었습니다!","모임을 즐기러 가볼까요?", "success");
-								        		location.href="detail.cl?classNo=${c.classNo}&clType=1"
+								        		//location.href="detail.cl?classNo=${c.classNo}&clType=1"
 								        	}, error:()=>{
 								        		swal("결제가 실패하였습니다.","다시한번 확인 후 결제해주세요!", "error");
 								        	}
@@ -115,6 +124,24 @@
 						  });
 					  });
 					}
+				
+				
+				function refund(){
+					$.ajax({
+						url:"refund.cl",
+						data:{
+							classNo : '${c.classNo}',
+			        		memNo : '${loginMember.memNo}',
+						},
+						success:(result)=>{
+							console.log(result);
+							//swal("결제 취소가 완료되었습니다!","더 좋은 서비스로 찾아뵙겠습니다.", "success");
+						}, error:()=>{
+							console.log(result);
+							//swal("결제취소가 실패하였습니다.","", "error")
+						}
+					})
+				}
 				
 				
 				
@@ -765,6 +792,7 @@
 													if(result == "success"){
 														$("#reply").val("");
 														selectReplyList();
+														alarmList();
 													}
 												}, error:()=>{
 													console.log("실패");

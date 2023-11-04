@@ -33,9 +33,9 @@ public class NotificationServiceImpl {
         this.emitterRepository = emitterRepository;
     }
 
-    public SseEmitter subscribe(String id, String lastEventId) {
+    public SseEmitter subscribe(String uid, String lastEventId) {
     	
-    	//String id = userId + "_" + System.currentTimeMillis();
+    	String id = uid + "_" + System.currentTimeMillis();
     	
     	SseEmitter emitter = new SseEmitter(DEFAULT_TIMEOUT);
         emitterRepository.save(id, emitter);

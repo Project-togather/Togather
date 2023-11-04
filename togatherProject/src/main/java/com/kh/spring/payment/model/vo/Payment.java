@@ -17,6 +17,10 @@ public class Payment {
 	private String memNo;
 	private String payDate;
 	private String payMethod;
-	private String PayYn;
+	private String payYn;
 	private String payEmail;
+	private String iUid;
+	private String mUid;
+	private String reason;
+	
 }

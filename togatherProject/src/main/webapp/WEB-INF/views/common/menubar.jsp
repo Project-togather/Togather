@@ -186,6 +186,7 @@ li .m-searchBtn i {
         	const eventSource = new EventSource(`sse/` + id);
             
             eventSource.addEventListener("sse", function(event) {
+                alarmList();
                 console.log("오셨습니까...");
                 const data = JSON.parse(event.data);
                 console.log(data);
@@ -209,6 +210,7 @@ li .m-searchBtn i {
                 }
 
                 toastr.info(data.reply.classTitle + "모임에 <span style='color: orange'>" + data.receiver.nickName + "</span>님이" + data.content, '🔔 알람이 도착했습니다 !');
+                
 
                 // 비동기 작업이 완료되면 프로미스 해결
                 resolve(data);
