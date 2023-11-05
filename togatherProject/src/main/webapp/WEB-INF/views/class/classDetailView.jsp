@@ -45,17 +45,17 @@
 							</h6>
 							<h3 class="display-1">${ c.classTitle }</h3>
 							<div class="space" data-mY="40px"></div>
-							<c:if test="${ loginMember.memNo ne c.memNo }">
-								<a class="btn btn-white enter-btn" onclick="enterClass();" style="color: black;">모임 참가하기</a> 
+							<c:if
+								test="${ loginMember ne null and loginMember.memNo ne c.memNo}">
+								<button class="btn btn-white enter-btn" onclick="enterClass();"
+									style="color: black;">모임 참가하기</button>
 							</c:if>
 							<!--  
 							<input type="text" id="id">
 							<button type="button" onclick="sse();">테스트</button>-->
 							<div id="sseTest2"></div>
 							<br>
-							<button type="button" class="btn btn-outline btn-sm btn-brand" onclick="requestPay();">결제하기</button>
-							<button type="button" class="btn btn-outline btn-sm btn-brand" onclick="refund();">환불하기</button>
-								
+							<button type="button" class="btn btn-outline btn-sm btn-brand" id="payment" onclick="requestPay();"	style="display: none; text-align: center">결제하기</button>
 						</div>
 					</div>
 				</div>
@@ -89,11 +89,7 @@
 					    buyer_name : name,
 					    buyer_tel : tel,
 					  }, function (rsp) { // callback
-						  
-						  console.log("==========");
-						  console.log(rsp);
-						  console.log(rsp.imp_uid);
-						  
+
 						  $.ajax({
 							  type:"POST",
 							  url:"verifyIamport/" + rsp.imp_uid
@@ -108,9 +104,14 @@
 								        		payEmail : email,
 								        		iUid : rsp.imp_uid,
 								        		mUid : rsp.merchant_uid
-								        	}, success:()=>{
-								        		swal("결제가 완료되었습니다!","모임을 즐기러 가볼까요?", "success");
-								        		//location.href="detail.cl?classNo=${c.classNo}&clType=1"
+								        	}, success:result=>{
+								        		if(result == "success"){
+									        		//location.href="detail.cl?classNo=${c.classNo}&clType=1"
+									        		checkStatus();
+									        		swal("결제가 완료되었습니다!","모임을 즐기러 가볼까요?", "success");
+								        		} else {
+									        		swal("결제가 실패하였습니다.","다시한번 확인 후 결제해주세요!", "error");
+								        		}
 								        	}, error:()=>{
 								        		swal("결제가 실패하였습니다.","다시한번 확인 후 결제해주세요!", "error");
 								        	}
@@ -124,27 +125,6 @@
 						  });
 					  });
 					}
-				
-				
-				function refund(){
-					$.ajax({
-						url:"refund.cl",
-						data:{
-							classNo : '${c.classNo}',
-			        		memNo : '${loginMember.memNo}',
-						},
-						success:(result)=>{
-							console.log(result);
-							//swal("결제 취소가 완료되었습니다!","더 좋은 서비스로 찾아뵙겠습니다.", "success");
-						}, error:()=>{
-							console.log(result);
-							//swal("결제취소가 실패하였습니다.","", "error")
-						}
-					})
-				}
-				
-				
-				
 			
 			/* 잔여자리에 따른 css 변경*/
 			let vac = ${ c.peopleLimit - c.vacancy }
@@ -160,24 +140,20 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-16 m-auto text-center">
-					<c:choose>
-						<c:when test="${ loginMember.memNo eq c.memNo }">
-							<a href="mypage.me"> 
-								<span id="profile"><img	src="${ atList[1].filePath }"></span> <br>
-								<span class="subtitle" id="profile_nickname">${ c.nickName }</span>
-								<br>
-								<br>
-							</a>
-						</c:when>
-						<c:when test="${ loginMember eq null }">
-							<a href="javascript:loginAlert()"> 
-							<span id="profile"><img	src="${ atList[1].filePath }"></span> <br>
-							<span class="subtitle" id="profile_nickname">${ c.nickName }</span>
-							<br>
-							<br>
-						</a>
-						</c:when>
-					</c:choose>
+						<c:choose>
+							<c:when test="${ loginMember.memNo eq c.memNo }">
+								<a href="mypage.me"> <span id="profile"><img src="${ atList[1].filePath }"></span> <br> <span class="subtitle" id="profile_nickname">${ c.nickName }</span> <br>
+									<br>
+								</a>
+							</c:when>
+							<c:when test="${ loginMember eq null }">
+								<a href="javascript:loginAlert()"> <span id="profile"><img
+										src="${ atList[1].filePath }"></span> <br> <span
+									class="subtitle" id="profile_nickname">${ c.nickName }</span> <br>
+									<br>
+								</a>
+							</c:when>
+						</c:choose>
 						<p>
 							<c:choose>
 								<c:when test="${ c.classApproval eq '승인제' }">
@@ -206,8 +182,11 @@
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<div class="space" data-mY="20px"></div>
-						<a class="btn btn-white enter-btn" onclick="enterClass();">모임
-							참가하기</a>
+						<c:if
+							test="${ loginMember ne null and loginMember.memNo ne c.memNo}">
+							<a class="btn btn-white enter-btn" onclick="enterClass();">모임
+								참가하기</a>
+						</c:if>
 					</div>
 				</div>
 			</div>
@@ -222,7 +201,7 @@
 						<p class="subtitle">Feed List</p>
 						<h1 class="display-1">모임 후기 목록</h1>
 						<p class="lead">
-							이 모임에 대한 후기를 볼 수 있어요! <br/>
+							이 모임에 대한 후기를 볼 수 있어요! <br />
 						</p>
 						<div class="divider-border"></div>
 					</div>
@@ -234,29 +213,31 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<div class="owl-carousel menu-carousel"	data-carousel-options="{&quot;nav&quot;: false}">
+						<div class="owl-carousel menu-carousel"
+							data-carousel-options="{&quot;nav&quot;: false}">
 							<c:forEach var="f" items="${ fList }">
-							<div class="menu-classic-item">
-								<div class="menu-classic-item-img">
-								<c:forEach var="ftn" items="${ ftnList }">
-									<c:if test="${ f.feNo eq ftn.refFno }">
-										<a class="photo" href="feedDetail.fe?feNo=${ f.feNo }"></a><img src="${ ftn.filePath }" alt="">
-									</c:if>
-								</c:forEach>
-									<div class="menu-classic-item-price">
-										<c:forEach var="fpf" items="${ fpfList }">
-											<c:if test="${ f.feWriter eq fpf.refFno }">
-												<img src="${ fpf.filePath }">
+								<div class="menu-classic-item">
+									<div class="menu-classic-item-img">
+										<c:forEach var="ftn" items="${ ftnList }">
+											<c:if test="${ f.feNo eq ftn.refFno }">
+												<a class="photo" href="${ ftn.filePath }"></a>
+												<img src="${ ftn.filePath }" alt="">
 											</c:if>
 										</c:forEach>
+										<div class="menu-classic-item-price">
+											<c:forEach var="fpf" items="${ fpfList }">
+												<c:if test="${ f.feWriter eq fpf.refFno }">
+													<img src="${ fpf.filePath }">
+												</c:if>
+											</c:forEach>
+										</div>
+									</div>
+									<div class="menu-classic-item-inner">
+										<h6>${ f.nickName }</h6>
+										<p>${ f.feDate }</p>
+										<p>${ f.feContent }</p>
 									</div>
 								</div>
-								<div class="menu-classic-item-inner">
-									<h6>${ f.nickName }</h6>
-									<p>${ f.feDate }</p>
-									<p>${ f.feContent }
-								</div>
-							</div>
 							</c:forEach>
 						</div>
 					</div>
@@ -354,36 +335,13 @@
 					</div>
 					<div class="col-xl-8 col-lg-12">
 						<div class="gallery gallery-shorcode">
+						<c:forEach var="f" items="${ ftnList }">
 							<div class="gallery-item">
 								<div class="gallery-image"
-									data-background="assets/images/portfolio/1.jpg"></div>
-								<a href="assets/images/portfolio/1.jpg" title="Title 1"></a>
+									data-background="${ f.filePath }"></div>
+								<a href="${ f.filePath }"></a>
 							</div>
-							<div class="gallery-item">
-								<div class="gallery-image"
-									data-background="assets/images/portfolio/5.jpg"></div>
-								<a href="assets/images/portfolio/5.jpg" title="Title 2"></a>
-							</div>
-							<div class="gallery-item">
-								<div class="gallery-image"
-									data-background="assets/images/portfolio/3.jpg"></div>
-								<a href="assets/images/portfolio/3.jpg" title="Title 3"></a>
-							</div>
-							<div class="gallery-item">
-								<div class="gallery-image"
-									data-background="assets/images/portfolio/4.jpg"></div>
-								<a href="assets/images/portfolio/4.jpg" title="Title 4"></a>
-							</div>
-							<div class="gallery-item">
-								<div class="gallery-image"
-									data-background="assets/images/portfolio/2.jpg"></div>
-								<a href="assets/images/portfolio/2.jpg" title="Title 5"></a>
-							</div>
-							<div class="gallery-item">
-								<div class="gallery-image"
-									data-background="assets/images/portfolio/6.jpg"></div>
-								<a href="assets/images/portfolio/6.jpg" title="Title 6"></a>
-							</div>
+						</c:forEach>
 						</div>
 					</div>
 				</div>
@@ -952,8 +910,9 @@
 				<div class="col-md-6">
 					<p class="subtitle">Professional cook team</p>
 					<h1 class="display-1">호스트 자기소개</h1>
-					<p class="lead">🎁 안녕하세요 여러분 <br>
-						모임을 좋아해서 호스트를 하는 지경까지 이른 모임에 미친 사람이에요! 🎉<p>
+					<p class="lead">
+						🎁 안녕하세요 여러분 <br> 모임을 좋아해서 호스트를 하는 지경까지 이른 모임에 미친 사람이에요! 🎉
+					<p>
 					<div class="divider-border-left"></div>
 					<div class="space" data-mY="60px"></div>
 					<a class="btn btn-black" href="#">View our menu</a>
@@ -973,10 +932,13 @@
 				<div class="col-md-6 m-auto text-center">
 					<p class="subtitle">From the blog</p>
 					<h1 class="display-1">상세지도</h1>
-					<div id="map" style="width:500px;height:400px;"></div>
-					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06"></script>
-					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06&libraries=LIBRARY"></script>
-					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06&libraries=services"></script>
+					<div id="map" style="width: 500px; height: 400px;"></div>
+					<script type="text/javascript"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06"></script>
+					<script type="text/javascript"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06&libraries=LIBRARY"></script>
+					<script type="text/javascript"
+						src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9be07910948b6a467fe99fca4953cf06&libraries=services"></script>
 					<script>
 						var container = document.getElementById('map');
 						var options = {
@@ -997,11 +959,11 @@
 						console.log(${c.placeId});
 						
 					</script>
-					<br>
-					<a href="https://map.kakao.com/link/map/${ c.placeId }">카카오맵으로 상세보기</a>
-					<br>
-					<a href="roadView.cl?latitude=${ c.latitude }&longitude=${ c.longitude }">로드뷰 상세보기</a>
-					
+					<br> <a href="https://map.kakao.com/link/map/${ c.placeId }">카카오맵으로
+						상세보기</a> <br> <a
+						href="roadView.cl?latitude=${ c.latitude }&longitude=${ c.longitude }">로드뷰
+						상세보기</a>
+
 					<div class="divider-border"></div>
 				</div>
 			</div>
@@ -1011,34 +973,29 @@
 				</div>
 			</div>
 			<div class="row">
-					<div class="col-md-12">
-						<div class="owl-carousel menu-carousel"	data-carousel-options="{&quot;nav&quot;: false}">
-							<c:forEach var="f" items="${ fList }">
+				<div class="col-md-12">
+					<div class="owl-carousel menu-carousel"
+						data-carousel-options="{&quot;nav&quot;: false}">
+						<c:forEach var="c" items="${ cList }">
 							<div class="menu-classic-item">
 								<div class="menu-classic-item-img">
-								<c:forEach var="ftn" items="${ ftnList }">
-									<c:if test="${ f.feNo eq ftn.refFno }">
-										<a class="photo" href="feedDetail.fe?feNo=${ f.feNo }"></a><img src="${ ftn.filePath }" alt="">
-									</c:if>
-								</c:forEach>
-									<div class="menu-classic-item-price">
-										<c:forEach var="fpf" items="${ fpfList }">
-											<c:if test="${ f.feWriter eq fpf.refFno }">
-												<img src="${ fpf.filePath }">
-											</c:if>
-										</c:forEach>
-									</div>
+									<c:forEach var="ctn" items="${ ctnList }">
+										<c:if test="${ c.classNo eq ctn.refFno }">
+											<a class="photo" href="detail.cl?classNo=${ c.classNo }&clType=1"></a>
+											<img src="${ ctn.filePath }" alt="">
+										</c:if>
+									</c:forEach>
 								</div>
 								<div class="menu-classic-item-inner">
-									<h6>${ f.nickName }</h6>
-									<p>${ f.feDate }</p>
-									<p>${ f.feContent }</p>
+									<h6>${ c.classTitle }</h6>
+									<p>📆 ${ c.classDate } ⏰ ${ c.classTime }</p> 
+									<p>🚗 ${ c.classLocation }</p>
 								</div>
 							</div>
-							</c:forEach>
-						</div>
+						</c:forEach>
 					</div>
 				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-12">
 					<div class="space" data-mY="60px"></div>
@@ -1253,25 +1210,28 @@
 
 	<!-- To top button-->
 	<div class="space" data-mY="40px"></div>
-	<!--  <a class="btn btn-white enterClass enter-btn" onclick="enterClass();">모임	참가하기</a> -->
 	<a class="likeClass"><span class="icon_heart_alt"
 		onclick="likeClass();"></span></a>
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
-		<c:if test="${ loginMember.memNo eq c.memNo }">
-			<a class="classOption" href="classUpdateForm.cl?classNo=${ c.classNo }"><span
-				class="icon-gears"></span></a>
-		</c:if>
-		<span class="classOption quit_option" style="display:none"><span class="ti-more-alt"></span></span>
-		<div class="quitClassContainer btn btn-outline btn-sm btn-brand" onclick="location.href='quitClassForm.cl?classNo=${c.classNo}&memNo=${ loginMember.memNo }'">클럽 탈퇴하기</div>
+	<c:if test="${ loginMember.memNo eq c.memNo }">
+		<a class="classOption" href="classUpdateForm.cl?classNo=${ c.classNo }">
+			<span class="icon-gears"></span>
+		</a>
+	</c:if>
+	<span class="classOption quit_option" style="display: none">
+		<span class="ti-more-alt"></span>
+	</span>
+	<div class="quitClassContainer btn btn-outline btn-sm btn-brand"
+		onclick="location.href='quitClassForm.cl?classNo=${c.classNo}&memNo=${ loginMember.memNo }'">클럽 탈퇴하기</div>
 	<div id="noti-form">
 		<span class="notification"><img
-			src="resources/assets/images/detail/notification.png"></span> 
-			<span class="notification-num"></span>
+			src="resources/assets/images/detail/notification.png"></span> <span
+			class="notification-num"></span>
 	</div>
-	
+
 	<!-- 알람창 display none -->
 	<div class="alarm-container">
-		<div class="alarm-box" style="margin-top:15px;">
+		<div class="alarm-box" style="margin-top: 15px;">
 			<ul>
 			</ul>
 		</div>
@@ -1375,10 +1335,16 @@
 							switch (result){
 								case 0 : ""; break;
 								case 1 : $(".enter-btn").text("참가중인 모임 입니다."); 
-										 $(".quit_option").css("display", "block"); break;
+										 $(".enter-btn").attr("disabled", true); 
+										 $(".quit_option").css("display", "block");
+										 $("#payment").css("display", "none"); break;
 								case 2 : $(".enter-btn").text("호스트 승인 대기중 입니다."); break;
 								case 3 : $(".enter-btn").text("빈자리가 나오기를 대기중입니다."); break;
-								case 4 : $(".enter-btn").text("결제 후 참가가 완료됩니다!"); break;
+								case 4 : $(".enter-btn").text("결제 후 참가가 완료됩니다!"); 
+										 $(".enter-btn").attr("disabled", true); 
+										 $("#payment").css("display", "inline"); break;
+								case 5 : $(".enter-btn").text("탈퇴한 모임입니다."); 
+										 $(".enter-btn").attr("disabled", true);							 
 							}
 						}, error:()=>{
 							console.log("가입상태 ajax 실패");
@@ -1466,11 +1432,11 @@
 							if(result == "insert"){
 								$(".likeClass>span").attr("class", "icon_heart");
 								checkLike();
-								swal("찜 등록 완료했습니다!");
+								swal("찜 😍 등록 완료했습니다!", "", "success");
 							} else if(result == "delete"){
 								$(".likeClass>span").attr("class", "icon_heart_alt");
 								checkLike();
-								swal("찜 삭제 완료했습니다!");
+								swal("찜 😥 삭제 완료했습니다!", "", "success");
 							}
 						}, error:()=>{
 							console.log("즐겨찾기 ajax실패");

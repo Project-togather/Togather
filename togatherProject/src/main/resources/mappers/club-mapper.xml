@@ -38,6 +38,8 @@
 	</resultMap>
 	
 	<resultMap type="Attachment" id="attachment">
+		<result column="att_no" property="attNo"/>
+		<result column="ref_fno" property="refFno"/>
 		<result column="origin_name" property="originName"/>
 		<result column="update_name" property="updateName"/>
 		<result column="file_path" property="filePath"/>
@@ -407,12 +409,16 @@
              , latitude
              , longitude
              , placeId
-             , cl_type    
+             , cl_type
+             , file_path    
 		  from class
 		  join member using (mem_no)
           join cl_type on(cl_type = cl_ca_no)
 		  join cl_category on (cl_category = cl_categoryno)
+		  join attachment on (c_no = ref_fno)
 		 where c_no = #{classNo}
+		   and category = 'class'
+           and thumbnail = 1
 		   and status = 'Y'
 	</select>
 	
@@ -476,6 +482,7 @@
 			   ,file_path
 			   ,enroll_date
 			   ,category
+			   ,thumbnail
 			 )
 		values
 			 (
@@ -493,6 +500,7 @@
 			   , #{filePath}
 			   , sysdate
 			   , 'class'
+			   , #{thumbnail}
 			 )
 	</insert>
 
@@ -644,7 +652,7 @@
 	
 	<delete id="quitClass">
 		update my_class
-		   set cl_type_status = 6
+		   set cl_type_status = 5
 		 where mem_no = #{memNo}
 		   and c_no = #{classNo}
 	</delete>
@@ -743,12 +751,11 @@
 		   and c_no = #{classNo}
 	</update>
 	
-	<update id="refuseMember">
-		update my_class
-		   set cl_type_status = 5
+	<delete id="refuseMember">
+		delete my_class
 		 where mem_no = #{memNo}
 		   and c_no = #{classNo}
-	</update>
+	</delete>
 	
 	<select id="selectCategoryList" resultMap="resultclub">
 		select 
@@ -973,7 +980,6 @@
 		     , fe_content
 		     , fe_date
 		     , fe_writer
-		     , fe_date
 		     , nickname
 		  from feed
 		  join member on (mem_no = fe_writer)
@@ -989,6 +995,7 @@
 		  from attachment
 		  join feed on (ref_fno = fe_writer)
 		   and category = 'profileImage'
+           where ref_cno = #{classNo}
 	</select>
 	
 	<select id="selectClassFeedTnList" resultMap="feedResult">
@@ -1001,6 +1008,39 @@
 		 where ref_cno = #{classNo}
 		   and category = 'FEED'
 		   and thumbnail = 1
+	</select>
+	
+	<update id="updateImg">
+		update attachment
+		   set origin_name = #{originName}
+		     , update_name = #{updateName}
+		     , file_path = #{filePath}
+		     , enroll_date = sysdate
+	     where ref_fno = #{classNo}
+	</update>
+	
+	<select id="selectSimilarList" resultMap="resultclub">
+		select
+		       c_no
+		     , mem_no
+		     , c_title
+		     , c_location
+		     , c_date
+		     , c_time
+		  from class
+		 where cl_category = #{clCategory}
+	</select>
+	
+	<select id="selectClassTnList" resultMap="attachment">
+		select  
+		       att_no
+		     , ref_fno
+		     , file_path
+		  from attachment
+          join class on (ref_fno = c_no)
+         where category = 'class'
+		   and thumbnail = 1
+           and cl_category = #{clCategory}
 	</select>
 	
 </mapper>

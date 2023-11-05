@@ -22,5 +22,6 @@ public class Payment {
 	private String iUid;
 	private String mUid;
 	private String reason;
+	private String detailReason;
 	
 }

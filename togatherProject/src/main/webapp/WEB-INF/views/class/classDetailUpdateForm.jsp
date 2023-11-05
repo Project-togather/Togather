@@ -404,7 +404,7 @@ input[type="range"]::-webkit-slider-thumb {
 									<h5>소셜링을 소개해볼까요?</h5>
 									<table style="margin: auto;">
 										<tr>
-											<td><img src="${ c.updateName }" id="contentImg1" class="contentImg1" onclick="chooseFile(1);"></td>
+											<td><img src="${ c.filePath }" id="contentImg1" class="contentImg1" onclick="chooseFile(1);"></td>
 										</tr>
 									</table>
 									<div style="display:none">
@@ -508,6 +508,31 @@ input[type="range"]::-webkit-slider-thumb {
 								        		$("#editorContent").val(classContent);
 								        		// console.log($("#editorContent").val())
 								        		// console.log($("#editor").val());
+								        		String.prototype.getBytes = function() {
+												    const contents = this;
+												    let str_character;
+												    let int_char_count = 0;
+												    let int_contents_length = contents.length;
+												
+												    for (k = 0; k < int_contents_length; k++) {
+												        str_character = contents.charAt(k);
+												        if (escape(str_character).length > 4)
+												            int_char_count += 3;
+												        else
+												            int_char_count++;
+												    }
+												    return int_char_count;
+												}
+								        		
+								        		const test = $("#editorContent").val();
+								        		console.log(test.getBytes() + "Byte");
+								        		
+								        		if(test.getBytes() >= 4000){
+								        			alert("입력가능한 글자수가 넘었습니다.");
+								        			str = test.substr(0, test.length - 1);
+								        			$("#editorContent").val(str);
+								        			
+								        		}
 								        	})
 								        })
 								    </script>
@@ -518,10 +543,10 @@ input[type="range"]::-webkit-slider-thumb {
 									
 									<div class="classTime">
 										<div class="form-group">
-											<input type="date" id="classDate" name="classDate" class="form-control" style="color: white;">
+											<input type="date" id="classDate" name="classDate" class="form-control" value="${ c.classDate }" style="color: white;">
 										</div> &nbsp;&nbsp;
 										<div class="form-group">
-											<input type="time" id="classTime" name="classTime" class="form-control" style="color: white;">										
+											<input type="time" id="classTime" name="classTime" class="form-control" value="${ c.classTime }" style="color: white;">										
 										</div>
 									</div>
 									
@@ -984,10 +1009,10 @@ input[type="range"]::-webkit-slider-thumb {
 									<br><br>
 									
 									<div class="form-group">
-										<input class="form-control" type="number" name="classPrice" placeholder="참가비가 없다면 0을 입력해주세요." style="color:white">
+										<input class="form-control" type="number" name="classPrice" placeholder="참가비가 없다면 0을 입력해주세요." style="color:white" value="${ c.classPrice }">
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="number" name="peopleLimit" placeholder="참가 인원수를 선택해주세요." style="color:white">
+										<input class="form-control" type="number" name="peopleLimit" placeholder="참가 인원수를 선택해주세요." style="color:white" value="${ c.peopleLimit }">
 									</div>
 									
 									<c:choose>

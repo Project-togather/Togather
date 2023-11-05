@@ -63,6 +63,7 @@
 		update payment
 		   set pay_yn = 'R'
 		     , reason = #{reason}
+		     , detailreason = #{detailReason}
 		 where c_no = #{classNo}
 		   and mem_no = #{memNo}  
 	</update>

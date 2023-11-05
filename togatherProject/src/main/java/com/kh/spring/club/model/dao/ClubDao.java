@@ -117,7 +117,7 @@ public class ClubDao {
 	}
 	
 	public int refuseMember(MyClass c, SqlSessionTemplate sqlSession) {
-		return sqlSession.update("clubMapper.refuseMember", c);
+		return sqlSession.delete("clubMapper.refuseMember", c);
 	}
 	
 	public ArrayList<Club> selectCategoryList(SqlSessionTemplate sqlSession, Club c){
@@ -164,4 +164,16 @@ public class ClubDao {
 		return (ArrayList)sqlSession.selectList("clubMapper.selectClassFeedTnList", c);
 	}
 
+	public int updateImg(Attachment at, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("clubMapper.updateImg", at);
+	}
+	
+	public ArrayList<Club> selectSimilarList(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectSimilarList", c);
+	}
+	
+	public ArrayList<Attachment> selectClassTnList(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClassTnList", c);
+	}
+	
 }

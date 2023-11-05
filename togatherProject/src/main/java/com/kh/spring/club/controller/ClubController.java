@@ -338,6 +338,7 @@ public class ClubController {
 		
 		if(result > 0) {
 			at.setCategory(c.getClType()+"");
+			at.setThumbnail(1);
 			
 			int result2 = cService.insertImg(at);
 			
@@ -366,6 +367,7 @@ public class ClubController {
 		
 		Club c = cService.selectClassDetail(mc);
 		
+		mc.setClCategory(c.getClCategory());
 		mc.setMemNo(c.getMemNo());
 		
 		ArrayList<Attachment> atList = cService.selectClassAttachment(mc); // 모임 프사, 썸네일 조회
@@ -373,7 +375,9 @@ public class ClubController {
 		ArrayList<Feed> fpfList = cService.selectClassFeedPfList(mc); // 피드 프로필사진
 		ArrayList<Feed> ftnList = cService.selectClassFeedTnList(mc); // 피드 썸네일
 		ArrayList<Member> list = cService.classMemberList(mc); // 모임 가입 명단
-		
+		ArrayList<Club> cList = cService.selectSimilarList(mc); // 비슷한 모임
+		ArrayList<Attachment> ctnList = cService.selectClassTnList(mc);
+
 		
 		if(c.getClassApproval().equals("Y")) {
 			c.setClassApproval("승인제");
@@ -387,6 +391,8 @@ public class ClubController {
 		model.addAttribute("fpfList", fpfList);
 		model.addAttribute("ftnList", ftnList);
 		model.addAttribute("c", c);
+		model.addAttribute("cList", cList);
+		model.addAttribute("ctnList", ctnList);
 		return "class/classDetailView";
 	}
 	
@@ -394,9 +400,10 @@ public class ClubController {
 	@RequestMapping("enroll.rv")
 	public String insertReply(Reply r, Member m) {
 		
-		nService.send(m, r, "댓글이 등록되었습니다!");
-
 		int result = cService.insertReply(r);
+		
+		nService.send(m, r, "댓글이 등록되었습니다!");
+		
 		return result>0 ? "success" : "fail";
 		
 
@@ -447,6 +454,7 @@ public class ClubController {
 		return result>0 ? "success" : "fail";
 	}
 	
+	/*
 	@ResponseBody
 	@RequestMapping("quitClass.cl")
 	public String quitClass(QuitReason qr) {
@@ -456,6 +464,7 @@ public class ClubController {
 		int result = cService.quitClass(qr);
 		return result>0 ? "success" : "fail";
 	}
+	*/
 	
 	@ResponseBody
 	@RequestMapping("likeClass.cl")
@@ -512,7 +521,6 @@ public class ClubController {
 	@RequestMapping("memberListPage.cl")
 	public String memberListPage(MyClass mc, Model model) {
 		Club c = cService.selectClassDetail(mc);
-		System.out.println("멤리 : " + c);
 		model.addAttribute("c", c);
 		return "class/classMemberList";
 	}
@@ -564,6 +572,8 @@ public class ClubController {
 	@RequestMapping(value="refuseClass.me", produces = "application/json; charset=UTF-8")
 	public int refuseClass(MyClass c) {
 		
+		System.out.println("거절 : " + c);
+		
 		int result = cService.refuseEnrollMember(c);
 		
 		if(result>0) {
@@ -589,8 +599,8 @@ public class ClubController {
 			
 			String updateName = saveFile(upfile, session);
 			at.setOriginName(upfile.getOriginalFilename());
-			at.setUpdateName("resources/uploadFiles/" + updateName);
-			at.setFilePath(upfile.getOriginalFilename() + "resources/uploadFiles/" + updateName);
+			at.setUpdateName(updateName);
+			at.setFilePath("resources/uploadFiles/" + updateName);
 			at.setClassNo(c.getClassNo());
 			
 			System.out.println("at : " + at);
@@ -601,13 +611,11 @@ public class ClubController {
 			
 			at.setCategory(c.getClType()+"");
 			
-			int result2 = cService.insertImg(at);
+			int result2 = cService.updateImg(at);
 			
 			if(result2 > 0) {
-				System.out.println("성공왓니");
-				cService.selectClassDetail(mc);
 				session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");
-				return "class/classDetailView";
+				return "redirect:detail.cl?classNo=" + at.getClassNo() + "&clType=1";
 			}else {
 				model.addAttribute("errorMsg", "게시글 등록에 실패");
 				return "common/errorPage";

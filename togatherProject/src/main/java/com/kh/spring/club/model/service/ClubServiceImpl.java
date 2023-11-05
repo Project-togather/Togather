@@ -209,5 +209,20 @@ public class ClubServiceImpl implements ClubService {
 
 	}
 
+	@Override
+	public int updateImg(Attachment at) {
+		return cDao.updateImg(at, sqlSession);
+	}
+
+	@Override
+	public ArrayList<Club> selectSimilarList(MyClass c) {
+		return cDao.selectSimilarList(c, sqlSession);
+	}
+
+	@Override
+	public ArrayList<Attachment> selectClassTnList(MyClass c) {
+		return cDao.selectClassTnList(c, sqlSession);
+	}
+
 
 }

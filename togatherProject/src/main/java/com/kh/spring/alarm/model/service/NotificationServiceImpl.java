@@ -140,7 +140,7 @@ public class NotificationServiceImpl {
                                    .data(data));
         } catch (IOException exception) {
             emitterRepository.deleteById(id);
-            throw new RuntimeException("연결 오류!");
+            //throw new RuntimeException("연결 오류!");
         }
     	
     }

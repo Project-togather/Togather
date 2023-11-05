@@ -18,4 +18,5 @@ public class MyClass {
 	
 	private String price; // 모임 가격
 	private String condition; // 유사 모임(1) 인지 상세 모임(0) 인지
+	private int clCategory;
 }
