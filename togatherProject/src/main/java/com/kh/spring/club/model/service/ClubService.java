@@ -117,4 +117,14 @@ public interface ClubService {
 	// 상세페이지의 피드 썸네일
 	ArrayList<Feed> selectClassFeedTnList(MyClass c);
 	
+	// 모임 파일 수정
+	int updateImg(Attachment at);
+	
+	// 비슷한 모임
+	ArrayList<Club> selectSimilarList(MyClass c);
+	
+	// 비슷한 모임 썸네일
+	ArrayList<Attachment> selectClassTnList(MyClass c);
+	
+	
 }

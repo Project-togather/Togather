@@ -61,4 +61,7 @@ public class Club {
 	
 	private String updateName;
 	private String filePath;
+	
+	private String msg;
+	private String refFno;
 }
