@@ -38,155 +38,157 @@ import oracle.net.aso.s;
 
 @Controller
 public class SearchController {
-	
-	@Autowired
-	private SearchServiceImpl sService;
-	
-	// 이미지 경로 저장
-	public String saveAllFile(MultipartFile upfile, HttpSession session) {
-		String originName = upfile.getOriginalFilename(); 
-		
-		String currentTime = new SimpleDateFormat("yyyyMMDDHHmmss").format(new Date());
-		int ranNum = (int)(Math.random() * 90000 + 10000); 
-		String ext = originName.substring(originName.lastIndexOf("."));
-		
-		String updateName = currentTime + ranNum + ext; 
-		
-		String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
-		
-			try {
-				upfile.transferTo(new File(savePath + updateName));
-			} catch (IllegalStateException | IOException e) {
-				e.printStackTrace();
-			}
-			
-		return updateName;
-	}
-	
-	
-	// 검색 화면
-	@RequestMapping(value = "search.li")
-	public String searchKeywordList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
-									@RequestParam(value = "keyword", required = true) String keyword,
-									@RequestParam(value = "options", required = false) String options,
-									@RequestParam(value = "sorting", required = false) String sorting,
-									@RequestParam(value = "category", required = false) String category,
-									@RequestParam(value = "hiddenDate", required = false) String hiddenDate, Model model) {
-	    	
-		System.out.println(currentPage);
-		
-		
-		// 검색 결과 총 개수
-	    int listCount = sService.searchListCount(keyword, options, sorting, category, hiddenDate);
-	    
-	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
-	    
-	    ArrayList<Club> list = sService.searchList(keyword, options, sorting, category, hiddenDate, pi);
-	    ArrayList<Attachment> alist = sService.searchImageList(keyword, options, sorting, category, hiddenDate, pi);
-	    
-	    
-	    model.addAttribute("keyword", keyword);
-	    model.addAttribute("options", options);
-	    model.addAttribute("sorting", sorting);
-	    model.addAttribute("category", category);
-	    model.addAttribute("dateValue", hiddenDate);
-	    
-	    model.addAttribute("pi", pi);
-        model.addAttribute("list", list);
-        model.addAttribute("alist", alist);
-	    
-	    
+   
+   @Autowired
+   private SearchServiceImpl sService;
+   
+   // 이미지 경로 저장
+   public String saveAllFile(MultipartFile upfile, HttpSession session) {
+      String originName = upfile.getOriginalFilename(); 
+      
+      String currentTime = new SimpleDateFormat("yyyyMMDDHHmmss").format(new Date());
+      int ranNum = (int)(Math.random() * 90000 + 10000); 
+      String ext = originName.substring(originName.lastIndexOf("."));
+      
+      String updateName = currentTime + ranNum + ext; 
+      
+      String savePath = session.getServletContext().getRealPath("/resources/uploadFiles/");
+      
+         try {
+            upfile.transferTo(new File(savePath + updateName));
+         } catch (IllegalStateException | IOException e) {
+            e.printStackTrace();
+         }
+         
+      return updateName;
+   }
+   
+   
+   // 검색 화면
+   @RequestMapping(value = "search.li")
+   public String searchKeywordList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage,
+                           @RequestParam(value = "keyword", required = true) String keyword,
+                           @RequestParam(value = "options", required = false) String options,
+                           @RequestParam(value = "sorting", required = false) String sorting,
+                           @RequestParam(value = "category", required = false) String category,
+                           @RequestParam(value = "dateValue", required = false) String dateValue,
+                           @RequestParam(value = "onoff", required = false) String onoff, Model model) {
+          
+      System.out.println(currentPage);
+      
+      
+      // 검색 결과 총 개수
+       int listCount = sService.searchListCount(keyword, options, sorting, category, dateValue, onoff);
+       
+       PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
+       
+       ArrayList<Club> list = sService.searchList(keyword, options, sorting, category, dateValue, onoff, pi);
+       ArrayList<Attachment> alist = sService.searchImageList(keyword, options, sorting, category, dateValue, onoff, pi);
+       
+       
+       model.addAttribute("keyword", keyword);
+       model.addAttribute("options", options);
+       model.addAttribute("sorting", sorting);
+       model.addAttribute("category", category);
+       model.addAttribute("dateValue", dateValue);
+       model.addAttribute("onoff", onoff);
+       
+       model.addAttribute("pi", pi);
+       model.addAttribute("list", list);
+       model.addAttribute("alist", alist);
+       
+       
         System.out.println("pi :" + pi);
         System.out.println("키워드 :" + keyword);
-        System.out.println("날짜 :" + hiddenDate);
+        System.out.println("날짜 :" + dateValue);
         System.out.println("유형 :" + options);
         System.out.println("정렬 :" + sorting);
         System.out.println("카테고리 :" + category);
+        System.out.println("온오프 :" + onoff);
         System.out.println("검색 결과: " + list);
         System.out.println("검색 사진 :" + alist);
         
-	    
+       
 
-	    return "search/searchPage2";
-	}
-
-
-	
-	
-	
-	
-	// ajax 피드 화면
-	@RequestMapping("list.al")
-	public String ajaxSelectAllPage() {
-		
-		return "search/searchPage";
-	}
-	
-	
-	
-	/* 피드 */
-	@ResponseBody
-	@RequestMapping(value = "getList.fe", produces = "application/json; charset=utf-8;")
-	public String ajaxSelectFeedList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage) {
-		
-		
-		System.out.println(currentPage);
-		
-		
-		// 검색 결과 총 개수
-	    int listCount = sService.searchFeedMoreListCount();
-	    
-	    PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
-		
-		
-	    ArrayList<Feed> list = sService.selectFeedList(pi);
-	    
-	    // 이미지 피드 목록을 가져옴
-	    ArrayList<Attachment> alist = sService.selectImageFeedList(pi);
-	    
-	    ArrayList<Member> mlist = sService.selectImageMemberFeedList(pi);
-	    
-	    System.out.println("pi :" + pi);
-	    
-	    // System.out.println(list);
-	    // System.out.println(alist);
-	    // System.out.println(mlist);
-	    
-	    // list와 alist를 JSON으로 변환하여 반환
-	    Gson gson = new Gson();
-	    JsonObject jsonObject = new JsonObject();
-	    jsonObject.add("pi", gson.toJsonTree(pi));
-	    jsonObject.add("list", gson.toJsonTree(list));
-	    jsonObject.add("alist", gson.toJsonTree(alist));
-	    jsonObject.add("mlist", gson.toJsonTree(mlist));
-
-	    return jsonObject.toString();
-	}
+       return "search/searchPage2";
+   }
 
 
-	
-	
-	/* 멤버 */
-	@ResponseBody
-	@RequestMapping(value = "getList.me", produces = "application/json; charset=utf-8;")
-	public String ajaxSelectMemberList() {
-		
-		ArrayList<Member> list = sService.selectMemberList();
-		ArrayList<Attachment> alist = sService.selectImageMemberList();
-		
-		System.out.println(list);
-		System.out.println(alist);
-		
-		Gson gson = new Gson();
-	    JsonObject jsonObject = new JsonObject();
-	    jsonObject.add("list", gson.toJsonTree(list));
-	    jsonObject.add("alist", gson.toJsonTree(alist));
-		
-	    return jsonObject.toString();
-		
-	}
-	
+   
+   
+   
+   
+   // ajax 피드 화면
+   @RequestMapping("list.al")
+   public String ajaxSelectAllPage() {
+      
+      return "search/searchPage";
+   }
+   
+   
+   
+   /* 피드 */
+   @ResponseBody
+   @RequestMapping(value = "getList.fe", produces = "application/json; charset=utf-8;")
+   public String ajaxSelectFeedList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage) {
+      
+      
+      System.out.println(currentPage);
+      
+      
+      // 검색 결과 총 개수
+       int listCount = sService.searchFeedMoreListCount();
+       
+       PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+      
+      
+       ArrayList<Feed> list = sService.selectFeedList(pi);
+       
+       // 이미지 피드 목록을 가져옴
+       ArrayList<Attachment> alist = sService.selectImageFeedList(pi);
+       
+       ArrayList<Member> mlist = sService.selectImageMemberFeedList(pi);
+       
+       System.out.println("pi :" + pi);
+       
+       // System.out.println(list);
+       // System.out.println(alist);
+       // System.out.println(mlist);
+       
+       // list와 alist를 JSON으로 변환하여 반환
+       Gson gson = new Gson();
+       JsonObject jsonObject = new JsonObject();
+       jsonObject.add("pi", gson.toJsonTree(pi));
+       jsonObject.add("list", gson.toJsonTree(list));
+       jsonObject.add("alist", gson.toJsonTree(alist));
+       jsonObject.add("mlist", gson.toJsonTree(mlist));
+
+       return jsonObject.toString();
+   }
+
+
+   
+   
+   /* 멤버 */
+   @ResponseBody
+   @RequestMapping(value = "getList.me", produces = "application/json; charset=utf-8;")
+   public String ajaxSelectMemberList() {
+      
+      ArrayList<Member> list = sService.selectMemberList();
+      ArrayList<Attachment> alist = sService.selectImageMemberList();
+      
+      System.out.println(list);
+      System.out.println(alist);
+      
+      Gson gson = new Gson();
+       JsonObject jsonObject = new JsonObject();
+       jsonObject.add("list", gson.toJsonTree(list));
+       jsonObject.add("alist", gson.toJsonTree(alist));
+      
+       return jsonObject.toString();
+      
+   }
+   
 }
-	
-	
-
+   
+   
