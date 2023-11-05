@@ -649,14 +649,13 @@ a { color:#000000;text-decoration:none; }
             var ps = new kakao.maps.services.Places();
 
             // 위치 검색 및 결과 표시 함수
-            // 위치 검색 및 결과 표시 함수
-function searchLocation() {
+            function searchLocation() {
     var locationInput = document.getElementById('locationInput');
     var locationResult = document.getElementById('locationResult');
     var hiddenLocationInput = document.getElementById('hiddenLocation');
     var keyword = locationInput.value;
 
-    // 클리어 hiddenLocation 값
+    // hiddenLocation 값을 지우세요
     hiddenLocationInput.value = "";
 
     ps.keywordSearch(keyword, function (data, status, pagination) {
@@ -664,35 +663,29 @@ function searchLocation() {
             var bounds = new kakao.maps.LatLngBounds();
             var resultHtml = '검색 결과: ';
 
-            for (var i = 0; i < data.length; i++) {
-                displayMarker(data[i]);
-                bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-
-                // 검색 결과를 hiddenLocation 값에 누적
-                hiddenLocationInput.value += data[i].place_name + ', ';
-
-                resultHtml += '<a href="#" onclick="selectLocation(\'' + data[i].place_name + '\'); return false;">' + data[i].place_name + '</a>, ';
-            }
-
-            // 마지막 쉼표 제거
-            resultHtml = resultHtml.slice(0, -2);
-            locationResult.innerHTML = resultHtml;
-
-            // 검색 결과에서 첫 번째 위치를 선택하여 locationInput의 값을 설정
             if (data.length > 0) {
-                locationInput.value = keyword; // Display the user's search input
+                displayMarker(data[0]);
+                bounds.extend(new kakao.maps.LatLng(data[0].y, data[0].x));
+
+                // 첫 번째 검색 결과를 hiddenLocation 값으로 설정합니다
+                hiddenLocationInput.value = data[0].place_name;
+
+                resultHtml += '<a href="#" onclick="selectLocation(\'' + data[0].place_name + '\'); return false;">' + data[0].place_name + '</a>';
             }
 
+            locationResult.innerHTML = resultHtml;
             map.setBounds(bounds);
         }
     });
 }
 
 
+
             // 위치를 선택할 때 hiddenLocation 값을 업데이트
             function selectLocation(selectedLocation) {
                 var hiddenLocationInput = document.getElementById('hiddenLocation');
-                hiddenLocationInput.value = selectedLocation + ', '; // 클리어 후 새로 설정
+                locationInput.value = selectedLocation; // 선택한 위치를 설정
+                hiddenLocationInput.value = selectedLocation; // 숨겨진 입력 필드의 값도 업데이트
             }
 
 
