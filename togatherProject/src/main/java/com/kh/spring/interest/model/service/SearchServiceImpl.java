@@ -25,18 +25,18 @@ public class SearchServiceImpl implements SearchService {
 
 	//임시
 	@Override
-	public int searchListCount(String keyword, String options, String sorting, String category, String dateValue, String onoff) {
-		return sDao.searchListCount(sqlSession, keyword, options, sorting, category, dateValue, onoff);
+	public int searchListCount(String keyword, String options, String sorting, String category, String dateValue, String onoff, String hiddenLocation) {
+		return sDao.searchListCount(sqlSession, keyword, options, sorting, category, dateValue, onoff, hiddenLocation);
 	}
 
 	@Override
-	public ArrayList<Club> searchList(String keyword, String options, String sorting, String category, String dateValue, String onoff, PageInfo pi) {
-		return sDao.searchList(sqlSession, keyword, options, sorting, category, dateValue, onoff, pi);
+	public ArrayList<Club> searchList(String keyword, String options, String sorting, String category, String dateValue, String onoff, String hiddenLocation, PageInfo pi) {
+		return sDao.searchList(sqlSession, keyword, options, sorting, category, dateValue, onoff, hiddenLocation, pi);
 	}
 
 	@Override
-	public ArrayList<Attachment> searchImageList(String keyword, String options, String sorting, String category, String dateValue, String onoff, PageInfo pi) {
-		return sDao.searchImageList(sqlSession, keyword, options, sorting, category, dateValue, onoff, pi);
+	public ArrayList<Attachment> searchImageList(String keyword, String options, String sorting, String category, String dateValue, String onoff, String hiddenLocation, PageInfo pi) {
+		return sDao.searchImageList(sqlSession, keyword, options, sorting, category, dateValue, onoff, hiddenLocation, pi);
 	}
 	
 	

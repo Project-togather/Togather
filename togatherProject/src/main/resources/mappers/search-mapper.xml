@@ -90,6 +90,7 @@
 		SELECT COUNT(*)
 			FROM class c
 			JOIN attachment ON (c_no = ref_fno)
+			join cl_category on (cl_category = cl_categoryno)
 			WHERE c.status = 'Y'
 			AND c.c_title LIKE '%' || #{keyword} || '%'
 			<if test="options == 1">
@@ -140,6 +141,7 @@
 		    <if test="status == 'off'">
 		        AND c.status = 'N'
 		    </if>
+		    AND (LOWER(c.c_location) LIKE '%' || LOWER(#{hiddenLocation}) || '%')
 			order by c_no desc
 	</select>
 	
@@ -149,9 +151,11 @@
 		    c_title,
 		    c_location,
 		    c_date,
-		    cl_type
+		    cl_type,
+		    cl_name
 		FROM class
 		JOIN attachment ON (c_no = ref_fno)
+		join cl_category on (cl_category = cl_categoryno)
 		WHERE status = 'Y'
 		    AND c_title like '%' || #{keyword} || '%'
 			<if test="options == 1">
@@ -202,6 +206,7 @@
 		    <if test="status == 'off'">
 		        AND status = 'N'
 		    </if>
+		    AND (LOWER(c_location) LIKE '%' || LOWER(#{hiddenLocation}) || '%')
 			order by c_no desc
 	</select>
 	
@@ -212,9 +217,11 @@
 	        a.origin_name,
 	        a.update_name,
 	        a.file_path,
-	        a.enroll_date
+	        a.enroll_date,
+	        cl_name
 	    FROM attachment a
 	    JOIN class c ON (a.ref_fno = c.c_no)
+	    join cl_category on (cl_category = cl_categoryno)
 	    WHERE c.status = 'Y'
 	    AND c.c_title LIKE '%' || #{keyword} || '%'
 		<if test="options == 1">
@@ -265,6 +272,7 @@
 	    <if test="status != 'on'">
 	        AND c.status = 'Y'
 	    </if>
+	    AND (LOWER(c.c_location) LIKE '%' || LOWER(#{hiddenLocation}) || '%')
 	    ORDER BY c.c_no DESC
 	</select>
 	 

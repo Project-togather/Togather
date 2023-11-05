@@ -72,18 +72,19 @@ public class SearchController {
                            @RequestParam(value = "sorting", required = false) String sorting,
                            @RequestParam(value = "category", required = false) String category,
                            @RequestParam(value = "dateValue", required = false) String dateValue,
-                           @RequestParam(value = "onoff", required = false) String onoff, Model model) {
+                           @RequestParam(value = "onoff", required = false) String onoff,
+                           @RequestParam(value = "hiddenLocation", required = false) String hiddenLocation, Model model) {
           
       System.out.println(currentPage);
       
       
       // 검색 결과 총 개수
-       int listCount = sService.searchListCount(keyword, options, sorting, category, dateValue, onoff);
+       int listCount = sService.searchListCount(keyword, options, sorting, category, dateValue, onoff, hiddenLocation);
        
        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 9);
        
-       ArrayList<Club> list = sService.searchList(keyword, options, sorting, category, dateValue, onoff, pi);
-       ArrayList<Attachment> alist = sService.searchImageList(keyword, options, sorting, category, dateValue, onoff, pi);
+       ArrayList<Club> list = sService.searchList(keyword, options, sorting, category, dateValue, onoff, hiddenLocation, pi);
+       ArrayList<Attachment> alist = sService.searchImageList(keyword, options, sorting, category, dateValue, onoff, hiddenLocation, pi);
        
        
        model.addAttribute("keyword", keyword);
@@ -92,6 +93,7 @@ public class SearchController {
        model.addAttribute("category", category);
        model.addAttribute("dateValue", dateValue);
        model.addAttribute("onoff", onoff);
+       model.addAttribute("hiddenLocation", hiddenLocation);
        
        model.addAttribute("pi", pi);
        model.addAttribute("list", list);
@@ -105,6 +107,7 @@ public class SearchController {
         System.out.println("정렬 :" + sorting);
         System.out.println("카테고리 :" + category);
         System.out.println("온오프 :" + onoff);
+        System.out.println("장소 :" + hiddenLocation);
         System.out.println("검색 결과: " + list);
         System.out.println("검색 사진 :" + alist);
         
