@@ -89,7 +89,7 @@
 	 <select id="searchListCount" resultType="_int">
 		SELECT COUNT(*)
 			FROM class c
-			JOIN attachment ON c_no = ref_fno
+			JOIN attachment ON (c_no = ref_fno)
 			WHERE c.status = 'Y'
 			AND c.c_title LIKE '%' || #{keyword} || '%'
 			<if test="options == 1">
@@ -101,39 +101,45 @@
 			<if test="options == 3">
 			  AND c.cl_type = 3
 			</if>
-			<if test="sorting == 4">
-		     AND c.c_location = '온라인'
+			<if test="sorting == 1">
+	          AND c.c_location = '온라인'
+	        </if>
+	        <if test="sorting == 2">
+	          AND c.c_location != '온라인'
+	        </if>
+	        <if test="category == 1">
+	           AND c.cl_category = 1
+	        </if>
+	        <if test="category == 2">
+	           AND c.cl_category = 2
+	        </if>
+	        <if test="category == 3">
+	           AND c.cl_category = 3
+	        </if>
+	        <if test="category == 4">
+	          AND c.cl_category = 4
+	        </if>
+	        <if test="category == 5">
+	          AND c.cl_category = 5
+	        </if>
+	        <if test="category == 6">
+	          AND c.cl_category = 6
+	        </if>
+	        <if test="category == 7">
+	          AND c.cl_category = 7
+	        </if>
+	        <if test="category == 8">
+	          AND c.cl_category = 8
+	        </if>
+	        <if test="dateValue != null">
+			  AND (c.c_date = COALESCE(#{dateValue}, c.c_date))
+			</if>
+			<if test="status == 'on'">
+		        AND c.status = 'Y'
 		    </if>
-		    <if test="sorting == 5">
-		     AND c.c_location != '온라인'
+		    <if test="status == 'off'">
+		        AND c.status = 'N'
 		    </if>
-		    <if test="category == 1">
-			  AND c.cl_category = 1
-			</if>
-			<if test="category == 2">
-			  AND c.cl_category = 2
-			</if>
-			<if test="category == 3">
-			  AND c.cl_category = 3
-			</if>
-			<if test="category == 4">
-    		AND c.cl_category = 4
-  			</if>
-  			<if test="category == 5">
-    		AND c.cl_category = 5
-  			</if>
-  			<if test="category == 6">
-    		AND c.cl_category = 6
-  			</if>
-  			<if test="category == 7">
-    		AND c.cl_category = 7
-  			</if>
-  			<if test="category == 8">
-    		AND c.cl_category = 8
-  			</if>
-  			<if test="dateValue != null">
-			  AND c.c_date = #{dateValue}
-			</if>
 			order by c_no desc
 	</select>
 	
@@ -157,97 +163,109 @@
 			<if test="options == 3">
 			  AND cl_type = 3
 			</if>
-			<if test="sorting == 4">
-    		AND c_location = '온라인'
-  			</if>
-  			<if test="sorting == 5">
-    		AND c_location != '온라인'
-  			</if>
-  			<if test="category == 1">
-			  AND cl_category = 1
+			<if test="sorting == 1">
+	          AND c_location = '온라인'
+	        </if>
+	        <if test="sorting == 2">
+	          AND c_location != '온라인'
+	        </if>
+	        <if test="category == 1">
+	           AND cl_category = 1
+	        </if>
+	        <if test="category == 2">
+	           AND cl_category = 2
+	        </if>
+	        <if test="category == 3">
+	           AND cl_category = 3
+	        </if>
+	        <if test="category == 4">
+	          AND cl_category = 4
+	        </if>
+	        <if test="category == 5">
+	          AND cl_category = 5
+	        </if>
+	        <if test="category == 6">
+	          AND cl_category = 6
+	        </if>
+	        <if test="category == 7">
+	          AND cl_category = 7
+	        </if>
+	        <if test="category == 8">
+	          AND cl_category = 8
+	        </if>
+	        <if test="dateValue != null">
+			  AND (c_date = COALESCE(#{dateValue}, c_date))
 			</if>
-			<if test="category == 2">
-			  AND cl_category = 2
-			</if>
-			<if test="category == 3">
-			  AND cl_category = 3
-			</if>
-			<if test="category == 4">
-    		AND cl_category = 4
-  			</if>
-  			<if test="category == 5">
-    		AND cl_category = 5
-  			</if>
-  			<if test="category == 6">
-    		AND cl_category = 6
-  			</if>
-  			<if test="category == 7">
-    		AND cl_category = 7
-  			</if>
-  			<if test="category == 8">
-    		AND cl_category = 8
-  			</if>
-  			<if test="dateValue != null">
-			  AND c_date = #{dateValue}
-			</if>
+			<if test="status == 'on'">
+		        AND status = 'Y'
+		    </if>
+		    <if test="status == 'off'">
+		        AND status = 'N'
+		    </if>
 			order by c_no desc
 	</select>
 	
 	<select id="searchImageList" resultMap="AttResult">
-		select
-        att_no
-    ,   ref_fno
-    ,   origin_name
-    ,	update_name
-    ,	file_path
-    ,	enroll_date
-        from attachment
-        join class on (c_no = ref_fno)
-			WHERE status = 'Y'
-			AND c_title like '%' || #{keyword} || '%'
-			<if test="options == 1">
-			  AND cl_type = 1
-			</if>
-			<if test="options == 2">
-			  AND cl_type = 2
-			</if>
-			<if test="options == 3">
-			  AND cl_type = 3
-			</if>
-			<if test="sorting == 4">
-    		AND c_location = '온라인'
-  			</if>
-  			<if test="sorting == 5">
-    		AND c_location != '온라인'
-  			</if>
-  			<if test="category == 1">
-			  AND cl_category = 1
-			</if>
-			<if test="category == 2">
-			  AND cl_category = 2
-			</if>
-			<if test="category == 3">
-			  AND cl_category = 3
-			</if>
-			<if test="category == 4">
-    		AND cl_category = 4
-  			</if>
-  			<if test="category == 5">
-    		AND cl_category = 5
-  			</if>
-  			<if test="category == 6">
-    		AND cl_category = 6
-  			</if>
-  			<if test="category == 7">
-    		AND cl_category = 7
-  			</if>
-  			<if test="category == 8">
-    		AND cl_category = 8
-  			</if>
-  			<if test="dateValue != null">
-			  AND c_date = #{dateValue}
-			</if>
-			order by c_no desc
+	    SELECT
+	        a.att_no,
+	        a.ref_fno,
+	        a.origin_name,
+	        a.update_name,
+	        a.file_path,
+	        a.enroll_date
+	    FROM attachment a
+	    JOIN class c ON (a.ref_fno = c.c_no)
+	    WHERE c.status = 'Y'
+	    AND c.c_title LIKE '%' || #{keyword} || '%'
+		<if test="options == 1">
+		  AND c.cl_type = 1
+		</if>
+		<if test="options == 2">
+		  AND c.cl_type = 2
+		</if>
+		<if test="options == 3">
+		  AND c.cl_type = 3
+		</if>
+		<if test="sorting == 1">
+          AND c.c_location = '온라인'
+        </if>
+        <if test="sorting == 2">
+          AND c.c_location != '온라인'
+        </if>
+        <if test="category == 1">
+           AND c.cl_category = 1
+        </if>
+        <if test="category == 2">
+           AND c.cl_category = 2
+        </if>
+        <if test="category == 3">
+           AND c.cl_category = 3
+        </if>
+        <if test="category == 4">
+          AND c.cl_category = 4
+        </if>
+        <if test="category == 5">
+          AND c.cl_category = 5
+        </if>
+        <if test="category == 6">
+          AND c.cl_category = 6
+        </if>
+        <if test="category == 7">
+          AND c.cl_category = 7
+        </if>
+        <if test="category == 8">
+          AND c.cl_category = 8
+        </if>
+        <if test="dateValue != null">
+		  AND (c.c_date = COALESCE(#{dateValue}, c.c_date))
+		</if>
+		<if test="status == 'on'">
+	        AND c.status = 'N'
+	    </if>
+	    <if test="status != 'on'">
+	        AND c.status = 'Y'
+	    </if>
+	    ORDER BY c.c_no DESC
 	</select>
 	 
 	 <!-- 

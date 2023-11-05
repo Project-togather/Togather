@@ -446,21 +446,23 @@ a { color:#000000;text-decoration:none; }
 								<br>
 								<div id="selectedDate">
 									선택 날짜 : <span id="dateValue"></span>
-									<input type="hidden" id="hiddenDate" name="hiddenDate" value="${ hiddenDate }">
+									<input type="hidden" id="hiddenDate" name="dateValue" value="${ dateValue }" <c:if test="${dateValue != null}">checked</c:if>>
 								</div>
 								<br>
 							</div>
 							
-							<div class="modal-body">
-							    <h5>종료된 모임도 표시하기</h5>
-							    <div class="wrapper">
-									<input type="checkbox" id="switch">
-									<label for="switch" class="switch_label">
-									  <span class="onf_btn"></span>
-									</label>
-								  </div>
-							</div>
 
+							<div class="modal-body">
+                                <h5>종료된 모임도 표시하기</h5>
+                                <div class="wrapper">
+                                    <input type="checkbox" id="switch" name="onoff" value="on" <c:if test="${onoff == 'on'}">checked</c:if>>
+                                    <label for="switch" class="switch_label">
+                                        <span class="onf_btn"></span>
+                                    </label>
+                                </div>
+                            </div>                            
+
+                            
 							<div class="modal-body">
 							    <h5>유형</h5>
 							    <label>
@@ -476,6 +478,7 @@ a { color:#000000;text-decoration:none; }
 							    </label>
 							</div>
 
+                            
 							<div class="modal-body">
 								<h5>정렬</h5>
 								<label>
@@ -486,6 +489,7 @@ a { color:#000000;text-decoration:none; }
 									오프라인 <input type="radio" name="sorting" value="2" <c:if test="${sorting == '2'}">checked</c:if>>
 								</label>
 							</div>
+							
 							
 							<div class="modal-body">
 								<h5>카테고리</h5>
@@ -587,7 +591,7 @@ a { color:#000000;text-decoration:none; }
 			                    <article class="post">
 			                        <div class="postPreview">
 			                            <a href="detail.cl?classNo=${c.classNo}&clType=${c.clType}">
-			                                <img src="${alist[loop.index].updateName}" alt="">
+			                                <img src="${alist[loop.index].filePath}" alt="">
 			                            </a>
 			                        </div>
 			                        <br>
@@ -1117,6 +1121,15 @@ a { color:#000000;text-decoration:none; }
 
 
 		</script>
+
+        <script>
+            const checkbox = document.getElementById("switch");
+
+            checkbox.addEventListener("change", function() {
+                const valueToPass = checkbox.checked ? "on" : "off";
+                // 여기에서 valueToPass를 사용하여 필요한 작업을 수행할 수 있습니다.
+            });
+        </script>
 
 
 
