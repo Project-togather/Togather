@@ -993,6 +993,8 @@
 		     , c_time
 		  from class
 		 where cl_category = #{clCategory}
+		   and not c_no in (#{classNo})
+		   and status = 'Y'
 	</select>
 	
 	<select id="selectClassTnList" resultMap="attachment">
@@ -1005,6 +1007,14 @@
          where category = 'class'
 		   and thumbnail = 1
            and cl_category = #{clCategory}
+           and not c_no in (#{classNo})
+	</select>
+	
+	<select id="selectMrUserId" resultMap="MemberResult">
+		select mem_no
+		  from member
+		  join reply using (mem_no)
+		  where r_no = #{mrNo}
 	</select>
 	
 </mapper>

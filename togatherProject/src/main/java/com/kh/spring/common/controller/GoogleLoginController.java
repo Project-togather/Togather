@@ -96,7 +96,6 @@ public class GoogleLoginController {
         	Member loginMember = mService.loginMember(m); //아디 비번주면 로그인이 되겠지?
 
             ArrayList<Member> clType = mService.selectClType(m);
-            System.out.println("쏄탑 : " + clType);
             session.setAttribute("clType", clType);
             session.setAttribute("pImg", loginMember.getImg());
             session.setAttribute("loginMember", loginMember);

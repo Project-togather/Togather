@@ -123,5 +123,6 @@ public interface ClubService {
 	// 비슷한 모임 썸네일
 	ArrayList<Attachment> selectClassTnList(MyClass c);
 	
-	
+	// 답글 달린 댓글 유저아이디
+	Member selectMrUserNo(Reply r);
 }

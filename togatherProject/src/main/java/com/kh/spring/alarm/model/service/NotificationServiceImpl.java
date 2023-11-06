@@ -100,7 +100,7 @@ public class NotificationServiceImpl {
     public void send(Member receiver, Reply reply, String content) {
     	
     	Notification notification = createNotification(receiver, reply, content);
-    	String id = receiver.getMemId();
+    	String id = receiver.getReceiver();
     	
     	//로그인 한 유저의 SseEmitter 모두 가져오기
     	Map<String, SseEmitter> sseEmitters = emitterRepository.findAllEmitterStartWithById(id);

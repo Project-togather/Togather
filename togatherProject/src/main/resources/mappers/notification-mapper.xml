@@ -31,7 +31,7 @@
 		  values
 		  	(
 		  	  seq_notino.nextval
-		  	, #{reply.refMno}
+		  	, #{receiver.receiver}
 		  	, #{reply.classTitle}
 		  	, #{content}
 		  	, 'detail.cl?classNo='||#{reply.refFno}

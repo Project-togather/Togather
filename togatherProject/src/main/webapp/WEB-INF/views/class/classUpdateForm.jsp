@@ -47,40 +47,18 @@
 										<p>가입되어있는 멤버, 승인 대기중인 멤버 등을 확인하실 수 있어요!</p>
 									</div>
 								</div>
+								<!--
 								<div class="menu-simple-item">
 									<div class="menu-simple-item-inner" onclick="location.href='';" style="cursor:pointer;">
 										<h6><span style="font-size:20px;">활동비 정산 내역</span><span class="pull-right">></span></h6>
 										<p>Bacon, Rice, Vegetables</p>
 									</div>
 								</div>
+								-->
 								<div class="menu-simple-item">
 									<div class="menu-simple-item-inner" onclick="deleteConfirm();" style="cursor:pointer;">
 										<h6><span style="font-size:20px;">클럽 삭제</span><span class="pull-right">></span></h6>
 										<p>이 클럽을 아예 삭제하실 수 있어요.</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-inner" onclick="location.href='';" style="cursor:pointer;">
-										<h6><span style="font-size:20px;">Italian Source Mushroom</span><span class="pull-right">></span></h6>
-										<p>Steak, Spices, Sauces</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-inner">
-										<h6><span style="font-size:20px;">Lemon and Garlic Green Beans</span><span class="pull-right">></span></h6>
-										<p>Pork meat, Sauces, Potato</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-inner">
-										<h6><span style="font-size:20px;">American Brunch Combo Menu</span><span class="pull-right">></span></h6>
-										<p>Bacon, Rice, Vegetables</p>
-									</div>
-								</div>
-								<div class="menu-simple-item">
-									<div class="menu-simple-item-inner">
-										<h6><span style="font-size:20px;">Smoked Paprika Hummus</span><span class="pull-right">></span></h6>
-										<p>Shrimp, Vegetables, Sauce</p>
 									</div>
 								</div>
 								</div>
@@ -102,9 +80,6 @@
 								.then((willDelete) => {
 								  if (willDelete) {
 									location.href="deleteClass.cl?cNo="+cNo;
-								    swal("모임이 삭제되었습니다!", {
-								      icon: "success",
-								    });
 								  } else {
 								    swal("모임 삭제를 취소합니다!");
 								  }
