@@ -127,9 +127,9 @@
 												+		"</div>"
 												+	"</div>"
 												+"</div>"
-												console.log(value2);
+												//console.log(value2);
 												
-												$("#replySection").find("#RE2").after(value2);
+												//$("#replySection").find("#RE2").after(value2);
 
 									}
 									
