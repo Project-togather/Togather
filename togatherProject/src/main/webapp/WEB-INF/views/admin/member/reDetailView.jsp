@@ -51,7 +51,7 @@
 					            </table>
 								<div class="btn-group float-right" role="group" aria-label="Basic mixed styles example">
 								<button type="button" class="btn btn-secondary float-right" onclick="history.back();">뒤로가기</button>
-								<button type="button" class="btn btn-danger float-right" onclick="deletenotice();" >반려하기</button>
+								<button type="button" class="btn btn-danger float-right" onclick="deletereport();" >반려하기</button>
 								<button type="submit" class="btn btn-warning float-right">신고수락</button>
 					            </form>
 							</div>
@@ -63,11 +63,11 @@
 	</div>
 	
 	<script>
-		function deletenotice(){
-			if(confirm("정말 해당글을 삭제하시겠습니까?")){
-			 	location.href='delete.no?noticeNo='+${n.noticeNo}
+		function deletereport(){
+			if(confirm("정말 해당글을 반려하시겠습니까?")){
+			 	location.href='delete.re?reNo='+${r.reNo}
 			}else{
-				location.href='detail.no?noticeNo='+${n.noticeNo}
+				location.href='detail.re?reNo='+${r.reNo}
 			}
 		}
 	</script>

@@ -13,6 +13,27 @@
 	height: 204.07px;
 	object-fit: cover;
 }
+
+.minibar {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.minibar2 {
+	float: left;
+	text-align: center;
+}
+
+.minibar2 li {
+	display: inline-block;
+	text-align: center;
+	margin-left: 210px;
+}
+
+li:hover {
+	cursor: pointer;
+	background-color: orange;
+}
 </style>
 </head>
 <body>
@@ -24,39 +45,51 @@
 	<br>
 	<br>
 
+		<div class="minibar" textalign="center">
+			<ul class="minibar2">
+				<li onclick="location.href='usnoticelist.pa'">공지사항</li>
+				<li onclick="location.href='usfaqlist.pa'">FAQ</li>
+				<li onclick="location.href='complain.bl'">회원신고</li>
+			</ul>
+		</div>
+		<br>
+		<br>
 	<div class="col-md-6 m-auto text-center">
 		<h1 class="display-1">회원신고 게시판</h1>
 		<p class="lead">정확한 내용으로 신고 해 주세요</p>
 		<div class="divider-border"></div>
 	</div>
-	
-		<div class="container" style="margin-top: 50px" >
-			<form action="throwComplain.bl" method="post" enctype="multipart/form-data">
+
+	<div class="container" style="margin-top: 50px">
+		<form action="throwComplain.bl" method="post"
+			enctype="multipart/form-data">
 			<input type="hidden" name="reMem" value="${loginMember.memId}">
 			<input type="hidden" name="reCategory" value="1">
-			
+
 			<div class="mb-3">
-			  <h4>신고할 유저 아이디 </h4>
-			  <input type="text" class="form-control" id="rePmem" name="rePmem">
+				<h4>신고할 유저 아이디</h4>
+				<input type="text" class="form-control" id="rePmem" name="rePmem">
 			</div>
 			<div class="mb-3">
-			  <h4>신고 내용 </h4>
-			  <textarea class="form-control" id="reContent" rows="20" name="reContent"></textarea>
+				<h4>신고 내용</h4>
+				<textarea class="form-control" id="reContent" rows="20"
+					name="reContent"></textarea>
 			</div>
-			
+
 			<div class="mb-3">
-			  <h4>첨부파일 </h4>
-			  <input class="form-control" type="file" id="originName" name="upfile" >
+				<h4>첨부파일</h4>
+				<input class="form-control" type="file" id="originName"
+					name="upfile">
 			</div>
 			<input type="submit" class="btn btn-warining" value="신고하기">
 		</form>
-		</div>
-		
-		
+	</div>
 
-		<div class="col-md-12">
-			<div class="space" data-my="100px" style="margin-top: 100px;"></div>
-		</div>
+
+
+	<div class="col-md-12">
+		<div class="space" data-my="100px" style="margin-top: 100px;"></div>
+	</div>
 
 	<!-- To top button-->
 	<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
@@ -75,6 +108,6 @@
 	<script src="assets/js/plugins.min.js"></script>
 	<script src="assets/js/custom.min.js"></script>
 
-	
+
 </body>
 </html>

@@ -19,8 +19,6 @@
 
 					<!-- Button trigger modal -->
 					<button type="button" class="btn btn-warning btn-sm float-right"
-						onclick="faqWriter2();">사용자페이지 faq</button>
-					<button type="button" class="btn btn-warning btn-sm float-right"
 						onclick="faqWriter();">faq 추가하기</button>
 
 					<br> <br>

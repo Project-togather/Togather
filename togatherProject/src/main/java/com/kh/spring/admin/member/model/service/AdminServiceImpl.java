@@ -115,4 +115,19 @@ public class AdminServiceImpl implements AdminService {
 		return ADao.insertblackList2(sqlSession,r);
 	}
 
+	@Override
+	public int selectBl(String bl) {
+		return ADao.selectBl(sqlSession,bl);
+	}
+
+	@Override
+	public int updateMemRp(String memId) {
+		return ADao.updateMemRp(sqlSession,memId);
+	}
+
+	@Override
+	public int deleteReport(String reNo) {
+		return ADao.deleteReport(sqlSession,reNo);
+	}
+
 }
