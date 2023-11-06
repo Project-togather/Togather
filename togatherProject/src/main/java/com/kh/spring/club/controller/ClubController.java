@@ -372,6 +372,7 @@ public class ClubController {
 		mc.setClType(1);
 		
 		Club c = cService.selectClassDetail(mc);
+		System.out.println("닉네임 나와야함 "+ c.getNickName());
 		
 		mc.setClCategory(c.getClCategory());
 		mc.setMemNo(c.getMemNo());
@@ -393,6 +394,7 @@ public class ClubController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("atList", atList);
+		System.out.println(atList);
 		model.addAttribute("fList", fList);
 		model.addAttribute("fpfList", fpfList);
 		model.addAttribute("ftnList", ftnList);

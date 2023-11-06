@@ -153,6 +153,13 @@
 									<br>
 								</a>
 							</c:when>
+							<c:otherwise>
+		                        <a href="javascript:loginAlert()"> <span id="profile"><img
+		                              src="${ atList[1].filePath }"></span> <br> <span
+		                           class="subtitle" id="profile_nickname">${ c.nickName }</span> <br>
+		                           <br>
+		                        </a>
+		                    </c:otherwise>
 						</c:choose>
 						<p>
 							<c:choose>
