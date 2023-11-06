@@ -22,8 +22,6 @@
 						data-bs-toggle="modal" data-bs-target="#blackinsert"
 						data-bs-whatever="@mdo">블랙리스트 추가하기</button>
 					<button type="button" class="btn btn-warning btn-sm float-right"
-					onclick="inputblacklist();">사용자페이지 블랙리스트 신고</button>
-					<button type="button" class="btn btn-warning btn-sm float-right"
 					onclick="selectblacklist();">블랙리스트 신고확인</button>
 						
 					<div class="modal fade" id="blackinsert" tabindex="-1"
@@ -75,7 +73,7 @@
 							<c:forEach var="b" items="${list}">
 								<tr>
 									<th scope="row">${b.blackNo}</th>
-									<td id="blackId">${b.blackId }</td>
+									<td id="blackId">${b.blackId}</td>
 									<td >${b.blackName }</td>
 									<td>${b.nickName }</td>
 									<td>${b.rpCount }</td>

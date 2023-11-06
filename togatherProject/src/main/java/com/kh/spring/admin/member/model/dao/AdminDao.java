@@ -104,4 +104,15 @@ public class AdminDao {
 	public int insertblackList2(SqlSession sqlSession,Report r) {
 		return sqlSession.insert("admemberMapper.insertblackList2",r);
 	}
+	
+	public int selectBl(SqlSession sqlSession,String bl) {
+		return sqlSession.selectOne("admemberMapper.selectBl",bl);
+	}
+	public int updateMemRp(SqlSession sqlSession,String memId) {
+		return sqlSession.update("admemberMapper.updateMemRp",memId);
+	}
+	public int deleteReport(SqlSession sqlSession,String reNo) {
+		return sqlSession.update("admemberMapper.deleteReport",reNo);
+	}
+	
 }

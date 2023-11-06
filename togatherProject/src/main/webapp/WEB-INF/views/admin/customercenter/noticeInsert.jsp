@@ -28,10 +28,10 @@
 										name="noticeContent" placeholder="내용을 입력하세요"></textarea>
 								</div>
 								<div class="btn-group float-right" role="group" aria-label="Basic mixed styles example">
-								<button type="button" class="btn btn-secondary float-right" onclick="history.back();">뒤로가기</button>
-								<button type="reset" class="btn btn-danger float-right">다시쓰기</button>
-								<button type="submit" class="btn btn-warning float-right">공지사항 등록</button>
-							</div>
+									<button type="button" class="btn btn-secondary float-right" onclick="history.back();">뒤로가기</button>
+									<button type="reset" class="btn btn-danger float-right">다시쓰기</button>
+									<button type="submit" class="btn btn-warning float-right">공지사항 등록</button>
+								</div>
 							</form>
 						</div>
 					</div>

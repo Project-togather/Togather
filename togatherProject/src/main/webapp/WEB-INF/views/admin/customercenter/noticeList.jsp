@@ -19,8 +19,6 @@
 
 					<!-- Button trigger modal -->
 					<button type="button" class="btn btn-warning btn-sm float-right"
-						onclick="noticeWriter2();">사용자페이지 공지사항</button>
-					<button type="button" class="btn btn-warning btn-sm float-right"
 						onclick="noticeWriter();">공지사항 추가하기</button>
 
 					<br> <br>
@@ -89,11 +87,7 @@
 			}
 	</script>
 	
-	<script>
-		function noticeWriter2(){
-			location.href="usnoticelist.pa"
-			}
-	</script>
+	
 	<script>
 		$(function(){
 			$(document).on("click","#noticetr",function(){
