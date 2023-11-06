@@ -44,7 +44,7 @@
 												<ul class="post-meta">
 													<li>${f.feDate}</li>
 													<li><a href="#">Like : ${f.likeCount}</a>,</li>
-													<li>3 Comments</li>
+													<li> Comments</li>
 												</ul>
 											</div>
 											<div class="post-content">
