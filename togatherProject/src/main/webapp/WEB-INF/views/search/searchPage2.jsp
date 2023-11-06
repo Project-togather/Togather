@@ -601,7 +601,9 @@ a { color:#000000;text-decoration:none; }
 		</c:if>
 
 		
-		
+        <div id="noResultsMessage" style="display: none; text-align: center;">
+            검색 결과가 없습니다.
+        </div>
 		
 			<div class="container">
 			    <div class="search-class">
@@ -622,7 +624,12 @@ a { color:#000000;text-decoration:none; }
 			                            <div class="post-header">
 			                                <h4 class="post-title1"><a href="blog-single-1.html">${c.classTitle}</a></h4>
 			                            </div>
-			                            <span class="bestDiv1"> ${ c.classDate }</span> &nbsp;
+			                            <span class="bestDiv1">
+                                            <c:choose>
+                                                <c:when test="${empty c.classDate}">등록된 날짜가 없습니다</c:when>
+                                                <c:otherwise>${c.classDate}</c:otherwise>
+                                            </c:choose>
+                                        </span> &nbsp;
 				          	            <span class="bestDiv2"> ${c.clName} </span> <br>
 			                        </div>
 			                    </article>
@@ -631,6 +638,7 @@ a { color:#000000;text-decoration:none; }
 			        </div>
 			    </div>
 			</div>
+
 
 
 				<div id="pagingArea">
@@ -664,6 +672,20 @@ a { color:#000000;text-decoration:none; }
 
 			</div>
 		
+
+            <script>
+                // 검색 결과가 없는 경우
+                var noResults = <c:if test="${empty list}">true</c:if>;
+                if (noResults) {
+                  document.getElementById("noResultsMessage").style.display = "block";
+                }
+
+                // 페이지네이션 숨기기
+                var noResults = <c:if test="${empty list}">true</c:if>;
+                if (noResults) {
+                    document.getElementById("pagingArea").style.display = "none";
+                }
+            </script>
 
             <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4dbad23dc2507351eb28701520293a0&libraries=services"></script>
             <script>
