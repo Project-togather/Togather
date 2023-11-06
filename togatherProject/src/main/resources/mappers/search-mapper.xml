@@ -135,13 +135,10 @@
 	        <if test="dateValue != null">
 			  AND (c.c_date = COALESCE(#{dateValue}, c.c_date))
 			</if>
-			<if test="status == 'on'">
-		        AND c.status = 'Y'
-		    </if>
-		    <if test="status == 'off'">
-		        AND c.status = 'N'
-		    </if>
-		    AND (LOWER(c.c_location) LIKE '%' || LOWER(#{hiddenLocation}) || '%')
+			<if test="onoff == 'on'">
+			    AND (c.status = 'Y' AND c.c_price = 0)
+			</if>
+		    AND (LOWER(c.c_location) LIKE '%' || LOWER(#{selectedAddress}) || '%')
 			order by c_no desc
 	</select>
 	
@@ -200,13 +197,10 @@
 	        <if test="dateValue != null">
 			  AND (c_date = COALESCE(#{dateValue}, c_date))
 			</if>
-			<if test="status == 'on'">
-		        AND status = 'Y'
-		    </if>
-		    <if test="status == 'off'">
-		        AND status = 'N'
-		    </if>
-		    AND (LOWER(c_location) LIKE '%' || LOWER(#{hiddenLocation}) || '%')
+			<if test="onoff == 'on'">
+			    AND (status = 'Y' AND c_price = 0)
+			</if>
+		    AND (LOWER(c_location) LIKE '%' || LOWER(#{selectedAddress}) || '%')
 			order by c_no desc
 	</select>
 	
@@ -266,13 +260,10 @@
         <if test="dateValue != null">
 		  AND (c.c_date = COALESCE(#{dateValue}, c.c_date))
 		</if>
-		<if test="status == 'on'">
-	        AND c.status = 'N'
-	    </if>
-	    <if test="status != 'on'">
-	        AND c.status = 'Y'
-	    </if>
-	    AND (LOWER(c.c_location) LIKE '%' || LOWER(#{hiddenLocation}) || '%')
+		<if test="onoff == 'on'">
+			    AND (c.status = 'Y' AND c.c_price = 0)
+			</if>
+	    AND (LOWER(c.c_location) LIKE '%' || LOWER(#{selectedAddress}) || '%')
 	    ORDER BY c.c_no DESC
 	</select>
 	 
@@ -334,68 +325,6 @@
 	 -->
 	
 	<!-- ajax 영역 -->
-	
-	<!-- 피드 부분 -->
-	<select id="ajaxSelectFeedList" resultMap="feedResult">
-		 select
-            fe_no
-        ,   ref_cno
-        ,   fe_content
-        ,   fe_date
-        ,   fe_writer
-        ,   f_status
-    from feed
-    join attachment on (fe_no = ref_fno)
-    where f_status = 'Y'
-    order by enroll_date desc
-	</select>
-	
-	<select id="ajaxSelectImageFeedList" resultMap="AttResult">
-		 select
-        att_no
-    ,   ref_fno
-    ,   origin_name
-    ,	update_name
-    ,	file_path
-    ,	enroll_date
-        from attachment
-        join feed on (fe_no = ref_fno)
-			WHERE f_status = 'Y'
-			order by enroll_date desc
-	</select>
-	
-	<select id="ajaxSelectImageMemberFeedList" resultMap="memberResult">
-		 select
-		       mem_no
-		     , mem_id
-		     , mem_pwd
-		     , mem_name
-		     , nickname
-		     , email
-		     , gender
-		     , age
-		     , phone
-		     , a.enroll_date
-		     , m_status
-		     , manner
-		     , img
-		     , msg
-		  from member
-		  join feed on (mem_no = fe_writer)
-		  join attachment a on (mem_no = ref_fno)
-		 WHERE m_status = 'Y'
-		    order by a.enroll_date desc
-	</select>
-	
-	<!-- 피드 무한 스크롤링 부분 -->
-	<select id="searchFeedMoreListCount" resultType="_int">
-		    SELECT COUNT(*)
-			FROM feed f
-			join attachment on (fe_no = ref_fno)
-    where f.f_status = 'Y'
-    order by enroll_date desc
-	</select>
-	
 	
 	<select id="ajaxSelectMemberList" resultMap="memberResult">
 		select

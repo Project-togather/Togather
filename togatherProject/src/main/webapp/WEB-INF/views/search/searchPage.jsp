@@ -341,6 +341,22 @@ span{
 }
 
 
+@font-face {
+    font-family: 'TheJamsil';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.ttf') format("truetype");
+    font-display: swap;
+}
+        *{
+            font-family: 'TheJamsil';
+            /* font-family: 'IBM Plex Sans KR', sans-serif; */
+        }
+
 </style>
 </head>
 <body>
@@ -383,6 +399,7 @@ span{
         
         
         <!-- 네비바 -->
+		<!--
         <nav id="searchNav">
 			<a href="#" id="feedClick">
 				<i class="fas fa-light fa-comment" style="color: rgba(114, 114, 114, 0.918);"></i>&nbsp;Feed
@@ -392,7 +409,7 @@ span{
 			</a>
 			<div class="nav-underline"></div>
 		</nav>
-		
+		-->
 		
 		
 		
@@ -498,16 +515,13 @@ span{
 
 		
 		<script>
+			/*
 		<!-- 먼저 보이는 feed -->
 			$(function() {
 					
 					$.ajax({
 						url:"getList.fe",
 						success:function(object) {
-							
-							
-							
-							
 							
 							let value = "";
 							
@@ -517,10 +531,12 @@ span{
 								let item2 = object.alist[i];
 								let item3 = object.mlist[i];
 
-								console.log(item3.filePath);
+								console.log(item);
+								console.log(item2);
+								console.log(item3);
 
 								$(".feed_img").attr("src", item2.filePath);
-								$(".profile_img").attr("src", item3.filePath);
+								$(".profile_img").attr("src", item3.img);
 
 								value += "<div class='feed-item'>" 
 											+ "<div class='feed-box'>" 
@@ -602,7 +618,7 @@ span{
 								console.log(item3.filePath);
 
 								$(".feed_img").attr("src", item2.filePath);
-								$(".profile_img").attr("src", item3.filePath);
+								$(".profile_img").attr("src", item3.img);
 								
 								value += "<div class='feed-item'>" 
 											+ "<div class='feed-box'>" 
@@ -652,11 +668,11 @@ span{
 					
 				})
 			})
+			*/
 
 			
 			<!-- 멤버 ajax 스크립트 영역 -->
 			$(function() {
-				$("#memberClick").click(function() {
 					
 					$.ajax({
 						url: "getList.me",
@@ -686,7 +702,6 @@ span{
 							console.log("ajax 통신 실패");
 						}
 					});
-				});
 			});
 
 		 	

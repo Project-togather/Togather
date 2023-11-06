@@ -14,6 +14,28 @@
 	height: 219.31px;
 	object-fit: cover;
 }
+
+@font-face {
+    font-family: 'TheJamsil';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.ttf') format("truetype");
+    font-display: swap;
+}
+        *{
+            font-family: 'TheJamsil';
+            /* font-family: 'IBM Plex Sans KR', sans-serif; */
+        }
+
+
+/* 글씨 크기 */
+#menu11 {
+	font-size: 100%;
+}
 </style>
 </head>
 <body>
@@ -90,7 +112,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 m-auto text-center">
-						<h1 class="display-1">소셜링</h1>
+						<p class="display-1">소셜링</p>
 						<p class="lead">똑같은 일상을 다채롭게 <br/> 만들어 줄 원데이 취향 모임</p>
 						<div class="divider-border"></div>
 					</div>

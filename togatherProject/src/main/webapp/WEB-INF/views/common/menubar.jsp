@@ -126,9 +126,21 @@ li .m-searchBtn i {
 
 
 /* 추가적인 스타일을 원하실 경우 여기에 추가하실 수 있습니다. */
-
-
-
+@font-face {
+    font-family: 'TheJamsil';
+    font-weight: 700;
+    font-style: normal;
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.eot');
+    src: url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.eot?#iefix') format('embedded-opentype'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.woff2') format('woff2'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.woff') format('woff'),
+        url('https://cdn.jsdelivr.net/gh/webfontworld/TheJamsil/TheJamsil-Light.ttf') format("truetype");
+    font-display: swap;
+}
+        *{
+            font-family: 'TheJamsil';
+            /* font-family: 'IBM Plex Sans KR', sans-serif; */
+        }
 </style>
 </head>
 <body>
@@ -290,7 +302,7 @@ li .m-searchBtn i {
          <div class="navigation navigation-center">
             <div class="container-fluid">
                <!-- Brand-->
-               <div class="inner-header"><a class="inner-brand" href="index.do"><img class="brand-dark" src="assets/images/logo.png" width="74px" alt=""><img class="brand-light" src="assets/images/logo-light.png" width="74px" alt=""></a></div>
+               <div class="inner-header"><a class="inner-brand" href="index.do"><img class="brand-dark" src="assets/images/togather-logo-light.png" width="150px" alt=""><img class="brand-light" src="assets/images/togather-logo.png" width="150px" alt=""></a></div>
                <!-- Navigation-->
                <div class="inner-navigation collapse">
                   <div class="inner-nav onepage-nav">
