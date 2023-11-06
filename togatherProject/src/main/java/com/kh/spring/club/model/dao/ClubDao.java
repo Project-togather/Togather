@@ -18,10 +18,6 @@ import com.kh.spring.reply.model.vo.Reply;
 @Repository
 public class ClubDao {
 	
-	public ArrayList<Club> selectClassList(SqlSessionTemplate sqlSession){
-		return (ArrayList)sqlSession.selectList("clubMapper.selectClassList"); 
-	}
-	
 	public ArrayList<Club> selectSocialList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("clubMapper.selectSocialList");
 	}

@@ -72,13 +72,20 @@ public class ClubController {
 	@RequestMapping(value= "index.do")
 	public String selectClassList(Club c, Attachment at, MultipartFile upfile, HttpSession session, Model model) {
 		
-		ArrayList<Club> list = cService.selectClassList();
-		// 피드 리스트 조회 추가!
-		ArrayList<Feed> list1 = fService.selectListFeeds();
+		ArrayList<Club> list1 = cService.selectSocialList();
+		ArrayList<Club> list2 = cService.selectClubList();
+		ArrayList<Club> list3 = cService.selectChallengeList();
+		ArrayList<Club> list4 = cService.selectOneDayList();
 		
-		if(list != null) {
+		// 피드 리스트 조회 추가!
+		ArrayList<Feed> list5 = fService.selectListFeeds();
+		
+		if(list1 != null) {
 			session.setAttribute("list1", list1);
-			session.setAttribute("list", list);
+			session.setAttribute("list2", list2);
+			session.setAttribute("list3", list3);
+			session.setAttribute("list4", list4);
+			session.setAttribute("list5", list5);
 			return "main";
 		}else {
 			model.addAttribute("errorMsg", "실패!?");

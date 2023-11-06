@@ -31,10 +31,10 @@
 		     , fe_writer
 		     , f_status
 		     , like_count
-		     , (select file_path
-		          from attachment
-		         where fe_no = ref_fno) img
+		     , file_path as img
 		  from feed
+		  join attachment on (fe_no = ref_fno)
+		 where thumbnail = 1
 		 order 
 		    by like_count desc
 	</select>
@@ -48,11 +48,10 @@
 		     , fe_writer
 		     , f_status
 		     , like_count
-		     , (select file_path
-				  from attachment
-				 where fe_no = ref_fno) img
+		     , file_path as img
 		  from feed f
           join attachment on (fe_no = ref_fno)
+         where thumbnail = 1
 	</select>
 	
 	<select id="selectFeedLists" resultMap="ResultFeed">
@@ -64,13 +63,12 @@
 		     , fe_writer
 		     , f_status
 		     , like_count
-		     , (select file_path
-				  from attachment
-				 where fe_no = ref_fno) img
+		     , file_path as img
 		  from feed f
           join attachment on (fe_no = ref_fno)
 		 where f_status = #{feStatus}
            and fe_no = ref_fno
+           and thumbnail = 1
 	</select>
 	 
 	<select id="FollowingFeedLists" resultMap="ResultFeed">
@@ -83,13 +81,12 @@
 		     , f_status
 		     , like_count
              , to_mem
-		     ,(select file_path
-				  from attachment
-				 where fe_no = ref_fno) img
+		     , file_path as img
 		  from feed
           join follow on (fe_writer = to_mem)
           join attachment on (fe_no = ref_fno)
          where from_mem = #{memNo}
+           and thumbnail = 1
 	</select>
 	
 </mapper>
