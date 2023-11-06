@@ -436,7 +436,6 @@ a { color:#000000;text-decoration:none; }
 		</div>
 		
 		
-		
 		<!-- 모달 -->
 		<!-- modal 구동 버튼 (trigger) -->
 		<div class="modal-btn">
@@ -453,8 +452,10 @@ a { color:#000000;text-decoration:none; }
 						<input type="hidden" name="cpage" value="1">
 						<input type="hidden" name="keyword" value="${ keyword }">
 						<div class="modal-header">
-							<h4 class="modal-title" id="myModalLabel">필터</h4>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title" id="myModalLabel">필터</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetModal()">
+                              <span aria-hidden="true">×</span>
+                            </button>
 						</div>
 
 						<div id="modal-body" style="max-height: 700px; overflow-y: auto;">
@@ -951,6 +952,29 @@ a { color:#000000;text-decoration:none; }
             
             </script>
 
+
+            <script>
+                // JavaScript로 모달을 초기화
+                function resetModal() {
+                // 모달 내의 필드를 초기화
+                // 예: 날짜, 체크박스, 라디오 버튼 등의 필드 초기화
+                // 날짜 초기화
+                document.getElementById("dateValue").textContent = "";
+                document.getElementById("hiddenDate").value = "";
+                
+                // 체크박스 초기화
+                document.getElementById("switch").checked = false;
+            
+                // 라디오 버튼 초기화
+                var radioButtons = document.getElementsByName("options");
+                for (var i = 0; i < radioButtons.length; i++) {
+                    radioButtons[i].checked = false;
+                }
+            
+                // 모달을 닫기
+                $('#myModal').modal('hide');
+                }
+            </script>
             
 		
 		
