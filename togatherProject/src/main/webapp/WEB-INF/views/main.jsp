@@ -104,8 +104,7 @@
 			
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<c:forEach var="c"  items="${ list }" end="8">
-						<c:if test="${ c.clType eq 1 }">
+					<c:forEach var="c"  items="${ list1 }" end="8">
 						<div class="col-md-4">
 							<div class="demo-preview" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
 								<img src="${ c.attachment.filePath }">
@@ -118,7 +117,6 @@
 					        	   </c:otherwise> 
 					          </c:choose>
 							</div>
-				          </c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -142,8 +140,7 @@
 			
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<c:forEach var="c"  items="${ list }" end="8">
-						<c:if test="${ c.clType eq 2 }">
+					<c:forEach var="c"  items="${ list2 }" end="8">
 						<div class="col-md-4">
 							<div class="demo-preview" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
 								<img src="${ c.attachment.filePath }">
@@ -156,7 +153,6 @@
 					        	   </c:otherwise> 
 					          </c:choose>
 							</div>
-				          </c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -179,8 +175,7 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<c:forEach var="c"  items="${ list }" end="8">
-						<c:if test="${ c.clType eq 3 }">
+					<c:forEach var="c"  items="${ list3 }" end="8">
 						<div class="col-md-4">
 							<div class="demo-preview" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
 								<img src="${ c.attachment.filePath }">
@@ -193,7 +188,6 @@
 					        	   </c:otherwise> 
 					          </c:choose>
 							</div>
-				          </c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -216,8 +210,7 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<c:forEach var="c"  items="${ list }" end="8">
-						<c:if test="${ c.clType eq 4 }">
+					<c:forEach var="c"  items="${ list4 }" end="8">
 						<div class="col-md-4">
 							<div class="demo-preview" onclick="location.href='detail.cl?classNo=${ c.classNo }&clType=${ c.clType }'">
 								<img src="${ c.attachment.filePath }">
@@ -230,7 +223,6 @@
 					        	   </c:otherwise> 
 					          </c:choose>
 							</div>
-				          </c:if>
 					</c:forEach>
 				</div>
 			</div>
@@ -253,9 +245,9 @@
 			</div>
 			<div class="container-fluid custom-container">
 				<div class="row">
-					<c:forEach var="f"  items="${ list1 }" end="8">
+					<c:forEach var="f"  items="${ list5 }" end="8">
 						<div class="col-md-4">
-							<div class="demo-preview" onclick="location.href='feedDetail.cl?feNo=${ f.feNo }'">
+							<div class="demo-preview" onclick="location.href='feedDetail.fe?feNo=${ f.feNo }'">
 								<img src="${ f.img }">
 						       <c:choose>
 						           <c:when test="${fn:length(f.feContent) > 18}">
@@ -270,7 +262,9 @@
 				</div>
 			</div>
 		</section>
-
+		
+		
+ 		
 	<!-- To top button--><a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 	
 		<br><br><br>

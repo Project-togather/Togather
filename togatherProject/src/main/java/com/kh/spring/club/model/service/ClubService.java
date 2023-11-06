@@ -12,9 +12,6 @@ import com.kh.spring.reply.model.vo.Reply;
 
 public interface ClubService {
 	
-	// 전체 리스트 조회 (소셜링, 클럽, 챌린지, 원데이, 피드?) (대문자)
-	ArrayList<Club> selectClassList();
-	
 	// 소셜링 전체 조회
 	ArrayList<Club> selectSocialList();
 	

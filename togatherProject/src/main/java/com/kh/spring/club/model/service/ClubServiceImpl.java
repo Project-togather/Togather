@@ -25,11 +25,6 @@ public class ClubServiceImpl implements ClubService {
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public ArrayList<Club> selectClassList() {
-		return cDao.selectClassList(sqlSession);
-	}
-
-	@Override
 	public ArrayList<Club> selectSocialList() {
 		return cDao.selectSocialList(sqlSession);
 	}
