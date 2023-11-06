@@ -112,10 +112,10 @@ public class NoticeController {
 		int result = Cservice.insertNoticeBoard(n);
 
 		if (result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 공지사항이 등록되었습니다.");
+			
 			return "redirect:notice.list";
 		} else {
-			model.addAttribute("errorMsg", "공지사항 등록에 실패했습니다.");
+			
 			return "common/errorPage";
 		}
 	}
@@ -125,10 +125,10 @@ public class NoticeController {
 			int result = Cservice.insertfaqBoard(f);
 
 			if (result > 0) {
-				session.setAttribute("alertMsg", "성공적으로 faq 등록되었습니다.");
+				
 				return "redirect:faq.list";
 			} else {
-				model.addAttribute("errorMsg", "faq 등록에 실패했습니다.");
+				
 				return "common/errorPage";
 
 			}
@@ -181,10 +181,10 @@ public class NoticeController {
 		int result = Cservice.updateNotice(n);
 
 		if (result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 공지사항이 등록되었습니다.");
+			
 			return "redirect:notice.list";
 		} else {
-			model.addAttribute("errorMsg", "공지사항 등록에 실패했습니다.");
+			
 			return "common/errorPage";
 
 		}
@@ -237,10 +237,10 @@ public class NoticeController {
 		int result = Cservice.updateFaq(f);
 
 		if (result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 faq가 수정 되었습니다.");
+			
 			return "redirect:faq.list";
 		} else {
-			model.addAttribute("errorMsg", "faq 수정에 실패했습니다.");
+			
 			return "common/faq.list";
 
 		}
@@ -259,10 +259,10 @@ public class NoticeController {
 		int result = Cservice.insertReplyNotice(nr);
 		
 		if (result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 댓글등록 되었습니다.");
+			
 			return "redirect:usnoticelist.pa";
 		} else {
-			session.setAttribute("errorMsg", "댓글등록에 실패했습니다.");
+			
 			return "redirect:usnoticelist.pa";
 		}
 	}

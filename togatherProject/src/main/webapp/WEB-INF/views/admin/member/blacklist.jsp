@@ -152,7 +152,7 @@
 				$idInput.keyup(function() {
 					console.log($idInput.val());
 
-					//최소 3글자 이상으로 입력되어 있을때만 ajax 요청해서 중복체크 하도록
+					//최소 1글자 이상으로 입력되어 있을때만 ajax 요청해서 중복체크 하도록
 					if ($idInput.val().length >= 1) {
 
 						$.ajax({

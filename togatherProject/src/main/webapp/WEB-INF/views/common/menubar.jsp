@@ -299,7 +299,7 @@ li .m-searchBtn i {
 						<li><a href="challenge.pa"><span class="menu-item-span">CHALLENGE</span></a></li>
 						<li><a href="oneday.pa"><span class="menu-item-span">ONEDAY</span></a></li>
 						<li><a href="lounge.pa"><span class="menu-item-span">ROUNGE</span></a></li>
-						<li><a href="#"><span class="menu-item-span">NOTICE</span></a></li>
+						<li><a href="usnoticelist.pa"><span class="menu-item-span">NOTICE</span></a></li>
 						
 					 <c:if test="${ not empty loginMember }"> 
 						<li><a href="myclass.pa"><span class="menu-item-span">MYCLASS</span></a></li>

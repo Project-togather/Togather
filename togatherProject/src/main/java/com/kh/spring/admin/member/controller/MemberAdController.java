@@ -192,6 +192,7 @@ public class MemberAdController {
 	        
   
 	        int result = Aservice.insertExcel(excel);
+	        System.out.println(result);
 	    	
 	    }
 

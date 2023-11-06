@@ -93,7 +93,6 @@
 		$(function(){
 			$(document).on("click","#memberlist",function(){
 				let num = $(this).find("#memberNo").text();
-				console.log(num)
 				location.href='detail.mem?memNo='+num
 			})
 		})

@@ -78,7 +78,7 @@ public class AdminDao {
 	}
 
 	public int insertExcel(SqlSession sqlsession, Member excel) {
-		return sqlsession.insert("admemberMapper.insertExcel", excel);
+		return sqlsession.update("admemberMapper.insertExcel", excel);
 	}
 
 	public int insertReport(SqlSession sqlsession, Report r) {

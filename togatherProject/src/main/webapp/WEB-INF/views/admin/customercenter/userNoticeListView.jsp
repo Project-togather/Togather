@@ -13,6 +13,10 @@
 	height: 204.07px;
 	object-fit: cover;
 }
+.minibar{ width: 1000px; margin:0 auto;}
+.minibar2{ float:left; text-align:center;}
+.minibar2 li{ display:inline-block; text-align:center; margin-left: 190px;}
+li:hover {cursor: pointer; background-color: orange;}
 </style>
 </head>
 <body>
@@ -23,8 +27,17 @@
 	<br>
 	<br>
 	<br>
-
+	
 	<div class="col-md-6 m-auto text-center">
+		 <div class="minibar">
+    		<ul class="minibar2">
+	        	<li onclick="location.href='usnoticelist.pa'">공지사항</li>
+	        	<li onclick="location.href='usfaqlist.pa'">FAQ</li>
+	        	<li onclick="location.href='complain.bl'">회원신고</li>
+	        </ul>
+		</div>
+		<br>
+		<br>
 		<h1 class="display-1">공지사항</h1>
 		<p class="lead">Togather공지사항 입니다.</p>
 		<div class="divider-border"></div>

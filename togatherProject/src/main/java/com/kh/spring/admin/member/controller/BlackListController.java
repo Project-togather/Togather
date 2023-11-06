@@ -73,10 +73,10 @@ public class BlackListController {
 		int result = Aservice.insertblackList(userId);
 
 		if (result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 블랙리스트가 등록되었습니다.");
+			
 			return "redirect:blacklist.bo";
 		} else {
-			model.addAttribute("errorMsg", "블랙리스트 등록에 실패했습니다.");
+			
 			return "common/errorPage";
 
 		}
@@ -88,10 +88,10 @@ public class BlackListController {
 		int result = Aservice.updateBlackList(memId);
 
 		if (result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 블랙리스트 해제되었습니다.");
+			
 			return "redirect:blacklist.bo";
 		} else {
-			model.addAttribute("errorMsg", "블랙리스트 해제에 실패했습니다.");
+			
 			return "common/errorPage";
 		}
 	}
@@ -103,7 +103,7 @@ public class BlackListController {
 			String changeName = saveFile(upfile, session);
 
 			r.setOriginName(upfile.getOriginalFilename());
-			r.setUpdateName("/resources/assets/bluploadFiles/" + changeName);
+			r.setUpdateName("resources/uploadFiles/" + changeName);
 
 		}
 
@@ -130,7 +130,7 @@ public class BlackListController {
 		String changeName = currentTime + ranNum + ext;// 20231004154607+5가지 랜덤값 생성+.확장자
 		// System.out.println(changeName);
 		// 업로드 시키고자 하는 폴더의 물리적인 경로를 알아내기
-		String savePath = session.getServletContext().getRealPath("/resources/assets/bluploadFiles/");
+		String savePath = session.getServletContext().getRealPath("resources/uploadFiles/");
 		// System.out.println(savePath);
 		try {
 			upfile.transferTo(new File(savePath + changeName));
@@ -167,21 +167,19 @@ public class BlackListController {
 	public ModelAndView detailReport(String reNo, ModelAndView mv) {
 
 		Report r = Aservice.selectReportList(reNo);
-		System.out.println("1"+r);
 		mv.addObject("r", r).setViewName("admin/member/reDetailView");
 		return mv;
 	}
 
 	@RequestMapping("rcount.bl")
 	public String rcountUpdate(Report r, Model model) {
-		System.out.println(r);
 		int result = Aservice.rcountUpdate(r);
 
 		if (r.getRpCount() > 1) {
 			int result3 = Aservice.insertblackList2(r);
-			if (result3 > 0) {
-				int result2 = Aservice.reResultupdate(r);
-			}
+				if (result3 > 0) {
+					int result2 = Aservice.reResultupdate(r);
+				}
 		} else {
 			model.addAttribute("errorMsg", "게시글 등록에 실패했습니다.");
 			return "common/errorPage";

@@ -192,37 +192,20 @@
 		  	where mem_no = #{memNo}
 	</update>
 	
-	<insert id="insertExcel">
-		insert 
-			into member
-			(
-				mem_No,
-				mem_id,
-				mem_pwd,
-				mem_name,
-				nickname,
-				email,
-				gender,
-				age,
-				phone,
-				manner,
-				m_status
-			)
-			values
-			(
-				#{memNo},
-				#{memId},
-				#{memPwd},
-				#{memName},
-				#{nickName},
-				#{email},
-				#{gender},
-				#{age},
-				#{phone},
-				#{manner},
-				#{memStatus}
-			)
-	</insert>
+	<update id="insertExcel">
+    UPDATE member
+    SET mem_id = #{memId},
+        mem_pwd = #{memPwd},
+        mem_name = #{memName},
+        nickname = #{nickName},
+        email = #{email},
+        gender = #{gender},
+        age = #{age},
+        phone = #{phone},
+        manner = #{manner},
+        m_status = #{memStatus}
+    WHERE mem_no = #{memNo}
+</update>
 	
 	<insert id="insertReport">
 		insert
