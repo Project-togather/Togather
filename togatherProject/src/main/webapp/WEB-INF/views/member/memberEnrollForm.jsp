@@ -10,6 +10,7 @@
 		<meta name="author" content="">
 		<title>MemberEnroll</title>
 		<!-- Favicons-->
+		<link rel="shortcut icon" href="assets/images/detail/favicon.ico">
 		<link rel="shortcut icon" href="assets/images/favicon.png">
 		<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 		<link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
@@ -36,7 +37,7 @@
 		<div class="wrapper">
 
 			<!-- Hero-->
-			<section class="module-cover fullscreen parallax" data-background="assets/images/clients/logo-1.png" data-overlay="0.7">
+			<section class="module-cover  parallax" data-background="assets/images/clients/logo-1.png" data-overlay="0.7">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-4 m-auto">
@@ -79,6 +80,7 @@
 											       name='gender' 
 											       value='M' 
 											       />Male
+									        <br>
 											<br>
 											AGE
 											<select name = "age" >
@@ -86,7 +88,8 @@
 												  <option value='${i}'>${i}</option>
 											    </c:forEach>	  
 											</select>
-											 <th>프로필이미지</th>
+											<br><br>
+											 <th>프로필이미지</th><br>
 							                    <td colspan="3" align="center">
 							                        <img id = "titleImg" width="250" height="170" onclick="chooseFile(1);">
 							                    </td>
@@ -102,7 +105,7 @@
 									</form>
 								</div>
 								<div class="up-help">
-									<p>By clicking "Sign Up", you agree to our <br> <a href="#">software services agreement</a>.</p>
+									<p>"Sign Up" 을 눌러 가입해보세요! <br> 당신의 가입을 환영합니다.</p>
 								</div>
 							</div>
 						</div>

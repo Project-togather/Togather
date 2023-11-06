@@ -6,8 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>To Gather : 사람과 취미를 모으다.</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="shortcut icon" href="assets/images/detail/favicon.ico">
 <style>
 .demo-preview img{
 	width: 384.89px;

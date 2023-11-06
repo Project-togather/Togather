@@ -23,6 +23,7 @@
             /* font-family: 'IBM Plex Sans KR', sans-serif; */
         }
 </style>
+<link rel="shortcut icon" href="assets/images/detail/favicon.ico">
 </head>
 <body>
 	<script>

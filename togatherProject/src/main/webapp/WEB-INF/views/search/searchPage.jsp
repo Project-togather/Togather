@@ -5,17 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>검색하기</title>
+<link rel="shortcut icon" href="assets/images/detail/favicon.ico">
 
 
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <!-- Favicons-->
-<link rel="shortcut icon" href="assets/images/favicon.png">
-<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="assets/images/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="assets/images/apple-touch-icon-114x114.png">
+
 <!-- Web Fonts-->
 <link href="https://fonts.googleapis.com/css?family=PT+Serif%7cSignika:300,400,600,700" rel="stylesheet">
 <!-- Bootstrap core CSS-->

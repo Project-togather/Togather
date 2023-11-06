@@ -15,7 +15,7 @@
 	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 <!-- kakao map api -->
 
-
+<link rel="shortcut icon" href="assets/images/detail/favicon.ico">
 <title>${ c.classTitle }</title>
 </head>
 <body>
@@ -931,10 +931,8 @@
 						console.log(${c.placeId});
 						
 					</script>
-					<br> <a href="https://map.kakao.com/link/map/${ c.placeId }">카카오맵으로
-						상세보기</a> <br> <a
-						href="roadView.cl?latitude=${ c.latitude }&longitude=${ c.longitude }">로드뷰
-						상세보기</a>
+					<br> <a href="https://map.kakao.com/link/map/${ c.placeId }" style="color:black;">카카오맵으로 상세보기</a> <br> 
+					<a href="roadView.cl?latitude=${ c.latitude }&longitude=${ c.longitude }" style="color:black;">로드뷰	상세보기</a>
 
 					<div class="divider-border"></div>
 				</div>
@@ -1345,7 +1343,7 @@
 					} else if(cl_type == "승인제" && seat == 0){
 						cl_typeNo = 3;
 					} else if(cl_type == "선착순" && seat > 0){
-						cl_typeNo = 1;
+						cl_typeNo = 2;
 					} else if(cl_type == "선착순" && seat == 0){
 						cl_typeNo = 2;
 					}

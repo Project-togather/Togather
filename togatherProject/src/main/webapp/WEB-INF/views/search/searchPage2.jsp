@@ -5,10 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-
-
+<title>검색하기</title>
+<link rel="shortcut icon" href="assets/images/detail/favicon.ico">
 <style>
 
 /* 서치바 영역 */

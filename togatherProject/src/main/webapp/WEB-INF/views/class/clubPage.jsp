@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>클럽 페이지</title>
+<link rel="shortcut icon" href="assets/images/detail/favicon.ico">
 <style>
 .menu-classic-item-img img{
 	width: 349.99px;

@@ -8,7 +8,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>Tavern - Responsive Restaurant Template(Bootstrap 4)</title>
+		<title>클럽 멤버 관리</title>
+		<link rel="shortcut icon" href="assets/images/detail/favicon.ico">
 	
 	</head>
 	<body>
