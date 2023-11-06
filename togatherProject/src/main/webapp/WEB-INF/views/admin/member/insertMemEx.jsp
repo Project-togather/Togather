@@ -29,7 +29,12 @@
 					</div>
 					<br><br><br>
 					
+<<<<<<< HEAD
 					<h1>멤버등록 페이지</h1>
+=======
+					<h1>회원정보수정</h1>
+						<h3>회원번호는 수정 불가능 합니다</h3>
+>>>>>>> sho5
 					    <form action="update.ex" method="POST" enctype="multipart/form-data">
 					      <input type="file" name="file">
 					      <input type="submit" value="멤버등록" />

@@ -85,10 +85,17 @@
 .minibar2 li {
 	display: inline-block;
 	text-align: center;
+<<<<<<< HEAD
 	margin-left: 210px;
 }
 
 .minibar3:hover {
+=======
+	margin-left: 190px;
+}
+
+minibar3:hover {
+>>>>>>> sho5
 	cursor: pointer;
 	background-color: orange;
 }
@@ -113,6 +120,15 @@
 	<br>
 	<br>
 	<div class="col-md-6 m-auto text-center">
+		 <div class="minibar">
+    		<ul class="minibar2">
+	        	<li class="minibar3" onclick="location.href='usnoticelist.pa'">공지사항</li>
+	        	<li class="minibar3" onclick="location.href='usfaqlist.pa'">FAQ</li>
+	        	<li class="minibar3" onclick="location.href='complain.bl'">회원신고</li>
+	        </ul>
+		</div>
+		<br>
+		<br>
 		<h1 class="display-1">faq</h1>
 		<p class="lead">Togather faq 입니다.</p>
 		<div class="divider-border"></div>

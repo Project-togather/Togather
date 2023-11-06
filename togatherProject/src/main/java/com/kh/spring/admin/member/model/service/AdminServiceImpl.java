@@ -80,8 +80,6 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public int insertExcel(Member excel) {
-
-		System.out.println("asd" + excel);
 		return ADao.insertExcel(sqlSession, excel);
 	}
 

@@ -96,7 +96,7 @@
 		<!-- To top button-->
 		<a class="scroll-top" href="#top"><span class="fa fa-angle-up"></span></a>
 
-		<jsp:include page="../../common/footer.jsp" />
+
 
 		<!-- Scripts-->
 		<script
