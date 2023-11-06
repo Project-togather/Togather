@@ -58,11 +58,11 @@ public class contentController {
 	@RequestMapping(value="content.do", method = RequestMethod.POST)
 	public String writeTestPost(@RequestParam("image") MultipartFile multi, HttpSession session ,HttpServletRequest request, HttpServletResponse response) {
 		
-		JSONObject jObj = new JSONObject(); // {}
+		JSONObject jObj = new JSONObject(); 
 		
 		try {
 			String uploadPath = "resources/contentUploadImg/";
-			String updateName = saveFile(multi, session); // 20231029716465669182.jpg 
+			String updateName = saveFile(multi, session);
 			
 			if(!multi.isEmpty()) {
 				

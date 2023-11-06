@@ -334,7 +334,7 @@ input[type="range"]::-webkit-slider-thumb {
 									<hr>
 									<br>
 									
-									<h5>(소셜링, 클럽, 챌린지)주제를 선택해 볼까요?</h5>
+									<h5>주제를 선택해 볼까요?</h5>
 									
 									<div class="clCategorydiv">
 										<div class="form-group">
@@ -606,16 +606,11 @@ input[type="range"]::-webkit-slider-thumb {
 										           		cache: false,
 										           		timeout: 600000,
 										           		success: function(data) {
-										           			// console.log(data);
 										           			url = data.url;
 										           			
-										           			// callback : 에디터(마크다운 편집기)에 표시할 텍스트, 뷰어에는 imageUrl 주소에 저장된 사진으로 나옴
-										        			// 형식 : ![대체 텍스트](주소)
 										           			callback(url, "사진 대체 텍스트 입력");
 										           		},
 										           		error: function(e) {
-										           			//console.log('ajax 이미지 업로드 실패');
-										           			//console.log(e.abort([statusText]));
 										           			callback(e, '사진 대체 텍스트 입력');
 										           		}
 										           	});
@@ -662,7 +657,6 @@ input[type="range"]::-webkit-slider-thumb {
 								        			alert("입력가능한 글자수가 넘었습니다.");
 								        			str = test.substr(0, test.length - 1);
 								        			$("#editorContent").val(str);
-								        			
 								        		}
 								        	})
 								        })
