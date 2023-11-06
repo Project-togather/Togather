@@ -128,9 +128,11 @@
 										value2 += '<div class="menu-simple-item">'
 											   + '<div class="menu-simple-item-img"><img src="' + list[i].img + '" alt=""></div>'
 											   + '<div class="menu-simple-item-inner">'
-											   + '<button class="pull-right btn btn-white" id="refuse" data-refuse="' + list[i].memNo + '"style="margin-left:20px; color:red;">거절</button>' 
-											   + '<button class="pull-right btn btn-white" id="admit" data-admit="' + list[i].memNo + '"style="color:blue;">승인</button>'
-											   + '<h6><span>' + list[i].nickName + '</span></h6>'
+											   if(clType==2){
+													value += '<button class="pull-right btn btn-white refuse" data-refuse="' + list[i].memNo + '"style="margin-left:20px; color:red;">거절</button>' 
+													   	   + '<button class="pull-right btn btn-white admit" data-admit="' + list[i].memNo + '"style="color:blue;">승인</button>'												   
+												   }
+										value2 += '<h6><span>' + list[i].nickName + '</span></h6>'
 											   + '<p>' + list[i].msg + '</p>'
 											   + '</div>'
 											   + '</div>';

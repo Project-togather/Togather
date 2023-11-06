@@ -80,7 +80,7 @@
 					var tel = '${loginMember.phone}'
 					
 					  IMP.request_pay({
-					    pg: "inicis",
+					    pg: "kakao",
 					    pay_method: "card",
 					    merchant_uid : 'merchant_'+new Date().getTime(),
 					    name : '(주)ToGather',
@@ -227,7 +227,7 @@
 									<div class="menu-classic-item-img">
 										<c:forEach var="ftn" items="${ ftnList }">
 											<c:if test="${ f.feNo eq ftn.refFno }">
-												<a class="photo" href="${ ftn.filePath }"></a>
+												<a class="photo" href="feedDetail.fe?feNo=${ f.feNo }"></a>
 												<img src="${ ftn.filePath }" alt="">
 											</c:if>
 										</c:forEach>
@@ -1226,9 +1226,11 @@
 			<span class="icon-gears"></span>
 		</a>
 	</c:if>
-	<span class="classOption quit_option" style="display: none">
-		<span class="ti-more-alt"></span>
-	</span>
+	<c:if test="${ loginMember.memNo ne c.memNo }">
+		<span class="classOption quit_option" style="display: none">
+			<span class="ti-more-alt"></span>
+		</span>
+	</c:if>
 	<div class="quitClassContainer btn btn-outline btn-sm btn-brand"
 		onclick="location.href='quitClassForm.cl?classNo=${c.classNo}&memNo=${ loginMember.memNo }'">클럽 탈퇴하기</div>
 	<div id="noti-form">

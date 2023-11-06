@@ -96,7 +96,7 @@ li:hover {cursor: pointer; background-color: orange;}
 		<section class="module">
 			<div class="container">
 				<div class="row" id="row">
-					<c:forEach var="f" items="${ list }" end="5">
+					<c:forEach var="f" items="${ list }">
 						<div class="col-md-4">
 						<div class="menu-classic-item">
 							<div class="menu-classic-item-img" onclick="location.href='feedDetail.fe?feNo=${ f.feNo }'">

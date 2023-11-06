@@ -943,7 +943,7 @@
 		  from feed
 		  join member on (mem_no = fe_writer)
 		 where ref_cno = #{classNo}
-		   and f_status = 'Y'
+		   and f_status = 'N'
 	</select>
 	
 	<select id="selectClassFeedPfList" resultMap="feedResult">

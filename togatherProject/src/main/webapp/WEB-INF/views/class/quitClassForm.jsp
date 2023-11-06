@@ -15,7 +15,7 @@
 				<div class="col-md-6 m-auto">
 					<div class="menu-classic-item">
 					<h1 class="display-3">취소할 ${ c.clCaName }</h1>
-						<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/1.jpg"></a><img src="assets/images/menu/1.jpg" alt="">
+						<div class="menu-classic-item-img"><a class="photo" href="assets/images/menu/1.jpg"></a><img src="${ atList[0].filePath }" alt="">
 						</div>
 						<div class="menu-classic-item-inner">
 							<h6>${c.classTitle }</h6>

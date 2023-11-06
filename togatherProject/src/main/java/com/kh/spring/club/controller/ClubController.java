@@ -385,6 +385,8 @@ public class ClubController {
 		ArrayList<Club> cList = cService.selectSimilarList(mc); // 비슷한 모임
 		ArrayList<Attachment> ctnList = cService.selectClassTnList(mc);
 
+		System.out.println("리스트 : " + list);
+		
 		
 		if(c.getClassApproval().equals("Y")) {
 			c.setClassApproval("승인제");
@@ -554,11 +556,13 @@ public class ClubController {
 	@RequestMapping("quitClassForm.cl")
 	public String quitClassForm(MyClass mc, Model model) {
 		
+		ArrayList<Attachment> atList = cService.selectClassAttachment(mc);
 		Club c = cService.selectClassDetail(mc);
 		int price = cService.selectPayPrice(mc);
 		
 		model.addAttribute("price", price);
 		model.addAttribute("c", c);
+		model.addAttribute("atList", atList);
 		return "class/quitClassForm";
 		
 	}

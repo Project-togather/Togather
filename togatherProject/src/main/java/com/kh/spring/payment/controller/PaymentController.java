@@ -63,8 +63,11 @@ public class PaymentController {
 		
 		com.kh.spring.payment.model.vo.Payment pi = pService.selectUid(p);
 		
+		System.out.println("엠유아디 : " + pi.getIUid());
+		
 		String access_token = pService.getToken(apiKey, secretKey);
 		String merchant_uid = pi.getMUid();
+		System.out.println("상점아디 : " + merchant_uid);
 		String reason = p.getReason();
 		
 		pi.setReason(p.getReason());
