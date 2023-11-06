@@ -372,7 +372,6 @@ public class ClubController {
 		mc.setClType(1);
 		
 		Club c = cService.selectClassDetail(mc);
-		System.out.println("닉네임 나와야함 "+ c.getNickName());
 		
 		mc.setClCategory(c.getClCategory());
 		mc.setMemNo(c.getMemNo());

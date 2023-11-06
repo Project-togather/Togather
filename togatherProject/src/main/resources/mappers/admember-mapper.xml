@@ -177,9 +177,16 @@
 
 	<update id="updateBlackList">
 		update 
-			blacklist
+			blacklist 
 		  set black_status ='N'
 		    where black_id = #{memId}
+	</update>
+	
+	<update id="updateMemRp"> 
+		update 
+			member
+		  set rp_count = 0
+		    where mem_id = #{memId}
 	</update>
 	
 	<update id="adUpdateMember">
@@ -317,4 +324,17 @@
 			FROM Member m
 			WHERE m.MEM_ID = #{rePmem}
 	</insert>
+	<select id="selectBl" resultType="_int">
+		select
+				count(*)
+			from blacklist
+		   where black_id = #{rePmem}
+	</select>
+	<update id="deleteReport">
+		update
+			report
+			set RE_RESULT = 'Y'
+		where re_no = #{reNo}
+		
+	</update>
 </mapper>

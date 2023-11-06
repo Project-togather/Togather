@@ -24,7 +24,7 @@
 							aria-expanded="false">회원 목록 다운로드</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 							<li><a class="dropdown-item" href="list.dl">회원목록 다운로드</a></li>
-							<li><a class="dropdown-item" href="updateMem.ex">회원정보 수정</a></li>
+							<li><a class="dropdown-item" href="updateMem.ex">회원등록</a></li>
 						</ul>
 					</div>
 					<br>

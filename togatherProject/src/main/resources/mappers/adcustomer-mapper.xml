@@ -53,7 +53,7 @@
 		faq_Status
 		from faq
 		where faq_Status = 'Y'
-		order by faq_no
+		order by faq_no desc
 	</select>
 
 	<select id="selectNoticeCount" resultType="_int">
