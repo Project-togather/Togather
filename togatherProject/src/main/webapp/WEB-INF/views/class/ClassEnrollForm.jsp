@@ -650,7 +650,7 @@ input[type="range"]::-webkit-slider-thumb {
 												        if (escape(str_character).length > 4)
 												            int_char_count += 3;
 												        else
-												            int_char_count++;
+												            int_char_count += 2;
 												    }
 												    return int_char_count;
 												}
