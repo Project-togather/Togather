@@ -516,9 +516,10 @@ public class ClubController {
 	
 	@RequestMapping("classUpdateForm.cl")
 	public String classUpdateForm(MyClass mc, Model model) {
-		
+		ArrayList<Attachment> atList = cService.selectClassAttachment(mc);
 		Club c = cService.selectClassDetail(mc);
 		model.addAttribute("c", c);
+		model.addAttribute("atList", atList);
 		
 		return "class/classUpdateForm";
 	}

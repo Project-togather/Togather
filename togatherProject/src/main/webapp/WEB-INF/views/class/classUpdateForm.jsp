@@ -15,7 +15,7 @@
 	<jsp:include page="../common/menubar.jsp"/>
 			<!-- Brunch-->
 			<br>
-			<section class="module parallax" data-background="assets/images/module-4.jpg" data-overlay="0.7">
+			<section class="module parallax" data-background="${ atList[0].filePath }" data-overlay="0.7">
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6 m-auto">
