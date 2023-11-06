@@ -48,14 +48,14 @@
 							<c:if
 								test="${ loginMember ne null and loginMember.memNo ne c.memNo}">
 								<button class="btn btn-white enter-btn" onclick="enterClass();"
-									style="color: black;">모임 참가하기</button>
+									style="color: black;">✍ 모임 참가하기</button>
 							</c:if>
 							<!--  
 							<input type="text" id="id">
 							<button type="button" onclick="sse();">테스트</button>-->
 							<div id="sseTest2"></div>
 							<br>
-							<button type="button" class="btn btn-outline btn-sm btn-brand" id="payment" onclick="requestPay();"	style="display: none; text-align: center">결제하기</button>
+							<button type="button" class="btn btn-outline btn-sm btn-brand" id="payment" onclick="requestPay();"	style="/*display: none;*/ text-align: center">카카오 페이</button>
 						</div>
 					</div>
 				</div>
@@ -189,11 +189,6 @@
 				<div class="row">
 					<div class="col-md-12 text-center">
 						<div class="space" data-mY="20px"></div>
-						<c:if
-							test="${ loginMember ne null and loginMember.memNo ne c.memNo}">
-							<a class="btn btn-white enter-btn" onclick="enterClass();">모임
-								참가하기</a>
-						</c:if>
 					</div>
 				</div>
 			</div>
@@ -206,9 +201,9 @@
 				<div class="row">
 					<div class="col-md-6 m-auto text-center">
 						<p class="subtitle">Feed List</p>
-						<h1 class="display-1">모임 후기 목록</h1>
+						<h1 class="display-1"> 👍 모임 후기</h1>
 						<p class="lead">
-							이 모임에 대한 후기를 볼 수 있어요! <br />
+							이 모임에 대한 후기를 구경해요 <br />
 						</p>
 						<div class="divider-border"></div>
 					</div>
@@ -220,8 +215,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<div class="owl-carousel menu-carousel"
-							data-carousel-options="{&quot;nav&quot;: false}">
+						<div class="owl-carousel menu-carousel"	data-carousel-options="{&quot;nav&quot;: false}">
 							<c:forEach var="f" items="${ fList }">
 								<div class="menu-classic-item">
 									<div class="menu-classic-item-img">
@@ -258,9 +252,9 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6 m-auto text-center">
-						<p class="subtitle">Tasty and crunchy</p>
-						<h1 class="display-1">참가중인 멤버 목록</h1>
-						<p class="lead">현재 ${ c.vacancy }명이 가입되어 있습니다!</p>
+						<p class="subtitle">Our Class Member</p>
+						<h1 class="display-1">👨‍👩‍👦‍👦 멤버 소개</h1>
+						<p class="lead">현재 ${ c.vacancy }명이 가입 중 입니다!</p>
 						<div class="divider-border"></div>
 					</div>
 				</div>
@@ -309,7 +303,7 @@
 					<div class="col-md-12">
 						<div class="space" data-mY="60px"></div>
 						<p class="text-center">
-							<a class="btn btn-black" href="#">멤버 더 보기</a>
+							<!--  <a class="btn btn-black" href="#">멤버 더 보기</a> -->
 						</p>
 					</div>
 				</div>
@@ -327,14 +321,16 @@
 								<div class="vertical">
 									<div class="text-center">
 										<p class="subtitle">Photos</p>
-										<h1 class="display-1">모임 관련 사진 다보기</h1>
+										<h1 class="display-1"> 📸 All Photos</h1>
 										<p class="lead">
-											Map where your photos were taken and discover local <br>
-											points of interest. Map where your photos.
+											추억이 담긴 이 곳 <br>
+											즐거웠던 사진을 남겨주세요!
 										</p>
 										<div class="divider-border"></div>
 										<div class="space" data-mY="60px"></div>
-										<a class="btn btn-black" href="#">View Gallery</a>
+										<c:if test="${ loginMember ne null }">
+											<a class="btn btn-black" href="http://localhost:8012/togather/mypage.me"> 👉 추억 남기러 가기</a>
+										</c:if>
 									</div>
 								</div>
 							</div>
@@ -362,7 +358,7 @@
 				<div class="row">
 					<div class="col-md-6 m-auto text-center">
 						<p class="subtitle">Summary of instructions</p>
-						<h1 class="display-1">안내사항 요약</h1>
+						<h1 class="display-1"> 📘 안내사항 요약</h1>
 						<p class="lead">자세한 정보를 알려드릴게요.</p>
 						<div class="divider-border"></div>
 					</div>
@@ -559,7 +555,7 @@
 				<div class="row">
 					<div class="col-md-7 m-auto text-center">
 						<p class="subtitle">Reply</p>
-						<h1 class="display-1">댓글</h1>
+						<h1 class="display-1">  😉 댓글</h1>
 						<p class="lead">
 							호스트에게 궁금한 점 또는 하고 싶은 말을 자유롭게 남겨보세요! <br />
 						</p>
@@ -832,7 +828,7 @@
 				<div class="col-md-12">
 					<div class="space" data-mY="60px"></div>
 					<p class="text-center">
-						<a class="btn btn-black" href="#">멤버 더 보기</a>
+						<!--  <a class="btn btn-black" href="#">멤버 더 보기</a> -->
 					</p>
 				</div>
 			</div>
@@ -841,8 +837,8 @@
 	<!-- Popular Dishes End-->
 
 	<!-- Testimonials-->
-	<section class="module parallax"
-		data-background="assets/images/module-4.jpg" data-overlay="0.7">
+	<!--
+	<section class="module parallax"data-background="${ atList[0].filePath }" data-overlay="0.7">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -868,37 +864,6 @@
 								<span>Albert Einstein</span>
 							</div>
 						</div>
-						<div class="review">
-							<div class="review-icons">
-								<img
-									src="https://s3.amazonaws.com/uifaces/faces/twitter/dannpetty/128.jpg"
-									alt="">
-							</div>
-							<div class="review-content">
-								<blockquote>
-									<p class="display-2">Perhaps the most romantic place in the
-										city.</p>
-								</blockquote>
-							</div>
-							<div class="review-author">
-								<span>Ralph Waldo Emerson</span>
-							</div>
-						</div>
-						<div class="review">
-							<div class="review-icons">
-								<img
-									src="https://s3.amazonaws.com/uifaces/faces/twitter/walterstephanie/128.jpg"
-									alt="">
-							</div>
-							<div class="review-content">
-								<blockquote>
-									<p class="display-2">I love this place!</p>
-								</blockquote>
-							</div>
-							<div class="review-author">
-								<span>Marilyn Monroe</span>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -909,21 +874,21 @@
 			</div>
 		</div>
 	</section>
+	-->
 	<!-- Testimonials end-->
 
 	<!-- Chef-->
-	<section class="module bg-gray p-b-0">
+	<section class="module">
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-md-6">
-					<p class="subtitle">Professional cook team</p>
-					<h1 class="display-1">호스트 자기소개</h1>
+					<p class="subtitle">Introduce Host</p>
+					<h1 class="display-1">😀 호스트는 이런 사람이에요!</h1>
 					<p class="lead">
 						🎁 안녕하세요 여러분 <br> 모임을 좋아해서 호스트를 하는 지경까지 이른 모임에 미친 사람이에요! 🎉
 					<p>
 					<div class="divider-border-left"></div>
 					<div class="space" data-mY="60px"></div>
-					<a class="btn btn-black" href="#">View our menu</a>
 				</div>
 				<div class="col-md-6">
 					<img src="${ atList[1].filePath }" alt="">
@@ -934,7 +899,7 @@
 	<!-- Chef End-->
 
 	<!-- News-->
-	<section class="module" id="news">
+	<section class="module bg-gray p-b-0" id="news">
 		<div class="container">
 			<div class="row map">
 				<div class="col-md-6 m-auto text-center">
@@ -1012,7 +977,6 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="text-center">
-						<a class="btn btn-circle btn-gray" href="#">All Recipes</a>
 					</div>
 				</div>
 			</div>
