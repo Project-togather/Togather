@@ -324,7 +324,6 @@ public class ClubController {
 	@RequestMapping("enroll.cl")
 	public String insertClass(Club c, Attachment at, MultipartFile upfile , HttpSession session , Model model) {
 
-		System.out.println("클래스동록 : " + c);
 
 		int result = cService.insertClass(c);
 		
@@ -400,6 +399,7 @@ public class ClubController {
 	@RequestMapping("enroll.rv")
 	public String insertReply(Reply r, Member m) {
 		
+		
 		int result = cService.insertReply(r);
 		
 		nService.send(m, r, "댓글이 등록되었습니다!");
@@ -427,8 +427,16 @@ public class ClubController {
 	
 	@ResponseBody
 	@RequestMapping("enrollRe.rv")
-	public String insertReReply(Reply r) {
+	public String insertReReply(Member m, Reply r) {
+
+		
 		int result = cService.insertReReply(r);
+		
+		Member mNo = cService.selectMrUserNo(r);
+		m.setReceiver(mNo.getMemNo());
+
+		nService.send(m, r, "답글이 등록되었습니다!");
+		
 		return result>0 ? "success" : "fail";
 
 	}
@@ -506,11 +514,12 @@ public class ClubController {
 	}
 	
 	@RequestMapping("deleteClass.cl")
-	public String deleteClass(String cNo, Model model) {
+	public String deleteClass(String cNo, Model model, HttpSession session) {
 		
 		int result = cService.deleteClass(cNo);
 		
 		if(result > 0) {
+			session.setAttribute("alertMsg", "모임이 삭제되었습니다!");
 			return "redirect:/";			
 		} else {
 			model.addAttribute("errorMsg", "게시글 등록에 실패");
@@ -557,8 +566,6 @@ public class ClubController {
 	@RequestMapping(value="admitClass.me", produces = "application/json; charset=UTF-8")
 	public int admitClass(MyClass c) {
 		
-		System.out.println("c:" + c);
-		
 		int result = cService.admitEnrollMember(c);
 		
 		if(result>0) {
@@ -571,8 +578,6 @@ public class ClubController {
 	@ResponseBody
 	@RequestMapping(value="refuseClass.me", produces = "application/json; charset=UTF-8")
 	public int refuseClass(MyClass c) {
-		
-		System.out.println("거절 : " + c);
 		
 		int result = cService.refuseEnrollMember(c);
 		
@@ -603,11 +608,9 @@ public class ClubController {
 			at.setFilePath("resources/uploadFiles/" + updateName);
 			at.setClassNo(c.getClassNo());
 			
-			System.out.println("at : " + at);
 		}
 		
 		if(result > 0) {
-			System.out.println("업데이트 성공1");
 			
 			at.setCategory(c.getClType()+"");
 			

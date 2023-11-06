@@ -224,5 +224,10 @@ public class ClubServiceImpl implements ClubService {
 		return cDao.selectClassTnList(c, sqlSession);
 	}
 
+	@Override
+	public Member selectMrUserNo(Reply r) {
+		return cDao.selectMrUserNo(r, sqlSession);
+	}
+
 
 }

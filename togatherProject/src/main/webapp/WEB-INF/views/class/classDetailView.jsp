@@ -65,7 +65,7 @@
 		<script>
 		
 		if('${loginMember}' != null){
-			sse('${loginMember.memId}');
+			sse('${loginMember.memNo}');
 		} else {
 			swal("ㅎㅎ");
 		}
@@ -744,8 +744,7 @@
 													memNo:'${loginMember.memNo}',
 													classTitle:'${c.classTitle}',
 													nickName:'${loginMember.nickName}',
-													memId:'${c.memId}',
-													refMno:'${c.memNo}'
+													receiver:'${c.memNo}',
 													},success:result=>{
 													if(result == "success"){
 														$("#reply").val("");
@@ -773,6 +772,8 @@
 													refFno:'${c.classNo}',
 													memNo:'${loginMember.memNo}',
 													mrNo:mr_no,
+													classTitle:'${c.classTitle}',
+													nickName:'${loginMember.nickName}',
 													},success:result=>{
 													if(result == "success"){
 														$("#rereply").val("");

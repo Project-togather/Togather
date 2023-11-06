@@ -175,5 +175,9 @@ public class ClubDao {
 	public ArrayList<Attachment> selectClassTnList(MyClass c, SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("clubMapper.selectClassTnList", c);
 	}
+
+	public Member selectMrUserNo(Reply r, SqlSessionTemplate sqlSession){
+		return (Member)sqlSession.selectOne("clubMapper.selectMrUserId", r);
+	}
 	
 }
