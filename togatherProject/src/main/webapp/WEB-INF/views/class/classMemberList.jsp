@@ -78,7 +78,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="space" data-mY="60px"></div>
-							<p class="text-center"><a class="btn btn-black" href="#">멤버 더 보기</a></p>
+							<!--  <p class="text-center"><a class="btn btn-black" href="#">멤버 더 보기</a></p> -->
 						</div>
 					</div>
 				</div>

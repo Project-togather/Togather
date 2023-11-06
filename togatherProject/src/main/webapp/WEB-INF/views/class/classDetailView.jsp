@@ -45,8 +45,7 @@
 							</h6>
 							<h3 class="display-1">${ c.classTitle }</h3>
 							<div class="space" data-mY="40px"></div>
-							<c:if
-								test="${ loginMember ne null and loginMember.memNo ne c.memNo}">
+							<c:if test="${ loginMember ne null and loginMember.memNo ne c.memNo}">
 								<button class="btn btn-white enter-btn" onclick="enterClass();"
 									style="color: black;">✍ 모임 참가하기</button>
 							</c:if>
@@ -55,7 +54,7 @@
 							<button type="button" onclick="sse();">테스트</button>-->
 							<div id="sseTest2"></div>
 							<br>
-							<button type="button" class="btn btn-outline btn-sm btn-brand" id="payment" onclick="requestPay();"	style="/*display: none;*/ text-align: center">카카오 페이</button>
+							<button type="button" class="btn btn-outline btn-sm btn-brand" id="payment" onclick="requestPay();"	style="display: none; text-align: center">카카오 페이</button>
 						</div>
 					</div>
 				</div>
@@ -685,8 +684,8 @@
 															       + '<div class="menu-simple-item-img"><img src="' + rlist[j].img + '" alt=""></div>'
 															       + '<div class="menu-simple-item-inner">'
 															       + '<h6><span>' + rlist[j].nickName + '</span></h6>'
+															       + '<p>' + rlist[j].rvDate + '<span id="rreply"></span>' + '</p><br>'
 															       + '<p>' + rlist[j].rvContent + '</p>'
-															       + '<p>' + rlist[j].rvDate + '<span id="rreply"></span>' + '</p>'
 															       + '</div>'
 															       + '</div>';
 
@@ -885,7 +884,7 @@
 					<p class="subtitle">Introduce Host</p>
 					<h1 class="display-1">😀 호스트는 이런 사람이에요!</h1>
 					<p class="lead">
-						🎁 안녕하세요 여러분 <br> 모임을 좋아해서 호스트를 하는 지경까지 이른 모임에 미친 사람이에요! 🎉
+						🎁 안녕하세요 여러분 <br> 모임을 좋아해서 제가 직접 모임을 만들어봤어요.. 🎉
 					<p>
 					<div class="divider-border-left"></div>
 					<div class="space" data-mY="60px"></div>

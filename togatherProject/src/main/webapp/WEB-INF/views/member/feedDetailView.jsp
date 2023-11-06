@@ -227,6 +227,7 @@
 										</aside>
 
 										<!-- Text widget-->
+										<!--  
 										<aside class="widget widget_text">
 											<div class="widget-title">
 												<c:choose>
@@ -244,7 +245,7 @@
 											</div>
 											
 										</aside>
-
+										-->
 									
 									</div>
 								</div>
