@@ -207,6 +207,7 @@ public class MemberController {
 	   Member m = new Member();
 	   m.setMemNo(memNo);
 	   m.setMsg(profileMessage);
+	   
 	   //프로필 한마디를 넣어보아요
 	   
 	   //System.out.println("DB로 갈 m " + m);
