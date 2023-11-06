@@ -18,9 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 import com.kh.spring.QuitReason.model.vo.QuitReason;
 import com.kh.spring.alarm.model.service.NotificationServiceImpl;
+import com.kh.spring.alarm.model.vo.Notification;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.service.ClubServiceImpl;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.feed.model.service.FeedServiceImpl;
 import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.service.MemberService;
@@ -343,6 +345,7 @@ public class ClubController {
 		
 		if(result > 0) {
 			at.setCategory(c.getClType()+"");
+			at.setThumbnail(1);
 			
 			int result2 = cService.insertImg(at);
 			
@@ -358,10 +361,30 @@ public class ClubController {
 	}
 	
 	@RequestMapping("detail.cl")
-	public String selectClassDetail(MyClass mc, Model model) {
+	public String selectClassDetail(MyClass mc, Model model, HttpSession session) {
+		
+		/*
+		if((Member)session.getAttribute("loginMember") != null) {
+			Member loginMember = (Member)session.getAttribute("loginMember");
+			mc.setMemNo(loginMember.getMemNo()); 			
+		}
+		*/
+
+		mc.setClType(1);
 		
 		Club c = cService.selectClassDetail(mc);
-		ArrayList<Member> list = cService.classMemberList(mc);
+		
+		mc.setClCategory(c.getClCategory());
+		mc.setMemNo(c.getMemNo());
+		
+		ArrayList<Attachment> atList = cService.selectClassAttachment(mc); // 모임 프사, 썸네일 조회
+		ArrayList<Feed> fList = cService.selectClassFeedList(mc); // 모임 피드
+		ArrayList<Feed> fpfList = cService.selectClassFeedPfList(mc); // 피드 프로필사진
+		ArrayList<Feed> ftnList = cService.selectClassFeedTnList(mc); // 피드 썸네일
+		ArrayList<Member> list = cService.classMemberList(mc); // 모임 가입 명단
+		ArrayList<Club> cList = cService.selectSimilarList(mc); // 비슷한 모임
+		ArrayList<Attachment> ctnList = cService.selectClassTnList(mc);
+
 		
 		if(c.getClassApproval().equals("Y")) {
 			c.setClassApproval("승인제");
@@ -370,7 +393,13 @@ public class ClubController {
 		}
 		
 		model.addAttribute("list", list);
+		model.addAttribute("atList", atList);
+		model.addAttribute("fList", fList);
+		model.addAttribute("fpfList", fpfList);
+		model.addAttribute("ftnList", ftnList);
 		model.addAttribute("c", c);
+		model.addAttribute("cList", cList);
+		model.addAttribute("ctnList", ctnList);
 		return "class/classDetailView";
 	}
 	
@@ -378,9 +407,10 @@ public class ClubController {
 	@RequestMapping("enroll.rv")
 	public String insertReply(Reply r, Member m) {
 		
-		nService.send(m, r, "댓글이 등록되었습니다!");
-
 		int result = cService.insertReply(r);
+		
+		nService.send(m, r, "댓글이 등록되었습니다!");
+		
 		return result>0 ? "success" : "fail";
 		
 
@@ -431,6 +461,7 @@ public class ClubController {
 		return result>0 ? "success" : "fail";
 	}
 	
+	/*
 	@ResponseBody
 	@RequestMapping("quitClass.cl")
 	public String quitClass(QuitReason qr) {
@@ -440,6 +471,7 @@ public class ClubController {
 		int result = cService.quitClass(qr);
 		return result>0 ? "success" : "fail";
 	}
+	*/
 	
 	@ResponseBody
 	@RequestMapping("likeClass.cl")
@@ -494,9 +526,9 @@ public class ClubController {
 	}
 	
 	@RequestMapping("memberListPage.cl")
-	public String memberListPage(String classNo, Model model) {
-		
-		model.addAttribute("classNo", classNo);
+	public String memberListPage(MyClass mc, Model model) {
+		Club c = cService.selectClassDetail(mc);
+		model.addAttribute("c", c);
 		return "class/classMemberList";
 	}
 	
@@ -532,6 +564,8 @@ public class ClubController {
 	@RequestMapping(value="admitClass.me", produces = "application/json; charset=UTF-8")
 	public int admitClass(MyClass c) {
 		
+		System.out.println("c:" + c);
+		
 		int result = cService.admitEnrollMember(c);
 		
 		if(result>0) {
@@ -545,6 +579,8 @@ public class ClubController {
 	@RequestMapping(value="refuseClass.me", produces = "application/json; charset=UTF-8")
 	public int refuseClass(MyClass c) {
 		
+		System.out.println("거절 : " + c);
+		
 		int result = cService.refuseEnrollMember(c);
 		
 		if(result>0) {
@@ -553,5 +589,47 @@ public class ClubController {
 			return result;
 		}
 	}
+	
+	@RequestMapping("classDetailUpdateForm.cl")
+	public String classDetailUpdateForm(MyClass mc, Model model) {
+		Club c = cService.selectClassDetail(mc);
 		
+		model.addAttribute("c", c);
+		return "class/classDetailUpdateForm";	
+	}
+	
+	@RequestMapping("update.cl")
+	public String updateClass(Club c, MyClass mc, Attachment at, MultipartFile upfile , HttpSession session , Model model) {
+		int result = cService.updateClass(c);
+		
+		if(!upfile.getOriginalFilename().equals("")) {
+			
+			String updateName = saveFile(upfile, session);
+			at.setOriginName(upfile.getOriginalFilename());
+			at.setUpdateName(updateName);
+			at.setFilePath("resources/uploadFiles/" + updateName);
+			at.setClassNo(c.getClassNo());
+			
+			System.out.println("at : " + at);
+		}
+		
+		if(result > 0) {
+			System.out.println("업데이트 성공1");
+			
+			at.setCategory(c.getClType()+"");
+			
+			int result2 = cService.updateImg(at);
+			
+			if(result2 > 0) {
+				session.setAttribute("alertMsg", "성공적으로 게시글이 수정되었습니다.");
+				return "redirect:detail.cl?classNo=" + at.getClassNo() + "&clType=1";
+			}else {
+				model.addAttribute("errorMsg", "게시글 등록에 실패");
+				return "common/errorPage";
+			}
+		}
+		return null;
+	}
+	
+	
 }

@@ -531,7 +531,7 @@ margin-bottom: 15px !important;
     		        timeout: 600000,
             	    processData: false,
             	   success : function(result){
-            		   alert(result);
+            		   
             		   inputChat2();
             	   },
             	   error : function(){
@@ -544,7 +544,7 @@ margin-bottom: 15px !important;
 			
           //채팅글자 insert
             function inputChat2(){
-            	 alert($("#input-text").val());
+            	 //alert($("#input-text").val());
                $.ajax({
             	   url : "chatInput.ch",
             	   data : {

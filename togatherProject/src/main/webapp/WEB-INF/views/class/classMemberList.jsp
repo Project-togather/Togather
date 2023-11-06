@@ -98,7 +98,7 @@
 						$.ajax({
 							url:"classMemberList.cl",
 							data:{
-								classNo:'${classNo}',
+								classNo:'${c.classNo}',
 								clType:clType
 							}, success:list=>{
 								if(clType == 1){
@@ -157,11 +157,17 @@
 							url:"admitClass.me",
 							data:{
 								memNo:memNo,
-								classNo:'${classNo}'
+								classNo:'${c.classNo}',
+								price:'${c.classPrice}'
 								},
-							success:()=>{
-								swal("참가 승인에 성공하였습니다!", "참가 희망자의 결제 후 최종 참가 됩니다.", "success");
-								memberList(2);
+							success:result=>{
+								if(result>0){
+									swal("참가 승인에 성공하였습니다!", "참가 희망자의 결제 후 최종 참가 됩니다.", "success");
+									memberList(2);									
+								} else {
+									swal("참가 승인에 실패하였습니다!","","error");
+									memberList(2);
+								}
 							}, error:()=>{
 								swal("참가 승인에 실패하였습니다!","","error");
 								memberList(2);
@@ -177,11 +183,16 @@
 							url:"refuseClass.me",
 							data:{
 								memNo:memNo,
-								classNo:'${classNo}'
+								classNo:'${c.classNo}'
 								},
 							success:result=>{
-								swal("참가 거절에 성공하였습니다!", "", "success");
-								memberList(2);
+								if(result>0){
+									swal("참가 거절에 성공하였습니다!", "", "success");
+									memberList(2);									
+								} else {
+									swal("참가 거절에 성공하였습니다!", "", "success");
+									memberList(2);
+								}
 							}, error:()=>{
 								swal("참가 거절에 성공하였습니다!", "", "success");
 								memberList(2);

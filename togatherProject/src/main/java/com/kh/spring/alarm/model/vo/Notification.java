@@ -17,15 +17,19 @@ import lombok.ToString;
 @ToString
 public class Notification {
 
-	private String a_no;
+	private String aNo;
 	private Member receiver;
     private Reply reply;
     private String content;
     private String url;
-    private boolean isRead;
+    private String isRead;
+    
+    private String happen;
+    private String receiveNo;
+    private String nickName;
 
     @Builder
-    public Notification(Member receiver, Reply reply, String content, String url, boolean isRead) {
+    public Notification(Member receiver, Reply reply, String content, String url, String isRead) {
     	this.receiver = receiver;
     	this.reply = reply;
     	this.content = content;

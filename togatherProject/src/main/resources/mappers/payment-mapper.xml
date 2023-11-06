@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
 <mapper namespace="paymentMapper">
+
+	<resultMap type="Payment" id="paymentResult">
+		<result column="pay_no" property="payNo"/>
+		<result column="c_no" property="classNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="pay_date" property="payDate"/>
+		<result column="pay_method" property="payMethod"/>
+		<result column="pay_yn" property="payYn"/>
+		<result column="pay_email" property="payEmail"/>
+		<result column="i_uid" property="iUid"/>
+		<result column="m_uid" property="mUid"/>
+		<result column="reason" property="reason"/>
+	</resultMap>
+
 	<insert id="insertPayment">
 		insert
 		  into payment
@@ -12,6 +26,8 @@
 		      , pay_method
 		      , pay_yn
 		      ,	pay_email
+		      , i_uid
+		      , m_uid
 		      )
 		  values
 		      (
@@ -22,6 +38,33 @@
 		      , 'card'
 		      ,	'Y'
 		      , #{payEmail}
+		      , #{iUid}
+		      , #{mUid}
 		      )
 	</insert>
+	
+	<select id="selectUid" resultMap="paymentResult">
+		select
+		       pay_no
+		     , c_no
+		     , mem_no
+		     , pay_date
+		     , pay_method
+		     , pay_yn
+		     , pay_email
+		     , i_uid
+		     , m_uid
+		  from payment
+		 where c_no = #{classNo}
+		   and mem_no = #{memNo}
+	</select>
+	
+	<update id="refundUid">
+		update payment
+		   set pay_yn = 'R'
+		     , reason = #{reason}
+		     , detailreason = #{detailReason}
+		 where c_no = #{classNo}
+		   and mem_no = #{memNo}  
+	</update>
 </mapper>

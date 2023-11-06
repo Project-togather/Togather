@@ -18,19 +18,21 @@ import com.kh.spring.member.model.vo.Member;
 public class SearchDao {
 	
 	// 임시
-	public int searchListCount(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String hiddenDate) {
+	public int searchListCount(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String dateValue, String onoff, String hiddenLocation) {
 	    
 		Map<String, Object> parameterMap = new HashMap<>();
 	    parameterMap.put("keyword", keyword);
 	    parameterMap.put("options", options);
 	    parameterMap.put("sorting", sorting);
 	    parameterMap.put("category", category);
-	    parameterMap.put("hiddenDate", hiddenDate);
+	    parameterMap.put("dateValue", dateValue);
+	    parameterMap.put("onoff", onoff);
+	    parameterMap.put("hiddenLocation", hiddenLocation);
 		
 	    return sqlSession.selectOne("searchMapper.searchListCount", parameterMap);
 	}
 	
-	public ArrayList<Club> searchList(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String hiddenDate, PageInfo pi) {
+	public ArrayList<Club> searchList(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String dateValue, String onoff, String hiddenLocation, PageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
@@ -42,13 +44,15 @@ public class SearchDao {
 	    parameterMap.put("options", options);
 	    parameterMap.put("sorting", sorting);
 	    parameterMap.put("category", category);
-	    parameterMap.put("dateValue", hiddenDate);
+	    parameterMap.put("dateValue", dateValue);
+	    parameterMap.put("onoff", onoff);
+	    parameterMap.put("hiddenLocation", hiddenLocation);
 
 	    return (ArrayList)sqlSession.selectList("searchMapper.searchList", parameterMap, rowBounds);
 	}
 	
 	
-	public ArrayList<Attachment> searchImageList(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String hiddenDate, PageInfo pi) {
+	public ArrayList<Attachment> searchImageList(SqlSessionTemplate sqlSession, String keyword, String options, String sorting, String category, String dateValue, String onoff, String hiddenLocation, PageInfo pi) {
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		int limit = pi.getBoardLimit();
@@ -60,7 +64,9 @@ public class SearchDao {
 	    parameterMap.put("options", options);
 	    parameterMap.put("sorting", sorting);
 	    parameterMap.put("category", category);
-	    parameterMap.put("dateValue", hiddenDate);
+	    parameterMap.put("dateValue", dateValue);
+	    parameterMap.put("onoff", onoff);
+	    parameterMap.put("hiddenLocation", hiddenLocation);
 		
 		return (ArrayList)sqlSession.selectList("searchMapper.searchImageList", parameterMap, rowBounds);
 		

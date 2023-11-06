@@ -57,7 +57,11 @@ public class Club {
 	private Attachment attachment;
 	
 	//관리자페이지 모임 조회용
-	private ClType ClType;
 	private String clCaName;
 	
+	private String updateName;
+	private String filePath;
+	
+	private String msg;
+	private String refFno;
 }

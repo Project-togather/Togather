@@ -6,8 +6,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.QuitReason.model.vo.QuitReason;
+import com.kh.spring.alarm.model.vo.Notification;
 import com.kh.spring.attachment.model.vo.Attachment;
 import com.kh.spring.club.model.vo.Club;
+import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.feed.model.vo.Feed;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.myClass.model.vo.MyClass;
@@ -111,7 +113,7 @@ public class ClubDao {
 	}
 	
 	public int refuseMember(MyClass c, SqlSessionTemplate sqlSession) {
-		return sqlSession.update("clubMapper.refuseMember", c);
+		return sqlSession.delete("clubMapper.refuseMember", c);
 	}
 	
 	public ArrayList<Club> selectCategoryList(SqlSessionTemplate sqlSession, Club c){
@@ -136,6 +138,38 @@ public class ClubDao {
 	
 	public ArrayList<Club> likeClassList(SqlSessionTemplate sqlSession, Club c){
 		return (ArrayList)sqlSession.selectList("clubMapper.likeClassList", c);
+	}
+	
+	public int updateClass(Club c, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("clubMapper.updateClass", c);
+	}
+	
+	public ArrayList<Attachment> selectClassAttachment(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClassAttachment", c);
+	}
+	
+	public ArrayList<Feed> selectClassFeedList(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClassFeedList", c);
+	}
+	
+	public ArrayList<Feed> selectClassFeedPfList(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClassFeedPfList", c);
+	}
+	
+	public ArrayList<Feed> selectClassFeedTnList(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClassFeedTnList", c);
+	}
+
+	public int updateImg(Attachment at, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("clubMapper.updateImg", at);
+	}
+	
+	public ArrayList<Club> selectSimilarList(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectSimilarList", c);
+	}
+	
+	public ArrayList<Attachment> selectClassTnList(MyClass c, SqlSessionTemplate sqlSession){
+		return (ArrayList)sqlSession.selectList("clubMapper.selectClassTnList", c);
 	}
 	
 }

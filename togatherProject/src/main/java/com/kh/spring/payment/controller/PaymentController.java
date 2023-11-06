@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +26,9 @@ public class PaymentController {
 	
 	private IamportClient api;
 	
+	public static final String apiKey = "1204024438583748";
+	public static final String secretKey = "EWewEVi2YQVa5mNaNgcw2rG59Paofu5knJUriYpyoUmlDkhIdRzlumTGzxGUPvLcoqDNLg4yf2zbraFV";
+	
 	public PaymentController() {
 		this.api = new IamportClient("1204024438583748", "EWewEVi2YQVa5mNaNgcw2rG59Paofu5knJUriYpyoUmlDkhIdRzlumTGzxGUPvLcoqDNLg4yf2zbraFV");
 	}
@@ -38,22 +43,44 @@ public class PaymentController {
 					  , Locale locale
 					  , HttpSession session
 					  , @PathVariable(value="imp_uid") String imp_uid) throws IamportResponseException, IOException{
-		System.out.println(imp_uid);
 		return api.paymentByImpUid(imp_uid);
 	}
 	
-	
+	@ResponseBody
 	@RequestMapping("pay.cl")
-	public String payment(com.kh.spring.payment.model.vo.Payment p, HttpServletRequest request, Model model) {
+	public String payment(com.kh.spring.payment.model.vo.Payment p) {
 		
 		int result = pService.insertPayment(p);
 		if(result > 0) {
-			String referer = request.getHeader("Referer");
-			return "redirect:"+ referer;
+			return "success";
 		} else {
-			model.addAttribute("errorMsg", "게시글 등록에 실패");
-			return "common/errorPage";
+			return "fail";
 		}
 	}
 	
+	@RequestMapping("refund.cl")
+	public String refund(com.kh.spring.payment.model.vo.Payment p, Model model, HttpSession session) throws IOException {
+		
+		com.kh.spring.payment.model.vo.Payment pi = pService.selectUid(p);
+		
+		String access_token = pService.getToken(apiKey, secretKey);
+		String merchant_uid = pi.getMUid();
+		String reason = p.getReason();
+		
+		pi.setReason(p.getReason());
+		pi.setDetailReason(p.getDetailReason());
+		
+		try {	
+	        pService.refundRequest(access_token, merchant_uid, reason);
+	        pService.refundUid(pi);
+	        session.setAttribute("alertMsg", "환불이 성공적으로 되었습니다.");
+			return "redirect:/index.do";
+	        //return new ResponseEntity<>("환불 성공", HttpStatus.OK);
+	    } catch (Exception e) {
+	        //return new ResponseEntity<>("환불 실패: " + e.getMessage(), HttpStatus.BAD_REQUEST);
+	    	model.addAttribute("errorMsg", "환불에 실패하였습니다.");
+			return "common/errorPage";
+	    }
+		
+	}
 }

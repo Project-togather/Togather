@@ -322,6 +322,66 @@ a { color:#000000;text-decoration:none; }
 .scriptCalendar {
 	margin-left: 9%;
 }
+
+/* 검색 리스트 */
+.bestDiv1{
+    padding: 4px 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    border-radius: 5px;
+    color: white;
+    background-color: rgb(238, 238, 238);
+    color: orange;
+}
+
+.bestDiv2{
+    padding: 4px 6px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
+    border-radius: 5px;
+    color: white;
+    background-color: orange;
+}
+
+/* 지도 */
+.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+.map_wrap {position:relative;width:100%;height:500px;}
+#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+#menu_wrap .option{text-align: center;}
+#menu_wrap .option p {margin:10px 0;}  
+#menu_wrap .option button {margin-left:5px;}
+#placesList li {list-style: none;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+#placesList .item span {display: block;margin-top:4px;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:10px 0 10px 55px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+#placesList .item .marker_1 {background-position: 0 -10px;}
+#placesList .item .marker_2 {background-position: 0 -56px;}
+#placesList .item .marker_3 {background-position: 0 -102px}
+#placesList .item .marker_4 {background-position: 0 -148px;}
+#placesList .item .marker_5 {background-position: 0 -194px;}
+#placesList .item .marker_6 {background-position: 0 -240px;}
+#placesList .item .marker_7 {background-position: 0 -286px;}
+#placesList .item .marker_8 {background-position: 0 -332px;}
+#placesList .item .marker_9 {background-position: 0 -378px;}
+#placesList .item .marker_10 {background-position: 0 -423px;}
+#placesList .item .marker_11 {background-position: 0 -470px;}
+#placesList .item .marker_12 {background-position: 0 -516px;}
+#placesList .item .marker_13 {background-position: 0 -562px;}
+#placesList .item .marker_14 {background-position: 0 -608px;}
+#placesList .item .marker_15 {background-position: 0 -654px;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
 </style>
 </head>
 <body>
@@ -403,21 +463,23 @@ a { color:#000000;text-decoration:none; }
 								<br>
 								<div id="selectedDate">
 									선택 날짜 : <span id="dateValue"></span>
-									<input type="hidden" id="hiddenDate" name="hiddenDate" value="${ hiddenDate }">
+									<input type="hidden" id="hiddenDate" name="dateValue" value="${ dateValue }" <c:if test="${dateValue != null}">checked</c:if>>
 								</div>
 								<br>
 							</div>
 							
-							<div class="modal-body">
-							    <h5>종료된 모임도 표시하기</h5>
-							    <div class="wrapper">
-									<input type="checkbox" id="switch">
-									<label for="switch" class="switch_label">
-									  <span class="onf_btn"></span>
-									</label>
-								  </div>
-							</div>
 
+							<div class="modal-body">
+                                <h5>참가 비 없는 모임 표시하기</h5>
+                                <div class="wrapper">
+                                    <input type="checkbox" id="switch" name="onoff" value="on" <c:if test="${onoff == 'on'}">checked</c:if>>
+                                    <label for="switch" class="switch_label">
+                                        <span class="onf_btn"></span>
+                                    </label>
+                                </div>
+                            </div>                            
+
+                            
 							<div class="modal-body">
 							    <h5>유형</h5>
 							    <label>
@@ -433,6 +495,7 @@ a { color:#000000;text-decoration:none; }
 							    </label>
 							</div>
 
+                            
 							<div class="modal-body">
 								<h5>정렬</h5>
 								<label>
@@ -443,6 +506,7 @@ a { color:#000000;text-decoration:none; }
 									오프라인 <input type="radio" name="sorting" value="2" <c:if test="${sorting == '2'}">checked</c:if>>
 								</label>
 							</div>
+							
 							
 							<div class="modal-body">
 								<h5>카테고리</h5>
@@ -479,6 +543,15 @@ a { color:#000000;text-decoration:none; }
 								</label>
 							</div>
 
+								<h5>지도</h5>
+                                <div class="modal-body">
+								    <div id="map" style="width:100%;height:350px;"></div>
+                                    <br>
+                                    <input type="text" id="locationInput" placeholder="위치 검색">
+                                    <input type="hidden" id="hiddenLocation" name="hiddenLocation" value="${hiddenLocation}" />
+                                    <span id="locationResult">검색 결과: </span>
+                                    <br>
+                                </div>
 						</div>
 
 						<div class="modal-footer">
@@ -489,8 +562,6 @@ a { color:#000000;text-decoration:none; }
 				</div>
 			</div>
 		</div>
-
-		<div class="modal-btn2"></div>
 
 		<br><br>
 		
@@ -512,18 +583,19 @@ a { color:#000000;text-decoration:none; }
 			                    <article class="post">
 			                        <div class="postPreview">
 			                            <a href="detail.cl?classNo=${c.classNo}&clType=${c.clType}">
-			                                <img src="${alist[loop.index].updateName}" alt="">
+			                                <img src="${alist[loop.index].filePath}" alt="">
 			                            </a>
 			                        </div>
 			                        <br>
 			                        <div class="post-wrapper">
+                                        <span class="post-content">
+                                            <p>${c.classLocation}</p>
+                                        </span>
 			                            <div class="post-header">
 			                                <h4 class="post-title1"><a href="blog-single-1.html">${c.classTitle}</a></h4>
 			                            </div>
-			                            <div class="post-content">
-			                                <p>${c.classLocation}</p>
-			                            </div>
-			                            <div class="post-more"><a href="#">${c.classDate}</a></div>
+			                            <span class="bestDiv1"> ${ c.classDate }</span> &nbsp;
+				          	            <span class="bestDiv2"> ${c.clName} </span> <br>
 			                        </div>
 			                    </article>
 			                </div>
@@ -564,6 +636,81 @@ a { color:#000000;text-decoration:none; }
 
 			</div>
 		
+
+            <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d4dbad23dc2507351eb28701520293a0&libraries=services"></script>
+            <script>
+            var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
+            var mapContainer = document.getElementById('map');
+            var mapOption = {
+                center: new kakao.maps.LatLng(37.566826, 126.9786567),
+                level: 3
+            };
+            var map = new kakao.maps.Map(mapContainer, mapOption);
+            var ps = new kakao.maps.services.Places();
+
+            // 위치 검색 및 결과 표시 함수
+            function searchLocation() {
+    var locationInput = document.getElementById('locationInput');
+    var locationResult = document.getElementById('locationResult');
+    var hiddenLocationInput = document.getElementById('hiddenLocation');
+    var keyword = locationInput.value;
+
+    // hiddenLocation 값을 지우세요
+    hiddenLocationInput.value = "";
+
+    ps.keywordSearch(keyword, function (data, status, pagination) {
+        if (status === kakao.maps.services.Status.OK) {
+            var bounds = new kakao.maps.LatLngBounds();
+            var resultHtml = '검색 결과: ';
+
+            if (data.length > 0) {
+                displayMarker(data[0]);
+                bounds.extend(new kakao.maps.LatLng(data[0].y, data[0].x));
+
+                // 첫 번째 검색 결과를 hiddenLocation 값으로 설정합니다
+                hiddenLocationInput.value = data[0].place_name;
+
+                resultHtml += '<a href="#" onclick="selectLocation(\'' + data[0].place_name + '\'); return false;">' + data[0].place_name + '</a>';
+            }
+
+            locationResult.innerHTML = resultHtml;
+            map.setBounds(bounds);
+        }
+    });
+}
+
+
+
+            // 위치를 선택할 때 hiddenLocation 값을 업데이트
+            function selectLocation(selectedLocation) {
+                var hiddenLocationInput = document.getElementById('hiddenLocation');
+                locationInput.value = selectedLocation; // 선택한 위치를 설정
+                hiddenLocationInput.value = selectedLocation; // 숨겨진 입력 필드의 값도 업데이트
+            }
+
+
+
+
+
+            // 지도에 마커를 표시하는 함수
+            function displayMarker(place) {
+                var marker = new kakao.maps.Marker({
+                    map: map,
+                    position: new kakao.maps.LatLng(place.y, place.x)
+                });
+
+                kakao.maps.event.addListener(marker, 'click', function () {
+                    infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+                    infowindow.open(map, marker);
+                });
+            }
+
+            // 입력 필드에 검색 함수를 연결
+            var locationInput = document.getElementById('locationInput');
+            locationInput.addEventListener('change', searchLocation);
+            </script>
+
+            
 		
 		
 		<script>
@@ -822,6 +969,15 @@ a { color:#000000;text-decoration:none; }
 
 
 		</script>
+
+        <script>
+            const checkbox = document.getElementById("switch");
+
+            checkbox.addEventListener("change", function() {
+                const valueToPass = checkbox.checked ? "on" : "off";
+                // 여기에서 valueToPass를 사용하여 필요한 작업을 수행할 수 있습니다.
+            });
+        </script>
 
 
 

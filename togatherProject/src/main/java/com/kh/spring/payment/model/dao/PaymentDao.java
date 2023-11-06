@@ -12,4 +12,12 @@ public class PaymentDao {
 		return sqlSession.insert("paymentMapper.insertPayment", p);
 	}
 	
+	public Payment selectUid(Payment p, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("paymentMapper.selectUid", p);
+	}
+	
+	public Payment refundUid(Payment p, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("paymentMapper.refundUid", p);
+	}
+	
 }

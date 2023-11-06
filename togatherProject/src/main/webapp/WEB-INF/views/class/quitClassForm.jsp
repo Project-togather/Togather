@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 			</div>
 		</div>
 	</section>
-		<form action="quitClass.cl" method="post">
+		 <form action="refund.cl" method="post"> 
 			<input type="hidden" name=classNo value="${ c.classNo }">
 			<input type="hidden" name=memNo value="${ loginMember.memNo }">
 			<section class="module bg-gray" id="special">
@@ -33,12 +34,12 @@
 					<div class="row">
 						<div class="col-md-6 m-auto text-center">
 								<h1 class="display-3">취소 사유</h1>
-									<select name="quitReason" required>
-										<option selected>사유를 선택해 주세요
-										<option value="personal">개인 사유
-										<option value="time">시간 부족
-										<option value="mitake">신청 실수
-										<option value="etc">기타
+									<select name="reason" required>
+										<option selected>사유를 선택해 주세요</option>
+										<option>개인 사유</option>
+										<option>시간 부족</option>
+										<option>신청 실수</option>
+										<option>기타</option>
 									</select>
 									<br><br>
 								<h1 class="display-3">상세 사유</h1>
@@ -47,7 +48,12 @@
 										<textarea class="form-control" name="detailReason" placeholder="취소하는 상세한 사유를 입력해 주세요.(선택)" rows="12" style="resize:none;"></textarea>
 								</div>
 							</div>
-							<p style="color:red">환불 금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${ price }원</p>
+							<c:if test="${ price ne 0 }">
+								<p style="color:red">환불 금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ${ price }원</p>
+							</c:if>
+							<c:if test="${ price eq 0 }">
+								<p style="color:red">환불 금액 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 0원</p>
+							</c:if>
 					</div>
 				</div>
 			</div>
@@ -79,11 +85,31 @@
 						      $(".quit_btn").attr("disabled", true);
 						    }
 						  });
+						  
+						  /*
+						  function refund(){
+								$.ajax({
+									url:"refund.cl",
+									data:{
+										classNo : '${c.classNo}',
+						        		memNo : '${loginMember.memNo}',
+						        		reason : 
+									},
+									success:(result)=>{
+										swal("결제 취소가 완료되었습니다!","더 좋은 서비스로 찾아뵙겠습니다.", "success");
+										location.href="http://localhost:8012/togather/"
+									}, error:()=>{
+										swal("결제취소가 실패하였습니다.","", "error")
+									}
+								})
+							}
+						  */
+						  
 						</script>
 					</div>
 				</div>
 			</div>
 		</section>
-	</form>
+	</form> 
 </body>
 </html>

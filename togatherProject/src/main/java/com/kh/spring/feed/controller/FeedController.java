@@ -140,6 +140,14 @@ public class FeedController {
 	//검색된 맴버페이지로 이동
 	@RequestMapping(value = "searchUserPage.fe")
 	public String searchUserPage(String searchNo , HttpSession session , HttpServletRequest request) {
+		
+		/*
+		if((Member)session.getAttribute("loginMember") != null) {
+			Member m = (Member)session.getAttribute("loginMember");
+			String loginMemberNo = m.getMemNo();
+		}
+		*/
+		
 		Member m = (Member)session.getAttribute("loginMember");
 		String loginMemberNo = m.getMemNo();
 		

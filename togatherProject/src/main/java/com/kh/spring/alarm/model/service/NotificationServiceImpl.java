@@ -12,6 +12,7 @@ import com.kh.spring.myClass.model.vo.MyClass;
 import com.kh.spring.reply.model.vo.Reply;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 @Service
@@ -32,9 +33,9 @@ public class NotificationServiceImpl {
         this.emitterRepository = emitterRepository;
     }
 
-    public SseEmitter subscribe(String id, String lastEventId) {
+    public SseEmitter subscribe(String uid, String lastEventId) {
     	
-    	//String id = userId + "_" + System.currentTimeMillis();
+    	String id = uid + "_" + System.currentTimeMillis();
     	
     	SseEmitter emitter = new SseEmitter(DEFAULT_TIMEOUT);
         emitterRepository.save(id, emitter);
@@ -115,7 +116,7 @@ public class NotificationServiceImpl {
     			}
 		);
     	
-    	nDao.insertAlarm(receiver, content, sqlSession);
+    	nDao.insertAlarm(receiver, reply, content, sqlSession);
     	
     }
     
@@ -125,7 +126,7 @@ public class NotificationServiceImpl {
                            .content(content)
                            .reply(reply)
                            .url("http://localhost:8012/togather/detail.cl?classNo=" + reply.getRefFno())
-                           .isRead(false)
+                           .isRead("N")
                            .build();
         
     }
@@ -139,10 +140,17 @@ public class NotificationServiceImpl {
                                    .data(data));
         } catch (IOException exception) {
             emitterRepository.deleteById(id);
-            throw new RuntimeException("연결 오류!");
+            //throw new RuntimeException("연결 오류!");
         }
     	
     }
-    
 
+	public ArrayList<Notification> selectAlarmList(String receiveNo) {
+		return nDao.selectAlarmList(receiveNo, sqlSession);
+	}
+    
+	public int deleteAlarm(String aNo) {
+		return nDao.deleteAlarm(aNo, sqlSession);
+	}
+	
 }

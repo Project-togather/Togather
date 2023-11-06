@@ -1,14 +1,20 @@
 package com.kh.spring.alarm.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import com.kh.spring.alarm.model.service.NotificationServiceImpl;
+import com.kh.spring.alarm.model.vo.Notification;
 
 @RestController
 @Controller
@@ -29,11 +35,11 @@ public class NotificationController {
 	}
 	*/
 	
-    @GetMapping(value = "sse/{id}", produces = "text/event-stream")
-    public SseEmitter subscribe(@PathVariable String id,
+    @GetMapping(value = "sse/{uid}", produces = "text/event-stream")
+    public SseEmitter subscribe(@PathVariable String uid,
     							@RequestHeader(value = "Last-Event-ID", required = false, defaultValue = "") String lastEventId) {
     	
-    	return notificationserviceImpl.subscribe(id, lastEventId);
+    	return notificationserviceImpl.subscribe(uid, lastEventId);
 
     }
 
@@ -44,4 +50,20 @@ public class NotificationController {
     }
     */
  
+    @ResponseBody
+	@RequestMapping("alarm.al")
+	public ArrayList<Notification> selectAlarm(String receiveNo, Model model) {
+    	
+		ArrayList<Notification> aList = notificationserviceImpl.selectAlarmList(receiveNo);
+		
+		return aList;
+	}
+    
+    @ResponseBody
+    @RequestMapping("delete.al")
+    public int deleteAlarm(String aNo) {
+    	int result = notificationserviceImpl.deleteAlarm(aNo);
+    	return result;
+    }
+    
 }

@@ -32,4 +32,9 @@ public class Feed {
 	private Attachment attachment;
 	private Great Great;
 	private String grNo;
+	private String attNo;
+	private String refFno;
+	private String filePath;
+	private String nickName;
+	
 }
