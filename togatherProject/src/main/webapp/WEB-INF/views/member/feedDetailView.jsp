@@ -44,7 +44,7 @@
 												<ul class="post-meta">
 													<li>${f.feDate}</li>
 													<li><a href="#">Like : ${f.likeCount}</a>,</li>
-													<li> Comments</li>
+													<li>Comments</li>
 												</ul>
 											</div>
 											<div class="post-content">
@@ -65,7 +65,7 @@
 									<!-- Post end-->
 									<!-- Comments area-->
 									<div class="comments-area">
-										<h5 class="comments-title">3 Comments</h5>
+										<h5 class="comments-title">Comments</h5>
 										<div  class="comment-list">
 											<div id="replySection" class="comment">
 												
