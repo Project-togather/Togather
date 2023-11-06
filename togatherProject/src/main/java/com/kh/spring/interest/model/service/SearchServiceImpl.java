@@ -25,18 +25,18 @@ public class SearchServiceImpl implements SearchService {
 
 	//임시
 	@Override
-	public int searchListCount(String keyword, String options, String sorting, String category, String dateValue, String onoff, String hiddenLocation) {
-		return sDao.searchListCount(sqlSession, keyword, options, sorting, category, dateValue, onoff, hiddenLocation);
+	public int searchListCount(String keyword, String options, String sorting, String category, String dateValue, String onoff, String selectedAddress) {
+		return sDao.searchListCount(sqlSession, keyword, options, sorting, category, dateValue, onoff, selectedAddress);
 	}
 
 	@Override
-	public ArrayList<Club> searchList(String keyword, String options, String sorting, String category, String dateValue, String onoff, String hiddenLocation, PageInfo pi) {
-		return sDao.searchList(sqlSession, keyword, options, sorting, category, dateValue, onoff, hiddenLocation, pi);
+	public ArrayList<Club> searchList(String keyword, String options, String sorting, String category, String dateValue, String onoff, String selectedAddress, PageInfo pi) {
+		return sDao.searchList(sqlSession, keyword, options, sorting, category, dateValue, onoff, selectedAddress, pi);
 	}
 
 	@Override
-	public ArrayList<Attachment> searchImageList(String keyword, String options, String sorting, String category, String dateValue, String onoff, String hiddenLocation, PageInfo pi) {
-		return sDao.searchImageList(sqlSession, keyword, options, sorting, category, dateValue, onoff, hiddenLocation, pi);
+	public ArrayList<Attachment> searchImageList(String keyword, String options, String sorting, String category, String dateValue, String onoff, String selectedAddress, PageInfo pi) {
+		return sDao.searchImageList(sqlSession, keyword, options, sorting, category, dateValue, onoff, selectedAddress, pi);
 	}
 	
 	
@@ -58,31 +58,6 @@ public class SearchServiceImpl implements SearchService {
 		return sDao.selectFilterImageSearchList(sqlSession, keyword, pi, options);
 	}
 	*/
-	
-	
-	
-	/* 피드 리스트가 보이는 서비스 */
-	@Override
-	public int searchFeedMoreListCount() {
-		return sDao.searchFeedMoreListCount(sqlSession);
-	}
-	
-	@Override
-	public ArrayList<Feed> selectFeedList(PageInfo pi) {
-		return sDao.selectFeedList(sqlSession, pi);
-	}
-	
-	@Override
-	public ArrayList<Attachment> selectImageFeedList(PageInfo pi) {
-		return sDao.selectImageFeedList(sqlSession, pi);
-	}
-	
-	@Override
-	public ArrayList<Member> selectImageMemberFeedList(PageInfo pi) {
-		return sDao.selectImageMemberFeedList(sqlSession, pi);
-	}
-	
-	/* 피드 무한 스크롤 */
 
 	
 
