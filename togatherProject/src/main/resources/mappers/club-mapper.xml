@@ -155,9 +155,8 @@
 		    , file_path
  		    , cl_name
 		    , cl_ca_name
-		    , enrolldate
 		order 
-		   by enrolldate desc
+		   by c_date , c_time 
 	</select>
 	
 	<select id="selectClubList" resultMap="resultclub">
@@ -215,9 +214,8 @@
 		    , file_path
  		    , cl_name
 		    , cl_ca_name
-		    , enrolldate
 		order 
-		   by enrolldate desc
+		   by c_date , c_time 
 	</select>
 	
 	<select id="selectChallengeList" resultMap="resultclub">
@@ -275,9 +273,8 @@
 		    , file_path
  		    , cl_name
 		    , cl_ca_name
-		    , enrolldate
 		order 
-		   by enrolldate desc
+		   by c_date , c_time 
 	</select>
 
 	<select id="selectOneDayList" resultMap="resultclub">
@@ -335,9 +332,8 @@
 		    , file_path
  		    , cl_name
 		    , cl_ca_name
-		    , enrolldate
 		order 
-		   by enrolldate desc
+		   by c_date , c_time 
 	</select>
 
 	
@@ -779,9 +775,8 @@
 		    , file_path
  		    , cl_name
 		    , cl_ca_name
-		    , enrolldate
 		order 
-		   by enrolldate desc
+		   by c_date , c_time 
 	</select>
 	
 	<select id="selectImgList" resultMap="MemberResult">
@@ -835,7 +830,7 @@
 		   and mem_no = #{memNo}
            and category = 'class'
    		 order
-		    by enrollDate desc
+		    by c_date , c_time 
 	</select>
 	
 	<select id="waitTypeClass" resultMap="resultclub">
@@ -870,7 +865,7 @@
 		 where mc.mem_no = #{memNo} 
 		   and mc.cl_type_status = #{clTypeStatus}
     	 order
-		    by enrollDate desc
+		    by c_date , c_time 
 	</select>
 	
 	<select id="likeClassList" resultMap="resultclub">
@@ -904,7 +899,7 @@
           left join attachment on (f.c_no = ref_fno)
 		 where f.mem_no = #{memNo}
 		 order
-		    by enrollDate desc
+		    by c_date , c_time 
 	</select>
 	
 	
