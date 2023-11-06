@@ -59,4 +59,11 @@ public interface AdminService  {
 	
 	//관리자 확인 - 누적신고3회이상 블랙리스트 자동 등록
 	int insertblackList2(Report r);
+	
+	//
+	int selectBl(String bl);
+	
+	int updateMemRp(String memId);
+	
+	int deleteReport(String reNo);
 }

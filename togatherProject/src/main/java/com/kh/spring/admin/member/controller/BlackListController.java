@@ -84,16 +84,21 @@ public class BlackListController {
 
 	@RequestMapping("black.de")
 	public String updateBlackList(String memId, Model model, HttpSession session) {
+		int result2 = Aservice.updateMemRp(memId);
+		
 
-		int result = Aservice.updateBlackList(memId);
-
-		if (result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 블랙리스트 해제되었습니다.");
-			return "redirect:blacklist.bo";
-		} else {
-			model.addAttribute("errorMsg", "블랙리스트 해제에 실패했습니다.");
-			return "common/errorPage";
+		if (result2 > 0) {
+			int result = Aservice.updateBlackList(memId);
+			if (result > 0) {
+				session.setAttribute("alertMsg", "성공적으로 블랙리스트 해제되었습니다.");
+				return "redirect:blacklist.bo";
+			} else {
+				model.addAttribute("errorMsg", "블랙리스트 해제에 실패했습니다.");
+				return "common/errorPage";
+			}
 		}
+		return "redirect:blacklist.bo";
+
 	}
 
 	@RequestMapping("throwComplain.bl")
@@ -167,27 +172,37 @@ public class BlackListController {
 	public ModelAndView detailReport(String reNo, ModelAndView mv) {
 
 		Report r = Aservice.selectReportList(reNo);
-		System.out.println("1"+r);
+		
 		mv.addObject("r", r).setViewName("admin/member/reDetailView");
 		return mv;
 	}
 
 	@RequestMapping("rcount.bl")
 	public String rcountUpdate(Report r, Model model) {
-		System.out.println(r);
-		int result = Aservice.rcountUpdate(r);
 
-		if (r.getRpCount() > 1) {
+		int result = Aservice.rcountUpdate(r);
+		String bl = r.getRePmem();
+		int result4 = Aservice.selectBl(bl);
+
+		if (r.getRpCount() > 1 && result4 == 0) {
+
 			int result3 = Aservice.insertblackList2(r);
 			if (result3 > 0) {
 				int result2 = Aservice.reResultupdate(r);
 			}
 		} else {
-			model.addAttribute("errorMsg", "게시글 등록에 실패했습니다.");
-			return "common/errorPage";
+			int result2 = Aservice.reResultupdate(r);
+
+			return "redirect:select.bl";
 		}
 		return "redirect:select.bl";
 
+	}
+	@RequestMapping("delete.re")
+	public String deleteReport(String reNo) {
+		int result = Aservice.deleteReport(reNo);
+
+		return "redirect:select.bl";
 	}
 
 }

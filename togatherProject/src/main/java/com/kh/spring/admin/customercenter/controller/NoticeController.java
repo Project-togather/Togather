@@ -190,12 +190,6 @@ public class NoticeController {
 		}
 	}
 
-	@RequestMapping("delete.no")
-	public String deleteNotice(String noticeNo) {
-		int result = Cservice.deleteNotice(noticeNo);
-
-		return "redirect:notice.list";
-	}
 
 	@RequestMapping("faq.list")
 	public ModelAndView faqList(@RequestParam(value = "cpage", defaultValue = "1") int currentPage, ModelAndView mv) {
@@ -252,6 +246,13 @@ public class NoticeController {
 
 		return "redirect:faq.list";
 	}
+	@RequestMapping("delete.no")
+	public String deleteNotice(String noticeNo) {
+		int result = Cservice.deleteNotice(noticeNo);
+
+		return "redirect:notice.list";
+	}
+	
 	
 	@RequestMapping("comment.no")
 	public String commentNotice(NoticeReply nr,HttpSession session) {
