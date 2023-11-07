@@ -231,6 +231,7 @@ NEXUS는 **연결, 관계, 집합체**를 뜻하는 단어로 여러 다른 것�
 ## 🌈Technology Stack
 <div style="display:flex; flex-direction:row;">
 Front-end
+ <br>
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 <img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
@@ -241,25 +242,21 @@ ajax
  json
 <br>
 Back-end
+ <br>
 <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white"> 
  이클립스
 <img src="https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white">
 <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=black">
 <img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
  마이바티스
-<br>
 mysql
+<br>
 Communication Tools
+ <br>
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 깃
-
-    
-  
-    <br>
-    
- 
-
 </div>
+<br>
 
 ## 👨‍👩‍👧‍👦Team members
 <div style="display:flex; flex-direction:row;">
