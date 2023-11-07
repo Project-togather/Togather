@@ -106,8 +106,9 @@ public class FeedController {
 	@ResponseBody
 	@RequestMapping (value = "showFeedReply.re" , produces="application/json ; charset=UTF-8")
 	public String showFeedReply(String feNo) {
-		//System.out.println(feNo);
+		//System.out.println("넌 왜 안되냐" + feNo);
 		ArrayList<Reply> rList = fService.showFeedReply(feNo);
+		System.out.println(rList);
 		ArrayList<Reply> toRlist = new ArrayList<Reply>();
 		for(int i = 0 ; i <rList.size() ; i ++ ) {
 			String memNo = rList.get(i).getMemNo();
