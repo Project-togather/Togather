@@ -1,3 +1,4 @@
+
 # Togather
 
  <div style="display:flex; flex-direction:row;"></div>
@@ -261,3 +262,6 @@ NEXUS는 **연결, 관계, 집합체**를 뜻하는 단어로 여러 다른 것�
   
 
  
+
+<img src="https://github.com/Project-togather/Togather/assets/48859949/c1edc4e8-ef8d-4042-beaa-a8d4ce55debe" width="400" height="300"> 
+
