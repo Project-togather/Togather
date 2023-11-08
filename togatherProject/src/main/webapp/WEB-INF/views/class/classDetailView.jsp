@@ -63,11 +63,13 @@
 
 		<script>
 		
+		/*
 		if('${loginMember}' != null){
 			sse('${loginMember.memNo}');
 		} else {
 			swal("ㅎㅎ");
 		}
+		*/
 		
 			
 				function requestPay() {
@@ -576,8 +578,7 @@
 												<input type="text" name="reply" id="reply"
 													class="form-control" placeholder="댓글달기"
 													style="background-color: #f4f1ea; width: 700px; display: inline-block;">
-												<button class="btn btn-gray" id="enroll-btn1"
-													onclick="addReply();" style="display: inline-block;">댓글
+												<button class="btn btn-gray" id="enroll-btn1" onclick="addReply();" style="display: inline-block;">댓글
 													등록</button>
 											</h6>
 										</div>

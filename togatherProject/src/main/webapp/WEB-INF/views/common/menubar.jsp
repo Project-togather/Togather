@@ -184,6 +184,12 @@ li .m-searchBtn i {
       
 	
 	<script>
+	
+	if('${loginMember}' != null){
+		sse('${loginMember.memNo}');
+	} else {
+		swal("ㅎㅎ");
+	}
 	 
 	/* sse Test */
     function sse(id) {
@@ -195,8 +201,8 @@ li .m-searchBtn i {
         	const eventSource = new EventSource(`sse/` + id);
             
             eventSource.addEventListener("sse", function(event) {
-                alarmList();
                 console.log("오셨습니까...");
+                //alarmList();
                 const data = JSON.parse(event.data);
                 console.log(data);
 
@@ -232,7 +238,31 @@ li .m-searchBtn i {
         });
 */
     }
-	
+	/*
+    function addReply(){
+		if($("#reply").val().trim().length != 0){
+			$.ajax({
+				url:"enroll.rv",
+				data:{
+					rvContent:$("#reply").val(),
+					refFno:'${c.classNo}',
+					memNo:'${loginMember.memNo}',
+					classTitle:'${c.classTitle}',
+					nickName:'${loginMember.nickName}',
+					receiver:'${c.memNo}',
+					},success:result=>{
+					if(result == "success"){
+						$("#reply").val("");
+						selectReplyList();
+						alarmList();
+					}
+				}, error:()=>{
+					console.log("실패");
+				}
+			})
+		}
+	}
+	*/
 	</script>
 	
 
