@@ -126,6 +126,116 @@
 						  });
 					  });
 					}
+		
+		function requestPay1() {
+			
+		    IMP.init("imp15430315"); 
+			var amount = ${c.classPrice}
+			var email = '${loginMember.email}'
+			var name = '${loginMember.memId}'
+			var tel = '${loginMember.phone}'
+			
+			  IMP.request_pay({
+			    pg: "inicis",
+			    pay_method: "card",
+			    merchant_uid : 'merchant_'+new Date().getTime(),
+			    name : '(주)ToGather',
+			    amount : amount,
+			    buyer_email : email,
+			    buyer_name : name,
+			    buyer_tel : tel,
+			  }, function (rsp) { // callback
+
+				  $.ajax({
+					  type:"POST",
+					  url:"verifyIamport/" + rsp.imp_uid
+				  }).done(function(data){
+					  if(rsp.paid_amount == data.response.amount){
+						  if (rsp.success) {
+						        $.ajax({
+						        	url:"pay.cl",
+						        	data:{
+						        		classNo : '${c.classNo}',
+						        		memNo : '${loginMember.memNo}',
+						        		payEmail : email,
+						        		iUid : rsp.imp_uid,
+						        		mUid : rsp.merchant_uid
+						        	}, success:result=>{
+						        		if(result == "success"){
+							        		//location.href="detail.cl?classNo=${c.classNo}&clType=1"
+							        		checkStatus();
+							        		swal("결제가 완료되었습니다!","모임을 즐기러 가볼까요?", "success");
+						        		} else {
+							        		swal("결제가 실패하였습니다.","다시한번 확인 후 결제해주세요!", "error");
+						        		}
+						        	}, error:()=>{
+						        		swal("결제가 실패하였습니다.","다시한번 확인 후 결제해주세요!", "error");
+						        	}
+						        })
+						      } else {
+						        console.log("실패");
+						      }
+					  }else {
+						  console.log("결제 및 검증 실패")
+					  }
+				  });
+			  });
+			}
+		
+		function requestPay2() {
+			
+		    IMP.init("imp15430315"); 
+			var amount = ${c.classPrice}
+			var email = '${loginMember.email}'
+			var name = '${loginMember.memId}'
+			var tel = '${loginMember.phone}'
+			
+			  IMP.request_pay({
+			    pg: "tosspay",
+			    pay_method: "card",
+			    merchant_uid : 'merchant_'+new Date().getTime(),
+			    name : '(주)ToGather',
+			    amount : amount,
+			    buyer_email : email,
+			    buyer_name : name,
+			    buyer_tel : tel,
+			  }, function (rsp) { // callback
+
+				  $.ajax({
+					  type:"POST",
+					  url:"verifyIamport/" + rsp.imp_uid
+				  }).done(function(data){
+					  if(rsp.paid_amount == data.response.amount){
+						  if (rsp.success) {
+						        $.ajax({
+						        	url:"pay.cl",
+						        	data:{
+						        		classNo : '${c.classNo}',
+						        		memNo : '${loginMember.memNo}',
+						        		payEmail : email,
+						        		iUid : rsp.imp_uid,
+						        		mUid : rsp.merchant_uid
+						        	}, success:result=>{
+						        		if(result == "success"){
+							        		//location.href="detail.cl?classNo=${c.classNo}&clType=1"
+							        		checkStatus();
+							        		swal("결제가 완료되었습니다!","모임을 즐기러 가볼까요?", "success");
+						        		} else {
+							        		swal("결제가 실패하였습니다.","다시한번 확인 후 결제해주세요!", "error");
+						        		}
+						        	}, error:()=>{
+						        		swal("결제가 실패하였습니다.","다시한번 확인 후 결제해주세요!", "error");
+						        	}
+						        })
+						      } else {
+						        console.log("실패");
+						      }
+					  }else {
+						  console.log("결제 및 검증 실패")
+					  }
+				  });
+			  });
+			}
 			
 			/* 잔여자리에 따른 css 변경*/
 			let vac = ${ c.peopleLimit - c.vacancy }
